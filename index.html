@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classifiche Motorsport 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1e1e22;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 40px;
+    color: #f0f0f0;
+  }
+  h1 {
+    text-align: center; font-size: 22px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: #e0e0e0; margin-bottom: 6px;
+  }
+  .subtitle { text-align: center; font-size: 13px; color: #888; margin-bottom: 4px; }
+  .last-updated { text-align: center; font-size: 12px; color: #666; letter-spacing: 0.03em; margin-bottom: 24px; }
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; max-width: 1300px; margin: 0 auto;
+  }
+  .column { background: #2c2c32; border-radius: 14px; overflow: hidden; border: 1px solid #3a3a42; }
+  .col-header {
+    padding: 14px 16px 12px; text-align: center; font-size: 15px;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid #3a3a42;
+  }
+  .motogp .col-header { background: #c0392b; color: #fff; }
+  .moto2  .col-header { background: #e67e22; color: #fff; }
+  .moto3  .col-header { background: #27ae60; color: #fff; }
+  .sbk    .col-header { background: #2980b9; color: #fff; }
+  .f1     .col-header { background: #e10600; color: #fff; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    padding: 7px 8px; text-align: left; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.07em; text-transform: uppercase; color: #888;
+    border-bottom: 1px solid #3a3a42; background: #252528;
+  }
+  thead th:first-child { text-align: center; width: 28px; }
+  thead th:last-child  { text-align: right; }
+  tbody tr { border-bottom: 1px solid #3a3a42; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #333340; }
+  tbody td { padding: 8px 8px; color: #ddd; vertical-align: middle; }
+  tbody td:first-child { text-align: center; font-weight: 700; color: #aaa; font-size: 12px; width: 28px; }
+  tbody td:last-child  { text-align: right; font-weight: 700; color: #f0c040; font-size: 14px; }
+  .pos-1 td:first-child { color: #ffd700; }
+  .pos-2 td:first-child { color: #c0c0c0; }
+  .pos-3 td:first-child { color: #cd7f32; }
+  .driver-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
+  .loading { text-align: center; color: #555; padding: 60px 0; font-size: 14px; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 440px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<h1>⚑ Classifiche Motorsport 2026</h1>
+<div class="subtitle">Piloti · Campionato 2026</div>
+<div class="last-updated" id="last-updated">Caricamento...</div>
+<div class="grid" id="standings-grid"><div class="loading">⏳ Caricamento classifiche...</div></div>
+
+<script>
+const BIN_ID  = '6a3064e4f5f4af5e29f7958b';
+const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
+const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
+
+const CATEGORIES = [
+  { id: 'motogp', label: 'MotoGP', cls: 'motogp', url: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings' },
+  { id: 'moto2',  label: 'Moto2',  cls: 'moto2',  url: 'https://www.motogp.com/en/world-standing/2026/moto2/championship-standings' },
+  { id: 'moto3',  label: 'Moto3',  cls: 'moto3',  url: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings' },
+  { id: 'sbk',    label: 'SBK',    cls: 'sbk',    url: 'https://www.worldsbk.com/en/standings/riders/2026/SBK' },
+  { id: 'f1',     label: 'F1',     cls: 'f1',     url: 'https://www.mclaren.com/racing/formula-1/standings/' },
+];
+
+async function loadAndRender() {
+  try {
+    const res = await fetch(BIN_URL, {
+      headers: { 'X-Access-Key': API_KEY }
+    });
+    if (!res.ok) throw new Error('Errore caricamento dati');
+    const json = await res.json();
+    const all = json.record;
+    renderAll(all);
+  } catch(e) {
+    document.getElementById('standings-grid').innerHTML =
+      '<div class="loading" style="color:#ca5f5f">⚠ Errore caricamento classifiche</div>';
+    document.getElementById('last-updated').textContent = '';
+  }
+}
+
+function renderAll(all) {
+  const grid = document.getElementById('standings-grid');
+  grid.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const riders = all[cat.id] || [];
+    const col = document.createElement('div');
+    col.className = 'column ' + cat.cls;
+    let rows = '';
+    if (riders.length === 0) {
+      rows = '<tr><td colspan="3" style="text-align:center;color:#555;padding:20px;font-size:12px;">Dati non disponibili</td></tr>';
+    } else {
+      const leader = riders[0].pts;
+      riders.forEach((r, i) => {
+        const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
+        const gap = i === 0 ? '' : `<span style="font-weight:normal;color:#666;font-size:11px;margin-left:4px">-${leader - r.pts}</span>`;
+        rows += `<tr class="${pc}"><td>${i+1}</td><td><div class="driver-name" title="${r.name}">${r.name}</div></td><td>${r.pts}${gap}</td></tr>`;
+      });
+    }
+    col.innerHTML =
+      `<div class="col-header"><a href="${cat.url}" target="_blank" style="color:inherit;text-decoration:none;">${cat.label} ↗</a></div>` +
+      `<table><thead><tr><th>#</th><th>Pilota</th><th>Pts</th></tr></thead><tbody>${rows}</tbody></table>`;
+    grid.appendChild(col);
+  });
+  const ts = all['_updated'];
+  document.getElementById('last-updated').textContent = ts ? 'Ultimo aggiornamento: ' + ts : '';
+}
+
+loadAndRender();
+</script>
+</body>
+</html>
