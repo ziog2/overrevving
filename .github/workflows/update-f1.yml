@@ -1,0 +1,67 @@
+name: Aggiorna classifica F1
+
+on:
+  schedule:
+    # Eseguito ogni domenica alle 19:00 UTC = 20:00 ora italiana (CET/CEST)
+    # Nota: l'ora italiana cambia con l'ora legale; 19:00 UTC corrisponde
+    # a 20:00 in inverno (CET) e 21:00 in estate (CEST). Vedi nota sotto.
+    - cron: '0 19 * * 0'
+  workflow_dispatch: {}  # permette anche l'avvio manuale dal sito GitHub
+
+jobs:
+  update-f1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica classifica F1 da Jolpica API
+        id: fetch
+        run: |
+          curl -s "https://api.jolpi.ca/ergast/f1/2026/driverstandings.json" -o f1raw.json
+          cat f1raw.json
+
+      - name: Trasforma e carica su JSONBin
+        env:
+          JSONBIN_API_KEY: ${{ secrets.JSONBIN_API_KEY }}
+          JSONBIN_BIN_ID: ${{ secrets.JSONBIN_BIN_ID }}
+        run: |
+          python3 << 'PYEOF'
+          import json, os, urllib.request
+
+          with open('f1raw.json') as f:
+              raw = json.load(f)
+
+          lists = raw.get('MRData', {}).get('StandingsTable', {}).get('StandingsLists', [])
+          if not lists:
+              print("Nessun dato F1 2026 disponibile, esco senza errori.")
+              exit(0)
+
+          standings = lists[0]['DriverStandings']
+          riders = [
+              {"name": d['Driver']['givenName'] + ' ' + d['Driver']['familyName'],
+               "pts": float(d['points'])}
+              for d in standings
+          ]
+
+          api_key = os.environ['JSONBIN_API_KEY']
+          bin_id  = os.environ['JSONBIN_BIN_ID']
+          bin_url = f"https://api.jsonbin.io/v3/b/{bin_id}"
+
+          # Leggi il bin attuale per non sovrascrivere le altre categorie
+          req = urllib.request.Request(bin_url + "/latest", headers={"X-Access-Key": api_key})
+          with urllib.request.urlopen(req) as resp:
+              current = json.load(resp)['record']
+
+          current['f1'] = riders
+          from datetime import datetime, timezone, timedelta
+          it_time = datetime.now(timezone.utc) + timedelta(hours=2)  # approssimazione CEST
+          current['_updated'] = it_time.strftime('%d/%m/%Y, %H:%M:%S') + ' · Auto (Domenica)'
+
+          body = json.dumps(current).encode('utf-8')
+          req2 = urllib.request.Request(
+              bin_url, data=body, method='PUT',
+              headers={"Content-Type": "application/json", "X-Access-Key": api_key}
+          )
+          with urllib.request.urlopen(req2) as resp2:
+              print("Salvato su JSONBin:", resp2.status)
+
+          print(f"Importati {len(riders)} piloti F1.")
+          PYEOF
