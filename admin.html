@@ -120,9 +120,9 @@
 <div class="last-updated" id="last-updated"></div>
 
 <div class="edit-bar">
-  <button class="edit-btn pdf-main-btn" onclick="document.getElementById('pdf-multi-input').click()">📂 Importa PDF classifiche</button>
+  <button class="edit-btn pdf-main-btn" onclick="document.getElementById('pdf-multi-input').click()">📂 Importa PDF SBK</button>
   <input type="file" id="pdf-multi-input" accept=".pdf" multiple style="display:none" onchange="handleMultiPDF(event)">
-  <button class="edit-btn f1-fetch-btn" onclick="fetchF1()">🔄 Aggiorna F1</button>
+  <button class="edit-btn f1-fetch-btn" onclick="fetchAllAPI()">🔄 Aggiorna MotoGP/Moto2/Moto3/F1</button>
   <button class="edit-btn" onclick="openEditor()">✏ Manuale</button>
 </div>
 <div id="global-status"></div>
@@ -160,7 +160,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 const BIN_ID  = '6a3064e4f5f4af5e29f7958b';
 const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
 const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-const ADMIN_PWD = 'andrea99!'; // ← CAMBIA QUESTA PASSWORD
+const ADMIN_PWD = 'moto2026'; // ← CAMBIA QUESTA PASSWORD
 
 const CATEGORIES = [
   { id: 'motogp', label: 'MotoGP', cls: 'motogp', url: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings' },
@@ -240,7 +240,7 @@ function showGlobalStatus(cls, msg) {
 }
 
 // ---- PDF multi-upload ----
-const FILE_MAP = { 'mgp':'motogp','motogp':'motogp','m2':'moto2','moto2':'moto2','m3':'moto3','moto3':'moto3','sbk':'sbk' };
+const FILE_MAP = { 'sbk':'sbk' };
 
 async function handleMultiPDF(e) {
   const files = [...e.target.files];
@@ -263,7 +263,7 @@ async function handleMultiPDF(e) {
   if (unknown.length) {
     const tag = document.createElement('div');
     tag.className = 'gstatus err';
-    tag.textContent = '⚠ File non riconosciuti (usa MGP, M2, M3, SBK): ' + unknown.join(', ');
+    tag.textContent = '⚠ File non riconosciuti (usa SBK.pdf): ' + unknown.join(', ');
     statusDiv.appendChild(tag);
   }
   await Promise.all(tasks.map(({ file, catId }) => processPDF(file, catId)));
@@ -367,28 +367,76 @@ function parseSBK(tokens) {
   return riders;
 }
 
-// ---- Fetch F1 ----
-async function fetchF1() {
-  showGlobalStatus('load', '⏳ F1 — recupero classifica…');
-  const endpoints = [
-    'https://api.jolpi.ca/ergast/f1/2026/driverstandings.json',
-    'https://corsproxy.io/?url=https://api.jolpi.ca/ergast/f1/2026/driverstandings.json',
-  ];
-  let data = null;
-  for (const url of endpoints) {
-    try { const res=await fetch(url,{signal:AbortSignal.timeout(8000)}); if(res.ok){data=await res.json();break;} } catch(e){continue;}
+// ---- Fetch MotoGP / Moto2 / Moto3 / F1 via API ----
+const PULSELIVE_SEASON_2026 = 'e88b4e43-2209-47aa-8e83-0e0b1cedde6e';
+const PULSELIVE_CATEGORIES = {
+  motogp: 'e8c110ad-64aa-4e8e-8a86-f2f152f6a942',
+  moto2:  '549640b8-fd9c-4245-acfd-60e4bc38b25c',
+  moto3:  '954f7e65-2ef2-4423-b949-4961cc603e45',
+};
+
+async function fetchAllAPI() {
+  showGlobalStatus('load', '⏳ Recupero classifiche da API…');
+  const statusDiv = document.getElementById('global-status');
+  statusDiv.innerHTML = '';
+
+  const labels = { motogp: 'MotoGP', moto2: 'Moto2', moto3: 'Moto3', f1: 'F1' };
+  for (const key of ['motogp', 'moto2', 'moto3', 'f1']) {
+    const tag = document.createElement('div');
+    tag.className = 'gstatus load'; tag.id = 'gs-' + key;
+    tag.textContent = '⏳ ' + labels[key] + ' — recupero…';
+    statusDiv.appendChild(tag);
   }
-  if (!data) { showGlobalStatus('err','⚠ F1 — impossibile raggiungere l\'API. Usa ✏ Manuale.'); return; }
+
+  // MotoGP / Moto2 / Moto3
+  for (const [catId, catUuid] of Object.entries(PULSELIVE_CATEGORIES)) {
+    try {
+      const url = `https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid=${PULSELIVE_SEASON_2026}&categoryUuid=${catUuid}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      const riders = (data.classification || [])
+        .map(c => ({ name: c.rider.full_name, pts: parseFloat(c.points) }))
+        .sort((a, b) => b.pts - a.pts);
+      if (riders.length === 0) throw new Error('nessun pilota trovato');
+      currentData[catId] = riders;
+      const tag = document.getElementById('gs-' + catId);
+      if (tag) { tag.className = 'gstatus ok'; tag.textContent = '✓ ' + labels[catId] + ' — ' + riders.length + ' piloti'; }
+    } catch (err) {
+      const tag = document.getElementById('gs-' + catId);
+      if (tag) { tag.className = 'gstatus err'; tag.textContent = '⚠ ' + labels[catId] + ' — ' + err.message; }
+    }
+  }
+
+  // F1 via Jolpica
   try {
-    const lists=data?.MRData?.StandingsTable?.StandingsLists;
-    if (!lists||lists.length===0) throw new Error('Nessun dato 2026 disponibile');
-    const riders=lists[0].DriverStandings.map(d=>({name:d.Driver.givenName+' '+d.Driver.familyName,pts:parseFloat(d.points)}));
-    if (riders.length===0) throw new Error('Nessun pilota trovato');
+    const endpoints = [
+      'https://api.jolpi.ca/ergast/f1/2026/driverstandings.json',
+      'https://corsproxy.io/?url=https://api.jolpi.ca/ergast/f1/2026/driverstandings.json',
+    ];
+    let data = null;
+    for (const url of endpoints) {
+      try { const res = await fetch(url, { signal: AbortSignal.timeout(8000) }); if (res.ok) { data = await res.json(); break; } } catch(e) { continue; }
+    }
+    if (!data) throw new Error('API non raggiungibile');
+    const lists = data?.MRData?.StandingsTable?.StandingsLists;
+    if (!lists || lists.length === 0) throw new Error('nessun dato 2026');
+    const riders = lists[0].DriverStandings.map(d => ({ name: d.Driver.givenName + ' ' + d.Driver.familyName, pts: parseFloat(d.points) }));
+    if (riders.length === 0) throw new Error('nessun pilota trovato');
     currentData['f1'] = riders;
+    const tag = document.getElementById('gs-f1');
+    if (tag) { tag.className = 'gstatus ok'; tag.textContent = '✓ F1 — ' + riders.length + ' piloti'; }
+  } catch (err) {
+    const tag = document.getElementById('gs-f1');
+    if (tag) { tag.className = 'gstatus err'; tag.textContent = '⚠ F1 — ' + err.message; }
+  }
+
+  try {
     await saveToBin();
     renderAll();
-    showGlobalStatus('ok','✓ F1 — '+riders.length+' piloti importati da Jolpica API');
-  } catch(err) { showGlobalStatus('err','⚠ F1 — '+err.message); }
+  } catch (e) {
+    showGlobalStatus('err', '⚠ Errore salvataggio su JSONBin: ' + e.message);
+  }
 }
 
 // ---- Modal manuale ----

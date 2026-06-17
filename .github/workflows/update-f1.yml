@@ -1,78 +1,98 @@
-name: Aggiorna classifica F1
+name: Aggiorna classifiche Motorsport
 
 on:
   schedule:
-    # Eseguito ogni domenica alle 19:00 UTC = 20:00 ora italiana (CET/CEST)
-    # Nota: l'ora italiana cambia con l'ora legale; 19:00 UTC corrisponde
-    # a 20:00 in inverno (CET) e 21:00 in estate (CEST). Vedi nota sotto.
+    # Eseguito ogni domenica alle 19:00 UTC ≈ 20:00/21:00 ora italiana
     - cron: '0 19 * * 0'
   workflow_dispatch: {}  # permette anche l'avvio manuale dal sito GitHub
 
 jobs:
-  update-f1:
+  update-standings:
     runs-on: ubuntu-latest
     steps:
-      - name: Scarica classifica F1 da Jolpica API
-        id: fetch
-        run: |
-          curl -s "https://api.jolpi.ca/ergast/f1/2026/driverstandings.json" -o f1raw.json
-          cat f1raw.json
-
-      - name: Trasforma e carica su JSONBin
+      - name: Scarica e aggiorna tutte le classifiche
         env:
           JSONBIN_API_KEY: ${{ secrets.JSONBIN_API_KEY }}
           JSONBIN_BIN_ID: ${{ secrets.JSONBIN_BIN_ID }}
         run: |
           python3 << 'PYEOF'
           import json, os, urllib.request
-
-          with open('f1raw.json') as f:
-              raw = json.load(f)
-
-          lists = raw.get('MRData', {}).get('StandingsTable', {}).get('StandingsLists', [])
-          if not lists:
-              print("Nessun dato F1 2026 disponibile, esco senza errori.")
-              exit(0)
-
-          standings = lists[0]['DriverStandings']
-          riders = [
-              {"name": d['Driver']['givenName'] + ' ' + d['Driver']['familyName'],
-               "pts": float(d['points'])}
-              for d in standings
-          ]
+          from datetime import datetime, timezone, timedelta
 
           api_key = os.environ['JSONBIN_API_KEY']
           bin_id  = os.environ['JSONBIN_BIN_ID']
           bin_url = f"https://api.jsonbin.io/v3/b/{bin_id}"
 
-          # Leggi il bin attuale per non sovrascrivere le altre categorie
-          req = urllib.request.Request(
-              bin_url + "/latest",
-              headers={
-                  "X-Access-Key": api_key,
-                  "Content-Type": "application/json",
-                  "User-Agent": "Mozilla/5.0 (compatible; GitHubActions-F1Updater/1.0)"
-              }
-          )
-          with urllib.request.urlopen(req) as resp:
-              current = json.load(resp)['record']
+          HEADERS_BASE = {
+              "Content-Type": "application/json",
+              "User-Agent": "Mozilla/5.0 (compatible; GitHubActions-MotorsportUpdater/1.0)"
+          }
 
-          current['f1'] = riders
-          from datetime import datetime, timezone, timedelta
+          def http_get(url, extra_headers=None):
+              headers = dict(HEADERS_BASE)
+              if extra_headers:
+                  headers.update(extra_headers)
+              req = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(req) as resp:
+                  return json.load(resp)
+
+          # ---- 1. MotoGP / Moto2 / Moto3 via API pulselive (Dorna) ----
+          SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e"
+          CATEGORY_IDS = {
+              "motogp": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+              "moto2":  "549640b8-fd9c-4245-acfd-60e4bc38b25c",
+              "moto3":  "954f7e65-2ef2-4423-b949-4961cc603e45",
+          }
+
+          results = {}
+          for cat_id, cat_uuid in CATEGORY_IDS.items():
+              url = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
+              try:
+                  data = http_get(url)
+                  classification = data.get('classification', [])
+                  riders = [
+                      {"name": c['rider']['full_name'], "pts": float(c['points'])}
+                      for c in classification
+                  ]
+                  riders.sort(key=lambda r: r['pts'], reverse=True)
+                  results[cat_id] = riders
+                  print(f"{cat_id}: {len(riders)} piloti importati")
+              except Exception as e:
+                  print(f"Errore {cat_id}: {e}")
+
+          # ---- 2. F1 via Jolpica API ----
+          try:
+              f1_data = http_get("https://api.jolpi.ca/ergast/f1/2026/driverstandings.json")
+              lists = f1_data.get('MRData', {}).get('StandingsTable', {}).get('StandingsLists', [])
+              if lists:
+                  standings = lists[0]['DriverStandings']
+                  f1_riders = [
+                      {"name": d['Driver']['givenName'] + ' ' + d['Driver']['familyName'],
+                       "pts": float(d['points'])}
+                      for d in standings
+                  ]
+                  results['f1'] = f1_riders
+                  print(f"f1: {len(f1_riders)} piloti importati")
+          except Exception as e:
+              print(f"Errore F1: {e}")
+
+          if not results:
+              print("Nessun dato recuperato, esco senza aggiornare.")
+              exit(0)
+
+          # ---- 3. Leggi il bin attuale e aggiorna solo le categorie ottenute ----
+          current = http_get(bin_url + "/latest", {"X-Access-Key": api_key})['record']
+          current.update(results)
+
           it_time = datetime.now(timezone.utc) + timedelta(hours=2)  # approssimazione CEST
           current['_updated'] = it_time.strftime('%d/%m/%Y, %H:%M:%S') + ' · Auto (Domenica)'
 
           body = json.dumps(current).encode('utf-8')
           req2 = urllib.request.Request(
               bin_url, data=body, method='PUT',
-              headers={
-                  "Content-Type": "application/json",
-                  "X-Access-Key": api_key,
-                  "User-Agent": "Mozilla/5.0 (compatible; GitHubActions-F1Updater/1.0)"
-              }
+              headers={**HEADERS_BASE, "X-Access-Key": api_key}
           )
           with urllib.request.urlopen(req2) as resp2:
               print("Salvato su JSONBin:", resp2.status)
-
-          print(f"Importati {len(riders)} piloti F1.")
           PYEOF
+
