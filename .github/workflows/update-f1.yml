@@ -46,7 +46,14 @@ jobs:
           bin_url = f"https://api.jsonbin.io/v3/b/{bin_id}"
 
           # Leggi il bin attuale per non sovrascrivere le altre categorie
-          req = urllib.request.Request(bin_url + "/latest", headers={"X-Access-Key": api_key})
+          req = urllib.request.Request(
+              bin_url + "/latest",
+              headers={
+                  "X-Access-Key": api_key,
+                  "Content-Type": "application/json",
+                  "User-Agent": "Mozilla/5.0 (compatible; GitHubActions-F1Updater/1.0)"
+              }
+          )
           with urllib.request.urlopen(req) as resp:
               current = json.load(resp)['record']
 
@@ -58,7 +65,11 @@ jobs:
           body = json.dumps(current).encode('utf-8')
           req2 = urllib.request.Request(
               bin_url, data=body, method='PUT',
-              headers={"Content-Type": "application/json", "X-Access-Key": api_key}
+              headers={
+                  "Content-Type": "application/json",
+                  "X-Access-Key": api_key,
+                  "User-Agent": "Mozilla/5.0 (compatible; GitHubActions-F1Updater/1.0)"
+              }
           )
           with urllib.request.urlopen(req2) as resp2:
               print("Salvato su JSONBin:", resp2.status)
