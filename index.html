@@ -108,7 +108,8 @@ function renderAll(all) {
       riders.forEach((r, i) => {
         const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
         const gap = i === 0 ? '' : `<span style="font-weight:normal;color:#666;font-size:11px;margin-left:4px">-${leader - r.pts}</span>`;
-        rows += `<tr class="${pc}"><td>${i+1}</td><td><div class="driver-name" title="${r.name}">${r.name}</div></td><td>${r.pts}${gap}</td></tr>`;
+        const shortName = formatName(r.name);
+        rows += `<tr class="${pc}"><td>${i+1}</td><td><div class="driver-name" title="${r.name}">${shortName}</div></td><td>${r.pts}${gap}</td></tr>`;
       });
     }
     col.innerHTML =
@@ -121,6 +122,13 @@ function renderAll(all) {
 }
 
 loadAndRender();
+
+function formatName(fullName) {
+  const parts = fullName.trim().split(' ');
+  if (parts.length < 2) return fullName;
+  // Prende la prima lettera del primo nome + punto + il resto (cognome, anche composto)
+  return parts[0][0].toUpperCase() + '. ' + parts.slice(1).join(' ');
+}
 </script>
 </body>
 </html>
