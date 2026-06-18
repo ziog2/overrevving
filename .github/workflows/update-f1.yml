@@ -60,7 +60,34 @@ jobs:
               except Exception as e:
                   print(f"Errore {cat_id}: {e}")
 
-          # ---- 2. F1 via Jolpica API ----
+          # ---- 2. MXGP via mxgpresults.com ----
+          try:
+              import re
+              mxgp_url = "https://mxgpresults.com/mxgp/standings"
+              req_mxgp = urllib.request.Request(mxgp_url, headers={
+                  "User-Agent": "Mozilla/5.0 (compatible; GitHubActions-MotorsportUpdater/1.0)"
+              })
+              with urllib.request.urlopen(req_mxgp) as resp:
+                  html = resp.read().decode('utf-8')
+
+              # Parse table rows: | pos | num | name | bike | nat | pts |
+              rows = re.findall(r'<tr[^>]*>\s*<td[^>]*>\d+\s*</td>\s*<td[^>]*>#\d+\s*</td>\s*<td[^>]*>(.*?)</td>.*?<td[^>]*>(\d+)\s*</td>\s*</tr>', html, re.DOTALL)
+              mxgp_riders = []
+              for name_cell, pts in rows:
+                  # Remove HTML tags (links etc)
+                  name = re.sub(r'<[^>]+>', '', name_cell).strip()
+                  if name:
+                      mxgp_riders.append({"name": name, "pts": int(pts)})
+
+              if mxgp_riders:
+                  results['mxgp'] = mxgp_riders
+                  print(f"mxgp: {len(mxgp_riders)} piloti importati")
+              else:
+                  print("MXGP: nessun pilota trovato nel parsing")
+          except Exception as e:
+              print(f"Errore MXGP: {e}")
+
+          # ---- 3. F1 via Jolpica API ----
           try:
               f1_data = http_get("https://api.jolpi.ca/ergast/f1/2026/driverstandings.json")
               lists = f1_data.get('MRData', {}).get('StandingsTable', {}).get('StandingsLists', [])
@@ -80,7 +107,7 @@ jobs:
               print("Nessun dato recuperato, esco senza aggiornare.")
               exit(0)
 
-          # ---- 3. Leggi il bin attuale e aggiorna solo le categorie ottenute ----
+          # ---- 4. Leggi il bin attuale e aggiorna solo le categorie ottenute ----
           current = http_get(bin_url + "/latest", {"X-Access-Key": api_key})['record']
           current.update(results)
 
