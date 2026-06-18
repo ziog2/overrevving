@@ -59,6 +59,11 @@
   .driver-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
   .loading { text-align: center; color: #555; padding: 60px 0; font-size: 14px; }
   @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } body { padding: 16px 40px 40px; } }
+  tbody tr.favorite { background: #2a1f3a !important; }
+  tbody tr.favorite:hover { background: #332545 !important; }
+  .fav-btn { background: none; border: none; cursor: pointer; font-size: 13px; padding: 0 4px; opacity: 0.3; transition: opacity 0.15s; line-height: 1; }
+  .fav-btn.active { opacity: 1; }
+  .fav-btn:hover { opacity: 0.8; }
 </style>
 </head>
 <body>
@@ -118,12 +123,19 @@ function renderAll(all) {
         const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
         const gap = i === 0 ? '' : `<span style="font-weight:normal;color:#666;font-size:11px;margin-left:4px">-${leader - r.pts}</span>`;
         const shortName = formatName(r.name);
-        rows += `<tr class="${pc}"><td>${i+1}</td><td><div class="driver-name" title="${r.name}">${shortName}</div></td><td>${r.pts}${gap}</td></tr>`;
+        const favKey = cat.id + ':' + r.name;
+        const isFav = favorites.has(favKey);
+        rows += `<tr class="${pc}${isFav ? ' favorite' : ''}" data-fav="${favKey}">
+          <td>${i+1}</td>
+          <td><div class="driver-name" title="${r.name}">${shortName}</div></td>
+          <td>${r.pts}${gap}</td>
+          <td style="width:20px;padding:4px 6px"><button class="fav-btn${isFav ? ' active' : ''}" onclick="toggleFav('${favKey}')" title="Pilota preferito">★</button></td>
+        </tr>`;
       });
     }
     col.innerHTML =
       `<div class="col-header"><a href="${cat.url}" target="_blank" style="color:inherit;text-decoration:none;">${cat.label} ↗</a></div>` +
-      `<table><thead><tr><th>#</th><th>Pilota</th><th>Pts</th></tr></thead><tbody>${rows}</tbody></table>`;
+      `<table><thead><tr><th>#</th><th>Pilota</th><th>Pts</th><th style="width:20px"></th></tr></thead><tbody>${rows}</tbody></table>`;
     grid.appendChild(col);
   });
   const ts = all['_updated'];
