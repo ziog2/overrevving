@@ -43,6 +43,7 @@
   thead th:first-child { text-align: center; width: 28px; }
   thead th:last-child  { text-align: right; }
   tbody tr { border-bottom: 1px solid #3a3a42; }
+  tbody tr:nth-child(even) { background: #28282e; }
   tbody tr:last-child { border-bottom: none; }
   tbody tr:hover { background: #333340; }
   tbody td { padding: 8px 8px; color: #ddd; vertical-align: middle; }
@@ -53,7 +54,7 @@
   .pos-3 td:first-child { color: #cd7f32; }
   .driver-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
   .loading { text-align: center; color: #555; padding: 60px 0; font-size: 14px; }
-  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } body { padding: 16px 20px 40px; } }
 </style>
 </head>
 <body>

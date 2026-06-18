@@ -55,6 +55,7 @@
   thead th:first-child { text-align: center; width: 28px; }
   thead th:last-child  { text-align: right; }
   tbody tr { border-bottom: 1px solid #3a3a42; }
+  tbody tr:nth-child(even) { background: #28282e; }
   tbody tr:last-child { border-bottom: none; }
   tbody tr:hover { background: #333340; }
   tbody td { padding: 8px 8px; color: #ddd; vertical-align: middle; }
@@ -99,7 +100,7 @@
   .btn-save { background: #3d6bbd; color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-size: 13px; font-weight: 600; cursor: pointer; }
   .btn-save:hover { background: #4d7bcd; }
   .error-msg { color: #e04040; font-size: 12px; margin-top: 8px; display: none; }
-  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } body { padding: 16px 20px 40px; } }
 </style>
 </head>
 <body>
@@ -172,7 +173,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 const BIN_ID  = '6a3064e4f5f4af5e29f7958b';
 const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
 const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-const ADMIN_PWD = 'moto2026'; // ← CAMBIA QUESTA PASSWORD
+const ADMIN_PWD = 'andrea99!'; // ← CAMBIA QUESTA PASSWORD
 
 const CATEGORIES = [
   { id: 'motogp', label: 'MotoGP', cls: 'motogp', url: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings' },
