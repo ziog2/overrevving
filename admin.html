@@ -155,8 +155,14 @@
 function formatName(fullName) {
   const parts = fullName.trim().split(' ');
   if (parts.length < 2) return fullName;
-  // Prende la prima lettera del primo nome + punto + il resto (cognome, anche composto)
-  return parts[0][0].toUpperCase() + '. ' + parts.slice(1).join(' ');
+  // Normalizza ogni parola: se è tutta maiuscola, la converte in Title Case
+  const normalized = parts.map(w =>
+    w === w.toUpperCase() && w.length > 1
+      ? w.charAt(0) + w.slice(1).toLowerCase()
+      : w
+  );
+  // Iniziale del nome + punto + cognome (anche composto)
+  return normalized[0][0].toUpperCase() + '. ' + normalized.slice(1).join(' ');
 }
 </script>
 <script>
