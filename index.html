@@ -57,6 +57,10 @@
   .pos-2 td:first-child { color: #c0c0c0; }
   .pos-3 td:first-child { color: #cd7f32; }
   .driver-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
+  .next-round { font-size: 13px; font-weight: 400; text-transform: none; letter-spacing: normal; margin-top: 4px; opacity: 0.9; }
+  .visitor-counter { text-align: center; margin-top: 40px; padding-top: 20px; }
+  .visitor-counter img { vertical-align: middle; image-rendering: pixelated; }
+  .visitor-counter-label { font-size: 11px; color: #555; margin-bottom: 6px; font-family: 'Courier New', monospace; letter-spacing: 0.05em; }
   .loading { text-align: center; color: #555; padding: 60px 0; font-size: 14px; }
   @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } body { padding: 16px 40px 40px; } }
   tbody tr.favorite { background: #2a1f3a !important; }
@@ -76,6 +80,13 @@
 </div>
 <div class="last-updated" id="last-updated">Caricamento...</div>
 <div class="grid" id="standings-grid"><div class="loading">⏳ Caricamento classifiche...</div></div>
+
+<div class="visitor-counter">
+  <div class="visitor-counter-label">VISITATORI</div>
+  <a href="https://hits.sh/overrevving.it/" target="_blank" rel="noopener">
+    <img src="https://hits.sh/overrevving.it.svg?style=for-the-badge&label=&color=2c2c32&labelColor=1e1e22&logo=none" alt="Contatore visite" height="26">
+  </a>
+</div>
 
 <script>
 const BIN_ID  = '6a3064e4f5f4af5e29f7958b';
@@ -134,7 +145,10 @@ function renderAll(all) {
       });
     }
     col.innerHTML =
-      `<div class="col-header"><a href="${cat.url}" target="_blank" style="color:inherit;text-decoration:none;">${cat.label} ↗</a></div>` +
+      `<div class="col-header">
+        <a href="${cat.url}" target="_blank" style="color:inherit;text-decoration:none;">${cat.label} ↗</a>
+        ${['motogp','moto2','moto3'].includes(cat.id) ? `<div class="next-round" id="countdown-${cat.id}">⏳ Caricamento...</div>` : ''}
+      </div>` +
       `<table><thead><tr><th>#</th><th>Pilota</th><th>Pts</th><th style="width:20px"></th></tr></thead><tbody>${rows}</tbody></table>`;
     grid.appendChild(col);
   });
@@ -160,6 +174,53 @@ function toggleFav(key) {
   });
 }
 
+// ---- Countdown prossimo round (MotoGP/Moto2/Moto3) ----
+const PULSELIVE_SEASON_2026 = 'e88b4e43-2209-47aa-8e83-0e0b1cedde6e';
+
+async function loadCountdown() {
+  try {
+    const res = await fetch(`https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid=${PULSELIVE_SEASON_2026}&isFinished=false`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const events = await res.json();
+    if (!events || events.length === 0) return;
+
+    // Il primo evento non concluso è il prossimo round
+    const next = events[0];
+    const dateStr = next.date_start; // formato YYYY-MM-DD
+    if (!dateStr) return;
+
+    const targetDate = new Date(dateStr + 'T00:00:00');
+    startCountdownTicker(targetDate, next.circuit ? next.circuit.name : '');
+  } catch (e) {
+    ['motogp', 'moto2', 'moto3'].forEach(catId => {
+      const el = document.getElementById('countdown-' + catId);
+      if (el) el.textContent = '';
+    });
+  }
+}
+
+function startCountdownTicker(targetDate, circuitName) {
+  function tick() {
+    const now = new Date();
+    const diff = targetDate - now;
+    let text;
+    if (diff <= 0) {
+      text = '🏁 Round in corso!';
+    } else {
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      text = `⏳ Prossimo round: ${days}g ${hours}h`;
+    }
+    ['motogp', 'moto2', 'moto3'].forEach(catId => {
+      const el = document.getElementById('countdown-' + catId);
+      if (el) el.textContent = text;
+    });
+  }
+  tick();
+  setInterval(tick, 60 * 1000); // aggiorna ogni minuto
+}
+
+loadCountdown();
 loadAndRender();
 
 function formatName(fullName) {
