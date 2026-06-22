@@ -175,28 +175,40 @@ function toggleFav(key) {
 }
 
 // ---- Countdown prossimo round (MotoGP/Moto2/Moto3) ----
-const PULSELIVE_SEASON_2026 = 'e88b4e43-2209-47aa-8e83-0e0b1cedde6e';
+// Calendario MotoGP 2026 — date gara domenica (ora locale italiana)
+const MOTOGP_2026 = [
+  { name: 'Qatar',       date: '2026-03-01' },
+  { name: 'Tailandia',   date: '2026-03-29' },
+  { name: 'Argentina',   date: '2026-04-12' },
+  { name: 'USA (COTA)',  date: '2026-04-19' },
+  { name: 'Spagna',      date: '2026-05-03' },
+  { name: 'Francia',     date: '2026-05-17' },
+  { name: 'Catalogna',   date: '2026-05-31' },
+  { name: 'Italia',      date: '2026-06-07' },
+  { name: 'Olanda',      date: '2026-06-28' },
+  { name: 'Germania',    date: '2026-07-12' },
+  { name: 'Gran Bretagna', date: '2026-08-02' },
+  { name: 'Austria',     date: '2026-08-16' },
+  { name: 'San Marino',  date: '2026-09-06' },
+  { name: 'Aragona',     date: '2026-09-20' },
+  { name: 'Giappone',    date: '2026-10-04' },
+  { name: 'Indonesia',   date: '2026-10-18' },
+  { name: 'Australia',   date: '2026-10-25' },
+  { name: 'Malesia',     date: '2026-11-01' },
+  { name: 'Valencia',    date: '2026-11-08' },
+];
 
-async function loadCountdown() {
-  try {
-    const res = await fetch(`https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid=${PULSELIVE_SEASON_2026}&isFinished=false`);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const events = await res.json();
-    if (!events || events.length === 0) return;
-
-    // Il primo evento non concluso è il prossimo round
-    const next = events[0];
-    const dateStr = next.date_start; // formato YYYY-MM-DD
-    if (!dateStr) return;
-
-    const targetDate = new Date(dateStr + 'T00:00:00');
-    startCountdownTicker(targetDate, next.circuit ? next.circuit.name : '');
-  } catch (e) {
+function loadCountdown() {
+  const now = new Date();
+  const next = MOTOGP_2026.find(e => new Date(e.date + 'T00:00:00') > now);
+  if (!next) {
     ['motogp', 'moto2', 'moto3'].forEach(catId => {
       const el = document.getElementById('countdown-' + catId);
-      if (el) el.textContent = '';
+      if (el) el.textContent = '🏁 Stagione conclusa';
     });
+    return;
   }
+  startCountdownTicker(new Date(next.date + 'T00:00:00'), next.name);
 }
 
 function startCountdownTicker(targetDate, circuitName) {
@@ -209,7 +221,7 @@ function startCountdownTicker(targetDate, circuitName) {
     } else {
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      text = `⏳ Prossimo round: ${days}g ${hours}h`;
+      text = `⏳ ${circuitName}: ${days}g ${hours}h`;
     }
     ['motogp', 'moto2', 'moto3'].forEach(catId => {
       const el = document.getElementById('countdown-' + catId);
