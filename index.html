@@ -154,6 +154,8 @@ function renderAll(all) {
   });
   const ts = all['_updated'];
   document.getElementById('last-updated').textContent = ts ? 'Ultimo aggiornamento: ' + ts : '';
+  // Avvia countdown dopo che il DOM è pronto
+  loadCountdown();
 }
 
 // ---- Preferiti ----
@@ -175,6 +177,7 @@ function toggleFav(key) {
 }
 
 // ---- Countdown prossimo round (MotoGP/Moto2/Moto3) ----
+let countdownStarted = false;
 // Calendario MotoGP 2026 — date gara domenica (ora locale italiana)
 const MOTOGP_2026 = [
   { name: 'Qatar',       date: '2026-03-01' },
@@ -199,6 +202,8 @@ const MOTOGP_2026 = [
 ];
 
 function loadCountdown() {
+  if (countdownStarted) return;
+  countdownStarted = true;
   const now = new Date();
   const next = MOTOGP_2026.find(e => new Date(e.date + 'T00:00:00') > now);
   if (!next) {
@@ -232,7 +237,6 @@ function startCountdownTicker(targetDate, circuitName) {
   setInterval(tick, 60 * 1000); // aggiorna ogni minuto
 }
 
-loadCountdown();
 loadAndRender();
 
 function formatName(fullName) {
