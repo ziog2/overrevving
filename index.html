@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Classifiche Motorsport 2026</title>
+<title>Motorsport Standings 2026</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -72,17 +72,17 @@
 </head>
 <body>
 
-<h1>Classifiche Motorsport 2026</h1>
+<h1>Motorsport Standings 2026</h1>
 <div class="logo-banner">
   <a href="https://www.etsy.com/shop/Overrevving" target="_blank" rel="noopener">
     <img src="logo.png" alt="Overrevving" class="site-logo">
   </a>
 </div>
-<div class="last-updated" id="last-updated">Caricamento...</div>
-<div class="grid" id="standings-grid"><div class="loading">⏳ Caricamento classifiche...</div></div>
+<div class="last-updated" id="last-updated">Loading...</div>
+<div class="grid" id="standings-grid"><div class="loading">⏳ Loading standings...</div></div>
 
 <div class="visitor-counter">
-  <div class="visitor-counter-label">VISITATORI</div>
+  <div class="visitor-counter-label">VISITORS</div>
   <a href="https://hits.sh/overrevving.it/" target="_blank" rel="noopener">
     <img src="https://hits.sh/overrevving.it.svg?style=for-the-badge&label=&color=2c2c32&labelColor=1e1e22&logo=none" alt="Contatore visite" height="26">
   </a>
@@ -113,7 +113,7 @@ async function loadAndRender() {
     renderAll(all);
   } catch(e) {
     document.getElementById('standings-grid').innerHTML =
-      '<div class="loading" style="color:#ca5f5f">⚠ Errore caricamento classifiche</div>';
+      '<div class="loading" style="color:#ca5f5f">⚠ Error loading standings</div>';
     document.getElementById('last-updated').textContent = '';
   }
 }
@@ -127,7 +127,7 @@ function renderAll(all) {
     col.className = 'column ' + cat.cls;
     let rows = '';
     if (riders.length === 0) {
-      rows = '<tr><td colspan="3" style="text-align:center;color:#555;padding:20px;font-size:12px;">Dati non disponibili</td></tr>';
+      rows = '<tr><td colspan="3" style="text-align:center;color:#555;padding:20px;font-size:12px;">No data available</td></tr>';
     } else {
       const leader = riders[0].pts;
       riders.forEach((r, i) => {
@@ -140,20 +140,20 @@ function renderAll(all) {
           <td>${i+1}</td>
           <td><div class="driver-name" title="${r.name}">${shortName}</div></td>
           <td>${r.pts}${gap}</td>
-          <td style="width:20px;padding:4px 6px"><button class="fav-btn${isFav ? ' active' : ''}" onclick="toggleFav('${favKey}')" title="Pilota preferito">★</button></td>
+          <td style="width:20px;padding:4px 6px"><button class="fav-btn${isFav ? ' active' : ''}" onclick="toggleFav('${favKey}')" title="Favourite rider">★</button></td>
         </tr>`;
       });
     }
     col.innerHTML =
       `<div class="col-header">
         <a href="${cat.url}" target="_blank" style="color:inherit;text-decoration:none;">${cat.label} ↗</a>
-        ${['motogp','moto2','moto3'].includes(cat.id) ? `<div class="next-round" id="countdown-${cat.id}">⏳ Caricamento...</div>` : ''}
+        <div class="next-round" id="countdown-${cat.id}">🏁 → Loading...</div>
       </div>` +
-      `<table><thead><tr><th>#</th><th>Pilota</th><th>Pts</th><th style="width:20px"></th></tr></thead><tbody>${rows}</tbody></table>`;
+      `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th><th style="width:20px"></th></tr></thead><tbody>${rows}</tbody></table>`;
     grid.appendChild(col);
   });
   const ts = all['_updated'];
-  document.getElementById('last-updated').textContent = ts ? 'Ultimo aggiornamento: ' + ts : '';
+  document.getElementById('last-updated').textContent = ts ? 'Last updated: ' + ts : '';
   // Avvia countdown dopo che il DOM è pronto
   loadCountdown();
 }
@@ -178,64 +178,161 @@ function toggleFav(key) {
 
 // ---- Countdown prossimo round (MotoGP/Moto2/Moto3) ----
 let countdownStarted = false;
-// Calendario MotoGP 2026 — date gara domenica (ora locale italiana)
-const MOTOGP_2026 = [
-  { name: 'Qatar',       date: '2026-03-01' },
-  { name: 'Tailandia',   date: '2026-03-29' },
-  { name: 'Argentina',   date: '2026-04-12' },
-  { name: 'USA (COTA)',  date: '2026-04-19' },
-  { name: 'Spagna',      date: '2026-05-03' },
-  { name: 'Francia',     date: '2026-05-17' },
-  { name: 'Catalogna',   date: '2026-05-31' },
-  { name: 'Italia',      date: '2026-06-07' },
-  { name: 'Olanda',      date: '2026-06-28' },
-  { name: 'Germania',    date: '2026-07-12' },
-  { name: 'Gran Bretagna', date: '2026-08-02' },
-  { name: 'Austria',     date: '2026-08-16' },
-  { name: 'San Marino',  date: '2026-09-06' },
-  { name: 'Aragona',     date: '2026-09-20' },
-  { name: 'Giappone',    date: '2026-10-04' },
-  { name: 'Indonesia',   date: '2026-10-18' },
-  { name: 'Australia',   date: '2026-10-25' },
-  { name: 'Malesia',     date: '2026-11-01' },
-  { name: 'Valencia',    date: '2026-11-08' },
-];
+// Race calendars 2026 — Sunday race dates
+const CALENDARS_2026 = {
+  motogp: [
+    { name: 'Qatar',         date: '2026-03-01' },
+    { name: 'Thailand',      date: '2026-03-29' },
+    { name: 'Argentina',     date: '2026-04-12' },
+    { name: 'USA (COTA)',    date: '2026-04-19' },
+    { name: 'Spain',         date: '2026-05-03' },
+    { name: 'France',        date: '2026-05-17' },
+    { name: 'Catalunya',     date: '2026-05-31' },
+    { name: 'Italy',         date: '2026-06-07' },
+    { name: 'Netherlands',   date: '2026-06-28' },
+    { name: 'Germany',       date: '2026-07-12' },
+    { name: 'Great Britain', date: '2026-08-02' },
+    { name: 'Austria',       date: '2026-08-16' },
+    { name: 'San Marino',    date: '2026-09-06' },
+    { name: 'Aragon',        date: '2026-09-20' },
+    { name: 'Japan',         date: '2026-10-04' },
+    { name: 'Indonesia',     date: '2026-10-18' },
+    { name: 'Australia',     date: '2026-10-25' },
+    { name: 'Malaysia',      date: '2026-11-01' },
+    { name: 'Valencia',      date: '2026-11-08' },
+  ],
+  moto2: [
+    { name: 'Qatar',         date: '2026-03-01' },
+    { name: 'Thailand',      date: '2026-03-29' },
+    { name: 'Argentina',     date: '2026-04-12' },
+    { name: 'USA (COTA)',    date: '2026-04-19' },
+    { name: 'Spain',         date: '2026-05-03' },
+    { name: 'France',        date: '2026-05-17' },
+    { name: 'Catalunya',     date: '2026-05-31' },
+    { name: 'Italy',         date: '2026-06-07' },
+    { name: 'Netherlands',   date: '2026-06-28' },
+    { name: 'Germany',       date: '2026-07-12' },
+    { name: 'Great Britain', date: '2026-08-02' },
+    { name: 'Austria',       date: '2026-08-16' },
+    { name: 'San Marino',    date: '2026-09-06' },
+    { name: 'Aragon',        date: '2026-09-20' },
+    { name: 'Japan',         date: '2026-10-04' },
+    { name: 'Indonesia',     date: '2026-10-18' },
+    { name: 'Australia',     date: '2026-10-25' },
+    { name: 'Malaysia',      date: '2026-11-01' },
+    { name: 'Valencia',      date: '2026-11-08' },
+  ],
+  moto3: [
+    { name: 'Qatar',         date: '2026-03-01' },
+    { name: 'Thailand',      date: '2026-03-29' },
+    { name: 'Argentina',     date: '2026-04-12' },
+    { name: 'USA (COTA)',    date: '2026-04-19' },
+    { name: 'Spain',         date: '2026-05-03' },
+    { name: 'France',        date: '2026-05-17' },
+    { name: 'Catalunya',     date: '2026-05-31' },
+    { name: 'Italy',         date: '2026-06-07' },
+    { name: 'Netherlands',   date: '2026-06-28' },
+    { name: 'Germany',       date: '2026-07-12' },
+    { name: 'Great Britain', date: '2026-08-02' },
+    { name: 'Austria',       date: '2026-08-16' },
+    { name: 'San Marino',    date: '2026-09-06' },
+    { name: 'Aragon',        date: '2026-09-20' },
+    { name: 'Japan',         date: '2026-10-04' },
+    { name: 'Indonesia',     date: '2026-10-18' },
+    { name: 'Australia',     date: '2026-10-25' },
+    { name: 'Malaysia',      date: '2026-11-01' },
+    { name: 'Valencia',      date: '2026-11-08' },
+  ],
+  sbk: [
+    { name: 'Australia',     date: '2026-02-22' },
+    { name: 'Portugal',      date: '2026-03-29' },
+    { name: 'Netherlands',   date: '2026-04-19' },
+    { name: 'Hungary',       date: '2026-05-03' },
+    { name: 'Most',          date: '2026-05-17' },
+    { name: 'Aragon',        date: '2026-05-31' },
+    { name: 'Misano',        date: '2026-06-14' },
+    { name: 'Donington',     date: '2026-07-12' },
+    { name: 'Magny-Cours',   date: '2026-09-27' },
+    { name: 'Cremona',       date: '2026-10-11' },
+    { name: 'Estoril',       date: '2026-10-18' },
+    { name: 'Jerez',         date: '2026-10-18' },
+  ],
+  mxgp: [
+    { name: 'Argentina',     date: '2026-03-08' },
+    { name: 'Andalucia',     date: '2026-03-22' },
+    { name: 'Switzerland',   date: '2026-03-29' },
+    { name: 'Sardegna',      date: '2026-04-12' },
+    { name: 'Trentino',      date: '2026-04-19' },
+    { name: 'France',        date: '2026-05-24' },
+    { name: 'Germany',       date: '2026-05-31' },
+    { name: 'Latvia',        date: '2026-06-07' },
+    { name: 'Italy',         date: '2026-06-21' },
+    { name: 'Portugal',      date: '2026-06-28' },
+    { name: 'South Africa',  date: '2026-07-05' },
+    { name: 'Great Britain', date: '2026-07-19' },
+    { name: 'Czech Republic',date: '2026-07-26' },
+    { name: 'Flanders',      date: '2026-08-02' },
+    { name: 'Sweden',        date: '2026-08-16' },
+    { name: 'Netherlands',   date: '2026-08-23' },
+    { name: 'Turkey',        date: '2026-09-06' },
+  ],
+  f1: [
+    { name: 'Australia',     date: '2026-03-08' },
+    { name: 'China',         date: '2026-03-15' },
+    { name: 'Japan',         date: '2026-03-29' },
+    { name: 'Bahrain',       date: '2026-04-12' },
+    { name: 'Saudi Arabia',  date: '2026-04-19' },
+    { name: 'Miami',         date: '2026-05-03' },
+    { name: 'Canada',        date: '2026-05-24' },
+    { name: 'Monaco',        date: '2026-06-07' },
+    { name: 'Spain',         date: '2026-06-14' },
+    { name: 'Austria',       date: '2026-06-28' },
+    { name: 'Great Britain', date: '2026-07-05' },
+    { name: 'Belgium',       date: '2026-07-19' },
+    { name: 'Netherlands',   date: '2026-08-23' },
+    { name: 'Italy',         date: '2026-09-06' },
+    { name: 'Madrid',        date: '2026-09-13' },
+    { name: 'Azerbaijan',    date: '2026-09-20' },
+    { name: 'Singapore',     date: '2026-10-04' },
+    { name: 'Austin',        date: '2026-10-25' },
+    { name: 'Mexico',        date: '2026-11-01' },
+    { name: 'São Paulo',     date: '2026-11-08' },
+    { name: 'Las Vegas',     date: '2026-11-21' },
+    { name: 'Qatar',         date: '2026-11-29' },
+    { name: 'Abu Dhabi',     date: '2026-12-06' },
+  ],
+};
 
 function loadCountdown() {
   if (countdownStarted) return;
   countdownStarted = true;
-  const now = new Date();
-  const next = MOTOGP_2026.find(e => new Date(e.date + 'T00:00:00') > now);
-  if (!next) {
-    ['motogp', 'moto2', 'moto3'].forEach(catId => {
-      const el = document.getElementById('countdown-' + catId);
-      if (el) el.textContent = '🏁 Stagione conclusa';
-    });
-    return;
-  }
-  startCountdownTicker(new Date(next.date + 'T00:00:00'), next.name);
+  // Start countdown for each category independently
+  ['motogp', 'moto2', 'moto3', 'sbk', 'mxgp', 'f1'].forEach(catId => {
+    const cal = CALENDARS_2026[catId];
+    if (!cal) return;
+    const now = new Date();
+    const next = cal.find(e => new Date(e.date + 'T00:00:00') > now);
+    const el = document.getElementById('countdown-' + catId);
+    if (!el) return;
+    if (!next) { el.textContent = '🏁 Season concluded'; return; }
+    startCategoryCountdown(el, new Date(next.date + 'T00:00:00'), next.name);
+  });
 }
 
-function startCountdownTicker(targetDate, circuitName) {
+function startCategoryCountdown(el, targetDate, name) {
   function tick() {
     const now = new Date();
     const diff = targetDate - now;
-    let text;
-    if (diff <= 0) {
-      text = '🏁 Round in corso!';
-    } else {
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      text = `⏳ ${circuitName}: ${days}g ${hours}h`;
-    }
-    ['motogp', 'moto2', 'moto3'].forEach(catId => {
-      const el = document.getElementById('countdown-' + catId);
-      if (el) el.textContent = text;
-    });
+    if (diff <= 0) { el.textContent = '🏁 Round in progress!'; return; }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    el.textContent = `🏁 → ${name}: ${days}d ${hours}h`;
   }
   tick();
-  setInterval(tick, 60 * 1000); // aggiorna ogni minuto
+  setInterval(tick, 60 * 1000);
 }
+
+
 
 loadAndRender();
 
