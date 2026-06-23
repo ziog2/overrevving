@@ -24,7 +24,7 @@
   .site-logo { max-width: 420px; width: 70%; height: auto; opacity: 0.92; transition: opacity 0.2s; border: 1px solid #3a3a42; border-radius: 14px; padding: 14px 20px; background: #2c2c32; }
   .site-logo:hover { opacity: 1; }
   .grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 16px; max-width: 1600px; margin: 0 auto;
   }
   .column { background: #2c2c32; border-radius: 14px; overflow: hidden; border: 1px solid #3a3a42; }
@@ -328,7 +328,7 @@ function loadCountdown() {
   if (countdownStarted) return;
   countdownStarted = true;
   // Start countdown for each category independently
-  ['motogp', 'moto2', 'moto3', 'sbk', 'mxgp', 'f1'].forEach(catId => {
+  ['motogp', 'moto2', 'moto3', 'sbk', 'mxgp', 'mx2', 'f1'].forEach(catId => {
     const cal = CALENDARS_2026[catId];
     if (!cal) return;
     const now = new Date();
