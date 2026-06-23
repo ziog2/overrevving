@@ -23,9 +23,17 @@
   .logo-banner { text-align: center; margin: 10px 0 6px; }
   .site-logo { max-width: 420px; width: 70%; height: auto; opacity: 0.92; transition: opacity 0.2s; border: 1px solid #3a3a42; border-radius: 14px; padding: 14px 20px; background: #2c2c32; }
   .site-logo:hover { opacity: 1; }
+  .grid-wrapper {
+    overflow-x: auto;
+    padding: 0 16px 12px;
+    -webkit-overflow-scrolling: touch;
+  }
   .grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px; margin: 0 auto; padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(260px, 1fr));
+    gap: 16px;
+    min-width: fit-content;
+    margin: 0 auto;
   }
   .column { background: #2c2c32; border-radius: 14px; overflow: hidden; border: 1px solid #3a3a42; }
   .col-header {
@@ -63,7 +71,7 @@
   .visitor-counter img { vertical-align: middle; image-rendering: pixelated; }
   .visitor-counter-label { font-size: 11px; color: #555; margin-bottom: 6px; font-family: 'Courier New', monospace; letter-spacing: 0.05em; }
   .loading { text-align: center; color: #555; padding: 60px 0; font-size: 14px; }
-  @media (max-width: 700px) { .grid { grid-template-columns: 1fr !important; } body { padding: 16px 40px 40px; } }
+  @media (max-width: 700px) { body { padding: 16px 20px 40px; } }
   tbody tr.favorite { background: #2a1f3a !important; }
   tbody tr.favorite:hover { background: #332545 !important; }
   .fav-btn { background: none; border: none; cursor: pointer; font-size: 13px; padding: 0 4px; opacity: 0.3; transition: opacity 0.15s, color 0.15s; line-height: 1; color: #999; }
@@ -80,7 +88,7 @@
   </a>
 </div>
 <div class="last-updated" id="last-updated">Loading...</div>
-<div class="grid" id="standings-grid"><div class="loading">⏳ Loading standings...</div></div>
+<div class="grid-wrapper"><div class="grid" id="standings-grid"><div class="loading">⏳ Loading standings...</div></div></div>
 
 <div class="visitor-counter">
   <div class="visitor-counter-label">VISITORS</div>
