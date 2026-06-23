@@ -23,6 +23,77 @@
   .logo-banner { text-align: center; margin: 10px 0 6px; }
   .site-logo { max-width: 420px; width: 70%; height: auto; opacity: 0.92; transition: opacity 0.2s; border: 1px solid #3a3a42; border-radius: 14px; padding: 14px 20px; background: #2c2c32; }
   .site-logo:hover { opacity: 1; }
+  /* Sidebar menu */
+  .menu-btn {
+    position: fixed; top: 16px; right: 16px; z-index: 200;
+    width: 42px; height: 42px; border-radius: 8px;
+    background: #2c2c32; border: 1px solid #3a3a42;
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 5px;
+    transition: background 0.2s;
+  }
+  .menu-btn:hover { background: #3a3a42; }
+  .menu-btn span {
+    display: block; width: 20px; height: 2px;
+    background: #ccc; border-radius: 2px;
+  }
+  .sidebar {
+    position: fixed; top: 0; right: -280px; width: 260px; height: 100vh;
+    background: #2a2a30; border-left: 1px solid #3a3a42;
+    z-index: 300; transition: right 0.3s ease;
+    display: flex; flex-direction: column;
+    padding: 20px 16px; box-shadow: -4px 0 20px rgba(0,0,0,0.4);
+  }
+  .sidebar.open { right: 0; }
+  .sidebar-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    z-index: 299; display: none;
+  }
+  .sidebar-overlay.open { display: block; }
+  .sidebar h3 {
+    font-size: 13px; font-weight: 600; color: #888;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 20px; margin-top: 4px;
+  }
+  .sidebar-close {
+    position: absolute; top: 14px; right: 14px;
+    background: none; border: none; color: #888;
+    font-size: 20px; cursor: pointer; line-height: 1;
+  }
+  .sidebar-close:hover { color: #ddd; }
+  .champ-toggle {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 8px;
+    cursor: pointer; margin-bottom: 6px;
+    transition: background 0.15s; user-select: none;
+  }
+  .champ-toggle:hover { background: #333340; }
+  .champ-toggle input { display: none; }
+  .champ-dot {
+    width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0;
+  }
+  .champ-label { font-size: 14px; color: #ddd; flex: 1; }
+  .champ-check {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 2px solid #555; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; transition: all 0.15s;
+  }
+  .champ-toggle.active .champ-check {
+    background: #3d6bbd; border-color: #3d6bbd; color: #fff;
+  }
+  .champ-check::after { content: ''; display: none; }
+  .champ-toggle.active .champ-check::after {
+    content: '✓'; display: block; font-size: 11px; font-weight: 700; color: #fff;
+  }
+  .sidebar-actions {
+    display: flex; gap: 8px; margin-top: 8px; margin-bottom: 20px;
+  }
+  .sidebar-btn {
+    flex: 1; padding: 7px; border-radius: 7px; border: 1px solid #444;
+    background: transparent; color: #888; font-size: 12px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .sidebar-btn:hover { background: #333340; color: #ddd; }
   .grid-wrapper {
     overflow-x: auto;
     padding: 0 16px 12px;
@@ -88,6 +159,25 @@
   </a>
 </div>
 <div class="last-updated" id="last-updated">Loading...</div>
+<!-- Menu button -->
+<button class="menu-btn" onclick="toggleSidebar()" title="Select championships">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- Sidebar overlay -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+  <h3>Championships</h3>
+  <div class="sidebar-actions">
+    <button class="sidebar-btn" onclick="selectAll()">Select all</button>
+    <button class="sidebar-btn" onclick="clearAll()">Clear all</button>
+  </div>
+  <div id="champ-list"></div>
+</div>
+
 <div class="grid-wrapper"><div class="grid" id="standings-grid"><div class="loading">⏳ Loading standings...</div></div></div>
 
 <div class="visitor-counter">
@@ -166,7 +256,85 @@ function renderAll(all) {
   document.getElementById('last-updated').textContent = ts ? 'Last updated: ' + ts : '';
   // Avvia countdown dopo che il DOM è pronto
   loadCountdown();
+  applyVisibility();
 }
+
+// ---- Sidebar championship selector ----
+const CHAMP_COLORS = {
+  motogp: '#c0392b', moto2: '#e67e22', moto3: '#27ae60',
+  sbk: '#2980b9', mxgp: '#ff6b00', mx2: '#f0a500', f1: '#e10600'
+};
+
+// Load saved preferences or default all visible
+let visibleChamps = new Set(
+  JSON.parse(localStorage.getItem('overrevving_champs') ||
+  JSON.stringify(CATEGORIES.map(c => c.id)))
+);
+
+function saveChampPrefs() {
+  localStorage.setItem('overrevving_champs', JSON.stringify([...visibleChamps]));
+}
+
+function buildSidebarList() {
+  const list = document.getElementById('champ-list');
+  list.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const active = visibleChamps.has(cat.id);
+    const div = document.createElement('div');
+    div.className = 'champ-toggle' + (active ? ' active' : '');
+    div.dataset.id = cat.id;
+    div.innerHTML = `
+      <div class="champ-dot" style="background:${CHAMP_COLORS[cat.id]}"></div>
+      <span class="champ-label">${cat.label}</span>
+      <div class="champ-check"></div>`;
+    div.onclick = () => toggleChamp(cat.id, div);
+    list.appendChild(div);
+  });
+}
+
+function toggleChamp(id, el) {
+  if (visibleChamps.has(id)) {
+    visibleChamps.delete(id);
+    el.classList.remove('active');
+  } else {
+    visibleChamps.add(id);
+    el.classList.add('active');
+  }
+  saveChampPrefs();
+  applyVisibility();
+}
+
+function selectAll() {
+  CATEGORIES.forEach(c => visibleChamps.add(c.id));
+  buildSidebarList();
+  saveChampPrefs();
+  applyVisibility();
+}
+
+function clearAll() {
+  visibleChamps.clear();
+  buildSidebarList();
+  saveChampPrefs();
+  applyVisibility();
+}
+
+function applyVisibility() {
+  CATEGORIES.forEach(cat => {
+    const col = document.querySelector('.column.' + cat.cls);
+    if (col) col.style.display = visibleChamps.has(cat.id) ? '' : 'none';
+  });
+  // Update grid column count to match visible columns
+  const visibleCount = visibleChamps.size || 1;
+  document.querySelector('.grid').style.gridTemplateColumns =
+    `repeat(${visibleCount}, minmax(260px, 1fr))`;
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('open');
+}
+
+buildSidebarList();
 
 // ---- Preferiti ----
 const FAV_KEY = 'overrevving_favorites';
