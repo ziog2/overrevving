@@ -50,6 +50,7 @@
   .sbk    .col-header { background: #2980b9; color: #fff; }
   .f1     .col-header { background: #e10600; color: #fff; }
   .mxgp   .col-header { background: #ff6b00; color: #fff; }
+  .mx2    .col-header { background: #f0a500; color: #fff; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   thead th {
     padding: 7px 8px; text-align: left; font-size: 11px; font-weight: 600;
@@ -147,6 +148,7 @@
       <option value="moto3">Moto3</option>
       <option value="sbk">SBK</option>
       <option value="mxgp">MXGP</option>
+      <option value="mx2">MX2</option>
       <option value="f1">F1</option>
     </select>
     <label>Dati (una riga per pilota: Nome, Punti)</label>
@@ -190,6 +192,7 @@ const CATEGORIES = [
   { id: 'moto3',  label: 'Moto3',  cls: 'moto3',  url: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings' },
   { id: 'sbk',    label: 'SBK',    cls: 'sbk',    url: 'https://www.worldsbk.com/en/standings/riders/2026/SBK' },
   { id: 'mxgp',   label: 'MXGP',   cls: 'mxgp',   url: 'https://mxgpresults.com/mxgp/standings' },
+  { id: 'mx2',    label: 'MX2',    cls: 'mx2',    url: 'https://mxgpresults.com/mx2/standings' },
   { id: 'f1',     label: 'F1',     cls: 'f1',     url: 'https://www.mclaren.com/racing/formula-1/standings/' },
 ];
 
@@ -404,8 +407,8 @@ async function fetchAllAPI() {
   const statusDiv = document.getElementById('global-status');
   statusDiv.innerHTML = '';
 
-  const labels = { motogp: 'MotoGP', moto2: 'Moto2', moto3: 'Moto3', mxgp: 'MXGP', f1: 'F1' };
-  for (const key of ['motogp', 'moto2', 'moto3', 'mxgp', 'f1']) {
+  const labels = { motogp: 'MotoGP', moto2: 'Moto2', moto3: 'Moto3', mxgp: 'MXGP', mx2: 'MX2', f1: 'F1' };
+  for (const key of ['motogp', 'moto2', 'moto3', 'mxgp', 'mx2', 'f1']) {
     const tag = document.createElement('div');
     tag.className = 'gstatus load'; tag.id = 'gs-' + key;
     tag.textContent = '⏳ ' + labels[key] + ' — recupero…';
@@ -454,6 +457,29 @@ async function fetchAllAPI() {
   } catch (err) {
     const tagMx = document.getElementById('gs-mxgp');
     if (tagMx) { tagMx.className = 'gstatus err'; tagMx.textContent = '⚠ MXGP — ' + err.message; }
+  }
+
+  // MX2 via mxgpresults.com
+  try {
+    const mx2Url = 'https://corsproxy.io/?url=https://mxgpresults.com/mx2/standings';
+    const mx2Res = await fetch(mx2Url, { signal: AbortSignal.timeout(10000) });
+    if (!mx2Res.ok) throw new Error('HTTP ' + mx2Res.status);
+    const html2 = await mx2Res.text();
+    const rowRe2 = /<tr[^>]*>\s*<td[^>]*>\d+\s*<\/td>\s*<td[^>]*>#\d+\s*<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>[\s\S]*?<td[^>]*>(\d+)\s*<\/td>\s*<\/tr>/g;
+    const mx2Riders = [];
+    let m2;
+    while ((m2 = rowRe2.exec(html2)) !== null) {
+      const name = m2[1].replace(/<[^>]+>/g, '').trim();
+      const pts  = parseInt(m2[2], 10);
+      if (name && !isNaN(pts)) mx2Riders.push({ name, pts });
+    }
+    if (mx2Riders.length === 0) throw new Error('no riders found');
+    currentData['mx2'] = mx2Riders;
+    const tagMx2 = document.getElementById('gs-mx2');
+    if (tagMx2) { tagMx2.className = 'gstatus ok'; tagMx2.textContent = '✓ MX2 — ' + mx2Riders.length + ' riders'; }
+  } catch (err) {
+    const tagMx2 = document.getElementById('gs-mx2');
+    if (tagMx2) { tagMx2.className = 'gstatus err'; tagMx2.textContent = '⚠ MX2 — ' + err.message; }
   }
 
   // F1 via Jolpica

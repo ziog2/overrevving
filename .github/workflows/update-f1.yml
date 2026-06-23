@@ -108,6 +108,27 @@ jobs:
               print("Nessun dato recuperato, esco senza aggiornare.")
               exit(0)
 
+          # ---- 3b. MX2 via mxgpresults.com ----
+          try:
+              import re
+              mx2_url = "https://mxgpresults.com/mx2/standings"
+              req_mx2 = urllib.request.Request(mx2_url, headers={
+                  "User-Agent": "Mozilla/5.0 (compatible; GitHubActions-MotorsportUpdater/1.0)"
+              })
+              with urllib.request.urlopen(req_mx2) as resp:
+                  html2 = resp.read().decode('utf-8')
+              rows2 = re.findall(r'<tr[^>]*>\s*<td[^>]*>\d+\s*</td>\s*<td[^>]*>#\d+\s*</td>\s*<td[^>]*>(.*?)</td>.*?<td[^>]*>(\d+)\s*</td>\s*</tr>', html2, re.DOTALL)
+              mx2_riders = []
+              for name_cell, pts in rows2:
+                  name = re.sub(r'<[^>]+>', '', name_cell).strip()
+                  if name:
+                      mx2_riders.append({"name": name, "pts": int(pts)})
+              if mx2_riders:
+                  results['mx2'] = mx2_riders
+                  print(f"mx2: {len(mx2_riders)} riders imported")
+          except Exception as e:
+              print(f"Error MX2: {e}")
+
           # ---- 4. Leggi il bin attuale e aggiorna solo le categorie ottenute ----
           current = http_get(bin_url + "/latest", {"X-Access-Key": api_key})['record']
           current.update(results)
