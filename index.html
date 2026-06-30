@@ -157,7 +157,7 @@
   .visitor-counter img { vertical-align: middle; image-rendering: pixelated; }
   .visitor-counter-label { font-size: 11px; color: #555; margin-bottom: 6px; font-family: 'Courier New', monospace; letter-spacing: 0.05em; }
   .loading { text-align: center; color: #555; padding: 60px 0; font-size: 14px; }
-  @media (max-width: 700px) { body { padding: 16px 20px 40px; } }
+  @media (max-width: 700px) { body { padding: 16px 20px 40px; } #reset-order-btn { display: none; } }
   tbody tr.favorite { background: #2a1f3a !important; }
   tbody tr.favorite:hover { background: #332545 !important; }
   .fav-btn { background: none; border: none; cursor: pointer; font-size: 13px; padding: 0 4px; opacity: 0.3; transition: opacity 0.15s, color 0.15s; line-height: 1; color: #999; }
@@ -189,7 +189,7 @@
   <div class="sidebar-actions">
     <button class="sidebar-btn" onclick="selectAll()">Select all</button>
     <button class="sidebar-btn" onclick="clearAll()">Clear all</button>
-    <button class="sidebar-btn" onclick="resetOrder()" style="flex:none;width:100%;margin-top:6px">Reset order</button>
+    <button class="sidebar-btn" id="reset-order-btn" onclick="resetOrder()" style="flex:none;width:100%;margin-top:6px">Reset order</button>
   </div>
   <div id="champ-list"></div>
   <!-- Social links -->
@@ -395,7 +395,10 @@ function saveOrder() {
 }
 
 function applyOrder() {
-  const order = loadOrder();
+  // Su mobile mantieni sempre l'ordine fisso predefinito
+  const order = window.innerWidth <= 700
+    ? CATEGORIES.map(c => c.id)
+    : loadOrder();
   const grid = document.getElementById('standings-grid');
   order.forEach(id => {
     const cat = CATEGORIES.find(c => c.id === id);
@@ -408,6 +411,7 @@ function applyOrder() {
 function initSortable() {
   const grid = document.getElementById('standings-grid');
   if (!grid || !window.Sortable) return;
+  if (window.innerWidth <= 700) return; // disabilita drag & drop su mobile
   Sortable.create(grid, {
     animation: 150,
     ghostClass: 'sortable-ghost',
