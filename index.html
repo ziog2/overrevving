@@ -113,7 +113,7 @@
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(7, minmax(260px, 1fr));
+    grid-template-columns: repeat(7, minmax(265px, 1fr));
     gap: 16px;
     min-width: fit-content;
     margin: 0 auto;
@@ -189,8 +189,8 @@
   <div class="sidebar-actions">
     <button class="sidebar-btn" onclick="selectAll()">Select all</button>
     <button class="sidebar-btn" onclick="clearAll()">Clear all</button>
-    <button class="sidebar-btn" id="reset-order-btn" onclick="resetOrder()" style="flex:none;width:100%;margin-top:6px">Reset order</button>
   </div>
+  <button class="sidebar-btn" id="reset-order-btn" onclick="resetOrder()" style="width:100%;margin-bottom:20px">Reset order</button>
   <div id="champ-list"></div>
   <!-- Social links -->
   <div class="sidebar-social">
@@ -365,7 +365,7 @@ function applyVisibility() {
   });
   const visibleCount = visibleChamps.size || 1;
   const gridEl = document.querySelector('.grid');
-  if (gridEl) gridEl.style.gridTemplateColumns = `repeat(${visibleCount}, minmax(260px, 1fr))`;
+  if (gridEl) gridEl.style.gridTemplateColumns = `repeat(${visibleCount}, minmax(265px, 1fr))`;
 }
 
 function toggleSidebar() {
