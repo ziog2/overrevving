@@ -43,6 +43,7 @@
     z-index: 300; transition: right 0.3s ease;
     display: flex; flex-direction: column;
     padding: 20px 16px; box-shadow: -4px 0 20px rgba(0,0,0,0.4);
+    overflow-y: auto;
   }
   .sidebar.open { right: 0; }
   .sidebar-overlay {
@@ -94,7 +95,8 @@
     cursor: pointer; transition: all 0.15s;
   }
   .sidebar-btn:hover { background: #333340; color: #ddd; }
-  .sidebar-social { margin-top: auto; padding-top: 20px; border-top: 1px solid #3a3a42; }
+  #reset-order-btn { flex: none; width: 100%; margin-top: 4px; margin-bottom: 20px; }
+  .sidebar-social { margin-top: 20px; padding-top: 20px; border-top: 1px solid #3a3a42; }
   .sidebar-social h4 { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
   .social-icons { display: flex; gap: 12px; justify-content: center; }
   .social-icon {
@@ -190,7 +192,7 @@
     <button class="sidebar-btn" onclick="selectAll()">Select all</button>
     <button class="sidebar-btn" onclick="clearAll()">Clear all</button>
   </div>
-  <button class="sidebar-btn" id="reset-order-btn" onclick="resetOrder()" style="width:100%;margin-bottom:20px;flex-shrink:0;height:32px">Reset order</button>
+  <button class="sidebar-btn" id="reset-order-btn" onclick="resetOrder()">Reset order</button>
   <div id="champ-list"></div>
   <!-- Social links -->
   <div class="sidebar-social">
