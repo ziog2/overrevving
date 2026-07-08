@@ -115,9 +115,9 @@
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(7, minmax(265px, 1fr));
+    grid-template-columns: repeat(7, 265px);
     gap: 16px;
-    min-width: fit-content;
+    width: fit-content;
     margin: 0 auto;
   }
   .column { background: #2c2c32; border-radius: 14px; overflow: hidden; border: 1px solid #3a3a42; cursor: grab; }
@@ -365,6 +365,9 @@ function applyVisibility() {
     const col = document.querySelector('.column.' + cat.cls);
     if (col) col.style.display = visibleChamps.has(cat.id) ? '' : 'none';
   });
+  const visibleCount = visibleChamps.size || 1;
+  const gridEl = document.querySelector('.grid');
+  if (gridEl) gridEl.style.gridTemplateColumns = `repeat(${visibleCount}, 265px)`;
 }
 
 function toggleSidebar() {
