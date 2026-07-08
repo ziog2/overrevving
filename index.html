@@ -112,6 +112,8 @@
     overflow-x: auto;
     padding: 0 16px 12px;
     -webkit-overflow-scrolling: touch;
+    display: flex;
+    justify-content: center;
   }
   .grid {
     display: grid;
@@ -365,9 +367,6 @@ function applyVisibility() {
     const col = document.querySelector('.column.' + cat.cls);
     if (col) col.style.display = visibleChamps.has(cat.id) ? '' : 'none';
   });
-  const visibleCount = visibleChamps.size || 1;
-  const gridEl = document.querySelector('.grid');
-  if (gridEl) gridEl.style.gridTemplateColumns = `repeat(${visibleCount}, minmax(265px, 1fr))`;
 }
 
 function toggleSidebar() {
