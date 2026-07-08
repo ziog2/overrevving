@@ -46,9 +46,10 @@
 
   .layout {
     max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px;
+    display: flex; gap: 20px; justify-content: center;
   }
-  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .layout > div { width: 275px; flex-shrink: 0; }
+  @media (max-width: 620px) { .layout { flex-direction: column; align-items: center; } }
 
   .panel {
     background: #2c2c32; border-radius: 14px; border: 1px solid #3a3a42;
@@ -336,19 +337,23 @@ function renderCalendar() {
   const catId = getCatId();
   const now = new Date();
   const nextIdx = SEASON_CALENDAR.findIndex(e => new Date(e.date + 'T00:00:00') > now);
+  const pastCount = nextIdx === -1 ? SEASON_CALENDAR.length : nextIdx;
+  const pct = Math.round((pastCount / SEASON_CALENDAR.length) * 100);
 
-  document.getElementById('cal-count').textContent = SEASON_CALENDAR.length + ' rounds';
+  document.getElementById('cal-count').textContent =
+    `${SEASON_CALENDAR.length} rounds · ${pct}% done`;
 
   const rows = SEASON_CALENDAR.map((r, i) => {
     const d = new Date(r.date + 'T00:00:00');
     const isPast = d < now;
     const isNext = i === nextIdx;
     const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    const roundTag = 'R' + String(i + 1).padStart(2, '0');
     return `
       <a class="cal-row ${isPast ? 'past' : ''} ${isNext ? 'next' : ''}" href="race.html?cat=${catId}&round=${i+1}">
         <div class="cal-round">${i+1}</div>
         <div class="cal-info">
-          <div class="cal-name">${r.name}</div>
+          <div class="cal-name">${roundTag} · ${r.name}</div>
           <div class="cal-date">${dateStr}</div>
         </div>
         ${isNext ? '<span class="cal-flag next">NEXT</span>' : ''}
