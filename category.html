@@ -294,8 +294,9 @@ async function loadLiveClassification(meta) {
     return;
   }
   try {
-    const url = `https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid=${PULSELIVE_SEASON_2026}&categoryUuid=${meta.pulseliveCategoryUuid}`;
-    const res = await fetch(url);
+    const directUrl = `https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid=${PULSELIVE_SEASON_2026}&categoryUuid=${meta.pulseliveCategoryUuid}`;
+    const proxyUrl = `https://corsproxy.io/?url=${encodeURIComponent(directUrl)}`;
+    const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(10000) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     const classification = data.classification || [];
