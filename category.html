@@ -70,6 +70,12 @@
   }
   thead th:first-child { text-align: center; width: 30px; }
   thead th:last-child { text-align: right; }
+  thead th.star-col { width: 24px; }
+  .fav-btn { background: none; border: none; cursor: pointer; font-size: 13px; padding: 0 4px; opacity: 0.3; transition: opacity 0.15s, color 0.15s; line-height: 1; color: #999; }
+  .fav-btn.active { opacity: 1; color: #ffd700; }
+  .fav-btn:hover { opacity: 0.8; }
+  tbody tr.favorite { background: #2a1f3a !important; }
+  tbody tr.favorite:hover { background: #332545 !important; }
   tbody tr { border-bottom: 1px solid #34343c; }
   tbody tr:nth-child(even) { background: #28282e; }
   tbody tr:last-child { border-bottom: none; }
@@ -200,6 +206,21 @@ function getCatId() {
   return params.get('cat') || 'motogp';
 }
 
+// ---- Preferiti (condivisi con la home tramite stessa chiave) ----
+const FAV_KEY = 'overrevving_favorites';
+let favorites = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]'));
+
+function toggleFav(key) {
+  if (favorites.has(key)) favorites.delete(key);
+  else favorites.add(key);
+  localStorage.setItem(FAV_KEY, JSON.stringify([...favorites]));
+  document.querySelectorAll(`[data-fav="${key}"]`).forEach(tr => {
+    tr.classList.toggle('favorite', favorites.has(key));
+    const btn = tr.querySelector('.fav-btn');
+    if (btn) btn.classList.toggle('active', favorites.has(key));
+  });
+}
+
 function formatName(fullName) {
   const parts = fullName.trim().split(' ');
   if (parts.length < 2) return fullName;
@@ -232,7 +253,7 @@ async function loadRidersFromBin(catId) {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
     const riders = json.record[catId] || [];
-    renderRidersTable(riders);
+    renderRidersTable(riders, catId);
 
     const ts = json.record['_updated'];
     document.getElementById('hero-meta').innerHTML = ts
@@ -244,7 +265,7 @@ async function loadRidersFromBin(catId) {
   }
 }
 
-function renderRidersTable(riders) {
+function renderRidersTable(riders, catId) {
   const el = document.getElementById('riders-table');
   document.getElementById('riders-count').textContent = riders.length ? riders.length + ' riders' : '';
   if (!riders.length) { el.innerHTML = '<div class="empty">No data available</div>'; return; }
@@ -254,9 +275,14 @@ function renderRidersTable(riders) {
   riders.forEach((r, i) => {
     const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
     const gap = i === 0 ? '' : `<span class="gap">-${leader - r.pts}</span>`;
-    rows += `<tr class="${pc}"><td>${i+1}</td><td>${formatName(r.name)}</td><td>${r.pts}${gap}</td></tr>`;
+    const favKey = catId + ':' + r.name;
+    const isFav = favorites.has(favKey);
+    rows += `<tr class="${pc}${isFav ? ' favorite' : ''}" data-fav="${favKey}">
+      <td>${i+1}</td><td>${formatName(r.name)}</td><td>${r.pts}${gap}</td>
+      <td><button class="fav-btn${isFav ? ' active' : ''}" onclick="toggleFav('${favKey}')" title="Favourite rider">★</button></td>
+    </tr>`;
   });
-  el.innerHTML = `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th></tr></thead><tbody>${rows}</tbody></table>`;
+  el.innerHTML = `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th><th class="star-col"></th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 // ---- Constructor standings, derived live from Pulselive classification ----
