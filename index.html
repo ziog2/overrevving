@@ -285,9 +285,13 @@ function renderAll(all) {
         </tr>`;
       });
     }
+    const hasDetailPage = ['motogp', 'moto2', 'moto3'].includes(cat.id);
+    const headerLink = hasDetailPage
+      ? `<a href="category.html?cat=${cat.id}" style="color:inherit;text-decoration:none;">${cat.label} →</a>`
+      : `<a href="${cat.url}" target="_blank" style="color:inherit;text-decoration:none;">${cat.label} ↗</a>`;
     col.innerHTML =
       `<div class="col-header">
-        <a href="${cat.url}" target="_blank" style="color:inherit;text-decoration:none;">${cat.label} ↗</a>
+        ${headerLink}
         <div class="next-round" id="countdown-${cat.id}">🏁 → Loading...</div>
       </div>` +
       `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th><th style="width:20px"></th></tr></thead><tbody>${rows}</tbody></table>`;

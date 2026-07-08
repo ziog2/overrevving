@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Category · Motorsport Standings 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1e1e22;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+    color: #f0f0f0;
+  }
+  a { color: inherit; }
+  .top-bar {
+    max-width: 1100px; margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; color: #999; text-decoration: none;
+    padding: 7px 14px; border-radius: 8px; border: 1px solid #3a3a42;
+    transition: background 0.15s;
+  }
+  .back-link:hover { background: #2c2c32; color: #ddd; }
+
+  .hero {
+    max-width: 1100px; margin: 0 auto 32px;
+    border-radius: 16px; overflow: hidden; border: 1px solid #3a3a42;
+  }
+  .hero-band { padding: 22px 28px; }
+  .hero-band h1 {
+    font-size: 26px; font-weight: 800; letter-spacing: 0.02em;
+    text-transform: uppercase; color: #fff;
+  }
+  .hero-band .hero-sub {
+    font-size: 13px; opacity: 0.85; margin-top: 4px; font-weight: 500;
+  }
+  .hero-meta {
+    background: #232328; padding: 12px 28px;
+    display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: #999;
+  }
+  .hero-meta strong { color: #ddd; font-weight: 600; }
+
+  .layout {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px;
+  }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: #2c2c32; border-radius: 14px; border: 1px solid #3a3a42;
+    overflow: hidden; margin-bottom: 20px;
+  }
+  .panel-head {
+    padding: 14px 18px; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; color: #ccc;
+    border-bottom: 1px solid #3a3a42; display: flex; align-items: center;
+    justify-content: space-between;
+  }
+  .panel-head .count { font-size: 11px; color: #666; font-weight: 500; text-transform: none; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    padding: 8px 10px; text-align: left; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; color: #888;
+    border-bottom: 1px solid #3a3a42; background: #252528;
+  }
+  thead th:first-child { text-align: center; width: 30px; }
+  thead th:last-child { text-align: right; }
+  tbody tr { border-bottom: 1px solid #34343c; }
+  tbody tr:nth-child(even) { background: #28282e; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #333340; }
+  tbody td { padding: 8px 10px; color: #ddd; }
+  tbody td:first-child { text-align: center; font-weight: 700; color: #aaa; font-size: 12px; }
+  tbody td:last-child { text-align: right; font-weight: 700; color: #f0c040; }
+  .pos-1 td:first-child { color: #ffd700; }
+  .pos-2 td:first-child { color: #c0c0c0; }
+  .pos-3 td:first-child { color: #cd7f32; }
+  .gap { font-weight: 400; color: #666; font-size: 11px; margin-left: 4px; }
+
+  /* Calendar */
+  .cal-list { display: flex; flex-direction: column; }
+  .cal-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 18px; border-bottom: 1px solid #34343c;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .cal-row:last-child { border-bottom: none; }
+  .cal-row:hover { background: #333340; }
+  .cal-row.past { opacity: 0.55; }
+  .cal-row.next { background: #2a2438; }
+  .cal-round {
+    width: 26px; height: 26px; border-radius: 7px; background: #1e1e22;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #999; flex-shrink: 0;
+  }
+  .cal-info { flex: 1; }
+  .cal-name { font-size: 13px; color: #ddd; font-weight: 600; }
+  .cal-date { font-size: 11px; color: #777; margin-top: 1px; }
+  .cal-flag { font-size: 11px; padding: 3px 8px; border-radius: 5px; background: #1e1e22; color: #999; }
+  .cal-flag.next { background: #3d6bbd; color: #fff; }
+
+  .loading, .empty { text-align: center; color: #666; padding: 30px 16px; font-size: 13px; }
+  .note {
+    max-width: 1100px; margin: 24px auto 0; font-size: 12px; color: #666;
+    text-align: center; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a class="back-link" href="index.html">← All championships</a>
+</div>
+
+<div class="hero" id="hero">
+  <div class="hero-band" id="hero-band">
+    <h1 id="hero-title">Loading…</h1>
+    <div class="hero-sub" id="hero-sub"></div>
+  </div>
+  <div class="hero-meta" id="hero-meta"></div>
+</div>
+
+<div class="layout">
+  <div>
+    <div class="panel">
+      <div class="panel-head"><span>Riders' standings</span><span class="count" id="riders-count"></span></div>
+      <div id="riders-table"><div class="loading">⏳ Loading…</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span>Constructors' standings</span><span class="count" id="constructors-count"></span></div>
+      <div id="constructors-table"><div class="loading">⏳ Loading…</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="panel">
+      <div class="panel-head"><span>Season calendar</span><span class="count" id="cal-count"></span></div>
+      <div class="cal-list" id="cal-list"><div class="loading">⏳ Loading…</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="note">Constructor standings are computed by grouping rider points by manufacturer, based on live data from the official MotoGP timing API. Wins/podiums breakdown and points progression chart are coming soon.</div>
+
+<script>
+// ---- Config ----
+const BIN_ID = '6a3064e4f5f4af5e29f7958b';
+const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
+const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
+
+const CATEGORY_META = {
+  motogp: {
+    label: 'MotoGP', color: '#c0392b',
+    officialUrl: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings',
+    pulseliveCategoryUuid: 'e8c110ad-64aa-4e8e-8a86-f2f152f6a942',
+  },
+  moto2: {
+    label: 'Moto2', color: '#e67e22',
+    officialUrl: 'https://www.motogp.com/en/world-standing/2026/moto2/championship-standings',
+    pulseliveCategoryUuid: '549640b8-fd9c-4245-acfd-60e4bc38b25c',
+  },
+  moto3: {
+    label: 'Moto3', color: '#27ae60',
+    officialUrl: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings',
+    pulseliveCategoryUuid: '954f7e65-2ef2-4423-b949-4961cc603e45',
+  },
+};
+
+const PULSELIVE_SEASON_2026 = 'e88b4e43-2209-47aa-8e83-0e0b1cedde6e';
+
+// Same 2026 calendar used on the home page (MotoGP/Moto2/Moto3 share dates)
+const SEASON_CALENDAR = [
+  { name: 'Qatar',         date: '2026-03-01' },
+  { name: 'Thailand',      date: '2026-03-29' },
+  { name: 'Argentina',     date: '2026-04-12' },
+  { name: 'USA (COTA)',    date: '2026-04-19' },
+  { name: 'Spain',         date: '2026-05-03' },
+  { name: 'France',        date: '2026-05-17' },
+  { name: 'Catalunya',     date: '2026-05-31' },
+  { name: 'Italy',         date: '2026-06-07' },
+  { name: 'Netherlands',   date: '2026-06-28' },
+  { name: 'Germany',       date: '2026-07-12' },
+  { name: 'Great Britain', date: '2026-08-02' },
+  { name: 'Austria',       date: '2026-08-16' },
+  { name: 'San Marino',    date: '2026-09-06' },
+  { name: 'Aragon',        date: '2026-09-20' },
+  { name: 'Japan',         date: '2026-10-04' },
+  { name: 'Indonesia',     date: '2026-10-18' },
+  { name: 'Australia',     date: '2026-10-25' },
+  { name: 'Malaysia',      date: '2026-11-01' },
+  { name: 'Valencia',      date: '2026-11-08' },
+];
+
+function getCatId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('cat') || 'motogp';
+}
+
+function formatName(fullName) {
+  const parts = fullName.trim().split(' ');
+  if (parts.length < 2) return fullName;
+  const normalized = parts.map(w =>
+    w === w.toUpperCase() && w.length > 1 ? w.charAt(0) + w.slice(1).toLowerCase() : w
+  );
+  return normalized[0][0].toUpperCase() + '. ' + normalized.slice(1).join(' ');
+}
+
+async function init() {
+  const catId = getCatId();
+  const meta = CATEGORY_META[catId] || CATEGORY_META.motogp;
+
+  // Header
+  document.title = `${meta.label} · Motorsport Standings 2026`;
+  document.getElementById('hero-title').textContent = meta.label;
+  document.getElementById('hero-sub').textContent = '2026 Season · Riders, constructors & calendar';
+  document.getElementById('hero-band').style.background = meta.color;
+  document.getElementById('hero-band').style.color = '#fff';
+
+  renderCalendar();
+  await loadRidersFromBin(catId);
+  await loadLiveClassification(meta);
+}
+
+// ---- Riders standings from JSONBin (same data as home page) ----
+async function loadRidersFromBin(catId) {
+  try {
+    const res = await fetch(BIN_URL, { headers: { 'X-Access-Key': API_KEY } });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    const riders = json.record[catId] || [];
+    renderRidersTable(riders);
+
+    const ts = json.record['_updated'];
+    document.getElementById('hero-meta').innerHTML = ts
+      ? `<span>Last updated: <strong>${ts}</strong></span>`
+      : '';
+  } catch (e) {
+    document.getElementById('riders-table').innerHTML =
+      '<div class="empty">⚠ Could not load standings</div>';
+  }
+}
+
+function renderRidersTable(riders) {
+  const el = document.getElementById('riders-table');
+  document.getElementById('riders-count').textContent = riders.length ? riders.length + ' riders' : '';
+  if (!riders.length) { el.innerHTML = '<div class="empty">No data available</div>'; return; }
+
+  const leader = riders[0].pts;
+  let rows = '';
+  riders.forEach((r, i) => {
+    const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
+    const gap = i === 0 ? '' : `<span class="gap">-${leader - r.pts}</span>`;
+    rows += `<tr class="${pc}"><td>${i+1}</td><td>${formatName(r.name)}</td><td>${r.pts}${gap}</td></tr>`;
+  });
+  el.innerHTML = `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// ---- Constructor standings, derived live from Pulselive classification ----
+async function loadLiveClassification(meta) {
+  const el = document.getElementById('constructors-table');
+  if (!meta.pulseliveCategoryUuid) {
+    el.innerHTML = '<div class="empty">Not available for this category</div>';
+    return;
+  }
+  try {
+    const url = `https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid=${PULSELIVE_SEASON_2026}&categoryUuid=${meta.pulseliveCategoryUuid}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const classification = data.classification || [];
+
+    // Group points by constructor
+    const byConstructor = {};
+    classification.forEach(c => {
+      const name = c.constructor ? c.constructor.name : (c.constructor_name || 'Unknown');
+      const pts = parseFloat(c.points) || 0;
+      byConstructor[name] = (byConstructor[name] || 0) + pts;
+    });
+
+    const rows = Object.entries(byConstructor)
+      .sort((a, b) => b[1] - a[1]);
+
+    renderConstructorsTable(rows);
+  } catch (e) {
+    el.innerHTML = '<div class="empty">⚠ Live constructor data unavailable right now</div>';
+  }
+}
+
+function renderConstructorsTable(rows) {
+  const el = document.getElementById('constructors-table');
+  document.getElementById('constructors-count').textContent = rows.length ? rows.length + ' manufacturers' : '';
+  if (!rows.length) { el.innerHTML = '<div class="empty">No data available</div>'; return; }
+
+  const leader = rows[0][1];
+  let html = '';
+  rows.forEach(([name, pts], i) => {
+    const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
+    const gap = i === 0 ? '' : `<span class="gap">-${Math.round(leader - pts)}</span>`;
+    html += `<tr class="${pc}"><td>${i+1}</td><td>${name}</td><td>${Math.round(pts)}${gap}</td></tr>`;
+  });
+  el.innerHTML = `<table><thead><tr><th>#</th><th>Constructor</th><th>Pts</th></tr></thead><tbody>${html}</tbody></table>`;
+}
+
+// ---- Calendar ----
+function renderCalendar() {
+  const catId = getCatId();
+  const now = new Date();
+  const nextIdx = SEASON_CALENDAR.findIndex(e => new Date(e.date + 'T00:00:00') > now);
+
+  document.getElementById('cal-count').textContent = SEASON_CALENDAR.length + ' rounds';
+
+  const rows = SEASON_CALENDAR.map((r, i) => {
+    const d = new Date(r.date + 'T00:00:00');
+    const isPast = d < now;
+    const isNext = i === nextIdx;
+    const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    return `
+      <a class="cal-row ${isPast ? 'past' : ''} ${isNext ? 'next' : ''}" href="race.html?cat=${catId}&round=${i+1}">
+        <div class="cal-round">${i+1}</div>
+        <div class="cal-info">
+          <div class="cal-name">${r.name}</div>
+          <div class="cal-date">${dateStr}</div>
+        </div>
+        ${isNext ? '<span class="cal-flag next">NEXT</span>' : ''}
+      </a>`;
+  }).join('');
+
+  document.getElementById('cal-list').innerHTML = rows;
+}
+
+init();
+</script>
+</body>
+</html>
