@@ -115,7 +115,7 @@
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(7, 265px);
+    grid-template-columns: repeat(7, 275px);
     gap: 16px;
     width: fit-content;
     margin: 0 auto;
@@ -367,7 +367,7 @@ function applyVisibility() {
   });
   const visibleCount = visibleChamps.size || 1;
   const gridEl = document.querySelector('.grid');
-  if (gridEl) gridEl.style.gridTemplateColumns = `repeat(${visibleCount}, 265px)`;
+  if (gridEl) gridEl.style.gridTemplateColumns = `repeat(${visibleCount}, 275px)`;
 }
 
 function toggleSidebar() {
