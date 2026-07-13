@@ -295,10 +295,18 @@ async function loadLiveClassification(meta) {
   }
   try {
     const directUrl = `https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid=${PULSELIVE_SEASON_2026}&categoryUuid=${meta.pulseliveCategoryUuid}`;
-    const proxyUrl = `https://corsproxy.io/?url=${encodeURIComponent(directUrl)}`;
-    const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(10000) });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
+    const proxies = [
+      `https://api.allorigins.win/raw?url=${encodeURIComponent(directUrl)}`,
+      `https://corsproxy.io/?url=${encodeURIComponent(directUrl)}`,
+    ];
+    let data = null;
+    for (const proxyUrl of proxies) {
+      try {
+        const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(10000) });
+        if (res.ok) { data = await res.json(); break; }
+      } catch (e) { continue; }
+    }
+    if (!data) throw new Error('All proxies failed');
     const classification = data.classification || [];
 
     // Group points by constructor
