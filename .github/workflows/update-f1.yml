@@ -48,29 +48,32 @@ jobs:
           for cat_id, cat_uuid in CATEGORY_IDS.items():
               base_standings_url = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
               try:
+                  # 1. Recupero Piloti
                   data_riders = http_get(base_standings_url)
-                  riders = [
-                      {"name": c['rider']['full_name'], "pts": float(c['points'])}
-                      for c in data_riders.get('classification', [])
-                  ]
+                  riders = []
+                  for c in data_riders.get('classification', []):
+                      if 'rider' in c and 'full_name' in c['rider']:
+                          riders.append({"name": c['rider']['full_name'], "pts": float(c['points'])})
                   riders.sort(key=lambda r: r['pts'], reverse=True)
                   results[cat_id] = riders
                   print(f"{cat_id} (Piloti): {len(riders)} importati")
 
+                  # 2. Recupero Costruttori
                   data_const = http_get(f"{base_standings_url}&type=CONSTRUCTORS")
-                  constructors = [
-                      {"name": c['constructor']['name'], "pts": float(c['points'])}
-                      for c in data_const.get('classification', [])
-                  ]
+                  constructors = []
+                  for c in data_const.get('classification', []):
+                      if 'constructor' in c and 'name' in c['constructor']:
+                          constructors.append({"name": c['constructor']['name'], "pts": float(c['points'])})
                   constructors.sort(key=lambda c: c['pts'], reverse=True)
                   results[f"{cat_id}_constructors"] = constructors
                   print(f"{cat_id} (Costruttori): {len(constructors)} importati")
 
+                  # 3. Recupero Team
                   data_teams = http_get(f"{base_standings_url}&type=TEAMS")
-                  teams = [
-                      {"name": c['team']['name'], "pts": float(c['points'])}
-                      for c in data_teams.get('classification', [])
-                  ]
+                  teams = []
+                  for c in data_teams.get('classification', []):
+                      if 'team' in c and 'name' in c['team']:
+                          teams.append({"name": c['team']['name'], "pts": float(c['points'])})
                   teams.sort(key=lambda t: t['pts'], reverse=True)
                   results[f"{cat_id}_teams"] = teams
                   print(f"{cat_id} (Team): {len(teams)} importati")
