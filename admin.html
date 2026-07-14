@@ -451,73 +451,54 @@ async function handleMotoGPStatsPDF(e) {
 }
 
 /**
- * Parsa la tabella Team e la tabella Constructor dalla stessa pagina.
- * Le due tabelle sono separate dall'intestazione "Constructor Points Leader Previous...".
- * Ogni riga: {pos} {Nome (anche multi-parola)} {Punti} {altri numeri di round, ignorati}
+ * Questa tabella MotoGP ha un layout a COLONNE (non a righe come le altre):
+ * ogni costruttore/team è una colonna verticale, con nome e punteggio totale
+ * allineati sulla stessa coordinata X ma a Y molto diverse.
  */
 function parseTeamsAndConstructors(tokens) {
-  // Raggruppa per riga (tolleranza Y ±4px)
-  const rowMap = new Map();
-  for (const t of tokens) {
-    const y = Math.round(t.y);
-    let key = null;
-    for (const k of rowMap.keys()) { if (Math.abs(y - k) <= 4) { key = k; break; } }
-    if (key === null) { key = y; rowMap.set(key, []); }
-    rowMap.get(key).push(t);
-  }
-  const sortedRows = [...rowMap.entries()]
-    .sort((a, b) => a[0] - b[0])
-    .map(([, toks]) => toks.sort((a, b) => a.x - b.x).map(t => t.text));
+  const constructorHeaderTok = tokens.find(t => t.text === 'Constructor');
+  const teamHeaderTok = tokens.find(t => t.text === 'Team');
+  if (!constructorHeaderTok || !teamHeaderTok) return { teams: [], constructors: [] };
 
-  // Trova l'indice della riga di intestazione "Constructor Points..."
-  const constructorHeaderIdx = sortedRows.findIndex(row =>
-    row.some(t => t === 'Constructor')
+  // Riga di intestazione: prendi tutti i token vicini in Y a "Constructor" o "Team"
+  const headerRowTokens = tokens
+    .filter(t => Math.abs(t.y - constructorHeaderTok.y) <= 6 || Math.abs(t.y - teamHeaderTok.y) <= 6)
+    .sort((a, b) => a.x - b.x);
+
+  const constructorNames = [];
+  const teamNames = [];
+  let mode = null;
+  for (const t of headerRowTokens) {
+    if (t.text === 'Constructor') { mode = 'constructor'; continue; }
+    if (t.text === 'Team') { mode = 'team'; continue; }
+    if (mode === 'constructor') constructorNames.push({ x: t.x, name: t.text });
+    else if (mode === 'team') teamNames.push({ x: t.x, name: t.text });
+  }
+
+  // Riga dei punti totali: subito sopra l'etichetta "Points"
+  const pointsLabelToks = tokens.filter(t => t.text === 'Points');
+  const pointsRowY = pointsLabelToks.length ? Math.min(...pointsLabelToks.map(t => t.y)) : 380;
+
+  const pointsCandidates = tokens.filter(t =>
+    /^\d{1,4}$/.test(t.text) && t.y < pointsRowY && t.y > pointsRowY - 20
   );
 
-  const teamRows = constructorHeaderIdx === -1 ? sortedRows : sortedRows.slice(0, constructorHeaderIdx);
-  const constructorRows = constructorHeaderIdx === -1 ? [] : sortedRows.slice(constructorHeaderIdx + 1);
-
-  function parseSection(rows) {
-    const results = [];
-    for (const toks of rows) {
-      if (!toks[0] || !/^\d+$/.test(toks[0])) continue;
-      const pos = parseInt(toks[0], 10);
-      if (pos < 1 || pos > 50) continue;
-
-      // Raccoglie il nome: tutte le parole (anche numeri all'interno del nome team, rari)
-      // finché non troviamo un numero "isolato" ragionevole come punteggio totale
-      let j = 1;
-      const nameParts = [];
-      while (j < toks.length && !/^\d+$/.test(toks[j])) {
-        nameParts.push(toks[j]);
-        j++;
+  function matchPoints(nameList) {
+    return nameList.map(n => {
+      let best = null, bestDist = Infinity;
+      for (const p of pointsCandidates) {
+        const dist = Math.abs(p.x - n.x);
+        if (dist < bestDist) { bestDist = dist; best = p; }
       }
-      if (nameParts.length === 0) continue;
-      if (j >= toks.length) continue;
-
-      const pts = parseInt(toks[j], 10);
-      if (isNaN(pts)) continue;
-
-      const name = nameParts.join(' ');
-      if (!results.find(r => r.name === name)) results.push({ name, pts });
-    }
-    results.sort((a, b) => b.pts - a.pts);
-    return results;
+      return best && bestDist < 2 ? { name: n.name, pts: parseInt(best.text, 10) } : null;
+    }).filter(Boolean);
   }
 
-  return {
-    teams: parseSection(teamRows),
-    constructors: parseSection(constructorRows),
-  };
+  const constructors = matchPoints(constructorNames).sort((a, b) => b.pts - a.pts);
+  const teams = matchPoints(teamNames).sort((a, b) => b.pts - a.pts);
+
+  return { teams, constructors };
 }
-
-
-const PULSELIVE_SEASON_2026 = 'e88b4e43-2209-47aa-8e83-0e0b1cedde6e';
-const PULSELIVE_CATEGORIES = {
-  motogp: 'e8c110ad-64aa-4e8e-8a86-f2f152f6a942',
-  moto2:  '549640b8-fd9c-4245-acfd-60e4bc38b25c',
-  moto3:  '954f7e65-2ef2-4423-b949-4961cc603e45',
-};
 
 async function fetchAllAPI() {
   showGlobalStatus('load', '⏳ Recupero classifiche da API…');
