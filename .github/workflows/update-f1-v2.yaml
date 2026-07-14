@@ -1,0 +1,161 @@
+name: Aggiorna classifiche Motorsport
+
+on:
+  schedule:
+    - cron: '0 18 * * 6'
+    - cron: '0 18 * * 0'
+  workflow_dispatch: {}
+
+jobs:
+  update-standings:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica e aggiorna tutte le classifiche
+        env:
+          JSONBIN_API_KEY: ${{ secrets.JSONBIN_API_KEY }}
+          JSONBIN_BIN_ID: ${{ secrets.JSONBIN_BIN_ID }}
+        run: |
+          python3 << 'PYEOF'
+          import json, os, urllib.request
+          from datetime import datetime, timezone, timedelta
+
+          api_key = os.environ['JSONBIN_API_KEY']
+          bin_id  = os.environ['JSONBIN_BIN_ID']
+          bin_url = f"https://api.jsonbin.io/v3/b/{bin_id}"
+
+          HEADERS_BASE = {
+              "Content-Type": "application/json",
+              "User-Agent": "Mozilla/5.0 (compatible; GitHubActions-MotorsportUpdater/1.0)"
+          }
+
+          def http_get(url, extra_headers=None):
+              headers = dict(HEADERS_BASE)
+              if extra_headers:
+                  headers.update(extra_headers)
+              req = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(req) as resp:
+                  return json.load(resp)
+
+          # ---- 1. MotoGP / Moto2 / Moto3 via API pulselive (Dorna) ----
+          SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e"
+          CATEGORY_IDS = {
+              "motogp": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
+              "moto2":  "549640b8-fd9c-4245-acfd-60e4bc38b25c",
+              "moto3":  "954f7e65-2ef2-4423-b949-4961cc603e45",
+          }
+
+          results = {}
+          for cat_id, cat_uuid in CATEGORY_IDS.items():
+              base_standings_url = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
+              try:
+                  data_riders = http_get(base_standings_url)
+                  riders = [
+                      {"name": c['rider']['full_name'], "pts": float(c['points'])}
+                      for c in data_riders.get('classification', [])
+                  ]
+                  riders.sort(key=lambda r: r['pts'], reverse=True)
+                  results[cat_id] = riders
+                  print(f"{cat_id} (Piloti): {len(riders)} importati")
+
+                  data_const = http_get(f"{base_standings_url}&type=CONSTRUCTORS")
+                  constructors = [
+                      {"name": c['constructor']['name'], "pts": float(c['points'])}
+                      for c in data_const.get('classification', [])
+                  ]
+                  constructors.sort(key=lambda c: c['pts'], reverse=True)
+                  results[f"{cat_id}_constructors"] = constructors
+                  print(f"{cat_id} (Costruttori): {len(constructors)} importati")
+
+                  data_teams = http_get(f"{base_standings_url}&type=TEAMS")
+                  teams = [
+                      {"name": c['team']['name'], "pts": float(c['points'])}
+                      for c in data_teams.get('classification', [])
+                  ]
+                  teams.sort(key=lambda t: t['pts'], reverse=True)
+                  results[f"{cat_id}_teams"] = teams
+                  print(f"{cat_id} (Team): {len(teams)} importati")
+
+              except Exception as e:
+                  print(f"Errore {cat_id}: {e}")
+
+          # ---- 2. MXGP via mxgpresults.com ----
+          try:
+              import re
+              mxgp_url = "https://mxgpresults.com/mxgp/standings"
+              req_mxgp = urllib.request.Request(mxgp_url, headers={
+                  "User-Agent": "Mozilla/5.0 (compatible; GitHubActions-MotorsportUpdater/1.0)"
+              })
+              with urllib.request.urlopen(req_mxgp) as resp:
+                  html = resp.read().decode('utf-8')
+
+              rows = re.findall(r'<tr[^>]*>\s*<td[^>]*>\d+\s*</td>\s*<td[^>]*>#\d+\s*</td>\s*<td[^>]*>(.*?)</td>.*?<td[^>]*>(\d+)\s*</td>\s*</tr>', html, re.DOTALL)
+              mxgp_riders = []
+              for name_cell, pts in rows:
+                  name = re.sub(r'<[^>]+>', '', name_cell).strip()
+                  if name:
+                      mxgp_riders.append({"name": name, "pts": int(pts)})
+
+              if mxgp_riders:
+                  results['mxgp'] = mxgp_riders
+                  print(f"mxgp: {len(mxgp_riders)} piloti importati")
+              else:
+                  print("MXGP: nessun pilota trovato nel parsing")
+          except Exception as e:
+              print(f"Errore MXGP: {e}")
+
+          # ---- 3. F1 via Jolpica API ----
+          try:
+              f1_data = http_get("https://api.jolpi.ca/ergast/f1/2026/driverstandings.json")
+              lists = f1_data.get('MRData', {}).get('StandingsTable', {}).get('StandingsLists', [])
+              if lists:
+                  standings = lists[0]['DriverStandings']
+                  f1_riders = [
+                      {"name": d['Driver']['givenName'] + ' ' + d['Driver']['familyName'],
+                       "pts": float(d['points'])}
+                      for d in standings
+                  ]
+                  results['f1'] = f1_riders
+                  print(f"f1: {len(f1_riders)} piloti importati")
+          except Exception as e:
+              print(f"Errore F1: {e}")
+
+          if not results:
+              print("Nessun dato recuperato, esco senza aggiornare.")
+              exit(0)
+
+          # ---- 3b. MX2 via mxgpresults.com ----
+          try:
+              import re
+              mx2_url = "https://mxgpresults.com/mx2/standings"
+              req_mx2 = urllib.request.Request(mx2_url, headers={
+                  "User-Agent": "Mozilla/5.0 (compatible; GitHubActions-MotorsportUpdater/1.0)"
+              })
+              with urllib.request.urlopen(req_mx2) as resp:
+                  html2 = resp.read().decode('utf-8')
+              rows2 = re.findall(r'<tr[^>]*>\s*<td[^>]*>\d+\s*</td>\s*<td[^>]*>#\d+\s*</td>\s*<td[^>]*>(.*?)</td>.*?<td[^>]*>(\d+)\s*</td>\s*</tr>', html2, re.DOTALL)
+              mx2_riders = []
+              for name_cell, pts in rows2:
+                  name = re.sub(r'<[^>]+>', '', name_cell).strip()
+                  if name:
+                      mx2_riders.append({"name": name, "pts": int(pts)})
+              if mx2_riders:
+                  results['mx2'] = mx2_riders
+                  print(f"mx2: {len(mx2_riders)} riders imported")
+          except Exception as e:
+              print(f"Error MX2: {e}")
+
+          # ---- 4. Leggi il bin attuale e aggiorna solo le categorie ottenute ----
+          current = http_get(bin_url + "/latest", {"X-Access-Key": api_key})['record']
+          current.update(results)
+
+          it_time = datetime.now(timezone.utc) + timedelta(hours=2)
+          current['_updated'] = it_time.strftime('%d/%m/%Y, %H:%M:%S') + ' · Auto (Domenica)'
+
+          body = json.dumps(current).encode('utf-8')
+          req2 = urllib.request.Request(
+              bin_url, data=body, method='PUT',
+              headers={**HEADERS_BASE, "X-Access-Key": api_key}
+          )
+          with urllib.request.urlopen(req2) as resp2:
+              print("Salvato su JSONBin:", resp2.status)
+          PYEOF
