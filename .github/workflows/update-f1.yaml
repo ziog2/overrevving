@@ -47,7 +47,7 @@ jobs:
           results = {}
           for cat_id, cat_uuid in CATEGORY_IDS.items():
               try:
-                  # 1. Recupero Piloti
+                  # 1. Classifica Piloti
                   url_riders = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
                   data_riders = http_get(url_riders)
                   riders = []
@@ -58,18 +58,24 @@ jobs:
                   results[cat_id] = riders
                   print(f"{cat_id} (Piloti): {len(riders)} importati")
 
-                  # 2. Recupero Costruttori (Nuovo Endpoint Dedicato)
+                  # 2. Classifica Costruttori (Supporta sia 'constructor' che 'manufacturer')
                   url_const = f"https://api.motogp.pulselive.com/motogp/v1/results/seasons/{SEASON_2026}/constructors-standings?categoryUuid={cat_uuid}"
                   data_const = http_get(url_const)
                   constructors = []
                   for c in data_const.get('classification', []):
+                      name = None
                       if 'constructor' in c and 'name' in c['constructor']:
-                          constructors.append({"name": c['constructor']['name'], "pts": float(c['points'])})
+                          name = c['constructor']['name']
+                      elif 'manufacturer' in c and 'name' in c['manufacturer']:
+                          name = c['manufacturer']['name']
+                      
+                      if name:
+                          constructors.append({"name": name, "pts": float(c['points'])})
                   constructors.sort(key=lambda c: c['pts'], reverse=True)
                   results[f"{cat_id}_constructors"] = constructors
                   print(f"{cat_id} (Costruttori): {len(constructors)} importati")
 
-                  # 3. Recupero Team (Nuovo Endpoint Dedicato)
+                  # 3. Classifica Team
                   url_teams = f"https://api.motogp.pulselive.com/motogp/v1/results/seasons/{SEASON_2026}/teams-standings?categoryUuid={cat_uuid}"
                   data_teams = http_get(url_teams)
                   teams = []
