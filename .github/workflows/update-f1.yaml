@@ -46,10 +46,10 @@ jobs:
 
           results = {}
           for cat_id, cat_uuid in CATEGORY_IDS.items():
+              base_standings_url = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
               try:
-                  # 1. Classifica Piloti
-                  url_riders = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
-                  data_riders = http_get(url_riders)
+                  # 1. Recupero Piloti (Sempre valido per tutti)
+                  data_riders = http_get(base_standings_url)
                   riders = []
                   for c in data_riders.get('classification', []):
                       if 'rider' in c and 'full_name' in c['rider']:
@@ -58,31 +58,40 @@ jobs:
                   results[cat_id] = riders
                   print(f"{cat_id} (Piloti): {len(riders)} importati")
 
-                  # 2. Classifica Costruttori (Supporta sia 'constructor' che 'manufacturer')
-                  url_const = f"https://api.motogp.pulselive.com/motogp/v1/results/seasons/{SEASON_2026}/constructors-standings?categoryUuid={cat_uuid}"
-                  data_const = http_get(url_const)
+                  # 2. Recupero Costruttori (Supporta MotoGP via endpoint dedicato e Moto2/Moto3 via parametro)
                   constructors = []
-                  for c in data_const.get('classification', []):
-                      name = None
-                      if 'constructor' in c and 'name' in c['constructor']:
-                          name = c['constructor']['name']
-                      elif 'manufacturer' in c and 'name' in c['manufacturer']:
-                          name = c['manufacturer']['name']
-                      
-                      if name:
-                          constructors.append({"name": name, "pts": float(c['points'])})
+                  if cat_id == "motogp":
+                      url_const = f"https://api.motogp.pulselive.com/motogp/v1/results/seasons/{SEASON_2026}/constructors-standings?categoryUuid={cat_uuid}"
+                      data_const = http_get(url_const)
+                      for c in data_const.get('classification', []):
+                          if 'constructor' in c and 'name' in c['constructor']:
+                              constructors.append({"name": c['constructor']['name'], "pts": float(c['points'])})
+                  else:
+                      # Per Moto2 e Moto3 usiamo il parametro con estrazione flessibile del nome
+                      data_const = http_get(f"{base_standings_url}&type=CONSTRUCTORS")
+                      for c in data_const.get('classification', []):
+                          name = None
+                          if 'constructor' in c and 'name' in c['constructor']:
+                              name = c['constructor']['name']
+                          elif 'manufacturer' in c and 'name' in c['manufacturer']:
+                              name = c['manufacturer']['name']
+                          if name:
+                              constructors.append({"name": name, "pts": float(c['points'])})
+
                   constructors.sort(key=lambda c: c['pts'], reverse=True)
                   results[f"{cat_id}_constructors"] = constructors
                   print(f"{cat_id} (Costruttori): {len(constructors)} importati")
 
-                  # 3. Classifica Team
-                  url_teams = f"https://api.motogp.pulselive.com/motogp/v1/results/seasons/{SEASON_2026}/teams-standings?categoryUuid={cat_uuid}"
-                  data_teams = http_get(url_teams)
+                  # 3. Recupero Team (Solo per MotoGP, in Moto2/3 non esiste il campionato Team ufficiale)
                   teams = []
-                  for c in data_teams.get('classification', []):
-                      if 'team' in c and 'name' in c['team']:
-                          teams.append({"name": c['team']['name'], "pts": float(c['points'])})
-                  teams.sort(key=lambda t: t['pts'], reverse=True)
+                  if cat_id == "motogp":
+                      url_teams = f"https://api.motogp.pulselive.com/motogp/v1/results/seasons/{SEASON_2026}/teams-standings?categoryUuid={cat_uuid}"
+                      data_teams = http_get(url_teams)
+                      for c in data_teams.get('classification', []):
+                          if 'team' in c and 'name' in c['team']:
+                              teams.append({"name": c['team']['name'], "pts": float(c['points'])})
+                      teams.sort(key=lambda t: t['pts'], reverse=True)
+                  
                   results[f"{cat_id}_teams"] = teams
                   print(f"{cat_id} (Team): {len(teams)} importati")
 
