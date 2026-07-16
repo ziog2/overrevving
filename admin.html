@@ -520,12 +520,13 @@ function parseTeamsAndConstructors(tokens) {
     else if (mode === 'team') teamNames.push({ x: t.x, name: t.text });
   }
 
-  // Riga dei punti totali: subito sopra l'etichetta "Points"
+  // Riga dei punti totali: intorno all'etichetta "Points" (sopra o leggermente sotto)
   const pointsLabelToks = tokens.filter(t => t.text === 'Points');
-  const pointsRowY = pointsLabelToks.length ? Math.min(...pointsLabelToks.map(t => t.y)) : 380;
+  const pointsRowYmin = pointsLabelToks.length ? Math.min(...pointsLabelToks.map(t => t.y)) : 375;
+  const pointsRowYmax = pointsLabelToks.length ? Math.max(...pointsLabelToks.map(t => t.y)) : 385;
 
   const pointsCandidates = tokens.filter(t =>
-    /^\d{1,4}$/.test(t.text) && t.y < pointsRowY && t.y > pointsRowY - 20
+    /^\d{1,4}(\.\d+)?$/.test(t.text) && t.y > pointsRowYmin - 20 && t.y < pointsRowYmax + 5
   );
 
   function matchPoints(nameList) {
@@ -535,7 +536,7 @@ function parseTeamsAndConstructors(tokens) {
         const dist = Math.abs(p.x - n.x);
         if (dist < bestDist) { bestDist = dist; best = p; }
       }
-      return best && bestDist < 2 ? { name: n.name, pts: parseInt(best.text, 10) } : null;
+      return best && bestDist < 2 ? { name: n.name, pts: parseFloat(best.text) } : null;
     }).filter(Boolean);
   }
 
