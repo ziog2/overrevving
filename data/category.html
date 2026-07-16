@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Classifiche Motorsport 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1e1e22;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 40px;
+    color: #f0f0f0;
+  }
+  h1 {
+    text-align: center; font-size: 22px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: #e0e0e0; margin-bottom: 6px;
+  }
+  .subtitle { text-align: center; font-size: 13px; color: #888; margin-bottom: 4px; }
+  .last-updated { text-align: center; font-size: 12px; color: #666; letter-spacing: 0.03em; margin-bottom: 24px; }
+  .logo-banner { text-align: center; margin: 10px 0 6px; }
+  .site-logo { max-width: 420px; width: 70%; height: auto; opacity: 0.92; transition: opacity 0.2s; }
+  .site-logo:hover { opacity: 1; }
+  .edit-bar { text-align: center; margin-bottom: 16px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+  .edit-btn { background: #3a3a45; color: #ccc; border: 1px solid #555; border-radius: 8px; padding: 8px 20px; font-size: 13px; cursor: pointer; transition: background 0.15s; }
+  .edit-btn:hover { background: #4a4a58; }
+  .pdf-main-btn { background: #3a5a3a; border-color: #4a7a4a; color: #8fca8f; font-weight: 600; }
+  .pdf-main-btn:hover { background: #4a6a4a; }
+  .f1-fetch-btn { background: #2a2a3a; border-color: #4a4a7a; color: #8888ca; font-weight: 600; }
+  .f1-fetch-btn:hover { background: #3a3a4a; }
+  #global-status { max-width: 1300px; margin: 0 auto 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .gstatus { font-size: 12px; border-radius: 7px; padding: 6px 12px; line-height: 1.5; }
+  .gstatus.ok   { background: #1a3a1a; color: #5fca5f; }
+  .gstatus.err  { background: #3a1a1a; color: #ca5f5f; }
+  .gstatus.load { background: #2a2a1a; color: #caaa5f; }
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; max-width: 1600px; margin: 0 auto;
+  }
+  .column { background: #2c2c32; border-radius: 14px; overflow: hidden; border: 1px solid #3a3a42; }
+  .col-header {
+    padding: 14px 16px 12px; text-align: center; font-size: 15px;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid #3a3a42;
+  }
+  .motogp .col-header { background: #c0392b; color: #fff; }
+  .moto2  .col-header { background: #e67e22; color: #fff; }
+  .moto3  .col-header { background: #27ae60; color: #fff; }
+  .sbk    .col-header { background: #2980b9; color: #fff; }
+  .f1     .col-header { background: #e10600; color: #fff; }
+  .mxgp   .col-header { background: #ff6b00; color: #fff; }
+  .mx2    .col-header { background: #f0a500; color: #fff; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    padding: 7px 8px; text-align: left; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.07em; text-transform: uppercase; color: #888;
+    border-bottom: 1px solid #3a3a42; background: #252528;
+  }
+  thead th:first-child { text-align: center; width: 28px; }
+  thead th:last-child  { text-align: right; }
+  tbody tr { border-bottom: 1px solid #3a3a42; }
+  tbody tr:nth-child(even) { background: #28282e; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #333340; }
+  tbody td { padding: 8px 8px; color: #ddd; vertical-align: middle; }
+  tbody td:first-child { text-align: center; font-weight: 700; color: #aaa; font-size: 12px; width: 28px; }
+  tbody td:last-child  { text-align: right; font-weight: 700; color: #f0c040; font-size: 14px; }
+  .pos-1 td:first-child { color: #ffd700; }
+  .pos-2 td:first-child { color: #c0c0c0; }
+  .pos-3 td:first-child { color: #cd7f32; }
+  .driver-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
+  /* Login */
+  .login-screen {
+    position: fixed; inset: 0; background: #1e1e22;
+    display: flex; align-items: center; justify-content: center; z-index: 200;
+  }
+  .login-box {
+    background: #2a2a30; border: 1px solid #444; border-radius: 14px;
+    padding: 32px; width: 300px; text-align: center;
+  }
+  .login-box h2 { font-size: 16px; color: #e0e0e0; margin-bottom: 20px; }
+  .login-box input {
+    width: 100%; background: #1e1e22; color: #ddd; border: 1px solid #444;
+    border-radius: 8px; padding: 10px; font-size: 14px; margin-bottom: 12px;
+    text-align: center; letter-spacing: 0.1em;
+  }
+  .login-box button {
+    width: 100%; background: #3d6bbd; color: #fff; border: none;
+    border-radius: 8px; padding: 10px; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .login-box button:hover { background: #4d7bcd; }
+  .login-error { color: #ca5f5f; font-size: 12px; margin-top: 8px; display: none; }
+  /* Modal */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+  .overlay.open { display: flex; }
+  .modal { background: #2a2a30; border-radius: 14px; border: 1px solid #444; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; padding: 24px; }
+  .modal h2 { font-size: 16px; font-weight: 600; color: #e0e0e0; margin-bottom: 16px; }
+  .modal label { display: block; font-size: 12px; color: #888; margin-bottom: 5px; margin-top: 14px; text-transform: uppercase; }
+  .modal select { width: 100%; background: #1e1e22; color: #ddd; border: 1px solid #444; border-radius: 8px; padding: 8px 10px; font-size: 13px; margin-bottom: 10px; }
+  .modal textarea { width: 100%; background: #1e1e22; color: #ddd; border: 1px solid #444; border-radius: 8px; padding: 10px; font-size: 13px; font-family: 'Courier New', monospace; resize: vertical; min-height: 280px; line-height: 1.6; }
+  .modal-hint { font-size: 12px; color: #666; margin-top: 8px; line-height: 1.5; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 18px; justify-content: flex-end; }
+  .btn-cancel { background: transparent; color: #888; border: 1px solid #444; border-radius: 8px; padding: 8px 18px; font-size: 13px; cursor: pointer; }
+  .btn-save { background: #3d6bbd; color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn-save:hover { background: #4d7bcd; }
+  .error-msg { color: #e04040; font-size: 12px; margin-top: 8px; display: none; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } body { padding: 16px 40px 40px; } }
+</style>
+</head>
+<body>
+
+<!-- Login screen -->
+<div class="login-screen" id="login-screen">
+  <div class="login-box">
+    <h2>🔒 Admin — Motorsport 2026</h2>
+    <input type="password" id="pwd-input" placeholder="Password" onkeydown="if(event.key==='Enter') checkPwd()">
+    <button onclick="checkPwd()">Accedi</button>
+    <div class="login-error" id="login-error">Password errata</div>
+  </div>
+</div>
+
+<h1>Classifiche Motorsport 2026</h1>
+<div class="logo-banner">
+  <a href="https://www.etsy.com/shop/Overrevving" target="_blank" rel="noopener">
+    <img src="logo.png" alt="Overrevving" class="site-logo">
+  </a>
+</div>
+<div class="last-updated" id="last-updated"></div>
+
+<div class="edit-bar">
+  <button class="edit-btn pdf-main-btn" onclick="fetchSBKFromRepo()">📂 Importa PDF SBK</button>
+  <button class="edit-btn pdf-main-btn" onclick="fetchStatsFromRepo()">📊 Importa PDF Stats MotoGP/Moto2</button>
+  <button class="edit-btn f1-fetch-btn" onclick="fetchAllAPI()">🔄 Aggiorna MotoGP/Moto2/Moto3/F1</button>
+  <button class="edit-btn" onclick="openEditor()">✏ Manuale</button>
+</div>
+<div id="global-status"></div>
+<div class="grid" id="standings-grid"></div>
+
+<!-- Modal manuale -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2>Aggiorna classifica</h2>
+    <label>Disciplina</label>
+    <select id="edit-category">
+      <option value="motogp">MotoGP</option>
+      <option value="moto2">Moto2</option>
+      <option value="moto3">Moto3</option>
+      <option value="sbk">SBK</option>
+      <option value="mxgp">MXGP</option>
+      <option value="mx2">MX2</option>
+      <option value="f1">F1</option>
+    </select>
+    <label>Dati (una riga per pilota: Nome, Punti)</label>
+    <textarea id="edit-data" placeholder="Max Verstappen, 275&#10;Lewis Hamilton, 251"></textarea>
+    <div class="modal-hint">Formato: <strong>Nome Cognome, Punti</strong> — un pilota per riga.</div>
+    <div class="error-msg" id="error-msg">Formato non valido.</div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeEditor()">Annulla</button>
+      <button class="btn-save" onclick="saveData()">Salva</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+function formatName(fullName) {
+  const parts = fullName.trim().split(' ');
+  if (parts.length < 2) return fullName;
+  // Normalizza ogni parola: se è tutta maiuscola, la converte in Title Case
+  const normalized = parts.map(w =>
+    w === w.toUpperCase() && w.length > 1
+      ? w.charAt(0) + w.slice(1).toLowerCase()
+      : w
+  );
+  // Iniziale del nome + punto + cognome (anche composto)
+  return normalized[0][0].toUpperCase() + '. ' + normalized.slice(1).join(' ');
+}
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+// ---- Config ----
+const BIN_ID  = '6a3064e4f5f4af5e29f7958b';
+const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
+const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+const ADMIN_PWD = 'andrea99!'; // ← CAMBIA QUESTA PASSWORD
+
+const CATEGORIES = [
+  { id: 'motogp', label: 'MotoGP', cls: 'motogp', url: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings' },
+  { id: 'moto2',  label: 'Moto2',  cls: 'moto2',  url: 'https://www.motogp.com/en/world-standing/2026/moto2/championship-standings' },
+  { id: 'moto3',  label: 'Moto3',  cls: 'moto3',  url: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings' },
+  { id: 'sbk',    label: 'SBK',    cls: 'sbk',    url: 'https://www.worldsbk.com/en/standings/riders/2026/SBK' },
+  { id: 'mxgp',   label: 'MXGP',   cls: 'mxgp',   url: 'https://mxgpresults.com/mxgp/standings' },
+  { id: 'mx2',    label: 'MX2',    cls: 'mx2',    url: 'https://mxgpresults.com/mx2/standings' },
+  { id: 'f1',     label: 'F1',     cls: 'f1',     url: 'https://www.mclaren.com/racing/formula-1/standings/' },
+];
+
+// ---- Login ----
+function checkPwd() {
+  const val = document.getElementById('pwd-input').value;
+  if (val === ADMIN_PWD) {
+    document.getElementById('login-screen').style.display = 'none';
+    loadFromBin();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('pwd-input').value = '';
+  }
+}
+
+// ---- JSONBin ----
+let currentData = { motogp:[], moto2:[], moto3:[], sbk:[], f1:[], _updated:'' };
+
+async function loadFromBin() {
+  try {
+    const res = await fetch(BIN_URL + '/latest', { headers: { 'X-Access-Key': API_KEY } });
+    if (!res.ok) throw new Error();
+    const json = await res.json();
+    currentData = json.record;
+    renderAll();
+  } catch(e) {
+    showGlobalStatus('err', '⚠ Errore caricamento dati da JSONBin');
+  }
+}
+
+async function saveToBin() {
+  currentData['_updated'] = new Date().toLocaleString('it-IT');
+  const res = await fetch(BIN_URL, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'X-Access-Key': API_KEY },
+    body: JSON.stringify(currentData)
+  });
+  if (!res.ok) throw new Error('Errore salvataggio su JSONBin');
+}
+
+// ---- Render ----
+function renderAll() {
+  const grid = document.getElementById('standings-grid');
+  grid.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const riders = currentData[cat.id] || [];
+    const col = document.createElement('div');
+    col.className = 'column ' + cat.cls;
+    let rows = '';
+    if (riders.length === 0) {
+      rows = '<tr><td colspan="3" style="text-align:center;color:#555;padding:20px;font-size:12px;">Nessun dato</td></tr>';
+    } else {
+      const leader = riders[0].pts;
+      riders.forEach((r, i) => {
+        const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
+        const gap = i === 0 ? '' : `<span style="font-weight:normal;color:#666;font-size:11px;margin-left:4px">-${leader - r.pts}</span>`;
+        const shortName = formatName(r.name);
+        rows += `<tr class="${pc}"><td>${i+1}</td><td><div class="driver-name" title="${r.name}">${shortName}</div></td><td>${r.pts}${gap}</td></tr>`;
+      });
+    }
+    col.innerHTML =
+      `<div class="col-header"><a href="${cat.url}" target="_blank" style="color:inherit;text-decoration:none;">${cat.label} ↗</a></div>` +
+      `<table><thead><tr><th>#</th><th>Pilota</th><th>Pts</th></tr></thead><tbody>${rows}</tbody></table>`;
+    grid.appendChild(col);
+  });
+  document.getElementById('last-updated').textContent = currentData['_updated'] ? 'Ultimo aggiornamento: ' + currentData['_updated'] : '';
+}
+
+function showGlobalStatus(cls, msg) {
+  const div = document.getElementById('global-status');
+  div.innerHTML = `<div class="gstatus ${cls}">${msg}</div>`;
+}
+
+// ---- PDF multi-upload ----
+const FILE_MAP = { 'sbk':'sbk' };
+
+// ---- Importa PDF SBK direttamente dalla cartella data/ del repository ----
+async function fetchSBKFromRepo() {
+  const statusDiv = document.getElementById('global-status');
+  statusDiv.innerHTML = '<div class="gstatus load" id="gs-sbk">⏳ Lettura data/SBK.pdf…</div>';
+  const setTag = (cls, msg) => {
+    const el = document.getElementById('gs-sbk');
+    if (el) { el.className = 'gstatus ' + cls; el.textContent = msg; }
+  };
+  try {
+    // Cache-busting per evitare che il browser mostri una versione vecchia del file
+    const res = await fetch('data/SBK.pdf?t=' + Date.now());
+    if (!res.ok) throw new Error('File non trovato (HTTP ' + res.status + ')');
+    const buf = await res.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+    const page = await pdf.getPage(1);
+    const content = await page.getTextContent();
+    const pageH = page.getViewport({ scale: 1 }).height;
+    const tokens = content.items
+      .filter(it => it.str && it.str.trim())
+      .map(it => ({ text: it.str.trim(), x: it.transform[4], y: pageH - it.transform[5] }));
+    const riders = parseSBK(tokens);
+    if (riders.length === 0) { setTag('err', '⚠ Nessun pilota trovato nel PDF'); return; }
+    currentData['sbk'] = riders;
+    await saveToBin();
+    renderAll();
+    setTag('ok', '✓ SBK — ' + riders.length + ' piloti importati da data/SBK.pdf');
+  } catch (err) {
+    setTag('err', '⚠ Errore: ' + err.message);
+  }
+}
+
+async function handleMultiPDF(e) {
+  const files = [...e.target.files];
+  e.target.value = '';
+  if (!files.length) return;
+  const statusDiv = document.getElementById('global-status');
+  statusDiv.innerHTML = '';
+  const tasks = [], unknown = [];
+  for (const file of files) {
+    const base = file.name.replace(/\.pdf$/i,'').toLowerCase().trim();
+    const catId = FILE_MAP[base];
+    if (catId) {
+      const tag = document.createElement('div');
+      tag.className = 'gstatus load'; tag.id = 'gs-' + catId;
+      tag.textContent = '⏳ ' + file.name + ' — lettura in corso…';
+      statusDiv.appendChild(tag);
+      tasks.push({ file, catId });
+    } else { unknown.push(file.name); }
+  }
+  if (unknown.length) {
+    const tag = document.createElement('div');
+    tag.className = 'gstatus err';
+    tag.textContent = '⚠ File non riconosciuti (usa SBK.pdf): ' + unknown.join(', ');
+    statusDiv.appendChild(tag);
+  }
+  await Promise.all(tasks.map(({ file, catId }) => processPDF(file, catId)));
+  // Salva tutto su JSONBin dopo aver processato tutti i PDF
+  try {
+    await saveToBin();
+    renderAll();
+  } catch(e) {
+    showGlobalStatus('err', '⚠ Errore salvataggio su JSONBin: ' + e.message);
+  }
+}
+
+async function processPDF(file, catId) {
+  const setTag = (cls, msg) => {
+    const el = document.getElementById('gs-' + catId);
+    if (el) { el.className = 'gstatus ' + cls; el.textContent = msg; }
+  };
+  try {
+    const buf = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+    const page = await pdf.getPage(1);
+    const content = await page.getTextContent();
+    const pageH = page.getViewport({ scale: 1 }).height;
+    const tokens = content.items
+      .filter(it => it.str && it.str.trim())
+      .map(it => ({ text: it.str.trim(), x: it.transform[4], y: pageH - it.transform[5] }));
+    const riders = catId === 'sbk' ? parseSBK(tokens) : parseStandings(tokens);
+    if (riders.length === 0) { setTag('err', '⚠ ' + file.name + ' — nessun pilota trovato'); return; }
+    currentData[catId] = riders;
+    setTag('ok', '✓ ' + file.name + ' — ' + riders.length + ' piloti');
+  } catch(err) {
+    setTag('err', '⚠ ' + file.name + ' — ' + err.message);
+  }
+}
+
+// ---- Parser MotoGP/Moto2/Moto3 ----
+function parseStandings(tokens) {
+  const rowMap = new Map();
+  for (const t of tokens) {
+    const y = Math.round(t.y); let key = null;
+    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 4) { key=k; break; } }
+    if (key===null) { key=y; rowMap.set(key,[]); }
+    rowMap.get(key).push(t);
+  }
+  const sortedRows = [...rowMap.entries()].sort((a,b)=>a[0]-b[0]).map(([,toks])=>toks.sort((a,b)=>a.x-b.x).map(t=>t.text));
+  const NAME_RE = /^[A-Za-zÀ-ÖØ-öø-ÿ].* [A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ]{2,}/;
+  const SKIP_RE = /^(GRAND PRIX|SEASON|WILDCARDS|2026|BALATON|OFFICIAL|COPYRIGHT)/i;
+  const riders = [];
+  for (const toks of sortedRows) {
+    if (toks.length < 2) continue;
+    const name = toks[0];
+    if (!NAME_RE.test(name) || SKIP_RE.test(name)) continue;
+    let pts = null;
+    for (let i=1; i<toks.length; i++) { const m=toks[i].match(/^(\d{1,4})(\.\d)?$/); if(m){pts=parseFloat(toks[i]);break;} }
+    if (pts!==null && pts<=9999 && !riders.find(r=>r.name===name)) riders.push({name,pts});
+  }
+  riders.sort((a,b)=>b.pts-a.pts);
+  return riders;
+}
+
+// ---- Parser SBK ----
+function parseSBK(tokens) {
+  const rowMap = new Map();
+  for (const t of tokens) {
+    const y = Math.round(t.y); let key = null;
+    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 6) { key=k; break; } }
+    if (key===null) { key=y; rowMap.set(key,[]); }
+    rowMap.get(key).push(t);
+  }
+  const sortedRows = [...rowMap.entries()].sort((a,b)=>a[0]-b[0]).map(([,toks])=>toks.sort((a,b)=>a.x-b.x).map(t=>t.text));
+  const riderRows = [];
+  for (let i=0; i<sortedRows.length; i++) {
+    const toks = sortedRows[i];
+    if (!toks[0] || !/^\d+$/.test(toks[0])) continue;
+    const pos = parseInt(toks[0],10);
+    if (pos<1||pos>100) continue;
+    if (!toks[1]||!/^[A-Z][A-Z ]*$/.test(toks[1])) continue;
+    let j=1; const surnameParts=[];
+    while (j<toks.length && /^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ][A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ ]*$/.test(toks[j]) && toks[j]===toks[j].toUpperCase()) { surnameParts.push(toks[j]); j++; }
+    const surname = surnameParts.join(' ');
+    let firstName='';
+    if (j<toks.length && /^[A-Z][a-z]/.test(toks[j])) { firstName=toks[j].split('(')[0].trim(); j++; }
+    if (j>=toks.length||!/^\d+$/.test(toks[j])) continue;
+    const pts=parseInt(toks[j],10);
+    riderRows.push({rowIdx:i,surname,firstName,pts});
+  }
+  const usedRows=new Set(riderRows.map(r=>r.rowIdx));
+  for (const rider of riderRows) {
+    if (rider.firstName) continue;
+    const nextIdx=rider.rowIdx+1;
+    if (nextIdx>=sortedRows.length||usedRows.has(nextIdx)) continue;
+    const nextToks=sortedRows[nextIdx];
+    if (nextToks.length>0&&/^[A-Z][a-z]/.test(nextToks[0])) rider.firstName=nextToks[0].split('(')[0].trim();
+  }
+  const seen=new Set(); const riders=[];
+  for (const r of riderRows) {
+    const name=(r.firstName?r.firstName+' ':'')+r.surname;
+    if (!seen.has(r.surname)) { seen.add(r.surname); riders.push({name,pts:r.pts}); }
+  }
+  riders.sort((a,b)=>b.pts-a.pts);
+  return riders;
+}
+
+// ---- Import PDF Stats Team + Constructor (MotoGP e Moto2) ----
+const STATS_PDF_SOURCES = [
+  { catId: 'motogp', file: 'MGP_worldstanding.pdf', label: 'MotoGP' },
+  { catId: 'moto2',  file: 'M2.pdf',                label: 'Moto2' },
+];
+
+async function fetchStatsFromRepo() {
+  const statusDiv = document.getElementById('global-status');
+  statusDiv.innerHTML = '';
+  for (const src of STATS_PDF_SOURCES) {
+    const tag = document.createElement('div');
+    tag.className = 'gstatus load'; tag.id = 'gs-stats-' + src.catId;
+    tag.textContent = `⏳ Lettura data/${src.file}…`;
+    statusDiv.appendChild(tag);
+  }
+  await Promise.all(STATS_PDF_SOURCES.map(fetchOneStatsPDF));
+  try {
+    await saveToBin();
+    renderAll();
+  } catch (e) {
+    showGlobalStatus('err', '⚠ Errore salvataggio su JSONBin: ' + e.message);
+  }
+}
+
+async function fetchOneStatsPDF(src) {
+  const setTag = (cls, msg) => {
+    const el = document.getElementById('gs-stats-' + src.catId);
+    if (el) { el.className = 'gstatus ' + cls; el.textContent = msg; }
+  };
+  try {
+    const res = await fetch('data/' + src.file + '?t=' + Date.now());
+    if (!res.ok) throw new Error('File non trovato (HTTP ' + res.status + ')');
+    const buf = await res.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+
+    // Cerca la pagina che contiene sia "Constructor" che "Team" (di solito l'ultima)
+    let targetPage = null;
+    let targetTokens = null;
+    for (let p = pdf.numPages; p >= 1; p--) {
+      const page = await pdf.getPage(p);
+      const content = await page.getTextContent();
+      const fullText = content.items.map(it => it.str).join(' ');
+      if (fullText.includes('Constructor') && fullText.includes('Team')) {
+        targetPage = page;
+        targetTokens = content;
+        break;
+      }
+    }
+    if (!targetPage) { setTag('err', `⚠ ${src.label} — pagina Team/Constructor non trovata`); return; }
+
+    const pageH = targetPage.getViewport({ scale: 1 }).height;
+    const tokens = targetTokens.items
+      .filter(it => it.str && it.str.trim())
+      .map(it => ({ text: it.str.trim(), x: it.transform[4], y: pageH - it.transform[5] }));
+
+    const { teams, constructors } = parseTeamsAndConstructors(tokens);
+
+    if (teams.length === 0 && constructors.length === 0) {
+      setTag('err', `⚠ ${src.label} — nessun dato Team/Constructor estratto`);
+      return;
+    }
+
+    currentData[src.catId + '_teams'] = teams;
+    currentData[src.catId + '_constructors'] = constructors;
+    setTag('ok', `✓ ${src.label} — ${teams.length} team, ${constructors.length} costruttori`);
+  } catch (err) {
+    setTag('err', `⚠ ${src.label} — ${err.message}`);
+  }
+}
+
+/**
+ * Questa tabella MotoGP ha un layout a COLONNE (non a righe come le altre):
+ * ogni costruttore/team è una colonna verticale, con nome e punteggio totale
+ * allineati sulla stessa coordinata X ma a Y molto diverse.
+ */
+function parseTeamsAndConstructors(tokens) {
+  const constructorHeaderTok = tokens.find(t => t.text === 'Constructor');
+  const teamHeaderTok = tokens.find(t => t.text === 'Team');
+  if (!constructorHeaderTok || !teamHeaderTok) return { teams: [], constructors: [] };
+
+  // Riga di intestazione: prendi tutti i token vicini in Y a "Constructor" o "Team"
+  const headerRowTokens = tokens
+    .filter(t => Math.abs(t.y - constructorHeaderTok.y) <= 6 || Math.abs(t.y - teamHeaderTok.y) <= 6)
+    .sort((a, b) => a.x - b.x);
+
+  const constructorNames = [];
+  const teamNames = [];
+  let mode = null;
+  for (const t of headerRowTokens) {
+    if (t.text === 'Constructor') { mode = 'constructor'; continue; }
+    if (t.text === 'Team') { mode = 'team'; continue; }
+    if (mode === 'constructor') constructorNames.push({ x: t.x, name: t.text });
+    else if (mode === 'team') teamNames.push({ x: t.x, name: t.text });
+  }
+
+  // Riga dei punti totali: subito sopra l'etichetta "Points"
+  const pointsLabelToks = tokens.filter(t => t.text === 'Points');
+  const pointsRowY = pointsLabelToks.length ? Math.min(...pointsLabelToks.map(t => t.y)) : 380;
+
+  const pointsCandidates = tokens.filter(t =>
+    /^\d{1,4}$/.test(t.text) && t.y < pointsRowY && t.y > pointsRowY - 20
+  );
+
+  function matchPoints(nameList) {
+    return nameList.map(n => {
+      let best = null, bestDist = Infinity;
+      for (const p of pointsCandidates) {
+        const dist = Math.abs(p.x - n.x);
+        if (dist < bestDist) { bestDist = dist; best = p; }
+      }
+      return best && bestDist < 2 ? { name: n.name, pts: parseInt(best.text, 10) } : null;
+    }).filter(Boolean);
+  }
+
+  const constructors = matchPoints(constructorNames).sort((a, b) => b.pts - a.pts);
+  const teams = matchPoints(teamNames).sort((a, b) => b.pts - a.pts);
+
+  return { teams, constructors };
+}
+
+async function fetchAllAPI() {
+  showGlobalStatus('load', '⏳ Recupero classifiche da API…');
+  const statusDiv = document.getElementById('global-status');
+  statusDiv.innerHTML = '';
+
+  const labels = { motogp: 'MotoGP', moto2: 'Moto2', moto3: 'Moto3', mxgp: 'MXGP', mx2: 'MX2', f1: 'F1' };
+  for (const key of ['motogp', 'moto2', 'moto3', 'mxgp', 'mx2', 'f1']) {
+    const tag = document.createElement('div');
+    tag.className = 'gstatus load'; tag.id = 'gs-' + key;
+    tag.textContent = '⏳ ' + labels[key] + ' — recupero…';
+    statusDiv.appendChild(tag);
+  }
+
+  // MotoGP / Moto2 / Moto3
+  for (const [catId, catUuid] of Object.entries(PULSELIVE_CATEGORIES)) {
+    try {
+      const url = `https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid=${PULSELIVE_SEASON_2026}&categoryUuid=${catUuid}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      const riders = (data.classification || [])
+        .map(c => ({ name: c.rider.full_name, pts: parseFloat(c.points) }))
+        .sort((a, b) => b.pts - a.pts);
+      if (riders.length === 0) throw new Error('nessun pilota trovato');
+      currentData[catId] = riders;
+      const tag = document.getElementById('gs-' + catId);
+      if (tag) { tag.className = 'gstatus ok'; tag.textContent = '✓ ' + labels[catId] + ' — ' + riders.length + ' piloti'; }
+    } catch (err) {
+      const tag = document.getElementById('gs-' + catId);
+      if (tag) { tag.className = 'gstatus err'; tag.textContent = '⚠ ' + labels[catId] + ' — ' + err.message; }
+    }
+  }
+
+  // MXGP via mxgpresults.com (tramite corsproxy per CORS)
+  try {
+    const mxgpUrl = 'https://corsproxy.io/?url=https://mxgpresults.com/mxgp/standings';
+    const mxgpRes = await fetch(mxgpUrl, { signal: AbortSignal.timeout(10000) });
+    if (!mxgpRes.ok) throw new Error('HTTP ' + mxgpRes.status);
+    const html = await mxgpRes.text();
+    // Parse righe tabella: pos | num | nome | bike | nat | pts
+    const rowRe = /<tr[^>]*>\s*<td[^>]*>\d+\s*<\/td>\s*<td[^>]*>#\d+\s*<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>[\s\S]*?<td[^>]*>(\d+)\s*<\/td>\s*<\/tr>/g;
+    const mxgpRiders = [];
+    let m;
+    while ((m = rowRe.exec(html)) !== null) {
+      const name = m[1].replace(/<[^>]+>/g, '').trim();
+      const pts  = parseInt(m[2], 10);
+      if (name && !isNaN(pts)) mxgpRiders.push({ name, pts });
+    }
+    if (mxgpRiders.length === 0) throw new Error('nessun pilota trovato');
+    currentData['mxgp'] = mxgpRiders;
+    const tagMx = document.getElementById('gs-mxgp');
+    if (tagMx) { tagMx.className = 'gstatus ok'; tagMx.textContent = '✓ MXGP — ' + mxgpRiders.length + ' piloti'; }
+  } catch (err) {
+    const tagMx = document.getElementById('gs-mxgp');
+    if (tagMx) { tagMx.className = 'gstatus err'; tagMx.textContent = '⚠ MXGP — ' + err.message; }
+  }
+
+  // MX2 via mxgpresults.com
+  try {
+    const mx2Url = 'https://corsproxy.io/?url=https://mxgpresults.com/mx2/standings';
+    const mx2Res = await fetch(mx2Url, { signal: AbortSignal.timeout(10000) });
+    if (!mx2Res.ok) throw new Error('HTTP ' + mx2Res.status);
+    const html2 = await mx2Res.text();
+    const rowRe2 = /<tr[^>]*>\s*<td[^>]*>\d+\s*<\/td>\s*<td[^>]*>#\d+\s*<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>[\s\S]*?<td[^>]*>(\d+)\s*<\/td>\s*<\/tr>/g;
+    const mx2Riders = [];
+    let m2;
+    while ((m2 = rowRe2.exec(html2)) !== null) {
+      const name = m2[1].replace(/<[^>]+>/g, '').trim();
+      const pts  = parseInt(m2[2], 10);
+      if (name && !isNaN(pts)) mx2Riders.push({ name, pts });
+    }
+    if (mx2Riders.length === 0) throw new Error('no riders found');
+    currentData['mx2'] = mx2Riders;
+    const tagMx2 = document.getElementById('gs-mx2');
+    if (tagMx2) { tagMx2.className = 'gstatus ok'; tagMx2.textContent = '✓ MX2 — ' + mx2Riders.length + ' riders'; }
+  } catch (err) {
+    const tagMx2 = document.getElementById('gs-mx2');
+    if (tagMx2) { tagMx2.className = 'gstatus err'; tagMx2.textContent = '⚠ MX2 — ' + err.message; }
+  }
+
+  // F1 via Jolpica
+  try {
+    const endpoints = [
+      'https://api.jolpi.ca/ergast/f1/2026/driverstandings.json',
+      'https://corsproxy.io/?url=https://api.jolpi.ca/ergast/f1/2026/driverstandings.json',
+    ];
+    let data = null;
+    for (const url of endpoints) {
+      try { const res = await fetch(url, { signal: AbortSignal.timeout(8000) }); if (res.ok) { data = await res.json(); break; } } catch(e) { continue; }
+    }
+    if (!data) throw new Error('API non raggiungibile');
+    const lists = data?.MRData?.StandingsTable?.StandingsLists;
+    if (!lists || lists.length === 0) throw new Error('nessun dato 2026');
+    const riders = lists[0].DriverStandings.map(d => ({ name: d.Driver.givenName + ' ' + d.Driver.familyName, pts: parseFloat(d.points) }));
+    if (riders.length === 0) throw new Error('nessun pilota trovato');
+    currentData['f1'] = riders;
+    const tag = document.getElementById('gs-f1');
+    if (tag) { tag.className = 'gstatus ok'; tag.textContent = '✓ F1 — ' + riders.length + ' piloti'; }
+  } catch (err) {
+    const tag = document.getElementById('gs-f1');
+    if (tag) { tag.className = 'gstatus err'; tag.textContent = '⚠ F1 — ' + err.message; }
+  }
+
+  try {
+    await saveToBin();
+    renderAll();
+  } catch (e) {
+    showGlobalStatus('err', '⚠ Errore salvataggio su JSONBin: ' + e.message);
+  }
+}
+
+// ---- Modal manuale ----
+function openEditor() { document.getElementById('overlay').classList.add('open'); loadCategoryIntoEditor(); }
+function closeEditor() { document.getElementById('overlay').classList.remove('open'); document.getElementById('error-msg').style.display='none'; }
+document.getElementById('edit-category').addEventListener('change', loadCategoryIntoEditor);
+function loadCategoryIntoEditor() {
+  const catId=document.getElementById('edit-category').value;
+  document.getElementById('edit-data').value=(currentData[catId]||[]).map(r=>r.name+', '+r.pts).join('\n');
+  document.getElementById('error-msg').style.display='none';
+}
+async function saveData() {
+  const catId=document.getElementById('edit-category').value;
+  const raw=document.getElementById('edit-data').value.trim();
+  const errEl=document.getElementById('error-msg');
+  if (!raw) { currentData[catId]=[]; await saveToBin(); renderAll(); closeEditor(); return; }
+  const lines=raw.split('\n').filter(l=>l.trim());
+  const riders=[];
+  for (const line of lines) {
+    const parts=line.split(','); if(parts.length<2){errEl.style.display='block';return;}
+    const name=parts.slice(0,-1).join(',').trim(); const pts=parts[parts.length-1].trim();
+    if(!name||isNaN(Number(pts))){errEl.style.display='block';return;}
+    riders.push({name,pts:Number(pts)});
+  }
+  errEl.style.display='none';
+  currentData[catId]=riders;
+  try { await saveToBin(); renderAll(); closeEditor(); }
+  catch(e) { showGlobalStatus('err','⚠ Errore salvataggio: '+e.message); }
+}
+document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeEditor();});
+</script>
+</body>
+</html>
