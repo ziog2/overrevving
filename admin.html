@@ -129,10 +129,8 @@
 <div class="last-updated" id="last-updated"></div>
 
 <div class="edit-bar">
-  <button class="edit-btn pdf-main-btn" onclick="document.getElementById('pdf-multi-input').click()">📂 Importa PDF SBK</button>
-  <input type="file" id="pdf-multi-input" accept=".pdf" multiple style="display:none" onchange="handleMultiPDF(event)">
-  <button class="edit-btn pdf-main-btn" onclick="document.getElementById('pdf-motogp-stats').click()">📊 Importa PDF Stats MotoGP</button>
-  <input type="file" id="pdf-motogp-stats" accept=".pdf" style="display:none" onchange="handleMotoGPStatsPDF(event)">
+  <button class="edit-btn pdf-main-btn" onclick="fetchSBKFromRepo()">📂 Importa PDF SBK</button>
+  <button class="edit-btn pdf-main-btn" onclick="fetchMotoGPStatsFromRepo()">📊 Importa PDF Stats MotoGP</button>
   <button class="edit-btn f1-fetch-btn" onclick="fetchAllAPI()">🔄 Aggiorna MotoGP/Moto2/Moto3/F1</button>
   <button class="edit-btn" onclick="openEditor()">✏ Manuale</button>
 </div>
@@ -164,7 +162,8 @@
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
 function formatName(fullName) {
   const parts = fullName.trim().split(' ');
   if (parts.length < 2) return fullName;
@@ -177,8 +176,7 @@ function formatName(fullName) {
   // Iniziale del nome + punto + cognome (anche composto)
   return normalized[0][0].toUpperCase() + '. ' + normalized.slice(1).join(' ');
 }
-</script>
-<script>
+
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -270,6 +268,37 @@ function showGlobalStatus(cls, msg) {
 
 // ---- PDF multi-upload ----
 const FILE_MAP = { 'sbk':'sbk' };
+
+// ---- Importa PDF SBK direttamente dalla cartella data/ del repository ----
+async function fetchSBKFromRepo() {
+  const statusDiv = document.getElementById('global-status');
+  statusDiv.innerHTML = '<div class="gstatus load" id="gs-sbk">⏳ Lettura data/SBK.pdf…</div>';
+  const setTag = (cls, msg) => {
+    const el = document.getElementById('gs-sbk');
+    if (el) { el.className = 'gstatus ' + cls; el.textContent = msg; }
+  };
+  try {
+    // Cache-busting per evitare che il browser mostri una versione vecchia del file
+    const res = await fetch('data/SBK.pdf?t=' + Date.now());
+    if (!res.ok) throw new Error('File non trovato (HTTP ' + res.status + ')');
+    const buf = await res.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+    const page = await pdf.getPage(1);
+    const content = await page.getTextContent();
+    const pageH = page.getViewport({ scale: 1 }).height;
+    const tokens = content.items
+      .filter(it => it.str && it.str.trim())
+      .map(it => ({ text: it.str.trim(), x: it.transform[4], y: pageH - it.transform[5] }));
+    const riders = parseSBK(tokens);
+    if (riders.length === 0) { setTag('err', '⚠ Nessun pilota trovato nel PDF'); return; }
+    currentData['sbk'] = riders;
+    await saveToBin();
+    renderAll();
+    setTag('ok', '✓ SBK — ' + riders.length + ' piloti importati da data/SBK.pdf');
+  } catch (err) {
+    setTag('err', '⚠ Errore: ' + err.message);
+  }
+}
 
 async function handleMultiPDF(e) {
   const files = [...e.target.files];
@@ -396,21 +425,19 @@ function parseSBK(tokens) {
   return riders;
 }
 
-// ---- Import PDF Stats MotoGP (Team + Constructor standings, ultima pagina) ----
-async function handleMotoGPStatsPDF(e) {
-  const file = e.target.files[0];
-  e.target.value = '';
-  if (!file) return;
-
+// ---- Import PDF Stats MotoGP (Team + Constructor standings) da data/MGP_worldstanding.pdf ----
+async function fetchMotoGPStatsFromRepo() {
   const statusDiv = document.getElementById('global-status');
-  statusDiv.innerHTML = '<div class="gstatus load" id="gs-motogp-stats">⏳ Lettura PDF stats MotoGP…</div>';
+  statusDiv.innerHTML = '<div class="gstatus load" id="gs-motogp-stats">⏳ Lettura data/MGP_worldstanding.pdf…</div>';
   const setTag = (cls, msg) => {
     const el = document.getElementById('gs-motogp-stats');
     if (el) { el.className = 'gstatus ' + cls; el.textContent = msg; }
   };
 
   try {
-    const buf = await file.arrayBuffer();
+    const res = await fetch('data/MGP_worldstanding.pdf?t=' + Date.now());
+    if (!res.ok) throw new Error('File non trovato (HTTP ' + res.status + ')');
+    const buf = await res.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
 
     // Cerca la pagina che contiene "Constructor Points" (di solito l'ultima)
