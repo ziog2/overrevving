@@ -130,7 +130,7 @@
 
 <div class="edit-bar">
   <button class="edit-btn pdf-main-btn" onclick="fetchSBKFromRepo()">📂 Importa PDF SBK</button>
-  <button class="edit-btn pdf-main-btn" onclick="fetchMotoGPStatsFromRepo()">📊 Importa PDF Stats MotoGP</button>
+  <button class="edit-btn pdf-main-btn" onclick="fetchStatsFromRepo()">📊 Importa PDF Stats MotoGP/Moto2</button>
   <button class="edit-btn f1-fetch-btn" onclick="fetchAllAPI()">🔄 Aggiorna MotoGP/Moto2/Moto3/F1</button>
   <button class="edit-btn" onclick="openEditor()">✏ Manuale</button>
 </div>
@@ -425,22 +425,42 @@ function parseSBK(tokens) {
   return riders;
 }
 
-// ---- Import PDF Stats MotoGP (Team + Constructor standings) da data/MGP_worldstanding.pdf ----
-async function fetchMotoGPStatsFromRepo() {
+// ---- Import PDF Stats Team + Constructor (MotoGP e Moto2) ----
+const STATS_PDF_SOURCES = [
+  { catId: 'motogp', file: 'MGP_worldstanding.pdf', label: 'MotoGP' },
+  { catId: 'moto2',  file: 'M2.pdf',                label: 'Moto2' },
+];
+
+async function fetchStatsFromRepo() {
   const statusDiv = document.getElementById('global-status');
-  statusDiv.innerHTML = '<div class="gstatus load" id="gs-motogp-stats">⏳ Lettura data/MGP_worldstanding.pdf…</div>';
+  statusDiv.innerHTML = '';
+  for (const src of STATS_PDF_SOURCES) {
+    const tag = document.createElement('div');
+    tag.className = 'gstatus load'; tag.id = 'gs-stats-' + src.catId;
+    tag.textContent = `⏳ Lettura data/${src.file}…`;
+    statusDiv.appendChild(tag);
+  }
+  await Promise.all(STATS_PDF_SOURCES.map(fetchOneStatsPDF));
+  try {
+    await saveToBin();
+    renderAll();
+  } catch (e) {
+    showGlobalStatus('err', '⚠ Errore salvataggio su JSONBin: ' + e.message);
+  }
+}
+
+async function fetchOneStatsPDF(src) {
   const setTag = (cls, msg) => {
-    const el = document.getElementById('gs-motogp-stats');
+    const el = document.getElementById('gs-stats-' + src.catId);
     if (el) { el.className = 'gstatus ' + cls; el.textContent = msg; }
   };
-
   try {
-    const res = await fetch('data/MGP_worldstanding.pdf?t=' + Date.now());
+    const res = await fetch('data/' + src.file + '?t=' + Date.now());
     if (!res.ok) throw new Error('File non trovato (HTTP ' + res.status + ')');
     const buf = await res.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
 
-    // Cerca la pagina che contiene "Constructor Points" (di solito l'ultima)
+    // Cerca la pagina che contiene sia "Constructor" che "Team" (di solito l'ultima)
     let targetPage = null;
     let targetTokens = null;
     for (let p = pdf.numPages; p >= 1; p--) {
@@ -453,7 +473,7 @@ async function fetchMotoGPStatsFromRepo() {
         break;
       }
     }
-    if (!targetPage) { setTag('err', '⚠ Pagina Team/Constructor non trovata nel PDF'); return; }
+    if (!targetPage) { setTag('err', `⚠ ${src.label} — pagina Team/Constructor non trovata`); return; }
 
     const pageH = targetPage.getViewport({ scale: 1 }).height;
     const tokens = targetTokens.items
@@ -463,17 +483,15 @@ async function fetchMotoGPStatsFromRepo() {
     const { teams, constructors } = parseTeamsAndConstructors(tokens);
 
     if (teams.length === 0 && constructors.length === 0) {
-      setTag('err', '⚠ Nessun dato Team/Constructor estratto dal PDF');
+      setTag('err', `⚠ ${src.label} — nessun dato Team/Constructor estratto`);
       return;
     }
 
-    currentData['motogp_teams'] = teams;
-    currentData['motogp_constructors'] = constructors;
-    await saveToBin();
-    renderAll();
-    setTag('ok', `✓ Importati ${teams.length} team e ${constructors.length} costruttori`);
+    currentData[src.catId + '_teams'] = teams;
+    currentData[src.catId + '_constructors'] = constructors;
+    setTag('ok', `✓ ${src.label} — ${teams.length} team, ${constructors.length} costruttori`);
   } catch (err) {
-    setTag('err', '⚠ Errore: ' + err.message);
+    setTag('err', `⚠ ${src.label} — ${err.message}`);
   }
 }
 
