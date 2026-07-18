@@ -467,64 +467,47 @@ function parseStandings(tokens) {
     rowMap.get(key).push(t);
   }
   const sortedRows = [...rowMap.entries()].sort((a,b)=>a[0]-b[0]).map(([,toks])=>toks.sort((a,b)=>a.x-b.x).map(t=>t.text.trim()));
+  const NAME_RE = /^[A-Za-zÀ-ÖØ-öø-ÿ].* [A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ]{2,}/;
   const SKIP_RE = /^(GRAND PRIX|SEASON|WILDCARDS|2026|BALATON|OFFICIAL|COPYRIGHT)/i;
   const riders = [];
 
   for (const toks of sortedRows) {
     if (toks.length < 3) continue;
-    if (!/^\d+$/.test(toks[0])) continue;
-    const pos = parseInt(toks[0], 10);
-    if (pos < 1 || pos > 100) continue;
+    
+    const rawName = toks[0];
+    if (!NAME_RE.test(rawName) || SKIP_RE.test(rawName)) continue;
 
-    // Extract surname (uppercase tokens)
-    let j = 1;
-    const surnameParts = [];
-    while (
-      j < toks.length &&
-      /^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(toks[j]) &&
-      toks[j] === toks[j].toUpperCase() &&
-      !/^\d+$/.test(toks[j])
-    ) {
-      surnameParts.push(toks[j]);
-      j++;
-    }
-    if (surnameParts.length === 0) continue;
-    const surname = surnameParts.join(' ');
+    // Check if second token is total points
+    if (!/^\d+(\.\d+)?$/.test(toks[1])) continue;
+    const pts = parseFloat(toks[1]);
 
-    if (SKIP_RE.test(surname)) continue;
-
-    // The next token must be a number (total points)
-    if (j >= toks.length || !/^\d+(\.\d+)?$/.test(toks[j])) continue;
-    const pts = parseFloat(toks[j]);
-    j++;
-
-    // If pos > 1, the next two tokens are gap to leader and gap to previous. Skip them.
-    if (pos > 1) {
-      j += 2;
+    // Find the correct history by testing start index 2 (no gaps) or 4 (with gaps)
+    let history = [];
+    for (const startIdx of [2, 4]) {
+      if (startIdx >= toks.length) continue;
+      const candidate = [];
+      let k = startIdx;
+      while (k < toks.length && /^(\d+|-)$/.test(toks[k])) {
+        candidate.push(toks[k] === '-' ? 0 : parseInt(toks[k], 10));
+        k++;
+      }
+      const sum = candidate.reduce((a, b) => a + b, 0);
+      if (Math.abs(sum - pts) < 0.1) {
+        history = candidate;
+        break;
+      }
     }
 
-    // Now collect scores
-    const history = [];
-    while (j < toks.length && /^(\d+|-)$/.test(toks[j])) {
-      const val = toks[j];
-      history.push(val === '-' ? 0 : parseInt(val, 10));
-      j++;
-    }
+    // Reconstruct formatted name (Title Case for uppercase parts)
+    const formattedName = rawName.split(' ').map(part => {
+      if (part === part.toUpperCase() && part.length > 1) {
+        return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+      }
+      return part;
+    }).join(' ');
 
-    // Extract first name (until country or end of mixed-case words)
-    const firstNameParts = [];
-    while (j < toks.length && !/^\[[A-Z]{3}\]$/.test(toks[j]) && !/^\d+$/.test(toks[j])) {
-      firstNameParts.push(toks[j]);
-      j++;
-    }
-    const firstName = firstNameParts.join(' ');
-
-    // Convert surname to Title Case for database compatibility
-    const titleSurname = surname.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
-    const name = (firstName ? firstName + ' ' : '') + titleSurname;
-
-    if (!riders.find(r => r.name === name)) {
-      riders.push({ name, pts, history });
+    if (!riders.find(r => r.name === formattedName)) {
+      riders.push({ name: formattedName, pts, history });
     }
   }
 
