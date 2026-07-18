@@ -130,14 +130,6 @@
   </div>
   <div class="hero-meta" id="hero-meta"></div>
 </div>
-
-<div class="chart-container" id="chart-container" style="display:none; max-width: 1100px; margin: 0 auto 32px; background: #2c2c32; border-radius: 14px; border: 1px solid #3a3a42; padding: 20px;">
-  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Riders' Points Progression</h3>
-  <div style="position: relative; height: 300px;">
-    <canvas id="progressionChart"></canvas>
-  </div>
-</div>
-
 <div class="layout">
   <div>
     <div class="panel">
@@ -160,6 +152,13 @@
       <div class="panel-head"><span>Season calendar</span><span class="count" id="cal-count"></span></div>
       <div class="cal-list" id="cal-list"><div class="loading">⏳ Loading…</div></div>
     </div>
+  </div>
+</div>
+
+<div class="chart-container" id="chart-container" style="display:none; max-width: 1100px; margin: 32px auto 0; background: #2c2c32; border-radius: 14px; border: 1px solid #3a3a42; padding: 20px;">
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Riders' Points Progression</h3>
+  <div style="position: relative; height: 300px;">
+    <canvas id="progressionChart"></canvas>
   </div>
 </div>
 
@@ -415,19 +414,51 @@ function renderProgressionChart(riders, catId) {
   const container = document.getElementById('chart-container');
   if (!container) return;
 
-  // Filter riders that are favorited and have history data
-  const favRiders = riders.filter(r => {
-    const favKey = catId + ':' + r.name;
-    return favorites.has(favKey) && r.history && r.history.length > 0;
-  });
+  // Check if any rider of this category is favorited
+  const anyFavorites = riders.some(r => favorites.has(catId + ':' + r.name));
 
-  if (favRiders.length === 0) {
+  if (!anyFavorites) {
     container.style.display = 'none';
     if (myChart) { myChart.destroy(); myChart = null; }
     return;
   }
 
   container.style.display = 'block';
+
+  // Filter favorited riders that have history data
+  const favRiders = riders.filter(r => {
+    const favKey = catId + ':' + r.name;
+    return favorites.has(favKey) && r.history && r.history.length > 0;
+  });
+
+  const canvasWrapper = container.querySelector('div');
+  let placeholder = document.getElementById('chart-placeholder');
+
+  if (favRiders.length === 0) {
+    // We have favorites, but none of them have history data!
+    if (canvasWrapper) canvasWrapper.style.display = 'none';
+    
+    if (!placeholder) {
+      placeholder = document.createElement('div');
+      placeholder.id = 'chart-placeholder';
+      placeholder.style.color = '#888';
+      placeholder.style.padding = '40px 20px';
+      placeholder.style.textAlign = 'center';
+      placeholder.style.fontSize = '13px';
+      placeholder.style.lineHeight = '1.6';
+      placeholder.innerHTML = '⏳ Nessun dato storico trovato per i preferiti.<br/>Carica il PDF aggiornato (es. <strong>MGP.pdf</strong>) nel pannello di amministrazione per abilitare il grafico della progressione!';
+      container.appendChild(placeholder);
+    } else {
+      placeholder.style.display = 'block';
+    }
+    
+    if (myChart) { myChart.destroy(); myChart = null; }
+    return;
+  }
+
+  // We have history data: hide placeholder and show canvas
+  if (placeholder) placeholder.style.display = 'none';
+  if (canvasWrapper) canvasWrapper.style.display = 'block';
 
   // Labels (X axis)
   const maxHistoryLen = Math.max(...favRiders.map(r => r.history.length));
