@@ -414,51 +414,19 @@ function renderProgressionChart(riders, catId) {
   const container = document.getElementById('chart-container');
   if (!container) return;
 
-  // Check if any rider of this category is favorited
-  const anyFavorites = riders.some(r => favorites.has(catId + ':' + r.name));
+  // Filter riders that are favorited and have history data
+  const favRiders = riders.filter(r => {
+    const favKey = catId + ':' + r.name;
+    return favorites.has(favKey) && r.history && r.history.length > 0;
+  });
 
-  if (!anyFavorites) {
+  if (favRiders.length === 0) {
     container.style.display = 'none';
     if (myChart) { myChart.destroy(); myChart = null; }
     return;
   }
 
   container.style.display = 'block';
-
-  // Filter favorited riders that have history data
-  const favRiders = riders.filter(r => {
-    const favKey = catId + ':' + r.name;
-    return favorites.has(favKey) && r.history && r.history.length > 0;
-  });
-
-  const canvasWrapper = container.querySelector('div');
-  let placeholder = document.getElementById('chart-placeholder');
-
-  if (favRiders.length === 0) {
-    // We have favorites, but none of them have history data!
-    if (canvasWrapper) canvasWrapper.style.display = 'none';
-    
-    if (!placeholder) {
-      placeholder = document.createElement('div');
-      placeholder.id = 'chart-placeholder';
-      placeholder.style.color = '#888';
-      placeholder.style.padding = '40px 20px';
-      placeholder.style.textAlign = 'center';
-      placeholder.style.fontSize = '13px';
-      placeholder.style.lineHeight = '1.6';
-      placeholder.innerHTML = '⏳ Nessun dato storico trovato per i preferiti.<br/>Carica il PDF aggiornato (es. <strong>MGP.pdf</strong>) nel pannello di amministrazione per abilitare il grafico della progressione!';
-      container.appendChild(placeholder);
-    } else {
-      placeholder.style.display = 'block';
-    }
-    
-    if (myChart) { myChart.destroy(); myChart = null; }
-    return;
-  }
-
-  // We have history data: hide placeholder and show canvas
-  if (placeholder) placeholder.style.display = 'none';
-  if (canvasWrapper) canvasWrapper.style.display = 'block';
 
   // Labels (X axis)
   const maxHistoryLen = Math.max(...favRiders.map(r => r.history.length));
