@@ -130,7 +130,7 @@
 
 <div class="edit-bar">
   <button class="edit-btn pdf-main-btn" onclick="fetchSBKFromRepo()">📂 Importa PDF SBK</button>
-  <button class="edit-btn pdf-main-btn" onclick="fetchStatsFromRepo()">📊 Importa PDF Stats MotoGP/Moto2</button>
+  <button class="edit-btn pdf-main-btn" onclick="fetchStatsFromRepo()">📊 Importa PDF Stats MotoGP/Moto2/Moto3</button>
   <button class="edit-btn f1-fetch-btn" onclick="fetchAllAPI()">🔄 Aggiorna MotoGP/Moto2/Moto3/F1</button>
   <button class="edit-btn" onclick="openEditor()">✏ Manuale</button>
 </div>
@@ -427,8 +427,9 @@ function parseSBK(tokens) {
 
 // ---- Import PDF Stats Team + Constructor (MotoGP e Moto2) ----
 const STATS_PDF_SOURCES = [
-  { catId: 'motogp', file: 'MGP_worldstanding.pdf', label: 'MotoGP' },
-  { catId: 'moto2',  file: 'M2.pdf',                label: 'Moto2' },
+  { catId: 'motogp', file: 'MGP.pdf', label: 'MotoGP' },
+  { catId: 'moto2',  file: 'M2.pdf',  label: 'Moto2' },
+  { catId: 'moto3',  file: 'M3.pdf',  label: 'Moto3' },
 ];
 
 async function fetchStatsFromRepo() {
