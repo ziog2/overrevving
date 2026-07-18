@@ -115,6 +115,7 @@
     text-align: center; line-height: 1.6;
   }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -128,6 +129,13 @@
     <div class="hero-sub" id="hero-sub"></div>
   </div>
   <div class="hero-meta" id="hero-meta"></div>
+</div>
+
+<div class="chart-container" id="chart-container" style="display:none; max-width: 1100px; margin: 0 auto 32px; background: #2c2c32; border-radius: 14px; border: 1px solid #3a3a42; padding: 20px;">
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Riders' Points Progression</h3>
+  <div style="position: relative; height: 300px;">
+    <canvas id="progressionChart"></canvas>
+  </div>
 </div>
 
 <div class="layout">
@@ -238,6 +246,7 @@ function getCatId() {
 // ---- Preferiti (condivisi con la home tramite stessa chiave) ----
 const FAV_KEY = 'overrevving_favorites';
 let favorites = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]'));
+let currentRiders = [];
 
 function toggleFav(key) {
   if (favorites.has(key)) favorites.delete(key);
@@ -248,6 +257,7 @@ function toggleFav(key) {
     const btn = tr.querySelector('.fav-btn');
     if (btn) btn.classList.toggle('active', favorites.has(key));
   });
+  renderProgressionChart(currentRiders, getCatId());
 }
 
 function formatName(fullName) {
@@ -286,7 +296,9 @@ async function loadRidersFromBin(catId) {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
     const riders = json.record[catId] || [];
+    currentRiders = riders;
     renderRidersTable(riders, catId);
+    renderProgressionChart(riders, catId);
 
     const constructors = json.record[catId + '_constructors'] || [];
     renderConstructorsTable(constructors);
@@ -385,6 +397,102 @@ function renderCalendar() {
   }).join('');
 
   document.getElementById('cal-list').innerHTML = rows;
+}
+
+const LINE_COLORS = [
+  '#ffd700', // Oro
+  '#3498db', // Blu
+  '#e74c3c', // Rosso
+  '#2ecc71', // Verde
+  '#9b59b6', // Viola
+  '#f1c40f', // Giallo
+  '#1abc9c', // Acquamarina
+  '#e67e22', // Arancione
+];
+
+let myChart = null;
+function renderProgressionChart(riders, catId) {
+  const container = document.getElementById('chart-container');
+  if (!container) return;
+
+  // Filter riders that are favorited and have history data
+  const favRiders = riders.filter(r => {
+    const favKey = catId + ':' + r.name;
+    return favorites.has(favKey) && r.history && r.history.length > 0;
+  });
+
+  if (favRiders.length === 0) {
+    container.style.display = 'none';
+    if (myChart) { myChart.destroy(); myChart = null; }
+    return;
+  }
+
+  container.style.display = 'block';
+
+  // Labels (X axis)
+  const maxHistoryLen = Math.max(...favRiders.map(r => r.history.length));
+  const cal = CALENDARS[catId] || CALENDARS.motogp;
+  const labels = [];
+  for (let i = 0; i < maxHistoryLen; i++) {
+    const gpName = cal[i] ? cal[i].name : 'Round ' + (i + 1);
+    labels.push(gpName);
+  }
+
+  // Datasets
+  const datasets = favRiders.map((r, idx) => {
+    let sum = 0;
+    const data = r.history.map(pts => { sum += pts; return sum; });
+    const color = LINE_COLORS[idx % LINE_COLORS.length];
+    return {
+      label: formatName(r.name),
+      data: data,
+      borderColor: color,
+      backgroundColor: color + '15',
+      borderWidth: 3,
+      tension: 0.3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      fill: false
+    };
+  });
+
+  const ctx = document.getElementById('progressionChart').getContext('2d');
+  if (myChart) {
+    myChart.data.labels = labels;
+    myChart.data.datasets = datasets;
+    myChart.update();
+  } else {
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: { color: '#ccc', font: { family: 'Inter', size: 12 } }
+          },
+          tooltip: {
+            backgroundColor: '#1e1e22',
+            titleColor: '#fff',
+            bodyColor: '#ddd',
+            borderColor: '#3a3a42',
+            borderWidth: 1
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#999', font: { family: 'Inter', size: 10 } }
+          },
+          y: {
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#999', font: { family: 'Inter', size: 11 } }
+          }
+        }
+      }
+    });
+  }
 }
 
 init();
