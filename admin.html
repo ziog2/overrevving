@@ -707,7 +707,16 @@ async function fetchOneStatsPDF(src) {
     const buf = await res.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
 
-    // Cerca la pagina che contiene sia "Constructor" che "Team" (di solito l'ultima)
+    // 1. Parse Riders Standings from Page 1
+    const ridersPage = await pdf.getPage(1);
+    const ridersContent = await ridersPage.getTextContent();
+    const pageH_riders = ridersPage.getViewport({ scale: 1 }).height;
+    const tokens_riders = ridersContent.items
+      .filter(it => it.str && it.str.trim())
+      .map(it => ({ text: it.str.trim(), x: it.transform[4], y: pageH_riders - it.transform[5] }));
+    const riders = parseStandings(tokens_riders);
+
+    // 2. Parse Constructor and Team (from the page containing both "Constructor" and "Team")
     let targetPage = null;
     let targetTokens = null;
     for (let p = pdf.numPages; p >= 1; p--) {
@@ -720,23 +729,30 @@ async function fetchOneStatsPDF(src) {
         break;
       }
     }
-    if (!targetPage) { setTag('err', `⚠ ${src.label} — pagina Team/Constructor non trovata`); return; }
+    
+    let teams = [];
+    let constructors = [];
+    if (targetPage) {
+      const pageH_stats = targetPage.getViewport({ scale: 1 }).height;
+      const tokens_stats = targetTokens.items
+        .filter(it => it.str && it.str.trim())
+        .map(it => ({ text: it.str.trim(), x: it.transform[4], y: pageH_stats - it.transform[5] }));
+      const stats = parseTeamsAndConstructors(tokens_stats);
+      teams = stats.teams;
+      constructors = stats.constructors;
+    }
 
-    const pageH = targetPage.getViewport({ scale: 1 }).height;
-    const tokens = targetTokens.items
-      .filter(it => it.str && it.str.trim())
-      .map(it => ({ text: it.str.trim(), x: it.transform[4], y: pageH - it.transform[5] }));
-
-    const { teams, constructors } = parseTeamsAndConstructors(tokens);
-
-    if (teams.length === 0 && constructors.length === 0) {
-      setTag('err', `⚠ ${src.label} — nessun dato Team/Constructor estratto`);
+    if (riders.length === 0 && teams.length === 0 && constructors.length === 0) {
+      setTag('err', `⚠ ${src.label} — nessun dato estratto`);
       return;
     }
 
+    if (riders.length > 0) {
+      currentData[src.catId] = riders;
+    }
     currentData[src.catId + '_teams'] = teams;
     currentData[src.catId + '_constructors'] = constructors;
-    setTag('ok', `✓ ${src.label} — ${teams.length} team, ${constructors.length} costruttori`);
+    setTag('ok', `✓ ${src.label} — ${riders.length} piloti, ${teams.length} team, ${constructors.length} costruttori`);
   } catch (err) {
     setTag('err', `⚠ ${src.label} — ${err.message}`);
   }
