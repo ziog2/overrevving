@@ -285,7 +285,7 @@ function renderAll(all) {
         </tr>`;
       });
     }
-    const hasDetailPage = ['motogp', 'moto2', 'moto3'].includes(cat.id);
+    const hasDetailPage = ['motogp', 'moto2', 'moto3', 'sbk'].includes(cat.id);
     const headerLink = hasDetailPage
       ? `<a href="category.html?cat=${cat.id}" style="color:inherit;text-decoration:none;">${cat.label} →</a>`
       : `<a href="${cat.url}" target="_blank" style="color:inherit;text-decoration:none;">${cat.label} ↗</a>`;

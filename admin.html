@@ -462,6 +462,73 @@ function parseSBK(tokens) {
   return riders;
 }
 
+function parseSBKConstructors(tokens) {
+  const rowMap = new Map();
+  for (const t of tokens) {
+    const y = Math.round(t.y); let key = null;
+    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 6) { key=k; break; } }
+    if (key===null) { key=y; rowMap.set(key,[]); }
+    rowMap.get(key).push(t);
+  }
+  const sortedRows = [...rowMap.entries()].sort((a,b)=>a[0]-b[0]).map(([,toks])=>toks.sort((a,b)=>a.x-b.x).map(t=>t.text));
+  const constructors = [];
+  for (const toks of sortedRows) {
+    if (toks.length < 3) continue;
+    if (!/^\d+$/.test(toks[0])) continue;
+    const pos = parseInt(toks[0], 10);
+    if (pos < 1 || pos > 20) continue;
+    // Check if toks[1] is all uppercase and letters
+    if (!/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(toks[1]) || toks[1] !== toks[1].toUpperCase()) continue;
+    // Check if toks[2] is a number
+    if (!/^\d+$/.test(toks[2])) continue;
+    const pts = parseInt(toks[2], 10);
+    constructors.push({ name: toks[1], pts });
+  }
+  constructors.sort((a, b) => b.pts - a.pts);
+  return constructors;
+}
+
+function parseSBKTeams(tokens) {
+  const rowMap = new Map();
+  for (const t of tokens) {
+    const y = Math.round(t.y); let key = null;
+    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 6) { key=k; break; } }
+    if (key===null) { key=y; rowMap.set(key,[]); }
+    rowMap.get(key).push(t);
+  }
+  const sortedRows = [...rowMap.entries()].sort((a,b)=>a[0]-b[0]).map(([,toks])=>toks.sort((a,b)=>a.x-b.x).map(t=>t.text));
+  const teams = [];
+  for (const toks of sortedRows) {
+    if (toks.length < 3) continue;
+    if (!/^\d+$/.test(toks[0])) continue;
+    const pos = parseInt(toks[0], 10);
+    if (pos < 1 || pos > 30) continue;
+
+    // Find the first token after index 0 that is a number (this is the points)
+    let ptsIdx = -1;
+    for (let k = 1; k < toks.length; k++) {
+      if (/^\d+$/.test(toks[k])) {
+        ptsIdx = k;
+        break;
+      }
+    }
+    if (ptsIdx === -1) continue;
+    const pts = parseInt(toks[ptsIdx], 10);
+
+    // Join tokens between index 0 and ptsIdx to get the team name
+    const nameParts = [];
+    for (let k = 1; k < ptsIdx; k++) {
+      nameParts.push(toks[k]);
+    }
+    const teamName = nameParts.join(' ').replace(/\s+/g, ' ').trim();
+    if (teamName.length < 5 || !/[a-zA-Z]/.test(teamName)) continue;
+
+    teams.push({ name: teamName, pts });
+  }
+  teams.sort((a, b) => b.pts - a.pts);
+  return teams;
+}
+
 // ---- Import PDF Stats Team + Constructor (MotoGP e Moto2) ----
 const STATS_PDF_SOURCES = [
   { catId: 'motogp', file: 'MGP.pdf', label: 'MotoGP' },

@@ -179,35 +179,56 @@ const CATEGORY_META = {
     officialUrl: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings',
     pulseliveCategoryUuid: '954f7e65-2ef2-4423-b949-4961cc603e45',
   },
+  sbk: {
+    label: 'SBK', color: '#2980b9',
+    officialUrl: 'https://www.worldsbk.com/en/standings/riders/2026/SBK',
+  },
 };
 
 const PULSELIVE_SEASON_2026 = 'e88b4e43-2209-47aa-8e83-0e0b1cedde6e';
 
-// Same 2026 calendar used on the home page (MotoGP/Moto2/Moto3 share dates)
-const SEASON_CALENDAR = [
-  { name: 'Thailand',      date: '2026-03-01' },
-  { name: 'Brazil',        date: '2026-03-22' },
-  { name: 'USA (COTA)',    date: '2026-03-29' },
-  { name: 'Spain',         date: '2026-04-26' },
-  { name: 'France',        date: '2026-05-10' },
-  { name: 'Catalunya',     date: '2026-05-17' },
-  { name: 'Italy',         date: '2026-05-31' },
-  { name: 'Hungary',       date: '2026-06-07' },
-  { name: 'Czech Republic',date: '2026-06-21' },
-  { name: 'Netherlands',   date: '2026-06-28' },
-  { name: 'Germany',       date: '2026-07-12' },
-  { name: 'Great Britain', date: '2026-08-09' },
-  { name: 'Aragon',        date: '2026-08-30' },
-  { name: 'San Marino',    date: '2026-09-13' },
-  { name: 'Austria',       date: '2026-09-20' },
-  { name: 'Japan',         date: '2026-10-04' },
-  { name: 'Indonesia',     date: '2026-10-11' },
-  { name: 'Australia',     date: '2026-10-25' },
-  { name: 'Malaysia',      date: '2026-11-01' },
-  { name: 'Qatar',         date: '2026-11-08' },
-  { name: 'Portugal',      date: '2026-11-22' },
-  { name: 'Valencia',      date: '2026-11-29' },
-];
+const CALENDARS = {
+  motogp: [
+    { name: 'Thailand',      date: '2026-03-01' },
+    { name: 'Brazil',        date: '2026-03-22' },
+    { name: 'USA (COTA)',    date: '2026-03-29' },
+    { name: 'Spain',         date: '2026-04-26' },
+    { name: 'France',        date: '2026-05-10' },
+    { name: 'Catalunya',     date: '2026-05-17' },
+    { name: 'Italy',         date: '2026-05-31' },
+    { name: 'Hungary',       date: '2026-06-07' },
+    { name: 'Czech Republic',date: '2026-06-21' },
+    { name: 'Netherlands',   date: '2026-06-28' },
+    { name: 'Germany',       date: '2026-07-12' },
+    { name: 'Great Britain', date: '2026-08-09' },
+    { name: 'Aragon',        date: '2026-08-30' },
+    { name: 'San Marino',    date: '2026-09-13' },
+    { name: 'Austria',       date: '2026-09-20' },
+    { name: 'Japan',         date: '2026-10-04' },
+    { name: 'Indonesia',     date: '2026-10-11' },
+    { name: 'Australia',     date: '2026-10-25' },
+    { name: 'Malaysia',      date: '2026-11-01' },
+    { name: 'Qatar',         date: '2026-11-08' },
+    { name: 'Portugal',      date: '2026-11-22' },
+    { name: 'Valencia',      date: '2026-11-29' },
+  ],
+  sbk: [
+    { name: 'Australia',     date: '2026-02-22' },
+    { name: 'Portugal',      date: '2026-03-29' },
+    { name: 'Netherlands',   date: '2026-04-19' },
+    { name: 'Hungary',       date: '2026-05-03' },
+    { name: 'Most',          date: '2026-05-17' },
+    { name: 'Aragon',        date: '2026-05-31' },
+    { name: 'Misano',        date: '2026-06-14' },
+    { name: 'Donington',     date: '2026-07-12' },
+    { name: 'Magny-Cours',   date: '2026-09-27' },
+    { name: 'Cremona',       date: '2026-10-11' },
+    { name: 'Estoril',       date: '2026-10-18' },
+    { name: 'Jerez',         date: '2026-10-18' },
+  ]
+};
+CALENDARS.moto2 = CALENDARS.motogp;
+CALENDARS.moto3 = CALENDARS.motogp;
 
 function getCatId() {
   const params = new URLSearchParams(window.location.search);
@@ -248,6 +269,11 @@ async function init() {
   document.getElementById('hero-sub').textContent = '2026 Season · Riders, constructors & calendar';
   document.getElementById('hero-band').style.background = meta.color;
   document.getElementById('hero-band').style.color = '#fff';
+
+  const noteEl = document.querySelector('.note');
+  if (noteEl) {
+    noteEl.textContent = `Constructors' and teams' standings are imported from the official ${meta.label} world championship classification. Wins/podiums breakdown and points progression chart are coming soon.`;
+  }
 
   renderCalendar();
   await loadRidersFromBin(catId);
@@ -332,15 +358,16 @@ function renderTeamsTable(rows) {
 // ---- Calendar ----
 function renderCalendar() {
   const catId = getCatId();
+  const cal = CALENDARS[catId] || CALENDARS.motogp;
   const now = new Date();
-  const nextIdx = SEASON_CALENDAR.findIndex(e => new Date(e.date + 'T00:00:00') > now);
-  const pastCount = nextIdx === -1 ? SEASON_CALENDAR.length : nextIdx;
-  const pct = Math.round((pastCount / SEASON_CALENDAR.length) * 100);
+  const nextIdx = cal.findIndex(e => new Date(e.date + 'T00:00:00') > now);
+  const pastCount = nextIdx === -1 ? cal.length : nextIdx;
+  const pct = Math.round((pastCount / cal.length) * 100);
 
   document.getElementById('cal-count').textContent =
-    `${SEASON_CALENDAR.length} rounds · ${pct}% done`;
+    `${cal.length} rounds · ${pct}% done`;
 
-  const rows = SEASON_CALENDAR.map((r, i) => {
+  const rows = cal.map((r, i) => {
     const d = new Date(r.date + 'T00:00:00');
     const isPast = d < now;
     const isNext = i === nextIdx;
