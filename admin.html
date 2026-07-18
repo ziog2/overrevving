@@ -474,16 +474,25 @@ function parseStandings(tokens) {
   for (const toks of sortedRows) {
     if (toks.length < 3) continue;
     
-    const rawName = toks[0];
-    if (!NAME_RE.test(rawName) || SKIP_RE.test(rawName)) continue;
+    // Dynamically locate the name token
+    const nameIdx = toks.findIndex(t => NAME_RE.test(t) && !SKIP_RE.test(t));
+    if (nameIdx === -1) continue;
+    const rawName = toks[nameIdx];
 
-    // Check if second token is total points
-    if (!/^\d+(\.\d+)?$/.test(toks[1])) continue;
-    const pts = parseFloat(toks[1]);
+    // Find the total points (first number token after the name)
+    let ptsIdx = -1;
+    for (let i = nameIdx + 1; i < toks.length; i++) {
+      if (/^\d+(\.\d+)?$/.test(toks[i])) {
+        ptsIdx = i;
+        break;
+      }
+    }
+    if (ptsIdx === -1) continue;
+    const pts = parseFloat(toks[ptsIdx]);
 
-    // Find the correct history by testing start index 2 (no gaps) or 4 (with gaps)
+    // Find the correct history by testing start index ptsIdx + 1 (no gaps) or ptsIdx + 3 (with gaps)
     let history = [];
-    for (const startIdx of [2, 4]) {
+    for (const startIdx of [ptsIdx + 1, ptsIdx + 3]) {
       if (startIdx >= toks.length) continue;
       const candidate = [];
       let k = startIdx;
