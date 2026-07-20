@@ -459,26 +459,118 @@ async function processPDF(file, catId) {
 
 // ---- Parser MotoGP/Moto2/Moto3 ----
 function parseStandings(tokens) {
-  const rowMap = new Map();
+  // Group tokens by X-coordinate (within 4px tolerance)
+  const colMap = new Map();
   for (const t of tokens) {
-    const y = Math.round(t.y); let key = null;
-    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 4) { key=k; break; } }
-    if (key===null) { key=y; rowMap.set(key,[]); }
-    rowMap.get(key).push(t);
+    const x = Math.round(t.x); let key = null;
+    for (const k of colMap.keys()) { if (Math.abs(x - key) <= 4) { key = k; break; } }
+    if (key === null) { key = x; colMap.set(key, []); }
+    colMap.get(key).push(t);
   }
-  const sortedRows = [...rowMap.entries()].sort((a,b)=>a[0]-b[0]).map(([,toks])=>toks.sort((a,b)=>a.x-b.x).map(t=>t.text));
-  const NAME_RE = /^[A-Za-zÀ-ÖØ-öø-ÿ].* [A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ]{2,}/;
-  const SKIP_RE = /^(GRAND PRIX|SEASON|WILDCARDS|2026|BALATON|OFFICIAL|COPYRIGHT)/i;
+
+  const sortedKeys = [...colMap.keys()].sort((a, b) => a - b);
   const riders = [];
-  for (const toks of sortedRows) {
-    if (toks.length < 2) continue;
-    const name = toks[0];
-    if (!NAME_RE.test(name) || SKIP_RE.test(name)) continue;
+
+  for (const surnameX of sortedKeys) {
+    const surnameCol = colMap.get(surnameX).sort((a, b) => b.y - a.y);
+    if (surnameCol.length < 3) continue;
+
+    // Search for surname token in this column
+    let surnameTok = null;
+    for (const t of surnameCol) {
+      const txt = t.text;
+      if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(txt) && txt === txt.toUpperCase() && txt.length > 1) {
+        if (txt === 'RIDER' || txt === 'POINTS' || txt === 'LEADER' || txt === 'PREV') continue;
+        surnameTok = txt;
+        break;
+      }
+    }
+    if (!surnameTok) continue;
+
+    // Find matching first name column to the right (X difference between 8 and 16)
+    let firstNameCol = null;
+    for (const fx of sortedKeys) {
+      const diff = fx - surnameX;
+      if (diff >= 8 && diff <= 16) {
+        firstNameCol = colMap.get(fx).sort((a, b) => b.y - a.y);
+        break;
+      }
+    }
+    if (!firstNameCol) continue;
+
+    // Find country/first name token in first name column
+    let firstNameCountryTok = null;
+    for (const t of firstNameCol) {
+      if (/\[[A-Z]{3}\]$/.test(t.text)) {
+        firstNameCountryTok = t.text;
+        break;
+      }
+    }
+    if (!firstNameCountryTok) continue;
+
+    // Find position token (a small number at the top)
+    let posTok = null;
+    for (const t of surnameCol) {
+      if (/^\d+$/.test(t.text)) {
+        const posVal = parseInt(t.text, 10);
+        if (posVal >= 1 && posVal <= 50) {
+          posTok = posVal;
+          break;
+        }
+      }
+    }
+    if (posTok === null) continue;
+
+    // Find points token and history by scanning number tokens in the surname column
     let pts = null;
-    for (let i=1; i<toks.length; i++) { const m=toks[i].match(/^(\d{1,4})(\.\d)?$/); if(m){pts=parseFloat(toks[i]);break;} }
-    if (pts!==null && pts<=9999 && !riders.find(r=>r.name===name)) riders.push({name,pts});
+    let history = null;
+
+    for (let colIdx = 0; colIdx < surnameCol.length; colIdx++) {
+      const t = surnameCol[colIdx].text;
+      if (/^\d+(\.\d+)?$/.test(t)) {
+        const candidatePts = parseFloat(t);
+        if (candidatePts < 5 || candidatePts > 1000) continue;
+        if (candidatePts === posTok) continue;
+
+        // Test start indices after colIdx
+        for (const startIdx of [colIdx + 1, colIdx + 3]) {
+          if (startIdx >= surnameCol.length) continue;
+
+          const candidateHistory = [];
+          let k = startIdx;
+          while (k < surnameCol.length && /^(\d+|-)$/.test(surnameCol[k].text)) {
+            const val = surnameCol[k].text;
+            candidateHistory.push(val === '-' ? 0 : parseInt(val, 10));
+            k++;
+          }
+
+          const sum = candidateHistory.reduce((sumVal, c) => sumVal + c, 0);
+
+          if (Math.abs(sum - candidatePts) < 0.1) {
+            pts = candidatePts;
+            history = candidateHistory;
+            break;
+          }
+        }
+        if (history !== null) break;
+      }
+    }
+
+    if (history === null) continue;
+
+    // Extract first name
+    const firstName = firstNameCountryTok.replace(/\[[A-Z]{3}\]$/g, '').trim();
+
+    // Format surname to Title Case
+    const titleSurname = surnameTok.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+    const name = firstName + ' ' + titleSurname;
+
+    if (!riders.find(r => r.name === name)) {
+      riders.push({ name, pts, history });
+    }
   }
-  riders.sort((a,b)=>b.pts-a.pts);
+
+  riders.sort((a, b) => b.pts - a.pts);
   return riders;
 }
 
