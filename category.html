@@ -409,6 +409,22 @@ const LINE_COLORS = [
   '#e67e22', // Arancione
 ];
 
+const RIDER_STYLES = {
+  'Francesco Bagnaia': { color: '#e74c3c', borderDash: [6, 4] },
+  'Marc Marquez': { color: '#e74c3c' },
+  'Jorge Martin': { color: '#a55eea' },
+  'Pedro Acosta': { color: '#eb3b5a' },
+  'Enea Bastianini': { color: '#fa8231' },
+  'Maverick Viñales': { color: '#4b7bec' },
+  'Aleix Espargaro': { color: '#20bf6b' },
+  'Fabio Di Giannantonio': { color: '#0fb9b1' },
+  'Marco Bezzecchi': { color: '#fed330' },
+  'Brad Binder': { color: '#fd9644' },
+  'Fabio Quartararo': { color: '#2d98da' },
+  'Franco Morbidelli': { color: '#45aaf2' },
+  'Alex Marquez': { color: '#a5b1c2' }
+};
+
 let myChart = null;
 function renderProgressionChart(riders, catId) {
   const container = document.getElementById('chart-container');
@@ -441,8 +457,10 @@ function renderProgressionChart(riders, catId) {
   const datasets = favRiders.map((r, idx) => {
     let sum = 0;
     const data = r.history.map(pts => { sum += pts; return sum; });
-    const color = LINE_COLORS[idx % LINE_COLORS.length];
-    return {
+    const customStyle = RIDER_STYLES[r.name] || {};
+    const color = customStyle.color || LINE_COLORS[idx % LINE_COLORS.length];
+    
+    const ds = {
       label: formatName(r.name),
       data: data,
       borderColor: color,
@@ -453,6 +471,12 @@ function renderProgressionChart(riders, catId) {
       pointHoverRadius: 6,
       fill: false
     };
+
+    if (customStyle.borderDash) {
+      ds.borderDash = customStyle.borderDash;
+    }
+
+    return ds;
   });
 
   const ctx = document.getElementById('progressionChart').getContext('2d');
