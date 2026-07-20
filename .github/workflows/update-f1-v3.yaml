@@ -36,7 +36,14 @@ jobs:
               with urllib.request.urlopen(req) as resp:
                   return json.load(resp)
 
-          # ---- 1. MotoGP / Moto2 / Moto3 via API pulselive (Dorna) ----
+          # ---- 1. Leggi il bin attuale prima per preservare la cronologia (history) ----
+          try:
+              current = http_get(bin_url + "/latest", {"X-Access-Key": api_key})['record']
+          except Exception as e:
+              print(f"Errore caricamento bin per history: {e}")
+              current = {}
+
+          # ---- 1b. MotoGP / Moto2 / Moto3 via API pulselive (Dorna) ----
           SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e"
           CATEGORY_IDS = {
               "motogp": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
@@ -51,16 +58,27 @@ jobs:
                   data_riders = http_get(base_standings_url)
                   classification = data_riders.get('classification', [])
 
-                  # 1. Estrazione Piloti
-                  riders = [
-                      {"name": c['rider']['full_name'], "pts": float(c['points'])}
-                      for c in classification if 'rider' in c and 'full_name' in c['rider']
-                  ]
+                  riders = []
+                  existing_riders = current.get(cat_id, [])
+                  for c in classification:
+                      if 'rider' not in c or 'full_name' not in c['rider']:
+                          continue
+                      name = c['rider']['full_name']
+                      pts = float(c['points'])
+                      
+                      existing = next((r for r in existing_riders if r.get('name') == name), None)
+                      if existing and 'history' in existing:
+                          history = list(existing['history'])
+                          diff = pts - float(existing.get('pts', 0))
+                          if diff > 0.1:
+                              history.append(int(diff))
+                          riders.append({"name": name, "pts": pts, "history": history})
+                      else:
+                          riders.append({"name": name, "pts": pts, "history": [int(pts)]})
+
                   riders.sort(key=lambda r: r['pts'], reverse=True)
                   results[cat_id] = riders
                   print(f"{cat_id} (Piloti): {len(riders)} importati")
-
-
 
               except Exception as e:
                   print(f"Errore {cat_id}: {e}")
@@ -131,8 +149,7 @@ jobs:
           except Exception as e:
               print(f"Error MX2: {e}")
 
-          # ---- 4. Leggi il bin attuale e aggiorna solo le categorie ottenute ----
-          current = http_get(bin_url + "/latest", {"X-Access-Key": api_key})['record']
+          # ---- 4. Aggiorna solo le categorie ottenute ----
           current.update(results)
 
           it_time = datetime.now(timezone.utc) + timedelta(hours=2)
