@@ -478,6 +478,15 @@ async function processPDF(file, catId) {
 
 // ---- Parser MotoGP/Moto2/Moto3 ----
 function parseStandings(tokens) {
+  function cleanRiderName(name) {
+    let clean = name.trim();
+    if (clean.includes("Vi'ales") || clean.includes("Vi\uFFFD'ales")) return 'Maverick Viñales';
+    if (clean.includes("Mu'oz") || clean.includes("Mu\uFFFD'oz")) return 'Daniel Muñoz';
+    if (clean.includes("-nco") || clean.includes("-nc\uFFFD") || clean.includes("\uFFFD-nc") || clean.includes("Öncü")) return 'Deniz Öncü';
+    clean = clean.replace(/\s+/g, ' ');
+    return clean;
+  }
+
   // Group tokens by X-coordinate (within 4px tolerance)
   const colMap = new Map();
   for (const t of tokens) {
@@ -498,10 +507,10 @@ function parseStandings(tokens) {
     let fullNameTok = null;
     for (const t of surnameCol) {
       const txt = t.text;
-      if (txt.includes(' ') && !/\[/.test(txt) && /[a-z]/.test(txt)) {
+      if (txt.includes(' ') && !/\[/.test(txt) && /[a-z\uFFFD]/.test(txt)) {
         const parts = txt.split(' ');
         const firstWord = parts[0];
-        if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(firstWord) && firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
+        if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\uFFFD\s\-']+$/i.test(firstWord) && firstWord.length > 1) {
           if (txt.includes('WORLD CHAMPIONSHIP') || txt.includes('GRAND PRIX')) continue;
           fullNameTok = txt;
           break;
@@ -518,7 +527,7 @@ function parseStandings(tokens) {
       const surnameParts = [];
       const firstNameParts = [];
       for (const p of parts) {
-        if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(p) && p === p.toUpperCase()) {
+        if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\uFFFD\s\-']+$/.test(p) && (p === p.toUpperCase() || p.includes('\uFFFD'))) {
           surnameParts.push(p);
         } else {
           firstNameParts.push(p);
@@ -534,7 +543,7 @@ function parseStandings(tokens) {
       // Search for surname token in this column
       for (const t of surnameCol) {
         const txt = t.text;
-        if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(txt) && txt === txt.toUpperCase() && txt.length > 1) {
+        if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\uFFFD\s\-']+$/.test(txt) && (txt === txt.toUpperCase() || txt.includes('\uFFFD')) && txt.length > 1) {
           if (txt === 'RIDER' || txt === 'POINTS' || txt === 'LEADER' || txt === 'PREV' || txt === 'NATION') continue;
           surnameTok = txt;
           break;
@@ -617,6 +626,8 @@ function parseStandings(tokens) {
     }
 
     if (history === null) continue;
+
+    name = cleanRiderName(name);
 
     if (!riders.find(r => r.name === name)) {
       riders.push({ name, pts, history });
