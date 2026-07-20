@@ -498,7 +498,7 @@ function parseStandings(tokens) {
     let fullNameTok = null;
     for (const t of surnameCol) {
       const txt = t.text;
-      if (txt.includes(' ') && !/\[/.test(txt)) {
+      if (txt.includes(' ') && !/\[/.test(txt) && /[a-z]/.test(txt)) {
         const parts = txt.split(' ');
         const firstWord = parts[0];
         if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(firstWord) && firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
