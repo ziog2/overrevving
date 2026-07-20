@@ -475,38 +475,79 @@ function parseStandings(tokens) {
     const surnameCol = colMap.get(surnameX).sort((a, b) => b.y - a.y);
     if (surnameCol.length < 3) continue;
 
-    // Search for surname token in this column
-    let surnameTok = null;
+    // Check if this column itself has a full name token, e.g. "GONZALEZ Manuel"
+    let fullNameTok = null;
     for (const t of surnameCol) {
       const txt = t.text;
-      if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(txt) && txt === txt.toUpperCase() && txt.length > 1) {
-        if (txt === 'RIDER' || txt === 'POINTS' || txt === 'LEADER' || txt === 'PREV') continue;
-        surnameTok = txt;
-        break;
+      if (txt.includes(' ') && !/\[/.test(txt)) {
+        const parts = txt.split(' ');
+        const firstWord = parts[0];
+        if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(firstWord) && firstWord === firstWord.toUpperCase() && firstWord.length > 1) {
+          if (txt.includes('WORLD CHAMPIONSHIP') || txt.includes('GRAND PRIX')) continue;
+          fullNameTok = txt;
+          break;
+        }
       }
     }
-    if (!surnameTok) continue;
 
-    // Find matching first name column to the right (X difference between 8 and 16)
-    let firstNameCol = null;
-    for (const fx of sortedKeys) {
-      const diff = fx - surnameX;
-      if (diff >= 8 && diff <= 16) {
-        firstNameCol = colMap.get(fx).sort((a, b) => b.y - a.y);
-        break;
-      }
-    }
-    if (!firstNameCol) continue;
+    let name = null;
+    let surnameTok = null;
 
-    // Find country/first name token in first name column
-    let firstNameCountryTok = null;
-    for (const t of firstNameCol) {
-      if (/\[[A-Z]{3}\]$/.test(t.text)) {
-        firstNameCountryTok = t.text;
-        break;
+    if (fullNameTok) {
+      // Moto2/Moto3: Single column layout
+      const parts = fullNameTok.split(' ');
+      const surnameParts = [];
+      const firstNameParts = [];
+      for (const p of parts) {
+        if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(p) && p === p.toUpperCase()) {
+          surnameParts.push(p);
+        } else {
+          firstNameParts.push(p);
+        }
       }
+      const surname = surnameParts.join(' ');
+      const firstName = firstNameParts.join(' ');
+      const titleSurname = surname.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+      name = firstName + ' ' + titleSurname;
+      surnameTok = surname;
+    } else {
+      // MotoGP: Two column layout
+      // Search for surname token in this column
+      for (const t of surnameCol) {
+        const txt = t.text;
+        if (/^[A-ZÁÀÉÈÍÌÓÒÚÙÑÜÇ\s\-']+$/.test(txt) && txt === txt.toUpperCase() && txt.length > 1) {
+          if (txt === 'RIDER' || txt === 'POINTS' || txt === 'LEADER' || txt === 'PREV' || txt === 'NATION') continue;
+          surnameTok = txt;
+          break;
+        }
+      }
+      if (!surnameTok) continue;
+
+      // Find matching first name column to the right
+      let firstNameCol = null;
+      for (const fx of sortedKeys) {
+        const diff = fx - surnameX;
+        if (diff >= 8 && diff <= 16) {
+          firstNameCol = colMap.get(fx).sort((a, b) => b.y - a.y);
+          break;
+        }
+      }
+      if (!firstNameCol) continue;
+
+      // Find country/first name token in first name column
+      let firstNameCountryTok = null;
+      for (const t of firstNameCol) {
+        if (/\[[A-Z]{3}\]$/.test(t.text)) {
+          firstNameCountryTok = t.text;
+          break;
+        }
+      }
+      if (!firstNameCountryTok) continue;
+
+      const firstName = firstNameCountryTok.replace(/\[[A-Z]{3}\]$/g, '').trim();
+      const titleSurname = surnameTok.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+      name = firstName + ' ' + titleSurname;
     }
-    if (!firstNameCountryTok) continue;
 
     // Find position token (a small number at the top)
     let posTok = null;
@@ -557,13 +598,6 @@ function parseStandings(tokens) {
     }
 
     if (history === null) continue;
-
-    // Extract first name
-    const firstName = firstNameCountryTok.replace(/\[[A-Z]{3}\]$/g, '').trim();
-
-    // Format surname to Title Case
-    const titleSurname = surnameTok.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
-    const name = firstName + ' ' + titleSurname;
 
     if (!riders.find(r => r.name === name)) {
       riders.push({ name, pts, history });
