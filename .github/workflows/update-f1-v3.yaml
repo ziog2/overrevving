@@ -60,30 +60,7 @@ jobs:
                   results[cat_id] = riders
                   print(f"{cat_id} (Piloti): {len(riders)} importati")
 
-                  # 2. Estrazione Costruttori Univoci (Punti impostati a 0)
-                  unique_constructors = set()
-                  for c in classification:
-                      name = None
-                      if 'constructor' in c and 'name' in c['constructor']:
-                          name = c['constructor']['name']
-                      elif 'manufacturer' in c and 'name' in c['manufacturer']:
-                          name = c['manufacturer']['name']
-                      if name:
-                          unique_constructors.add(name)
 
-                  constructors = [{"name": name, "pts": 0.0} for name in sorted(unique_constructors)]
-                  results[f"{cat_id}_constructors"] = constructors
-                  print(f"{cat_id} (Costruttori univoci): {len(constructors)} trovati")
-
-                  # 3. Estrazione Team Univoci (Punti impostati a 0)
-                  unique_teams = set()
-                  for c in classification:
-                      if 'team' in c and 'name' in c['team']:
-                          unique_teams.add(c['team']['name'])
-
-                  teams = [{"name": name, "pts": 0.0} for name in sorted(unique_teams)]
-                  results[f"{cat_id}_teams"] = teams
-                  print(f"{cat_id} (Team univoci): {len(teams)} trovati")
 
               except Exception as e:
                   print(f"Errore {cat_id}: {e}")
