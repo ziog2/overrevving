@@ -441,16 +441,35 @@ async function processPDF(file, catId) {
 
       setTag('ok', `✓ ${file.name} — ${riders.length} piloti, ${constructors.length} costruttori, ${teams.length} team`);
     } else {
-      const page = await pdf.getPage(1);
-      const content = await page.getTextContent();
-      const pageH = page.getViewport({ scale: 1 }).height;
-      const tokens = content.items
-        .filter(it => it.str && it.str.trim())
-        .map(it => ({ text: it.str.trim(), x: it.transform[4], y: pageH - it.transform[5] }));
-      const riders = parseStandings(tokens);
+      const riders = [];
+      for (let p = 1; p <= pdf.numPages; p++) {
+        const page = await pdf.getPage(p);
+        const content = await page.getTextContent();
+        const fullText = content.items.map(it => it.str).join(' ');
+        if (fullText.includes('Constructor') && fullText.includes('Team')) continue;
+
+        const pageH = page.getViewport({ scale: 1 }).height;
+        const tokens = content.items
+          .filter(it => it.str && it.str.trim())
+          .map(it => ({ text: it.str.trim(), x: it.transform[4], y: pageH - it.transform[5] }));
+        const pageRiders = parseStandings(tokens);
+        riders.push(...pageRiders);
+      }
       if (riders.length === 0) { setTag('err', '⚠ ' + file.name + ' — nessun pilota trovato'); return; }
-      currentData[catId] = riders;
-      setTag('ok', '✓ ' + file.name + ' — ' + riders.length + ' piloti');
+
+      // Deduplicate and sort
+      const seen = new Set();
+      const uniqueRiders = [];
+      for (const r of riders) {
+        if (!seen.has(r.name)) {
+          seen.add(r.name);
+          uniqueRiders.push(r);
+        }
+      }
+      uniqueRiders.sort((a, b) => b.pts - a.pts);
+
+      currentData[catId] = uniqueRiders;
+      setTag('ok', '✓ ' + file.name + ' — ' + uniqueRiders.length + ' piloti');
     }
   } catch(err) {
     setTag('err', '⚠ ' + file.name + ' — ' + err.message);
@@ -463,7 +482,7 @@ function parseStandings(tokens) {
   const colMap = new Map();
   for (const t of tokens) {
     const x = Math.round(t.x); let key = null;
-    for (const k of colMap.keys()) { if (Math.abs(x - key) <= 4) { key = k; break; } }
+    for (const k of colMap.keys()) { if (Math.abs(x - k) <= 4) { key = k; break; } }
     if (key === null) { key = x; colMap.set(key, []); }
     colMap.get(key).push(t);
   }
@@ -613,7 +632,7 @@ function parseSBK(tokens) {
   const rowMap = new Map();
   for (const t of tokens) {
     const y = Math.round(t.y); let key = null;
-    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 6) { key=k; break; } }
+    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 9) { key=k; break; } }
     if (key===null) { key=y; rowMap.set(key,[]); }
     rowMap.get(key).push(t);
   }
@@ -677,7 +696,7 @@ function parseSBKConstructors(tokens) {
   const rowMap = new Map();
   for (const t of tokens) {
     const y = Math.round(t.y); let key = null;
-    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 6) { key=k; break; } }
+    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 9) { key=k; break; } }
     if (key===null) { key=y; rowMap.set(key,[]); }
     rowMap.get(key).push(t);
   }
@@ -718,7 +737,7 @@ function parseSBKTeams(tokens) {
   const rowMap = new Map();
   for (const t of tokens) {
     const y = Math.round(t.y); let key = null;
-    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 6) { key=k; break; } }
+    for (const k of rowMap.keys()) { if (Math.abs(y-k) <= 9) { key=k; break; } }
     if (key===null) { key=y; rowMap.set(key,[]); }
     rowMap.get(key).push(t);
   }
