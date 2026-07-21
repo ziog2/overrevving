@@ -155,9 +155,42 @@
   .pos-3 td:first-child { color: #cd7f32; }
   .driver-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
   .next-round { font-size: 13px; font-weight: 400; text-transform: none; letter-spacing: normal; margin-top: 4px; opacity: 0.9; }
-  .visitor-counter { text-align: center; margin-top: 40px; padding-top: 20px; }
-  .visitor-counter img { vertical-align: middle; image-rendering: pixelated; }
-  .visitor-counter-label { font-size: 11px; color: #555; margin-bottom: 6px; font-family: 'Courier New', monospace; letter-spacing: 0.05em; }
+  .visitor-counter { text-align: center; margin-top: 40px; padding-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .visitor-counter-label { font-size: 11px; color: #666; font-family: 'Courier New', monospace; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+  .visitor-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    height: 26px;
+    border: 1px solid #3a3a42;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  .visitor-badge .badge-title {
+    background: #1e1e22;
+    color: #888;
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.05em;
+    border-right: 1px solid #3a3a42;
+  }
+  .visitor-badge .badge-val {
+    background: #2c2c32;
+    color: #38ef7d;
+    padding: 0 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
   .loading { text-align: center; color: #555; padding: 60px 0; font-size: 14px; }
   @media (max-width: 700px) { body { padding: 16px 20px 40px; } #reset-order-btn { display: none; } }
   tbody tr.favorite { background: #2a1f3a !important; }
@@ -221,10 +254,11 @@
 <div class="grid-wrapper"><div class="grid" id="standings-grid"><div class="loading">⏳ Loading standings...</div></div></div>
 
 <div class="visitor-counter">
-  <div class="visitor-counter-label">VISITORS</div>
-  <a href="https://hits.sh/overrevving.it/" target="_blank" rel="noopener">
-    <img src="https://hits.sh/overrevving.it.svg?style=for-the-badge&label=&color=2c2c32&labelColor=1e1e22&logo=none" alt="Contatore visite" height="26">
-  </a>
+  <div class="visitor-counter-label">UNIQUE VISITORS</div>
+  <div class="visitor-badge" id="unique-visitor-badge">
+    <span class="badge-title">VISITATORI UNICI</span>
+    <span class="badge-val" id="unique-visitor-count">...</span>
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
@@ -653,6 +687,38 @@ function formatName(fullName) {
   // Iniziale del nome + punto + cognome (anche composto)
   return normalized[0][0].toUpperCase() + '. ' + normalized.slice(1).join(' ');
 }
+
+// ---- Contatore Visitatori Univoci ----
+async function initUniqueVisitorCounter() {
+  const countEl = document.getElementById('unique-visitor-count');
+  if (!countEl) return;
+
+  const storageKey = 'overrevving_unique_v1';
+  const hasVisited = localStorage.getItem(storageKey);
+  
+  // Se già visitato in precedenza, legge solo il totale; altrimenti incrementa il contatore unici
+  const endpoint = hasVisited
+    ? 'https://api.counterapi.dev/v1/overrevving-site/unique_visitors'
+    : 'https://api.counterapi.dev/v1/overrevving-site/unique_visitors/up';
+
+  try {
+    const res = await fetch(endpoint);
+    const data = await res.json();
+    if (data && typeof data.count === 'number') {
+      countEl.textContent = data.count.toLocaleString();
+      if (!hasVisited) {
+        localStorage.setItem(storageKey, new Date().toISOString());
+      }
+    } else {
+      countEl.textContent = '---';
+    }
+  } catch (err) {
+    console.warn('Errore caricamento visitatori unici:', err);
+    countEl.textContent = '---';
+  }
+}
+
+initUniqueVisitorCounter();
 </script>
 </body>
 </html>
