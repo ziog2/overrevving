@@ -607,9 +607,9 @@ function parseStandings(tokens) {
 
           const candidateHistory = [];
           let k = startIdx;
-          while (k < surnameCol.length && /^(\d+|-)$/.test(surnameCol[k].text)) {
+          while (k < surnameCol.length && /^(\d+(\.\d+)?|-)$/.test(surnameCol[k].text)) {
             const val = surnameCol[k].text;
-            candidateHistory.push(val === '-' ? 0 : parseInt(val, 10));
+            candidateHistory.push(val === '-' ? 0 : parseFloat(val));
             k++;
           }
 
