@@ -598,7 +598,7 @@ function parseStandings(tokens) {
       const t = surnameCol[colIdx].text;
       if (/^\d+(\.\d+)?$/.test(t)) {
         const candidatePts = parseFloat(t);
-        if (candidatePts < 5 || candidatePts > 1000) continue;
+        if (candidatePts < 0 || candidatePts > 1000) continue;
         if (candidatePts === posTok) continue;
 
         // Test start indices after colIdx
