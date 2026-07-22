@@ -458,20 +458,137 @@ function getRiderHistory(r, prop) {
   return [0];
 }
 
+function drawNativeProgressionChart(canvas, labels, datasets) {
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const dpr = window.devicePixelRatio || 1;
+  const parent = canvas.parentElement;
+  const width = (parent && parent.clientWidth) ? parent.clientWidth : 800;
+  const height = 280;
+
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+  canvas.style.width = width + 'px';
+  canvas.style.height = height + 'px';
+
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, width, height);
+
+  const padLeft = 45;
+  const padRight = 20;
+  const padTop = 40;
+  const padBottom = 35;
+  const graphW = width - padLeft - padRight;
+  const graphH = height - padTop - padBottom;
+
+  if (!labels || labels.length === 0 || !datasets || datasets.length === 0) return;
+
+  let maxVal = 0;
+  datasets.forEach(ds => {
+    (ds.data || []).forEach(v => { if (v > maxVal) maxVal = v; });
+  });
+  if (maxVal <= 0) maxVal = 10;
+  maxVal = Math.ceil(maxVal / 20) * 20;
+
+  // Legend at top
+  let legendX = padLeft;
+  const legendY = 18;
+  ctx.font = '11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+
+  datasets.forEach(ds => {
+    const textWidth = ctx.measureText(ds.label).width;
+    ctx.save();
+    ctx.strokeStyle = ds.borderColor || '#3498db';
+    ctx.lineWidth = 2.5;
+    if (ds.borderDash) ctx.setLineDash(ds.borderDash);
+    ctx.beginPath();
+    ctx.moveTo(legendX, legendY - 3);
+    ctx.lineTo(legendX + 16, legendY - 3);
+    ctx.stroke();
+    ctx.restore();
+
+    ctx.fillStyle = '#ccc';
+    ctx.fillText(ds.label, legendX + 22, legendY);
+    legendX += textWidth + 36;
+  });
+
+  // Y-axis grid & labels
+  const steps = 4;
+  ctx.font = '10px monospace';
+  ctx.fillStyle = '#888';
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+  ctx.lineWidth = 1;
+
+  for (let i = 0; i <= steps; i++) {
+    const val = Math.round((maxVal / steps) * i);
+    const y = padTop + graphH - (graphH * (val / maxVal));
+    ctx.beginPath();
+    ctx.moveTo(padLeft, y);
+    ctx.lineTo(width - padRight, y);
+    ctx.stroke();
+
+    ctx.textAlign = 'right';
+    ctx.fillText(val, padLeft - 8, y + 3);
+  }
+
+  // X-axis grid & labels
+  const numRounds = labels.length;
+  const stepX = numRounds > 1 ? graphW / (numRounds - 1) : graphW;
+
+  labels.forEach((label, i) => {
+    const x = padLeft + (i * stepX);
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+    ctx.moveTo(x, padTop);
+    ctx.lineTo(x, padTop + graphH);
+    ctx.stroke();
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#999';
+    const shortLabel = label.length > 8 ? label.substring(0, 7) + '.' : label;
+    ctx.fillText(shortLabel, x, padTop + graphH + 18);
+  });
+
+  // Datasets lines & points
+  datasets.forEach(ds => {
+    if (!ds.data || ds.data.length === 0) return;
+
+    ctx.save();
+    ctx.strokeStyle = ds.borderColor || '#3498db';
+    ctx.lineWidth = 3;
+    if (ds.borderDash) ctx.setLineDash(ds.borderDash);
+
+    ctx.beginPath();
+    ds.data.forEach((val, i) => {
+      const x = padLeft + (i * stepX);
+      const y = padTop + graphH - (graphH * (val / maxVal));
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    ctx.restore();
+
+    // Draw points
+    ds.data.forEach((val, i) => {
+      const x = padLeft + (i * stepX);
+      const y = padTop + graphH - (graphH * (val / maxVal));
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = ds.borderColor || '#3498db';
+      ctx.fill();
+      ctx.strokeStyle = '#1e1e22';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    });
+  });
+}
+
 function renderProgressionChart(riders, catId) {
   const container = document.getElementById('chart-container');
   const wrapper = document.getElementById('charts-wrapper');
   if (!container || !wrapper) return;
-
-  if (typeof Chart === 'undefined') {
-    wrapper.innerHTML = '<div class="loading">⏳ Loading chart library...</div>';
-    container.style.display = 'block';
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
-    script.onload = () => renderProgressionChart(riders, catId);
-    document.head.appendChild(script);
-    return;
-  }
 
   chartInstances.forEach(c => { try { c.destroy(); } catch(e){} });
   chartInstances = [];
@@ -490,8 +607,6 @@ function renderProgressionChart(riders, catId) {
   }
 
   container.style.display = 'block';
-  // Force browser layout reflow
-  void container.offsetHeight;
 
   const chartConfigs = [];
   if (catId === 'motogp') {
@@ -502,81 +617,90 @@ function renderProgressionChart(riders, catId) {
     chartConfigs.push({ id: 'chart-all', title: "Riders' Points Progression", historyProp: 'history' });
   }
 
-  setTimeout(() => {
-    chartConfigs.forEach((cfg, cIdx) => {
-      const validRiders = activeRiders;
+  chartConfigs.forEach((cfg, cIdx) => {
+    const validRiders = activeRiders;
 
-      const maxHistoryLen = Math.max(...validRiders.map(r => getRiderHistory(r, cfg.historyProp).length));
-      if (maxHistoryLen <= 0) return;
+    const maxHistoryLen = Math.max(...validRiders.map(r => getRiderHistory(r, cfg.historyProp).length));
+    if (maxHistoryLen <= 0) return;
 
-      const section = document.createElement('div');
-      section.style.marginBottom = cIdx < chartConfigs.length - 1 ? '35px' : '0';
-      section.innerHTML = `
-        <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">${cfg.title}</h3>
-        <div style="position: relative; height: 280px; width: 100%;">
-          <canvas id="${cfg.id}"></canvas>
-        </div>`;
-      wrapper.appendChild(section);
+    const section = document.createElement('div');
+    section.style.marginBottom = cIdx < chartConfigs.length - 1 ? '35px' : '0';
+    section.innerHTML = `
+      <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">${cfg.title}</h3>
+      <div style="position: relative; height: 280px; width: 100%;">
+        <canvas id="${cfg.id}"></canvas>
+      </div>`;
+    wrapper.appendChild(section);
 
-      const cal = CALENDARS[catId] || CALENDARS.motogp;
-      const labels = [];
-      for (let i = 0; i < maxHistoryLen; i++) {
-        const gpName = cal[i] ? cal[i].name : 'Round ' + (i + 1);
-        labels.push(gpName);
+    const cal = CALENDARS[catId] || CALENDARS.motogp;
+    const labels = [];
+    for (let i = 0; i < maxHistoryLen; i++) {
+      const gpName = cal[i] ? cal[i].name : 'Round ' + (i + 1);
+      labels.push(gpName);
+    }
+
+    const datasets = validRiders.map((r, idx) => {
+      const histArr = getRiderHistory(r, cfg.historyProp);
+      let sum = 0;
+      const data = histArr.map(pts => { sum += pts; return sum; });
+      const customStyle = RIDER_STYLES[r.name] || {};
+      const color = customStyle.color || LINE_COLORS[idx % LINE_COLORS.length];
+      
+      const ds = {
+        label: formatName(r.name),
+        data: data,
+        borderColor: color,
+        backgroundColor: color + '15',
+        borderWidth: 3,
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        fill: false
+      };
+      if (customStyle.borderDash) {
+        ds.borderDash = customStyle.borderDash;
       }
-
-      const datasets = validRiders.map((r, idx) => {
-        const histArr = getRiderHistory(r, cfg.historyProp);
-        let sum = 0;
-        const data = histArr.map(pts => { sum += pts; return sum; });
-        const customStyle = RIDER_STYLES[r.name] || {};
-        const color = customStyle.color || LINE_COLORS[idx % LINE_COLORS.length];
-        
-        const ds = {
-          label: formatName(r.name),
-          data: data,
-          borderColor: color,
-          backgroundColor: color + '15',
-          borderWidth: 3,
-          tension: 0.3,
-          pointRadius: 4,
-          pointHoverRadius: 6,
-          fill: false
-        };
-        if (customStyle.borderDash) {
-          ds.borderDash = customStyle.borderDash;
-        }
-        return ds;
-      });
-
-      const canvasEl = document.getElementById(cfg.id);
-      if (!canvasEl) return;
-      const ctx = canvasEl.getContext('2d');
-      const chart = new Chart(ctx, {
-        type: 'line',
-        data: { labels, datasets },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { labels: { color: '#ccc', font: { family: 'Inter', size: 12 } } },
-            tooltip: {
-              backgroundColor: '#1e1e22',
-              titleColor: '#fff',
-              bodyColor: '#ddd',
-              borderColor: '#3a3a42',
-              borderWidth: 1
-            }
-          },
-          scales: {
-            x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#999', font: { family: 'Inter', size: 10 } } },
-            y: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#999', font: { family: 'Inter', size: 11 } } }
-          }
-        }
-      });
-      chartInstances.push(chart);
+      return ds;
     });
-  }, 50);
+
+    const canvasEl = document.getElementById(cfg.id);
+    if (!canvasEl) return;
+
+    if (typeof Chart !== 'undefined') {
+      try {
+        const ctx = canvasEl.getContext('2d');
+        const chart = new Chart(ctx, {
+          type: 'line',
+          data: { labels, datasets },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { labels: { color: '#ccc', font: { family: 'Inter', size: 12 } } },
+              tooltip: {
+                backgroundColor: '#1e1e22',
+                titleColor: '#fff',
+                bodyColor: '#ddd',
+                borderColor: '#3a3a42',
+                borderWidth: 1
+              }
+            },
+            scales: {
+              x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#999', font: { family: 'Inter', size: 10 } } },
+              y: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#999', font: { family: 'Inter', size: 11 } } }
+            }
+          }
+        });
+        chartInstances.push(chart);
+        return;
+      } catch (err) {
+        console.warn('Chart.js render failed, falling back to native canvas:', err);
+      }
+    }
+
+    // Native Canvas 2D fallback rendering
+    drawNativeProgressionChart(canvasEl, labels, datasets);
+  });
 }
 
 // ---- Constructor standings, derived live from Pulselive classification ----
