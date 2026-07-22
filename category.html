@@ -114,6 +114,43 @@
     max-width: 1100px; margin: 24px auto 0; font-size: 12px; color: #666;
     text-align: center; line-height: 1.6;
   }
+
+  /* MotoGP Standings Filter Toggle */
+  .motogp-filter-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px 12px;
+    background: #252528;
+    border-bottom: 1px solid #3a3a42;
+  }
+  .filter-toggle-group {
+    display: inline-flex;
+    background: #1e1e22;
+    padding: 3px;
+    border-radius: 8px;
+    border: 1px solid #3a3a42;
+    gap: 3px;
+  }
+  .filter-toggle-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-toggle-btn.active {
+    background: #c0392b;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .filter-toggle-btn:hover:not(.active) {
+    color: #fff;
+    background: rgba(255,255,255,0.05);
+  }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -144,6 +181,13 @@
   <div>
     <div class="panel">
       <div class="panel-head"><span>Riders' standings</span><span class="count" id="riders-count"></span></div>
+      <div class="motogp-filter-container" id="motogp-filter-bar" style="display:none;">
+        <div class="filter-toggle-group">
+          <button class="filter-toggle-btn active" id="btn-filter-all" onclick="setMotoGPFilter('all')">Race</button>
+          <button class="filter-toggle-btn" id="btn-filter-sprint" onclick="setMotoGPFilter('sprint')">Only Sprints</button>
+          <button class="filter-toggle-btn" id="btn-filter-long" onclick="setMotoGPFilter('long')">Only long race</button>
+        </div>
+      </div>
       <div id="riders-table"><div class="loading">⏳ Loading…</div></div>
     </div>
   </div>
@@ -156,9 +200,8 @@
 </div>
 
 <div class="chart-container" id="chart-container" style="display:none; max-width: 1100px; margin: 32px auto 0; background: #2c2c32; border-radius: 14px; border: 1px solid #3a3a42; padding: 20px;">
-  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Riders' Points Progression</h3>
-  <div style="position: relative; height: 300px;">
-    <canvas id="progressionChart"></canvas>
+  <div id="charts-wrapper">
+    <!-- Chart containers rendered dynamically -->
   </div>
 </div>
 
@@ -315,24 +358,197 @@ async function loadRidersFromBin(catId) {
   }
 }
 
+let currentMotoGPFilter = 'all';
+
+function setMotoGPFilter(filterMode) {
+  currentMotoGPFilter = filterMode;
+  document.querySelectorAll('.filter-toggle-btn').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById('btn-filter-' + filterMode);
+  if (activeBtn) activeBtn.classList.add('active');
+  
+  if (currentRiders && currentRiders.length) {
+    renderRidersTable(currentRiders, getCatId());
+  }
+}
+
 function renderRidersTable(riders, catId) {
   const el = document.getElementById('riders-table');
   document.getElementById('riders-count').textContent = riders.length ? riders.length + ' riders' : '';
   if (!riders.length) { el.innerHTML = '<div class="empty">No data available</div>'; return; }
 
-  const leader = riders[0].pts;
+  const filterBar = document.getElementById('motogp-filter-bar');
+  if (filterBar) {
+    filterBar.style.display = (catId === 'motogp') ? 'flex' : 'none';
+  }
+
+  let list = [...riders];
+
+  if (catId === 'motogp') {
+    if (currentMotoGPFilter === 'sprint') {
+      list.sort((a, b) => (b.sprint_pts || 0) - (a.sprint_pts || 0));
+    } else if (currentMotoGPFilter === 'long') {
+      list.sort((a, b) => (b.long_pts || 0) - (a.long_pts || 0));
+    } else {
+      list.sort((a, b) => b.pts - a.pts);
+    }
+  }
+
+  const leaderScore = (catId === 'motogp' && currentMotoGPFilter === 'sprint')
+    ? (list[0].sprint_pts || 0)
+    : (catId === 'motogp' && currentMotoGPFilter === 'long')
+    ? (list[0].long_pts || 0)
+    : list[0].pts;
+
   let rows = '';
-  riders.forEach((r, i) => {
+  list.forEach((r, i) => {
     const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
-    const gap = i === 0 ? '' : `<span class="gap">-${leader - r.pts}</span>`;
+    const currentScore = (catId === 'motogp' && currentMotoGPFilter === 'sprint')
+      ? (r.sprint_pts || 0)
+      : (catId === 'motogp' && currentMotoGPFilter === 'long')
+      ? (r.long_pts || 0)
+      : r.pts;
+
+    const gap = i === 0 ? '' : `<span class="gap">-${leaderScore - currentScore}</span>`;
     const favKey = catId + ':' + r.name;
     const isFav = favorites.has(favKey);
+
+    let ptsCellContent = '';
+    if (catId === 'motogp') {
+      const spr = r.sprint_pts !== undefined ? r.sprint_pts : 0;
+      const lng = r.long_pts !== undefined ? r.long_pts : 0;
+      if (currentMotoGPFilter === 'sprint') {
+        ptsCellContent = `<div style="display:inline-flex;align-items:baseline;gap:5px;justify-content:flex-end;">
+          <span style="font-size:14px;font-weight:700;color:#f0c040;">${spr}</span>
+          <span style="font-size:10px;color:#888;" title="Total points">(Tot: ${r.pts})</span>
+          ${gap}
+        </div>`;
+      } else if (currentMotoGPFilter === 'long') {
+        ptsCellContent = `<div style="display:inline-flex;align-items:baseline;gap:5px;justify-content:flex-end;">
+          <span style="font-size:14px;font-weight:700;color:#f0c040;">${lng}</span>
+          <span style="font-size:10px;color:#888;" title="Total points">(Tot: ${r.pts})</span>
+          ${gap}
+        </div>`;
+      } else {
+        ptsCellContent = `<div style="display:inline-flex;align-items:baseline;gap:5px;justify-content:flex-end;">
+          <span style="font-size:10px;color:#888;font-weight:normal;" title="Sprint points">S:${spr}</span>
+          <span style="font-size:14px;font-weight:700;color:#f0c040;">${r.pts}</span>
+          <span style="font-size:10px;color:#aaa;font-weight:normal;" title="Long race points">L:${lng}</span>
+          ${gap}
+        </div>`;
+      }
+    } else {
+      ptsCellContent = `${r.pts}${gap}`;
+    }
+
     rows += `<tr class="${pc}${isFav ? ' favorite' : ''}" data-fav="${favKey}">
-      <td>${i+1}</td><td>${formatName(r.name)}</td><td>${r.pts}${gap}</td>
+      <td>${i+1}</td>
+      <td>${formatName(r.name)}</td>
+      <td>${ptsCellContent}</td>
       <td><button class="fav-btn${isFav ? ' active' : ''}" onclick="toggleFav('${favKey}')" title="Favourite rider">★</button></td>
     </tr>`;
   });
   el.innerHTML = `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th><th class="star-col"></th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+let chartInstances = [];
+
+function renderProgressionChart(riders, catId) {
+  const container = document.getElementById('chart-container');
+  const wrapper = document.getElementById('charts-wrapper');
+  if (!container || !wrapper) return;
+
+  chartInstances.forEach(c => c.destroy());
+  chartInstances = [];
+  wrapper.innerHTML = '';
+
+  const favRiders = riders.filter(r => {
+    const favKey = catId + ':' + r.name;
+    return favorites.has(favKey) && r.history && r.history.length > 0;
+  });
+
+  if (favRiders.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+
+  container.style.display = 'block';
+
+  const chartConfigs = [];
+  if (catId === 'motogp') {
+    chartConfigs.push({ id: 'chart-all', title: "Riders' Points Progression — Race (Generale)", historyProp: 'history' });
+    chartConfigs.push({ id: 'chart-sprint', title: "Riders' Points Progression — Only Sprints (Gare Sprint)", historyProp: 'sprint_history' });
+    chartConfigs.push({ id: 'chart-long', title: "Riders' Points Progression — Only Long Race (Gare Lunghe)", historyProp: 'long_history' });
+  } else {
+    chartConfigs.push({ id: 'chart-all', title: "Riders' Points Progression", historyProp: 'history' });
+  }
+
+  chartConfigs.forEach((cfg, cIdx) => {
+    const section = document.createElement('div');
+    section.style.marginBottom = cIdx < chartConfigs.length - 1 ? '35px' : '0';
+    section.innerHTML = `
+      <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">${cfg.title}</h3>
+      <div style="position: relative; height: 280px;">
+        <canvas id="${cfg.id}"></canvas>
+      </div>`;
+    wrapper.appendChild(section);
+
+    const maxHistoryLen = Math.max(...favRiders.map(r => (r[cfg.historyProp] || r.history).length));
+    const cal = CALENDARS[catId] || CALENDARS.motogp;
+    const labels = [];
+    for (let i = 0; i < maxHistoryLen; i++) {
+      const gpName = cal[i] ? cal[i].name : 'Round ' + (i + 1);
+      labels.push(gpName);
+    }
+
+    const datasets = favRiders.map((r, idx) => {
+      const histArr = r[cfg.historyProp] || r.history;
+      let sum = 0;
+      const data = histArr.map(pts => { sum += pts; return sum; });
+      const customStyle = RIDER_STYLES[r.name] || {};
+      const color = customStyle.color || LINE_COLORS[idx % LINE_COLORS.length];
+      
+      const ds = {
+        label: formatName(r.name),
+        data: data,
+        borderColor: color,
+        backgroundColor: color + '15',
+        borderWidth: 3,
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        fill: false
+      };
+      if (customStyle.borderDash) {
+        ds.borderDash = customStyle.borderDash;
+      }
+      return ds;
+    });
+
+    const ctx = document.getElementById(cfg.id).getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { color: '#ccc', font: { family: 'Inter', size: 12 } } },
+          tooltip: {
+            backgroundColor: '#1e1e22',
+            titleColor: '#fff',
+            bodyColor: '#ddd',
+            borderColor: '#3a3a42',
+            borderWidth: 1
+          }
+        },
+        scales: {
+          x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#999', font: { family: 'Inter', size: 10 } } },
+          y: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#999', font: { family: 'Inter', size: 11 } } }
+        }
+      }
+    });
+    chartInstances.push(chart);
+  });
 }
 
 // ---- Constructor standings, derived live from Pulselive classification ----
