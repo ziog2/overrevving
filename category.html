@@ -481,14 +481,19 @@ function renderSingleChart(chartType, canvasId, containerId, riders, catId, hist
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  const favRiders = (riders || []).filter(r => {
+  let activeRiders = (riders || []).filter(r => {
     const favKey = catId + ':' + r.name;
     return favorites.has(favKey) && r.history && r.history.length > 0;
   });
 
+  // If no favorited riders in this category, show Top 5 riders in championship
+  if (activeRiders.length === 0) {
+    activeRiders = (riders || []).slice(0, 5).filter(r => r.history && r.history.length > 0);
+  }
+
   let chartVar = (chartType === 'all') ? chartAll : (chartType === 'sprint') ? chartSprint : chartLong;
 
-  if (favRiders.length === 0) {
+  if (activeRiders.length === 0) {
     container.style.display = 'none';
     if (chartVar) {
       chartVar.destroy();
@@ -501,7 +506,7 @@ function renderSingleChart(chartType, canvasId, containerId, riders, catId, hist
 
   container.style.display = 'block';
 
-  const maxHistoryLen = Math.max(...favRiders.map(r => {
+  const maxHistoryLen = Math.max(...activeRiders.map(r => {
     const arr = (historyProp && r[historyProp] && Array.isArray(r[historyProp]) && r[historyProp].length > 0) ? r[historyProp] : r.history;
     return arr.length;
   }));
@@ -515,7 +520,7 @@ function renderSingleChart(chartType, canvasId, containerId, riders, catId, hist
     labels.push(gpName);
   }
 
-  const datasets = favRiders.map((r, idx) => {
+  const datasets = activeRiders.map((r, idx) => {
     const histArr = (historyProp && r[historyProp] && Array.isArray(r[historyProp]) && r[historyProp].length > 0) ? r[historyProp] : r.history;
     let sum = 0;
     const data = histArr.map(pts => { sum += pts; return sum; });
