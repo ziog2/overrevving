@@ -111,6 +111,10 @@
     border-bottom: 1px solid #2e2e34;
   }
   th:last-child, td:last-child { text-align: right; }
+  #constructors-table th, #constructors-table td,
+  #teams-table th, #teams-table td {
+    text-align: left !important;
+  }
   td {
     padding: 9px 12px;
     border-bottom: 1px solid #28282e;
@@ -121,7 +125,9 @@
   tr.pos-1 td:first-child { color: #f1c40f; font-weight: 700; }
   tr.pos-2 td:first-child { color: #bdc3c7; font-weight: 700; }
   tr.pos-3 td:first-child { color: #e67e22; font-weight: 700; }
-  tr.favorite td { background: rgba(255, 215, 0, 0.06) !important; }
+  tbody tr.favorite { background: #2a1f3a !important; }
+  tbody tr.favorite:hover { background: #332545 !important; }
+  tbody tr.favorite td { background: transparent !important; }
   .star-col { width: 28px; text-align: center !important; }
   .fav-btn {
     background: none;
