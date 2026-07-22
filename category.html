@@ -481,11 +481,11 @@ function renderSingleChart(chartType, canvasId, containerId, riders, catId, hist
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  let activeRiders = (riders || []).filter(r => isRiderFavorited(catId, r.name) && r.history && r.history.length > 0);
+  let activeRiders = (riders || []).filter(r => isRiderFavorited(catId, r.name));
 
   // If no favorited riders in this category, show Top 5 riders in championship
   if (activeRiders.length === 0) {
-    activeRiders = (riders || []).slice(0, 5).filter(r => r.history && r.history.length > 0);
+    activeRiders = (riders || []).slice(0, 5);
   }
 
   let chartVar = (chartType === 'all') ? chartAll : (chartType === 'sprint') ? chartSprint : chartLong;
@@ -503,10 +503,7 @@ function renderSingleChart(chartType, canvasId, containerId, riders, catId, hist
 
   container.style.display = 'block';
 
-  const maxHistoryLen = Math.max(...activeRiders.map(r => {
-    const arr = (historyProp && r[historyProp] && Array.isArray(r[historyProp]) && r[historyProp].length > 0) ? r[historyProp] : r.history;
-    return arr.length;
-  }));
+  const maxHistoryLen = Math.max(...activeRiders.map(r => getRiderHistory(r, historyProp).length));
 
   if (maxHistoryLen <= 0) return;
 
@@ -518,7 +515,7 @@ function renderSingleChart(chartType, canvasId, containerId, riders, catId, hist
   }
 
   const datasets = activeRiders.map((r, idx) => {
-    const histArr = (historyProp && r[historyProp] && Array.isArray(r[historyProp]) && r[historyProp].length > 0) ? r[historyProp] : r.history;
+    const histArr = getRiderHistory(r, historyProp);
     let sum = 0;
     const data = histArr.map(pts => { sum += pts; return sum; });
     const customStyle = RIDER_STYLES[r.name] || {};
