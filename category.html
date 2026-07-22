@@ -431,6 +431,13 @@ function renderRidersTable(riders, catId) {
 
 let chartInstances = [];
 
+function getRiderHistory(r, prop) {
+  if (prop && Array.isArray(r[prop]) && r[prop].length > 0) {
+    return r[prop];
+  }
+  return (r && Array.isArray(r.history) && r.history.length > 0) ? r.history : [];
+}
+
 function renderProgressionChart(riders, catId) {
   const container = document.getElementById('chart-container');
   const wrapper = document.getElementById('charts-wrapper');
@@ -468,15 +475,12 @@ function renderProgressionChart(riders, catId) {
 
   chartConfigs.forEach((cfg, cIdx) => {
     const validRiders = activeRiders.filter(r => {
-      const arr = r[cfg.historyProp] || r.history;
-      return Array.isArray(arr) && arr.length > 0;
+      const arr = getRiderHistory(r, cfg.historyProp);
+      return arr.length > 0;
     });
     if (validRiders.length === 0) return;
 
-    const maxHistoryLen = Math.max(...validRiders.map(r => {
-      const arr = r[cfg.historyProp] || r.history;
-      return Array.isArray(arr) ? arr.length : 0;
-    }));
+    const maxHistoryLen = Math.max(...validRiders.map(r => getRiderHistory(r, cfg.historyProp).length));
     if (maxHistoryLen <= 0) return;
 
     const section = document.createElement('div');
@@ -496,7 +500,7 @@ function renderProgressionChart(riders, catId) {
     }
 
     const datasets = validRiders.map((r, idx) => {
-      const histArr = r[cfg.historyProp] || r.history || [];
+      const histArr = getRiderHistory(r, cfg.historyProp);
       let sum = 0;
       const data = histArr.map(pts => { sum += pts; return sum; });
       const customStyle = RIDER_STYLES[r.name] || {};
