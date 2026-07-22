@@ -481,10 +481,7 @@ function renderSingleChart(chartType, canvasId, containerId, riders, catId, hist
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  let activeRiders = (riders || []).filter(r => {
-    const favKey = catId + ':' + r.name;
-    return favorites.has(favKey) && r.history && r.history.length > 0;
-  });
+  let activeRiders = (riders || []).filter(r => isRiderFavorited(catId, r.name) && r.history && r.history.length > 0);
 
   // If no favorited riders in this category, show Top 5 riders in championship
   if (activeRiders.length === 0) {
