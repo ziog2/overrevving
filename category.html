@@ -152,7 +152,7 @@
     background: rgba(255,255,255,0.05);
   }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="js/chart.min.js"></script>
 </head>
 <body>
 
@@ -576,6 +576,16 @@ function renderSingleChart(chartType, canvasId, containerId, riders, catId, hist
 }
 
 function renderProgressionChart(riders, catId) {
+  if (!['motogp', 'moto2', 'moto3'].includes(catId)) {
+    const cAll = document.getElementById('chart-container-all');
+    const cSprint = document.getElementById('chart-container-sprint');
+    const cLong = document.getElementById('chart-container-long');
+    if (cAll) cAll.style.display = 'none';
+    if (cSprint) cSprint.style.display = 'none';
+    if (cLong) cLong.style.display = 'none';
+    return;
+  }
+
   renderSingleChart('all', 'progressionChartAll', 'chart-container-all', riders, catId, 'history');
   
   if (catId === 'motogp') {
