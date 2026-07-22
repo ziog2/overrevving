@@ -339,8 +339,8 @@ async function loadRidersFromBin(catId) {
     const json = await res.json();
     const riders = json.record[catId] || [];
     currentRiders = riders;
+
     renderRidersTable(riders, catId);
-    renderProgressionChart(riders, catId);
 
     const constructors = json.record[catId + '_constructors'] || [];
     renderConstructorsTable(constructors);
@@ -348,11 +348,18 @@ async function loadRidersFromBin(catId) {
     const teams = json.record[catId + '_teams'] || [];
     renderTeamsTable(teams);
 
+    try {
+      renderProgressionChart(riders, catId);
+    } catch (chartErr) {
+      console.warn('Progression chart render warning:', chartErr);
+    }
+
     const ts = json.record['_updated'];
     document.getElementById('hero-meta').innerHTML = ts
       ? `<span>Last updated: <strong>${ts}</strong></span>`
       : '';
   } catch (e) {
+    console.error('Error loading standings from bin:', e);
     document.getElementById('riders-table').innerHTML =
       '<div class="empty">⚠ Could not load standings</div>';
   }
@@ -403,47 +410,19 @@ function renderRidersTable(riders, catId) {
   list.forEach((r, i) => {
     const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
     const currentScore = (catId === 'motogp' && currentMotoGPFilter === 'sprint')
-      ? (r.sprint_pts || 0)
+      ? (r.sprint_pts !== undefined ? r.sprint_pts : 0)
       : (catId === 'motogp' && currentMotoGPFilter === 'long')
-      ? (r.long_pts || 0)
+      ? (r.long_pts !== undefined ? r.long_pts : 0)
       : r.pts;
 
     const gap = i === 0 ? '' : `<span class="gap">-${leaderScore - currentScore}</span>`;
     const favKey = catId + ':' + r.name;
     const isFav = favorites.has(favKey);
 
-    let ptsCellContent = '';
-    if (catId === 'motogp') {
-      const spr = r.sprint_pts !== undefined ? r.sprint_pts : 0;
-      const lng = r.long_pts !== undefined ? r.long_pts : 0;
-      if (currentMotoGPFilter === 'sprint') {
-        ptsCellContent = `<div style="display:inline-flex;align-items:baseline;gap:5px;justify-content:flex-end;">
-          <span style="font-size:14px;font-weight:700;color:#f0c040;">${spr}</span>
-          <span style="font-size:10px;color:#888;" title="Total points">(Tot: ${r.pts})</span>
-          ${gap}
-        </div>`;
-      } else if (currentMotoGPFilter === 'long') {
-        ptsCellContent = `<div style="display:inline-flex;align-items:baseline;gap:5px;justify-content:flex-end;">
-          <span style="font-size:14px;font-weight:700;color:#f0c040;">${lng}</span>
-          <span style="font-size:10px;color:#888;" title="Total points">(Tot: ${r.pts})</span>
-          ${gap}
-        </div>`;
-      } else {
-        ptsCellContent = `<div style="display:inline-flex;align-items:baseline;gap:5px;justify-content:flex-end;">
-          <span style="font-size:10px;color:#888;font-weight:normal;" title="Sprint points">S:${spr}</span>
-          <span style="font-size:14px;font-weight:700;color:#f0c040;">${r.pts}</span>
-          <span style="font-size:10px;color:#aaa;font-weight:normal;" title="Long race points">L:${lng}</span>
-          ${gap}
-        </div>`;
-      }
-    } else {
-      ptsCellContent = `${r.pts}${gap}`;
-    }
-
     rows += `<tr class="${pc}${isFav ? ' favorite' : ''}" data-fav="${favKey}">
       <td>${i+1}</td>
       <td>${formatName(r.name)}</td>
-      <td>${ptsCellContent}</td>
+      <td>${currentScore}${gap}</td>
       <td><button class="fav-btn${isFav ? ' active' : ''}" onclick="toggleFav('${favKey}')" title="Favourite rider">★</button></td>
     </tr>`;
   });
@@ -457,13 +436,13 @@ function renderProgressionChart(riders, catId) {
   const wrapper = document.getElementById('charts-wrapper');
   if (!container || !wrapper) return;
 
-  chartInstances.forEach(c => c.destroy());
+  chartInstances.forEach(c => { try { c.destroy(); } catch(e){} });
   chartInstances = [];
   wrapper.innerHTML = '';
 
-  const favRiders = riders.filter(r => {
+  const favRiders = (riders || []).filter(r => {
     const favKey = catId + ':' + r.name;
-    return favorites.has(favKey) && r.history && r.history.length > 0;
+    return favorites.has(favKey) && r.history && Array.isArray(r.history) && r.history.length > 0;
   });
 
   if (favRiders.length === 0) {
@@ -483,6 +462,18 @@ function renderProgressionChart(riders, catId) {
   }
 
   chartConfigs.forEach((cfg, cIdx) => {
+    const validRiders = favRiders.filter(r => {
+      const arr = r[cfg.historyProp] || r.history;
+      return Array.isArray(arr) && arr.length > 0;
+    });
+    if (validRiders.length === 0) return;
+
+    const maxHistoryLen = Math.max(...validRiders.map(r => {
+      const arr = r[cfg.historyProp] || r.history;
+      return Array.isArray(arr) ? arr.length : 0;
+    }));
+    if (maxHistoryLen <= 0) return;
+
     const section = document.createElement('div');
     section.style.marginBottom = cIdx < chartConfigs.length - 1 ? '35px' : '0';
     section.innerHTML = `
@@ -492,7 +483,6 @@ function renderProgressionChart(riders, catId) {
       </div>`;
     wrapper.appendChild(section);
 
-    const maxHistoryLen = Math.max(...favRiders.map(r => (r[cfg.historyProp] || r.history).length));
     const cal = CALENDARS[catId] || CALENDARS.motogp;
     const labels = [];
     for (let i = 0; i < maxHistoryLen; i++) {
@@ -500,8 +490,8 @@ function renderProgressionChart(riders, catId) {
       labels.push(gpName);
     }
 
-    const datasets = favRiders.map((r, idx) => {
-      const histArr = r[cfg.historyProp] || r.history;
+    const datasets = validRiders.map((r, idx) => {
+      const histArr = r[cfg.historyProp] || r.history || [];
       let sum = 0;
       const data = histArr.map(pts => { sum += pts; return sum; });
       const customStyle = RIDER_STYLES[r.name] || {};
@@ -524,7 +514,9 @@ function renderProgressionChart(riders, catId) {
       return ds;
     });
 
-    const ctx = document.getElementById(cfg.id).getContext('2d');
+    const canvasEl = document.getElementById(cfg.id);
+    if (!canvasEl) return;
+    const ctx = canvasEl.getContext('2d');
     const chart = new Chart(ctx, {
       type: 'line',
       data: { labels, datasets },

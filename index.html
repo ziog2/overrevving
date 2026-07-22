@@ -311,24 +311,10 @@ function renderAll(all) {
         const shortName = formatName(r.name);
         const favKey = cat.id + ':' + r.name;
         const isFav = favorites.has(favKey);
-        let ptsContent = '';
-        if (cat.id === 'motogp' && (r.sprint_pts !== undefined || r.long_pts !== undefined)) {
-          const spr = r.sprint_pts !== undefined ? r.sprint_pts : 0;
-          const lng = r.long_pts !== undefined ? r.long_pts : 0;
-          ptsContent = `
-            <div style="display:inline-flex;align-items:baseline;gap:4px;justify-content:flex-end;">
-              <span style="font-size:10px;color:#888;font-weight:normal;" title="Sprint points">S:${spr}</span>
-              <span style="font-size:14px;font-weight:700;color:#f0c040;">${r.pts}</span>
-              <span style="font-size:10px;color:#aaa;font-weight:normal;" title="Long race points">L:${lng}</span>
-              ${gap}
-            </div>`;
-        } else {
-          ptsContent = `${r.pts}${gap}`;
-        }
         rows += `<tr class="${pc}${isFav ? ' favorite' : ''}" data-fav="${favKey}">
           <td>${i+1}</td>
           <td><div class="driver-name" title="${r.name}">${shortName}</div></td>
-          <td>${ptsContent}</td>
+          <td>${r.pts}${gap}</td>
           <td style="width:20px;padding:4px 6px"><button class="fav-btn${isFav ? ' active' : ''}" onclick="toggleFav('${favKey}')" title="Favourite rider">★</button></td>
         </tr>`;
       });
