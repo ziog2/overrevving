@@ -152,7 +152,7 @@
     background: rgba(255,255,255,0.05);
   }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
 <body>
 
@@ -462,6 +462,16 @@ function renderProgressionChart(riders, catId) {
   const container = document.getElementById('chart-container');
   const wrapper = document.getElementById('charts-wrapper');
   if (!container || !wrapper) return;
+
+  if (typeof Chart === 'undefined') {
+    wrapper.innerHTML = '<div class="loading">⏳ Loading chart library...</div>';
+    container.style.display = 'block';
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js';
+    script.onload = () => renderProgressionChart(riders, catId);
+    document.head.appendChild(script);
+    return;
+  }
 
   chartInstances.forEach(c => { try { c.destroy(); } catch(e){} });
   chartInstances = [];
