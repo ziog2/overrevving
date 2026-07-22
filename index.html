@@ -627,27 +627,32 @@ const CALENDARS_2026 = {
 function loadCountdown() {
   if (countdownStarted) return;
   countdownStarted = true;
+  const now = new Date();
   // Start countdown for each category independently
   ['motogp', 'moto2', 'moto3', 'sbk', 'mxgp', 'mx2', 'f1'].forEach(catId => {
     const cal = CALENDARS_2026[catId];
     if (!cal) return;
-    const now = new Date();
+
+    const completedCount = cal.filter(e => new Date(e.date + 'T23:59:59') < now).length;
+    const pct = Math.round((completedCount / cal.length) * 100);
+    const pctBadge = ` · ${pct}%`;
+
     const next = cal.find(e => new Date(e.date + 'T00:00:00') > now);
     const el = document.getElementById('countdown-' + catId);
     if (!el) return;
-    if (!next) { el.textContent = '🏁 Season concluded'; return; }
-    startCategoryCountdown(el, new Date(next.date + 'T00:00:00'), next.name);
+    if (!next) { el.textContent = `🏁 Season concluded (${pct}%)`; return; }
+    startCategoryCountdown(el, new Date(next.date + 'T00:00:00'), next.name, pctBadge);
   });
 }
 
-function startCategoryCountdown(el, targetDate, name) {
+function startCategoryCountdown(el, targetDate, name, pctBadge) {
   function tick() {
     const now = new Date();
     const diff = targetDate - now;
     if (diff <= 0) { el.textContent = '🏁 Round in progress!'; return; }
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    el.textContent = `🏁 → ${name}: ${days}d ${hours}h`;
+    el.textContent = `🏁 → ${name}: ${days}d ${hours}h${pctBadge}`;
   }
   tick();
   setInterval(tick, 60 * 1000);

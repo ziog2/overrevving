@@ -172,6 +172,12 @@
     font-size: 12px;
   }
   .cal-item:last-child { border-bottom: none; }
+  .cal-item.past {
+    opacity: 0.45;
+    background: rgba(0, 0, 0, 0.15);
+  }
+  .cal-item.past .cal-name { color: #888; }
+  .cal-item.past .cal-date { color: #555; }
   .cal-name { font-weight: 600; color: #eee; }
   .cal-date { color: #777; font-size: 11px; }
   .note {
@@ -448,14 +454,28 @@ function renderCalendar() {
   const catId = getCatId();
   const events = CALENDARS[catId] || CALENDARS.motogp;
   const el = document.getElementById('cal-list');
-  document.getElementById('cal-count').textContent = events.length + ' rounds';
+  const now = new Date();
 
+  let completedCount = 0;
   let html = '';
+
   events.forEach(ev => {
+    const evDate = new Date(ev.date + 'T23:59:59');
+    const isPast = evDate < now;
+    if (isPast) completedCount++;
+
     const d = new Date(ev.date);
     const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
-    html += `<div class="cal-item"><span class="cal-name">${ev.name}</span><span class="cal-date">${dateStr}</span></div>`;
+    const checkMark = isPast ? '<span style="color:#2ecc71;margin-right:6px;font-size:11px;">✓</span>' : '';
+    
+    html += `<div class="cal-item${isPast ? ' past' : ''}">
+      <span class="cal-name">${checkMark}${ev.name}</span>
+      <span class="cal-date">${dateStr}</span>
+    </div>`;
   });
+
+  const pct = Math.round((completedCount / events.length) * 100);
+  document.getElementById('cal-count').textContent = `${completedCount}/${events.length} completed (${pct}%)`;
   el.innerHTML = html;
 }
 
