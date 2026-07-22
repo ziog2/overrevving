@@ -1,155 +1,188 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Category · Motorsport Standings 2026</title>
+<title>Motorsport Standings 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: #1e1e22;
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #18181c;
+    color: #e0e0e0;
     min-height: 100vh;
-    padding: 24px 16px 60px;
-    color: #f0f0f0;
+    padding-bottom: 40px;
   }
-  a { color: inherit; }
   .top-bar {
-    max-width: 1100px; margin: 0 auto 20px;
-    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 20px 10px;
   }
   .back-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 13px; color: #999; text-decoration: none;
-    padding: 7px 14px; border-radius: 8px; border: 1px solid #3a3a42;
-    transition: background 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.15s;
   }
-  .back-link:hover { background: #2c2c32; color: #ddd; }
-
+  .back-link:hover { color: #fff; }
   .hero {
-    max-width: 1100px; margin: 0 auto 32px;
-    border-radius: 16px; overflow: hidden; border: 1px solid #3a3a42;
+    max-width: 1100px;
+    margin: 10px auto 24px;
+    padding: 0 20px;
   }
-  .hero-band { padding: 22px 28px; }
+  .hero-band {
+    padding: 24px 28px;
+    border-radius: 16px;
+    background: #2c2c32;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
   .hero-band h1 {
-    font-size: 26px; font-weight: 800; letter-spacing: 0.02em;
-    text-transform: uppercase; color: #fff;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
-  .hero-band .hero-sub {
-    font-size: 13px; opacity: 0.85; margin-top: 4px; font-weight: 500;
+  .hero-sub {
+    font-size: 13px;
+    opacity: 0.85;
   }
   .hero-meta {
-    background: #232328; padding: 12px 28px;
-    display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: #999;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #888;
+    display: flex;
+    gap: 16px;
   }
-  .hero-meta strong { color: #ddd; font-weight: 600; }
-
   .layout {
-    max-width: 1100px; margin: 0 auto;
-    display: flex; gap: 20px; justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
   }
-  .layout > div { width: 275px; flex-shrink: 0; }
-  @media (max-width: 620px) { .layout { flex-direction: column; align-items: center; } }
-
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+  }
   .panel {
-    background: #2c2c32; border-radius: 14px; border: 1px solid #3a3a42;
-    overflow: hidden; margin-bottom: 20px;
+    background: #222226;
+    border-radius: 14px;
+    border: 1px solid #2e2e34;
+    overflow: hidden;
   }
   .panel-head {
-    padding: 14px 18px; font-size: 13px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.06em; color: #ccc;
-    border-bottom: 1px solid #3a3a42; display: flex; align-items: center;
-    justify-content: space-between;
-  }
-  .panel-head .count { font-size: 11px; color: #666; font-weight: 500; text-transform: none; }
-
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  thead th {
-    padding: 8px 10px; text-align: left; font-size: 11px; font-weight: 600;
-    letter-spacing: 0.06em; text-transform: uppercase; color: #888;
-    border-bottom: 1px solid #3a3a42; background: #252528;
-  }
-  thead th:first-child { text-align: center; width: 30px; }
-  thead th.star-col { width: 24px; }
-  .fav-btn { background: none; border: none; cursor: pointer; font-size: 13px; padding: 0 4px; opacity: 0.3; transition: opacity 0.15s, color 0.15s; line-height: 1; color: #999; }
-  .fav-btn.active { opacity: 1; color: #ffd700; }
-  .fav-btn:hover { opacity: 0.8; }
-  tbody tr.favorite { background: #2a1f3a !important; }
-  tbody tr.favorite:hover { background: #332545 !important; }
-  tbody tr { border-bottom: 1px solid #34343c; }
-  tbody tr:nth-child(even) { background: #28282e; }
-  tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: #333340; }
-  tbody td { padding: 8px 10px; color: #ddd; }
-  tbody td:first-child { text-align: center; font-weight: 700; color: #aaa; font-size: 12px; }
-  .pos-1 td:first-child { color: #ffd700; }
-  .pos-2 td:first-child { color: #c0c0c0; }
-  .pos-3 td:first-child { color: #cd7f32; }
-  .gap { font-weight: 400; color: #666; font-size: 11px; margin-left: 4px; }
-
-  /* Calendar */
-  .cal-list { display: flex; flex-direction: column; }
-  .cal-row {
-    display: flex; align-items: center; gap: 12px;
-    padding: 10px 18px; border-bottom: 1px solid #34343c;
-    text-decoration: none; transition: background 0.15s;
-  }
-  .cal-row:last-child { border-bottom: none; }
-  .cal-row:hover { background: #333340; }
-  .cal-row.past { opacity: 0.55; }
-  .cal-row.next { background: #2a2438; }
-  .cal-round {
-    width: 26px; height: 26px; border-radius: 7px; background: #1e1e22;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700; color: #999; flex-shrink: 0;
-  }
-  .cal-info { flex: 1; }
-  .cal-name { font-size: 13px; color: #ddd; font-weight: 600; }
-  .cal-date { font-size: 11px; color: #777; margin-top: 1px; }
-  .cal-flag { font-size: 11px; padding: 3px 8px; border-radius: 5px; background: #1e1e22; color: #999; }
-  .cal-flag.next { background: #3d6bbd; color: #fff; }
-
-  .loading, .empty { text-align: center; color: #666; padding: 30px 16px; font-size: 13px; }
-  .note {
-    max-width: 1100px; margin: 24px auto 0; font-size: 12px; color: #666;
-    text-align: center; line-height: 1.6;
-  }
-
-  /* MotoGP Standings Filter Toggle */
-  .motogp-filter-container {
-    display: flex;
-    justify-content: center;
-    padding: 10px 12px;
-    background: #252528;
-    border-bottom: 1px solid #3a3a42;
-  }
-  .filter-toggle-group {
-    display: inline-flex;
-    background: #1e1e22;
-    padding: 3px;
-    border-radius: 8px;
-    border: 1px solid #3a3a42;
-    gap: 3px;
-  }
-  .filter-toggle-btn {
-    background: transparent;
-    border: none;
-    color: #888;
-    padding: 6px 14px;
-    font-size: 11px;
+    padding: 14px 16px;
+    background: #2a2a30;
+    font-size: 13px;
     font-weight: 700;
-    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ddd;
+    border-bottom: 1px solid #33333a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .panel-head .count {
+    font-size: 11px;
+    font-weight: 500;
+    color: #888;
+    text-transform: none;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #777;
+    background: rgba(0,0,0,0.15);
+    border-bottom: 1px solid #2e2e34;
+  }
+  th:last-child, td:last-child { text-align: right; }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #28282e;
+    color: #ccc;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  tr.pos-1 td:first-child { color: #f1c40f; font-weight: 700; }
+  tr.pos-2 td:first-child { color: #bdc3c7; font-weight: 700; }
+  tr.pos-3 td:first-child { color: #e67e22; font-weight: 700; }
+  tr.favorite td { background: rgba(255, 215, 0, 0.06) !important; }
+  .star-col { width: 28px; text-align: center !important; }
+  .fav-btn {
+    background: none;
+    border: none;
+    color: #444;
     cursor: pointer;
-    transition: all 0.2s ease;
+    font-size: 14px;
+    padding: 2px 4px;
+    transition: color 0.15s, transform 0.15s;
+    line-height: 1;
   }
-  .filter-toggle-btn.active {
-    background: #c0392b;
-    color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  .fav-btn:hover { color: #ffd700; transform: scale(1.2); }
+  .fav-btn.active { color: #ffd700; }
+  .gap {
+    font-weight: normal;
+    color: #666;
+    font-size: 11px;
+    margin-left: 4px;
   }
-  .filter-toggle-btn:hover:not(.active) {
-    color: #fff;
-    background: rgba(255,255,255,0.05);
+  .loading {
+    padding: 30px;
+    text-align: center;
+    font-size: 13px;
+    color: #777;
+  }
+  .empty {
+    padding: 30px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+  }
+  .cal-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .cal-item {
+    padding: 10px 14px;
+    border-bottom: 1px solid #28282e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+  .cal-item:last-child { border-bottom: none; }
+  .cal-name { font-weight: 600; color: #eee; }
+  .cal-date { color: #777; font-size: 11px; }
+  .note {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    padding: 0 20px;
+    font-size: 11px;
+    color: #666;
+    line-height: 1.5;
+  }
+  .chart-container {
+    max-width: 1100px;
+    margin: 32px auto 0;
+    background: #2c2c32;
+    border-radius: 14px;
+    border: 1px solid #3a3a42;
+    padding: 20px;
   }
 </style>
 <script src="js/chart.min.js"></script>
@@ -167,13 +200,14 @@
   </div>
   <div class="hero-meta" id="hero-meta"></div>
 </div>
+
 <div class="layout">
   <div>
     <div class="panel">
       <div class="panel-head"><span>Constructors' standings</span><span class="count" id="constructors-count"></span></div>
       <div id="constructors-table"><div class="loading">⏳ Loading…</div></div>
     </div>
-    <div class="panel">
+    <div class="panel" style="margin-top:20px;">
       <div class="panel-head"><span>Teams' standings</span><span class="count" id="teams-count"></span></div>
       <div id="teams-table"><div class="loading">⏳ Loading…</div></div>
     </div>
@@ -181,13 +215,6 @@
   <div>
     <div class="panel">
       <div class="panel-head"><span>Riders' standings</span><span class="count" id="riders-count"></span></div>
-      <div class="motogp-filter-container" id="motogp-filter-bar" style="display:none;">
-        <div class="filter-toggle-group">
-          <button class="filter-toggle-btn active" id="btn-filter-all" onclick="setMotoGPFilter('all')">Race</button>
-          <button class="filter-toggle-btn" id="btn-filter-sprint" onclick="setMotoGPFilter('sprint')">Only Sprints</button>
-          <button class="filter-toggle-btn" id="btn-filter-long" onclick="setMotoGPFilter('long')">Only long race</button>
-        </div>
-      </div>
       <div id="riders-table"><div class="loading">⏳ Loading…</div></div>
     </div>
   </div>
@@ -199,24 +226,10 @@
   </div>
 </div>
 
-<div class="chart-container" id="chart-container-all" style="display:none; max-width: 1100px; margin: 32px auto 0; background: #2c2c32; border-radius: 14px; border: 1px solid #3a3a42; padding: 20px;">
-  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;" id="chart-title-all">Riders' Points Progression</h3>
+<div class="chart-container" id="chart-container" style="display:none;">
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Riders' Points Progression</h3>
   <div style="position: relative; height: 300px;">
-    <canvas id="progressionChartAll"></canvas>
-  </div>
-</div>
-
-<div class="chart-container" id="chart-container-sprint" style="display:none; max-width: 1100px; margin: 32px auto 0; background: #2c2c32; border-radius: 14px; border: 1px solid #3a3a42; padding: 20px;">
-  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Riders' Points Progression — Only Sprints</h3>
-  <div style="position: relative; height: 300px;">
-    <canvas id="progressionChartSprint"></canvas>
-  </div>
-</div>
-
-<div class="chart-container" id="chart-container-long" style="display:none; max-width: 1100px; margin: 32px auto 0; background: #2c2c32; border-radius: 14px; border: 1px solid #3a3a42; padding: 20px;">
-  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Riders' Points Progression — Only Long Race</h3>
-  <div style="position: relative; height: 300px;">
-    <canvas id="progressionChartLong"></canvas>
+    <canvas id="progressionChart"></canvas>
   </div>
 </div>
 
@@ -231,51 +244,46 @@ const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
 const CATEGORY_META = {
   motogp: {
     label: 'MotoGP', color: '#c0392b',
-    officialUrl: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings',
-    pulseliveCategoryUuid: 'e8c110ad-64aa-4e8e-8a86-f2f152f6a942',
+    officialUrl: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings'
   },
   moto2: {
-    label: 'Moto2', color: '#e67e22',
-    officialUrl: 'https://www.motogp.com/en/world-standing/2026/moto2/championship-standings',
-    pulseliveCategoryUuid: '549640b8-fd9c-4245-acfd-60e4bc38b25c',
+    label: 'Moto2', color: '#d35400',
+    officialUrl: 'https://www.motogp.com/en/world-standing/2026/moto2/championship-standings'
   },
   moto3: {
     label: 'Moto3', color: '#27ae60',
-    officialUrl: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings',
-    pulseliveCategoryUuid: '954f7e65-2ef2-4423-b949-4961cc603e45',
+    officialUrl: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings'
   },
   sbk: {
     label: 'SBK', color: '#2980b9',
-    officialUrl: 'https://www.worldsbk.com/en/standings/riders/2026/SBK',
-  },
+    officialUrl: 'https://www.worldsbk.com/en/standings/riders/2026/SBK'
+  }
 };
-
-const PULSELIVE_SEASON_2026 = 'e88b4e43-2209-47aa-8e83-0e0b1cedde6e';
 
 const CALENDARS = {
   motogp: [
     { name: 'Thailand',      date: '2026-03-01' },
-    { name: 'Brazil',        date: '2026-03-22' },
-    { name: 'USA (COTA)',    date: '2026-03-29' },
+    { name: 'Brazil',        date: '2026-03-15' },
+    { name: 'Americas',      date: '2026-03-29' },
+    { name: 'Qatar',         date: '2026-04-12' },
     { name: 'Spain',         date: '2026-04-26' },
     { name: 'France',        date: '2026-05-10' },
-    { name: 'Catalunya',     date: '2026-05-17' },
-    { name: 'Italy',         date: '2026-05-31' },
-    { name: 'Hungary',       date: '2026-06-07' },
-    { name: 'Czech Republic',date: '2026-06-21' },
+    { name: 'Great Britain', date: '2026-05-24' },
+    { name: 'Aragon',        date: '2026-06-07' },
+    { name: 'Italy',         date: '2026-06-21' },
     { name: 'Netherlands',   date: '2026-06-28' },
     { name: 'Germany',       date: '2026-07-12' },
-    { name: 'Great Britain', date: '2026-08-09' },
-    { name: 'Aragon',        date: '2026-08-30' },
+    { name: 'Czechia',       date: '2026-07-19' },
+    { name: 'Austria',       date: '2026-08-23' },
+    { name: 'Hungary',       date: '2026-08-30' },
+    { name: 'Catalunya',     date: '2026-09-06' },
     { name: 'San Marino',    date: '2026-09-13' },
-    { name: 'Austria',       date: '2026-09-20' },
     { name: 'Japan',         date: '2026-10-04' },
     { name: 'Indonesia',     date: '2026-10-11' },
     { name: 'Australia',     date: '2026-10-25' },
     { name: 'Malaysia',      date: '2026-11-01' },
-    { name: 'Qatar',         date: '2026-11-08' },
-    { name: 'Portugal',      date: '2026-11-22' },
-    { name: 'Valencia',      date: '2026-11-29' },
+    { name: 'Portugal',      date: '2026-11-15' },
+    { name: 'Valencia',      date: '2026-11-22' },
   ],
   sbk: [
     { name: 'Australia',     date: '2026-02-22' },
@@ -300,7 +308,6 @@ function getCatId() {
   return params.get('cat') || 'motogp';
 }
 
-// ---- Preferiti (condivisi con la home tramite stessa chiave) ----
 const FAV_KEY = 'overrevving_favorites';
 let favorites = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]'));
 let currentRiders = [];
@@ -330,7 +337,6 @@ async function init() {
   const catId = getCatId();
   const meta = CATEGORY_META[catId] || CATEGORY_META.motogp;
 
-  // Header
   document.title = `${meta.label} · Motorsport Standings 2026`;
   document.getElementById('hero-title').textContent = meta.label;
   document.getElementById('hero-sub').textContent = '2026 Season · Riders, constructors & calendar';
@@ -346,7 +352,6 @@ async function init() {
   await loadRidersFromBin(catId);
 }
 
-// ---- Riders standings from JSONBin (same data as home page) ----
 async function loadRidersFromBin(catId) {
   try {
     const res = await fetch(BIN_URL, { headers: { 'X-Access-Key': API_KEY } });
@@ -380,226 +385,29 @@ async function loadRidersFromBin(catId) {
   }
 }
 
-let currentMotoGPFilter = 'all';
-
-function setMotoGPFilter(filterMode) {
-  currentMotoGPFilter = filterMode;
-  document.querySelectorAll('.filter-toggle-btn').forEach(btn => btn.classList.remove('active'));
-  const activeBtn = document.getElementById('btn-filter-' + filterMode);
-  if (activeBtn) activeBtn.classList.add('active');
-  
-  if (currentRiders && currentRiders.length) {
-    renderRidersTable(currentRiders, getCatId());
-  }
-}
-
-function renderRidersTable(riders, catId) {
+function renderRidersTable(rows, catId) {
   const el = document.getElementById('riders-table');
-  document.getElementById('riders-count').textContent = riders.length ? riders.length + ' riders' : '';
-  if (!riders.length) { el.innerHTML = '<div class="empty">No data available</div>'; return; }
+  document.getElementById('riders-count').textContent = rows.length ? rows.length + ' riders' : '';
+  if (!rows.length) { el.innerHTML = '<div class="empty">No data available</div>'; return; }
 
-  const filterBar = document.getElementById('motogp-filter-bar');
-  if (filterBar) {
-    filterBar.style.display = (catId === 'motogp') ? 'flex' : 'none';
-  }
-
-  let list = [...riders];
-
-  if (catId === 'motogp') {
-    if (currentMotoGPFilter === 'sprint') {
-      list.sort((a, b) => (b.sprint_pts || 0) - (a.sprint_pts || 0));
-    } else if (currentMotoGPFilter === 'long') {
-      list.sort((a, b) => (b.long_pts || 0) - (a.long_pts || 0));
-    } else {
-      list.sort((a, b) => b.pts - a.pts);
-    }
-  }
-
-  const leaderScore = (catId === 'motogp' && currentMotoGPFilter === 'sprint')
-    ? (list[0].sprint_pts || 0)
-    : (catId === 'motogp' && currentMotoGPFilter === 'long')
-    ? (list[0].long_pts || 0)
-    : list[0].pts;
-
-  let rows = '';
-  list.forEach((r, i) => {
+  const leader = rows[0].pts;
+  let html = '';
+  rows.forEach((r, i) => {
     const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
-    const currentScore = (catId === 'motogp' && currentMotoGPFilter === 'sprint')
-      ? (r.sprint_pts !== undefined ? r.sprint_pts : 0)
-      : (catId === 'motogp' && currentMotoGPFilter === 'long')
-      ? (r.long_pts !== undefined ? r.long_pts : 0)
-      : r.pts;
-
-    const gap = i === 0 ? '' : `<span class="gap">-${leaderScore - currentScore}</span>`;
+    const gap = i === 0 ? '' : `<span class="gap">-${leader - r.pts}</span>`;
     const favKey = catId + ':' + r.name;
     const isFav = favorites.has(favKey);
 
-    rows += `<tr class="${pc}${isFav ? ' favorite' : ''}" data-fav="${favKey}">
+    html += `<tr class="${pc}${isFav ? ' favorite' : ''}" data-fav="${favKey}">
       <td>${i+1}</td>
       <td>${formatName(r.name)}</td>
-      <td>${currentScore}${gap}</td>
+      <td>${r.pts}${gap}</td>
       <td><button class="fav-btn${isFav ? ' active' : ''}" onclick="toggleFav('${favKey}')" title="Favourite rider">★</button></td>
     </tr>`;
   });
-  el.innerHTML = `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th><th class="star-col"></th></tr></thead><tbody>${rows}</tbody></table>`;
+  el.innerHTML = `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th><th class="star-col"></th></tr></thead><tbody>${html}</tbody></table>`;
 }
 
-function isRiderFavorited(catId, riderName) {
-  if (!riderName) return false;
-  const target1 = (catId + ':' + riderName).toLowerCase();
-  const target2 = riderName.toLowerCase();
-  for (const f of favorites) {
-    const fLower = String(f).toLowerCase();
-    if (fLower === target1 || fLower === target2 || fLower.endsWith(':' + target2)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-let chartInstances = [];
-
-function getRiderHistory(r, prop) {
-  if (!r) return [0];
-  if (prop && Array.isArray(r[prop]) && r[prop].length > 0) {
-    return r[prop];
-  }
-  if (Array.isArray(r.history) && r.history.length > 0) {
-    return r.history;
-  }
-  if (typeof r.pts === 'number' && r.pts > 0) {
-    return [r.pts];
-  }
-  return [0];
-}
-
-let chartAll = null;
-let chartSprint = null;
-let chartLong = null;
-
-function renderSingleChart(chartType, canvasId, containerId, riders, catId, historyProp) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
-  let activeRiders = (riders || []).filter(r => isRiderFavorited(catId, r.name));
-
-  // If no favorited riders in this category, show Top 5 riders in championship
-  if (activeRiders.length === 0) {
-    activeRiders = (riders || []).slice(0, 5);
-  }
-
-  let chartVar = (chartType === 'all') ? chartAll : (chartType === 'sprint') ? chartSprint : chartLong;
-
-  if (activeRiders.length === 0) {
-    container.style.display = 'none';
-    if (chartVar) {
-      chartVar.destroy();
-      if (chartType === 'all') chartAll = null;
-      if (chartType === 'sprint') chartSprint = null;
-      if (chartType === 'long') chartLong = null;
-    }
-    return;
-  }
-
-  container.style.display = 'block';
-
-  const maxHistoryLen = Math.max(...activeRiders.map(r => getRiderHistory(r, historyProp).length));
-
-  if (maxHistoryLen <= 0) return;
-
-  const cal = CALENDARS[catId] || CALENDARS.motogp;
-  const labels = [];
-  for (let i = 0; i < maxHistoryLen; i++) {
-    const gpName = cal[i] ? cal[i].name : 'Round ' + (i + 1);
-    labels.push(gpName);
-  }
-
-  const datasets = activeRiders.map((r, idx) => {
-    const histArr = getRiderHistory(r, historyProp);
-    let sum = 0;
-    const data = histArr.map(pts => { sum += pts; return sum; });
-    const customStyle = RIDER_STYLES[r.name] || {};
-    const color = customStyle.color || LINE_COLORS[idx % LINE_COLORS.length];
-    
-    const ds = {
-      label: formatName(r.name),
-      data: data,
-      borderColor: color,
-      backgroundColor: color + '15',
-      borderWidth: 3,
-      tension: 0.3,
-      pointRadius: 4,
-      pointHoverRadius: 6,
-      fill: false
-    };
-    if (customStyle.borderDash) {
-      ds.borderDash = customStyle.borderDash;
-    }
-    return ds;
-  });
-
-  const canvasEl = document.getElementById(canvasId);
-  if (!canvasEl) return;
-  const ctx = canvasEl.getContext('2d');
-
-  if (chartVar) {
-    chartVar.data.labels = labels;
-    chartVar.data.datasets = datasets;
-    chartVar.update();
-  } else {
-    const newChart = new Chart(ctx, {
-      type: 'line',
-      data: { labels, datasets },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { labels: { color: '#ccc', font: { family: 'Inter', size: 12 } } },
-          tooltip: {
-            backgroundColor: '#1e1e22',
-            titleColor: '#fff',
-            bodyColor: '#ddd',
-            borderColor: '#3a3a42',
-            borderWidth: 1
-          }
-        },
-        scales: {
-          x: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#999', font: { family: 'Inter', size: 10 } } },
-          y: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#999', font: { family: 'Inter', size: 11 } } }
-        }
-      }
-    });
-    if (chartType === 'all') chartAll = newChart;
-    if (chartType === 'sprint') chartSprint = newChart;
-    if (chartType === 'long') chartLong = newChart;
-  }
-}
-
-function renderProgressionChart(riders, catId) {
-  if (!['motogp', 'moto2', 'moto3'].includes(catId)) {
-    const cAll = document.getElementById('chart-container-all');
-    const cSprint = document.getElementById('chart-container-sprint');
-    const cLong = document.getElementById('chart-container-long');
-    if (cAll) cAll.style.display = 'none';
-    if (cSprint) cSprint.style.display = 'none';
-    if (cLong) cLong.style.display = 'none';
-    return;
-  }
-
-  renderSingleChart('all', 'progressionChartAll', 'chart-container-all', riders, catId, 'history');
-  
-  if (catId === 'motogp') {
-    renderSingleChart('sprint', 'progressionChartSprint', 'chart-container-sprint', riders, catId, 'sprint_history');
-    renderSingleChart('long', 'progressionChartLong', 'chart-container-long', riders, catId, 'long_history');
-  } else {
-    const cSprint = document.getElementById('chart-container-sprint');
-    const cLong = document.getElementById('chart-container-long');
-    if (cSprint) cSprint.style.display = 'none';
-    if (cLong) cLong.style.display = 'none';
-  }
-}
-
-// ---- Constructor standings, derived live from Pulselive classification ----
 function renderConstructorsTable(rows) {
   const el = document.getElementById('constructors-table');
   document.getElementById('constructors-count').textContent = rows.length ? rows.length + ' manufacturers' : '';
@@ -630,176 +438,114 @@ function renderTeamsTable(rows) {
   el.innerHTML = `<table><thead><tr><th>#</th><th>Team</th><th>Pts</th></tr></thead><tbody>${html}</tbody></table>`;
 }
 
-// ---- Calendar ----
 function renderCalendar() {
   const catId = getCatId();
-  const cal = CALENDARS[catId] || CALENDARS.motogp;
-  const now = new Date();
-  const nextIdx = cal.findIndex(e => new Date(e.date + 'T00:00:00') > now);
-  const pastCount = nextIdx === -1 ? cal.length : nextIdx;
-  const pct = Math.round((pastCount / cal.length) * 100);
+  const events = CALENDARS[catId] || CALENDARS.motogp;
+  const el = document.getElementById('cal-list');
+  document.getElementById('cal-count').textContent = events.length + ' rounds';
 
-  document.getElementById('cal-count').textContent =
-    `${cal.length} rounds · ${pct}% done`;
-
-  const rows = cal.map((r, i) => {
-    const d = new Date(r.date + 'T00:00:00');
-    const isPast = d < now;
-    const isNext = i === nextIdx;
+  let html = '';
+  events.forEach(ev => {
+    const d = new Date(ev.date);
     const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
-    const roundTag = 'R' + String(i + 1).padStart(2, '0');
-    return `
-      <a class="cal-row ${isPast ? 'past' : ''} ${isNext ? 'next' : ''}" href="race.html?cat=${catId}&round=${i+1}">
-        <div class="cal-round">${i+1}</div>
-        <div class="cal-info">
-          <div class="cal-name">${roundTag} · ${r.name}</div>
-          <div class="cal-date">${dateStr}</div>
-        </div>
-        ${isNext ? '<span class="cal-flag next">NEXT</span>' : ''}
-      </a>`;
-  }).join('');
-
-  document.getElementById('cal-list').innerHTML = rows;
+    html += `<div class="cal-item"><span class="cal-name">${ev.name}</span><span class="cal-date">${dateStr}</span></div>`;
+  });
+  el.innerHTML = html;
 }
 
 const LINE_COLORS = [
-  '#ffd700', // Oro
-  '#3498db', // Blu
-  '#e74c3c', // Rosso
-  '#2ecc71', // Verde
-  '#9b59b6', // Viola
-  '#f1c40f', // Giallo
-  '#1abc9c', // Acquamarina
-  '#e67e22', // Arancione
+  '#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6',
+  '#e67e22', '#1abc9c', '#e84393', '#00cec9', '#fdcb6e'
 ];
 
 const RIDER_STYLES = {
-  // Bagnaia & Marc Marquez (Rosso)
-  'Francesco Bagnaia': { color: '#e74c3c', borderDash: [6, 4] },
   'Marc Marquez': { color: '#e74c3c' },
-  // Martin & Bezzecchi (Nero/Charcoal visibile su sfondo scuro)
+  'Francesco Bagnaia': { color: '#e74c3c', borderDash: [6, 4] },
   'Jorge Martin': { color: '#4a4a4a', borderDash: [6, 4] },
   'Marco Bezzecchi': { color: '#4a4a4a' },
-  // Di Giannantonio & Morbidelli (Giallo Evidenziatore)
   'Fabio Di Giannantonio': { color: '#d8ff00' },
   'Franco Morbidelli': { color: '#d8ff00', borderDash: [6, 4] },
-  // Ogura & Raul Fernandez (Azzurro Gulf)
   'Ai Ogura': { color: '#8ec0e4' },
   'Raul Fernandez': { color: '#8ec0e4', borderDash: [6, 4] },
-  // Acosta & Binder (Arancione KTM)
   'Pedro Acosta': { color: '#ff6600' },
   'Brad Binder': { color: '#ff6600', borderDash: [6, 4] },
-  // Marini & Mir (Rosso Honda Repsol)
   'Luca Marini': { color: '#ff0000' },
   'Joan Mir': { color: '#ff0000', borderDash: [6, 4] },
-  // Alex Marquez & Aldeguer (Azzurro Gresini)
   'Alex Marquez': { color: '#9cb2e6' },
   'Fermin Aldeguer': { color: '#9cb2e6', borderDash: [6, 4] },
-  
-  // Altri piloti predefiniti
   'Enea Bastianini': { color: '#ff9f43' },
   'Maverick Viñales': { color: '#ff9f43', borderDash: [6, 4] },
-  // Quartararo & Rins (Blu Scuro Yamaha)
   'Fabio Quartararo': { color: '#0055ff' },
   'Alex Rins': { color: '#0055ff', borderDash: [6, 4] },
-  // Miller & Toprak (Blu medio/chiaro)
   'Jack Miller': { color: '#3388ff' },
   'Toprak Razgatlioglu': { color: '#3388ff', borderDash: [6, 4] },
-  // Moreira, Zarco & Crutchlow (Bianco)
   'Diogo Moreira': { color: '#ffffff' },
   'Johann Zarco': { color: '#ffffff', borderDash: [6, 4] },
   'Cal Crutchlow': { color: '#ffffff', borderDash: [6, 4] },
 
-  // --- MOTO2 (mototiming.live team colors) ---
-  // Liqui Moly Dynavolt Intact GP
+  // Moto2
   'Manuel Gonzalez': { color: '#535357' },
   'Senna Agius': { color: '#535357', borderDash: [6, 4] },
-  // BLU CRU Pramac Yamaha Moto2
   'Izan Guevara': { color: '#133a72' },
   'Alberto Ferrandez': { color: '#133a72', borderDash: [6, 4] },
-  // CFMOTO Aspar Team
   'David Alonso': { color: '#009bb4' },
   'Daniel Holgado': { color: '#009bb4', borderDash: [6, 4] },
-  // QJ MOTOR - GALFER - MSI
   'Ivan Ortola': { color: '#d80c24' },
   'Angel Piqueras': { color: '#d80c24', borderDash: [6, 4] },
   'Marcos Ramirez': { color: '#d80c24', borderDash: [6, 4] },
   'Unai Orradre': { color: '#d80c24', borderDash: [6, 4] },
-  // SpeedRS Team
   'Celestino Vietti': { color: '#f24d44' },
   'Dennis Foggia': { color: '#f24d44', borderDash: [6, 4] },
   'Luca Lunetta': { color: '#f24d44', borderDash: [6, 4] },
-  // OnlyFans American Racing Team
   'Joe Roberts': { color: '#0d34b2' },
   'Filip Salac': { color: '#0d34b2', borderDash: [6, 4] },
-  // ITALJET Gresini Moto2
   'Alonso Lopez': { color: '#9baee4' },
   'Sergio Garcia': { color: '#9baee4', borderDash: [6, 4] },
   'Milan Pawelec': { color: '#9baee4', borderDash: [6, 4] },
-  // Red Bull KTM Ajo
   'Collin Veijer': { color: '#ff6600' },
   'Jose Antonio Rueda': { color: '#ff6600', borderDash: [6, 4] },
-  // Italtrans Racing Team
   'Daniel Muñoz': { color: '#106ba9' },
   'Adrian Huertas': { color: '#106ba9', borderDash: [6, 4] },
-  // REDS Fantic Racing
   'Tony Arbolino': { color: '#afb9b9' },
   'Barry Baltus': { color: '#afb9b9', borderDash: [6, 4] },
   'Jorge Navarro': { color: '#afb9b9', borderDash: [6, 4] },
-  // KLINT Racing Team
   'Alex Escrig': { color: '#73cdba' },
   'Xabi Zurutuza': { color: '#73cdba', borderDash: [6, 4] },
-  // ELF Marc VDS Racing Team
   'Aron Canet': { color: '#682a38' },
   'Deniz Öncü': { color: '#682a38', borderDash: [6, 4] },
-  // Momoven Idrofoglia RW Racing Team
   'Ayumu Sasaki': { color: '#eb5b1d' },
   'Zonta Van Den Goorbergh': { color: '#eb5b1d', borderDash: [6, 4] },
-  // Idemitsu Honda Team Asia
   'Taiyo Furusato': { color: '#fafafa' },
   'Mario Suryo Aji': { color: '#fafafa', borderDash: [6, 4] },
   'Jacob Roulstone': { color: '#fafafa', borderDash: [6, 4] },
 
-  // --- MOTO3 (mototiming.live team colors) ---
-  // CFMOTO Gaviota Aspar Team
+  // Moto3
   'Maximo Quiles': { color: '#0285FF' },
   'Marco Morelli': { color: '#009bb4', borderDash: [6, 4] },
-  // Leopard Racing
   'Adrian Fernandez': { color: '#75cbd1' },
   'Guido Pini': { color: '#75cbd1', borderDash: [6, 4] },
-  // Liqui Moly Dynavolt Intact GP
   'David Muñoz': { color: '#535357' },
   'David Almansa': { color: '#535357', borderDash: [6, 4] },
   'Marcos Uriarte': { color: '#535357', borderDash: [6, 4] },
-  // Red Bull KTM Ajo
   'Alvaro Carpe': { color: '#ff6600' },
   'Brian Uriarte': { color: '#ff6600', borderDash: [6, 4] },
-  // AEON Credit - MT Helmets - MSI
   'Ryusei Yamanaka': { color: '#ff4133' },
   'Hakim Danish': { color: '#ff4133', borderDash: [6, 4] },
-  // Red Bull KTM Tech3
   'Valentin Perrone': { color: '#d85700' },
   'Rico Salmela': { color: '#d85700', borderDash: [6, 4] },
-  // GRYD Racing
   'Joel Kelso': { color: '#408dc5' },
   'Eddie O\'Shea': { color: '#408dc5', borderDash: [6, 4] },
-  // Rivacold Snipers Team
   'Nicola Carraro': { color: '#ffe000' },
   'Jesus Rios': { color: '#ffe000', borderDash: [6, 4] },
-  // LEVEL UP - MTA
   'Matteo Bertelle': { color: '#e04f4f' },
   'Joel Esteban': { color: '#e04f4f', borderDash: [6, 4] },
-  // SIC58 Squadra Corse
   'Casey O\'Gorman': { color: '#e42327' },
   'Leo Rammerstorfer': { color: '#e42327', borderDash: [6, 4] },
-  // CIP Green Power
   'Scott Ogden': { color: '#77cd5c' },
   'Adrian Cruces': { color: '#77cd5c', borderDash: [6, 4] },
-  // CODE Motorsports
   'Cormac Buchanan': { color: '#ed1c24' },
   'Eduardo Gutierrez': { color: '#ed1c24', borderDash: [6, 4] },
   'Ruche Moodley': { color: '#ed1c24', borderDash: [6, 4] },
-  // Honda Team Asia
   'Zen Mitani': { color: '#ffffff' },
   'Veda Pratama': { color: '#ffffff', borderDash: [6, 4] }
 };
@@ -809,7 +555,6 @@ function renderProgressionChart(riders, catId) {
   const container = document.getElementById('chart-container');
   if (!container) return;
 
-  // Filter riders that are favorited and have history data
   const favRiders = riders.filter(r => {
     const favKey = catId + ':' + r.name;
     return favorites.has(favKey) && r.history && r.history.length > 0;
@@ -823,7 +568,6 @@ function renderProgressionChart(riders, catId) {
 
   container.style.display = 'block';
 
-  // Labels (X axis)
   const maxHistoryLen = Math.max(...favRiders.map(r => r.history.length));
   const cal = CALENDARS[catId] || CALENDARS.motogp;
   const labels = [];
@@ -832,7 +576,6 @@ function renderProgressionChart(riders, catId) {
     labels.push(gpName);
   }
 
-  // Datasets
   const datasets = favRiders.map((r, idx) => {
     let sum = 0;
     const data = r.history.map(pts => { sum += pts; return sum; });
