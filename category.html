@@ -429,13 +429,33 @@ function renderRidersTable(riders, catId) {
   el.innerHTML = `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th><th class="star-col"></th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
+function isRiderFavorited(catId, riderName) {
+  if (!riderName) return false;
+  const target1 = (catId + ':' + riderName).toLowerCase();
+  const target2 = riderName.toLowerCase();
+  for (const f of favorites) {
+    const fLower = String(f).toLowerCase();
+    if (fLower === target1 || fLower === target2 || fLower.endsWith(':' + target2)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 let chartInstances = [];
 
 function getRiderHistory(r, prop) {
+  if (!r) return [0];
   if (prop && Array.isArray(r[prop]) && r[prop].length > 0) {
     return r[prop];
   }
-  return (r && Array.isArray(r.history) && r.history.length > 0) ? r.history : [];
+  if (Array.isArray(r.history) && r.history.length > 0) {
+    return r.history;
+  }
+  if (typeof r.pts === 'number' && r.pts > 0) {
+    return [r.pts];
+  }
+  return [0];
 }
 
 function renderProgressionChart(riders, catId) {
@@ -447,14 +467,11 @@ function renderProgressionChart(riders, catId) {
   chartInstances = [];
   wrapper.innerHTML = '';
 
-  let activeRiders = (riders || []).filter(r => {
-    const favKey = catId + ':' + r.name;
-    return favorites.has(favKey) && r.history && Array.isArray(r.history) && r.history.length > 0;
-  });
+  let activeRiders = (riders || []).filter(r => isRiderFavorited(catId, r.name));
 
-  // If no riders are favorited yet, default to Top 5 riders in the championship
+  // If no favorited riders match in this category, default to Top 5 riders in the championship
   if (activeRiders.length === 0) {
-    activeRiders = (riders || []).slice(0, 5).filter(r => r.history && Array.isArray(r.history) && r.history.length > 0);
+    activeRiders = (riders || []).slice(0, 5);
   }
 
   if (activeRiders.length === 0) {
@@ -474,11 +491,7 @@ function renderProgressionChart(riders, catId) {
   }
 
   chartConfigs.forEach((cfg, cIdx) => {
-    const validRiders = activeRiders.filter(r => {
-      const arr = getRiderHistory(r, cfg.historyProp);
-      return arr.length > 0;
-    });
-    if (validRiders.length === 0) return;
+    const validRiders = activeRiders;
 
     const maxHistoryLen = Math.max(...validRiders.map(r => getRiderHistory(r, cfg.historyProp).length));
     if (maxHistoryLen <= 0) return;
@@ -487,7 +500,7 @@ function renderProgressionChart(riders, catId) {
     section.style.marginBottom = cIdx < chartConfigs.length - 1 ? '35px' : '0';
     section.innerHTML = `
       <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">${cfg.title}</h3>
-      <div style="position: relative; height: 280px;">
+      <div style="position: relative; height: 280px; width: 100%;">
         <canvas id="${cfg.id}"></canvas>
       </div>`;
     wrapper.appendChild(section);
