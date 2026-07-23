@@ -43,90 +43,16 @@ jobs:
               print(f"Errore caricamento bin per history: {e}")
               current = {}
 
-          # ---- 1b. MotoGP via API pulselive (Dorna) with full Sprint & Long race history ----
+          # ---- 1b. MotoGP / Moto2 / Moto3 via API pulselive (Dorna) ----
           SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e"
-          MOTOGP_UUID = "e8c110ad-64aa-4e8e-8a86-f2f152f6a942"
-          SPRINT_MAP = {1:12, 2:9, 3:7, 4:6, 5:5, 6:4, 7:3, 8:2, 9:1}
-          LONG_MAP   = {1:25, 2:20, 3:16, 4:13, 5:11, 6:10, 7:9, 8:8, 9:7, 10:6, 11:5, 12:4, 13:3, 14:2, 15:1}
-          GP_SHORT_NAMES = ["THA", "BRA", "USA", "SPA", "FRA", "CAT", "ITA", "HUN", "CZE", "NED", "GER"]
-
-          results = {}
-
-          try:
-              events_url = f"https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid={SEASON_2026}&categoryUuid={MOTOGP_UUID}"
-              events = http_get(events_url)
-              gp_events_map = {ev['short_name']: ev['id'] for ev in events if isinstance(ev, dict) and ev.get('short_name') in GP_SHORT_NAMES}
-
-              rider_data = {}
-              for short_name in GP_SHORT_NAMES:
-                  if short_name not in gp_events_map: continue
-                  ev_id = gp_events_map[short_name]
-                  sessions_url = f"https://api.motogp.pulselive.com/motogp/v1/results/sessions?eventUuid={ev_id}&categoryUuid={MOTOGP_UUID}"
-                  try:
-                      sessions = http_get(sessions_url)
-                  except Exception: continue
-
-                  spr_session = next((s for s in sessions if isinstance(s, dict) and s.get('type') == 'SPR'), None)
-                  rac_session = next((s for s in sessions if isinstance(s, dict) and s.get('type') == 'RAC'), None)
-
-                  if spr_session:
-                      try:
-                          res = http_get(f"https://api.motogp.pulselive.com/motogp/v1/results/session/{spr_session['id']}/classification?categoryUuid={MOTOGP_UUID}")
-                          for c in res.get('classification', []):
-                              if not c.get('rider') or not c['rider'].get('full_name'): continue
-                              name = c['rider']['full_name'].strip()
-                              if "Vinales" in name or "Vi.ales" in name: name = "Maverick Viñales"
-                              pos = int(c.get('position', 99))
-                              pts = SPRINT_MAP.get(pos, 0)
-                              if name not in rider_data: rider_data[name] = {}
-                              if short_name not in rider_data[name]: rider_data[name][short_name] = {'spr': 0, 'rac': 0}
-                              rider_data[name][short_name]['spr'] = pts
-                      except Exception: pass
-
-                  if rac_session:
-                      try:
-                          res = http_get(f"https://api.motogp.pulselive.com/motogp/v1/results/session/{rac_session['id']}/classification?categoryUuid={MOTOGP_UUID}")
-                          for c in res.get('classification', []):
-                              if not c.get('rider') or not c['rider'].get('full_name'): continue
-                              name = c['rider']['full_name'].strip()
-                              if "Vinales" in name or "Vi.ales" in name: name = "Maverick Viñales"
-                              pos = int(c.get('position', 99))
-                              pts = LONG_MAP.get(pos, 0)
-                              if name not in rider_data: rider_data[name] = {}
-                              if short_name not in rider_data[name]: rider_data[name][short_name] = {'spr': 0, 'rac': 0}
-                              rider_data[name][short_name]['rac'] = pts
-                      except Exception: pass
-
-              mgp_riders = []
-              for name, gp_dict in rider_data.items():
-                  spr_hist = [gp_dict.get(gp, {}).get('spr', 0) for gp in GP_SHORT_NAMES]
-                  rac_hist = [gp_dict.get(gp, {}).get('rac', 0) for gp in GP_SHORT_NAMES]
-                  tot_hist = [s + r for s, r in zip(spr_hist, rac_hist)]
-                  spr_pts = sum(spr_hist)
-                  rac_pts = sum(rac_hist)
-                  tot_pts = sum(tot_hist)
-                  mgp_riders.append({
-                      "name": name,
-                      "pts": tot_pts,
-                      "history": tot_hist,
-                      "sprint_pts": spr_pts,
-                      "sprint_history": spr_hist,
-                      "long_pts": rac_pts,
-                      "long_history": rac_hist
-                  })
-
-              mgp_riders.sort(key=lambda r: r['pts'], reverse=True)
-              results['motogp'] = mgp_riders
-              print(f"motogp (Piloti + Sprint/Long history): {len(mgp_riders)} importati")
-          except Exception as e:
-              print(f"Errore motogp: {e}")
-
-          # ---- 1c. Moto2 & Moto3 via API pulselive ----
-          OTHER_MOTOGP_CATS = {
+          CATEGORY_IDS = {
+              "motogp": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
               "moto2":  "549640b8-fd9c-4245-acfd-60e4bc38b25c",
               "moto3":  "954f7e65-2ef2-4423-b949-4961cc603e45",
           }
-          for cat_id, cat_uuid in OTHER_MOTOGP_CATS.items():
+
+          results = {}
+          for cat_id, cat_uuid in CATEGORY_IDS.items():
               base_standings_url = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
               try:
                   data_riders = http_get(base_standings_url)
@@ -136,14 +62,16 @@ jobs:
                   existing_riders = current.get(cat_id, [])
                   for c in classification:
                       if 'rider' not in c or 'full_name' not in c['rider']: continue
-                      name = c['rider']['full_name']
+                      name = c['rider']['full_name'].strip()
+                      if "Vinales" in name or "Vi.ales" in name: name = "Maverick Viñales"
                       pts = float(c['points'])
                       
                       existing = next((r for r in existing_riders if r.get('name') == name), None)
                       if existing:
                           item = dict(existing)
+                          old_pts = float(existing.get('pts', 0))
                           history = list(existing.get('history', []))
-                          diff = pts - float(existing.get('pts', 0))
+                          diff = pts - old_pts
                           if diff > 0.1: history.append(int(diff))
                           item['pts'] = pts
                           item['history'] = history
