@@ -466,10 +466,31 @@ async function processPDF(file, catId) {
           uniqueRiders.push(r);
         }
       }
-      uniqueRiders.sort((a, b) => b.pts - a.pts);
 
-      currentData[catId] = uniqueRiders;
-      setTag('ok', '✓ ' + file.name + ' — ' + uniqueRiders.length + ' piloti');
+      if (currentData[catId] && currentData[catId].length > 0) {
+        // Merge with existing API dataset: NEVER OVERWRITE pts from API!
+        const existingMap = new Map();
+        currentData[catId].forEach(r => existingMap.set(r.name.toLowerCase(), r));
+
+        uniqueRiders.forEach(rPdf => {
+          const key = rPdf.name.toLowerCase();
+          const existing = existingMap.get(key);
+          if (existing) {
+            // Keep existing.pts strictly unchanged (from GitHub workflow API)!
+            if (rPdf.sprint_history) existing.sprint_history = rPdf.sprint_history;
+            if (rPdf.long_history) existing.long_history = rPdf.long_history;
+            if (rPdf.history) existing.history = rPdf.history;
+            if (rPdf.sprint_pts !== undefined) existing.sprint_pts = rPdf.sprint_pts;
+            if (rPdf.long_pts !== undefined) existing.long_pts = rPdf.long_pts;
+          } else {
+            currentData[catId].push(rPdf);
+          }
+        });
+      } else {
+        uniqueRiders.sort((a, b) => b.pts - a.pts);
+        currentData[catId] = uniqueRiders;
+      }
+      setTag('ok', '✓ ' + file.name + ' — ' + uniqueRiders.length + ' piloti aggiornati (classifica generale API preservata)');
     }
   } catch(err) {
     setTag('err', '⚠ ' + file.name + ' — ' + err.message);

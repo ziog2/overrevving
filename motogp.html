@@ -473,6 +473,9 @@ function getPtsForMode(rider, mode) {
 function getHistoryForMode(rider, mode) {
   if (mode === 'sprint') return rider.sprint_history || [];
   if (mode === 'long') return rider.long_history || [];
+  if (rider.sprint_history && rider.long_history && rider.sprint_history.length > 0 && rider.sprint_history.length === rider.long_history.length) {
+    return rider.sprint_history.map((sPts, idx) => sPts + (rider.long_history[idx] || 0));
+  }
   return rider.history || [];
 }
 
