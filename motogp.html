@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MotoGP · Motorsport Standings 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #18181c;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+  .top-bar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 20px 10px;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: #fff; }
+  .hero {
+    max-width: 1100px;
+    margin: 10px auto 24px;
+    padding: 0 20px;
+  }
+  .hero-band {
+    padding: 24px 28px;
+    border-radius: 16px;
+    background: #c0392b;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hero-band h1 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .hero-sub {
+    font-size: 13px;
+    opacity: 0.85;
+  }
+  .hero-meta {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #888;
+    display: flex;
+    gap: 16px;
+  }
+  .layout {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+  .panel {
+    background: #222226;
+    border-radius: 14px;
+    border: 1px solid #2e2e34;
+    overflow: hidden;
+  }
+  .panel-head {
+    padding: 14px 16px;
+    background: #2a2a30;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ddd;
+    border-bottom: 1px solid #33333a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .panel-head .count {
+    font-size: 11px;
+    font-weight: 500;
+    color: #888;
+    text-transform: none;
+  }
+
+  /* Toggle bar per classifiche MotoGP */
+  .standings-toggle-bar {
+    display: flex;
+    background: #1e1e22;
+    border-radius: 10px;
+    padding: 4px;
+    margin: 12px 14px 4px;
+    gap: 4px;
+    border: 1px solid #2e2e34;
+  }
+  .toggle-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #999;
+    padding: 8px 10px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    font-family: inherit;
+    text-align: center;
+  }
+  .toggle-btn:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.05);
+  }
+  .toggle-btn.active {
+    background: #c0392b;
+    color: #fff;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #777;
+    background: rgba(0,0,0,0.15);
+    border-bottom: 1px solid #2e2e34;
+  }
+  th:last-child, td:last-child { text-align: right; }
+  #constructors-table th, #constructors-table td,
+  #teams-table th, #teams-table td {
+    text-align: left !important;
+  }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #28282e;
+    color: #ccc;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  tr.pos-1 td:first-child { color: #f1c40f; font-weight: 700; }
+  tr.pos-2 td:first-child { color: #bdc3c7; font-weight: 700; }
+  tr.pos-3 td:first-child { color: #e67e22; font-weight: 700; }
+  tbody tr.favorite { background: #2a1f3a !important; }
+  tbody tr.favorite:hover { background: #332545 !important; }
+  tbody tr.favorite td { background: transparent !important; }
+  .star-col { width: 28px; text-align: center !important; }
+  .fav-btn {
+    background: none;
+    border: none;
+    color: #444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 4px;
+    transition: color 0.15s, transform 0.15s;
+    line-height: 1;
+  }
+  .fav-btn:hover { color: #ffd700; transform: scale(1.2); }
+  .fav-btn.active { color: #ffd700; }
+  .gap {
+    font-weight: normal;
+    color: #666;
+    font-size: 11px;
+    margin-left: 4px;
+  }
+  .loading {
+    padding: 30px;
+    text-align: center;
+    font-size: 13px;
+    color: #777;
+  }
+  .empty {
+    padding: 30px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+  }
+  .cal-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .cal-item {
+    padding: 10px 14px;
+    border-bottom: 1px solid #28282e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+  .cal-item:last-child { border-bottom: none; }
+  .cal-item.past {
+    opacity: 0.45;
+    background: rgba(0, 0, 0, 0.15);
+  }
+  .cal-item.past .cal-name { color: #888; }
+  .cal-item.past .cal-date { color: #555; }
+  .cal-name { font-weight: 600; color: #eee; }
+  .cal-date { color: #777; font-size: 11px; }
+  .note {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    padding: 0 20px;
+    font-size: 11px;
+    color: #666;
+    line-height: 1.5;
+  }
+  .chart-container {
+    max-width: 1100px;
+    margin: 32px auto 0;
+    background: #2c2c32;
+    border-radius: 14px;
+    border: 1px solid #3a3a42;
+    padding: 20px;
+  }
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .chart-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #ccc;
+  }
+</style>
+<script src="js/chart.min.js"></script>
+</head>
+<body>
+
+<div class="top-bar">
+  <a class="back-link" href="index.html">← All championships</a>
+</div>
+
+<div class="hero">
+  <div class="hero-band">
+    <h1>MotoGP</h1>
+    <div class="hero-sub">2026 Season · Riders, constructors & calendar</div>
+  </div>
+  <div class="hero-meta" id="hero-meta"></div>
+</div>
+
+<div class="layout">
+  <div>
+    <div class="panel">
+      <div class="panel-head"><span>Constructors' standings</span><span class="count" id="constructors-count"></span></div>
+      <div id="constructors-table"><div class="loading">⏳ Loading…</div></div>
+    </div>
+    <div class="panel" style="margin-top:20px;">
+      <div class="panel-head"><span>Teams' standings</span><span class="count" id="teams-count"></span></div>
+      <div id="teams-table"><div class="loading">⏳ Loading…</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="panel">
+      <div class="panel-head"><span>Riders' standings</span><span class="count" id="riders-count"></span></div>
+      <div class="standings-toggle-bar">
+        <button class="toggle-btn active" data-mode="overall" onclick="switchStandingsMode('overall')">Generale</button>
+        <button class="toggle-btn" data-mode="sprint" onclick="switchStandingsMode('sprint')">Sprint</button>
+        <button class="toggle-btn" data-mode="long" onclick="switchStandingsMode('long')">Gare Lunghe</button>
+      </div>
+      <div id="riders-table"><div class="loading">⏳ Loading…</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="panel">
+      <div class="panel-head"><span>Season calendar</span><span class="count" id="cal-count"></span></div>
+      <div class="cal-list" id="cal-list"><div class="loading">⏳ Loading…</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="chart-container" id="chart-container" style="display:none;">
+  <div class="chart-header">
+    <h3 class="chart-title" id="chart-title">Riders' Points Progression</h3>
+  </div>
+  <div style="position: relative; height: 300px;">
+    <canvas id="progressionChart"></canvas>
+  </div>
+</div>
+
+<div class="note">Constructors' and teams' standings are imported from the official MotoGP world championship classification PDF. Use the toggle buttons above the riders table to switch between Overall, Sprint, and Main Race standings.</div>
+
+<script>
+const BIN_ID = '6a3064e4f5f4af5e29f7958b';
+const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
+const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
+const catId = 'motogp';
+
+const CALENDAR = [
+  { name: 'Thailand',      date: '2026-03-01' },
+  { name: 'Brazil',        date: '2026-03-22' },
+  { name: 'USA',           date: '2026-03-29' },
+  { name: 'Spain',         date: '2026-04-26' },
+  { name: 'France',        date: '2026-05-10' },
+  { name: 'Catalonia',     date: '2026-05-17' },
+  { name: 'Italy',         date: '2026-05-31' },
+  { name: 'Hungary',       date: '2026-06-07' },
+  { name: 'Czechia',       date: '2026-06-21' },
+  { name: 'Netherlands',   date: '2026-06-28' },
+  { name: 'Germany',       date: '2026-07-12' },
+  { name: 'Great Britain', date: '2026-08-09' },
+  { name: 'Aragon',        date: '2026-08-30' },
+  { name: 'San Marino',    date: '2026-09-13' },
+  { name: 'Austria',       date: '2026-09-20' },
+  { name: 'Japan',         date: '2026-10-04' },
+  { name: 'Indonesia',     date: '2026-10-11' },
+  { name: 'Australia',     date: '2026-10-25' },
+  { name: 'Malaysia',      date: '2026-11-01' },
+  { name: 'Qatar',         date: '2026-11-08' },
+  { name: 'Portugal',      date: '2026-11-22' },
+  { name: 'Valencia',      date: '2026-11-29' },
+];
+
+const FAV_KEY = 'overrevving_favorites';
+let favorites = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]'));
+let currentRiders = [];
+let currentMode = 'overall'; // 'overall', 'sprint', 'long'
+
+function toggleFav(key) {
+  if (favorites.has(key)) favorites.delete(key);
+  else favorites.add(key);
+  localStorage.setItem(FAV_KEY, JSON.stringify([...favorites]));
+  document.querySelectorAll(`[data-fav="${key}"]`).forEach(tr => {
+    tr.classList.toggle('favorite', favorites.has(key));
+    const btn = tr.querySelector('.fav-btn');
+    if (btn) btn.classList.toggle('active', favorites.has(key));
+  });
+  renderProgressionChart(currentRiders);
+}
+
+function formatName(fullName) {
+  const parts = fullName.trim().split(' ');
+  if (parts.length < 2) return fullName;
+  const normalized = parts.map(w =>
+    w === w.toUpperCase() && w.length > 1 ? w.charAt(0) + w.slice(1).toLowerCase() : w
+  );
+  return normalized[0][0].toUpperCase() + '. ' + normalized.slice(1).join(' ');
+}
+
+function switchStandingsMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === mode);
+  });
+  if (currentRiders.length) {
+    renderRidersTable(currentRiders);
+    renderProgressionChart(currentRiders);
+  }
+}
+
+async function init() {
+  renderCalendar();
+  await loadRidersFromBin();
+}
+
+async function loadRidersFromBin() {
+  try {
+    const res = await fetch(BIN_URL, { headers: { 'X-Access-Key': API_KEY } });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    const riders = json.record[catId] || [];
+    currentRiders = riders;
+
+    renderRidersTable(riders);
+
+    const constructors = json.record[catId + '_constructors'] || [];
+    renderConstructorsTable(constructors);
+
+    const teams = json.record[catId + '_teams'] || [];
+    renderTeamsTable(teams);
+
+    try {
+      renderProgressionChart(riders);
+    } catch (chartErr) {
+      console.warn('Progression chart render warning:', chartErr);
+    }
+
+    const ts = json.record['_updated'];
+    document.getElementById('hero-meta').innerHTML = ts
+      ? `<span>Last updated: <strong>${ts}</strong></span>`
+      : '';
+  } catch (e) {
+    console.error('Error loading standings:', e);
+    document.getElementById('riders-table').innerHTML =
+      '<div class="empty">⚠ Could not load standings</div>';
+  }
+}
+
+function getPtsForMode(rider, mode) {
+  if (mode === 'sprint') return rider.sprint_pts !== undefined ? rider.sprint_pts : 0;
+  if (mode === 'long') return rider.long_pts !== undefined ? rider.long_pts : 0;
+  return rider.pts !== undefined ? rider.pts : 0;
+}
+
+function getHistoryForMode(rider, mode) {
+  if (mode === 'sprint') return rider.sprint_history || rider.history || [];
+  if (mode === 'long') return rider.long_history || rider.history || [];
+  return rider.history || [];
+}
+
+function renderRidersTable(rows) {
+  const el = document.getElementById('riders-table');
+  document.getElementById('riders-count').textContent = rows.length ? rows.length + ' riders' : '';
+  if (!rows.length) { el.innerHTML = '<div class="empty">No data available</div>'; return; }
+
+  // Clone and sort according to active mode
+  const sortedRows = [...rows].sort((a, b) => getPtsForMode(b, currentMode) - getPtsForMode(a, currentMode));
+
+  const leaderPts = getPtsForMode(sortedRows[0], currentMode);
+  let html = '';
+  sortedRows.forEach((r, i) => {
+    const pts = getPtsForMode(r, currentMode);
+    const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
+    const gap = i === 0 ? '' : `<span class="gap">-${leaderPts - pts}</span>`;
+    const favKey = catId + ':' + r.name;
+    const isFav = favorites.has(favKey);
+
+    html += `<tr class="${pc}${isFav ? ' favorite' : ''}" data-fav="${favKey}">
+      <td>${i+1}</td>
+      <td>${formatName(r.name)}</td>
+      <td>${pts}${gap}</td>
+      <td><button class="fav-btn${isFav ? ' active' : ''}" onclick="toggleFav('${favKey}')" title="Favourite rider">★</button></td>
+    </tr>`;
+  });
+  el.innerHTML = `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th><th class="star-col"></th></tr></thead><tbody>${html}</tbody></table>`;
+}
+
+function renderConstructorsTable(rows) {
+  const el = document.getElementById('constructors-table');
+  document.getElementById('constructors-count').textContent = rows.length ? rows.length + ' manufacturers' : '';
+  if (!rows.length) { el.innerHTML = '<div class="empty">No data available yet</div>'; return; }
+
+  const leader = rows[0].pts;
+  let html = '';
+  rows.forEach((r, i) => {
+    const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
+    const gap = i === 0 ? '' : `<span class="gap">-${leader - r.pts}</span>`;
+    html += `<tr class="${pc}"><td>${i+1}</td><td>${r.name}</td><td>${r.pts}${gap}</td></tr>`;
+  });
+  el.innerHTML = `<table><thead><tr><th>#</th><th>Constructor</th><th>Pts</th></tr></thead><tbody>${html}</tbody></table>`;
+}
+
+function renderTeamsTable(rows) {
+  const el = document.getElementById('teams-table');
+  document.getElementById('teams-count').textContent = rows.length ? rows.length + ' teams' : '';
+  if (!rows.length) { el.innerHTML = '<div class="empty">No data available yet</div>'; return; }
+
+  const leader = rows[0].pts;
+  let html = '';
+  rows.forEach((r, i) => {
+    const pc = i===0?'pos-1':i===1?'pos-2':i===2?'pos-3':'';
+    const gap = i === 0 ? '' : `<span class="gap">-${leader - r.pts}</span>`;
+    html += `<tr class="${pc}"><td>${i+1}</td><td>${r.name}</td><td>${r.pts}${gap}</td></tr>`;
+  });
+  el.innerHTML = `<table><thead><tr><th>#</th><th>Team</th><th>Pts</th></tr></thead><tbody>${html}</tbody></table>`;
+}
+
+function renderCalendar() {
+  const el = document.getElementById('cal-list');
+  const now = new Date();
+  let completedCount = 0;
+  let html = '';
+
+  CALENDAR.forEach(ev => {
+    const evDate = new Date(ev.date + 'T23:59:59');
+    const isPast = evDate < now;
+    if (isPast) completedCount++;
+
+    const d = new Date(ev.date);
+    const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    const checkMark = isPast ? '<span style="color:#2ecc71;margin-right:6px;font-size:11px;">✓</span>' : '';
+    
+    html += `<div class="cal-item${isPast ? ' past' : ''}">
+      <span class="cal-name">${checkMark}${ev.name}</span>
+      <span class="cal-date">${dateStr}</span>
+    </div>`;
+  });
+
+  const pct = Math.round((completedCount / CALENDAR.length) * 100);
+  document.getElementById('cal-count').textContent = `${completedCount}/${CALENDAR.length} completed (${pct}%)`;
+  el.innerHTML = html;
+}
+
+const LINE_COLORS = [
+  '#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6',
+  '#e67e22', '#1abc9c', '#e84393', '#00cec9', '#fdcb6e'
+];
+
+const RIDER_STYLES = {
+  'Marc Marquez': { color: '#e74c3c' },
+  'Francesco Bagnaia': { color: '#e74c3c', borderDash: [6, 4] },
+  'Jorge Martin': { color: '#4a4a4a', borderDash: [6, 4] },
+  'Marco Bezzecchi': { color: '#4a4a4a' },
+  'Fabio Di Giannantonio': { color: '#d8ff00' },
+  'Franco Morbidelli': { color: '#d8ff00', borderDash: [6, 4] },
+  'Ai Ogura': { color: '#8ec0e4' },
+  'Raul Fernandez': { color: '#8ec0e4', borderDash: [6, 4] },
+  'Pedro Acosta': { color: '#ff6600' },
+  'Brad Binder': { color: '#ff6600', borderDash: [6, 4] },
+  'Luca Marini': { color: '#ff0000' },
+  'Joan Mir': { color: '#ff0000', borderDash: [6, 4] },
+  'Alex Marquez': { color: '#9cb2e6' },
+  'Fermin Aldeguer': { color: '#9cb2e6', borderDash: [6, 4] },
+  'Enea Bastianini': { color: '#ff9f43' },
+  'Maverick Viñales': { color: '#ff9f43', borderDash: [6, 4] },
+  'Fabio Quartararo': { color: '#0055ff' },
+  'Alex Rins': { color: '#0055ff', borderDash: [6, 4] },
+  'Jack Miller': { color: '#3388ff' },
+  'Toprak Razgatlioglu': { color: '#3388ff', borderDash: [6, 4] },
+  'Diogo Moreira': { color: '#ffffff' },
+  'Johann Zarco': { color: '#ffffff', borderDash: [6, 4] },
+  'Cal Crutchlow': { color: '#ffffff', borderDash: [6, 4] }
+};
+
+let myChart = null;
+function renderProgressionChart(riders) {
+  const container = document.getElementById('chart-container');
+  if (!container) return;
+
+  const modeLabel = currentMode === 'sprint' ? 'Sprint' : currentMode === 'long' ? 'Gare Lunghe' : 'Generale';
+  document.getElementById('chart-title').textContent = `Progressione Punti (${modeLabel})`;
+
+  const favRiders = riders.filter(r => {
+    const favKey = catId + ':' + r.name;
+    const hist = getHistoryForMode(r, currentMode);
+    return favorites.has(favKey) && hist && hist.length > 0;
+  });
+
+  if (favRiders.length === 0) {
+    container.style.display = 'none';
+    if (myChart) { myChart.destroy(); myChart = null; }
+    return;
+  }
+
+  container.style.display = 'block';
+
+  const maxHistoryLen = Math.max(...favRiders.map(r => getHistoryForMode(r, currentMode).length));
+  const labels = [];
+  for (let i = 0; i < maxHistoryLen; i++) {
+    const gpName = CALENDAR[i] ? CALENDAR[i].name : 'Round ' + (i + 1);
+    labels.push(gpName);
+  }
+
+  const datasets = favRiders.map((r, idx) => {
+    let sum = 0;
+    const hist = getHistoryForMode(r, currentMode);
+    const data = hist.map(pts => { sum += pts; return sum; });
+    const customStyle = RIDER_STYLES[r.name] || {};
+    const color = customStyle.color || LINE_COLORS[idx % LINE_COLORS.length];
+    
+    const ds = {
+      label: formatName(r.name),
+      data: data,
+      borderColor: color,
+      backgroundColor: color + '15',
+      borderWidth: 3,
+      tension: 0.3,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      fill: false
+    };
+
+    if (customStyle.borderDash) {
+      ds.borderDash = customStyle.borderDash;
+    }
+
+    return ds;
+  });
+
+  const ctx = document.getElementById('progressionChart').getContext('2d');
+  if (myChart) {
+    myChart.data.labels = labels;
+    myChart.data.datasets = datasets;
+    myChart.update();
+  } else {
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: { color: '#ccc', font: { family: 'Inter', size: 12 } }
+          },
+          tooltip: {
+            backgroundColor: '#1e1e22',
+            titleColor: '#fff',
+            bodyColor: '#ddd',
+            borderColor: '#3a3a42',
+            borderWidth: 1
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#999', font: { family: 'Inter', size: 10 } }
+          },
+          y: {
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#999', font: { family: 'Inter', size: 11 } }
+          }
+        }
+      }
+    });
+  }
+}
+
+init();
+</script>
+</body>
+</html>
