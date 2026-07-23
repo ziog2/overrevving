@@ -43,45 +43,105 @@ jobs:
               print(f"Errore caricamento bin per history: {e}")
               current = {}
 
-          # ---- 1b. MotoGP / Moto2 / Moto3 via API pulselive (Dorna) ----
+          # ---- 1b. MotoGP / Moto2 / Moto3 via API pulselive (Dorna) with full per-session history ----
           SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e"
-          CATEGORY_IDS = {
+          CATEGORY_UUIDS = {
               "motogp": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
               "moto2":  "549640b8-fd9c-4245-acfd-60e4bc38b25c",
               "moto3":  "954f7e65-2ef2-4423-b949-4961cc603e45",
           }
+          GP_SHORT_NAMES = ["THA", "BRA", "USA", "SPA", "FRA", "CAT", "ITA", "HUN", "CZE", "NED", "GER"]
 
           results = {}
-          for cat_id, cat_uuid in CATEGORY_IDS.items():
-              base_standings_url = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
-              try:
-                  data_riders = http_get(base_standings_url)
-                  classification = data_riders.get('classification', [])
 
-                  riders = []
-                  existing_riders = current.get(cat_id, [])
-                  for c in classification:
-                      if 'rider' not in c or 'full_name' not in c['rider']: continue
+          for cat_id, cat_uuid in CATEGORY_UUIDS.items():
+              try:
+                  events_url = f"https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
+                  events = http_get(events_url)
+                  gp_events_map = {ev['short_name']: ev['id'] for ev in events if isinstance(ev, dict) and ev.get('short_name') in GP_SHORT_NAMES}
+
+                  standings_url = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
+                  standings = http_get(standings_url).get('classification', [])
+
+                  all_riders = []
+                  for c in standings:
+                      if not c.get('rider') or not c['rider'].get('full_name'): continue
                       name = c['rider']['full_name'].strip()
                       if "Vinales" in name or "Vi.ales" in name: name = "Maverick Viñales"
-                      pts = float(c['points'])
-                      
-                      existing = next((r for r in existing_riders if r.get('name') == name), None)
-                      if existing:
-                          item = dict(existing)
-                          old_pts = float(existing.get('pts', 0))
-                          history = list(existing.get('history', []))
-                          diff = pts - old_pts
-                          if diff > 0.1: history.append(int(diff))
-                          item['pts'] = pts
-                          item['history'] = history
-                          riders.append(item)
-                      else:
-                          riders.append({"name": name, "pts": pts, "history": [int(pts)]})
+                      if "Munoz" in name or "Mu.oz" in name: name = "Daniel Muñoz"
+                      if "Oncu" in name or ".ncu" in name: name = "Deniz Öncü"
+                      if name not in all_riders: all_riders.append(name)
 
-                  riders.sort(key=lambda r: r['pts'], reverse=True)
-                  results[cat_id] = riders
-                  print(f"{cat_id} (Piloti): {len(riders)} importati")
+                  rider_matrix = {r: {gp: {'spr': 0, 'rac': 0} for gp in GP_SHORT_NAMES} for r in all_riders}
+
+                  for short_name in GP_SHORT_NAMES:
+                      if short_name not in gp_events_map: continue
+                      ev_id = gp_events_map[short_name]
+                      sessions_url = f"https://api.motogp.pulselive.com/motogp/v1/results/sessions?eventUuid={ev_id}&categoryUuid={cat_uuid}"
+                      try:
+                          sessions = http_get(sessions_url)
+                      except Exception: continue
+
+                      spr_session = next((s for s in sessions if isinstance(s, dict) and s.get('type') == 'SPR'), None)
+                      rac_session = next((s for s in sessions if isinstance(s, dict) and s.get('type') == 'RAC'), None)
+
+                      if spr_session:
+                          try:
+                              res = http_get(f"https://api.motogp.pulselive.com/motogp/v1/results/session/{spr_session['id']}/classification?categoryUuid={cat_uuid}")
+                              for c in res.get('classification', []):
+                                  if not c.get('rider') or not c['rider'].get('full_name'): continue
+                                  name = c['rider']['full_name'].strip()
+                                  if "Vinales" in name or "Vi.ales" in name: name = "Maverick Viñales"
+                                  if "Munoz" in name or "Mu.oz" in name: name = "Daniel Muñoz"
+                                  if "Oncu" in name or ".ncu" in name: name = "Deniz Öncü"
+                                  pts = int(c.get('points', 0)) if c.get('points') is not None else 0
+                                  if name not in rider_matrix: rider_matrix[name] = {g: {'spr': 0, 'rac': 0} for g in GP_SHORT_NAMES}
+                                  rider_matrix[name][short_name]['spr'] = pts
+                          except Exception: pass
+
+                      if rac_session:
+                          try:
+                              res = http_get(f"https://api.motogp.pulselive.com/motogp/v1/results/session/{rac_session['id']}/classification?categoryUuid={cat_uuid}")
+                              for c in res.get('classification', []):
+                                  if not c.get('rider') or not c['rider'].get('full_name'): continue
+                                  name = c['rider']['full_name'].strip()
+                                  if "Vinales" in name or "Vi.ales" in name: name = "Maverick Viñales"
+                                  if "Munoz" in name or "Mu.oz" in name: name = "Daniel Muñoz"
+                                  if "Oncu" in name or ".ncu" in name: name = "Deniz Öncü"
+                                  pts = int(c.get('points', 0)) if c.get('points') is not None else 0
+                                  if name not in rider_matrix: rider_matrix[name] = {g: {'spr': 0, 'rac': 0} for g in GP_SHORT_NAMES}
+                                  rider_matrix[name][short_name]['rac'] = pts
+                          except Exception: pass
+
+                  # Marc Marquez explicit user override for MotoGP
+                  if cat_id == "motogp" and "Marc Marquez" in rider_matrix:
+                      m_spr = [9, 12, 0, 12, 0, 0, 5, 12, 7, 4, 12]
+                      m_rac = [0, 13, 11, 0, 0, 0, 9, 25, 25, 9, 25]
+                      for idx, gp in enumerate(GP_SHORT_NAMES):
+                          rider_matrix["Marc Marquez"][gp]['spr'] = m_spr[idx]
+                          rider_matrix["Marc Marquez"][gp]['rac'] = m_rac[idx]
+
+                  clean_riders = []
+                  for name, gp_dict in rider_matrix.items():
+                      spr_hist = [gp_dict[gp]['spr'] for gp in GP_SHORT_NAMES]
+                      rac_hist = [gp_dict[gp]['rac'] for gp in GP_SHORT_NAMES]
+                      tot_hist = [s + r for s, r in zip(spr_hist, rac_hist)]
+                      spr_pts = sum(spr_hist)
+                      rac_pts = sum(rac_hist)
+                      tot_pts = sum(tot_hist)
+                      clean_riders.append({
+                          "name": name,
+                          "pts": tot_pts,
+                          "history": tot_hist,
+                          "sprint_pts": spr_pts,
+                          "sprint_history": spr_hist,
+                          "long_pts": rac_pts,
+                          "long_history": rac_hist
+                      })
+
+                  clean_riders.sort(key=lambda r: r['pts'], reverse=True)
+                  results[cat_id] = clean_riders
+                  print(f"{cat_id} (Piloti + Sprint/Long history): {len(clean_riders)} importati")
               except Exception as e:
                   print(f"Errore {cat_id}: {e}")
 
