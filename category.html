@@ -576,6 +576,31 @@ const RIDER_STYLES = {
   'Veda Pratama': { color: '#ffffff', borderDash: [6, 4] }
 };
 
+const logoImg = new Image();
+logoImg.src = 'logo.png';
+
+const watermarkPlugin = {
+  id: 'watermarkLogo',
+  beforeDraw: (chart) => {
+    if (!logoImg.complete || logoImg.naturalWidth === 0) return;
+    const ctx = chart.ctx;
+    const { chartArea } = chart;
+    if (!chartArea) return;
+
+    ctx.save();
+    ctx.globalAlpha = 0.09;
+    const targetWidth = 110;
+    const targetHeight = (logoImg.naturalHeight / logoImg.naturalWidth) * targetWidth;
+    const x = chartArea.left + 12;
+    const y = chartArea.top + 10;
+    ctx.drawImage(logoImg, x, y, targetWidth, targetHeight);
+    ctx.restore();
+  }
+};
+logoImg.onload = () => {
+  if (currentRiders.length) renderProgressionChart(currentRiders, getCatId());
+};
+
 let myChart = null;
 function renderProgressionChart(riders, catId) {
   const container = document.getElementById('chart-container');
@@ -636,6 +661,7 @@ function renderProgressionChart(riders, catId) {
     myChart = new Chart(ctx, {
       type: 'line',
       data: { labels, datasets },
+      plugins: [watermarkPlugin],
       options: {
         responsive: true,
         maintainAspectRatio: false,
