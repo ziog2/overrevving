@@ -225,7 +225,7 @@
   }
   .chart-container {
     max-width: 1100px;
-    margin: 32px auto 0;
+    margin: 24px auto 0;
     background: #2c2c32;
     border-radius: 14px;
     border: 1px solid #3a3a42;
@@ -291,12 +291,33 @@
   </div>
 </div>
 
-<div class="chart-container" id="chart-container" style="display:none;">
+<!-- 1. Grafico Progressione Totale -->
+<div class="chart-container" id="chart-container-overall" style="display:none; margin-top:32px;">
   <div class="chart-header">
-    <h3 class="chart-title" id="chart-title">Riders' Points Progression</h3>
+    <h3 class="chart-title">Progressione Punti Totali (Generale)</h3>
   </div>
   <div style="position: relative; height: 300px;">
-    <canvas id="progressionChart"></canvas>
+    <canvas id="progressionChartOverall"></canvas>
+  </div>
+</div>
+
+<!-- 2. Grafico Progressione Solo Sprint -->
+<div class="chart-container" id="chart-container-sprint" style="display:none;">
+  <div class="chart-header">
+    <h3 class="chart-title">Progressione Punti (Solo Sprint)</h3>
+  </div>
+  <div style="position: relative; height: 300px;">
+    <canvas id="progressionChartSprint"></canvas>
+  </div>
+</div>
+
+<!-- 3. Grafico Progressione Solo Gare Lunghe -->
+<div class="chart-container" id="chart-container-long" style="display:none;">
+  <div class="chart-header">
+    <h3 class="chart-title">Progressione Punti (Solo Gare Lunghe)</h3>
+  </div>
+  <div style="position: relative; height: 300px;">
+    <canvas id="progressionChartLong"></canvas>
   </div>
 </div>
 
@@ -347,7 +368,7 @@ function toggleFav(key) {
     const btn = tr.querySelector('.fav-btn');
     if (btn) btn.classList.toggle('active', favorites.has(key));
   });
-  renderProgressionChart(currentRiders);
+  renderAllCharts(currentRiders);
 }
 
 function formatName(fullName) {
@@ -366,7 +387,6 @@ function switchStandingsMode(mode) {
   });
   if (currentRiders.length) {
     renderRidersTable(currentRiders);
-    renderProgressionChart(currentRiders);
   }
 }
 
@@ -392,7 +412,7 @@ async function loadRidersFromBin() {
     renderTeamsTable(teams);
 
     try {
-      renderProgressionChart(riders);
+      renderAllCharts(riders);
     } catch (chartErr) {
       console.warn('Progression chart render warning:', chartErr);
     }
@@ -415,8 +435,8 @@ function getPtsForMode(rider, mode) {
 }
 
 function getHistoryForMode(rider, mode) {
-  if (mode === 'sprint') return rider.sprint_history || rider.history || [];
-  if (mode === 'long') return rider.long_history || rider.history || [];
+  if (mode === 'sprint') return rider.sprint_history || [];
+  if (mode === 'long') return rider.long_history || [];
   return rider.history || [];
 }
 
@@ -534,29 +554,40 @@ const RIDER_STYLES = {
   'Cal Crutchlow': { color: '#ffffff', borderDash: [6, 4] }
 };
 
-let myChart = null;
-function renderProgressionChart(riders) {
-  const container = document.getElementById('chart-container');
-  if (!container) return;
+let chartInstances = {
+  overall: null,
+  sprint: null,
+  long: null
+};
 
-  const modeLabel = currentMode === 'sprint' ? 'Sprint' : currentMode === 'long' ? 'Gare Lunghe' : 'Generale';
-  document.getElementById('chart-title').textContent = `Progressione Punti (${modeLabel})`;
+function renderAllCharts(riders) {
+  renderChartInstance('progressionChartOverall', 'chart-container-overall', 'overall', riders);
+  renderChartInstance('progressionChartSprint', 'chart-container-sprint', 'sprint', riders);
+  renderChartInstance('progressionChartLong', 'chart-container-long', 'long', riders);
+}
+
+function renderChartInstance(canvasId, containerId, modeKey, riders) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
   const favRiders = riders.filter(r => {
     const favKey = catId + ':' + r.name;
-    const hist = getHistoryForMode(r, currentMode);
+    const hist = getHistoryForMode(r, modeKey);
     return favorites.has(favKey) && hist && hist.length > 0;
   });
 
   if (favRiders.length === 0) {
     container.style.display = 'none';
-    if (myChart) { myChart.destroy(); myChart = null; }
+    if (chartInstances[modeKey]) {
+      chartInstances[modeKey].destroy();
+      chartInstances[modeKey] = null;
+    }
     return;
   }
 
   container.style.display = 'block';
 
-  const maxHistoryLen = Math.max(...favRiders.map(r => getHistoryForMode(r, currentMode).length));
+  const maxHistoryLen = Math.max(...favRiders.map(r => getHistoryForMode(r, modeKey).length));
   const labels = [];
   for (let i = 0; i < maxHistoryLen; i++) {
     const gpName = CALENDAR[i] ? CALENDAR[i].name : 'Round ' + (i + 1);
@@ -565,7 +596,7 @@ function renderProgressionChart(riders) {
 
   const datasets = favRiders.map((r, idx) => {
     let sum = 0;
-    const hist = getHistoryForMode(r, currentMode);
+    const hist = getHistoryForMode(r, modeKey);
     const data = hist.map(pts => { sum += pts; return sum; });
     const customStyle = RIDER_STYLES[r.name] || {};
     const color = customStyle.color || LINE_COLORS[idx % LINE_COLORS.length];
@@ -589,13 +620,13 @@ function renderProgressionChart(riders) {
     return ds;
   });
 
-  const ctx = document.getElementById('progressionChart').getContext('2d');
-  if (myChart) {
-    myChart.data.labels = labels;
-    myChart.data.datasets = datasets;
-    myChart.update();
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  if (chartInstances[modeKey]) {
+    chartInstances[modeKey].data.labels = labels;
+    chartInstances[modeKey].data.datasets = datasets;
+    chartInstances[modeKey].update();
   } else {
-    myChart = new Chart(ctx, {
+    chartInstances[modeKey] = new Chart(ctx, {
       type: 'line',
       data: { labels, datasets },
       options: {
