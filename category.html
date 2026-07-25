@@ -302,6 +302,22 @@
         <canvas id="progressionChart"></canvas>
       </div>
     </div>
+
+    <!-- Contatore 0 Punti (Gare Sprint) -->
+    <div class="chart-container" id="chart-container-zero-sprint" style="display:none;">
+      <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Contatore Gare a 0 Punti (Gare Sprint)</h3>
+      <div style="position: relative; height: 300px;">
+        <canvas id="progressionChartZeroSprint"></canvas>
+      </div>
+    </div>
+
+    <!-- Contatore 0 Punti (Gare Lunghe) -->
+    <div class="chart-container" id="chart-container-zero-long" style="display:none;">
+      <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Contatore Gare a 0 Punti (Gare Lunghe)</h3>
+      <div style="position: relative; height: 300px;">
+        <canvas id="progressionChartZeroLong"></canvas>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -409,7 +425,7 @@ function toggleFav(key) {
     const btn = tr.querySelector('.fav-btn');
     if (btn) btn.classList.toggle('active', favorites.has(key));
   });
-  renderProgressionChart(currentRiders, getCatId());
+  renderAllCategoryCharts(currentRiders, getCatId());
 }
 
 function formatName(fullName) {
@@ -457,7 +473,7 @@ async function loadRidersFromBin(catId) {
     renderTeamsTable(teams);
 
     try {
-      renderProgressionChart(riders, catId);
+      renderAllCategoryCharts(riders, catId);
     } catch (chartErr) {
       console.warn('Progression chart render warning:', chartErr);
     }
@@ -674,28 +690,59 @@ const watermarkPlugin = {
   }
 };
 logoImg.onload = () => {
-  if (currentRiders.length) renderProgressionChart(currentRiders, getCatId());
+  if (currentRiders.length) renderAllCategoryCharts(currentRiders, getCatId());
 };
 
-let myChart = null;
-function renderProgressionChart(riders, catId) {
-  const container = document.getElementById('chart-container');
+let chartInstances = {
+  progression: null,
+  zero_sprint: null,
+  zero_long: null
+};
+
+function renderAllCategoryCharts(riders, catId) {
+  renderCategoryChartInstance('progressionChart', 'chart-container', 'progression', riders, catId);
+  renderCategoryChartInstance('progressionChartZeroSprint', 'chart-container-zero-sprint', 'zero_sprint', riders, catId);
+  renderCategoryChartInstance('progressionChartZeroLong', 'chart-container-zero-long', 'zero_long', riders, catId);
+}
+
+function renderCategoryChartInstance(canvasId, containerId, modeKey, riders, catId) {
+  const container = document.getElementById(containerId);
   if (!container) return;
+
+  const hasSprint = riders.some(r => r.sprint_history && r.sprint_history.length > 0);
+  if (modeKey === 'zero_sprint' && !hasSprint) {
+    container.style.display = 'none';
+    if (chartInstances[modeKey]) {
+      chartInstances[modeKey].destroy();
+      chartInstances[modeKey] = null;
+    }
+    return;
+  }
+
+  const getHist = (r) => {
+    if (modeKey === 'zero_sprint') return r.sprint_history || [];
+    if (modeKey === 'zero_long') return r.long_history || r.history || [];
+    return r.history || [];
+  };
 
   const favRiders = riders.filter(r => {
     const favKey = catId + ':' + r.name;
-    return favorites.has(favKey) && r.history && r.history.length > 0;
+    const h = getHist(r);
+    return favorites.has(favKey) && h && h.length > 0;
   });
 
   if (favRiders.length === 0) {
     container.style.display = 'none';
-    if (myChart) { myChart.destroy(); myChart = null; }
+    if (chartInstances[modeKey]) {
+      chartInstances[modeKey].destroy();
+      chartInstances[modeKey] = null;
+    }
     return;
   }
 
   container.style.display = 'block';
 
-  const maxHistoryLen = Math.max(...favRiders.map(r => r.history.length));
+  const maxHistoryLen = Math.max(...favRiders.map(r => getHist(r).length));
   const cal = CALENDARS[catId] || CALENDARS.motogp;
   const labels = [];
   for (let i = 0; i < maxHistoryLen; i++) {
@@ -703,9 +750,21 @@ function renderProgressionChart(riders, catId) {
     labels.push(gpName);
   }
 
+  const isZeroMode = modeKey.startsWith('zero');
+
   const datasets = favRiders.map((r, idx) => {
-    let sum = 0;
-    const data = r.history.map(pts => { sum += pts; return sum; });
+    const h = getHist(r);
+    let data = [];
+    if (isZeroMode) {
+      let zeroCount = 0;
+      data = h.map(pts => {
+        if (pts === 0) zeroCount += 1;
+        return zeroCount;
+      });
+    } else {
+      let sum = 0;
+      data = h.map(pts => { sum += pts; return sum; });
+    }
     const customStyle = RIDER_STYLES[r.name] || {};
     const color = customStyle.color || LINE_COLORS[idx % LINE_COLORS.length];
     
@@ -715,7 +774,7 @@ function renderProgressionChart(riders, catId) {
       borderColor: color,
       backgroundColor: color + '15',
       borderWidth: 3,
-      tension: 0.3,
+      tension: isZeroMode ? 0.1 : 0.3,
       pointRadius: 4,
       pointHoverRadius: 6,
       fill: false
@@ -728,13 +787,13 @@ function renderProgressionChart(riders, catId) {
     return ds;
   });
 
-  const ctx = document.getElementById('progressionChart').getContext('2d');
-  if (myChart) {
-    myChart.data.labels = labels;
-    myChart.data.datasets = datasets;
-    myChart.update();
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  if (chartInstances[modeKey]) {
+    chartInstances[modeKey].data.labels = labels;
+    chartInstances[modeKey].data.datasets = datasets;
+    chartInstances[modeKey].update();
   } else {
-    myChart = new Chart(ctx, {
+    chartInstances[modeKey] = new Chart(ctx, {
       type: 'line',
       data: { labels, datasets },
       plugins: [watermarkPlugin],
@@ -759,8 +818,13 @@ function renderProgressionChart(riders, catId) {
             ticks: { color: '#999', font: { family: 'Inter', size: 10 } }
           },
           y: {
+            beginAtZero: true,
             grid: { color: 'rgba(255,255,255,0.06)' },
-            ticks: { color: '#999', font: { family: 'Inter', size: 11 } }
+            ticks: { 
+              color: '#999', 
+              font: { family: 'Inter', size: 11 },
+              precision: isZeroMode ? 0 : undefined
+            }
           }
         }
       }

@@ -367,6 +367,26 @@
         <canvas id="progressionChartLong"></canvas>
       </div>
     </div>
+
+    <!-- 4. Contatore 0 Punti (Gare Sprint) -->
+    <div class="chart-container" id="chart-container-zero-sprint" style="display:none;">
+      <div class="chart-header">
+        <h3 class="chart-title">Contatore Gare a 0 Punti (Gare Sprint)</h3>
+      </div>
+      <div style="position: relative; height: 300px;">
+        <canvas id="progressionChartZeroSprint"></canvas>
+      </div>
+    </div>
+
+    <!-- 5. Contatore 0 Punti (Gare Lunghe) -->
+    <div class="chart-container" id="chart-container-zero-long" style="display:none;">
+      <div class="chart-header">
+        <h3 class="chart-title">Contatore Gare a 0 Punti (Gare Lunghe)</h3>
+      </div>
+      <div style="position: relative; height: 300px;">
+        <canvas id="progressionChartZeroLong"></canvas>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -500,8 +520,8 @@ function getPtsForMode(rider, mode) {
 }
 
 function getHistoryForMode(rider, mode) {
-  if (mode === 'sprint') return rider.sprint_history || [];
-  if (mode === 'long') return rider.long_history || [];
+  if (mode === 'sprint' || mode === 'zero_sprint') return rider.sprint_history || [];
+  if (mode === 'long' || mode === 'zero_long') return rider.long_history || [];
   return rider.history || [];
 }
 
@@ -647,13 +667,17 @@ logoImg.onload = () => {
 let chartInstances = {
   overall: null,
   sprint: null,
-  long: null
+  long: null,
+  zero_sprint: null,
+  zero_long: null
 };
 
 function renderAllCharts(riders) {
   renderChartInstance('progressionChartOverall', 'chart-container-overall', 'overall', riders);
   renderChartInstance('progressionChartSprint', 'chart-container-sprint', 'sprint', riders);
   renderChartInstance('progressionChartLong', 'chart-container-long', 'long', riders);
+  renderChartInstance('progressionChartZeroSprint', 'chart-container-zero-sprint', 'zero_sprint', riders);
+  renderChartInstance('progressionChartZeroLong', 'chart-container-zero-long', 'zero_long', riders);
 }
 
 function renderChartInstance(canvasId, containerId, modeKey, riders) {
@@ -684,10 +708,21 @@ function renderChartInstance(canvasId, containerId, modeKey, riders) {
     labels.push(gpName);
   }
 
+  const isZeroMode = modeKey.startsWith('zero');
+
   const datasets = favRiders.map((r, idx) => {
-    let sum = 0;
     const hist = getHistoryForMode(r, modeKey);
-    const data = hist.map(pts => { sum += pts; return sum; });
+    let data = [];
+    if (isZeroMode) {
+      let zeroCount = 0;
+      data = hist.map(pts => {
+        if (pts === 0) zeroCount += 1;
+        return zeroCount;
+      });
+    } else {
+      let sum = 0;
+      data = hist.map(pts => { sum += pts; return sum; });
+    }
     const customStyle = RIDER_STYLES[r.name] || {};
     const color = customStyle.color || LINE_COLORS[idx % LINE_COLORS.length];
     
@@ -697,7 +732,7 @@ function renderChartInstance(canvasId, containerId, modeKey, riders) {
       borderColor: color,
       backgroundColor: color + '15',
       borderWidth: 3,
-      tension: 0.3,
+      tension: isZeroMode ? 0.1 : 0.3,
       pointRadius: 4,
       pointHoverRadius: 6,
       fill: false
@@ -741,8 +776,13 @@ function renderChartInstance(canvasId, containerId, modeKey, riders) {
             ticks: { color: '#999', font: { family: 'Inter', size: 10 } }
           },
           y: {
+            beginAtZero: true,
             grid: { color: 'rgba(255,255,255,0.06)' },
-            ticks: { color: '#999', font: { family: 'Inter', size: 11 } }
+            ticks: { 
+              color: '#999', 
+              font: { family: 'Inter', size: 11 },
+              precision: isZeroMode ? 0 : undefined
+            }
           }
         }
       }
