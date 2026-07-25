@@ -208,13 +208,49 @@
   }
   .social-icon:hover { background: #3a3a50; transform: translateY(-2px); }
   .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
-  .chart-container {
+  .page-wrapper {
     max-width: 1100px;
-    margin: 32px auto 0;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+  .charts-section {
+    width: 100%;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .chart-container {
+    width: 100%;
     background: #2c2c32;
     border-radius: 14px;
     border: 1px solid #3a3a42;
     padding: 20px;
+    box-sizing: border-box;
+  }
+  @media (min-width: 1680px) {
+    .page-wrapper {
+      max-width: 1840px;
+      display: grid;
+      grid-template-columns: 1100px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .layout {
+      padding: 0;
+      margin: 0;
+    }
+    .charts-section {
+      margin-top: 0;
+    }
   }
 </style>
 <script src="js/chart.min.js"></script>
@@ -233,35 +269,39 @@
   <div class="hero-meta" id="hero-meta"></div>
 </div>
 
-<div class="layout">
-  <div>
-    <div class="panel">
-      <div class="panel-head"><span>Constructors' standings</span><span class="count" id="constructors-count"></span></div>
-      <div id="constructors-table"><div class="loading">⏳ Loading…</div></div>
+<div class="page-wrapper">
+  <div class="layout">
+    <div>
+      <div class="panel">
+        <div class="panel-head"><span>Constructors' standings</span><span class="count" id="constructors-count"></span></div>
+        <div id="constructors-table"><div class="loading">⏳ Loading…</div></div>
+      </div>
+      <div class="panel" style="margin-top:20px;">
+        <div class="panel-head"><span>Teams' standings</span><span class="count" id="teams-count"></span></div>
+        <div id="teams-table"><div class="loading">⏳ Loading…</div></div>
+      </div>
     </div>
-    <div class="panel" style="margin-top:20px;">
-      <div class="panel-head"><span>Teams' standings</span><span class="count" id="teams-count"></span></div>
-      <div id="teams-table"><div class="loading">⏳ Loading…</div></div>
+    <div>
+      <div class="panel">
+        <div class="panel-head"><span>Riders' standings</span><span class="count" id="riders-count"></span></div>
+        <div id="riders-table"><div class="loading">⏳ Loading…</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <div class="panel-head"><span>Season calendar</span><span class="count" id="cal-count"></span></div>
+        <div class="cal-list" id="cal-list"><div class="loading">⏳ Loading…</div></div>
+      </div>
     </div>
   </div>
-  <div>
-    <div class="panel">
-      <div class="panel-head"><span>Riders' standings</span><span class="count" id="riders-count"></span></div>
-      <div id="riders-table"><div class="loading">⏳ Loading…</div></div>
-    </div>
-  </div>
-  <div>
-    <div class="panel">
-      <div class="panel-head"><span>Season calendar</span><span class="count" id="cal-count"></span></div>
-      <div class="cal-list" id="cal-list"><div class="loading">⏳ Loading…</div></div>
-    </div>
-  </div>
-</div>
 
-<div class="chart-container" id="chart-container" style="display:none;">
-  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Riders' Points Progression</h3>
-  <div style="position: relative; height: 300px;">
-    <canvas id="progressionChart"></canvas>
+  <div class="charts-section">
+    <div class="chart-container" id="chart-container" style="display:none;">
+      <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Riders' Points Progression</h3>
+      <div style="position: relative; height: 300px;">
+        <canvas id="progressionChart"></canvas>
+      </div>
+    </div>
   </div>
 </div>
 

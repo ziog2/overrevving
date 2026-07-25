@@ -60,10 +60,12 @@
     display: flex;
     gap: 16px;
   }
-  .layout {
+  .page-wrapper {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 20px;
+  }
+  .layout {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
@@ -71,157 +73,36 @@
   @media (max-width: 900px) {
     .layout { grid-template-columns: 1fr; }
   }
-  .panel {
-    background: #222226;
-    border-radius: 14px;
-    border: 1px solid #2e2e34;
-    overflow: hidden;
-  }
-  .panel-head {
-    padding: 14px 16px;
-    background: #2a2a30;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ddd;
-    border-bottom: 1px solid #33333a;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .panel-head .count {
-    font-size: 11px;
-    font-weight: 500;
-    color: #888;
-    text-transform: none;
-  }
-
-  /* Toggle bar per classifiche MotoGP */
-  .standings-toggle-bar {
-    display: flex;
-    background: #1e1e22;
-    border-radius: 10px;
-    padding: 4px;
-    margin: 12px 14px 4px;
-    gap: 4px;
-    border: 1px solid #2e2e34;
-  }
-  .toggle-btn {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: #999;
-    padding: 8px 10px;
-    border-radius: 7px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s;
-    font-family: inherit;
-    text-align: center;
-  }
-  .toggle-btn:hover {
-    color: #fff;
-    background: rgba(255,255,255,0.05);
-  }
-  .toggle-btn.active {
-    background: #c0392b;
-    color: #fff;
-  }
-
-  table {
+  .charts-section {
     width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
-  th {
-    text-align: left;
-    padding: 8px 12px;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #777;
-    background: rgba(0,0,0,0.15);
-    border-bottom: 1px solid #2e2e34;
-  }
-  th:last-child, td:last-child { text-align: right; }
-  #constructors-table th, #constructors-table td,
-  #teams-table th, #teams-table td {
-    text-align: left !important;
-  }
-  td {
-    padding: 9px 12px;
-    border-bottom: 1px solid #28282e;
-    color: #ccc;
-  }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: rgba(255,255,255,0.02); }
-  tr.pos-1 td:first-child { color: #f1c40f; font-weight: 700; }
-  tr.pos-2 td:first-child { color: #bdc3c7; font-weight: 700; }
-  tr.pos-3 td:first-child { color: #e67e22; font-weight: 700; }
-  tbody tr.favorite { background: #2a1f3a !important; }
-  tbody tr.favorite:hover { background: #332545 !important; }
-  tbody tr.favorite td { background: transparent !important; }
-  .star-col { width: 28px; text-align: center !important; }
-  .fav-btn {
-    background: none;
-    border: none;
-    color: #444;
-    cursor: pointer;
-    font-size: 14px;
-    padding: 2px 4px;
-    transition: color 0.15s, transform 0.15s;
-    line-height: 1;
-  }
-  .fav-btn:hover { color: #ffd700; transform: scale(1.2); }
-  .fav-btn.active { color: #ffd700; }
-  .gap {
-    font-weight: normal;
-    color: #666;
-    font-size: 11px;
-    margin-left: 4px;
-  }
-  .loading {
-    padding: 30px;
-    text-align: center;
-    font-size: 13px;
-    color: #777;
-  }
-  .empty {
-    padding: 30px;
-    text-align: center;
-    font-size: 13px;
-    color: #666;
-  }
-  .cal-list {
+    margin-top: 32px;
     display: flex;
     flex-direction: column;
+    gap: 24px;
   }
-  .cal-item {
-    padding: 10px 14px;
-    border-bottom: 1px solid #28282e;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-  }
-  .cal-item:last-child { border-bottom: none; }
-  .cal-item.past {
-    opacity: 0.45;
-    background: rgba(0, 0, 0, 0.15);
-  }
-  .cal-item.past .cal-name { color: #888; }
-  .cal-item.past .cal-date { color: #555; }
-  .cal-name { font-weight: 600; color: #eee; }
-  .cal-date { color: #777; font-size: 11px; }
   .chart-container {
-    max-width: 1100px;
-    margin: 24px auto 0;
+    width: 100%;
     background: #2c2c32;
     border-radius: 14px;
     border: 1px solid #3a3a42;
     padding: 20px;
+    box-sizing: border-box;
+  }
+  @media (min-width: 1680px) {
+    .page-wrapper {
+      max-width: 1840px;
+      display: grid;
+      grid-template-columns: 1100px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .layout {
+      padding: 0;
+      margin: 0;
+    }
+    .charts-section {
+      margin-top: 0;
+    }
   }
   .chart-header {
     display: flex;
@@ -281,63 +162,67 @@
   <div class="hero-meta" id="hero-meta"></div>
 </div>
 
-<div class="layout">
-  <div>
-    <div class="panel">
-      <div class="panel-head"><span>Constructors' standings</span><span class="count" id="constructors-count"></span></div>
-      <div id="constructors-table"><div class="loading">⏳ Loading…</div></div>
-    </div>
-    <div class="panel" style="margin-top:20px;">
-      <div class="panel-head"><span>Teams' standings</span><span class="count" id="teams-count"></span></div>
-      <div id="teams-table"><div class="loading">⏳ Loading…</div></div>
-    </div>
-  </div>
-  <div>
-    <div class="panel">
-      <div class="panel-head"><span>Riders' standings</span><span class="count" id="riders-count"></span></div>
-      <div class="standings-toggle-bar">
-        <button class="toggle-btn active" data-mode="overall" onclick="switchStandingsMode('overall')">Generale</button>
-        <button class="toggle-btn" data-mode="sprint" onclick="switchStandingsMode('sprint')">Sprint</button>
-        <button class="toggle-btn" data-mode="long" onclick="switchStandingsMode('long')">Gare Lunghe</button>
+<div class="page-wrapper">
+  <div class="layout">
+    <div>
+      <div class="panel">
+        <div class="panel-head"><span>Constructors' standings</span><span class="count" id="constructors-count"></span></div>
+        <div id="constructors-table"><div class="loading">⏳ Loading…</div></div>
       </div>
-      <div id="riders-table"><div class="loading">⏳ Loading…</div></div>
+      <div class="panel" style="margin-top:20px;">
+        <div class="panel-head"><span>Teams' standings</span><span class="count" id="teams-count"></span></div>
+        <div id="teams-table"><div class="loading">⏳ Loading…</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <div class="panel-head"><span>Riders' standings</span><span class="count" id="riders-count"></span></div>
+        <div class="standings-toggle-bar">
+          <button class="toggle-btn active" data-mode="overall" onclick="switchStandingsMode('overall')">Generale</button>
+          <button class="toggle-btn" data-mode="sprint" onclick="switchStandingsMode('sprint')">Sprint</button>
+          <button class="toggle-btn" data-mode="long" onclick="switchStandingsMode('long')">Gare Lunghe</button>
+        </div>
+        <div id="riders-table"><div class="loading">⏳ Loading…</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <div class="panel-head"><span>Season calendar</span><span class="count" id="cal-count"></span></div>
+        <div class="cal-list" id="cal-list"><div class="loading">⏳ Loading…</div></div>
+      </div>
     </div>
   </div>
-  <div>
-    <div class="panel">
-      <div class="panel-head"><span>Season calendar</span><span class="count" id="cal-count"></span></div>
-      <div class="cal-list" id="cal-list"><div class="loading">⏳ Loading…</div></div>
+
+  <div class="charts-section">
+    <!-- 1. Grafico Progressione Totale -->
+    <div class="chart-container" id="chart-container-overall" style="display:none;">
+      <div class="chart-header">
+        <h3 class="chart-title">Progressione Punti Totali (Generale)</h3>
+      </div>
+      <div style="position: relative; height: 300px;">
+        <canvas id="progressionChartOverall"></canvas>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- 1. Grafico Progressione Totale -->
-<div class="chart-container" id="chart-container-overall" style="display:none; margin-top:32px;">
-  <div class="chart-header">
-    <h3 class="chart-title">Progressione Punti Totali (Generale)</h3>
-  </div>
-  <div style="position: relative; height: 300px;">
-    <canvas id="progressionChartOverall"></canvas>
-  </div>
-</div>
+    <!-- 2. Grafico Progressione Solo Sprint -->
+    <div class="chart-container" id="chart-container-sprint" style="display:none;">
+      <div class="chart-header">
+        <h3 class="chart-title">Progressione Punti (Solo Sprint)</h3>
+      </div>
+      <div style="position: relative; height: 300px;">
+        <canvas id="progressionChartSprint"></canvas>
+      </div>
+    </div>
 
-<!-- 2. Grafico Progressione Solo Sprint -->
-<div class="chart-container" id="chart-container-sprint" style="display:none;">
-  <div class="chart-header">
-    <h3 class="chart-title">Progressione Punti (Solo Sprint)</h3>
-  </div>
-  <div style="position: relative; height: 300px;">
-    <canvas id="progressionChartSprint"></canvas>
-  </div>
-</div>
-
-<!-- 3. Grafico Progressione Solo Gare Lunghe -->
-<div class="chart-container" id="chart-container-long" style="display:none;">
-  <div class="chart-header">
-    <h3 class="chart-title">Progressione Punti (Solo Gare Lunghe)</h3>
-  </div>
-  <div style="position: relative; height: 300px;">
-    <canvas id="progressionChartLong"></canvas>
+    <!-- 3. Grafico Progressione Solo Gare Lunghe -->
+    <div class="chart-container" id="chart-container-long" style="display:none;">
+      <div class="chart-header">
+        <h3 class="chart-title">Progressione Punti (Solo Gare Lunghe)</h3>
+      </div>
+      <div style="position: relative; height: 300px;">
+        <canvas id="progressionChartLong"></canvas>
+      </div>
+    </div>
   </div>
 </div>
 
