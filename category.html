@@ -709,7 +709,7 @@ function renderCategoryChartInstance(canvasId, containerId, modeKey, riders, cat
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  const hasSprint = riders.some(r => r.sprint_history && r.sprint_history.length > 0);
+  const hasSprint = riders.some(r => (r.sprint_pts && r.sprint_pts > 0) || (r.sprint_history && r.sprint_history.some(p => p > 0)));
   if (modeKey === 'zero_sprint' && !hasSprint) {
     container.style.display = 'none';
     if (chartInstances[modeKey]) {
@@ -717,6 +717,13 @@ function renderCategoryChartInstance(canvasId, containerId, modeKey, riders, cat
       chartInstances[modeKey] = null;
     }
     return;
+  }
+
+  if (modeKey === 'zero_long') {
+    const titleEl = container.querySelector('h3');
+    if (titleEl) {
+      titleEl.textContent = hasSprint ? 'Zero-Point Finishes (Main Races)' : 'Zero-Point Finishes';
+    }
   }
 
   const getHist = (r) => {
