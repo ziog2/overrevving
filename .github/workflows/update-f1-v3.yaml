@@ -131,6 +131,10 @@ jobs:
                       rac_pts = sum(rac_hist)
                       official_total = official_pts.get(name, sum(tot_hist))
 
+                      diff = official_total - sum(tot_hist)
+                      if abs(diff) > 0.001 and len(tot_hist) > 0:
+                          tot_hist[-1] += diff
+
                       clean_riders.append({
                           "name": name,
                           "pts": official_total,
