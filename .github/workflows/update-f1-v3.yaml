@@ -63,16 +63,16 @@ jobs:
                   standings_url = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
                   standings = http_get(standings_url).get('classification', [])
 
-                  all_riders = []
+                  official_pts = {}
                   for c in standings:
                       if not c.get('rider') or not c['rider'].get('full_name'): continue
                       name = c['rider']['full_name'].strip()
                       if "Vinales" in name or "Vi.ales" in name: name = "Maverick Viñales"
                       if "Munoz" in name or "Mu.oz" in name: name = "Daniel Muñoz"
                       if "Oncu" in name or ".ncu" in name: name = "Deniz Öncü"
-                      if name not in all_riders: all_riders.append(name)
+                      official_pts[name] = float(c.get('points', 0))
 
-                  rider_matrix = {r: {gp: {'spr': 0, 'rac': 0} for gp in GP_SHORT_NAMES} for r in all_riders}
+                  rider_matrix = {r: {gp: {'spr': 0.0, 'rac': 0.0} for gp in GP_SHORT_NAMES} for r in official_pts.keys()}
 
                   for short_name in GP_SHORT_NAMES:
                       if short_name not in gp_events_map: continue
@@ -94,9 +94,9 @@ jobs:
                                   if "Vinales" in name or "Vi.ales" in name: name = "Maverick Viñales"
                                   if "Munoz" in name or "Mu.oz" in name: name = "Daniel Muñoz"
                                   if "Oncu" in name or ".ncu" in name: name = "Deniz Öncü"
-                                  pts = int(c.get('points', 0)) if c.get('points') is not None else 0
-                                  if name not in rider_matrix: rider_matrix[name] = {g: {'spr': 0, 'rac': 0} for g in GP_SHORT_NAMES}
-                                  rider_matrix[name][short_name]['spr'] = pts
+                                  pts_val = float(c.get('points', 0)) if c.get('points') is not None else 0.0
+                                  if name not in rider_matrix: rider_matrix[name] = {g: {'spr': 0.0, 'rac': 0.0} for g in GP_SHORT_NAMES}
+                                  rider_matrix[name][short_name]['spr'] = pts_val
                           except Exception: pass
 
                       if rac_session:
@@ -108,9 +108,9 @@ jobs:
                                   if "Vinales" in name or "Vi.ales" in name: name = "Maverick Viñales"
                                   if "Munoz" in name or "Mu.oz" in name: name = "Daniel Muñoz"
                                   if "Oncu" in name or ".ncu" in name: name = "Deniz Öncü"
-                                  pts = int(c.get('points', 0)) if c.get('points') is not None else 0
-                                  if name not in rider_matrix: rider_matrix[name] = {g: {'spr': 0, 'rac': 0} for g in GP_SHORT_NAMES}
-                                  rider_matrix[name][short_name]['rac'] = pts
+                                  pts_val = float(c.get('points', 0)) if c.get('points') is not None else 0.0
+                                  if name not in rider_matrix: rider_matrix[name] = {g: {'spr': 0.0, 'rac': 0.0} for g in GP_SHORT_NAMES}
+                                  rider_matrix[name][short_name]['rac'] = pts_val
                           except Exception: pass
 
                   # Marc Marquez explicit user override for MotoGP
@@ -118,8 +118,9 @@ jobs:
                       m_spr = [9, 12, 0, 12, 0, 0, 5, 12, 7, 4, 12]
                       m_rac = [0, 13, 11, 0, 0, 0, 9, 25, 25, 9, 25]
                       for idx, gp in enumerate(GP_SHORT_NAMES):
-                          rider_matrix["Marc Marquez"][gp]['spr'] = m_spr[idx]
-                          rider_matrix["Marc Marquez"][gp]['rac'] = m_rac[idx]
+                          rider_matrix["Marc Marquez"][gp]['spr'] = float(m_spr[idx])
+                          rider_matrix["Marc Marquez"][gp]['rac'] = float(m_rac[idx])
+                      official_pts["Marc Marquez"] = 190.0
 
                   clean_riders = []
                   for name, gp_dict in rider_matrix.items():
@@ -128,10 +129,11 @@ jobs:
                       tot_hist = [s + r for s, r in zip(spr_hist, rac_hist)]
                       spr_pts = sum(spr_hist)
                       rac_pts = sum(rac_hist)
-                      tot_pts = sum(tot_hist)
+                      official_total = official_pts.get(name, sum(tot_hist))
+
                       clean_riders.append({
                           "name": name,
-                          "pts": tot_pts,
+                          "pts": official_total,
                           "history": tot_hist,
                           "sprint_pts": spr_pts,
                           "sprint_history": spr_hist,
