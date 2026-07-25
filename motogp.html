@@ -322,9 +322,9 @@
       <div class="panel">
         <div class="panel-head"><span>Riders' standings</span><span class="count" id="riders-count"></span></div>
         <div class="standings-toggle-bar">
-          <button class="toggle-btn active" data-mode="overall" onclick="switchStandingsMode('overall')">Generale</button>
+          <button class="toggle-btn active" data-mode="overall" onclick="switchStandingsMode('overall')">Overall</button>
           <button class="toggle-btn" data-mode="sprint" onclick="switchStandingsMode('sprint')">Sprint</button>
-          <button class="toggle-btn" data-mode="long" onclick="switchStandingsMode('long')">Gare Lunghe</button>
+          <button class="toggle-btn" data-mode="long" onclick="switchStandingsMode('long')">Main Races</button>
         </div>
         <div id="riders-table"><div class="loading">⏳ Loading…</div></div>
       </div>
@@ -341,7 +341,7 @@
     <!-- 1. Grafico Progressione Totale -->
     <div class="chart-container" id="chart-container-overall" style="display:none;">
       <div class="chart-header">
-        <h3 class="chart-title">Progressione Punti Totali (Generale)</h3>
+        <h3 class="chart-title">Overall Points Progression</h3>
       </div>
       <div style="position: relative; height: 300px;">
         <canvas id="progressionChartOverall"></canvas>
@@ -351,7 +351,7 @@
     <!-- 2. Grafico Progressione Solo Sprint -->
     <div class="chart-container" id="chart-container-sprint" style="display:none;">
       <div class="chart-header">
-        <h3 class="chart-title">Progressione Punti (Solo Sprint)</h3>
+        <h3 class="chart-title">Sprint Races Points Progression</h3>
       </div>
       <div style="position: relative; height: 300px;">
         <canvas id="progressionChartSprint"></canvas>
@@ -361,7 +361,7 @@
     <!-- 3. Grafico Progressione Solo Gare Lunghe -->
     <div class="chart-container" id="chart-container-long" style="display:none;">
       <div class="chart-header">
-        <h3 class="chart-title">Progressione Punti (Solo Gare Lunghe)</h3>
+        <h3 class="chart-title">Main Races Points Progression</h3>
       </div>
       <div style="position: relative; height: 300px;">
         <canvas id="progressionChartLong"></canvas>
@@ -371,7 +371,7 @@
     <!-- 4. Contatore 0 Punti (Gare Sprint) -->
     <div class="chart-container" id="chart-container-zero-sprint" style="display:none;">
       <div class="chart-header">
-        <h3 class="chart-title">Contatore Gare a 0 Punti (Gare Sprint)</h3>
+        <h3 class="chart-title">Zero-Point Finishes (Sprint Races)</h3>
       </div>
       <div style="position: relative; height: 300px;">
         <canvas id="progressionChartZeroSprint"></canvas>
@@ -381,7 +381,7 @@
     <!-- 5. Contatore 0 Punti (Gare Lunghe) -->
     <div class="chart-container" id="chart-container-zero-long" style="display:none;">
       <div class="chart-header">
-        <h3 class="chart-title">Contatore Gare a 0 Punti (Gare Lunghe)</h3>
+        <h3 class="chart-title">Zero-Point Finishes (Main Races)</h3>
       </div>
       <div style="position: relative; height: 300px;">
         <canvas id="progressionChartZeroLong"></canvas>
