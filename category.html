@@ -282,6 +282,31 @@
     border-color: #e74c3c;
     transform: translateY(-1px);
   }
+  .cal-download-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid #3a3a42;
+    color: #bbb;
+    border-radius: 6px;
+    padding: 3px 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  }
+  .cal-download-btn:hover {
+    background: #27ae60;
+    color: #fff;
+    border-color: #2ecc71;
+    transform: translateY(-1px);
+  }
+  .cal-download-btn svg {
+    fill: currentColor;
+    width: 12px;
+    height: 12px;
+  }
   /* Gemini AI Insight Card */
   .ai-insight-card {
     background: linear-gradient(135deg, rgba(34, 34, 40, 0.95), rgba(44, 44, 52, 0.95));
@@ -373,7 +398,16 @@
     </div>
     <div>
       <div class="panel">
-        <div class="panel-head"><span>Season calendar</span><span class="count" id="cal-count"></span></div>
+        <div class="panel-head">
+          <span>Season calendar</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button class="cal-download-btn" onclick="downloadCalendarICS(currentCalendar, getCatId().toUpperCase())" title="Add to Apple Calendar, Outlook, Google Calendar (.ics)">
+              <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/></svg>
+              <span>.ICS</span>
+            </button>
+            <span class="count" id="cal-count"></span>
+          </div>
+        </div>
         <div class="cal-list" id="cal-list"><div class="loading">⏳ Loading…</div></div>
       </div>
     </div>
@@ -906,6 +940,65 @@ function downloadChartAsPNG(canvasId, titleName) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+}
+
+function downloadCalendarICS(calendarData, catName) {
+  if (!calendarData || !calendarData.length) return;
+
+  const categoryTitle = catName || 'Motorsport';
+  const cleanCat = categoryTitle.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+
+  let icsLines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Overrevving//Motorsport Calendar 2026//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    `X-WR-CALNAME:${categoryTitle} 2026 Season Calendar`
+  ];
+
+  const nowStamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+  calendarData.forEach((ev, idx) => {
+    if (!ev.date) return;
+    
+    const startDate = new Date(ev.date);
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + 1);
+
+    const startStr = startDate.toISOString().split('T')[0].replace(/-/g, '');
+    const endStr = endDate.toISOString().split('T')[0].replace(/-/g, '');
+
+    const eventUid = `${startStr}-${idx}@overrevving.com`;
+    const summary = `${categoryTitle} - GP ${ev.name}`;
+    const description = `2026 ${categoryTitle} Grand Prix at ${ev.name}. Track live standings and race statistics on Overrevving!`;
+
+    icsLines.push(
+      'BEGIN:VEVENT',
+      `UID:${eventUid}`,
+      `DTSTAMP:${nowStamp}`,
+      `DTSTART;VALUE=DATE:${startStr}`,
+      `DTEND;VALUE=DATE:${endStr}`,
+      `SUMMARY:${summary}`,
+      `DESCRIPTION:${description}`,
+      'STATUS:CONFIRMED',
+      'END:VEVENT'
+    );
+  });
+
+  icsLines.push('END:VCALENDAR');
+
+  const icsContent = icsLines.join('\r\n');
+  const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${cleanCat}_calendar_2026.ics`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
 function updateAIInsight(riders, catId) {
