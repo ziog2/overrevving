@@ -320,7 +320,7 @@
     padding: 1px 5px;
     font-size: 10px;
     font-weight: 700;
-    margin-right: 6px;
+    margin-left: 8px;
     letter-spacing: 0.02em;
     font-family: monospace;
     display: inline-block;
@@ -760,7 +760,7 @@ function renderCalendar() {
     const weatherBadge = (isPast && ev.weather) ? `<span class="cal-weather-badge">${ev.weather}</span>` : '';
     
     html += `<div class="cal-item${isPast ? ' past' : ''}">
-      <span class="cal-name">${checkMark}${weatherBadge}${ev.name}</span>
+      <span class="cal-name">${checkMark}${ev.name}${weatherBadge}</span>
       <span class="cal-date">${dateStr}</span>
     </div>`;
   });
