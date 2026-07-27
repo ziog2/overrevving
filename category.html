@@ -248,9 +248,44 @@
       padding: 0;
       margin: 0;
     }
-    .charts-section {
-      margin-top: 0;
-    }
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .chart-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #ccc;
+  }
+  .chart-download-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid #3a3a42;
+    color: #bbb;
+    border-radius: 6px;
+    padding: 5px 9px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  }
+  .chart-download-btn:hover {
+    background: #c0392b;
+    color: #fff;
+    border-color: #e74c3c;
+    transform: translateY(-1px);
+  }
+  .chart-download-btn svg {
+    fill: currentColor;
+    width: 14px;
+    height: 14px;
   }
 </style>
 <script src="js/chart.min.js"></script>
@@ -297,7 +332,13 @@
 
   <div class="charts-section">
     <div class="chart-container" id="chart-container" style="display:none;">
-      <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Overall Points Progression</h3>
+      <div class="chart-header">
+        <h3 class="chart-title">Overall Points Progression</h3>
+        <button class="chart-download-btn" onclick="downloadChartAsPNG('progressionChart', 'Overall Points Progression')" title="Download PNG">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span>PNG</span>
+        </button>
+      </div>
       <div style="position: relative; height: 300px;">
         <canvas id="progressionChart"></canvas>
       </div>
@@ -305,7 +346,13 @@
 
     <!-- Contatore 0 Punti (Gare Sprint) -->
     <div class="chart-container" id="chart-container-zero-sprint" style="display:none;">
-      <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Zero-Point Finishes (Sprint Races)</h3>
+      <div class="chart-header">
+        <h3 class="chart-title">Zero-Point Finishes (Sprint Races)</h3>
+        <button class="chart-download-btn" onclick="downloadChartAsPNG('progressionChartZeroSprint', 'Zero-Point Finishes Sprint Races')" title="Download PNG">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span>PNG</span>
+        </button>
+      </div>
       <div style="position: relative; height: 300px;">
         <canvas id="progressionChartZeroSprint"></canvas>
       </div>
@@ -313,7 +360,13 @@
 
     <!-- Contatore 0 Punti (Gare Lunghe) -->
     <div class="chart-container" id="chart-container-zero-long" style="display:none;">
-      <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #ccc; margin-bottom: 15px;">Zero-Point Finishes (Main Races)</h3>
+      <div class="chart-header">
+        <h3 class="chart-title">Zero-Point Finishes (Main Races)</h3>
+        <button class="chart-download-btn" onclick="downloadChartAsPNG('progressionChartZeroLong', 'Zero-Point Finishes Main Races')" title="Download PNG">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          <span>PNG</span>
+        </button>
+      </div>
       <div style="position: relative; height: 300px;">
         <canvas id="progressionChartZeroLong"></canvas>
       </div>
@@ -692,6 +745,30 @@ const watermarkPlugin = {
 logoImg.onload = () => {
   if (currentRiders.length) renderAllCategoryCharts(currentRiders, getCatId());
 };
+
+function downloadChartAsPNG(canvasId, titleName) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  const tempCanvas = document.createElement('canvas');
+  tempCanvas.width = canvas.width;
+  tempCanvas.height = canvas.height;
+  const ctx = tempCanvas.getContext('2d');
+
+  ctx.fillStyle = '#2c2c32';
+  ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+  ctx.drawImage(canvas, 0, 0);
+
+  const imageURI = tempCanvas.toDataURL('image/png');
+  const link = document.createElement('a');
+  const cat = typeof getCatId === 'function' ? getCatId() : 'category';
+  const cleanTitle = (titleName || 'chart').toLowerCase().replace(/[^a-z0-9]+/g, '_');
+  link.download = `${cat}_${cleanTitle}.png`;
+  link.href = imageURI;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
 let chartInstances = {
   progression: null,
