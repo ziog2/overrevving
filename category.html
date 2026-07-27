@@ -282,10 +282,59 @@
     border-color: #e74c3c;
     transform: translateY(-1px);
   }
-  .chart-download-btn svg {
-    fill: currentColor;
-    width: 14px;
-    height: 14px;
+  /* Gemini AI Insight Card */
+  .ai-insight-card {
+    background: linear-gradient(135deg, rgba(34, 34, 40, 0.95), rgba(44, 44, 52, 0.95));
+    border-radius: 14px;
+    border: 1px solid rgba(155, 89, 182, 0.35);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+  .ai-insight-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #8e44ad, #3498db, #2ecc71);
+  }
+  .ai-insight-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .ai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(142, 68, 173, 0.18);
+    border: 1px solid rgba(155, 89, 182, 0.4);
+    color: #d6a2e8;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .ai-subtitle {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .ai-insight-body {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #e0e0e0;
+  }
+  .ai-insight-body strong {
+    color: #fff;
+  }
+  .ai-highlight {
+    color: #f1c40f;
+    font-weight: 600;
   }
 </style>
 <script src="js/chart.min.js"></script>
@@ -331,6 +380,20 @@
   </div>
 
   <div class="charts-section">
+    <!-- Gemini AI Season Insight Card -->
+    <div class="ai-insight-card" id="ai-insight-card" style="display:none;">
+      <div class="ai-insight-header">
+        <div class="ai-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/>
+          </svg>
+          <span>GEMINI AI INSIGHT</span>
+        </div>
+        <span class="ai-subtitle">Season Analysis</span>
+      </div>
+      <div class="ai-insight-body" id="ai-insight-body"></div>
+    </div>
+
     <div class="chart-container" id="chart-container" style="display:none;">
       <div class="chart-header">
         <h3 class="chart-title">Overall Points Progression</h3>
@@ -845,6 +908,106 @@ function downloadChartAsPNG(canvasId, titleName) {
   document.body.removeChild(link);
 }
 
+function updateAIInsight(riders, catId) {
+  const card = document.getElementById('ai-insight-card');
+  const body = document.getElementById('ai-insight-body');
+  if (!card || !body) return;
+
+  const favRiders = riders.filter(r => {
+    const favKey = catId + ':' + r.name;
+    return favorites.has(favKey);
+  });
+
+  if (favRiders.length === 0) {
+    card.style.display = 'none';
+    return;
+  }
+
+  card.style.display = 'block';
+  const sorted = [...favRiders].sort((a, b) => (b.pts || 0) - (a.pts || 0));
+  const categoryName = catId ? catId.toUpperCase() : 'MOTOGP';
+
+  let html = '';
+
+  if (sorted.length === 1) {
+    const r = sorted[0];
+    const sprPts = r.sprint_pts || 0;
+    const longPts = r.long_pts || (r.pts || 0) - sprPts;
+    const sprZeros = (r.sprint_history || []).filter(p => p === 0).length;
+    const longZeros = (r.long_history || r.history || []).filter(p => p === 0).length;
+
+    html = `<strong>${formatName(r.name)}</strong> currently holds <strong>${r.pts} points</strong> in the ${categoryName} standings. `;
+    if (sprPts > 0) {
+      html += `Their points tally includes <span class="ai-highlight">${sprPts} Sprint pts</span> and <span class="ai-highlight">${longPts} Main Race pts</span>. `;
+    } else {
+      html += `Accumulated over ${r.history ? r.history.length : 0} rounds with consistent race pace. `;
+    }
+    html += `Reliability metrics show <strong>${longZeros} zero-point finishes</strong> in Main Races${sprPts > 0 ? ` and <strong>${sprZeros} zero-point finishes</strong> in Sprint sessions` : ''}.`;
+  } else if (sorted.length === 2) {
+    const [r1, r2] = sorted;
+    const gap = (r1.pts || 0) - (r2.pts || 0);
+
+    const r1Spr = r1.sprint_pts || 0;
+    const r2Spr = r2.sprint_pts || 0;
+    const r1Long = r1.long_pts || (r1.pts || 0) - r1Spr;
+    const r2Long = r2.long_pts || (r2.pts || 0) - r2Spr;
+
+    const r1Zeros = (r1.long_history || r1.history || []).filter(p => p === 0).length;
+    const r2Zeros = (r2.long_history || r2.history || []).filter(p => p === 0).length;
+
+    html = `Head-to-head title analysis between <strong>${formatName(r1.name)}</strong> (${r1.pts} pts) and <strong>${formatName(r2.name)}</strong> (${r2.pts} pts), separated by <span class="ai-highlight">${gap} points</span>.<br>`;
+    
+    if (r1Spr > 0 || r2Spr > 0) {
+      if (r1Spr > r2Spr) {
+        html += `<strong>${formatName(r1.name)}</strong> holds an advantage in Sprints (${r1Spr} vs ${r2Spr} pts), while `;
+      } else if (r2Spr > r1Spr) {
+        html += `<strong>${formatName(r2.name)}</strong> outperforms in Sprints (${r2Spr} vs ${r1Spr} pts), but `;
+      }
+      if (r1Long >= r2Long) {
+        html += `<strong>${formatName(r1.name)}</strong> leads Main Race points (${r1Long} vs ${r2Long} pts).<br>`;
+      } else {
+        html += `<strong>${formatName(r2.name)}</strong> leads Sunday Main Races (${r2Long} vs ${r1Long} pts).<br>`;
+      }
+    } else {
+      html += `Main Race scoring shows ${formatName(r1.name)} ahead by ${gap} pts across completed rounds.<br>`;
+    }
+
+    html += `Consistency factor: ${formatName(r1.name)} has ${r1Zeros} zero-point finishes vs ${r2Zeros} for ${formatName(r2.name)}.`;
+  } else {
+    const leader = sorted[0];
+    const runnerUp = sorted[1];
+    const gap = (leader.pts || 0) - (runnerUp.pts || 0);
+
+    let bestSprRider = sorted[0];
+    let bestLongRider = sorted[0];
+    let minZerosRider = sorted[0];
+    let minZerosCount = 999;
+
+    sorted.forEach(r => {
+      if ((r.sprint_pts || 0) > (bestSprRider.sprint_pts || 0)) bestSprRider = r;
+      const longP = r.long_pts || (r.pts || 0) - (r.sprint_pts || 0);
+      const bestLongP = bestLongRider.long_pts || (bestLongRider.pts || 0) - (bestLongRider.sprint_pts || 0);
+      if (longP > bestLongP) bestLongRider = r;
+
+      const z = (r.long_history || r.history || []).filter(p => p === 0).length;
+      if (z < minZerosCount) {
+        minZerosCount = z;
+        minZerosRider = r;
+      }
+    });
+
+    html = `Comparative analysis of <strong>${sorted.length} selected riders</strong>, led by <strong>${formatName(leader.name)}</strong> (${leader.pts} pts) with a <span class="ai-highlight">${gap}-point lead</span> over ${formatName(runnerUp.name)}.<br>`;
+    
+    if (bestSprRider.sprint_pts > 0) {
+      html += `Sprint Specialist: <strong>${formatName(bestSprRider.name)}</strong> (${bestSprRider.sprint_pts} Sprint pts). `;
+      html += `Sunday Leader: <strong>${formatName(bestLongRider.name)}</strong> (${bestLongRider.long_pts || (bestLongRider.pts - bestLongRider.sprint_pts)} Main Race pts).<br>`;
+    }
+    html += `Highest consistency award goes to <strong>${formatName(minZerosRider.name)}</strong> with only <strong>${minZerosCount} zero-point finishes</strong> in Main Races.`;
+  }
+
+  body.innerHTML = html;
+}
+
 let chartInstances = {
   progression: null,
   zero_sprint: null,
@@ -852,6 +1015,7 @@ let chartInstances = {
 };
 
 function renderAllCategoryCharts(riders, catId) {
+  updateAIInsight(riders, catId);
   renderCategoryChartInstance('progressionChart', 'chart-container', 'progression', riders, catId);
   renderCategoryChartInstance('progressionChartZeroSprint', 'chart-container-zero-sprint', 'zero_sprint', riders, catId);
   renderCategoryChartInstance('progressionChartZeroLong', 'chart-container-zero-long', 'zero_long', riders, catId);
