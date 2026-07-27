@@ -936,13 +936,13 @@ function updateAIInsight(riders, catId) {
     const sprZeros = (r.sprint_history || []).filter(p => p === 0).length;
     const longZeros = (r.long_history || r.history || []).filter(p => p === 0).length;
 
-    html = `<strong>${formatName(r.name)}</strong> currently holds <strong>${r.pts} points</strong> in the ${categoryName} standings. `;
+    html = `🎙️ <em>"Signori, che stagione per <strong>${formatName(r.name)}</strong>! Dominatore in solitario della nostra analisi con ben <strong>${r.pts} punti</strong> in ${categoryName}. `;
     if (sprPts > 0) {
-      html += `Their points tally includes <span class="ai-highlight">${sprPts} Sprint pts</span> and <span class="ai-highlight">${longPts} Main Race pts</span>. `;
+      html += `Il suo bottino parla chiaro: <span class="ai-highlight">${sprPts} punti conquistati al Sabato nelle Sprint</span> e ben <span class="ai-highlight">${longPts} punti stampati nelle Gare della Domenica</span>. `;
     } else {
-      html += `Accumulated over ${r.history ? r.history.length : 0} rounds with consistent race pace. `;
+      html += `Un ruolino di marcia costante costruito gara dopo gara. `;
     }
-    html += `Reliability metrics show <strong>${longZeros} zero-point finishes</strong> in Main Races${sprPts > 0 ? ` and <strong>${sprZeros} zero-point finishes</strong> in Sprint sessions` : ''}.`;
+    html += `Sul fronte dell'affidabilità si contano <strong>${longZeros} zeri nelle gare principali</strong>${sprPts > 0 ? ` e <strong>${sprZeros} zeri nelle Sprint</strong>` : ''}: un ritmo da vero protagonista del Mondiale!"</em>`;
   } else if (sorted.length === 2) {
     const [r1, r2] = sorted;
     const gap = (r1.pts || 0) - (r2.pts || 0);
@@ -955,24 +955,24 @@ function updateAIInsight(riders, catId) {
     const r1Zeros = (r1.long_history || r1.history || []).filter(p => p === 0).length;
     const r2Zeros = (r2.long_history || r2.history || []).filter(p => p === 0).length;
 
-    html = `Head-to-head title analysis between <strong>${formatName(r1.name)}</strong> (${r1.pts} pts) and <strong>${formatName(r2.name)}</strong> (${r2.pts} pts), separated by <span class="ai-highlight">${gap} points</span>.<br>`;
+    html = `🎙️ <em>"Attenzione ragazzi, che duello infuocato tra <strong>${formatName(r1.name)}</strong> (${r1.pts} pt) e <strong>${formatName(r2.name)}</strong> (${r2.pts} pt)! Soltanto <span class="ai-highlight">${gap} punti</span> separano questi due leoni in classifica.<br>`;
     
     if (r1Spr > 0 || r2Spr > 0) {
       if (r1Spr > r2Spr) {
-        html += `<strong>${formatName(r1.name)}</strong> holds an advantage in Sprints (${r1Spr} vs ${r2Spr} pts), while `;
+        html += `Se al Sabato <strong>${formatName(r1.name)}</strong> fa la voce grossa nelle Sprint (${r1Spr} vs ${r2Spr} pt), `;
       } else if (r2Spr > r1Spr) {
-        html += `<strong>${formatName(r2.name)}</strong> outperforms in Sprints (${r2Spr} vs ${r1Spr} pts), but `;
+        html += `Se al Sabato <strong>${formatName(r2.name)}</strong> fa scintille nelle Sprint (${r2Spr} vs ${r1Spr} pt), `;
       }
       if (r1Long >= r2Long) {
-        html += `<strong>${formatName(r1.name)}</strong> leads Main Race points (${r1Long} vs ${r2Long} pts).<br>`;
+        html += `alla Domenica <strong>${formatName(r1.name)}</strong> risponde imponendo la sua legge nelle gare lunghe (${r1Long} vs ${r2Long} pt).<br>`;
       } else {
-        html += `<strong>${formatName(r2.name)}</strong> leads Sunday Main Races (${r2Long} vs ${r1Long} pts).<br>`;
+        html += `alla Domenica <strong>${formatName(r2.name)}</strong> risponde a tono nella gara principale (${r2Long} vs ${r1Long} pt).<br>`;
       }
     } else {
-      html += `Main Race scoring shows ${formatName(r1.name)} ahead by ${gap} pts across completed rounds.<br>`;
+      html += `Nelle gare principali ${formatName(r1.name)} mantiene un margine di sicurezza di ${gap} pt.<br>`;
     }
 
-    html += `Consistency factor: ${formatName(r1.name)} has ${r1Zeros} zero-point finishes vs ${r2Zeros} for ${formatName(r2.name)}.`;
+    html += `Fattore costanza: ${formatName(r1.name)} conta ${r1Zeros} gare a 0 punti contro le ${r2Zeros} di ${formatName(r2.name)}. La sfida per il titolo è più aperta che mai!"</em>`;
   } else {
     const leader = sorted[0];
     const runnerUp = sorted[1];
@@ -996,13 +996,13 @@ function updateAIInsight(riders, catId) {
       }
     });
 
-    html = `Comparative analysis of <strong>${sorted.length} selected riders</strong>, led by <strong>${formatName(leader.name)}</strong> (${leader.pts} pts) with a <span class="ai-highlight">${gap}-point lead</span> over ${formatName(runnerUp.name)}.<br>`;
+    html = `🎙️ <em>"Pelle d'oca per questo Mondiale! Tra i <strong>${sorted.length} piloti selezionati</strong>, in vetta svetta <strong>${formatName(leader.name)}</strong> con <strong>${leader.pts} punti</strong>, ma <strong>${formatName(runnerUp.name)}</strong> incalza a soli <span class="ai-highlight">${gap} punti di distacco</span>.<br>`;
     
     if (bestSprRider.sprint_pts > 0) {
-      html += `Sprint Specialist: <strong>${formatName(bestSprRider.name)}</strong> (${bestSprRider.sprint_pts} Sprint pts). `;
-      html += `Sunday Leader: <strong>${formatName(bestLongRider.name)}</strong> (${bestLongRider.long_pts || (bestLongRider.pts - bestLongRider.sprint_pts)} Main Race pts).<br>`;
+      html += `Re del Sabato Sprint: <strong>${formatName(bestSprRider.name)}</strong> (${bestSprRider.sprint_pts} pt). `;
+      html += `Dominatore della Domenica: <strong>${formatName(bestLongRider.name)}</strong> (${bestLongRider.long_pts || (bestLongRider.pts - bestLongRider.sprint_pts)} pt).<br>`;
     }
-    html += `Highest consistency award goes to <strong>${formatName(minZerosRider.name)}</strong> with only <strong>${minZerosCount} zero-point finishes</strong> in Main Races.`;
+    html += `Il premio di martello per la costanza va a <strong>${formatName(minZerosRider.name)}</strong> con soli <strong>${minZerosCount} zeri</strong> in gara lunga. Fino all'ultima staccata della stagione ci sarà da divertirsi!"</em>`;
   }
 
   body.innerHTML = html;
