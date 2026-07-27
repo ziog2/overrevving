@@ -312,6 +312,19 @@
     width: 12px;
     height: 12px;
   }
+  .cal-weather-badge {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid #4a4a54;
+    color: #e0e0e0;
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 10px;
+    font-weight: 700;
+    margin-right: 6px;
+    letter-spacing: 0.02em;
+    font-family: monospace;
+    display: inline-block;
+  }
   /* Gemini AI Insight Card */
   .ai-insight-card {
     background: linear-gradient(135deg, rgba(34, 34, 40, 0.95), rgba(44, 44, 52, 0.95));
@@ -563,17 +576,17 @@ const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
 const catId = 'motogp';
 
 const CALENDAR = [
-  { name: 'Thailand',      date: '2026-03-01' },
-  { name: 'Brazil',        date: '2026-03-22' },
-  { name: 'USA',           date: '2026-03-29' },
-  { name: 'Spain',         date: '2026-04-26' },
-  { name: 'France',        date: '2026-05-10' },
-  { name: 'Catalonia',     date: '2026-05-17' },
-  { name: 'Italy',         date: '2026-05-31' },
-  { name: 'Hungary',       date: '2026-06-07' },
-  { name: 'Czechia',       date: '2026-06-21' },
-  { name: 'Netherlands',   date: '2026-06-28' },
-  { name: 'Germany',       date: '2026-07-12' },
+  { name: 'Thailand',      date: '2026-03-01', weather: 'SPR: Dry RACE: Dry' },
+  { name: 'Brazil',        date: '2026-03-22', weather: 'SPR: Dry RACE: Dry' },
+  { name: 'USA',           date: '2026-03-29', weather: 'SPR: Dry RACE: Dry' },
+  { name: 'Spain',         date: '2026-04-26', weather: 'SPR: Dry RACE: Dry' },
+  { name: 'France',        date: '2026-05-10', weather: 'SPR: Dry RACE: Dry' },
+  { name: 'Catalonia',     date: '2026-05-17', weather: 'SPR: Dry RACE1: Dry RACE2: Dry' },
+  { name: 'Italy',         date: '2026-05-31', weather: 'SPR: Dry RACE: Dry' },
+  { name: 'Hungary',       date: '2026-06-07', weather: 'SPR: Dry RACE: Dry' },
+  { name: 'Czechia',       date: '2026-06-21', weather: 'SPR: Dry RACE: Dry' },
+  { name: 'Netherlands',   date: '2026-06-28', weather: 'SPR: Dry RACE: Dry' },
+  { name: 'Germany',       date: '2026-07-12', weather: 'SPR: Dry RACE: Dry' },
   { name: 'Great Britain', date: '2026-08-09' },
   { name: 'Aragon',        date: '2026-08-30' },
   { name: 'San Marino',    date: '2026-09-13' },
@@ -744,9 +757,10 @@ function renderCalendar() {
     const d = new Date(ev.date);
     const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
     const checkMark = isPast ? '<span style="color:#2ecc71;margin-right:6px;font-size:11px;">✓</span>' : '';
+    const weatherBadge = (isPast && ev.weather) ? `<span class="cal-weather-badge">${ev.weather}</span>` : '';
     
     html += `<div class="cal-item${isPast ? ' past' : ''}">
-      <span class="cal-name">${checkMark}${ev.name}</span>
+      <span class="cal-name">${checkMark}${weatherBadge}${ev.name}</span>
       <span class="cal-date">${dateStr}</span>
     </div>`;
   });
