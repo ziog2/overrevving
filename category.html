@@ -380,20 +380,6 @@
   </div>
 
   <div class="charts-section">
-    <!-- Gemini AI Season Insight Card -->
-    <div class="ai-insight-card" id="ai-insight-card" style="display:none;">
-      <div class="ai-insight-header">
-        <div class="ai-badge">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/>
-          </svg>
-          <span>GEMINI AI INSIGHT</span>
-        </div>
-        <span class="ai-subtitle">Season Analysis</span>
-      </div>
-      <div class="ai-insight-body" id="ai-insight-body"></div>
-    </div>
-
     <div class="chart-container" id="chart-container" style="display:none;">
       <div class="chart-header">
         <h3 class="chart-title">Overall Points Progression</h3>
@@ -433,6 +419,20 @@
       <div style="position: relative; height: 300px;">
         <canvas id="progressionChartZeroLong"></canvas>
       </div>
+    </div>
+
+    <!-- Gemini AI Season Insight Card (Moved to bottom of all charts) -->
+    <div class="ai-insight-card" id="ai-insight-card" style="display:none; margin-top: 20px;">
+      <div class="ai-insight-header">
+        <div class="ai-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/>
+          </svg>
+          <span>GEMINI AI INSIGHT</span>
+        </div>
+        <span class="ai-subtitle">Season Commentary</span>
+      </div>
+      <div class="ai-insight-body" id="ai-insight-body"></div>
     </div>
   </div>
 </div>

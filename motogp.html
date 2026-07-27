@@ -418,20 +418,6 @@
   </div>
 
   <div class="charts-section">
-    <!-- Gemini AI Season Insight Card -->
-    <div class="ai-insight-card" id="ai-insight-card" style="display:none;">
-      <div class="ai-insight-header">
-        <div class="ai-badge">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/>
-          </svg>
-          <span>GEMINI AI INSIGHT</span>
-        </div>
-        <span class="ai-subtitle">Season Analysis</span>
-      </div>
-      <div class="ai-insight-body" id="ai-insight-body"></div>
-    </div>
-
     <!-- 1. Grafico Progressione Totale -->
     <div class="chart-container" id="chart-container-overall" style="display:none;">
       <div class="chart-header">
@@ -500,6 +486,20 @@
       <div style="position: relative; height: 300px;">
         <canvas id="progressionChartZeroLong"></canvas>
       </div>
+    </div>
+
+    <!-- Gemini AI Season Insight Card (Moved to bottom of all charts) -->
+    <div class="ai-insight-card" id="ai-insight-card" style="display:none; margin-top: 20px;">
+      <div class="ai-insight-header">
+        <div class="ai-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/>
+          </svg>
+          <span>GEMINI AI INSIGHT</span>
+        </div>
+        <span class="ai-subtitle">Season Commentary</span>
+      </div>
+      <div class="ai-insight-body" id="ai-insight-body"></div>
     </div>
   </div>
 </div>
@@ -903,13 +903,13 @@ function updateAIInsight(riders, catId) {
     const sprZeros = (r.sprint_history || []).filter(p => p === 0).length;
     const longZeros = (r.long_history || r.history || []).filter(p => p === 0).length;
 
-    html = `🎙️ <em>"Signori, che stagione per <strong>${formatName(r.name)}</strong>! Dominatore in solitario della nostra analisi con ben <strong>${r.pts} punti</strong> in ${categoryName}. `;
+    html = `🎙️ <em>"What a sensational season we are witnessing from <strong>${formatName(r.name)}</strong>! Leading our focus in solitary glory with a commanding <strong>${r.pts} points</strong> in ${categoryName}. `;
     if (sprPts > 0) {
-      html += `Il suo bottino parla chiaro: <span class="ai-highlight">${sprPts} punti conquistati al Sabato nelle Sprint</span> e ben <span class="ai-highlight">${longPts} punti stampati nelle Gare della Domenica</span>. `;
+      html += `His tally tells a thrilling story: <span class="ai-highlight">${sprPts} points snatched in Saturday Sprints</span> and a massive <span class="ai-highlight">${longPts} points bagged in Sunday Main Races</span>. `;
     } else {
-      html += `Un ruolino di marcia costante costruito gara dopo gara. `;
+      html += `Accumulated with ruthless consistency round after round. `;
     }
-    html += `Sul fronte dell'affidabilità si contano <strong>${longZeros} zeri nelle gare principali</strong>${sprPts > 0 ? ` e <strong>${sprZeros} zeri nelle Sprint</strong>` : ''}: un ritmo da vero protagonista del Mondiale!"</em>`;
+    html += `On the reliability front, he has recorded <strong>${longZeros} zero-point finishes in Main Races</strong>${sprPts > 0 ? ` and <strong>${sprZeros} in Sprint sessions</strong>` : ''} — championship pace at its finest!"</em>`;
   } else if (sorted.length === 2) {
     const [r1, r2] = sorted;
     const gap = (r1.pts || 0) - (r2.pts || 0);
@@ -922,24 +922,24 @@ function updateAIInsight(riders, catId) {
     const r1Zeros = (r1.long_history || r1.history || []).filter(p => p === 0).length;
     const r2Zeros = (r2.long_history || r2.history || []).filter(p => p === 0).length;
 
-    html = `🎙️ <em>"Attenzione ragazzi, che duello infuocato tra <strong>${formatName(r1.name)}</strong> (${r1.pts} pt) e <strong>${formatName(r2.name)}</strong> (${r2.pts} pt)! Soltanto <span class="ai-highlight">${gap} punti</span> separano questi due leoni in classifica.<br>`;
+    html = `🎙️ <em>"Hold onto your seats, what an absolute firestorm between <strong>${formatName(r1.name)}</strong> (${r1.pts} pts) and <strong>${formatName(r2.name)}</strong> (${r2.pts} pts)! Just <span class="ai-highlight">${gap} points</span> separating these two titans on the leaderboard.<br>`;
     
     if (r1Spr > 0 || r2Spr > 0) {
       if (r1Spr > r2Spr) {
-        html += `Se al Sabato <strong>${formatName(r1.name)}</strong> fa la voce grossa nelle Sprint (${r1Spr} vs ${r2Spr} pt), `;
+        html += `While <strong>${formatName(r1.name)}</strong> holds the upper hand on Saturday Sprints (${r1Spr} vs ${r2Spr} pts), `;
       } else if (r2Spr > r1Spr) {
-        html += `Se al Sabato <strong>${formatName(r2.name)}</strong> fa scintille nelle Sprint (${r2Spr} vs ${r1Spr} pt), `;
+        html += `While <strong>${formatName(r2.name)}</strong> sparks magic on Saturday Sprints (${r2Spr} vs ${r1Spr} pts), `;
       }
       if (r1Long >= r2Long) {
-        html += `alla Domenica <strong>${formatName(r1.name)}</strong> risponde imponendo la sua legge nelle gare lunghe (${r1Long} vs ${r2Long} pt).<br>`;
+        html += `<strong>${formatName(r1.name)}</strong> answers back in style on Sunday Main Races (${r1Long} vs ${r2Long} pts).<br>`;
       } else {
-        html += `alla Domenica <strong>${formatName(r2.name)}</strong> risponde a tono nella gara principale (${r2Long} vs ${r1Long} pt).<br>`;
+        html += `<strong>${formatName(r2.name)}</strong> claims Sunday supremacy in the Main Race (${r2Long} vs ${r1Long} pts).<br>`;
       }
     } else {
-      html += `Nelle gare principali ${formatName(r1.name)} mantiene un margine di sicurezza di ${gap} pt.<br>`;
+      html += `Main Race scoring shows ${formatName(r1.name)} holding a ${gap}-point buffer.<br>`;
     }
 
-    html += `Fattore costanza: ${formatName(r1.name)} conta ${r1Zeros} gare a 0 punti contro le ${r2Zeros} di ${formatName(r2.name)}. La sfida per il titolo è più aperta che mai!"</em>`;
+    html += `Consistency check: ${formatName(r1.name)} has registered ${r1Zeros} zero-point finishes compared to ${r2Zeros} for ${formatName(r2.name)}. This title fight is going right down to the wire!"</em>`;
   } else {
     const leader = sorted[0];
     const runnerUp = sorted[1];
@@ -963,13 +963,13 @@ function updateAIInsight(riders, catId) {
       }
     });
 
-    html = `🎙️ <em>"Pelle d'oca per questo Mondiale! Tra i <strong>${sorted.length} piloti selezionati</strong>, in vetta svetta <strong>${formatName(leader.name)}</strong> con <strong>${leader.pts} punti</strong>, ma <strong>${formatName(runnerUp.name)}</strong> incalza a soli <span class="ai-highlight">${gap} punti di distacco</span>.<br>`;
+    html = `🎙️ <em>"Pure goosebumps for this World Championship! Among the <strong>${sorted.length} selected riders</strong>, <strong>${formatName(leader.name)}</strong> sits on top with <strong>${leader.pts} points</strong>, but <strong>${formatName(runnerUp.name)}</strong> is breathing down his neck just <span class="ai-highlight">${gap} points behind</span>.<br>`;
     
     if (bestSprRider.sprint_pts > 0) {
-      html += `Re del Sabato Sprint: <strong>${formatName(bestSprRider.name)}</strong> (${bestSprRider.sprint_pts} pt). `;
-      html += `Dominatore della Domenica: <strong>${formatName(bestLongRider.name)}</strong> (${bestLongRider.long_pts || (bestLongRider.pts - bestLongRider.sprint_pts)} pt).<br>`;
+      html += `King of Saturday Sprints: <strong>${formatName(bestSprRider.name)}</strong> (${bestSprRider.sprint_pts} pts). `;
+      html += `Sunday Master: <strong>${formatName(bestLongRider.name)}</strong> (${bestLongRider.long_pts || (bestLongRider.pts - bestLongRider.sprint_pts)} pts).<br>`;
     }
-    html += `Il premio di martello per la costanza va a <strong>${formatName(minZerosRider.name)}</strong> con soli <strong>${minZerosCount} zeri</strong> in gara lunga. Fino all'ultima staccata della stagione ci sarà da divertirsi!"</em>`;
+    html += `The ultimate consistency award goes to <strong>${formatName(minZerosRider.name)}</strong> with only <strong>${minZerosCount} zero-point finishes</strong> in Sunday Main Races. Expect fireworks all the way to the final lap!"</em>`;
   }
 
   body.innerHTML = html;
