@@ -711,22 +711,96 @@ logoImg.onload = () => {
 };
 
 function downloadChartAsPNG(canvasId, titleName) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
+  const sourceCanvas = document.getElementById(canvasId);
+  if (!sourceCanvas) return;
+
+  let sourceChart = null;
+  for (let key in chartInstances) {
+    if (chartInstances[key] && chartInstances[key].canvas === sourceCanvas) {
+      sourceChart = chartInstances[key];
+      break;
+    }
+  }
+
+  const targetWidth = 1920;
+  const targetHeight = 1080;
 
   const tempCanvas = document.createElement('canvas');
-  tempCanvas.width = canvas.width;
-  tempCanvas.height = canvas.height;
+  tempCanvas.width = targetWidth;
+  tempCanvas.height = targetHeight;
   const ctx = tempCanvas.getContext('2d');
 
   ctx.fillStyle = '#2c2c32';
-  ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-  ctx.drawImage(canvas, 0, 0);
+  ctx.fillRect(0, 0, targetWidth, targetHeight);
+
+  if (sourceChart) {
+    const chartPaddingX = 60;
+    const chartPaddingTop = 130;
+    const chartPaddingBottom = 60;
+
+    const chartW = targetWidth - (chartPaddingX * 2);
+    const chartH = targetHeight - chartPaddingTop - chartPaddingBottom;
+
+    const offscreenCanvas = document.createElement('canvas');
+    offscreenCanvas.width = chartW;
+    offscreenCanvas.height = chartH;
+
+    const hdData = JSON.parse(JSON.stringify(sourceChart.data));
+    const hdOptions = JSON.parse(JSON.stringify(sourceChart.options));
+
+    hdOptions.responsive = false;
+    hdOptions.maintainAspectRatio = false;
+    hdOptions.animation = false;
+
+    if (hdOptions.plugins && hdOptions.plugins.legend) {
+      hdOptions.plugins.legend.labels = hdOptions.plugins.legend.labels || {};
+      hdOptions.plugins.legend.labels.font = { family: 'Inter, system-ui, sans-serif', size: 18, weight: '600' };
+    }
+    if (hdOptions.scales) {
+      if (hdOptions.scales.x) {
+        hdOptions.scales.x.ticks = hdOptions.scales.x.ticks || {};
+        hdOptions.scales.x.ticks.font = { family: 'Inter, system-ui, sans-serif', size: 15 };
+      }
+      if (hdOptions.scales.y) {
+        hdOptions.scales.y.ticks = hdOptions.scales.y.ticks || {};
+        hdOptions.scales.y.ticks.font = { family: 'Inter, system-ui, sans-serif', size: 16 };
+      }
+    }
+
+    if (hdData && hdData.datasets) {
+      hdData.datasets.forEach(ds => {
+        ds.borderWidth = 5;
+        ds.pointRadius = 7;
+        ds.pointHoverRadius = 9;
+      });
+    }
+
+    const hdChart = new Chart(offscreenCanvas.getContext('2d'), {
+      type: 'line',
+      data: hdData,
+      plugins: [watermarkPlugin],
+      options: hdOptions
+    });
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 34px Inter, system-ui, sans-serif';
+    ctx.fillText(titleName.toUpperCase(), chartPaddingX, 65);
+
+    ctx.fillStyle = '#888888';
+    ctx.font = '600 18px Inter, system-ui, sans-serif';
+    ctx.fillText('OVERREVVING · MOTORSPORT STANDINGS 2026', chartPaddingX, 102);
+
+    ctx.drawImage(offscreenCanvas, chartPaddingX, chartPaddingTop);
+
+    hdChart.destroy();
+  } else {
+    ctx.drawImage(sourceCanvas, 60, 120, targetWidth - 120, targetHeight - 180);
+  }
 
   const imageURI = tempCanvas.toDataURL('image/png');
   const link = document.createElement('a');
   const cleanTitle = (titleName || 'chart').toLowerCase().replace(/[^a-z0-9]+/g, '_');
-  link.download = `motogp_${cleanTitle}.png`;
+  link.download = `motogp_${cleanTitle}_1080p.png`;
   link.href = imageURI;
   document.body.appendChild(link);
   link.click();
