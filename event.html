@@ -253,41 +253,33 @@
     }
 
     .col-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: #2c2c32;
+      border: 1px solid #3a3a42;
       border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     }
 
     .col-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--card-border);
-    }
-
-    .sprint-header { border-bottom-color: var(--accent-yellow); }
-    .race-header { border-bottom-color: var(--accent-red); }
-
-    .col-title {
-      font-size: 16px;
+      padding: 14px 16px 12px;
+      text-align: center;
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: 0.03em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #3a3a42;
     }
 
-    .badge-pts {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-sub);
+    .sprint-header { background: #e67e22; color: #fff; }
+    .race-header { background: #c0392b; color: #fff; }
+
+    .next-round {
+      font-size: 12px;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: normal;
+      margin-top: 4px;
+      opacity: 0.9;
     }
 
     /* Standings Tables */
@@ -297,44 +289,90 @@
       font-size: 13px;
     }
 
-    .standings-table th {
+    .standings-table thead th {
+      padding: 7px 8px;
       text-align: left;
-      padding: 7px 10px;
-      color: #888;
-      font-weight: 600;
       font-size: 11px;
-      text-transform: uppercase;
+      font-weight: 600;
       letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #888;
+      border-bottom: 1px solid #3a3a42;
       background: #252528;
+    }
+
+    .standings-table thead th.star-col { width: 28px; text-align: center; }
+    .standings-table thead th:nth-child(2) { text-align: center; width: 28px; }
+    .standings-table thead th:last-child { text-align: right; }
+
+    .standings-table tbody tr {
       border-bottom: 1px solid #3a3a42;
     }
 
-    .standings-table td {
-      padding: 8px 10px;
-      border-bottom: 1px solid #28282e;
-      vertical-align: middle;
-      color: #ccc;
+    .standings-table tbody tr:nth-child(even) {
+      background: #28282e;
     }
 
-    .standings-table tr:last-child td {
+    .standings-table tbody tr:last-child {
       border-bottom: none;
     }
 
-    .standings-table tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
+    .standings-table tbody tr:hover {
+      background: #333340;
+    }
+
+    .standings-table tbody tr.favorite {
+      background: #2a1f3a !important;
+    }
+
+    .standings-table tbody tr.favorite:hover {
+      background: #332545 !important;
+    }
+
+    .standings-table tbody tr.favorite td {
+      background: transparent !important;
+    }
+
+    .standings-table tbody td {
+      padding: 8px 8px;
+      color: #ddd;
+      vertical-align: middle;
+    }
+
+    .star-col { width: 28px; text-align: center !important; }
+
+    .fav-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 0 4px;
+      opacity: 0.3;
+      transition: opacity 0.15s, color 0.15s;
+      line-height: 1;
+      color: #999;
+    }
+
+    .fav-btn.active {
+      opacity: 1;
+      color: #ffd700;
+    }
+
+    .fav-btn:hover {
+      opacity: 0.8;
     }
 
     .pos-cell {
+      text-align: center !important;
       font-weight: 700;
-      font-size: 12px;
       color: #aaa;
+      font-size: 12px;
       width: 28px;
-      text-align: center;
     }
 
-    .pos-1 { color: #f1c40f !important; }
-    .pos-2 { color: #bdc3c7 !important; }
-    .pos-3 { color: #e67e22 !important; }
+    .pos-1 { color: #ffd700 !important; }
+    .pos-2 { color: #c0c0c0 !important; }
+    .pos-3 { color: #cd7f32 !important; }
 
     .rider-name {
       font-weight: 400;
@@ -343,10 +381,10 @@
     }
 
     .pts-scored {
+      text-align: right !important;
       font-weight: 700;
-      font-size: 14px;
       color: #f0c040;
-      text-align: right;
+      font-size: 14px;
     }
 
     .speed-cell {
@@ -589,6 +627,29 @@
       renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, sprintResults, raceResults);
     }
 
+    function getFavorites() {
+      try { return JSON.parse(localStorage.getItem('or_favorites') || '[]'); }
+      catch(e) { return []; }
+    }
+    function saveFavorites(favs) {
+      try { localStorage.setItem('or_favorites', JSON.stringify(favs)); }
+      catch(e) {}
+    }
+    function toggleFav(btn, riderName) {
+      let favs = getFavorites();
+      const tr = btn.closest('tr');
+      if (favs.includes(riderName)) {
+        favs = favs.filter(n => n !== riderName);
+        btn.classList.remove('active');
+        if (tr) tr.classList.remove('favorite');
+      } else {
+        favs.push(riderName);
+        btn.classList.add('active');
+        if (tr) tr.classList.add('favorite');
+      }
+      saveFavorites(favs);
+    }
+
     function formatName(fullName) {
       if (!fullName) return '';
       const parts = fullName.trim().split(' ');
@@ -613,6 +674,7 @@
       const mainEl = document.getElementById('main-content');
       const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/RAC`;
       const flagHtml = `<img src="https://flagcdn.com/w20/${gp.countryCode}.png" srcset="https://flagcdn.com/w40/${gp.countryCode}.png 2x" class="flag-img" alt="${gp.location}">`;
+      const favs = getFavorites();
 
       let sprintRows = '';
       if (sprintResults.length) {
@@ -621,8 +683,12 @@
           const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : '';
           const pts = r.pts !== undefined ? r.pts : calculateSprintPts(pos);
           const rawName = r.rider ? r.rider.full_name : r.name || 'Rider';
+          const isFav = favs.includes(rawName);
 
-          sprintRows += `<tr>
+          sprintRows += `<tr class="${isFav ? 'favorite' : ''}">
+            <td class="star-col">
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
+            </td>
             <td class="pos-cell ${pc}">${pos}</td>
             <td>
               <div class="rider-name">${formatName(rawName)}</div>
@@ -631,7 +697,7 @@
           </tr>`;
         });
       } else {
-        sprintRows = `<tr><td colspan="3" style="text-align:center; padding: 24px; color: var(--text-sub);">No Sprint Race data available for this round.</td></tr>`;
+        sprintRows = `<tr><td colspan="4" style="text-align:center; padding: 24px; color: var(--text-sub);">No Sprint Race data available for this round.</td></tr>`;
       }
 
       let raceRows = '';
@@ -641,8 +707,12 @@
           const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : '';
           const pts = r.pts !== undefined ? r.pts : calculateRacePts(pos);
           const rawName = r.rider ? r.rider.full_name : r.name || 'Rider';
+          const isFav = favs.includes(rawName);
 
-          raceRows += `<tr>
+          raceRows += `<tr class="${isFav ? 'favorite' : ''}">
+            <td class="star-col">
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
+            </td>
             <td class="pos-cell ${pc}">${pos}</td>
             <td>
               <div class="rider-name">${formatName(rawName)}</div>
@@ -651,7 +721,7 @@
           </tr>`;
         });
       } else {
-        raceRows = `<tr><td colspan="3" style="text-align:center; padding: 24px; color: var(--text-sub);">No Main Race data available for this round.</td></tr>`;
+        raceRows = `<tr><td colspan="4" style="text-align:center; padding: 24px; color: var(--text-sub);">No Main Race data available for this round.</td></tr>`;
       }
 
       mainEl.innerHTML = `
@@ -692,12 +762,13 @@
           <!-- LEFT COLUMN: SPRINT RACE -->
           <div class="col-card">
             <div class="col-header sprint-header">
-              <div class="col-title">⚡ Sprint Race Standings</div>
-              <div class="badge-pts">Sprint Points (12-1)</div>
+              <div>⚡ SPRINT RACE STANDINGS</div>
+              <div class="next-round">Sprint Points (12 - 1)</div>
             </div>
             <table class="standings-table">
               <thead>
                 <tr>
+                  <th class="star-col"></th>
                   <th>#</th>
                   <th>Rider</th>
                   <th style="text-align:right">Pts</th>
@@ -712,12 +783,13 @@
           <!-- RIGHT COLUMN: MAIN RACE -->
           <div class="col-card">
             <div class="col-header race-header">
-              <div class="col-title">🏁 Main Race Standings</div>
-              <div class="badge-pts">Race Points (25-1)</div>
+              <div>🏁 MAIN RACE STANDINGS</div>
+              <div class="next-round">Race Points (25 - 1)</div>
             </div>
             <table class="standings-table">
               <thead>
                 <tr>
+                  <th class="star-col"></th>
                   <th>#</th>
                   <th>Rider</th>
                   <th style="text-align:right">Pts</th>
