@@ -334,8 +334,9 @@
     .pos-3 { color: #e67e22; }
 
     .rider-name {
-      font-weight: 700;
-      color: #fff;
+      font-weight: 400;
+      color: #ddd;
+      font-size: 13px;
     }
 
     .rider-num {
@@ -351,10 +352,9 @@
     }
 
     .pts-scored {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 15px;
-      color: var(--accent-green);
+      font-weight: 700;
+      font-size: 14px;
+      color: #f0c040;
       text-align: right;
     }
 
@@ -526,28 +526,20 @@
           const longList = [];
 
           motogpBin.forEach(r => {
-            const sprPts = (r.sprint_history && r.sprint_history[rIdx]) ? r.sprint_history[rIdx] : 0;
-            const longPts = (r.long_history && r.long_history[rIdx]) ? r.long_history[rIdx] : 0;
+            const sprPts = (r.sprint_history && r.sprint_history[rIdx] !== undefined) ? r.sprint_history[rIdx] : 0;
+            const longPts = (r.long_history && r.long_history[rIdx] !== undefined) ? r.long_history[rIdx] : 0;
 
-            if (sprPts > 0) {
-              sprList.push({
-                rider: { full_name: r.name, number: '' },
-                team: { name: '' },
-                best_lap: { time: '-' },
-                top_speed: '-',
-                pts: sprPts
-              });
-            }
+            sprList.push({
+              rider: { full_name: r.name, number: '' },
+              team: { name: '' },
+              pts: sprPts
+            });
 
-            if (longPts > 0) {
-              longList.push({
-                rider: { full_name: r.name, number: '' },
-                team: { name: '' },
-                best_lap: { time: '-' },
-                top_speed: '-',
-                pts: longPts
-              });
-            }
+            longList.push({
+              rider: { full_name: r.name, number: '' },
+              team: { name: '' },
+              pts: longPts
+            });
           });
 
           sprList.sort((a, b) => b.pts - a.pts);
