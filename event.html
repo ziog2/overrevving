@@ -627,27 +627,59 @@
       renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, sprintResults, raceResults);
     }
 
-    function getFavorites() {
-      try { return JSON.parse(localStorage.getItem('or_favorites') || '[]'); }
-      catch(e) { return []; }
-    }
-    function saveFavorites(favs) {
-      try { localStorage.setItem('or_favorites', JSON.stringify(favs)); }
-      catch(e) {}
-    }
-    function toggleFav(btn, riderName) {
-      let favs = getFavorites();
-      const tr = btn.closest('tr');
-      if (favs.includes(riderName)) {
-        favs = favs.filter(n => n !== riderName);
-        btn.classList.remove('active');
-        if (tr) tr.classList.remove('favorite');
-      } else {
-        favs.push(riderName);
-        btn.classList.add('active');
-        if (tr) tr.classList.add('favorite');
+    const FAV_KEY = 'overrevving_favorites';
+
+    function getFavoritesSet() {
+      try {
+        const list = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
+        return new Set(list);
+      } catch(e) {
+        return new Set();
       }
-      saveFavorites(favs);
+    }
+
+    function isRiderFavorite(riderName) {
+      if (!riderName) return false;
+      const favs = getFavoritesSet();
+      const nameTrim = riderName.trim();
+      
+      if (favs.has(`motogp:${nameTrim}`) || favs.has(nameTrim)) return true;
+      
+      for (let item of favs) {
+        const cleanItem = item.includes(':') ? item.split(':')[1] : item;
+        if (cleanItem.toLowerCase() === nameTrim.toLowerCase()) return true;
+      }
+      return false;
+    }
+
+    function toggleFav(btn, riderName) {
+      if (!riderName) return;
+      const nameTrim = riderName.trim();
+      const favKey = `motogp:${nameTrim}`;
+      const favs = getFavoritesSet();
+      
+      let isFavNow = false;
+      if (isRiderFavorite(nameTrim)) {
+        favs.delete(favKey);
+        favs.delete(nameTrim);
+        for (let item of Array.from(favs)) {
+          const cleanItem = item.includes(':') ? item.split(':')[1] : item;
+          if (cleanItem.toLowerCase() === nameTrim.toLowerCase()) favs.delete(item);
+        }
+      } else {
+        favs.add(favKey);
+        isFavNow = true;
+      }
+      
+      localStorage.setItem(FAV_KEY, JSON.stringify([...favs]));
+      
+      document.querySelectorAll('.standings-table tbody tr').forEach(tr => {
+        if (tr.dataset.riderName && tr.dataset.riderName.toLowerCase() === nameTrim.toLowerCase()) {
+          tr.classList.toggle('favorite', isFavNow);
+          const b = tr.querySelector('.fav-btn');
+          if (b) b.classList.toggle('active', isFavNow);
+        }
+      });
     }
 
     function formatName(fullName) {
@@ -674,7 +706,6 @@
       const mainEl = document.getElementById('main-content');
       const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/RAC`;
       const flagHtml = `<img src="https://flagcdn.com/w20/${gp.countryCode}.png" srcset="https://flagcdn.com/w40/${gp.countryCode}.png 2x" class="flag-img" alt="${gp.location}">`;
-      const favs = getFavorites();
 
       let sprintRows = '';
       if (sprintResults.length) {
@@ -683,9 +714,9 @@
           const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : '';
           const pts = r.pts !== undefined ? r.pts : calculateSprintPts(pos);
           const rawName = r.rider ? r.rider.full_name : r.name || 'Rider';
-          const isFav = favs.includes(rawName);
+          const isFav = isRiderFavorite(rawName);
 
-          sprintRows += `<tr class="${isFav ? 'favorite' : ''}">
+          sprintRows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
               <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
             </td>
@@ -707,9 +738,9 @@
           const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : '';
           const pts = r.pts !== undefined ? r.pts : calculateRacePts(pos);
           const rawName = r.rider ? r.rider.full_name : r.name || 'Rider';
-          const isFav = favs.includes(rawName);
+          const isFav = isRiderFavorite(rawName);
 
-          raceRows += `<tr class="${isFav ? 'favorite' : ''}">
+          raceRows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
               <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
             </td>
