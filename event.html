@@ -40,7 +40,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 14px 24px;
+      padding: 12px 24px;
     }
 
     .nav-container {
@@ -59,20 +59,17 @@
     }
 
     .header-logo-img {
-      height: 44px;
+      height: 64px;
       width: auto;
-      max-width: 280px;
+      max-width: 360px;
       opacity: 0.95;
       transition: opacity 0.2s ease, transform 0.2s ease;
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 4px 16px;
-      background: var(--card-bg);
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
     }
 
     .header-logo-img:hover {
       opacity: 1;
-      transform: scale(1.02);
+      transform: scale(1.03);
     }
 
     .back-btn {
@@ -162,6 +159,15 @@
       display: flex;
       align-items: center;
       gap: 12px;
+    }
+
+    .flag-img {
+      width: 22px;
+      height: 15px;
+      object-fit: cover;
+      border-radius: 3px;
+      vertical-align: middle;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
 
     /* Weather Strip */
@@ -456,30 +462,33 @@
   <script>
     const SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e";
     const CAT_MOTOGP = "e8c110ad-64aa-4e8e-8a86-f2f152f6a942";
+    const BIN_ID = '6a3064e4f5f4af5e29f7958b';
+    const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
+    const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
 
     const GP_ROUNDS = [
-      { round: 'R01', short: 'THA', name: 'PT Grand Prix of Thailand', circuit: 'Chang International Circuit', location: 'Buriram', date: '27 Feb - 01 Mar 2026', flag: '🇹🇭' },
-      { round: 'R02', short: 'BRA', name: 'Grand Prix of Brazil', circuit: 'Autódromo Internacional de Goiânia', location: 'Goiânia', date: '20 Mar - 22 Mar 2026', flag: '🇧🇷' },
-      { round: 'R03', short: 'USA', name: 'Grand Prix of The Americas', circuit: 'Circuit of the Americas', location: 'Austin', date: '27 Mar - 29 Mar 2026', flag: '🇺🇸' },
-      { round: 'R04', short: 'SPA', name: 'Gran Premio de España', circuit: 'Circuito de Jerez', location: 'Jerez de la Frontera', date: '24 Apr - 26 Apr 2026', flag: '🇪🇸' },
-      { round: 'R05', short: 'FRA', name: 'Grand Prix de France', circuit: 'Le Mans Bugatti Circuit', location: 'Le Mans', date: '08 May - 10 May 2026', flag: '🇫🇷' },
-      { round: 'R06', short: 'CAT', name: 'Gran Premi de Catalunya', circuit: 'Circuit de Barcelona-Catalunya', location: 'Montmeló', date: '15 May - 17 May 2026', flag: '🏁' },
-      { round: 'R07', short: 'ITA', name: 'Gran Premio d\'Italia', circuit: 'Autodromo Internazionale del Mugello', location: 'Scarperia e San Piero', date: '29 May - 31 May 2026', flag: '🇮🇹' },
-      { round: 'R08', short: 'HUN', name: 'Hungarian Grand Prix', circuit: 'Balaton Park Circuit', location: 'Balatonfőkajár', date: '05 Jun - 07 Jun 2026', flag: '🇭🇺' },
-      { round: 'R09', short: 'CZE', name: 'Grand Prix of Czechia', circuit: 'Automotodrom Brno', location: 'Brno', date: '19 Jun - 21 Jun 2026', flag: '🇨🇿' },
-      { round: 'R10', short: 'NED', name: 'TT Assen', circuit: 'TT Circuit Assen', location: 'Assen', date: '26 Jun - 28 Jun 2026', flag: '🇳🇱' },
-      { round: 'R11', short: 'GER', name: 'Motorrad Grand Prix Deutschland', circuit: 'Sachsenring', location: 'Hohenstein-Ernstthal', date: '10 Jul - 12 Jul 2026', flag: '🇩🇪' },
-      { round: 'R12', short: 'GBR', name: 'British Grand Prix', circuit: 'Silverstone Circuit', location: 'Silverstone', date: '07 Aug - 09 Aug 2026', flag: '🇬🇧' },
-      { round: 'R13', short: 'ARA', name: 'Gran Premio de Aragón', circuit: 'MotorLand Aragón', location: 'Alcañiz', date: '28 Aug - 30 Aug 2026', flag: '🇪🇸' },
-      { round: 'R14', short: 'RSM', name: 'Gran Premio di San Marino', circuit: 'Misano World Circuit Marco Simoncelli', location: 'Misano Adriatico', date: '11 Sep - 13 Sep 2026', flag: '🇸🇲' },
-      { round: 'R15', short: 'AUT', name: 'Austrian Grand Prix', circuit: 'Red Bull Ring', location: 'Spielberg', date: '18 Sep - 20 Sep 2026', flag: '🇦🇹' },
-      { round: 'R16', short: 'JPN', name: 'Grand Prix of Japan', circuit: 'Mobility Resort Motegi', location: 'Motegi', date: '02 Oct - 04 Oct 2026', flag: '🇯🇵' },
-      { round: 'R17', short: 'INA', name: 'Indonesian Grand Prix', circuit: 'Pertamina Mandalika Circuit', location: 'Lombok', date: '09 Oct - 11 Oct 2026', flag: '🇮🇩' },
-      { round: 'R18', short: 'AUS', name: 'Australian Grand Prix', circuit: 'Phillip Island Grand Prix Circuit', location: 'Phillip Island', date: '23 Oct - 25 Oct 2026', flag: '🇦🇺' },
-      { round: 'R19', short: 'MAL', name: 'Malaysian Grand Prix', circuit: 'PETRONAS Sepang International Circuit', location: 'Sepang', date: '30 Oct - 01 Nov 2026', flag: '🇲🇾' },
-      { round: 'R20', short: 'QAT', name: 'Qatar Grand Prix', circuit: 'Lusail International Circuit', location: 'Lusail', date: '06 Nov - 08 Nov 2026', flag: '🇶🇦' },
-      { round: 'R21', short: 'POR', name: 'Grande Prémio de Portugal', circuit: 'Autódromo Internacional do Algarve', location: 'Portimão', date: '20 Nov - 22 Nov 2026', flag: '🇵🇹' },
-      { round: 'R22', short: 'VAL', name: 'Gran Premio de la Comunitat Valenciana', circuit: 'Circuit Ricardo Tormo', location: 'Cheste', date: '27 Nov - 29 Nov 2026', flag: '🇪🇸' }
+      { round: 'R01', short: 'THA', countryCode: 'th', name: 'PT Grand Prix of Thailand', circuit: 'Chang International Circuit', location: 'Buriram', date: '27 Feb - 01 Mar 2026' },
+      { round: 'R02', short: 'BRA', countryCode: 'br', name: 'Grand Prix of Brazil', circuit: 'Autódromo Internacional de Goiânia', location: 'Goiânia', date: '20 Mar - 22 Mar 2026' },
+      { round: 'R03', short: 'USA', countryCode: 'us', name: 'Grand Prix of The Americas', circuit: 'Circuit of the Americas', location: 'Austin', date: '27 Mar - 29 Mar 2026' },
+      { round: 'R04', short: 'SPA', countryCode: 'es', name: 'Gran Premio de España', circuit: 'Circuito de Jerez', location: 'Jerez de la Frontera', date: '24 Apr - 26 Apr 2026' },
+      { round: 'R05', short: 'FRA', countryCode: 'fr', name: 'Grand Prix de France', circuit: 'Le Mans Bugatti Circuit', location: 'Le Mans', date: '08 May - 10 May 2026' },
+      { round: 'R06', short: 'CAT', countryCode: 'es', name: 'Gran Premi de Catalunya', circuit: 'Circuit de Barcelona-Catalunya', location: 'Montmeló', date: '15 May - 17 May 2026' },
+      { round: 'R07', short: 'ITA', countryCode: 'it', name: 'Gran Premio d\'Italia', circuit: 'Autodromo Internazionale del Mugello', location: 'Scarperia e San Piero', date: '29 May - 31 May 2026' },
+      { round: 'R08', short: 'HUN', countryCode: 'hu', name: 'Hungarian Grand Prix', circuit: 'Balaton Park Circuit', location: 'Balatonfőkajár', date: '05 Jun - 07 Jun 2026' },
+      { round: 'R09', short: 'CZE', countryCode: 'cz', name: 'Grand Prix of Czechia', circuit: 'Automotodrom Brno', location: 'Brno', date: '19 Jun - 21 Jun 2026' },
+      { round: 'R10', short: 'NED', countryCode: 'nl', name: 'TT Assen', circuit: 'TT Circuit Assen', location: 'Assen', date: '26 Jun - 28 Jun 2026' },
+      { round: 'R11', short: 'GER', countryCode: 'de', name: 'Motorrad Grand Prix Deutschland', circuit: 'Sachsenring', location: 'Hohenstein-Ernstthal', date: '10 Jul - 12 Jul 2026' },
+      { round: 'R12', short: 'GBR', countryCode: 'gb', name: 'British Grand Prix', circuit: 'Silverstone Circuit', location: 'Silverstone', date: '07 Aug - 09 Aug 2026' },
+      { round: 'R13', short: 'ARA', countryCode: 'es', name: 'Gran Premio de Aragón', circuit: 'MotorLand Aragón', location: 'Alcañiz', date: '28 Aug - 30 Aug 2026' },
+      { round: 'R14', short: 'RSM', countryCode: 'sm', name: 'Gran Premio di San Marino', circuit: 'Misano World Circuit Marco Simoncelli', location: 'Misano Adriatico', date: '11 Sep - 13 Sep 2026' },
+      { round: 'R15', short: 'AUT', countryCode: 'at', name: 'Austrian Grand Prix', circuit: 'Red Bull Ring', location: 'Spielberg', date: '18 Sep - 20 Sep 2026' },
+      { round: 'R16', short: 'JPN', countryCode: 'jp', name: 'Grand Prix of Japan', circuit: 'Mobility Resort Motegi', location: 'Motegi', date: '02 Oct - 04 Oct 2026' },
+      { round: 'R17', short: 'INA', countryCode: 'id', name: 'Indonesian Grand Prix', circuit: 'Pertamina Mandalika Circuit', location: 'Lombok', date: '09 Oct - 11 Oct 2026' },
+      { round: 'R18', short: 'AUS', countryCode: 'au', name: 'Australian Grand Prix', circuit: 'Phillip Island Grand Prix Circuit', location: 'Phillip Island', date: '23 Oct - 25 Oct 2026' },
+      { round: 'R19', short: 'MAL', countryCode: 'my', name: 'Malaysian Grand Prix', circuit: 'PETRONAS Sepang International Circuit', location: 'Sepang', date: '30 Oct - 01 Nov 2026' },
+      { round: 'R20', short: 'QAT', countryCode: 'qa', name: 'Qatar Grand Prix', circuit: 'Lusail International Circuit', location: 'Lusail', date: '06 Nov - 08 Nov 2026' },
+      { round: 'R21', short: 'POR', countryCode: 'pt', name: 'Grande Prémio de Portugal', circuit: 'Autódromo Internacional do Algarve', location: 'Portimão', date: '20 Nov - 22 Nov 2026' },
+      { round: 'R22', short: 'VAL', countryCode: 'es', name: 'Gran Premio de la Comunitat Valenciana', circuit: 'Circuit Ricardo Tormo', location: 'Cheste', date: '27 Nov - 29 Nov 2026' }
     ];
 
     function getQueryParams() {
@@ -494,21 +503,68 @@
       const { year, round } = getQueryParams();
       const roundIdx = GP_ROUNDS.findIndex(r => r.round === round);
       const gp = GP_ROUNDS[roundIdx >= 0 ? roundIdx : 0];
+      const rIdx = roundIdx >= 0 ? roundIdx : 0;
 
       const prevGp = roundIdx > 0 ? GP_ROUNDS[roundIdx - 1] : null;
       const nextGp = roundIdx < GP_ROUNDS.length - 1 ? GP_ROUNDS[roundIdx + 1] : null;
 
       document.title = `${year} ${gp.round} · ${gp.name} · Overrevving`;
 
+      let sprintResults = [];
+      let raceResults = [];
+      let weatherInfo = { track: 'Dry', weather: 'Partly-Cloudy', air: '32°C', ground: '50°C', humidity: '45%' };
+
+      // Load JSONBin Data (Guaranteed Fallback)
       try {
-        // Query Pulselive API for Events
+        const binRes = await fetch(BIN_URL, { headers: { 'X-Access-Key': API_KEY } });
+        if (binRes.ok) {
+          const binJson = await binRes.json();
+          const motogpBin = binJson.record.motogp || [];
+
+          // Compute Sprint & Main Race Standings from JSONBin history
+          const sprList = [];
+          const longList = [];
+
+          motogpBin.forEach(r => {
+            const sprPts = (r.sprint_history && r.sprint_history[rIdx]) ? r.sprint_history[rIdx] : 0;
+            const longPts = (r.long_history && r.long_history[rIdx]) ? r.long_history[rIdx] : 0;
+
+            if (sprPts > 0) {
+              sprList.push({
+                rider: { full_name: r.name, number: '' },
+                team: { name: '' },
+                best_lap: { time: '-' },
+                top_speed: '-',
+                pts: sprPts
+              });
+            }
+
+            if (longPts > 0) {
+              longList.push({
+                rider: { full_name: r.name, number: '' },
+                team: { name: '' },
+                best_lap: { time: '-' },
+                top_speed: '-',
+                pts: longPts
+              });
+            }
+          });
+
+          sprList.sort((a, b) => b.pts - a.pts);
+          longList.sort((a, b) => b.pts - a.pts);
+
+          sprintResults = sprList;
+          raceResults = longList;
+        }
+      } catch (binErr) {
+        console.warn("JSONBin fallback load notice:", binErr);
+      }
+
+      // Try Live Pulselive API for rich data (top speeds, lap times)
+      try {
         const eventsUrl = `https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid=${SEASON_2026}&categoryUuid=${CAT_MOTOGP}`;
         const events = await fetch(eventsUrl).then(r => r.json());
         const apiEvent = events.find(e => e.short_name === gp.short);
-
-        let sprintResults = [];
-        let raceResults = [];
-        let weatherInfo = { track: 'Dry', weather: 'Partly-Cloudy', air: '32°C', ground: '50°C', humidity: '45%' };
 
         if (apiEvent) {
           const sessionsUrl = `https://api.motogp.pulselive.com/motogp/v1/results/sessions?eventUuid=${apiEvent.id}&categoryUuid=${CAT_MOTOGP}`;
@@ -530,22 +586,24 @@
           if (sprSess) {
             const classUrl = `https://api.motogp.pulselive.com/motogp/v1/results/session/${sprSess.id}/classification`;
             const data = await fetch(classUrl).then(r => r.json());
-            sprintResults = data.classification || [];
+            if (data.classification && data.classification.length) {
+              sprintResults = data.classification;
+            }
           }
 
           if (racSess) {
             const classUrl = `https://api.motogp.pulselive.com/motogp/v1/results/session/${racSess.id}/classification`;
             const data = await fetch(classUrl).then(r => r.json());
-            raceResults = data.classification || [];
+            if (data.classification && data.classification.length) {
+              raceResults = data.classification;
+            }
           }
         }
-
-        renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, sprintResults, raceResults);
-
-      } catch (err) {
-        console.error("Error fetching event details:", err);
-        renderPageLayout(year, gp, prevGp, nextGp, { track: 'Dry', weather: 'Sunny', air: '32°C', ground: '50°C', humidity: '45%' }, [], []);
+      } catch (apiErr) {
+        console.warn("Live API query warning (using JSONBin data):", apiErr);
       }
+
+      renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, sprintResults, raceResults);
     }
 
     function calculateSprintPts(pos) {
@@ -560,23 +618,26 @@
 
     function renderPageLayout(year, gp, prevGp, nextGp, weather, sprintResults, raceResults) {
       const mainEl = document.getElementById('main-content');
-
       const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/RAC`;
+      const flagHtml = `<img src="https://flagcdn.com/w20/${gp.countryCode}.png" srcset="https://flagcdn.com/w40/${gp.countryCode}.png 2x" class="flag-img" alt="${gp.location}">`;
 
       let sprintRows = '';
       if (sprintResults.length) {
         sprintResults.forEach((r, idx) => {
           const pos = r.position || idx + 1;
           const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : '';
-          const pts = calculateSprintPts(pos);
-          const bestLap = r.best_lap ? r.best_lap.time : '-';
-          const topSpeed = r.top_speed ? `${r.top_speed} km/h` : '-';
+          const pts = r.pts !== undefined ? r.pts : calculateSprintPts(pos);
+          const bestLap = r.best_lap ? (r.best_lap.time || '-') : '-';
+          const topSpeed = r.top_speed && r.top_speed !== '-' ? `${r.top_speed} km/h` : '-';
+          const riderName = r.rider ? r.rider.full_name : r.name || 'Rider';
+          const riderNum = r.rider && r.rider.number ? `#${r.rider.number}` : '';
+          const teamName = r.team ? r.team.name : '';
 
           sprintRows += `<tr>
             <td class="pos-cell ${pc}">${pos}</td>
             <td>
-              <div class="rider-name">${r.rider ? r.rider.full_name : 'Rider'}<span class="rider-num">#${r.rider ? r.rider.number : ''}</span></div>
-              <div class="team-name">${r.team ? r.team.name : ''}</div>
+              <div class="rider-name">${riderName}<span class="rider-num">${riderNum}</span></div>
+              <div class="team-name">${teamName}</div>
             </td>
             <td>${bestLap}</td>
             <td class="speed-cell">${topSpeed}</td>
@@ -592,15 +653,18 @@
         raceResults.forEach((r, idx) => {
           const pos = r.position || idx + 1;
           const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : '';
-          const pts = calculateRacePts(pos);
-          const bestLap = r.best_lap ? r.best_lap.time : '-';
-          const topSpeed = r.top_speed ? `${r.top_speed} km/h` : '-';
+          const pts = r.pts !== undefined ? r.pts : calculateRacePts(pos);
+          const bestLap = r.best_lap ? (r.best_lap.time || '-') : '-';
+          const topSpeed = r.top_speed && r.top_speed !== '-' ? `${r.top_speed} km/h` : '-';
+          const riderName = r.rider ? r.rider.full_name : r.name || 'Rider';
+          const riderNum = r.rider && r.rider.number ? `#${r.rider.number}` : '';
+          const teamName = r.team ? r.team.name : '';
 
           raceRows += `<tr>
             <td class="pos-cell ${pc}">${pos}</td>
             <td>
-              <div class="rider-name">${r.rider ? r.rider.full_name : 'Rider'}<span class="rider-num">#${r.rider ? r.rider.number : ''}</span></div>
-              <div class="team-name">${r.team ? r.team.name : ''}</div>
+              <div class="rider-name">${riderName}<span class="rider-num">${riderNum}</span></div>
+              <div class="team-name">${teamName}</div>
             </td>
             <td>${bestLap}</td>
             <td class="speed-cell">${topSpeed}</td>
@@ -618,7 +682,7 @@
               <div class="round-badge">${year} SEASON · ROUND ${gp.round.replace('R','')}</div>
               <h1 class="event-title">${gp.name}</h1>
               <div class="circuit-sub">
-                <span>${gp.flag} ${gp.circuit} · ${gp.location}</span>
+                <span>${flagHtml} ${gp.circuit} · ${gp.location}</span>
                 <span>•</span>
                 <span>${gp.date}</span>
               </div>
