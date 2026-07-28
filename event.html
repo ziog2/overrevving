@@ -606,6 +606,16 @@
       renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, sprintResults, raceResults);
     }
 
+    function formatName(fullName) {
+      if (!fullName) return '';
+      const parts = fullName.trim().split(' ');
+      if (parts.length < 2) return fullName;
+      const normalized = parts.map(w =>
+        w === w.toUpperCase() && w.length > 1 ? w.charAt(0) + w.slice(1).toLowerCase() : w
+      );
+      return normalized[0][0].toUpperCase() + '. ' + normalized.slice(1).join(' ');
+    }
+
     function calculateSprintPts(pos) {
       const ptsMap = { 1: 12, 2: 9, 3: 7, 4: 6, 5: 5, 6: 4, 7: 3, 8: 2, 9: 1 };
       return ptsMap[pos] || 0;
@@ -627,25 +637,18 @@
           const pos = r.position || idx + 1;
           const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : '';
           const pts = r.pts !== undefined ? r.pts : calculateSprintPts(pos);
-          const bestLap = r.best_lap ? (r.best_lap.time || '-') : '-';
-          const topSpeed = r.top_speed && r.top_speed !== '-' ? `${r.top_speed} km/h` : '-';
-          const riderName = r.rider ? r.rider.full_name : r.name || 'Rider';
-          const riderNum = r.rider && r.rider.number ? `#${r.rider.number}` : '';
-          const teamName = r.team ? r.team.name : '';
+          const rawName = r.rider ? r.rider.full_name : r.name || 'Rider';
 
           sprintRows += `<tr>
             <td class="pos-cell ${pc}">${pos}</td>
             <td>
-              <div class="rider-name">${riderName}<span class="rider-num">${riderNum}</span></div>
-              <div class="team-name">${teamName}</div>
+              <div class="rider-name">${formatName(rawName)}</div>
             </td>
-            <td>${bestLap}</td>
-            <td class="speed-cell">${topSpeed}</td>
-            <td class="pts-scored">${pts > 0 ? '+' + pts : '0'}</td>
+            <td class="pts-scored">${pts}</td>
           </tr>`;
         });
       } else {
-        sprintRows = `<tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-sub);">No Sprint Race data available for this round.</td></tr>`;
+        sprintRows = `<tr><td colspan="3" style="text-align:center; padding: 24px; color: var(--text-sub);">No Sprint Race data available for this round.</td></tr>`;
       }
 
       let raceRows = '';
@@ -654,25 +657,18 @@
           const pos = r.position || idx + 1;
           const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : '';
           const pts = r.pts !== undefined ? r.pts : calculateRacePts(pos);
-          const bestLap = r.best_lap ? (r.best_lap.time || '-') : '-';
-          const topSpeed = r.top_speed && r.top_speed !== '-' ? `${r.top_speed} km/h` : '-';
-          const riderName = r.rider ? r.rider.full_name : r.name || 'Rider';
-          const riderNum = r.rider && r.rider.number ? `#${r.rider.number}` : '';
-          const teamName = r.team ? r.team.name : '';
+          const rawName = r.rider ? r.rider.full_name : r.name || 'Rider';
 
           raceRows += `<tr>
             <td class="pos-cell ${pc}">${pos}</td>
             <td>
-              <div class="rider-name">${riderName}<span class="rider-num">${riderNum}</span></div>
-              <div class="team-name">${teamName}</div>
+              <div class="rider-name">${formatName(rawName)}</div>
             </td>
-            <td>${bestLap}</td>
-            <td class="speed-cell">${topSpeed}</td>
-            <td class="pts-scored">${pts > 0 ? '+' + pts : '0'}</td>
+            <td class="pts-scored">${pts}</td>
           </tr>`;
         });
       } else {
-        raceRows = `<tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-sub);">No Main Race data available for this round.</td></tr>`;
+        raceRows = `<tr><td colspan="3" style="text-align:center; padding: 24px; color: var(--text-sub);">No Main Race data available for this round.</td></tr>`;
       }
 
       mainEl.innerHTML = `
@@ -720,9 +716,7 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Rider / Team</th>
-                  <th>Best Lap</th>
-                  <th>Top Speed</th>
+                  <th>Rider</th>
                   <th style="text-align:right">Pts</th>
                 </tr>
               </thead>
@@ -742,9 +736,7 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Rider / Team</th>
-                  <th>Best Lap</th>
-                  <th>Top Speed</th>
+                  <th>Rider</th>
                   <th style="text-align:right">Pts</th>
                 </tr>
               </thead>
