@@ -257,9 +257,20 @@
     .grid-header { background: #2980b9; color: #fff; }
     .time-cell {
       text-align: right !important;
-      font-family: monospace;
-      font-size: 11px;
-      color: #aaa;
+      font-family: 'Inter', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e0e0e0;
+    }
+    .pos-dnf {
+      color: #ff5555 !important;
+      background: rgba(255, 85, 85, 0.15);
+      border: 1px solid rgba(255, 85, 85, 0.3);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 10px;
+      display: inline-block;
     }
 
     .col-card {
@@ -596,8 +607,8 @@
           sprList.sort((a, b) => b.pts - a.pts);
           longList.sort((a, b) => b.pts - a.pts);
 
-          sprintResults = sprList;
-          raceResults = longList;
+          if (!sprintResults.length) sprintResults = sprList;
+          if (!raceResults.length) raceResults = longList;
         }
       } catch (binErr) {
         console.warn("JSONBin fallback load notice:", binErr);
@@ -818,10 +829,13 @@
       let sprintRows = '';
       if (sprintResults.length) {
         sprintResults.forEach((r, idx) => {
-          const isNC = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null;
-          const pos = isNC ? 'NC' : (r.pos || r.position || idx + 1);
-          const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : isNC ? 'pos-nc' : '';
-          const pts = r.pts !== undefined ? r.pts : (isNC ? 0 : calculateSprintPts(pos));
+          const isDNF = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null || r.status === 'NOTFINISHFIRST';
+          const posNum = r.pos || r.position || idx + 1;
+          const posCell = isDNF 
+            ? `<span class="pos-dnf">DNF</span>` 
+            : `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
+          
+          const pts = isDNF ? '-' : (r.pts !== undefined ? r.pts : calculateSprintPts(posNum));
           const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
           const isFav = isRiderFavorite(rawName);
 
@@ -829,11 +843,11 @@
             <td class="star-col">
               <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
             </td>
-            <td class="pos-cell ${pc}">${pos}</td>
+            <td class="pos-cell">${posCell}</td>
             <td>
               <div class="rider-name">${formatName(rawName)}</div>
             </td>
-            <td class="pts-scored">${pts}</td>
+            <td class="pts-scored" style="${isDNF ? 'color: #666;' : ''}">${pts}</td>
           </tr>`;
         });
       } else {
@@ -843,10 +857,13 @@
       let raceRows = '';
       if (raceResults.length) {
         raceResults.forEach((r, idx) => {
-          const isNC = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null;
-          const pos = isNC ? 'NC' : (r.pos || r.position || idx + 1);
-          const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : isNC ? 'pos-nc' : '';
-          const pts = r.pts !== undefined ? r.pts : (isNC ? 0 : calculateRacePts(pos));
+          const isDNF = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null || r.status === 'NOTFINISHFIRST';
+          const posNum = r.pos || r.position || idx + 1;
+          const posCell = isDNF 
+            ? `<span class="pos-dnf">DNF</span>` 
+            : `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
+          
+          const pts = isDNF ? '-' : (r.pts !== undefined ? r.pts : calculateRacePts(posNum));
           const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
           const isFav = isRiderFavorite(rawName);
 
@@ -854,11 +871,11 @@
             <td class="star-col">
               <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
             </td>
-            <td class="pos-cell ${pc}">${pos}</td>
+            <td class="pos-cell">${posCell}</td>
             <td>
               <div class="rider-name">${formatName(rawName)}</div>
             </td>
-            <td class="pts-scored">${pts}</td>
+            <td class="pts-scored" style="${isDNF ? 'color: #666;' : ''}">${pts}</td>
           </tr>`;
         });
       } else {
