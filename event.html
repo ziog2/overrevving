@@ -240,16 +240,26 @@
       color: #fff;
     }
 
-    /* Side-by-Side Grid */
-    .grid-two-col {
+    /* Three-Column Grid matching index.html */
+    .grid-three-col {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
       margin-bottom: 32px;
     }
 
-    @media (max-width: 950px) {
-      .grid-two-col { grid-template-columns: 1fr; }
+    @media (max-width: 1100px) {
+      .grid-three-col {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      }
+    }
+
+    .grid-header { background: #2980b9; color: #fff; }
+    .time-cell {
+      text-align: right !important;
+      font-family: monospace;
+      font-size: 11px;
+      color: #aaa;
     }
 
     .col-card {
@@ -539,6 +549,7 @@
 
       document.title = `${year} ${gp.round} · ${gp.name} · Overrevving`;
 
+      let gridResults = [];
       let sprintResults = [];
       let raceResults = [];
       let weatherInfo = { track: 'Dry', weather: 'Partly-Cloudy', air: '32°C', ground: '50°C', humidity: '45%' };
@@ -581,7 +592,7 @@
         console.warn("JSONBin fallback load notice:", binErr);
       }
 
-      // Try Live Pulselive API for rich data (top speeds, lap times)
+      // Try Live Pulselive API for rich data (starting grid, top speeds, lap times)
       try {
         const eventsUrl = `https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid=${SEASON_2026}&categoryUuid=${CAT_MOTOGP}`;
         const events = await fetch(eventsUrl).then(r => r.json());
@@ -591,6 +602,7 @@
           const sessionsUrl = `https://api.motogp.pulselive.com/motogp/v1/results/sessions?eventUuid=${apiEvent.id}&categoryUuid=${CAT_MOTOGP}`;
           const sessions = await fetch(sessionsUrl).then(r => r.json());
 
+          const qSessions = sessions.filter(s => s.type === 'Q' && s.status === 'FINISHED');
           const sprSess = sessions.find(s => s.type === 'SPR' && s.status === 'FINISHED');
           const racSess = sessions.find(s => s.type === 'RAC' && s.status === 'FINISHED');
 
@@ -602,6 +614,56 @@
               ground: racSess.condition.ground || '48°C',
               humidity: racSess.condition.humidity || '40%'
             };
+          }
+
+          if (qSessions.length) {
+            let q2Riders = [];
+            let q1Riders = [];
+
+            for (const qs of qSessions) {
+              try {
+                const qClassUrl = `https://api.motogp.pulselive.com/motogp/v1/results/session/${qs.id}/classification`;
+                const data = await fetch(qClassUrl).then(r => r.json());
+                if (data.classification && data.classification.length) {
+                  if (data.classification.length <= 12 && q2Riders.length === 0) {
+                    q2Riders = data.classification;
+                  } else {
+                    q1Riders = data.classification;
+                  }
+                }
+              } catch(e) {}
+            }
+
+            const combined = [];
+            const q2RiderIds = new Set();
+
+            q2Riders.forEach((r, idx) => {
+              const rId = r.rider ? r.rider.id : (r.id || idx);
+              q2RiderIds.add(rId);
+              combined.push({
+                position: idx + 1,
+                rider: r.rider,
+                name: r.rider ? r.rider.full_name : r.name || 'Rider',
+                time: r.best_lap ? (r.best_lap.time || '-') : '-'
+              });
+            });
+
+            let p13 = q2Riders.length + 1;
+            q1Riders.forEach((r, idx) => {
+              const rId = r.rider ? r.rider.id : (r.id || idx);
+              if (!q2RiderIds.has(rId)) {
+                combined.push({
+                  position: p13++,
+                  rider: r.rider,
+                  name: r.rider ? r.rider.full_name : r.name || 'Rider',
+                  time: r.best_lap ? (r.best_lap.time || '-') : '-'
+                });
+              }
+            });
+
+            if (combined.length) {
+              gridResults = combined;
+            }
           }
 
           if (sprSess) {
@@ -624,7 +686,17 @@
         console.warn("Live API query warning (using JSONBin data):", apiErr);
       }
 
-      renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, sprintResults, raceResults);
+      if (!gridResults.length && (sprintResults.length || raceResults.length)) {
+        const source = raceResults.length ? raceResults : sprintResults;
+        gridResults = source.map((r, idx) => ({
+          position: r.position || idx + 1,
+          rider: r.rider,
+          name: r.rider ? r.rider.full_name : r.name || 'Rider',
+          time: r.best_lap ? (r.best_lap.time || '-') : '-'
+        }));
+      }
+
+      renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, gridResults, sprintResults, raceResults);
     }
 
     const FAV_KEY = 'overrevving_favorites';
@@ -702,10 +774,34 @@
       return ptsMap[pos] || 0;
     }
 
-    function renderPageLayout(year, gp, prevGp, nextGp, weather, sprintResults, raceResults) {
+    function renderPageLayout(year, gp, prevGp, nextGp, weather, gridResults, sprintResults, raceResults) {
       const mainEl = document.getElementById('main-content');
       const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/RAC`;
       const flagHtml = `<img src="https://flagcdn.com/w20/${gp.countryCode}.png" srcset="https://flagcdn.com/w40/${gp.countryCode}.png 2x" class="flag-img" alt="${gp.location}">`;
+
+      let gridRows = '';
+      if (gridResults.length) {
+        gridResults.forEach((r, idx) => {
+          const pos = r.position || idx + 1;
+          const pc = pos === 1 ? 'pos-1' : pos === 2 ? 'pos-2' : pos === 3 ? 'pos-3' : '';
+          const rawName = r.rider ? r.rider.full_name : r.name || 'Rider';
+          const isFav = isRiderFavorite(rawName);
+          const lapTime = r.time || (r.best_lap ? r.best_lap.time : '-');
+
+          gridRows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
+            <td class="star-col">
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
+            </td>
+            <td class="pos-cell ${pc}">${pos}</td>
+            <td>
+              <div class="rider-name">${formatName(rawName)}</div>
+            </td>
+            <td class="time-cell">${lapTime}</td>
+          </tr>`;
+        });
+      } else {
+        gridRows = `<tr><td colspan="4" style="text-align:center; padding: 24px; color: var(--text-sub);">No Starting Grid data available for this round.</td></tr>`;
+      }
 
       let sprintRows = '';
       if (sprintResults.length) {
@@ -789,11 +885,32 @@
           </div>
         </div>
 
-        <div class="grid-two-col">
-          <!-- LEFT COLUMN: SPRINT RACE -->
+        <div class="grid-three-col">
+          <!-- LEFT COLUMN: STARTING GRID -->
+          <div class="col-card">
+            <div class="col-header grid-header">
+              <div>⏱️ GRIGLIA DI PARTENZA</div>
+              <div class="next-round">Qualifying Times (Q2 / Q1)</div>
+            </div>
+            <table class="standings-table">
+              <thead>
+                <tr>
+                  <th class="star-col"></th>
+                  <th>#</th>
+                  <th>Rider</th>
+                  <th style="text-align:right">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${gridRows}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- MIDDLE COLUMN: SPRINT RACE -->
           <div class="col-card">
             <div class="col-header sprint-header">
-              <div>⚡ SPRINT RACE STANDINGS</div>
+              <div>⚡ GARA SPRINT</div>
               <div class="next-round">Sprint Points (12 - 1)</div>
             </div>
             <table class="standings-table">
@@ -814,7 +931,7 @@
           <!-- RIGHT COLUMN: MAIN RACE -->
           <div class="col-card">
             <div class="col-header race-header">
-              <div>🏁 MAIN RACE STANDINGS</div>
+              <div>🏁 GARA LUNGA</div>
               <div class="next-round">Race Points (25 - 1)</div>
             </div>
             <table class="standings-table">
