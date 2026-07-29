@@ -240,17 +240,18 @@
       color: #fff;
     }
 
-    /* Three-Column Grid matching index.html */
+    /* Three-Column Grid matching index.html card width */
     .grid-three-col {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 32px;
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto 32px;
     }
 
-    @media (max-width: 1100px) {
+    @media (max-width: 900px) {
       .grid-three-col {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
       }
     }
 
@@ -258,9 +259,15 @@
     .time-cell {
       text-align: right !important;
       font-family: 'Inter', monospace;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       color: #e0e0e0;
+    }
+    .gap-cell {
+      text-align: right !important;
+      font-family: 'Inter', monospace;
+      font-size: 11px;
+      color: #999;
     }
     .pos-dnf {
       color: #ff5555 !important;
@@ -805,6 +812,24 @@
       return ptsMap[pos] || 0;
     }
 
+    function parseLapTimeToSeconds(timeStr) {
+      if (!timeStr || timeStr === '-' || !timeStr.includes(':')) return null;
+      const parts = timeStr.trim().split(':');
+      if (parts.length < 2) return null;
+      const min = parseFloat(parts[0]);
+      const sec = parseFloat(parts[1]);
+      return min * 60 + sec;
+    }
+
+    function calculateGap(p1TimeStr, riderTimeStr) {
+      const p1Sec = parseLapTimeToSeconds(p1TimeStr);
+      const rSec = parseLapTimeToSeconds(riderTimeStr);
+      if (p1Sec === null || rSec === null) return '-';
+      const diff = rSec - p1Sec;
+      if (diff <= 0.0001) return '-';
+      return '+' + diff.toFixed(3);
+    }
+
     function renderPageLayout(year, gp, prevGp, nextGp, weather, gridResults, sprintResults, raceResults) {
       const mainEl = document.getElementById('main-content');
       const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/RAC`;
@@ -812,6 +837,7 @@
 
       let gridRows = '';
       if (gridResults.length) {
+        const p1TimeStr = gridResults[0] ? (gridResults[0].time || (gridResults[0].best_lap ? gridResults[0].best_lap.time : null)) : null;
         gridResults.forEach((r, idx) => {
           const isNC = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null;
           const posNum = isNC ? 'NC' : (r.pos || r.position || idx + 1);
@@ -821,6 +847,7 @@
           const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
           const isFav = isRiderFavorite(rawName);
           const lapTime = r.time || (r.best_lap ? r.best_lap.time : '-');
+          const gapStr = calculateGap(p1TimeStr, lapTime);
 
           gridRows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
@@ -831,10 +858,11 @@
               <div class="rider-name">${formatName(rawName)}</div>
             </td>
             <td class="time-cell">${lapTime}</td>
+            <td class="gap-cell">${gapStr}</td>
           </tr>`;
         });
       } else {
-        gridRows = `<tr><td colspan="4" style="text-align:center; padding: 24px; color: var(--text-sub);">No Starting Grid data available for this round.</td></tr>`;
+        gridRows = `<tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-sub);">No Starting Grid data available for this round.</td></tr>`;
       }
 
       let sprintRows = '';
@@ -931,8 +959,7 @@
           <!-- LEFT COLUMN: STARTING GRID -->
           <div class="col-card">
             <div class="col-header grid-header">
-              <div>⏱️ GRIGLIA DI PARTENZA</div>
-              <div class="next-round">Qualifying Times (Q2 / Q1)</div>
+              <div>🏁 GRIGLIA DI PARTENZA</div>
             </div>
             <table class="standings-table">
               <thead>
@@ -941,6 +968,7 @@
                   <th>#</th>
                   <th>Rider</th>
                   <th style="text-align:right">Time</th>
+                  <th style="text-align:right">Gap</th>
                 </tr>
               </thead>
               <tbody>
@@ -953,7 +981,6 @@
           <div class="col-card">
             <div class="col-header sprint-header">
               <div>⚡ GARA SPRINT</div>
-              <div class="next-round">Sprint Points (12 - 1)</div>
             </div>
             <table class="standings-table">
               <thead>
@@ -974,7 +1001,6 @@
           <div class="col-card">
             <div class="col-header race-header">
               <div>🏁 GARA LUNGA</div>
-              <div class="next-round">Race Points (25 - 1)</div>
             </div>
             <table class="standings-table">
               <thead>
