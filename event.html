@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -241,29 +241,23 @@
     }
 
     /* Three-Column Grid: Starting Grid wide, Sprint & Race matching index.html */
-    /* Five-Column Layout with uniform fixed column widths matching motogp.html */
+    /* Five-Column Layout: Uses 100% full width like index.html with fixed min-width per column */
     .grid-five-col {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(275px, 1fr));
       gap: 16px;
-      overflow-x: auto;
-      padding-bottom: 16px;
+      width: 100%;
       margin: 0 auto 32px;
-      justify-content: flex-start;
+      overflow-x: auto;
+      padding-bottom: 14px;
       -webkit-overflow-scrolling: touch;
-      max-width: 1520px;
-    }
-
-    .grid-five-col .col-card {
-      flex: 0 0 280px;
-      width: 280px;
-      min-width: 280px;
       box-sizing: border-box;
     }
 
-    @media (min-width: 1500px) {
-      .grid-five-col {
-        justify-content: center;
-      }
+    .grid-five-col .col-card {
+      min-width: 275px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .fp1-header { background: #8e44ad; color: #fff; }
@@ -891,7 +885,7 @@
 
           fp1Rows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">â˜…</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
             <td class="pos-cell">${posCell}</td>
             <td>
@@ -923,7 +917,7 @@
 
           fp2Rows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">â˜…</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
             <td class="pos-cell">${posCell}</td>
             <td>
@@ -954,7 +948,7 @@
 
           gridRows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
             <td class="pos-cell">${posCell}</td>
             <td>
@@ -983,7 +977,7 @@
 
           sprintRows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
             <td class="pos-cell">${posCell}</td>
             <td>
@@ -1011,7 +1005,7 @@
 
           raceRows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
             <td class="pos-cell">${posCell}</td>
             <td>
@@ -1062,7 +1056,7 @@
           <!-- COLUMN 1: FP1 -->
           <div class="col-card">
             <div class="col-header fp1-header">
-              <div>â±ï¸ FP1</div>
+              <div>&#x23F1;&#xFE0F; FP1</div>
             </div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup>
@@ -1092,7 +1086,7 @@
           <!-- COLUMN 2: FP2 -->
           <div class="col-card">
             <div class="col-header fp2-header">
-              <div>â±ï¸ FP2</div>
+              <div>&#x23F1;&#xFE0F; FP2</div>
             </div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup>
@@ -1122,7 +1116,7 @@
           <!-- COLUMN 3: STARTING GRID -->
           <div class="col-card">
             <div class="col-header grid-header">
-              <div>ðŸ STARTING GRID</div>
+              <div>&#x1F3C1; STARTING GRID</div>
             </div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup>
@@ -1150,7 +1144,7 @@
           <!-- COLUMN 4: SPRINT RACE -->
           <div class="col-card">
             <div class="col-header sprint-header">
-              <div>âš¡ SPRINT RACE</div>
+              <div>&#x26A1; SPRINT RACE</div>
             </div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup>
@@ -1176,7 +1170,7 @@
           <!-- COLUMN 5: MAIN RACE -->
           <div class="col-card">
             <div class="col-header race-header">
-              <div>ðŸ MAIN RACE</div>
+              <div>&#x1F3C1; MAIN RACE</div>
             </div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup>
