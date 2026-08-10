@@ -50,7 +50,6 @@ jobs:
               "moto2":  "549640b8-fd9c-4245-acfd-60e4bc38b25c",
               "moto3":  "954f7e65-2ef2-4423-b949-4961cc603e45",
           }
-          GP_SHORT_NAMES = ["THA", "BRA", "USA", "SPA", "FRA", "CAT", "ITA", "HUN", "CZE", "NED", "GER"]
 
           results = {}
 
@@ -58,7 +57,9 @@ jobs:
               try:
                   events_url = f"https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
                   events = http_get(events_url)
-                  gp_events_map = {ev['short_name']: ev['id'] for ev in events if isinstance(ev, dict) and ev.get('short_name') in GP_SHORT_NAMES}
+                  finished_events = [ev for ev in events if isinstance(ev, dict) and ev.get('status') == 'FINISHED' and not str(ev.get('short_name', '')).endswith(('1', '2', '3'))]
+                  gp_short_names = [ev['short_name'] for ev in finished_events]
+                  gp_events_map = {ev['short_name']: ev['id'] for ev in finished_events}
 
                   standings_url = f"https://api.motogp.pulselive.com/motogp/v1/results/standings?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
                   standings = http_get(standings_url).get('classification', [])
@@ -72,9 +73,9 @@ jobs:
                       if "Oncu" in name or ".ncu" in name: name = "Deniz Öncü"
                       official_pts[name] = float(c.get('points', 0))
 
-                  rider_matrix = {r: {gp: {'spr': 0.0, 'rac': 0.0} for gp in GP_SHORT_NAMES} for r in official_pts.keys()}
+                  rider_matrix = {r: {gp: {'spr': 0.0, 'rac': 0.0} for gp in gp_short_names} for r in official_pts.keys()}
 
-                  for short_name in GP_SHORT_NAMES:
+                  for short_name in gp_short_names:
                       if short_name not in gp_events_map: continue
                       ev_id = gp_events_map[short_name]
                       sessions_url = f"https://api.motogp.pulselive.com/motogp/v1/results/sessions?eventUuid={ev_id}&categoryUuid={cat_uuid}"
@@ -82,8 +83,8 @@ jobs:
                           sessions = http_get(sessions_url)
                       except Exception: continue
 
-                      spr_session = next((s for s in sessions if isinstance(s, dict) and s.get('type') == 'SPR'), None)
-                      rac_session = next((s for s in sessions if isinstance(s, dict) and s.get('type') == 'RAC'), None)
+                      spr_session = next((s for s in sessions if isinstance(s, dict) and s.get('type') == 'SPR' and s.get('status') == 'FINISHED'), None)
+                      rac_session = next((s for s in sessions if isinstance(s, dict) and s.get('type') == 'RAC' and s.get('status') == 'FINISHED'), None)
 
                       if spr_session:
                           try:
@@ -95,7 +96,7 @@ jobs:
                                   if "Munoz" in name or "Mu.oz" in name: name = "Daniel Muñoz"
                                   if "Oncu" in name or ".ncu" in name: name = "Deniz Öncü"
                                   pts_val = float(c.get('points', 0)) if c.get('points') is not None else 0.0
-                                  if name not in rider_matrix: rider_matrix[name] = {g: {'spr': 0.0, 'rac': 0.0} for g in GP_SHORT_NAMES}
+                                  if name not in rider_matrix: rider_matrix[name] = {g: {'spr': 0.0, 'rac': 0.0} for g in gp_short_names}
                                   rider_matrix[name][short_name]['spr'] = pts_val
                           except Exception: pass
 
@@ -109,23 +110,14 @@ jobs:
                                   if "Munoz" in name or "Mu.oz" in name: name = "Daniel Muñoz"
                                   if "Oncu" in name or ".ncu" in name: name = "Deniz Öncü"
                                   pts_val = float(c.get('points', 0)) if c.get('points') is not None else 0.0
-                                  if name not in rider_matrix: rider_matrix[name] = {g: {'spr': 0.0, 'rac': 0.0} for g in GP_SHORT_NAMES}
+                                  if name not in rider_matrix: rider_matrix[name] = {g: {'spr': 0.0, 'rac': 0.0} for g in gp_short_names}
                                   rider_matrix[name][short_name]['rac'] = pts_val
                           except Exception: pass
 
-                  # Marc Marquez explicit user override for MotoGP
-                  if cat_id == "motogp" and "Marc Marquez" in rider_matrix:
-                      m_spr = [9, 12, 0, 12, 0, 0, 5, 12, 7, 4, 12]
-                      m_rac = [0, 13, 11, 0, 0, 0, 9, 25, 25, 9, 25]
-                      for idx, gp in enumerate(GP_SHORT_NAMES):
-                          rider_matrix["Marc Marquez"][gp]['spr'] = float(m_spr[idx])
-                          rider_matrix["Marc Marquez"][gp]['rac'] = float(m_rac[idx])
-                      official_pts["Marc Marquez"] = 190.0
-
                   clean_riders = []
                   for name, gp_dict in rider_matrix.items():
-                      spr_hist = [gp_dict[gp]['spr'] for gp in GP_SHORT_NAMES]
-                      rac_hist = [gp_dict[gp]['rac'] for gp in GP_SHORT_NAMES]
+                      spr_hist = [gp_dict[gp]['spr'] for gp in gp_short_names]
+                      rac_hist = [gp_dict[gp]['rac'] for gp in gp_short_names]
                       tot_hist = [s + r for s, r in zip(spr_hist, rac_hist)]
                       spr_pts = sum(spr_hist)
                       rac_pts = sum(rac_hist)
