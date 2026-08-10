@@ -682,8 +682,16 @@ async function loadRidersFromBin() {
 }
 
 function getPtsForMode(rider, mode) {
-  if (mode === 'sprint') return rider.sprint_pts !== undefined ? rider.sprint_pts : 0;
-  if (mode === 'long') return rider.long_pts !== undefined ? rider.long_pts : 0;
+  if (mode === 'sprint') {
+    if (rider.sprint_pts !== undefined) return rider.sprint_pts;
+    if (rider.sprint_history && rider.sprint_history.length) return rider.sprint_history.reduce((a, b) => a + b, 0);
+    return 0;
+  }
+  if (mode === 'long') {
+    if (rider.long_pts !== undefined) return rider.long_pts;
+    if (rider.long_history && rider.long_history.length) return rider.long_history.reduce((a, b) => a + b, 0);
+    return 0;
+  }
   return rider.pts !== undefined ? rider.pts : 0;
 }
 
