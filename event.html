@@ -91,8 +91,7 @@
       color: #fff;
     }
 
-    main {
-      max-width: 100%;
+    main { max-width: 1450px;
       margin: 0 auto;
       padding: 32px 24px;
       width: 100%;
@@ -241,27 +240,28 @@
     }
 
     /* Three-Column Grid: Starting Grid wide, Sprint & Race matching index.html */
-    /* Grid Wrapper & Five-Column Layout: Fixed 280px cards flowing from left to right, matching index.html */
+    /* Grid Wrapper & Five-Column Layout: EXACT REPLICA OF index.html GRID STRUCTURE */
     .grid-wrapper-event {
-      width: 100%;
       overflow-x: auto;
-      padding-bottom: 16px;
-      margin-bottom: 32px;
+      padding: 0 16px 12px;
       -webkit-overflow-scrolling: touch;
+      width: 100%;
     }
 
     .grid-five-col {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(5, 275px);
       gap: 16px;
-      width: max-content;
-      margin: 0;
+      width: fit-content;
+      margin: 0 auto 32px;
     }
 
     .grid-five-col .col-card {
-      flex: 0 0 280px;
-      width: 280px;
-      min-width: 280px;
-      max-width: 280px;
+      background: #2c2c32;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #3a3a42;
+      width: 275px;
       box-sizing: border-box;
     }
 
@@ -890,7 +890,7 @@
 
           fp1Rows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">â˜…</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
             <td class="pos-cell">${posCell}</td>
             <td>
@@ -922,7 +922,7 @@
 
           fp2Rows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">â˜…</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
             <td class="pos-cell">${posCell}</td>
             <td>
