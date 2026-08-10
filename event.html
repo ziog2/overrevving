@@ -91,7 +91,7 @@
       color: #fff;
     }
 
-    main { max-width: 1600px;
+    main { max-width: 1680px;
       margin: 0 auto;
       padding: 32px 24px;
       width: 100%;
@@ -240,15 +240,17 @@
     }
 
     /* Three-Column Grid: Starting Grid wide, Sprint & Race matching index.html */
-    /* Grid Wrapper & Five-Column Layout: EXACT REPLICA OF index.html GRID STRUCTURE */
-    .grid-wrapper-event { overflow-x: auto; padding: 0 0 12px;
-      -webkit-overflow-scrolling: touch;
+    /* Grid Wrapper & Five-Column Layout: FP1, FP2, STARTING GRID at 300px, SPRINT & MAIN RACE at 275px */
+    .grid-wrapper-event {
+      overflow-x: auto;
+      padding: 0 0 16px 0;
       width: 100%;
+      -webkit-overflow-scrolling: touch;
     }
 
     .grid-five-col {
       display: grid;
-      grid-template-columns: repeat(5, 275px);
+      grid-template-columns: 300px 300px 300px 275px 275px;
       gap: 16px;
       width: fit-content;
       margin: 0 auto 32px;
@@ -259,7 +261,6 @@
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid #3a3a42;
-      width: 275px;
       box-sizing: border-box;
     }
 
