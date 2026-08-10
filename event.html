@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -241,25 +241,28 @@
     }
 
     /* Three-Column Grid: Starting Grid wide, Sprint & Race matching index.html */
-    /* Five-Column Layout: FP1, FP2, Starting Grid, Sprint, Race */
+    /* Five-Column Layout with uniform fixed column widths matching motogp.html */
     .grid-five-col {
-      display: grid;
-      grid-template-columns: 1.35fr 1.35fr 1.35fr 1fr 1fr;
+      display: flex;
       gap: 16px;
-      max-width: 1700px;
+      overflow-x: auto;
+      padding-bottom: 16px;
       margin: 0 auto 32px;
+      justify-content: flex-start;
+      -webkit-overflow-scrolling: touch;
+      max-width: 1520px;
     }
 
-    @media (max-width: 1550px) {
+    .grid-five-col .col-card {
+      flex: 0 0 280px;
+      width: 280px;
+      min-width: 280px;
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 1500px) {
       .grid-five-col {
-        display: flex;
-        overflow-x: auto;
-        padding-bottom: 14px;
-        -webkit-overflow-scrolling: touch;
-      }
-      .grid-five-col .col-card {
-        min-width: 320px;
-        flex: 0 0 320px;
+        justify-content: center;
       }
     }
 
@@ -888,7 +891,7 @@
 
           fp1Rows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">â˜…</button>
             </td>
             <td class="pos-cell">${posCell}</td>
             <td>
@@ -920,7 +923,7 @@
 
           fp2Rows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">★</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">â˜…</button>
             </td>
             <td class="pos-cell">${posCell}</td>
             <td>
@@ -1061,11 +1064,19 @@
             <div class="col-header fp1-header">
               <div>â±ï¸ FP1</div>
             </div>
-            <table class="standings-table">
+            <table class="standings-table" style="table-layout: fixed;">
+              <colgroup>
+                <col style="width: 20px;">
+                <col style="width: 22px;">
+                <col style="width: auto;">
+                <col style="width: 28px;">
+                <col style="width: 54px;">
+                <col style="width: 44px;">
+              </colgroup>
               <thead>
                 <tr>
                   <th class="star-col"></th>
-                  <th>#</th>
+                  <th style="text-align:center">#</th>
                   <th>Rider</th>
                   <th style="text-align:center">Laps</th>
                   <th style="text-align:right">Time</th>
@@ -1083,11 +1094,19 @@
             <div class="col-header fp2-header">
               <div>â±ï¸ FP2</div>
             </div>
-            <table class="standings-table">
+            <table class="standings-table" style="table-layout: fixed;">
+              <colgroup>
+                <col style="width: 20px;">
+                <col style="width: 22px;">
+                <col style="width: auto;">
+                <col style="width: 28px;">
+                <col style="width: 54px;">
+                <col style="width: 44px;">
+              </colgroup>
               <thead>
                 <tr>
                   <th class="star-col"></th>
-                  <th>#</th>
+                  <th style="text-align:center">#</th>
                   <th>Rider</th>
                   <th style="text-align:center">Laps</th>
                   <th style="text-align:right">Time</th>
@@ -1105,11 +1124,18 @@
             <div class="col-header grid-header">
               <div>ðŸ STARTING GRID</div>
             </div>
-            <table class="standings-table">
+            <table class="standings-table" style="table-layout: fixed;">
+              <colgroup>
+                <col style="width: 20px;">
+                <col style="width: 22px;">
+                <col style="width: auto;">
+                <col style="width: 56px;">
+                <col style="width: 44px;">
+              </colgroup>
               <thead>
                 <tr>
                   <th class="star-col"></th>
-                  <th>#</th>
+                  <th style="text-align:center">#</th>
                   <th>Rider</th>
                   <th style="text-align:right">Time</th>
                   <th style="text-align:right">Gap</th>
@@ -1126,11 +1152,17 @@
             <div class="col-header sprint-header">
               <div>âš¡ SPRINT RACE</div>
             </div>
-            <table class="standings-table">
+            <table class="standings-table" style="table-layout: fixed;">
+              <colgroup>
+                <col style="width: 20px;">
+                <col style="width: 22px;">
+                <col style="width: auto;">
+                <col style="width: 36px;">
+              </colgroup>
               <thead>
                 <tr>
                   <th class="star-col"></th>
-                  <th>#</th>
+                  <th style="text-align:center">#</th>
                   <th>Rider</th>
                   <th style="text-align:right">Pts</th>
                 </tr>
@@ -1146,11 +1178,17 @@
             <div class="col-header race-header">
               <div>ðŸ MAIN RACE</div>
             </div>
-            <table class="standings-table">
+            <table class="standings-table" style="table-layout: fixed;">
+              <colgroup>
+                <col style="width: 20px;">
+                <col style="width: 22px;">
+                <col style="width: auto;">
+                <col style="width: 36px;">
+              </colgroup>
               <thead>
                 <tr>
                   <th class="star-col"></th>
-                  <th>#</th>
+                  <th style="text-align:center">#</th>
                   <th>Rider</th>
                   <th style="text-align:right">Pts</th>
                 </tr>
