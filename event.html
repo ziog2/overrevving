@@ -1125,7 +1125,7 @@
       return '+' + diff.toFixed(3);
     }
 
-    function renderPageLayout(year, gp, prevGp, nextGp, weather, fp1Results, fp2Results, gridResults, sprintResults, raceResults) {
+    function renderPageLayout(year, gp, prevGp, nextGp, weather, fp1Results, prResults, fp2Results, gridResults, sprintResults, raceResults) {
       const mainEl = document.getElementById('main-content');
       const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/RAC`;
       const flagHtml = `<img src="https://flagcdn.com/w20/${gp.countryCode}.png" srcset="https://flagcdn.com/w40/${gp.countryCode}.png 2x" class="flag-img" alt="${gp.location}">`;
@@ -1491,6 +1491,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', initEventPage);
+  
+    window.addEventListener('DOMContentLoaded', initEventPage);
   </script>
 </body>
 </html>
