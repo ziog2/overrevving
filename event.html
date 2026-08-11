@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -13151,6 +13151,17 @@
     }
 
     function renderPageLayout(year, gp, prevGp, nextGp, weather, fp1Results, prResults, fp2Results, gridResults, sprintResults, raceResults) {
+      const gpWeather = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[gp.short]) ? SESSION_WEATHER_DATA[gp.short] : {};
+      const cleanW = (txt) => {
+        if (!txt) return 'Dry | Air: -- | Track: --';
+        return txt.replace(/&#xB0;/g, '°').replace(/Â°/g, '°').replace(/Â/g, '').replace(/°C°C/g, '°C');
+      };
+      const fp1W = cleanW(gpWeather.fp1);
+      const prW = cleanW(gpWeather.pr);
+      const fp2W = cleanW(gpWeather.fp2);
+      const gridW = cleanW(gpWeather.grid);
+      const sprintW = cleanW(gpWeather.sprint);
+      const raceW = cleanW(gpWeather.race);
       const mainEl = document.getElementById('main-content');
       const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/RAC`;
       const flagHtml = `<img src="https://flagcdn.com/w20/${gp.countryCode}.png" srcset="https://flagcdn.com/w40/${gp.countryCode}.png 2x" class="flag-img" alt="${gp.location}">`;
@@ -13367,7 +13378,7 @@
         <div class="grid-five-col">
           <!-- COLUMN 1: FP1 -->
           <div class="col-card">
-            <div class="col-header fp1-header"><div class="col-header-title">&#x23F1;&#xFE0F; FP1</div><div class="col-header-sub" id="fp1-weather">Dry | Air: 31°C | Track: 39°C</div></div>
+            <div class="col-header fp1-header"><div class="col-header-title">&#x23F1;&#xFE0F; FP1</div><div class="col-header-sub" id="fp1-weather">${fp1W}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup><col style="width: 22px;"><col style="width: 22px;"><col style="width: 130px;"><col style="width: 42px;"><col style="width: 72px;"><col style="width: 62px;"></colgroup>
               <thead>
@@ -13388,7 +13399,7 @@
 
           <!-- COLUMN 2: PR -->
           <div class="col-card">
-            <div class="col-header pr-header"><div class="col-header-title">&#x23F1;&#xFE0F; PR</div><div class="col-header-sub" id="pr-weather">Dry | Air: 32°C | Track: 40°C</div></div>
+            <div class="col-header pr-header"><div class="col-header-title">&#x23F1;&#xFE0F; PR</div><div class="col-header-sub" id="pr-weather">${prW}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup><col style="width: 22px;"><col style="width: 22px;"><col style="width: 130px;"><col style="width: 42px;"><col style="width: 72px;"><col style="width: 62px;"></colgroup>
               <thead>
@@ -13409,7 +13420,7 @@
 
           <!-- COLUMN 3: FP2 -->
           <div class="col-card">
-            <div class="col-header fp2-header"><div class="col-header-title">&#x23F1;&#xFE0F; FP2</div><div class="col-header-sub" id="fp2-weather">Dry | Air: 22&deg;C | Track: 31&deg;C</div></div>
+            <div class="col-header fp2-header"><div class="col-header-title">&#x23F1;&#xFE0F; FP2</div><div class="col-header-sub" id="fp2-weather">${fp2W}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup><col style="width: 22px;"><col style="width: 22px;"><col style="width: 130px;"><col style="width: 42px;"><col style="width: 72px;"><col style="width: 62px;"></colgroup>
               <thead>
@@ -13430,7 +13441,7 @@
 
           <!-- COLUMN 3: STARTING GRID -->
           <div class="col-card">
-            <div class="col-header grid-header"><div class="col-header-title">&#x1F3C1; STARTING GRID</div><div class="col-header-sub" id="grid-weather">Dry | Air: 23&deg;C | Track: 36&deg;C</div></div>
+            <div class="col-header grid-header"><div class="col-header-title">&#x1F3C1; STARTING GRID</div><div class="col-header-sub" id="grid-weather">${gridW}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup><col style="width: 22px;"><col style="width: 24px;"><col style="width: 150px;"><col style="width: 84px;"><col style="width: 70px;"></colgroup>
               <thead>
@@ -13450,7 +13461,7 @@
 
           <!-- COLUMN 4: SPRINT RACE -->
           <div class="col-card">
-            <div class="col-header sprint-header"><div class="col-header-title">&#x26A1; SPRINT RACE</div><div class="col-header-sub" id="sprint-weather">Dry | Air: 26&deg;C | Track: 41&deg;C</div></div>
+            <div class="col-header sprint-header"><div class="col-header-title">&#x26A1; SPRINT RACE</div><div class="col-header-sub" id="sprint-weather">${sprintW}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup><col style="width: 22px;"><col style="width: 24px;"><col style="width: 210px;"><col style="width: 69px;"></colgroup>
               <thead>
@@ -13469,7 +13480,7 @@
 
           <!-- COLUMN 5: MAIN RACE -->
           <div class="col-card">
-            <div class="col-header race-header"><div class="col-header-title">&#x1F3C1; MAIN RACE</div><div class="col-header-sub" id="race-weather">Dry | Air: 27°C | Track: 44°C</div></div>
+            <div class="col-header race-header"><div class="col-header-title">&#x1F3C1; MAIN RACE</div><div class="col-header-sub" id="race-weather">${raceW}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup><col style="width: 22px;"><col style="width: 24px;"><col style="width: 210px;"><col style="width: 69px;"></colgroup>
               <thead>
