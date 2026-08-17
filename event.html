@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -91,7 +91,7 @@
       color: #fff;
     }
 
-    main { max-width: 3300px;
+    main { max-width: 3650px;
       margin: 0 auto;
       padding: 32px 24px;
       width: 100%;
@@ -250,7 +250,7 @@
 
     .grid-five-col {
       display: grid;
-      grid-template-columns: 350px 350px 350px 350px 350px 350px 325px 350px 325px;
+      grid-template-columns: 350px 350px 350px 350px 350px 350px 325px 350px 325px 325px;
       gap: 16px;
       width: fit-content;
       margin: 0 auto 32px;
@@ -348,6 +348,7 @@
     .sprint-header { background: #e67e22; color: #fff; }
     .wup-header { background: #00b894; color: #fff; }
     .race-header { background: #c0392b; color: #fff; }
+    .gp-header { background: #b8860b; color: #fff; }
 
     .next-round {
       font-size: 12px;
@@ -19087,7 +19088,7 @@
         wupRows = `<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-sub);">No Warm Up (WUP) data available for this round.</td></tr>`;
       }
 
-      let raceRows = '';
+            let raceRows = '';
       if (raceResults.length) {
         raceResults.forEach((r, idx) => {
           const isDNF = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null || r.status === 'NOTFINISHFIRST';
@@ -19113,6 +19114,75 @@
         });
       } else {
         raceRows = `<tr><td colspan="4" style="text-align:center; padding: 24px; color: var(--text-sub);">No Main Race data available for this round.</td></tr>`;
+      }
+
+      // Compute Combined GP Standings (Sprint + Main Race)
+      let gpRows = '';
+      const riderPointsMap = new Map();
+
+      if (sprintResults.length || raceResults.length) {
+        sprintResults.forEach((r, idx) => {
+          const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
+          const isDNF = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null || r.status === 'NOTFINISHFIRST';
+          const posNum = r.pos || r.position || idx + 1;
+          const pts = isDNF ? 0 : (r.pts !== undefined && r.pts !== null ? Number(r.pts) : calculateSprintPts(posNum));
+          
+          if (!riderPointsMap.has(rawName)) {
+            riderPointsMap.set(rawName, { name: rawName, sprintPts: 0, racePts: 0, bestRacePos: 99, bestSprPos: 99 });
+          }
+          const entry = riderPointsMap.get(rawName);
+          entry.sprintPts = pts;
+          entry.bestSprPos = isDNF ? 99 : Number(posNum);
+        });
+
+        raceResults.forEach((r, idx) => {
+          const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
+          const isDNF = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null || r.status === 'NOTFINISHFIRST';
+          const posNum = r.pos || r.position || idx + 1;
+          const pts = isDNF ? 0 : (r.pts !== undefined && r.pts !== null ? Number(r.pts) : calculateRacePts(posNum));
+          
+          if (!riderPointsMap.has(rawName)) {
+            riderPointsMap.set(rawName, { name: rawName, sprintPts: 0, racePts: 0, bestRacePos: 99, bestSprPos: 99 });
+          }
+          const entry = riderPointsMap.get(rawName);
+          entry.racePts = pts;
+          entry.bestRacePos = isDNF ? 99 : Number(posNum);
+        });
+
+        const combinedList = Array.from(riderPointsMap.values()).map(r => ({
+          name: r.name,
+          sprintPts: r.sprintPts,
+          racePts: r.racePts,
+          totalPts: r.sprintPts + r.racePts,
+          bestRacePos: r.bestRacePos,
+          bestSprPos: r.bestSprPos
+        }));
+
+        combinedList.sort((a, b) => {
+          if (b.totalPts !== a.totalPts) return b.totalPts - a.totalPts;
+          if (a.bestRacePos !== b.bestRacePos) return a.bestRacePos - b.bestRacePos;
+          return a.bestSprPos - b.bestSprPos;
+        });
+
+        combinedList.forEach((r, idx) => {
+          const posNum = idx + 1;
+          const posCell = `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
+          const isFav = isRiderFavorite(r.name);
+          const ptsDisplay = r.totalPts > 0 ? r.totalPts : '0';
+
+          gpRows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${r.name.replace(/"/g, '&quot;')}">
+            <td class="star-col">
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${r.name.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
+            </td>
+            <td class="pos-cell">${posCell}</td>
+            <td>
+              <div class="rider-name">${formatName(r.name)}</div>
+            </td>
+            <td class="pts-scored" style="${r.totalPts === 0 ? 'color: #666;' : ''}">${ptsDisplay}</td>
+          </tr>`;
+        });
+      } else {
+        gpRows = `<tr><td colspan="4" style="text-align:center; padding: 24px; color: var(--text-sub);">No GP Standings data available.</td></tr>`;
       }
 
       mainEl.innerHTML = `
@@ -19248,7 +19318,7 @@
             </table>
           </div>
 
-          <!-- COLUMN 6: STARTING GRID -->
+                    <!-- COLUMN 6: STARTING GRID -->
           <div class="col-card">
             <div class="col-header grid-header"><div class="col-header-title">&#x1F3C1; STARTING GRID</div><div class="col-header-sub" id="grid-weather">${gridW}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
@@ -19287,7 +19357,7 @@
             </table>
           </div>
 
-                    <!-- COLUMN 8: WARM UP -->
+          <!-- COLUMN 8: WARM UP -->
           <div class="col-card">
             <div class="col-header wup-header"><div class="col-header-title">&#x23F1;&#xFE0F; WUP</div><div class="col-header-sub" id="wup-weather">${wupW}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
@@ -19323,6 +19393,25 @@
               </thead>
               <tbody>
                 ${raceRows}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- COLUMN 10: GP POINTS -->
+          <div class="col-card">
+            <div class="col-header gp-header"><div class="col-header-title">&#x1F3C6; GP POINTS</div><div class="col-header-sub">Sprint + Main Race</div></div>
+            <table class="standings-table" style="table-layout: fixed;">
+              <colgroup><col style="width: 22px;"><col style="width: 24px;"><col style="width: 210px;"><col style="width: 69px;"></colgroup>
+              <thead>
+                <tr>
+                  <th class="star-col"></th>
+                  <th style="text-align:center">#</th>
+                  <th>Rider</th>
+                  <th style="text-align:right">Pts</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${gpRows}
               </tbody>
             </table>
           </div>
