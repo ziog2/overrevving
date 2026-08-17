@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -91,7 +91,7 @@
       color: #fff;
     }
 
-    main { max-width: 2200px;
+    main { max-width: 2550px;
       margin: 0 auto;
       padding: 32px 24px;
       width: 100%;
@@ -250,7 +250,7 @@
 
     .grid-five-col {
       display: grid;
-      grid-template-columns: 350px 350px 350px 350px 325px 325px;
+      grid-template-columns: 350px 350px 350px 350px 350px 325px 325px;
       gap: 16px;
       width: fit-content;
       margin: 0 auto 32px;
@@ -288,6 +288,7 @@
     .fp1-header { background: #8e44ad; color: #fff; }
     .pr-header { background: #d35400; color: #fff; }
     .fp2-header { background: #16a085; color: #fff; }
+    .q1-header { background: #0984e3; color: #fff; }
     .laps-cell {
       text-align: center !important;
       font-family: 'Inter', monospace;
@@ -598,8 +599,9 @@
       { round: 'R22', short: 'VAL', countryCode: 'es', name: 'Gran Premio de la Comunitat Valenciana', circuit: 'Circuit Ricardo Tormo', location: 'Cheste', date: '27 Nov - 29 Nov 2026' }
     ];
 
-            const SESSION_WEATHER_DATA = {
+                const SESSION_WEATHER_DATA = {
     "ES2":  {
+                "q1":  "Dry | Air: -- | Track: --",
                 "race":  "Dry | Air: -- | Track: --",
                 "sprint":  "Dry | Air: -- | Track: --",
                 "grid":  "Dry | Air: -- | Track: --",
@@ -608,6 +610,7 @@
                 "fp1":  "Dry | Air: -- | Track: --"
             },
     "BRA":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: 30Â°C | Track: 44Â°C",
                 "grid":  "Dry | Air: 28Â°C | Track: 42Â°C",
@@ -616,6 +619,7 @@
                 "fp1":  "Wet | Air: 25Â°C | Track: 35Â°C"
             },
     "JPN":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: Â°C | Track: Â°C",
                 "grid":  "Dry | Air: Â°C | Track: Â°C",
@@ -624,6 +628,7 @@
                 "fp1":  "Dry | Air: Â°C | Track: Â°C"
             },
     "MY2":  {
+                "q1":  "Dry | Air: -- | Track: --",
                 "race":  "Dry | Air: -- | Track: --",
                 "sprint":  "Dry | Air: -- | Track: --",
                 "grid":  "Dry | Air: -- | Track: --",
@@ -632,6 +637,7 @@
                 "fp1":  "Dry | Air: 33Â°C | Track: 51Â°C"
             },
     "ITA":  {
+                "q1":  "Dry | Air: 25Â°C | Track: 40Â°C",
                 "race":  "Dry | Air: 28Â°C | Track: 50Â°C",
                 "sprint":  "Dry | Air: 30Â°C | Track: 49Â°C",
                 "grid":  "Dry | Air: 25Â°C | Track: 40Â°C",
@@ -640,6 +646,7 @@
                 "fp1":  "Dry | Air: 23Â°C | Track: 25Â°C"
             },
     "USA":  {
+                "q1":  "Dry | Air: 16Â°C | Track: 26Â°C",
                 "race":  "Dry | Air: 26Â°C | Track: 43Â°C",
                 "sprint":  "Dry | Air: 20Â°C | Track: 37Â°C",
                 "grid":  "Dry | Air: 16Â°C | Track: 27Â°C",
@@ -648,6 +655,7 @@
                 "fp1":  "Dry | Air: 23Â°C | Track: 30Â°C"
             },
     "AUT":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: Â°C | Track: Â°C",
                 "grid":  "Dry | Air: Â°C | Track: Â°C",
@@ -656,6 +664,7 @@
                 "fp1":  "Dry | Air: Â°C | Track: Â°C"
             },
     "TH1":  {
+                "q1":  "Dry | Air: -- | Track: --",
                 "race":  "Dry | Air: -- | Track: --",
                 "sprint":  "Dry | Air: -- | Track: --",
                 "grid":  "Dry | Air: -- | Track: --",
@@ -664,6 +673,7 @@
                 "fp1":  "Dry | Air: 32Â°C | Track: 51Â°C"
             },
     "QAT":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: Â°C | Track: Â°C",
                 "grid":  "Dry | Air: Â°C | Track: Â°C",
@@ -672,6 +682,7 @@
                 "fp1":  "Dry | Air: Â°C | Track: Â°C"
             },
     "HUN":  {
+                "q1":  "Dry | Air: 22Â°C | Track: 37Â°C",
                 "race":  "Dry | Air: 29Â°C | Track: 48Â°C",
                 "sprint":  "Dry | Air: 24Â°C | Track: 44Â°C",
                 "grid":  "Dry | Air: 22Â°C | Track: 39Â°C",
@@ -680,6 +691,7 @@
                 "fp1":  "Dry | Air: Â°C | Track: Â°C"
             },
     "ARA":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: Â°C | Track: Â°C",
                 "grid":  "Dry | Air: Â°C | Track: Â°C",
@@ -688,6 +700,7 @@
                 "fp1":  "Dry | Air: Â°C | Track: Â°C"
             },
     "GBR":  {
+                "q1":  "Dry | Air: 23Â°C | Track: 35Â°C",
                 "race":  "Dry | Air: 27Â°C | Track: 44Â°C",
                 "sprint":  "Dry | Air: 26Â°C | Track: 41Â°C",
                 "grid":  "Dry | Air: 23Â°C | Track: 36Â°C",
@@ -696,6 +709,7 @@
                 "fp1":  "Dry | Air: 19Â°C | Track: 34Â°C"
             },
     "FRA":  {
+                "q1":  "Dry | Air: 19Â°C | Track: 14Â°C",
                 "race":  "Dry | Air: 17Â°C | Track: 22Â°C",
                 "sprint":  "Dry | Air: 24Â°C | Track: 38Â°C",
                 "grid":  "Dry | Air: 20Â°C | Track: 22Â°C",
@@ -704,6 +718,7 @@
                 "fp1":  "Dry | Air: 20Â°C | Track: 26Â°C"
             },
     "VAL":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: Â°C | Track: Â°C",
                 "grid":  "Dry | Air: Â°C | Track: Â°C",
@@ -712,6 +727,7 @@
                 "fp1":  "Dry | Air: Â°C | Track: Â°C"
             },
     "ES1":  {
+                "q1":  "Dry | Air: -- | Track: --",
                 "race":  "Dry | Air: -- | Track: --",
                 "sprint":  "Dry | Air: -- | Track: --",
                 "grid":  "Dry | Air: -- | Track: --",
@@ -720,6 +736,7 @@
                 "fp1":  "Dry | Air: -- | Track: --"
             },
     "CAT":  {
+                "q1":  "Dry | Air: 15Â°C | Track: 15Â°C",
                 "race":  "Dry Dry | Air: 20Â° 19Â°C | Track: 34Â° 37Â°C",
                 "sprint":  "Dry | Air: 20Â°C | Track: 41Â°C",
                 "grid":  "Dry | Air: 17Â°C | Track: 15Â°C",
@@ -728,6 +745,7 @@
                 "fp1":  "Dry | Air: 13Â°C | Track: 17Â°C"
             },
     "CZE":  {
+                "q1":  "Dry | Air: 28Â°C | Track: 40Â°C",
                 "race":  "Dry | Air: 31Â°C | Track: 47Â°C",
                 "sprint":  "Dry | Air: 33Â°C | Track: 49Â°C",
                 "grid":  "Dry | Air: 28Â°C | Track: 42Â°C",
@@ -736,6 +754,7 @@
                 "fp1":  "Dry | Air: 28Â°C | Track: 42Â°C"
             },
     "AUS":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: Â°C | Track: Â°C",
                 "grid":  "Dry | Air: Â°C | Track: Â°C",
@@ -744,6 +763,7 @@
                 "fp1":  "Dry | Air: Â°C | Track: Â°C"
             },
     "SPA":  {
+                "q1":  "Wet | Air: 16Â°C | Track: 18Â°C",
                 "race":  "Dry | Air: 23Â°C | Track: 36Â°C",
                 "sprint":  "Dry | Air: 19Â°C | Track: 23Â°C",
                 "grid":  "Wet | Air: 18Â°C | Track: 22Â°C",
@@ -752,6 +772,7 @@
                 "fp1":  "Dry | Air: 17Â°C | Track: 21Â°C"
             },
     "THA":  {
+                "q1":  "Dry | Air: 30Â°C | Track: 39Â°C",
                 "race":  "Dry | Air: 35Â°C | Track: 55Â°C",
                 "sprint":  "Dry | Air: 33Â°C | Track: 52Â°C",
                 "grid":  "Dry | Air: 30Â°C | Track: 40Â°C",
@@ -760,6 +781,7 @@
                 "fp1":  "Dry | Air: 31Â°C | Track: 39Â°C"
             },
     "VC1":  {
+                "q1":  "Dry | Air: -- | Track: --",
                 "race":  "Dry | Air: -- | Track: --",
                 "sprint":  "Dry | Air: -- | Track: --",
                 "grid":  "Dry | Air: -- | Track: --",
@@ -768,6 +790,7 @@
                 "fp1":  "Dry | Air: 17Â°C | Track: 18Â°C"
             },
     "CT1":  {
+                "q1":  "Dry | Air: -- | Track: --",
                 "race":  "Dry | Air: -- | Track: --",
                 "sprint":  "Dry | Air: -- | Track: --",
                 "grid":  "Dry | Air: -- | Track: --",
@@ -776,6 +799,7 @@
                 "fp1":  "Dry | Air: 17Â°C | Track: 22Â°C"
             },
     "POR":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: Â°C | Track: Â°C",
                 "grid":  "Dry | Air: Â°C | Track: Â°C",
@@ -784,6 +808,7 @@
                 "fp1":  "Dry | Air: Â°C | Track: Â°C"
             },
     "MAL":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: Â°C | Track: Â°C",
                 "grid":  "Dry | Air: Â°C | Track: Â°C",
@@ -792,6 +817,7 @@
                 "fp1":  "Dry | Air: Â°C | Track: Â°C"
             },
     "RSM":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: Â°C | Track: Â°C",
                 "grid":  "Dry | Air: Â°C | Track: Â°C",
@@ -800,6 +826,7 @@
                 "fp1":  "Dry | Air: Â°C | Track: Â°C"
             },
     "NED":  {
+                "q1":  "Dry | Air: 31Â°C | Track: 42Â°C",
                 "race":  "Dry | Air: 29Â°C | Track: 43Â°C",
                 "sprint":  "Dry | Air: 32Â°C | Track: 45Â°C",
                 "grid":  "Dry | Air: 31Â°C | Track: 43Â°C",
@@ -808,6 +835,7 @@
                 "fp1":  "Dry | Air: 28Â°C | Track: 37Â°C"
             },
     "GER":  {
+                "q1":  "Dry | Air: 21Â°C | Track: 35Â°C",
                 "race":  "Dry | Air: 28Â°C | Track: 42Â°C",
                 "sprint":  "Dry | Air: 25Â°C | Track: 42Â°C",
                 "grid":  "Dry | Air: 22Â°C | Track: 35Â°C",
@@ -816,6 +844,7 @@
                 "fp1":  "Dry | Air: 19Â°C | Track: 31Â°C"
             },
     "ES3":  {
+                "q1":  "Dry | Air: -- | Track: --",
                 "race":  "Dry | Air: -- | Track: --",
                 "sprint":  "Dry | Air: -- | Track: --",
                 "grid":  "Dry | Air: -- | Track: --",
@@ -824,6 +853,7 @@
                 "fp1":  "Dry | Air: 22Â°C | Track: 26Â°C"
             },
     "INA":  {
+                "q1":  "Dry | Air: Â°C | Track: Â°C",
                 "race":  "Dry | Air: Â°C | Track: Â°C",
                 "sprint":  "Dry | Air: Â°C | Track: Â°C",
                 "grid":  "Dry | Air: Â°C | Track: Â°C",
@@ -836,6 +866,9 @@
 
     const STATIC_EVENT_DATA = {
     "ES2":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -856,6 +889,104 @@
                         }
             },
     "BRA":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Marco Bezzecchi",
+                               "laps":  9,
+                               "time":  "01:17.408",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Fabio Di Giannantonio",
+                               "laps":  8,
+                               "time":  "01:17.531",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Joan Mir",
+                               "laps":  9,
+                               "time":  "01:17.710",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Diogo Moreira",
+                               "laps":  9,
+                               "time":  "01:17.812",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Franco Morbidelli",
+                               "laps":  9,
+                               "time":  "01:17.815",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Raul Fernandez",
+                               "laps":  10,
+                               "time":  "01:17.964",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Alex Rins",
+                               "laps":  9,
+                               "time":  "01:17.975",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Jack Miller",
+                               "laps":  7,
+                               "time":  "01:18.022",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Luca Marini",
+                               "laps":  3,
+                               "time":  "01:18.169",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Maverick ViÃ±ales",
+                               "laps":  8,
+                               "time":  "01:18.176",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Brad Binder",
+                               "laps":  9,
+                               "time":  "01:18.237",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  12,
+                               "rider":  "Enea Bastianini",
+                               "laps":  9,
+                               "time":  "01:18.479",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -1846,6 +1977,9 @@
                         ]
             },
     "JPN":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -1866,6 +2000,9 @@
                         }
             },
     "MY2":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -1886,6 +2023,104 @@
                         }
             },
     "ITA":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Raul Fernandez",
+                               "laps":  7,
+                               "time":  "01:44.538",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Pedro Acosta",
+                               "laps":  7,
+                               "time":  "01:44.765",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Ai Ogura",
+                               "laps":  8,
+                               "time":  "01:44.852",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Brad Binder",
+                               "laps":  7,
+                               "time":  "01:44.908",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Joan Mir",
+                               "laps":  7,
+                               "time":  "01:45.274",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Luca Marini",
+                               "laps":  7,
+                               "time":  "01:45.279",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Jack Miller",
+                               "laps":  7,
+                               "time":  "01:45.288",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Fabio Quartararo",
+                               "laps":  6,
+                               "time":  "01:45.498",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Maverick ViÃ±ales",
+                               "laps":  7,
+                               "time":  "01:45.873",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  7,
+                               "time":  "01:46.137",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Michele Pirro",
+                               "laps":  7,
+                               "time":  "01:46.161",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  12,
+                               "rider":  "Cal Crutchlow",
+                               "laps":  6,
+                               "time":  "01:47.092",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -2876,6 +3111,96 @@
                         ]
             },
     "USA":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Fermin Aldeguer",
+                               "laps":  7,
+                               "time":  "02:00.977",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Joan Mir",
+                               "laps":  6,
+                               "time":  "02:01.210",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Raul Fernandez",
+                               "laps":  7,
+                               "time":  "02:01.228",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Diogo Moreira",
+                               "laps":  6,
+                               "time":  "02:01.306",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Johann Zarco",
+                               "laps":  6,
+                               "time":  "02:01.445",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Fabio Quartararo",
+                               "laps":  6,
+                               "time":  "02:01.553",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  7,
+                               "time":  "02:01.745",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Brad Binder",
+                               "laps":  6,
+                               "time":  "02:01.865",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Jack Miller",
+                               "laps":  7,
+                               "time":  "02:01.893",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Franco Morbidelli",
+                               "laps":  6,
+                               "time":  "02:02.117",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Alex Rins",
+                               "laps":  6,
+                               "time":  "02:02.366",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -3834,6 +4159,9 @@
                         ]
             },
     "AUT":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -3854,6 +4182,9 @@
                         }
             },
     "TH1":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -3874,6 +4205,9 @@
                         }
             },
     "QAT":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -3894,6 +4228,104 @@
                         }
             },
     "HUN":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Francesco Bagnaia",
+                               "laps":  8,
+                               "time":  "01:37.443",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Luca Marini",
+                               "laps":  8,
+                               "time":  "01:37.594",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Joan Mir",
+                               "laps":  8,
+                               "time":  "01:37.756",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Enea Bastianini",
+                               "laps":  8,
+                               "time":  "01:37.815",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Fabio Quartararo",
+                               "laps":  8,
+                               "time":  "01:37.965",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Iker Lecuona",
+                               "laps":  8,
+                               "time":  "01:38.024",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Brad Binder",
+                               "laps":  6,
+                               "time":  "01:38.068",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  8,
+                               "time":  "01:38.074",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Franco Morbidelli",
+                               "laps":  7,
+                               "time":  "01:38.234",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Alex Rins",
+                               "laps":  8,
+                               "time":  "01:38.469",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Maverick ViÃ±ales",
+                               "laps":  7,
+                               "time":  "01:38.469",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  12,
+                               "rider":  "Cal Crutchlow",
+                               "laps":  8,
+                               "time":  "01:39.284",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -4884,6 +5316,9 @@
                         ]
             },
     "ARA":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -4904,6 +5339,112 @@
                         }
             },
     "GBR":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Franco Morbidelli",
+                               "laps":  6,
+                               "time":  "01:57.173",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Iker Lecuona",
+                               "laps":  6,
+                               "time":  "01:57.383",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Fabio Quartararo",
+                               "laps":  7,
+                               "time":  "01:57.433",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Diogo Moreira",
+                               "laps":  7,
+                               "time":  "01:57.596",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Luca Marini",
+                               "laps":  7,
+                               "time":  "01:57.877",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Francesco Bagnaia",
+                               "laps":  7,
+                               "time":  "01:57.891",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Alex Rins",
+                               "laps":  7,
+                               "time":  "01:57.940",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Brad Binder",
+                               "laps":  6,
+                               "time":  "01:58.081",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Enea Bastianini",
+                               "laps":  7,
+                               "time":  "01:58.120",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Cal Crutchlow",
+                               "laps":  7,
+                               "time":  "01:58.140",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Pol Espargaro",
+                               "laps":  7,
+                               "time":  "01:58.414",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  12,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  7,
+                               "time":  "01:58.590",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  13,
+                               "rider":  "Augusto Fernandez",
+                               "laps":  7,
+                               "time":  "01:58.842",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -5934,6 +6475,104 @@
                         ]
             },
     "FRA":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Marc Marquez",
+                               "laps":  7,
+                               "time":  "01:29.288",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Fabio Quartararo",
+                               "laps":  9,
+                               "time":  "01:29.719",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Raul Fernandez",
+                               "laps":  8,
+                               "time":  "01:29.885",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Enea Bastianini",
+                               "laps":  6,
+                               "time":  "01:30.360",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Luca Marini",
+                               "laps":  7,
+                               "time":  "01:30.396",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Franco Morbidelli",
+                               "laps":  8,
+                               "time":  "01:30.413",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  8,
+                               "time":  "01:30.419",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Diogo Moreira",
+                               "laps":  8,
+                               "time":  "01:30.428",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Jack Miller",
+                               "laps":  8,
+                               "time":  "01:30.439",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Fermin Aldeguer",
+                               "laps":  8,
+                               "time":  "01:30.769",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Brad Binder",
+                               "laps":  8,
+                               "time":  "01:30.825",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  12,
+                               "rider":  "Jonas Folger",
+                               "laps":  8,
+                               "time":  "01:31.826",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -6916,6 +7555,9 @@
                         ]
             },
     "VAL":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -6936,6 +7578,9 @@
                         }
             },
     "ES1":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -6956,6 +7601,104 @@
                         }
             },
     "CAT":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Franco Morbidelli",
+                               "laps":  7,
+                               "time":  "01:38.550",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Jorge Martin",
+                               "laps":  6,
+                               "time":  "01:38.701",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Francesco Bagnaia",
+                               "laps":  7,
+                               "time":  "01:38.752",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Enea Bastianini",
+                               "laps":  8,
+                               "time":  "01:38.797",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Fermin Aldeguer",
+                               "laps":  7,
+                               "time":  "01:38.851",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Luca Marini",
+                               "laps":  8,
+                               "time":  "01:39.011",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Maverick ViÃ±ales",
+                               "laps":  7,
+                               "time":  "01:39.071",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Ai Ogura",
+                               "laps":  8,
+                               "time":  "01:39.212",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Alex Rins",
+                               "laps":  7,
+                               "time":  "01:39.280",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Diogo Moreira",
+                               "laps":  8,
+                               "time":  "01:39.324",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Augusto Fernandez",
+                               "laps":  7,
+                               "time":  "01:39.876",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  12,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  5,
+                               "time":  "01:42.945",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  {
 
                          },
@@ -7771,6 +8514,104 @@
                         ]
             },
     "CZE":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Jorge Martin",
+                               "laps":  6,
+                               "time":  "01:51.819",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Franco Morbidelli",
+                               "laps":  6,
+                               "time":  "01:52.020",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Maverick ViÃ±ales",
+                               "laps":  6,
+                               "time":  "01:52.053",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Alex Marquez",
+                               "laps":  6,
+                               "time":  "01:52.086",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Fabio Quartararo",
+                               "laps":  7,
+                               "time":  "01:52.185",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Luca Marini",
+                               "laps":  7,
+                               "time":  "01:52.263",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Enea Bastianini",
+                               "laps":  6,
+                               "time":  "01:52.357",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Jack Miller",
+                               "laps":  6,
+                               "time":  "01:52.420",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Alex Rins",
+                               "laps":  6,
+                               "time":  "01:52.506",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Brad Binder",
+                               "laps":  6,
+                               "time":  "01:52.556",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  6,
+                               "time":  "01:52.626",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  12,
+                               "rider":  "Cal Crutchlow",
+                               "laps":  6,
+                               "time":  "01:53.599",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -8737,6 +9578,9 @@
                         ]
             },
     "AUS":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -8757,6 +9601,112 @@
                         }
             },
     "SPA":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Johann Zarco",
+                               "laps":  7,
+                               "time":  "01:48.267",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Pedro Acosta",
+                               "laps":  6,
+                               "time":  "01:48.353",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Brad Binder",
+                               "laps":  8,
+                               "time":  "01:49.278",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Joan Mir",
+                               "laps":  7,
+                               "time":  "01:49.522",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Luca Marini",
+                               "laps":  7,
+                               "time":  "01:49.803",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Augusto Fernandez",
+                               "laps":  8,
+                               "time":  "01:49.977",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Fabio Quartararo",
+                               "laps":  8,
+                               "time":  "01:50.139",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Franco Morbidelli",
+                               "laps":  5,
+                               "time":  "01:50.219",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  7,
+                               "time":  "01:50.252",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Lorenzo Savadori",
+                               "laps":  7,
+                               "time":  "01:50.390",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Alex Rins",
+                               "laps":  7,
+                               "time":  "01:50.763",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  12,
+                               "rider":  "Jack Miller",
+                               "laps":  6,
+                               "time":  "01:58.941",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  "OUTSTND",
+                               "rider":  "Diogo Moreira",
+                               "laps":  0,
+                               "time":  "-",
+                               "status":  "OUTSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -9787,6 +10737,104 @@
                         ]
             },
     "THA":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Raul Fernandez",
+                               "laps":  8,
+                               "time":  "01:28.784",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Franco Morbidelli",
+                               "laps":  6,
+                               "time":  "01:29.090",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Francesco Bagnaia",
+                               "laps":  9,
+                               "time":  "01:29.348",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Luca Marini",
+                               "laps":  7,
+                               "time":  "01:29.446",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Diogo Moreira",
+                               "laps":  7,
+                               "time":  "01:29.489",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Fabio Quartararo",
+                               "laps":  9,
+                               "time":  "01:29.683",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Maverick ViÃ±ales",
+                               "laps":  7,
+                               "time":  "01:29.774",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Jack Miller",
+                               "laps":  9,
+                               "time":  "01:29.834",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Alex Rins",
+                               "laps":  9,
+                               "time":  "01:30.067",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Enea Bastianini",
+                               "laps":  8,
+                               "time":  "01:30.078",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  8,
+                               "time":  "01:30.165",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  12,
+                               "rider":  "Michele Pirro",
+                               "laps":  8,
+                               "time":  "01:31.361",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -10777,6 +11825,9 @@
                         ]
             },
     "VC1":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -10797,6 +11848,9 @@
                         }
             },
     "CT1":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -10817,6 +11871,9 @@
                         }
             },
     "POR":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -10837,6 +11894,9 @@
                         }
             },
     "MAL":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -10857,6 +11917,9 @@
                         }
             },
     "RSM":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -10877,6 +11940,104 @@
                         }
             },
     "NED":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Fabio Quartararo",
+                               "laps":  8,
+                               "time":  "01:31.271",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Joan Mir",
+                               "laps":  7,
+                               "time":  "01:31.315",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Franco Morbidelli",
+                               "laps":  7,
+                               "time":  "01:31.426",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Diogo Moreira",
+                               "laps":  4,
+                               "time":  "01:31.718",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Brad Binder",
+                               "laps":  8,
+                               "time":  "01:31.922",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Alex Rins",
+                               "laps":  9,
+                               "time":  "01:32.085",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Luca Marini",
+                               "laps":  7,
+                               "time":  "01:32.162",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Jack Miller",
+                               "laps":  7,
+                               "time":  "01:32.367",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Maverick ViÃ±ales",
+                               "laps":  7,
+                               "time":  "01:32.790",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Augusto Fernandez",
+                               "laps":  7,
+                               "time":  "01:32.887",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Cal Crutchlow",
+                               "laps":  8,
+                               "time":  "01:32.978",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  12,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  6,
+                               "time":  "01:33.125",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -11883,6 +13044,96 @@
                         ]
             },
     "GER":  {
+                "q1":  [
+                           {
+                               "pos":  1,
+                               "rider":  "Francesco Bagnaia",
+                               "laps":  8,
+                               "time":  "01:19.753",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  2,
+                               "rider":  "Fabio Quartararo",
+                               "laps":  7,
+                               "time":  "01:19.864",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  3,
+                               "rider":  "Joan Mir",
+                               "laps":  9,
+                               "time":  "01:19.988",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  4,
+                               "rider":  "Luca Marini",
+                               "laps":  8,
+                               "time":  "01:19.998",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  5,
+                               "rider":  "Diogo Moreira",
+                               "laps":  10,
+                               "time":  "01:20.084",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  6,
+                               "rider":  "Brad Binder",
+                               "laps":  9,
+                               "time":  "01:20.184",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  7,
+                               "rider":  "Enea Bastianini",
+                               "laps":  8,
+                               "time":  "01:20.370",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  8,
+                               "rider":  "Toprak Razgatlioglu",
+                               "laps":  8,
+                               "time":  "01:20.585",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  9,
+                               "rider":  "Alex Rins",
+                               "laps":  8,
+                               "time":  "01:20.600",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  10,
+                               "rider":  "Maverick ViÃ±ales",
+                               "laps":  7,
+                               "time":  "01:20.781",
+                               "status":  "INSTND",
+                               "pts":  null
+                           },
+                           {
+                               "pos":  11,
+                               "rider":  "Cal Crutchlow",
+                               "laps":  8,
+                               "time":  "01:20.953",
+                               "status":  "INSTND",
+                               "pts":  null
+                           }
+                       ],
                 "race":  [
                              {
                                  "pos":  1,
@@ -12817,6 +14068,9 @@
                         ]
             },
     "ES3":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -12837,6 +14091,9 @@
                         }
             },
     "INA":  {
+                "q1":  {
+
+                       },
                 "race":  {
 
                          },
@@ -12881,6 +14138,7 @@
       let fp1Results = [];
       let prResults = [];
       let fp2Results = [];
+      let q1Results = [];
       let gridResults = [];
       let sprintResults = [];
       let raceResults = [];
@@ -12891,10 +14149,14 @@
         if (evData.fp1 && evData.fp1.length) fp1Results = evData.fp1;
         if (evData.pr && evData.pr.length) prResults = evData.pr;
         if (evData.fp2 && evData.fp2.length) fp2Results = evData.fp2;
+        if (evData.q1 && evData.q1.length) q1Results = evData.q1;
         if (evData.grid && evData.grid.length) gridResults = evData.grid;
         if (evData.sprint && evData.sprint.length) sprintResults = evData.sprint;
         if (evData.race && evData.race.length) raceResults = evData.race;
       }
+
+      // RENDER INSTANTLY FROM EMBEDDED DATA (0ms DELAY)
+      renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, fp1Results, prResults, fp2Results, q1Results, gridResults, sprintResults, raceResults);
 
       // Load JSONBin Data (Guaranteed Fallback)
       try {
@@ -13054,7 +14316,7 @@
         }));
       }
 
-      renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, fp1Results, prResults, fp2Results, gridResults, sprintResults, raceResults);
+      renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, fp1Results, prResults, fp2Results, q1Results, gridResults, sprintResults, raceResults);
     }
 
     const FAV_KEY = 'overrevving_favorites';
@@ -13150,7 +14412,7 @@
       return '+' + diff.toFixed(3);
     }
 
-    function renderPageLayout(year, gp, prevGp, nextGp, weather, fp1Results, prResults, fp2Results, gridResults, sprintResults, raceResults) {
+    function renderPageLayout(year, gp, prevGp, nextGp, weather, fp1Results, prResults, fp2Results, q1Results, gridResults, sprintResults, raceResults) {
       const gpWeather = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[gp.short]) ? SESSION_WEATHER_DATA[gp.short] : {};
       const cleanW = (txt) => {
         if (!txt) return 'Dry | Air: -- | Track: --';
@@ -13159,6 +14421,7 @@
       const fp1W = cleanW(gpWeather.fp1);
       const prW = cleanW(gpWeather.pr);
       const fp2W = cleanW(gpWeather.fp2);
+      const q1W = cleanW(gpWeather.q1);
       const gridW = cleanW(gpWeather.grid);
       const sprintW = cleanW(gpWeather.sprint);
       const raceW = cleanW(gpWeather.race);
@@ -13260,6 +14523,38 @@
         });
       } else {
         fp2Rows = `<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-sub);">No FP2 data available for this round.</td></tr>`;
+      }
+
+            let q1Rows = '';
+      if (q1Results.length) {
+        const p1TimeStr = q1Results[0] ? (q1Results[0].time || (q1Results[0].best_lap ? q1Results[0].best_lap.time : null)) : null;
+        q1Results.forEach((r, idx) => {
+          const isNC = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null;
+          const posNum = isNC ? 'NC' : (r.pos || r.position || idx + 1);
+          const posCell = isNC 
+            ? <span class="pos-dnf">NC</span> 
+            : <span class=""></span>;
+          const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
+          const isFav = isRiderFavorite(rawName);
+          const totalLaps = r.laps !== undefined ? r.laps : (r.total_laps !== undefined ? r.total_laps : '-');
+          const lapTime = r.time || (r.best_lap ? r.best_lap.time : '-');
+          const gapStr = calculateGap(p1TimeStr, lapTime);
+
+          q1Rows += <tr class="" data-rider-name="">
+            <td class="star-col">
+              <button class="fav-btn " onclick="toggleFav(this, '')" title="Favorite">&#x2605;</button>
+            </td>
+            <td class="pos-cell"></td>
+            <td>
+              <div class="rider-name"></div>
+            </td>
+            <td class="laps-cell"></td>
+            <td class="time-cell"></td>
+            <td class="gap-cell"></td>
+          </tr>;
+        });
+      } else {
+        q1Rows = <tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-sub);">No Q1 data available for this round.</td></tr>;
       }
 
       let gridRows = '';
@@ -13439,7 +14734,28 @@
             </table>
           </div>
 
-          <!-- COLUMN 3: STARTING GRID -->
+                    <!-- COLUMN 4: Q1 -->
+          <div class="col-card">
+            <div class="col-header q1-header"><div class="col-header-title">&#x23F1;&#xFE0F; Q1</div><div class="col-header-sub" id="q1-weather">${q1W}</div></div>
+            <table class="standings-table" style="table-layout: fixed;">
+              <colgroup><col style="width: 22px;"><col style="width: 22px;"><col style="width: 130px;"><col style="width: 42px;"><col style="width: 72px;"><col style="width: 62px;"></colgroup>
+              <thead>
+                <tr>
+                  <th class="star-col"></th>
+                  <th style="text-align:center">#</th>
+                  <th>Rider</th>
+                  <th style="text-align:center">Laps</th>
+                  <th style="text-align:right">Time</th>
+                  <th style="text-align:right">Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${q1Rows}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- COLUMN 5: STARTING GRID -->
           <div class="col-card">
             <div class="col-header grid-header"><div class="col-header-title">&#x1F3C1; STARTING GRID</div><div class="col-header-sub" id="grid-weather">${gridW}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
@@ -13459,7 +14775,7 @@
             </table>
           </div>
 
-          <!-- COLUMN 4: SPRINT RACE -->
+          <!-- COLUMN 6: SPRINT RACE -->
           <div class="col-card">
             <div class="col-header sprint-header"><div class="col-header-title">&#x26A1; SPRINT RACE</div><div class="col-header-sub" id="sprint-weather">${sprintW}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
@@ -13478,7 +14794,7 @@
             </table>
           </div>
 
-          <!-- COLUMN 5: MAIN RACE -->
+          <!-- COLUMN 7: MAIN RACE -->
           <div class="col-card">
             <div class="col-header race-header"><div class="col-header-title">&#x1F3C1; MAIN RACE</div><div class="col-header-sub" id="race-weather">${raceW}</div></div>
             <table class="standings-table" style="table-layout: fixed;">
