@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -14525,36 +14525,36 @@
         fp2Rows = `<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-sub);">No FP2 data available for this round.</td></tr>`;
       }
 
-            let q1Rows = '';
+      let q1Rows = '';
       if (q1Results.length) {
         const p1TimeStr = q1Results[0] ? (q1Results[0].time || (q1Results[0].best_lap ? q1Results[0].best_lap.time : null)) : null;
         q1Results.forEach((r, idx) => {
           const isNC = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null;
           const posNum = isNC ? 'NC' : (r.pos || r.position || idx + 1);
           const posCell = isNC 
-            ? <span class="pos-dnf">NC</span> 
-            : <span class=""></span>;
+            ? `<span class="pos-dnf">NC</span>` 
+            : `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
           const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
           const isFav = isRiderFavorite(rawName);
           const totalLaps = r.laps !== undefined ? r.laps : (r.total_laps !== undefined ? r.total_laps : '-');
           const lapTime = r.time || (r.best_lap ? r.best_lap.time : '-');
           const gapStr = calculateGap(p1TimeStr, lapTime);
 
-          q1Rows += <tr class="" data-rider-name="">
+          q1Rows += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn " onclick="toggleFav(this, '')" title="Favorite">&#x2605;</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
-            <td class="pos-cell"></td>
+            <td class="pos-cell">${posCell}</td>
             <td>
-              <div class="rider-name"></div>
+              <div class="rider-name">${formatName(rawName)}</div>
             </td>
-            <td class="laps-cell"></td>
-            <td class="time-cell"></td>
-            <td class="gap-cell"></td>
-          </tr>;
+            <td class="laps-cell">${totalLaps}</td>
+            <td class="time-cell">${lapTime}</td>
+            <td class="gap-cell">${gapStr}</td>
+          </tr>`;
         });
       } else {
-        q1Rows = <tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-sub);">No Q1 data available for this round.</td></tr>;
+        q1Rows = `<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-sub);">No Q1 data available for this round.</td></tr>`;
       }
 
       let gridRows = '';
