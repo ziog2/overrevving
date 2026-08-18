@@ -735,19 +735,24 @@ async function initUniqueVisitorCounter() {
   const countEl = document.getElementById('unique-visitor-count');
   if (!countEl) return;
 
-  const storageKey = 'overrevving_unique_v1';
+  const storageKey = 'overrevving_unique_visited';
   const hasVisited = localStorage.getItem(storageKey);
   
-  // Se già visitato in precedenza, legge solo il totale; altrimenti incrementa il contatore unici
+  // Se già visitato in precedenza, legge solo il totale con /get; altrimenti incrementa con /hit
   const endpoint = hasVisited
-    ? 'https://api.counterapi.dev/v1/overrevving-site/unique_visitors'
-    : 'https://api.counterapi.dev/v1/overrevving-site/unique_visitors/up';
+    ? 'https://countapi.mileshilliard.com/api/v1/get/overrevving_unique_visitors'
+    : 'https://countapi.mileshilliard.com/api/v1/hit/overrevving_unique_visitors';
 
   try {
     const res = await fetch(endpoint);
+    if (!res.ok) throw new Error('API response status ' + res.status);
     const data = await res.json();
-    if (data && typeof data.count === 'number') {
-      countEl.textContent = data.count.toLocaleString();
+    const count = (data && (typeof data.value === 'number' || typeof data.count === 'number'))
+      ? (data.value !== undefined ? data.value : data.count)
+      : null;
+
+    if (count !== null) {
+      countEl.textContent = Number(count).toLocaleString();
       if (!hasVisited) {
         localStorage.setItem(storageKey, new Date().toISOString());
       }
@@ -756,6 +761,14 @@ async function initUniqueVisitorCounter() {
     }
   } catch (err) {
     console.warn('Errore caricamento visitatori unici:', err);
+    try {
+      const fallbackRes = await fetch('https://countapi.mileshilliard.com/api/v1/get/overrevving_unique_visitors');
+      const fallbackData = await fallbackRes.json();
+      if (fallbackData && typeof fallbackData.value === 'number') {
+        countEl.textContent = fallbackData.value.toLocaleString();
+        return;
+      }
+    } catch(e) {}
     countEl.textContent = '---';
   }
 }
