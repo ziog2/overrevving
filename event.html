@@ -22538,7 +22538,8 @@
 
         const datasets = activeFavRiders.map((rName, idx) => {
           const laps = gpLaps[rName] || [];
-          const style = RIDER_STYLES[rName] || { color: ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6'][idx % 5] };
+          const customStyle = RIDER_STYLES[rName] || {};
+          const color = customStyle.color || ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6'][idx % 5];
           
           // Values for lap 2 to (maxLaps - 1)
           const data = [];
@@ -22547,18 +22548,24 @@
             data.push(lapObj ? lapObj[secKey] : null);
           }
 
-          return {
-            label: rName,
+          const ds = {
+            label: formatName(rName),
             data: data,
-            borderColor: style.color || '#fff',
-            backgroundColor: style.color || '#fff',
-            borderDash: style.borderDash || [],
-            borderWidth: 2.2,
-            pointRadius: 3,
+            borderColor: color,
+            backgroundColor: color + '15',
+            borderWidth: 3,
+            tension: 0.15,
+            pointRadius: 4,
             pointHoverRadius: 6,
-            tension: 0.18,
+            fill: false,
             spanGaps: true
           };
+
+          if (customStyle.borderDash) {
+            ds.borderDash = customStyle.borderDash;
+          }
+
+          return ds;
         });
 
         const ctx = canvasEl.getContext('2d');
@@ -22582,16 +22589,16 @@
                 position: 'top',
                 labels: {
                   color: '#ccc',
-                  font: { family: 'Inter', size: 11, weight: '600' },
-                  boxWidth: 16,
-                  padding: 10
+                  font: { family: 'Inter', size: 12 },
+                  boxWidth: 24,
+                  padding: 12
                 }
               },
               tooltip: {
-                backgroundColor: 'rgba(25, 25, 30, 0.95)',
+                backgroundColor: '#1e1e22',
                 titleColor: '#fff',
                 bodyColor: '#ddd',
-                borderColor: '#444',
+                borderColor: '#3a3a42',
                 borderWidth: 1,
                 padding: 10,
                 callbacks: {
@@ -22603,14 +22610,14 @@
             },
             scales: {
               x: {
-                grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                ticks: { color: '#888', font: { family: 'Inter', size: 10 } }
+                grid: { color: 'rgba(255, 255, 255, 0.06)' },
+                ticks: { color: '#999', font: { family: 'Inter', size: 10 } }
               },
               y: {
-                grid: { color: 'rgba(255, 255, 255, 0.07)' },
+                grid: { color: 'rgba(255, 255, 255, 0.06)' },
                 ticks: {
-                  color: '#aaa',
-                  font: { family: 'Inter', size: 10 },
+                  color: '#999',
+                  font: { family: 'Inter', size: 11 },
                   callback: function(val) { return val.toFixed(2) + 's'; }
                 }
               }
