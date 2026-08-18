@@ -550,9 +550,130 @@
       color: var(--text-sub);
       font-size: 16px;
     }
+    /* Sidebar menu (Identical to index.html) */
+  .menu-btn {
+    position: fixed; top: 16px; right: 16px; z-index: 200;
+    width: 42px; height: 42px; border-radius: 8px;
+    background: #2c2c32; border: 1px solid #3a3a42;
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 5px;
+    transition: background 0.2s;
+  }
+  .menu-btn:hover { background: #3a3a42; }
+  .menu-btn span {
+    display: block; width: 20px; height: 2px;
+    background: #ccc; border-radius: 2px;
+  }
+  .sidebar {
+    position: fixed; top: 0; right: -280px; width: 260px; height: 100vh;
+    background: #2a2a30; border-left: 1px solid #3a3a42;
+    z-index: 300; transition: right 0.3s ease;
+    display: flex; flex-direction: column;
+    padding: 20px 16px; box-shadow: -4px 0 20px rgba(0,0,0,0.4);
+    overflow-y: auto;
+  }
+  .sidebar.open { right: 0; }
+  .sidebar-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    z-index: 299; display: none;
+  }
+  .sidebar-overlay.open { display: block; }
+  .sidebar h3 {
+    font-size: 13px; font-weight: 600; color: #888;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 20px; margin-top: 4px;
+  }
+  .sidebar-close {
+    position: absolute; top: 14px; right: 14px;
+    background: none; border: none; color: #888;
+    font-size: 20px; cursor: pointer; line-height: 1;
+  }
+  .sidebar-close:hover { color: #ddd; }
+  .champ-toggle {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 8px;
+    cursor: pointer; margin-bottom: 6px;
+    transition: background 0.15s; user-select: none;
+  }
+  .champ-toggle:hover { background: #333340; }
+  .champ-toggle input { display: none; }
+  .champ-dot {
+    width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0;
+  }
+  .champ-label { font-size: 14px; color: #ddd; flex: 1; }
+  .champ-check {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 2px solid #555; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; transition: all 0.15s;
+  }
+  .champ-toggle.active .champ-check {
+    background: #3d6bbd; border-color: #3d6bbd; color: #fff;
+  }
+  .champ-check::after { content: ''; display: none; }
+  .champ-toggle.active .champ-check::after {
+    content: 'âœ“'; display: block; font-size: 11px; font-weight: 700; color: #fff;
+  }
+  .sidebar-actions {
+    display: flex; gap: 8px; margin-top: 8px; margin-bottom: 20px;
+  }
+  .sidebar-btn {
+    flex: 1; padding: 7px; border-radius: 7px; border: 1px solid #444;
+    background: transparent; color: #888; font-size: 12px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .sidebar-btn:hover { background: #333340; color: #ddd; }
+  .sidebar-social { margin-top: 20px; padding-top: 20px; border-top: 1px solid #3a3a42; }
+  .sidebar-social h4 { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+  .social-icons { display: flex; gap: 12px; justify-content: center; }
+  .social-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: #333340; border: 1px solid #3a3a42;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; transition: background 0.2s, transform 0.15s;
+    color: #ccc;
+  }
+  .social-icon:hover { background: #3a3a50; transform: translateY(-2px); }
+  .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
   </style>
 </head>
 <body>
+
+  <!-- Menu button -->
+  <button class="menu-btn" onclick="toggleSidebar()" title="Select sessions">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-close" onclick="toggleSidebar()">&#x2715;</button>
+    <h3>Sessions</h3>
+    <div class="sidebar-actions">
+      <button class="sidebar-btn" onclick="selectAllSessions()">Select all</button>
+      <button class="sidebar-btn" onclick="clearAllSessions()">Clear all</button>
+    </div>
+    <div id="session-list"></div>
+    <!-- Social links -->
+    <div class="sidebar-social">
+      <h4>Get in touch with ZioG</h4>
+      <div class="social-icons">
+        <a class="social-icon" href="https://www.instagram.com/ziog.2/" target="_blank" rel="noopener" title="Instagram" style="color:#e1306c">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a class="social-icon" href="https://www.youtube.com/@ZioG91" target="_blank" rel="noopener" title="YouTube" style="color:#ff0000">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </a>
+        <a class="social-icon" href="https://www.tiktok.com/@ziog91" target="_blank" rel="noopener" title="TikTok" style="color:#ccc">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+        </a>
+        <a class="social-icon" href="https://www.facebook.com/mrandreagalassi/" target="_blank" rel="noopener" title="Facebook" style="color:#1877f2">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <header>
     <div class="nav-container">
@@ -18726,6 +18847,92 @@
       renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, fp1Results, prResults, fp2Results, q1Results, q2Results, gridResults, sprintResults, wupResults, raceResults);
     }
 
+        // ---- Sidebar session selector ----
+    const EVENT_SESSIONS = [
+      { id: 'fp1', label: 'FP1', color: '#8e44ad', width: '350px' },
+      { id: 'pr', label: 'PR', color: '#d35400', width: '350px' },
+      { id: 'fp2', label: 'FP2', color: '#16a085', width: '350px' },
+      { id: 'q1', label: 'Q1', color: '#0984e3', width: '350px' },
+      { id: 'q2', label: 'Q2', color: '#6c5ce7', width: '350px' },
+      { id: 'grid', label: 'Starting Grid', color: '#2980b9', width: '350px' },
+      { id: 'sprint', label: 'Sprint Race', color: '#e67e22', width: '325px' },
+      { id: 'wup', label: 'WUP', color: '#00b894', width: '350px' },
+      { id: 'race', label: 'Main Race', color: '#c0392b', width: '325px' },
+      { id: 'gp', label: 'GP Points', color: '#b8860b', width: '325px' }
+    ];
+
+    let visibleSessions = new Set(
+      JSON.parse(localStorage.getItem('overrevving_event_sessions') ||
+      JSON.stringify(EVENT_SESSIONS.map(s => s.id)))
+    );
+
+    function saveSessionPrefs() {
+      localStorage.setItem('overrevving_event_sessions', JSON.stringify([...visibleSessions]));
+    }
+
+    function buildSidebarList() {
+      const list = document.getElementById('session-list');
+      if (!list) return;
+      list.innerHTML = '';
+      EVENT_SESSIONS.forEach(sess => {
+        const active = visibleSessions.has(sess.id);
+        const div = document.createElement('div');
+        div.className = 'champ-toggle' + (active ? ' active' : '');
+        div.dataset.id = sess.id;
+        div.innerHTML = `
+          <div class="champ-dot" style="background:${sess.color}"></div>
+          <span class="champ-label">${sess.label}</span>
+          <div class="champ-check"></div>`;
+        div.onclick = () => toggleSession(sess.id, div);
+        list.appendChild(div);
+      });
+    }
+
+    function toggleSession(id, el) {
+      if (visibleSessions.has(id)) {
+        visibleSessions.delete(id);
+        el.classList.remove('active');
+      } else {
+        visibleSessions.add(id);
+        el.classList.add('active');
+      }
+      saveSessionPrefs();
+      applySessionVisibility();
+    }
+
+    function selectAllSessions() {
+      EVENT_SESSIONS.forEach(s => visibleSessions.add(s.id));
+      buildSidebarList();
+      saveSessionPrefs();
+      applySessionVisibility();
+    }
+
+    function clearAllSessions() {
+      visibleSessions.clear();
+      buildSidebarList();
+      saveSessionPrefs();
+      applySessionVisibility();
+    }
+
+    function applySessionVisibility() {
+      EVENT_SESSIONS.forEach(sess => {
+        const col = document.querySelector(`.col-card[data-session="${sess.id}"]`);
+        if (col) col.style.display = visibleSessions.has(sess.id) ? '' : 'none';
+      });
+      const activeWidths = EVENT_SESSIONS.filter(s => visibleSessions.has(s.id)).map(s => s.width);
+      const gridEl = document.querySelector('.grid-five-col');
+      if (gridEl) {
+        gridEl.style.gridTemplateColumns = activeWidths.length ? activeWidths.join(' ') : '350px';
+      }
+    }
+
+    function toggleSidebar() {
+      const sb = document.getElementById('sidebar');
+      const sbo = document.getElementById('sidebar-overlay');
+      if (sb) sb.classList.toggle('open');
+      if (sbo) sbo.classList.toggle('open');
+    }
+
     const FAV_KEY = 'overrevving_favorites';
 
     function getFavoritesSet() {
@@ -19398,7 +19605,7 @@
           </div>
 
           <!-- COLUMN 10: GP POINTS -->
-          <div class="col-card">
+          <div class="col-card" data-session="gp">
             <div class="col-header gp-header"><div class="col-header-title">&#x1F3C6; GP POINTS</div><div class="col-header-sub">Sprint + Main Race</div></div>
             <table class="standings-table" style="table-layout: fixed;">
               <colgroup><col style="width: 22px;"><col style="width: 24px;"><col style="width: 210px;"><col style="width: 69px;"></colgroup>
@@ -19420,7 +19627,7 @@
         </div>
 
         <div class="round-nav-bar">
-          ${prevGp ? `<a href="event.html?year=${year}&round=${prevGp.round}" class="nav-link">← ${prevGp.round}: ${prevGp.name}</a>` : `<span class="nav-link disabled">← First Round</span>`}
+          ${prevGp ? `<a href="event.html?year=${year}&round=${prevGp.round}" class="nav-link">â† ${prevGp.round}: ${prevGp.name}</a>` : `<span class="nav-link disabled">â† First Round</span>`}
           
           <div class="footer-social-inline">
             <div class="footer-social-title">Get in touch with ZioG</div>
@@ -19440,15 +19647,15 @@
             </div>
           </div>
 
-          ${nextGp ? `<a href="event.html?year=${year}&round=${nextGp.round}" class="nav-link">${nextGp.round}: ${nextGp.name} →</a>` : `<span class="nav-link disabled">Final Round →</span>`}
+          ${nextGp ? `<a href="event.html?year=${year}&round=${nextGp.round}" class="nav-link">${nextGp.round}: ${nextGp.name} â†’</a>` : `<span class="nav-link disabled">Final Round â†’</span>`}
         </div>
       `;
+
+      buildSidebarList();
+      applySessionVisibility();
     }
 
     document.addEventListener('DOMContentLoaded', initEventPage);
-  
-    window.addEventListener('DOMContentLoaded', initEventPage);
   </script>
 </body>
 </html>
-
