@@ -22476,7 +22476,8 @@
 
     let sectorChartInstances = { t1: null, t2: null, t3: null, t4: null };
 
-    function renderSectorCharts(currentGpShort = 'THA') {
+    function renderSectorCharts(currentGpShort) {
+      if (!currentGpShort) currentGpShort = 'THA';
       const sectionEl = document.getElementById('sector-section');
       if (!sectionEl) return;
 
@@ -22518,20 +22519,19 @@
       // Labels: from Lap 2 to Lap (maxLaps - 1)
       const labels = [];
       for (let lapNum = 2; lapNum < maxLaps; lapNum++) {
-        labels.push(L);
+        labels.push('L' + lapNum);
       }
 
       const sectorKeys = ['t1', 't2', 't3', 't4'];
-      const sectorNames = { t1: 'Sector 1 (T1)', t2: 'Sector 2 (T2)', t3: 'Sector 3 (T3)', t4: 'Sector 4 (T4)' };
 
       sectorKeys.forEach(secKey => {
-        const canvasId = chart-sector-;
+        const canvasId = 'chart-sector-' + secKey;
         const canvasEl = document.getElementById(canvasId);
         if (!canvasEl) return;
 
         // Destroy previous instance
         if (sectorChartInstances[secKey]) {
-          sectorChartInstances[secKey].destroy();
+          try { sectorChartInstances[secKey].destroy(); } catch(e) {}
           sectorChartInstances[secKey] = null;
         }
 
@@ -22595,7 +22595,7 @@
                 padding: 10,
                 callbacks: {
                   label: function(context) {
-                    return  : s;
+                    return ' ' + context.dataset.label + ': ' + context.parsed.y.toFixed(3) + 's';
                   }
                 }
               }
