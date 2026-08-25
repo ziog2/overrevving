@@ -46330,6 +46330,31 @@
     }
 
     let sectorChartInstances = { t1: null, t2: null, t3: null, t4: null };
+    const logoImg = new Image();
+    logoImg.src = 'logo.png';
+
+    const watermarkPlugin = {
+      id: 'watermarkLogo',
+      beforeDraw: (chart) => {
+        if (!logoImg.complete || logoImg.naturalWidth === 0) return;
+        const ctx = chart.ctx;
+        const { chartArea } = chart;
+        if (!chartArea) return;
+
+        ctx.save();
+        ctx.globalAlpha = 0.09;
+        const targetWidth = Math.min(180, (chartArea.right - chartArea.left) * 0.45);
+        const targetHeight = (logoImg.naturalHeight / logoImg.naturalWidth) * targetWidth;
+        const x = chartArea.left + 12;
+        const y = chartArea.top + 12;
+
+        ctx.drawImage(logoImg, x, y, targetWidth, targetHeight);
+        ctx.restore();
+      }
+    };
+    logoImg.onload = () => {
+      if (window.CURRENT_EVENT_SHORT) renderSectorCharts(window.CURRENT_EVENT_SHORT);
+    };
 
     function renderSectorCharts(currentGpShort) {
       if (!currentGpShort) currentGpShort = (window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA'));
@@ -47183,7 +47208,7 @@
         <div class="sector-section" id="sector-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">&#x23F1;&#xFE0F; SPR RACE - Lap-by-Lap Sector Times Comparison</div>
+              <div class="sector-title">&#x23F1;&#xFE0F; MAIN RACE - Lap-by-Lap Sector Times Comparison</div>
               <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Sectors T1, T2, T3, T4 &middot; Excludes Lap 1 &amp; Final Lap</div>
             </div>
             <button class="win-btn" id="sector-min-btn" onclick="toggleSectorMinimize()" title="Minimize / Expand">
