@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Event Details · Overrevving</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/chart.min.js"></script>
   <style>
     :root {
       --bg: #18181c;
@@ -829,6 +829,39 @@
   </main>
 
   <script>
+    const logoImg = new Image();
+    logoImg.src = 'logo.png';
+
+    const watermarkPlugin = {
+      id: 'watermarkLogo',
+      beforeDraw: (chart) => {
+        if (!logoImg.complete || logoImg.naturalWidth === 0) return;
+        const ctx = chart.ctx;
+        const { chartArea } = chart;
+        if (!chartArea) return;
+
+        ctx.save();
+        ctx.globalAlpha = 0.09;
+        const targetWidth = Math.min(220, (chartArea.right - chartArea.left) * 0.45);
+        const targetHeight = (logoImg.naturalHeight / logoImg.naturalWidth) * targetWidth;
+        const x = chartArea.left + 12;
+        const y = chartArea.top + 10;
+        ctx.drawImage(logoImg, x, y, targetWidth, targetHeight);
+        ctx.restore();
+      }
+    };
+
+    logoImg.onload = () => {
+      if (typeof sectorChartInstances !== 'undefined') {
+        for (let key in sectorChartInstances) {
+          if (sectorChartInstances[key]) {
+            try { sectorChartInstances[key].update('none'); } catch(e) {}
+          }
+        }
+      }
+      const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
+      if (cur && typeof renderSectorCharts === 'function') renderSectorCharts(cur);
+    };
     const SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e";
     const CAT_MOTOGP = "e8c110ad-64aa-4e8e-8a86-f2f152f6a942";
     const BIN_ID = '6a3064e4f5f4af5e29f7958b';
@@ -51427,38 +51460,6 @@
     }
 
     let sectorChartInstances = { t1: null, t2: null, t3: null, t4: null };
-    const logoImg = new Image();
-    logoImg.src = 'logo.png';
-
-    const watermarkPlugin = {
-      id: 'watermarkLogo',
-      beforeDraw: (chart) => {
-        if (!logoImg.complete || logoImg.naturalWidth === 0) return;
-        const ctx = chart.ctx;
-        const { chartArea } = chart;
-        if (!chartArea) return;
-
-        ctx.save();
-        ctx.globalAlpha = 0.09;
-        const targetWidth = Math.min(220, (chartArea.right - chartArea.left) * 0.45);
-        const targetHeight = (logoImg.naturalHeight / logoImg.naturalWidth) * targetWidth;
-        const x = chartArea.left + 12;
-        const y = chartArea.top + 10;
-
-        ctx.drawImage(logoImg, x, y, targetWidth, targetHeight);
-        ctx.restore();
-      }
-    };
-    logoImg.onload = () => {
-      for (let key in sectorChartInstances) {
-        if (sectorChartInstances[key]) {
-          try { sectorChartInstances[key].update('none'); } catch(e) {}
-        }
-      }
-      const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
-      if (cur) renderSectorCharts(cur);
-    };
-
     function renderSectorCharts(currentGpShort) {
       if (!currentGpShort) currentGpShort = (window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA'));
       window.CURRENT_EVENT_SHORT = currentGpShort;
@@ -51561,6 +51562,7 @@
             labels: labels,
             datasets: datasets
           },
+          plugins: [watermarkPlugin],
           options: {
             responsive: true,
             maintainAspectRatio: false,
