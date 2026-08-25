@@ -584,7 +584,7 @@
 
     .sector-section.minimized .sector-subtitle,
     .sector-section.minimized .sector-grid-2x2 {
-      display: none;
+      display: none !important;
     }
     /* 4-Quadrant Sector Times Comparison Section */
     .sector-section {
@@ -22509,6 +22509,34 @@
                          ]
 }
     };
+
+        function toggleSectorMinimize() {
+      const section = document.getElementById('sector-section');
+      if (!section) return;
+      const isMin = section.classList.toggle('minimized');
+      const btn = document.getElementById('sector-min-btn');
+      const icon = document.getElementById('sector-min-icon');
+      
+      if (isMin) {
+        if (btn) btn.setAttribute('title', 'Expand');
+        if (icon) {
+          icon.innerHTML = '<rect x="2" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/>';
+        }
+      } else {
+        if (btn) btn.setAttribute('title', 'Minimize');
+        if (icon) {
+          icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+        }
+        ['t1', 't2', 't3', 't4'].forEach(k => {
+          if (sectorChartInstances && sectorChartInstances[k]) {
+            try { sectorChartInstances[k].resize(); } catch(e) {}
+          }
+        });
+      }
+      try {
+        localStorage.setItem('overrevving_sector_minimized', isMin ? '1' : '0');
+      } catch(e) {}
+    }
 
     let sectorChartInstances = { t1: null, t2: null, t3: null, t4: null };
 
