@@ -551,7 +551,42 @@
       color: var(--text-sub);
       font-size: 16px;
     }
-        /* 4-Quadrant Sector Times Comparison Section */
+            .win-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid #444450;
+      background: #202026;
+      color: #bbb;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+      margin-left: 12px;
+    }
+
+    .win-btn:hover {
+      background: #33333e;
+      border-color: #666675;
+      color: #fff;
+    }
+
+    .sector-section.minimized {
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .sector-section.minimized .sector-header {
+      margin-bottom: 0;
+    }
+
+    .sector-section.minimized .sector-subtitle,
+    .sector-section.minimized .sector-grid-2x2 {
+      display: none;
+    }
+    /* 4-Quadrant Sector Times Comparison Section */
     .sector-section {
       margin-top: 36px;
       margin-bottom: 24px;
@@ -22504,6 +22539,9 @@
       }
 
       sectionEl.style.display = 'block';
+      if (localStorage.getItem('overrevving_sector_minimized') === '1' && !sectionEl.classList.contains('minimized')) {
+        toggleSectorMinimize();
+      }
 
       // Determine laps range: exclude lap 1 and final lap
       let maxLaps = 0;
@@ -23325,9 +23363,14 @@
         <div class="sector-section" id="sector-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">&#x23F1;&#xFE0F; Lap-by-Lap Sector Times Comparison</div>
+              <div class="sector-title">&#x23F1;&#xFE0F; SPR RACE - Lap-by-Lap Sector Times Comparison</div>
               <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Sectors T1, T2, T3, T4 &middot; Excludes Lap 1 &amp; Final Lap</div>
             </div>
+            <button class="win-btn" id="sector-min-btn" onclick="toggleSectorMinimize()" title="Minimize / Expand">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="sector-min-icon">
+                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
           </div>
           <div class="sector-grid-2x2">
             <!-- TOP-LEFT: T1 -->
