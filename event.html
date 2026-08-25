@@ -23374,7 +23374,7 @@
         </div>
 
         <div class="round-nav-bar">
-          ${prevGp ? `<a href="event.html?year=${year}&round=${prevGp.round}" class="nav-link">â† ${prevGp.round}: ${prevGp.name}</a>` : `<span class="nav-link disabled">â† First Round</span>`}
+          ${prevGp ? `<a href="event.html?year=${year}&round=${prevGp.round}" class="nav-link">&larr; ${prevGp.round}: ${prevGp.name}</a>` : `<span class="nav-link disabled">&larr; First Round</span>`}
           
           <div class="footer-social-inline">
             <div class="footer-social-title">Get in touch with ZioG</div>
@@ -23394,7 +23394,7 @@
             </div>
           </div>
 
-          ${nextGp ? `<a href="event.html?year=${year}&round=${nextGp.round}" class="nav-link">${nextGp.round}: ${nextGp.name} â†’</a>` : `<span class="nav-link disabled">Final Round â†’</span>`}
+          ${nextGp ? `<a href="event.html?year=${year}&round=${nextGp.round}" class="nav-link">${nextGp.round}: ${nextGp.name} &rarr;</a>` : `<span class="nav-link disabled">Final Round &rarr;</span>`}
         </div>
       `;
 
