@@ -158,3 +158,20 @@ Backup Timestamp:
 2026-08-26 22:04:32
 =====================================================
 
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20260826_230018
+
+Note / Log Message:
+Versione stabile con grafici Lap Chart (Progressione Posizioni Giro per Giro) per SPR RACE e MAIN RACE in event.html. Dati completi estratti per tutti i 12 round della stagione 2026, scala Y dinamica in funzione dei piloti preferiti selezionati con margine in alto e in basso, etichette sequenziali complete (P1..Pmax), tratti lineari (tension 0) e gestione DNF/ritiri.
+
+Git Commit Info:
+Commit Hash: 56f27302a1f626f326f4908d0d579eb53edd6d25 Commit Date: Wed Aug 26 22:53:42 2026 +0200 Commit Message: Set tension to 0 for linear straight lines between markers across all charts
+
+Backup Timestamp:
+2026-08-26 23:00:18
+=====================================================
+
