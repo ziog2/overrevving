@@ -78266,10 +78266,15 @@
         labels.push('L' + i);
       }
 
-      let maxPositionFound = 22;
+      let totalRidersInSession = 22;
+      for (let rName in sessionData.riders) {
+        (sessionData.riders[rName] || []).forEach(p => {
+          if (p && p > totalRidersInSession) totalRidersInSession = p;
+        });
+      }
+
       const datasets = activeFavRiders.map((rName, idx) => {
         const posData = sessionData.riders[rName] || [];
-        posData.forEach(p => { if (p && p > maxPositionFound) maxPositionFound = p; });
         const style = RIDER_STYLES[rName] || {};
         const color = style.color || ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6'][idx % 5];
 
@@ -78344,9 +78349,9 @@
               }
             }
           },
-                    layout: {
+          layout: {
             padding: {
-              top: 16,
+              top: 14,
               bottom: 8,
               left: 4,
               right: 12
@@ -78359,18 +78364,22 @@
             },
             y: {
               reverse: true,
-              min: 0,
-              max: maxPositionFound + 1,
+              min: 0.5,
+              max: totalRidersInSession + 0.5,
+              afterBuildTicks: function(axis) {
+                const tickVals = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22];
+                if (totalRidersInSession > 22 && !tickVals.includes(totalRidersInSession)) {
+                  tickVals.push(totalRidersInSession);
+                }
+                axis.ticks = tickVals.map(v => ({ value: v }));
+              },
               grid: { color: 'rgba(255, 255, 255, 0.06)' },
               ticks: {
-                stepSize: 1,
+                autoSkip: false,
                 color: '#999',
                 font: { family: 'Inter', size: 11, weight: '600' },
                 callback: function(val) {
-                  if (val === 1 || (val > 1 && val <= maxPositionFound && (val % 2 === 0 || val === maxPositionFound))) {
-                    return 'P' + val;
-                  }
-                  return '';
+                  return 'P' + val;
                 }
               }
             }
