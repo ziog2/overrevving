@@ -78359,15 +78359,15 @@
             },
             y: {
               reverse: true,
-              min: 0.5,
-              max: maxPositionFound + 0.5,
+              min: 0,
+              max: maxPositionFound + 1,
               grid: { color: 'rgba(255, 255, 255, 0.06)' },
               ticks: {
                 stepSize: 1,
                 color: '#999',
                 font: { family: 'Inter', size: 11, weight: '600' },
                 callback: function(val) {
-                  if (Number.isInteger(val) && val >= 1 && val <= maxPositionFound) {
+                  if (val === 1 || (val > 1 && val <= maxPositionFound && (val % 2 === 0 || val === maxPositionFound))) {
                     return 'P' + val;
                   }
                   return '';
