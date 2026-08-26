@@ -78273,8 +78273,12 @@
         });
       }
 
+      let maxSelectedPos = 1;
       const datasets = activeFavRiders.map((rName, idx) => {
         const posData = sessionData.riders[rName] || [];
+        posData.forEach(p => {
+          if (p && p > maxSelectedPos) maxSelectedPos = p;
+        });
         const style = RIDER_STYLES[rName] || {};
         const color = style.color || ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6'][idx % 5];
 
@@ -78296,6 +78300,15 @@
         }
         return ds;
       });
+
+      // Dynamic scale with 1 position margin at bottom unless last placed rider is selected
+      let maxPosToShow = maxSelectedPos + 1;
+      if (maxPosToShow > totalRidersInSession) {
+        maxPosToShow = totalRidersInSession;
+      }
+      if (maxPosToShow < 2) {
+        maxPosToShow = 2;
+      }
 
       if (sessionKey === 'SPR' && sprLapChartInstance) {
         try { sprLapChartInstance.destroy(); } catch(e) {}
@@ -78365,11 +78378,11 @@
             y: {
               reverse: true,
               min: 0.5,
-              max: totalRidersInSession + 0.5,
+              max: maxPosToShow + 0.5,
               afterBuildTicks: function(axis) {
-                const tickVals = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22];
-                if (totalRidersInSession > 22 && !tickVals.includes(totalRidersInSession)) {
-                  tickVals.push(totalRidersInSession);
+                const tickVals = [];
+                for (let i = 1; i <= maxPosToShow; i++) {
+                  tickVals.push(i);
                 }
                 axis.ticks = tickVals.map(v => ({ value: v }));
               },
