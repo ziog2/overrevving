@@ -134,9 +134,29 @@
   .sbk    .col-header { background: #2980b9; color: #fff; }
   .f1     .col-header { background: #e10600; color: #fff; }
   .mxgp   .col-header { background: #ff6b00; color: #fff; }
-  .mx2    .col-header { background: #f0a500; color: #fff; }
+  .col-table-wrapper {
+    max-height: 553px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .col-table-wrapper::-webkit-scrollbar {
+    width: 5px;
+  }
+  .col-table-wrapper::-webkit-scrollbar-track {
+    background: #252528;
+  }
+  .col-table-wrapper::-webkit-scrollbar-thumb {
+    background: #444450;
+    border-radius: 4px;
+  }
+  .col-table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555565;
+  }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
     padding: 7px 8px; text-align: left; font-size: 11px; font-weight: 600;
     letter-spacing: 0.07em; text-transform: uppercase; color: #888;
     border-bottom: 1px solid #3a3a42; background: #252528;
@@ -365,7 +385,7 @@ function renderAll(all) {
         ${headerLink}
         <div class="next-round" id="countdown-${cat.id}">🏁 → Loading...</div>
       </div>` +
-      `<table><thead><tr><th>#</th><th>Rider</th><th>Pts</th><th style="width:20px"></th></tr></thead><tbody>${rows}</tbody></table>`;
+      `<div class="col-table-wrapper"><table><thead><tr><th>#</th><th>Rider</th><th>Pts</th><th style="width:20px"></th></tr></thead><tbody>${rows}</tbody></table></div>`;
     grid.appendChild(col);
   });
   const ts = all['_updated'];
