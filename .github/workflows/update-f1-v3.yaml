@@ -1,10 +1,13 @@
-name: Aggiorna classifiche Motorsport
+name: Aggiorna classifiche Motorsport ed Eventi
 
 on:
   schedule:
     - cron: '0 18 * * 6'
     - cron: '0 18 * * 0'
   workflow_dispatch: {}
+
+permissions:
+  contents: write
 
 jobs:
   update-standings:
@@ -17,9 +20,15 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Installa dipendenze (pdfjs-dist)
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installa dipendenze
         run: |
           npm install --quiet pdfjs-dist@3.11.174
+          pip install --quiet pypdf
 
       - name: Scarica ed estrai classifiche da PDF Dorna e API
         env:
@@ -27,3 +36,19 @@ jobs:
           JSONBIN_BIN_ID: ${{ secrets.JSONBIN_BIN_ID }}
         run: |
           node .github/scripts/update_standings.js
+
+      - name: Aggiorna dati evento (event.html)
+        run: |
+          python3 .github/scripts/update_event_data.py
+
+      - name: Commit e push automatico se ci sono aggiornamenti
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add event.html
+          if git diff --staged --quiet; then
+            echo "Nessuna modifica da inviare."
+          else
+            git commit -m "Auto-update event data for latest MotoGP Grand Prix [skip ci]"
+            git push origin main
+          fi
