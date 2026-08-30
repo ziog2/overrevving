@@ -71,7 +71,6 @@ def main():
 
         # Check if already populated with real data in STATIC_EVENT_DATA
         marker = f'"{short}":'
-        # Check if it has non-empty FP1/Grid
         if marker in html_content:
             idx = html_content.find(marker)
             sample = html_content[idx:idx+200]
@@ -90,7 +89,7 @@ def main():
 
         fp_sess = [s for s in sessions if s.get('type') == 'FP']
         pr_sess = next((s for s in sessions if s.get('type') == 'PR'), None)
-        q_sess  = [s for s in sessions if s.get('type') == 'Q']
+        q_sess  = sorted([s for s in sessions if s.get('type') == 'Q'], key=lambda s: s.get('date', ''))
         spr_sess = next((s for s in sessions if s.get('type') == 'SPR'), None)
         wup_sess = next((s for s in sessions if s.get('type') == 'WUP'), None)
         rac_sess = next((s for s in sessions if s.get('type') == 'RAC'), None)
@@ -99,25 +98,25 @@ def main():
         pr  = format_class(pr_sess['id']) if pr_sess else []
         fp2 = format_class(fp_sess[1]['id']) if len(fp_sess) >= 2 else []
 
-        q1 = []
-        q2 = []
-        for qs in q_sess:
-            c = format_class(qs['id'])
-            if len(c) <= 12 and not q2:
-                q2 = c
-            else:
-                q1 = c
+        q1_sess = q_sess[0] if len(q_sess) >= 1 else None
+        q2_sess = q_sess[1] if len(q_sess) >= 2 else None
+
+        q1 = format_class(q1_sess['id']) if q1_sess else []
+        q2 = format_class(q2_sess['id']) if q2_sess else []
 
         spr = format_class(spr_sess['id']) if spr_sess else []
         wup = format_class(wup_sess['id']) if wup_sess else []
         rac = format_class(rac_sess['id']) if rac_sess else []
 
-        # Build grid
+        # Build grid: P1..P12 from Q2 (Pole), P13..P22 from Q1 excluding promoted top 2
         grid = []
-        q2_riders = set()
+        promoted = set()
+        if len(q1) >= 2:
+            promoted.add(q1[0]['rider'])
+            promoted.add(q1[1]['rider'])
+
         p = 1
         for r in q2:
-            q2_riders.add(r['rider'])
             grid.append({
                 "pos": p,
                 "rider": r['rider'],
@@ -129,7 +128,7 @@ def main():
             p += 1
 
         for r in q1:
-            if r['rider'] not in q2_riders:
+            if r['rider'] not in promoted:
                 grid.append({
                     "pos": p,
                     "rider": r['rider'],
@@ -146,7 +145,6 @@ def main():
         }
         static_json = json.dumps(static_obj, separators=(',', ':'))
 
-        # Replace in STATIC_EVENT_DATA
         empty_pattern = rf'"{short}":\s*\{{\s*"grid":\s*\[\s*\],\s*"race":\s*\{{[\s\S]*?"q1":\s*\{{[\s\S]*?\}}'
         if re.search(empty_pattern, html_content):
             html_content = re.sub(empty_pattern, f'"{short}": {static_json}', html_content)
