@@ -175,3 +175,18 @@ Backup Timestamp:
 2026-08-26 23:00:18
 =====================================================
 
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20260831_004115
+
+Note / Log Message:
+Versione stabile con integrazione completa di Aragon (Round 13) in event.html: 9 sessioni complete, classifiche Q1 e Q2 in ordine cronologico corretto (Pole a Bezzecchi), griglia ufficiale a 22 piloti, Sprint e Main Race, Lap Charts (SPR e RAC) con wrapper totalLaps, intertempi 4 settori (T1..T4), temperature meteo e badge SPR/RACE nei calendari di motogp.html e category.html. Automazione completa tramite GitHub Actions per classifiche costruttori/team da Dorna PDF e sincronizzazione nuovi GP.
+
+Git Commit Info:
+Commit Hash: 8fcc51f47b1b7d60a730967d26e23ca8ca7db8f4 Commit Date: Mon Aug 31 00:39:26 2026 +0200 Commit Message: Populate Aragon Grand Prix session data and telemetries cleanly in event.html
+
+Backup Timestamp:
+2026-08-31 00:41:15
+=====================================================
