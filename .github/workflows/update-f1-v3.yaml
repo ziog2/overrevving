@@ -10,14 +10,23 @@ jobs:
   update-standings:
     runs-on: ubuntu-latest
     steps:
+      - name: Installa dipendenze Python
+        run: |
+          pip install --quiet pypdf
+
       - name: Scarica e aggiorna tutte le classifiche
         env:
           JSONBIN_API_KEY: ${{ secrets.JSONBIN_API_KEY }}
           JSONBIN_BIN_ID: ${{ secrets.JSONBIN_BIN_ID }}
         run: |
           python3 << 'PYEOF'
-          import json, os, urllib.request
+          import json, os, urllib.request, io, re
           from datetime import datetime, timezone, timedelta
+
+          try:
+              import pypdf
+          except ImportError:
+              pypdf = None
 
           api_key = os.environ['JSONBIN_API_KEY']
           bin_id  = os.environ['JSONBIN_BIN_ID']
@@ -33,8 +42,91 @@ jobs:
               if extra_headers:
                   headers.update(extra_headers)
               req = urllib.request.Request(url, headers=headers)
-              with urllib.request.urlopen(req) as resp:
+              with urllib.request.urlopen(req, timeout=15) as resp:
                   return json.load(resp)
+
+          def download_bytes(url):
+              req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+              with urllib.request.urlopen(req, timeout=15) as resp:
+                  return resp.read()
+
+          def parse_pdf_stats(pdf_bytes):
+              if not pypdf:
+                  return [], []
+              try:
+                  reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
+                  target_page = None
+                  for page in reversed(reader.pages):
+                      txt = page.extract_text() or ""
+                      if "Constructor" in txt and "Team" in txt:
+                          target_page = page
+                          break
+                  if not target_page:
+                      target_page = reader.pages[-1]
+
+                  tokens = []
+                  def visitor(text, cm, tm, font_dict, font_size):
+                      if text and text.strip():
+                          tokens.append({'text': text.strip(), 'x': tm[4], 'y': tm[5]})
+                  target_page.extract_text(visitor_text=visitor)
+
+                  const_hdr = next((t for t in tokens if t['text'] == 'Constructor'), None)
+                  team_hdr  = next((t for t in tokens if t['text'] == 'Team'), None)
+                  if not const_hdr or not team_hdr:
+                      return [], []
+
+                  hdr_tokens = [t for t in tokens if abs(t['y'] - const_hdr['y']) <= 6 or abs(t['y'] - team_hdr['y']) <= 6]
+                  hdr_tokens.sort(key=lambda t: t['x'])
+
+                  const_names = []
+                  team_names = []
+                  mode = None
+                  for t in hdr_tokens:
+                      if t['text'] == 'Constructor':
+                          mode = 'const'
+                          continue
+                      if t['text'] == 'Team':
+                          mode = 'team'
+                          continue
+                      if mode == 'const':
+                          const_names.append(t)
+                      elif mode == 'team':
+                          team_names.append(t)
+
+                  pts_label_toks = [t for t in tokens if t['text'] == 'Points']
+                  if pts_label_toks:
+                      y_min = min(t['y'] for t in pts_label_toks) - 20
+                      y_max = max(t['y'] for t in pts_label_toks) + 5
+                  else:
+                      y_min, y_max = 355, 390
+
+                  pts_candidates = [
+                      t for t in tokens
+                      if re.match(r'^\d{1,4}(\.\d+)?$', t['text']) and y_min < t['y'] < y_max
+                  ]
+
+                  def match_pts(names):
+                      out = []
+                      for n in names:
+                          best = None
+                          best_dist = float('inf')
+                          for p in pts_candidates:
+                              d = abs(p['x'] - n['x'])
+                              if d < best_dist:
+                                  best_dist = d
+                                  best = p
+                          if best and best_dist < 4:
+                              val = float(best['text']) if '.' in best['text'] else int(best['text'])
+                              out.append({'name': n['text'], 'pts': val})
+                      out.sort(key=lambda x: x['pts'], reverse=True)
+                      return out
+
+                  constructors = match_pts(const_names)
+                  teams = match_pts(team_names)
+                  return constructors, teams
+              except Exception as e:
+                  print(f"Error parsing PDF stats: {e}")
+                  return [], []
 
           # ---- 1. Leggi il bin attuale prima per preservare la cronologia (history) ----
           try:
@@ -45,15 +137,17 @@ jobs:
 
           # ---- 1b. MotoGP / Moto2 / Moto3 via API pulselive (Dorna) with full per-session history ----
           SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e"
-          CATEGORY_UUIDS = {
-              "motogp": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942",
-              "moto2":  "549640b8-fd9c-4245-acfd-60e4bc38b25c",
-              "moto3":  "954f7e65-2ef2-4423-b949-4961cc603e45",
+          CATEGORY_CONFIG = {
+              "motogp": {"uuid": "e8c110ad-64aa-4e8e-8a86-f2f152f6a942", "pdf_name": "MotoGP"},
+              "moto2":  {"uuid": "549640b8-fd9c-4245-acfd-60e4bc38b25c", "pdf_name": "Moto2"},
+              "moto3":  {"uuid": "954f7e65-2ef2-4423-b949-4961cc603e45", "pdf_name": "Moto3"},
           }
 
           results = {}
 
-          for cat_id, cat_uuid in CATEGORY_UUIDS.items():
+          for cat_id, cfg in CATEGORY_CONFIG.items():
+              cat_uuid = cfg["uuid"]
+              pdf_cat_name = cfg["pdf_name"]
               try:
                   events_url = f"https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid={SEASON_2026}&categoryUuid={cat_uuid}"
                   events = http_get(events_url)
@@ -140,6 +234,23 @@ jobs:
                   clean_riders.sort(key=lambda r: r['pts'], reverse=True)
                   results[cat_id] = clean_riders
                   print(f"{cat_id} (Piloti + Sprint/Long history): {len(clean_riders)} importati")
+
+                  # ---- Download and Parse Dorna worldstanding.pdf for Constructors & Teams ----
+                  if gp_short_names:
+                      latest_gp = gp_short_names[-1]
+                      pdf_url = f"https://resources.motogp.com/files/results/2026/{latest_gp}/{pdf_cat_name}/RAC/worldstanding.pdf"
+                      try:
+                          pdf_bytes = download_bytes(pdf_url)
+                          constructors, teams = parse_pdf_stats(pdf_bytes)
+                          if constructors:
+                              results[f"{cat_id}_constructors"] = constructors
+                              print(f"{cat_id}_constructors: {len(constructors)} costruttori estratti da {latest_gp}")
+                          if teams:
+                              results[f"{cat_id}_teams"] = teams
+                              print(f"{cat_id}_teams: {len(teams)} team estratti da {latest_gp}")
+                      except Exception as pe:
+                          print(f"Nota: impossibile scaricare/estrarre PDF {pdf_url}: {pe}")
+
               except Exception as e:
                   print(f"Errore {cat_id}: {e}")
 
