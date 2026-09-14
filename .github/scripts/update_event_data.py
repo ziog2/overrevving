@@ -70,13 +70,15 @@ def main():
         if not short or not ev_id: continue
 
         # Check if already populated with real data in STATIC_EVENT_DATA
-        marker = f'"{short}":'
-        if marker in html_content:
-            idx = html_content.find(marker)
-            sample = html_content[idx:idx+200]
-            if '"grid":  [' in sample and '"pos":' in sample:
-                print(f"Evento {short} già popolato con dati in event.html.")
-                continue
+        static_start = html_content.find('const STATIC_EVENT_DATA = {')
+        if static_start != -1:
+            marker = f'"{short}":'
+            idx = html_content.find(marker, static_start)
+            if idx != -1:
+                sample = html_content[idx:idx+1000]
+                if '"pos":' in sample:
+                    print(f"Evento {short} già popolato con dati in STATIC_EVENT_DATA.")
+                    continue
 
         print(f"Estrazione e popolamento evento {short} ({ev.get('name')})...")
 
@@ -145,15 +147,16 @@ def main():
         }
         static_json = json.dumps(static_obj, separators=(',', ':'))
 
-        empty_pattern = rf'"{short}":\s*\{{\s*"grid":\s*\[\s*\],\s*"race":\s*\{{[\s\S]*?"q1":\s*\{{[\s\S]*?\}}'
+        empty_pattern = rf'"{short}":\s*\{{\s*"grid":\s*\[\s*\],\s*"race":\s*\{{[\s\S]*?"q1":\s*\{{[\s\S]*?\}\s*\}}'
         if re.search(empty_pattern, html_content):
             html_content = re.sub(empty_pattern, f'"{short}": {static_json}', html_content)
             updated = True
             print(f"✓ Sostituito placeholder vuoto {short} in STATIC_EVENT_DATA!")
-        elif 'const STATIC_EVENT_DATA = {' in html_content:
-            html_content = html_content.replace(
+        elif static_start != -1 and html_content.find(f'"{short}":', static_start) == -1:
+            html_content = html_content[:static_start] + html_content[static_start:].replace(
                 'const STATIC_EVENT_DATA = {',
-                f'const STATIC_EVENT_DATA = {{\n    "{short}": {static_json},'
+                f'const STATIC_EVENT_DATA = {{\n    "{short}": {static_json},',
+                1
             )
             updated = True
             print(f"✓ Inserito {short} in STATIC_EVENT_DATA!")
