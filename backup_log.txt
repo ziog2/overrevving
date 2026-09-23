@@ -190,3 +190,23 @@ Commit Hash: 8fcc51f47b1b7d60a730967d26e23ca8ca7db8f4 Commit Date: Mon Aug 31 00
 Backup Timestamp:
 2026-08-31 00:41:15
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20260923_231408
+
+Note / Log Message:
+Versione stabile e aggiornata con:
+- Integrazione completa dei GP di San Marino (Round 14) e Austria (Round 15) in event.html: 9 sessioni complete (FP1, PR, FP2, Q1, Q2, Grid ufficiale 22 piloti, Sprint, WUP, Race), condizioni meteo, Lap Charts completi (SPR e RAC) e telemetria settori T1-T4 per tutti i piloti.
+- Automazione completa weekend MotoGP (.github/scripts/update_event_data.py e workflow GitHub Actions): esecuzione automatica sabato sera (Sprint, LapChart Sprint, Settori Sprint) e domenica sera (Warm Up, Gara, LapChart Gara, Settori Gara, Classifiche generali), con supporto orari asiatici ed europei/americani.
+- Aggiornamento condizioni meteo (SPR: Dry RACE: Dry) per San Marino e Austria nei calendari di motogp.html e category.html (con aggiornamento automatico dei badge anche per i prossimi GP).
+- Personalizzazione stile barra di scroll orizzontale (longitudinale) in index.html, perfettamente uniformata allo stile scuro/sottile delle colonne verticali.
+
+Git Commit Info:
+Commit Hash: c2341b42b4280baa847ecf7d07ebb5b661ce3aea Commit Date: Wed Sep 23 22:49:07 2026 Commit Message: Style horizontal scrollbar in index.html to match vertical column scrollbars
+
+Backup Timestamp:
+2026-09-23 23:14:08
+=====================================================
