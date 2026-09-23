@@ -112,6 +112,22 @@
     overflow-x: auto;
     padding: 0 16px 12px;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #444450 #252528;
+  }
+  .grid-wrapper::-webkit-scrollbar {
+    height: 8px;
+  }
+  .grid-wrapper::-webkit-scrollbar-track {
+    background: #252528;
+    border-radius: 4px;
+  }
+  .grid-wrapper::-webkit-scrollbar-thumb {
+    background: #444450;
+    border-radius: 4px;
+  }
+  .grid-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555565;
   }
   .grid {
     display: grid;
