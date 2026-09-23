@@ -147,7 +147,7 @@ def main():
         }
         static_json = json.dumps(static_obj, separators=(',', ':'))
 
-        empty_pattern = rf'"{short}":\s*\{{\s*"grid":\s*\[\s*\],\s*"race":\s*\{{[\s\S]*?"q1":\s*\{{[\s\S]*?\}\s*\}}'
+        empty_pattern = r'"' + short + r'":\s*\{\s*"grid":\s*\[\s*\],\s*"race":\s*\{[\s\S]*?"q1":\s*\{[\s\S]*?\}\s*\}'
         if re.search(empty_pattern, html_content):
             html_content = re.sub(empty_pattern, f'"{short}": {static_json}', html_content)
             updated = True
