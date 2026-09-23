@@ -523,6 +523,46 @@ def find_matching_object(text, search_key):
 
     return full_start, full_end, parsed
 
+SHORT_TO_CAL_NAME = {
+    'THA': 'Thailand', 'BRA': 'Brazil', 'USA': 'USA', 'SPA': 'Spain',
+    'FRA': 'France', 'CAT': 'Catalonia', 'ITA': 'Italy', 'HUN': 'Hungary',
+    'CZE': 'Czechia', 'NED': 'Netherlands', 'GER': 'Germany', 'GBR': 'Great Britain',
+    'ARA': 'Aragon', 'RSM': 'San Marino', 'AUT': 'Austria', 'JPN': 'Japan',
+    'INA': 'Indonesia', 'AUS': 'Australia', 'MAL': 'Malaysia', 'QAT': 'Qatar',
+    'POR': 'Portugal', 'VAL': 'Valencia'
+}
+
+def get_track_cond(sess):
+    if not sess:
+        return None
+    cond = sess.get('condition')
+    if isinstance(cond, dict):
+        track = cond.get('track', '')
+        if track:
+            return 'Wet' if 'wet' in str(track).lower() else 'Dry'
+    return 'Dry'
+
+def update_file_calendar_weather(file_path, cal_name, weather_str):
+    if not os.path.exists(file_path):
+        return
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    # Check if weather is already present with the desired string
+    if re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'{re.escape(weather_str)}'", content):
+        return
+
+    # If weather is already present with a partial string (e.g. SPR only), update it
+    if re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'[^']*'", content):
+        content = re.sub(rf"(name:\s*'{cal_name}'[^\}}]*weather:\s*)'[^']*'", rf"\1'{weather_str}'", content)
+    else:
+        # Append weather
+        content = re.sub(rf"(name:\s*'{cal_name}',\s*date:\s*'[^']+')(?!\s*,\s*weather:)(\s*\}})", rf"\1, weather: '{weather_str}'\2", content)
+
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"✓ Aggiornato meteo calendario per {cal_name} in {file_path}: {weather_str}")
+
 # --- MAIN AUTOMATION FUNCTION ---
 
 def main():
@@ -680,6 +720,24 @@ def main():
                         html_content = html_content[:idx_w_start] + new_w_slice + html_content[idx_w_end:]
                         updated = True
                         print(f"✓ Aggiornato meteo per {short} in SESSION_WEATHER_DATA!")
+
+        # Update calendar badges in category.html and motogp.html
+        cal_name = SHORT_TO_CAL_NAME.get(short)
+        if cal_name:
+            spr_cond = get_track_cond(spr_sess) if spr_sess else ('Dry' if spr else None)
+            rac_cond = get_track_cond(rac_sess) if rac_sess else ('Dry' if rac else None)
+            if spr_cond and rac_cond:
+                cal_badge = f"SPR: {spr_cond} RACE: {rac_cond}"
+            elif spr_cond:
+                cal_badge = f"SPR: {spr_cond}"
+            elif rac_cond:
+                cal_badge = f"RACE: {rac_cond}"
+            else:
+                cal_badge = None
+
+            if cal_badge:
+                update_file_calendar_weather("category.html", cal_name, cal_badge)
+                update_file_calendar_weather("motogp.html", cal_name, cal_badge)
 
         # 3. LAP CHARTS & SECTOR TELEMETRY
 
