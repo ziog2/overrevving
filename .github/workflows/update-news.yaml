@@ -1,0 +1,38 @@
+name: Aggiornamento Notizie Motorsport (Ogni Ora)
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Esecuzione automatica ogni ora
+  workflow_dispatch: {}  # Esecuzione manuale da interfaccia GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Estrai ultime notizie da feed RSS
+        run: |
+          python3 .github/scripts/fetch_news.py
+
+      - name: Commit e push automatico delle notizie
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/news.json js/news.js
+          if git diff --staged --quiet; then
+            echo "Nessuna nuova notizia da inviare."
+          else
+            git commit -m "Aggiornamento orario notizie motorsport [skip ci]"
+            git push origin main
+          fi
