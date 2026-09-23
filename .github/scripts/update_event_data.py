@@ -473,6 +473,56 @@ def extract_lap_chart_from_pdf(pdf_bytes):
 
     return {"totalLaps": num_laps, "riders": rider_positions}
 
+def find_matching_object(text, search_key):
+    """
+    Finds '"{search_key}": {' and returns (full_start, full_end, parsed_dict_or_raw)
+    using depth-balanced brace matching within `text`.
+    """
+    pattern = rf'"{search_key}"\s*:\s*\{{'
+    m = re.search(pattern, text)
+    if not m:
+        return None, None, None
+    full_start = m.start()
+    brace_start = text.find('{', full_start)
+
+    depth = 0
+    in_string = False
+    escape = False
+    full_end = None
+
+    for i in range(brace_start, len(text)):
+        ch = text[i]
+        if escape:
+            escape = False
+            continue
+        if ch == '\\':
+            if in_string:
+                escape = True
+            continue
+        if ch == '"':
+            in_string = not in_string
+            continue
+        if not in_string:
+            if ch == '{':
+                depth += 1
+            elif ch == '}':
+                depth -= 1
+                if depth == 0:
+                    full_end = i + 1
+                    break
+
+    if full_end is None:
+        return None, None, None
+
+    json_str = text[brace_start:full_end]
+    parsed = None
+    try:
+        parsed = json.loads(json_str)
+    except Exception:
+        pass
+
+    return full_start, full_end, parsed
+
 # --- MAIN AUTOMATION FUNCTION ---
 
 def main():
@@ -483,6 +533,8 @@ def main():
 
     with open(event_html_path, "r", encoding="utf-8") as f:
         html_content = f.read()
+
+    orig_len = len(html_content)
 
     events_url = f"https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid={SEASON_2026}&categoryUuid={CAT_MOTOGP}"
     try:
@@ -553,90 +605,111 @@ def main():
                     grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
                     p += 1
 
-        # Check existing STATIC_EVENT_DATA entry
-        static_start = html_content.find('const STATIC_EVENT_DATA = {')
-        has_real_race_data = False
-        has_real_spr_data = False
+        # 1. Update STATIC_EVENT_DATA using bounded brace matching
+        idx_s_start = html_content.find('const STATIC_EVENT_DATA = {')
+        idx_s_end = html_content.find('function getQueryParams()', idx_s_start) if idx_s_start != -1 else -1
 
-        if static_start != -1:
-            idx = html_content.find(f'"{short}":', static_start)
-            if idx != -1:
-                sample = html_content[idx:idx+2500]
-                if '"race":' in sample and '"pos":' in sample:
-                    has_real_race_data = True
-                if '"sprint":' in sample and '"pos":' in sample:
-                    has_real_spr_data = True
+        if idx_s_start != -1 and idx_s_end != -1:
+            s_slice = html_content[idx_s_start:idx_s_end]
+            s_start, s_end, s_parsed = find_matching_object(s_slice, short)
 
-        # Determine if session updates are needed
-        needs_session_update = False
-        if not has_real_race_data and (rac or spr):
-            needs_session_update = True
-        elif not has_real_spr_data and spr:
-            needs_session_update = True
+            if s_start is not None and s_end is not None:
+                has_race = False
+                has_spr = False
+                if isinstance(s_parsed, dict):
+                    has_race = bool(s_parsed.get("race") and isinstance(s_parsed["race"], list) and len(s_parsed["race"]) > 0)
+                    has_spr = bool(s_parsed.get("sprint") and isinstance(s_parsed["sprint"], list) and len(s_parsed["sprint"]) > 0)
 
-        if needs_session_update:
-            static_obj = {
-                "fp1": fp1, "pr": pr, "fp2": fp2, "q1": q1, "q2": q2,
-                "grid": grid, "sprint": spr, "wup": wup, "race": rac
-            }
-            static_json = json.dumps(static_obj, separators=(',', ':'))
+                needs_update = False
+                if not has_race and rac:
+                    needs_update = True
+                elif not has_spr and spr:
+                    needs_update = True
 
-            empty_pattern = r'"' + short + r'":\s*\{\s*"grid":\s*\[\s*\],\s*"race":\s*\{[\s\S]*?"q1":\s*\{[\s\S]*?\}\s*\}'
-            if re.search(empty_pattern, html_content):
-                html_content = re.sub(empty_pattern, f'"{short}": {static_json}', html_content)
-                updated = True
-                print(f"✓ Popolato {short} in STATIC_EVENT_DATA!")
-            else:
-                # Replace existing block if updating Sunday race data after Saturday sprint
-                existing_m = re.search(rf'"{short}":\s*\{{[\s\S]*?"q1":\s*\[[\s\S]*?\]\s*\}}', html_content)
-                if existing_m:
-                    html_content = html_content[:existing_m.start()] + f'"{short}": {static_json}' + html_content[existing_m.end():]
+                if needs_update:
+                    existing = s_parsed if isinstance(s_parsed, dict) else {}
+                    static_obj = {
+                        "fp1": fp1 if fp1 else (existing.get("fp1") if isinstance(existing.get("fp1"), list) else []),
+                        "pr": pr if pr else (existing.get("pr") if isinstance(existing.get("pr"), list) else []),
+                        "fp2": fp2 if fp2 else (existing.get("fp2") if isinstance(existing.get("fp2"), list) else []),
+                        "q1": q1 if q1 else (existing.get("q1") if isinstance(existing.get("q1"), list) else []),
+                        "q2": q2 if q2 else (existing.get("q2") if isinstance(existing.get("q2"), list) else []),
+                        "grid": grid if grid else (existing.get("grid") if isinstance(existing.get("grid"), list) else []),
+                        "sprint": spr if spr else (existing.get("sprint") if isinstance(existing.get("sprint"), list) else []),
+                        "wup": wup if wup else (existing.get("wup") if isinstance(existing.get("wup"), list) else []),
+                        "race": rac if rac else (existing.get("race") if isinstance(existing.get("race"), list) else [])
+                    }
+                    static_json = json.dumps(static_obj, separators=(',', ':'))
+                    new_s_entry = f'"{short}": {static_json}'
+                    new_s_slice = s_slice[:s_start] + new_s_entry + s_slice[s_end:]
+                    html_content = html_content[:idx_s_start] + new_s_slice + html_content[idx_s_end:]
                     updated = True
-                    print(f"✓ Aggiornato blocco {short} in STATIC_EVENT_DATA (Gara Domenica)!")
+                    label = "Gara Domenica" if rac else ("Sprint Sabato" if spr else "Qualifiche")
+                    print(f"✓ Aggiornato blocco {short} in STATIC_EVENT_DATA ({label})!")
 
-        # Weather updates
-        weather_obj = {
-            "grid": format_cond(rac_sess or q2_sess),
-            "race": format_cond(rac_sess),
-            "sprint": format_cond(spr_sess),
-            "fp1": format_cond(fp_sess[0] if len(fp_sess) >= 1 else None),
-            "fp2": format_cond(fp_sess[1] if len(fp_sess) >= 2 else None),
-            "wup": format_cond(wup_sess),
-            "pr": format_cond(pr_sess),
-            "q2": format_cond(q2_sess),
-            "q1": format_cond(q1_sess)
-        }
-        weather_json = json.dumps(weather_obj, separators=(',', ':'))
-        w_pattern = rf'"{short}":\s*\{{[\s\S]*?"q1":\s*"[^"]*"\s*\}}'
-        if re.search(w_pattern, html_content):
-            html_content = re.sub(w_pattern, f'"{short}": {weather_json}', html_content)
-            updated = True
-            print(f"✓ Aggiornato meteo per {short} in SESSION_WEATHER_DATA!")
+        # 2. Update SESSION_WEATHER_DATA using bounded brace matching
+        idx_w_start = html_content.find('const SESSION_WEATHER_DATA = {')
+        idx_w_end = html_content.find('const STATIC_EVENT_DATA =', idx_w_start) if idx_w_start != -1 else -1
 
-        # --- LAP CHARTS & SECTOR TELEMETRY ---
+        if idx_w_start != -1 and idx_w_end != -1:
+            w_slice = html_content[idx_w_start:idx_w_end]
+            w_start, w_end, w_parsed = find_matching_object(w_slice, short)
 
-        # 1. SPRINT (Available Saturday evening)
+            if w_start is not None and w_end is not None:
+                weather_obj = {
+                    "grid": format_cond(rac_sess or q2_sess),
+                    "race": format_cond(rac_sess),
+                    "sprint": format_cond(spr_sess),
+                    "fp1": format_cond(fp_sess[0] if len(fp_sess) >= 1 else None),
+                    "fp2": format_cond(fp_sess[1] if len(fp_sess) >= 2 else None),
+                    "wup": format_cond(wup_sess),
+                    "pr": format_cond(pr_sess),
+                    "q2": format_cond(q2_sess),
+                    "q1": format_cond(q1_sess)
+                }
+                has_w = any(isinstance(v, str) and ('°C' in v or 'Wet' in v) for v in weather_obj.values())
+                if has_w:
+                    merged_w = dict(w_parsed) if isinstance(w_parsed, dict) else weather_obj
+                    for k, v in weather_obj.items():
+                        if '°C' in v or 'Wet' in v:
+                            merged_w[k] = v
+                    if merged_w != w_parsed:
+                        merged_w_json = json.dumps(merged_w, separators=(',', ':'))
+                        new_w_entry = f'"{short}": {merged_w_json}'
+                        new_w_slice = w_slice[:w_start] + new_w_entry + w_slice[w_end:]
+                        html_content = html_content[:idx_w_start] + new_w_slice + html_content[idx_w_end:]
+                        updated = True
+                        print(f"✓ Aggiornato meteo per {short} in SESSION_WEATHER_DATA!")
+
+        # 3. LAP CHARTS & SECTOR TELEMETRY
+
+        # 3.1 SPRINT (Available Saturday evening)
         if spr:
             idx_spr_charts = html_content.find('const EVENT_LAP_CHARTS_DATA =')
-            spr_chart_present = (f'"{short}":' in html_content[idx_spr_charts:html_content.find('"RAC":', idx_spr_charts)]) if idx_spr_charts != -1 else False
+            idx_rac_in_charts = html_content.find('"RAC":', idx_spr_charts) if idx_spr_charts != -1 else -1
+            spr_chart_present = (f'"{short}":' in html_content[idx_spr_charts:idx_rac_in_charts]) if idx_rac_in_charts != -1 else False
 
             if not spr_chart_present:
                 spr_lap_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/SPR/LapChart.pdf"
-                spr_ana_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/SPR/Analysis.pdf"
-                
                 spr_lap_bytes = download_bytes(spr_lap_pdf_url)
                 if spr_lap_bytes:
                     print(f"  Estrazione LapChart Sprint per {short}...")
                     spr_lap_data = extract_lap_chart_from_pdf(spr_lap_bytes)
                     if spr_lap_data and spr_lap_data.get("riders"):
                         spr_lap_json = json.dumps(spr_lap_data, separators=(',', ':'))
-                        m_spr_c = re.search(r'"SPR":\s*\{', html_content)
+                        m_spr_c = re.search(r'"SPR":\s*\{', html_content[idx_spr_charts:idx_rac_in_charts])
                         if m_spr_c:
-                            pos = m_spr_c.end()
+                            pos = idx_spr_charts + m_spr_c.end()
                             html_content = html_content[:pos] + f'\n        "{short}": ' + spr_lap_json + ',' + html_content[pos:]
                             updated = True
                             print(f"  ✓ Inserito LapChart Sprint {short} ({spr_lap_data['totalLaps']} giri)!")
 
+            idx_spr_sec_start = html_content.find('const EVENT_SPR_LAPS_DATA =')
+            idx_rac_sec_start = html_content.find('const EVENT_LAPS_DATA =')
+            spr_sec_present = (f'"{short}":' in html_content[idx_spr_sec_start:idx_rac_sec_start]) if (idx_spr_sec_start != -1 and idx_rac_sec_start != -1) else False
+
+            if not spr_sec_present:
+                spr_ana_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/SPR/Analysis.pdf"
                 spr_ana_bytes = download_bytes(spr_ana_pdf_url)
                 if spr_ana_bytes:
                     print(f"  Estrazione Settori Sprint per {short}...")
@@ -650,28 +723,32 @@ def main():
                             updated = True
                             print(f"  ✓ Inseriti Settori Sprint {short} ({len(spr_sectors_data)} piloti)!")
 
-        # 2. MAIN RACE (Available Sunday evening)
+        # 3.2 MAIN RACE (Available Sunday evening)
         if rac:
             idx_rac_charts = html_content.find('"RAC":')
-            rac_chart_present = (f'"{short}":' in html_content[idx_rac_charts:html_content.find('const EVENT_SPR_LAPS_DATA', idx_rac_charts)]) if idx_rac_charts != -1 else False
+            idx_spr_sec = html_content.find('const EVENT_SPR_LAPS_DATA =', idx_rac_charts) if idx_rac_charts != -1 else -1
+            rac_chart_present = (f'"{short}":' in html_content[idx_rac_charts:idx_spr_sec]) if idx_spr_sec != -1 else False
 
             if not rac_chart_present:
                 rac_lap_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/RAC/LapChart.pdf"
-                rac_ana_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/RAC/Analysis.pdf"
-
                 rac_lap_bytes = download_bytes(rac_lap_pdf_url)
                 if rac_lap_bytes:
                     print(f"  Estrazione LapChart Gara per {short}...")
                     rac_lap_data = extract_lap_chart_from_pdf(rac_lap_bytes)
                     if rac_lap_data and rac_lap_data.get("riders"):
                         rac_lap_json = json.dumps(rac_lap_data, separators=(',', ':'))
-                        m_rac_c = re.search(r'"RAC":\s*\{', html_content)
+                        m_rac_c = re.search(r'"RAC":\s*\{', html_content[idx_rac_charts:idx_spr_sec])
                         if m_rac_c:
-                            pos = m_rac_c.end()
+                            pos = idx_rac_charts + m_rac_c.end()
                             html_content = html_content[:pos] + f'\n        "{short}": ' + rac_lap_json + ',' + html_content[pos:]
                             updated = True
                             print(f"  ✓ Inserito LapChart Gara {short} ({rac_lap_data['totalLaps']} giri)!")
 
+            idx_rac_sec = html_content.find('const EVENT_LAPS_DATA =')
+            rac_sec_present = (f'"{short}":' in html_content[idx_rac_sec:]) if idx_rac_sec != -1 else False
+
+            if not rac_sec_present:
+                rac_ana_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/RAC/Analysis.pdf"
                 rac_ana_bytes = download_bytes(rac_ana_pdf_url)
                 if rac_ana_bytes:
                     print(f"  Estrazione Settori Gara per {short}...")
@@ -686,9 +763,16 @@ def main():
                             print(f"  ✓ Inseriti Settori Gara {short} ({len(rac_sectors_data)} piloti)!")
 
     if updated:
+        # Integrity verification before writing
+        if len(html_content) < orig_len * 0.95:
+            raise RuntimeError(f"ABORT: html_content shrunk suspiciously from {orig_len} to {len(html_content)}")
+        for req_tag in ("const SESSION_WEATHER_DATA =", "const STATIC_EVENT_DATA =", "const EVENT_LAP_CHARTS_DATA =", "const EVENT_SPR_LAPS_DATA =", "const EVENT_LAPS_DATA =", "function initEventPage()"):
+            if req_tag not in html_content:
+                raise RuntimeError(f"ABORT: Missing required section '{req_tag}' in html_content")
+
         with open(event_html_path, "w", encoding="utf-8") as f:
             f.write(html_content)
-        print("\n✓ event.html aggiornato con successo!")
+        print("\n✓ event.html aggiornato e validato con successo!")
     else:
         print("\nNessun nuovo dato da aggiornare in event.html.")
 
