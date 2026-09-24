@@ -266,6 +266,14 @@
     justify-content: space-between;
     margin-bottom: 14px;
     padding: 0 4px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .news-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
   }
   .news-section-title {
     font-size: 15px;
@@ -284,6 +292,17 @@
     height: 16px;
     background: #e10600;
     border-radius: 2px;
+  }
+  .news-last-updated {
+    font-size: 11px;
+    color: #888;
+    background: #252528;
+    border: 1px solid #3a3a42;
+    padding: 3px 8px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
   }
   .news-badge-count {
     font-size: 11px;
@@ -489,7 +508,13 @@
 <!-- News Section -->
 <section class="news-section" id="news-section">
   <div class="news-header-container">
-    <div class="news-section-title">Ultime Notizie Motorsport</div>
+    <div class="news-header-left">
+      <div class="news-section-title">Last Motorsport News</div>
+      <div class="news-last-updated" id="news-last-updated">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.7"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span id="news-last-updated-text">Last update: ...</span>
+      </div>
+    </div>
     <div class="news-badge-count" id="news-count">Aggiornate ogni ora</div>
   </div>
   <div class="news-grid-container" id="news-grid">
@@ -1010,6 +1035,46 @@ function getNewsCategoryClass(cat) {
   return 'cat-default';
 }
 
+let newsLastUpdated = '';
+
+function formatLastUpdated(raw) {
+  if (!raw) return '';
+  try {
+    const m = String(raw).trim().match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})(?::(\d{2}))?/);
+    if (m) {
+      const [, y, mo, d, h, mi] = m;
+      return `${d}/${mo}/${y} ${h}:${mi}`;
+    }
+    const d = new Date(raw);
+    if (!isNaN(d.getTime())) {
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      const hours = String(d.getHours()).padStart(2, '0');
+      const minutes = String(d.getMinutes()).padStart(2, '0');
+      return `${day}/${month}/${year} ${hours}:${minutes}`;
+    }
+  } catch(e) {}
+  return String(raw);
+}
+
+function updateNewsLastUpdatedUI() {
+  const updatedEl = document.getElementById('news-last-updated-text');
+  if (!updatedEl) return;
+  if (newsLastUpdated) {
+    updatedEl.textContent = 'Last update: ' + formatLastUpdated(newsLastUpdated);
+  } else if (allNewsItems && allNewsItems.length > 0) {
+    const top = allNewsItems.find(i => {
+      const d = i.pubDateISO || i.pubDate;
+      return d && !d.startsWith('0001');
+    });
+    if (top) {
+      const topDate = top.pubDateISO || top.pubDate;
+      updatedEl.textContent = 'Last update: ' + formatLastUpdated(topDate);
+    }
+  }
+}
+
 function renderNews() {
   const container = document.getElementById('news-grid');
   const countEl = document.getElementById('news-count');
@@ -1102,23 +1167,35 @@ function renderNews() {
   });
 
   container.innerHTML = html;
+  updateNewsLastUpdatedUI();
 }
 
 async function initNews() {
-  if (window.NEWS_DATA && Array.isArray(window.NEWS_DATA.items)) {
-    allNewsItems = window.NEWS_DATA.items;
+  if (window.NEWS_DATA) {
+    if (Array.isArray(window.NEWS_DATA.items)) {
+      allNewsItems = window.NEWS_DATA.items;
+    }
+    if (window.NEWS_DATA.lastUpdated) {
+      newsLastUpdated = window.NEWS_DATA.lastUpdated;
+    }
   }
   try {
     const res = await fetch('data/news.json?t=' + Date.now());
     if (res.ok) {
       const data = await res.json();
-      if (data && Array.isArray(data.items)) {
-        allNewsItems = data.items;
+      if (data) {
+        if (Array.isArray(data.items)) {
+          allNewsItems = data.items;
+        }
+        if (data.lastUpdated) {
+          newsLastUpdated = data.lastUpdated;
+        }
       }
     }
   } catch(e) {
     // offline o fallback su window.NEWS_DATA
   }
+  updateNewsLastUpdatedUI();
   renderNews();
 }
 
