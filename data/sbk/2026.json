@@ -1,0 +1,253 @@
+﻿{
+    "calendar":  [
+                     {
+                         "date":  "2026-02-22",
+                         "round":  1,
+                         "name":  "Australia"
+                     },
+                     {
+                         "date":  "2026-03-29",
+                         "round":  2,
+                         "name":  "Portugal"
+                     },
+                     {
+                         "date":  "2026-04-19",
+                         "round":  3,
+                         "name":  "Netherlands"
+                     },
+                     {
+                         "date":  "2026-05-03",
+                         "round":  4,
+                         "name":  "Hungary"
+                     },
+                     {
+                         "date":  "2026-05-17",
+                         "round":  5,
+                         "name":  "Most"
+                     },
+                     {
+                         "date":  "2026-05-31",
+                         "round":  6,
+                         "name":  "Aragon"
+                     },
+                     {
+                         "date":  "2026-06-14",
+                         "round":  7,
+                         "name":  "Misano"
+                     },
+                     {
+                         "date":  "2026-07-12",
+                         "round":  8,
+                         "name":  "Donington"
+                     },
+                     {
+                         "date":  "2026-09-27",
+                         "round":  9,
+                         "name":  "Magny-Cours"
+                     },
+                     {
+                         "date":  "2026-10-11",
+                         "round":  10,
+                         "name":  "Cremona"
+                     },
+                     {
+                         "date":  "2026-10-18",
+                         "round":  11,
+                         "name":  "Estoril"
+                     },
+                     {
+                         "date":  "2026-10-18",
+                         "round":  12,
+                         "name":  "Jerez"
+                     }
+                 ],
+    "teams":  [
+                  {
+                      "name":  "Aruba.it Racing - Ducati",
+                      "pts":  25
+                  },
+                  {
+                      "name":  "Barni Spark Racing Team",
+                      "pts":  20
+                  },
+                  {
+                      "name":  "Team Goeleven",
+                      "pts":  16
+                  },
+                  {
+                      "name":  "ELF Marc VDS Racing Team",
+                      "pts":  11
+                  },
+                  {
+                      "name":  "bimota by Kawasaki Racing Team",
+                      "pts":  9
+                  },
+                  {
+                      "name":  "ROKiT BMW Motorrad WorldSBK Team",
+                      "pts":  8
+                  },
+                  {
+                      "name":  "Motocorsa Racing",
+                      "pts":  7
+                  },
+                  {
+                      "name":  "Kawasaki WorldSBK Team",
+                      "pts":  5
+                  },
+                  {
+                      "name":  "MGM Optical Express Racing",
+                      "pts":  4
+                  },
+                  {
+                      "name":  "Pata Maxus Yamaha",
+                      "pts":  3
+                  },
+                  {
+                      "name":  "GYTR GRT Yamaha WorldSBK Team",
+                      "pts":  3
+                  },
+                  {
+                      "name":  "Superbike Advocates",
+                      "pts":  3
+                  },
+                  {
+                      "name":  "Honda HRC",
+                      "pts":  1
+                  },
+                  {
+                      "name":  "Motoxracing WorldSBK Team",
+                      "pts":  1
+                  }
+              ],
+    "constructors":  [
+                         {
+                             "name":  "DUCATI",
+                             "pts":  496
+                         },
+                         {
+                             "name":  "BIMOTA",
+                             "pts":  220
+                         },
+                         {
+                             "name":  "BMW",
+                             "pts":  136
+                         },
+                         {
+                             "name":  "YAMAHA",
+                             "pts":  131
+                         },
+                         {
+                             "name":  "KAWASAKI",
+                             "pts":  110
+                         },
+                         {
+                             "name":  "HONDA",
+                             "pts":  20
+                         }
+                     ],
+    "lastUpdated":  "2026-10-04 22:39:35 · Auto (Domenica)",
+    "riders":  [
+                   {
+                       "name":  "Nicolo BULEGA",
+                       "pts":  491
+                   },
+                   {
+                       "name":  "Iker LECUONA",
+                       "pts":  358
+                   },
+                   {
+                       "name":  "Yari MONTELLA",
+                       "pts":  211
+                   },
+                   {
+                       "name":  "Alex LOWES",
+                       "pts":  182
+                   },
+                   {
+                       "name":  "Sam LOWES",
+                       "pts":  177
+                   },
+                   {
+                       "name":  "Axel BASSANI",
+                       "pts":  153
+                   },
+                   {
+                       "name":  "Lorenzo BALDASSARRI",
+                       "pts":  145
+                   },
+                   {
+                       "name":  "Garrett GERLOFF",
+                       "pts":  110
+                   },
+                   {
+                       "name":  "Alvaro BAUTISTA",
+                       "pts":  107
+                   },
+                   {
+                       "name":  "Miguel OLIVEIRA",
+                       "pts":  106
+                   },
+                   {
+                       "name":  "Andrea LOCATELLI",
+                       "pts":  99
+                   },
+                   {
+                       "name":  "Alberto SURRA",
+                       "pts":  95
+                   },
+                   {
+                       "name":  "Tarran MACKENZIE",
+                       "pts":  81
+                   },
+                   {
+                       "name":  "Xavi VIERGE",
+                       "pts":  80
+                   },
+                   {
+                       "name":  "Thomas BRIDEWELL",
+                       "pts":  59
+                   },
+                   {
+                       "name":  "Danilo PETRUCCI",
+                       "pts":  48
+                   },
+                   {
+                       "name":  "Remy GARDNER",
+                       "pts":  45
+                   },
+                   {
+                       "name":  "Stefano MANZI",
+                       "pts":  34
+                   },
+                   {
+                       "name":  "Michael VAN DER MARK",
+                       "pts":  23
+                   },
+                   {
+                       "name":  "Somkiat CHANTRA",
+                       "pts":  8
+                   },
+                   {
+                       "name":  "Tetsuta NAGASHIMA",
+                       "pts":  7
+                   },
+                   {
+                       "name":  "Jonathan REA",
+                       "pts":  6
+                   },
+                   {
+                       "name":  "Bahattin SOFUOGLU",
+                       "pts":  4
+                   },
+                   {
+                       "name":  "Mattia RATO",
+                       "pts":  2
+                   },
+                   {
+                       "name":  "Ryan VICKERS",
+                       "pts":  1
+                   }
+               ],
+    "category":  "sbk",
+    "season":  2026
+}

@@ -650,18 +650,26 @@ async function init() {
 
 async function loadRidersFromBin() {
   try {
-    const res = await fetch(BIN_URL, { headers: { 'X-Access-Key': API_KEY } });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const json = await res.json();
-    const riders = json.record[catId] || [];
+    let record;
+    try {
+      const res = await fetch('data/standings_latest.json?t=' + Date.now());
+      if (!res.ok) throw new Error('Local file fetch error');
+      record = await res.json();
+    } catch (localErr) {
+      const res = await fetch(BIN_URL, { headers: { 'X-Access-Key': API_KEY } });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const json = await res.json();
+      record = json.record;
+    }
+    const riders = record[catId] || [];
     currentRiders = riders;
 
     renderRidersTable(riders);
 
-    const constructors = json.record[catId + '_constructors'] || [];
+    const constructors = record[catId + '_constructors'] || [];
     renderConstructorsTable(constructors);
 
-    const teams = json.record[catId + '_teams'] || [];
+    const teams = record[catId + '_teams'] || [];
     renderTeamsTable(teams);
 
     try {
@@ -670,7 +678,7 @@ async function loadRidersFromBin() {
       console.warn('Progression chart render warning:', chartErr);
     }
 
-    const ts = json.record['_updated'];
+    const ts = record['_updated'];
     document.getElementById('hero-meta').innerHTML = ts
       ? `<span>Last updated: <strong>${ts}</strong></span>`
       : '';

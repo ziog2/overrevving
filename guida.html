@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overrevving - Enciclopedia Tecnica e Manuale Operativo</title>
+<style>
+  /* Wikipedia / MediaWiki Vector Skin Recreation */
+  body {
+    background-color: #f6f6f6;
+    color: #202122;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Liberation Sans", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Top Navigation Bar */
+  .wiki-top-nav {
+    background: #ffffff;
+    border-bottom: 1px solid #a7d7f9;
+    padding: 10px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .wiki-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    color: #000;
+  }
+  .wiki-logo-icon {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    border: 1px solid #a2a9b1;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+  }
+  .wiki-nav-links a {
+    color: #0645ad;
+    text-decoration: none;
+    margin-left: 18px;
+    font-weight: 500;
+  }
+  .wiki-nav-links a:hover {
+    text-decoration: underline;
+  }
+
+  /* Container */
+  .wiki-container {
+    max-width: 1140px;
+    margin: 24px auto 60px;
+    background: #ffffff;
+    border: 1px solid #a7d7f9;
+    padding: 36px 44px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  /* Headings */
+  h1.firstHeading {
+    font-family: 'Linux Libertine', Georgia, Times, serif;
+    font-size: 30px;
+    font-weight: normal;
+    border-bottom: 1px solid #a2a9b1;
+    margin-top: 0;
+    margin-bottom: 4px;
+    padding-bottom: 6px;
+    color: #000;
+  }
+  .siteSub {
+    font-size: 12.5px;
+    color: #54595d;
+    margin-bottom: 18px;
+  }
+
+  h2 {
+    font-family: 'Linux Libertine', Georgia, Times, serif;
+    font-size: 22px;
+    font-weight: normal;
+    border-bottom: 1px solid #a2a9b1;
+    margin-top: 40px;
+    margin-bottom: 14px;
+    padding-bottom: 4px;
+    color: #000;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 26px;
+    margin-bottom: 10px;
+    color: #111;
+  }
+  h4 {
+    font-size: 14.5px;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  /* Links */
+  a {
+    color: #0645ad;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  a:visited {
+    color: #0b0080;
+  }
+
+  /* Infobox */
+  .infobox {
+    float: right;
+    clear: right;
+    margin: 0 0 1.2em 1.6em;
+    background: #f8f9fa;
+    border: 1px solid #a2a9b1;
+    padding: 6px;
+    width: 320px;
+    font-size: 12.5px;
+    border-collapse: collapse;
+  }
+  .infobox th, .infobox td {
+    padding: 6px 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #eaecf0;
+  }
+  .infobox-title {
+    background: #b0c4de;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px 6px;
+    border: none;
+    letter-spacing: 0.03em;
+  }
+  .infobox-image {
+    text-align: center;
+    padding: 12px;
+    background: #ffffff;
+  }
+  .infobox-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  .infobox-caption {
+    font-size: 11px;
+    color: #54595d;
+    text-align: center;
+    padding-top: 6px;
+  }
+  .infobox-header {
+    background: #e2e8f0;
+    font-weight: bold;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Table of Contents */
+  .toc {
+    background-color: #f8f9fa;
+    border: 1px solid #a2a9b1;
+    padding: 16px 22px;
+    font-size: 13px;
+    margin: 24px 0 32px;
+    display: inline-block;
+    min-width: 340px;
+    max-width: 780px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .toctitle {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  .toctoggle {
+    font-size: 11px;
+    color: #0645ad;
+    cursor: pointer;
+    font-weight: normal;
+  }
+  .toc ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+  }
+  .toc ul ul {
+    padding-left: 24px;
+  }
+  .toc li {
+    margin: 5px 0;
+  }
+  .tocnumber {
+    color: #202122;
+    margin-right: 6px;
+    font-weight: 500;
+  }
+
+  /* Wikipedia-style tables (wikitable) */
+  table.wikitable {
+    background-color: #ffffff;
+    color: #202122;
+    margin: 1.2em 0;
+    border: 1px solid #a2a9b1;
+    border-collapse: collapse;
+    font-size: 13px;
+    width: 100%;
+  }
+  table.wikitable th, table.wikitable td {
+    border: 1px solid #a2a9b1;
+    padding: 7px 10px;
+    vertical-align: middle;
+  }
+  table.wikitable th {
+    background-color: #eaecf0;
+    text-align: left;
+    font-weight: 600;
+  }
+  table.wikitable tr:hover {
+    background-color: #f8f9fa;
+  }
+
+  /* Code and Pre */
+  code {
+    background: #f8f9fa;
+    border: 1px solid #eaecf0;
+    padding: 2px 6px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12.5px;
+    border-radius: 3px;
+    color: #a01c1c;
+  }
+  pre {
+    background: #f8f9fa;
+    border: 1px solid #c8ccd1;
+    border-left: 4px solid #3d6bbd;
+    padding: 12px 16px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12.5px;
+    line-height: 1.5;
+    overflow-x: auto;
+    border-radius: 3px;
+  }
+  pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #202122;
+  }
+
+  /* Callout Boxes (Wikipedia Notes) */
+  .wiki-box {
+    margin: 18px 0;
+    padding: 12px 18px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  .wiki-box-info {
+    background: #eaf3ff;
+    border: 1px solid #b8d5f8;
+    border-left: 5px solid #3366cc;
+  }
+  .wiki-box-warning {
+    background: #fef6e7;
+    border: 1px solid #f6d89e;
+    border-left: 5px solid #d37a15;
+  }
+  .wiki-box-success {
+    background: #eef8ee;
+    border: 1px solid #bce1bc;
+    border-left: 5px solid #2e852e;
+  }
+
+  /* Tag Badges */
+  .badge {
+    display: inline-block;
+    padding: 2px 7px;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #fff;
+    vertical-align: middle;
+  }
+  .badge-motogp { background: #c0392b; }
+  .badge-moto2  { background: #e67e22; }
+  .badge-moto3  { background: #27ae60; }
+  .badge-sbk    { background: #2980b9; }
+  .badge-mxgp   { background: #ff6b00; }
+  .badge-mx2    { background: #f0a500; color: #111; }
+  .badge-f1     { background: #e10600; }
+
+  /* Clearfix */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  /* Footer */
+  .wiki-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #a2a9b1;
+    font-size: 12px;
+    color: #54595d;
+    line-height: 1.7;
+  }
+
+  .top-jump {
+    float: right;
+    font-size: 12px;
+    font-weight: normal;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header navigazione stile Wikipedia -->
+<div class="wiki-top-nav">
+  <div class="wiki-logo-area">
+    <div class="wiki-logo-icon">W</div>
+    <div>
+      <span style="font-size: 16px; letter-spacing: -0.5px;">WIKIPEDIA</span><br>
+      <span style="font-size: 10px; color: #54595d; text-transform: uppercase;">Enciclopedia della Documentazione Tecnica</span>
+    </div>
+  </div>
+  <div class="wiki-nav-links">
+    <a href="index.html">← Apri Sito Overrevving</a>
+    <a href="admin.html">Pannello Admin</a>
+    <a href="#toc">Indice Generale</a>
+  </div>
+</div>
+
+<div class="wiki-container clearfix">
+
+  <h1 class="firstHeading">Overrevving — Manuale di Architettura e Funzionamento</h1>
+  <div class="siteSub">Voce tecnica ufficiale · Ultima revisione: Stagione Mondiale 2026.</div>
+
+  <!-- Infobox Wikipedia a destra -->
+  <table class="infobox">
+    <tr>
+      <th colspan="2" class="infobox-title">Overrevving — Motorsport Standings 2026</th>
+    </tr>
+    <tr>
+      <td colspan="2" class="infobox-image">
+        <img src="logo.png" alt="Overrevving Logo">
+        <div class="infobox-caption">Logo ufficiale del portale Overrevving</div>
+      </td>
+    </tr>
+    <tr>
+      <th colspan="2" class="infobox-header">Informazioni Generali</th>
+    </tr>
+    <tr>
+      <th scope="row">Nome portale</th>
+      <td>Overrevving / Motorsport Standings 2026</td>
+    </tr>
+    <tr>
+      <th scope="row">Dominio di produzione</th>
+      <td><a href="https://overrevving.it" target="_blank">overrevving.it</a> (CNAME GitHub Pages)</td>
+    </tr>
+    <tr>
+      <th scope="row">Discipline monitorate</th>
+      <td>7 (MotoGP, Moto2, Moto3, SBK, MXGP, MX2, Formula 1)</td>
+    </tr>
+    <tr>
+      <th scope="row">Autore / Brand</th>
+      <td>Andrea Galassi (<a href="https://www.instagram.com/ziog.2/" target="_blank">@ziog.2</a>) / Overrevving Etsy Shop</td>
+    </tr>
+    <tr>
+      <th colspan="2" class="infobox-header">Architettura Software</th>
+    </tr>
+    <tr>
+      <th scope="row">Paradigma</th>
+      <td>Jamstack / Single Page Application (Serverless)</td>
+    </tr>
+    <tr>
+      <th scope="row">Frontend Stack</th>
+      <td>HTML5 semantico, CSS3 Grid/Flexbox moderno, Vanilla JS (ES6+)</td>
+    </tr>
+    <tr>
+      <th scope="row">Librerie integrate</th>
+      <td><a href="https://github.com/SortableJS/Sortable" target="_blank">SortableJS 1.15.2</a> (Drag & Drop), <a href="https://mozilla.github.io/pdf.js/" target="_blank">PDF.js 3.11.174</a> (Parser OCR-less)</td>
+    </tr>
+    <tr>
+      <th scope="row">Database / Storage</th>
+      <td><a href="https://jsonbin.io" target="_blank">JSONBin.io</a> (Bin REST cloud JSON con chiave di sicurezza)</td>
+    </tr>
+    <tr>
+      <th scope="row">Orchestratore Backend</th>
+      <td>GitHub Actions (Runner Ubuntu, script Python 3 automatico via Cron)</td>
+    </tr>
+    <tr>
+      <th scope="row">Persistenza Client</th>
+      <td>Web Storage API (<code>localStorage</code> per ordinamento colonne e preferiti)</td>
+    </tr>
+    <tr>
+      <th scope="row">Analytics</th>
+      <td>Hits.sh (tracciamento visite tramite badge SVG)</td>
+    </tr>
+  </table>
+
+  <!-- Introduzione della voce -->
+  <p>
+    <strong>Overrevving</strong> è una piattaforma web specializzata nel tracciamento in tempo reale delle classifiche mondiali dei principali sport motoristici su due e quattro ruote per la stagione agonistica 2026. Il progetto nasce per offrire agli appassionati una visualizzazione unificata, priva di pubblicità invasive, ultra-veloce e interattiva, capace di affiancare in un'unica interfaccia sia le categorie del Motomondiale (MotoGP, Moto2, Moto3), sia le derivate di serie (WorldSBK), il fuoristrada iridato (MXGP, MX2) e la Formula 1.
+  </p>
+  <p>
+    L'infrastruttura tecnologica è costruita secondo la filosofia <strong>Jamstack Serverless</strong>: il sito non necessita di server applicativi proprietari attivi h24 né di database SQL a pagamento. I dati risiedono su un servizio cloud di archiviazione JSON (<a href="https://jsonbin.io" target="_blank">JSONBin.io</a>) e vengono aggiornati automaticamente nei fine settimana di gara tramite pipeline <strong>GitHub Actions</strong> scritte in Python, con il supporto di un pannello amministrativo protetto da credenziali (<code>admin.html</code>) in grado di estrarre i dati direttamente dai bollettini PDF ufficiali di gara.
+  </p>
+
+  <!-- TABELLA DEI CONTENUTI (INDICE GENERALE WIKIPEDIA) -->
+  <div class="toc" id="toc">
+    <div class="toctitle">
+      <span>Indice generale</span>
+      <span class="toctoggle">[<a href="javascript:void(0)" onclick="const u=document.getElementById('toclist'); u.style.display=u.style.display==='none'?'block':'none';">mostra/nascondi</a>]</span>
+    </div>
+    <ul id="toclist">
+      <li>
+        <a href="#sec-1"><span class="tocnumber">1</span> <span class="toctext">Panoramica del Progetto Overrevving</span></a>
+        <ul>
+          <li><a href="#sec-1-1"><span class="tocnumber">1.1</span> <span class="toctext">Finalità e caratteristiche salienti</span></a></li>
+          <li><a href="#sec-1-2"><span class="tocnumber">1.2</span> <span class="toctext">Architettura Jamstack e modello economico Zero-Cost</span></a></li>
+          <li><a href="#sec-1-3"><span class="tocnumber">1.3</span> <span class="toctext">Mappa dei file e struttura dell'albero di directory</span></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#sec-2"><span class="tocnumber">2</span> <span class="toctext">Architettura dei Dati e Flusso Informativo</span></a>
+        <ul>
+          <li><a href="#sec-2-1"><span class="tocnumber">2.1</span> <span class="toctext">Il ruolo centrale di JSONBin.io</span></a></li>
+          <li><a href="#sec-2-2"><span class="tocnumber">2.2</span> <span class="toctext">Struttura dello schema JSON unificato</span></a></li>
+          <li><a href="#sec-2-3"><span class="tocnumber">2.3</span> <span class="toctext">Ciclo di vita dell'informazione: Ingestione, Elaborazione e Visualizzazione</span></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#sec-3"><span class="tocnumber">3</span> <span class="toctext">Fonti dei Dati e Metodologie di Acquisizione</span></a>
+        <ul>
+          <li><a href="#sec-3-1"><span class="tocnumber">3.1</span> <span class="toctext">MotoGP, Moto2 e Moto3: REST API Pulselive (Dorna Sports)</span></a></li>
+          <li><a href="#sec-3-2"><span class="tocnumber">3.3</span> <span class="toctext">Formula 1: REST API Jolpica (Ergast API 2026)</span></a></li>
+          <li><a href="#sec-3-3"><span class="tocnumber">3.3</span> <span class="toctext">Motocross MXGP e MX2: Web Scraping HTML (mxgpresults.com)</span></a></li>
+          <li><a href="#sec-3-4"><span class="tocnumber">3.4</span> <span class="toctext">Superbike (WorldSBK): Parsing ottico-posizionale di PDF ufficiali</span></a></li>
+          <li><a href="#sec-3-5"><span class="tocnumber">3.5</span> <span class="toctext">Statistiche Costruttori e Team Motomondiale: Estrazione PDF a colonne</span></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#sec-4"><span class="tocnumber">4</span> <span class="toctext">Automazione Backend tramite GitHub Actions</span></a>
+        <ul>
+          <li><a href="#sec-4-1"><span class="tocnumber">4.1</span> <span class="toctext">Il workflow automatico (.github/workflows/update-f1-v3.yaml)</span></a></li>
+          <li><a href="#sec-4-2"><span class="tocnumber">4.2</span> <span class="toctext">Schedulazione Cron nei weekend di gara e Workflow Dispatch manuale</span></a></li>
+          <li><a href="#sec-4-3"><span class="tocnumber">4.3</span> <span class="toctext">Algoritmo Python di normalizzazione, merge e push HTTP PUT</span></a></li>
+          <li><a href="#sec-4-4"><span class="tocnumber">4.4</span> <span class="toctext">Gestione delle credenziali e Secrets di repository</span></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#sec-5"><span class="tocnumber">5</span> <span class="toctext">Interfaccia Utente e Dashboard Pubblica (index.html)</span></a>
+        <ul>
+          <li><a href="#sec-5-1"><span class="tocnumber">5.1</span> <span class="toctext">Griglia orizzontale a scorrimento (CSS Grid & Dark Theme)</span></a></li>
+          <li><a href="#sec-5-2"><span class="tocnumber">5.2</span> <span class="toctext">Riorganizzazione colonne con SortableJS (Drag & Drop)</span></a></li>
+          <li><a href="#sec-5-3"><span class="tocnumber">5.3</span> <span class="toctext">Sidebar di personalizzazione campionati e persistenza in LocalStorage</span></a></li>
+          <li><a href="#sec-5-4"><span class="tocnumber">5.4</span> <span class="toctext">Sistema di Piloti Preferiti (evidenziazione visiva e stella)</span></a></li>
+          <li><a href="#sec-5-5"><span class="tocnumber">5.5</span> <span class="toctext">Motore di countdown dinamico per i Gran Premi della stagione 2026</span></a></li>
+          <li><a href="#sec-5-6"><span class="tocnumber">5.6</span> <span class="toctext">Normalizzazione intelligente dei nomi dei piloti</span></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#sec-6"><span class="tocnumber">6</span> <span class="toctext">Pagine di Dettaglio Categoria (category.html)</span></a>
+        <ul>
+          <li><a href="#sec-6-1"><span class="tocnumber">6.1</span> <span class="toctext">Routing lato client basato su URL Query Parameters (?cat=)</span></a></li>
+          <li><a href="#sec-6-2"><span class="tocnumber">6.2</span> <span class="toctext">Visualizzazione parallela Piloti, Costruttori e Team</span></a></li>
+          <li><a href="#sec-6-3"><span class="tocnumber">6.3</span> <span class="toctext">Calendario completo con calcolo di stato (svolta, in corso, prossima)</span></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#sec-7"><span class="tocnumber">7</span> <span class="toctext">Pannello Amministrativo di Controllo (admin.html)</span></a>
+        <ul>
+          <li><a href="#sec-7-1"><span class="tocnumber">7.1</span> <span class="toctext">Controllo accessi e sicurezza con password di protezione</span></a></li>
+          <li><a href="#sec-7-2"><span class="tocnumber">7.2</span> <span class="toctext">Trigger manuale di aggiornamento live via API del browser</span></a></li>
+          <li><a href="#sec-7-3"><span class="tocnumber">7.3</span> <span class="toctext">Parser PDF integrato nel browser (PDF.js)</span></a></li>
+          <li><a href="#sec-7-4"><span class="tocnumber">7.4</span> <span class="toctext">Editor testuale rapido (modifica manuale CSV "Pilota, Punti")</span></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#sec-8"><span class="tocnumber">8</span> <span class="toctext">Guida Operativa e Manutenzione</span></a>
+        <ul>
+          <li><a href="#sec-8-1"><span class="tocnumber">8.1</span> <span class="toctext">Checklist operativa per il fine settimana di gara</span></a></li>
+          <li><a href="#sec-8-2"><span class="tocnumber">8.2</span> <span class="toctext">Risoluzione anomalie (Troubleshooting API, CORS, parsing PDF)</span></a></li>
+          <li><a href="#sec-8-3"><span class="tocnumber">8.3</span> <span class="toctext">Rotazione delle chiavi API JSONBin e password amministratore</span></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#sec-9"><span class="tocnumber">9</span> <span class="toctext">Glossario Tecnico e Riferimenti Esterni</span></a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SEZIONE 1 -->
+  <h2 id="sec-1">1. Panoramica del Progetto Overrevving <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
+  <h3 id="sec-1-1">1.1 Finalità e caratteristiche salienti</h3>
+  <p>
+    Il portale <strong>Overrevving</strong> è stato concepito con l'obiettivo di abbattere la frammentazione informativa che caratterizza il motorsport mondiale. Solitamente, un appassionato o addetto ai lavori deve consultare da 4 a 6 siti web diversi (spesso pesanti, carichi di banner promozionali o protetti da paywall) per monitorare i punti di piloti e case costruttrici tra MotoGP, Superbike, Motocross e Formula 1.
+  </p>
+  <p>
+    Overrevving risolve questo problema aggregando in una singola pagina a griglia 7 campionati di primo livello:
+  </p>
+  <ul>
+    <li><span class="badge badge-motogp">MotoGP</span> Classe regina del Motomondiale FIM.</li>
+    <li><span class="badge badge-moto2">Moto2</span> Categoria intermedia con propulsori Triumph 765cc.</li>
+    <li><span class="badge badge-moto3">Moto3</span> Categoria cadetta monocilindrica 250cc.</li>
+    <li><span class="badge badge-sbk">WorldSBK</span> Campionato Mondiale Superbike (moto derivate dalla serie).</li>
+    <li><span class="badge badge-mxgp">MXGP</span> Campionato del Mondo di Motocross classe regina (450cc).</li>
+    <li><span class="badge badge-mx2">MX2</span> Campionato del Mondo Motocross under-23 (250cc).</li>
+    <li><span class="badge badge-f1">Formula 1</span> Campionato mondiale FIA monoposto.</li>
+  </ul>
+
+  <h3 id="sec-1-2">1.2 Architettura Jamstack e modello economico Zero-Cost</h3>
+  <p>
+    L'intera infrastruttura sfrutta il pattern <strong>Jamstack</strong> (JavaScript, APIs, Markup pre-renderizzato). Le caratteristiche fondamentali sono:
+  </p>
+  <ul>
+    <li><strong>Nessun server fisso da mantenere:</strong> Il portale non necessita di macchine virtuali EC2, VPS o container Docker sempre accesi. L'hosting è delegato all'infrastruttura CDN globale di <strong>GitHub Pages</strong>, garantendo tempi di caricamento (TTFB) inferiori a 50 millisecondi ovunque nel mondo.</li>
+    <li><strong>Costi di esercizio nulli:</strong> Sia GitHub Pages, sia JSONBin.io (nel tier free con fino a 10.000 richieste al mese), sia le GitHub Actions (fino a 2.000 minuti di esecuzione gratuita al mese per account) operano interamente a costo zero.</li>
+    <li><strong>Massima sicurezza e resilienza:</strong> Essendo costituito da file statici (HTML, CSS, JS), il sito non presenta superfici di attacco tipiche dei CMS tradizionali (come iniezioni SQL, exploit WordPress o vulnerabilità PHP).</li>
+  </ul>
+
+  <h3 id="sec-1-3">1.3 Mappa dei file e struttura dell'albero di directory</h3>
+  <p>La struttura del repository si presenta snella e modulare:</p>
+  <pre><code>/ (Radice del progetto)
+│
+├── CNAME                              # Configurazione DNS personalizzato (overrevving.it)
+├── index.html                         # Frontend principale: dashboard pubblica a 7 colonne
+├── category.html                      # Vista di dettaglio: Piloti, Costruttori, Team e Calendario
+├── admin.html                         # Cruscotto di gestione, login, trigger API e parser PDF
+├── guida.html                         # Questa enciclopedia tecnica completa in formato locale
+├── logo.png                           # Asset grafico Overrevving visualizzato nell'header
+│
+├── .github/
+│   └── workflows/
+│       └── update-f1-v3.yaml          # Pipeline GitHub Actions (cron weekend e script Python)
+│
+└── data/                              # Archivio PDF ufficiali per l'importazione
+    ├── SBK.pdf                        # Bollettino ufficiale WorldSBK
+    ├── SBK2.pdf                       # Eventuale bollettino di riserva / gara 2
+    ├── MGP.pdf                        # Report statistiche ufficiali Dorna MotoGP (Team & Costruttori)
+    ├── M2.pdf                         # Report statistiche ufficiali Dorna Moto2 (Team & Costruttori)
+    └── M3.pdf                         # Report statistiche ufficiali Dorna Moto3 (Team & Costruttori)</code></pre>
+
+  <!-- SEZIONE 2 -->
+  <h2 id="sec-2">2. Architettura dei Dati e Flusso Informativo <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
+  <h3 id="sec-2-1">2.1 Il ruolo centrale di JSONBin.io</h3>
+  <p>
+    Tutte le pagine del portale non si collegano direttamente e simultaneamente a decine di API esterne (cosa che causerebbe problemi di rate limiting, latenza e blocchi CORS sui browser degli utenti). Invece, si interfacciano con un unico bin cloud hosted su <strong>JSONBin.io</strong>, che funge da database NoSQL centralizzato (<em>Single Source of Truth</em>).
+  </p>
+  <table class="wikitable">
+    <tr>
+      <th>Parametro</th>
+      <th>Valore di Configurazione</th>
+      <th>Note</th>
+    </tr>
+    <tr>
+      <td><strong>BIN ID</strong></td>
+      <td><code>6a3064e4f5f4af5e29f7958b</code></td>
+      <td>Identificativo univoco globale del record cloud</td>
+    </tr>
+    <tr>
+      <td><strong>Endpoint di Lettura (Pubblica)</strong></td>
+      <td><code>https://api.jsonbin.io/v3/b/6a3064e4f5f4af5e29f7958b/latest</code></td>
+      <td>Utilizzato da <code>index.html</code> e <code>category.html</code></td>
+    </tr>
+    <tr>
+      <td><strong>Metodo di Scrittura</strong></td>
+      <td><code>PUT https://api.jsonbin.io/v3/b/6a3064e4f5f4af5e29f7958b</code></td>
+      <td>Riservato alle GitHub Actions e ad <code>admin.html</code></td>
+    </tr>
+    <tr>
+      <td><strong>Header di Autenticazione</strong></td>
+      <td><code>X-Access-Key: &lt;API_KEY&gt;</code></td>
+      <td>Richiesto per autorizzare la lettura/scrittura dei dati</td>
+    </tr>
+  </table>
+
+  <h3 id="sec-2-2">2.2 Struttura dello schema JSON unificato</h3>
+  <p>
+    Il payload salvato all'interno del Bin ha una struttura a dizionario JSON in cui ogni chiave rappresenta un campionato o una sottoclassifica specifica. Ogni classifica è un array ordinato di oggetti con le chiavi standard <code>name</code> (stringa) e <code>pts</code> (numero con virgola mobile o intero):
+  </p>
+  <pre><code>{
+  "motogp": [
+    { "name": "Marc Marquez", "pts": 37.0 },
+    { "name": "Francesco Bagnaia", "pts": 31.0 }
+  ],
+  "motogp_constructors": [
+    { "name": "Ducati", "pts": 37.0 },
+    { "name": "KTM", "pts": 22.0 }
+  ],
+  "motogp_teams": [
+    { "name": "Ducati Lenovo Team", "pts": 68.0 },
+    { "name": "Gresini Racing MotoGP", "pts": 40.0 }
+  ],
+  "moto2": [ ... ],
+  "moto2_constructors": [ ... ],
+  "moto2_teams": [ ... ],
+  "moto3": [ ... ],
+  "moto3_constructors": [ ... ],
+  "moto3_teams": [ ... ],
+  "sbk": [
+    { "name": "Toprak Razgatlioglu", "pts": 58.0 },
+    { "name": "Nicolo Bulega", "pts": 49.0 }
+  ],
+  "mxgp": [
+    { "name": "Jorge Prado", "pts": 50 },
+    { "name": "Tim Gajser", "pts": 44 }
+  ],
+  "mx2": [ ... ],
+  "f1": [
+    { "name": "Max Verstappen", "pts": 26.0 },
+    { "name": "Lando Norris", "pts": 18.0 }
+  ],
+  "_updated": "30/08/2026, 20:00:15 · Auto (Domenica)"
+}</code></pre>
+
+  <h3 id="sec-2-3">2.3 Ciclo di vita dell'informazione: Ingestione, Elaborazione e Visualizzazione</h3>
+  <p>Il percorso compiuto dai dati è suddiviso in tre macro-fasi:</p>
+  <ol>
+    <li><strong>Fase di Raccolta (Ingestion):</strong> Le sorgenti ufficiali (API Dorna, API Jolpica, scraping mxgpresults o PDF) rilasciano i punteggi al termine delle sessioni di qualifica e delle gare.</li>
+    <li><strong>Fase di Normalizzazione & Aggiornamento (Storage):</strong> I punteggi vengono estratti, i nomi dei piloti ripuliti, e l'oggetto JSON su JSONBin viene aggiornato tramite una chiamata HTTP <code>PUT</code> con il timestamp corrente salvato nella proprietà <code>_updated</code>.</li>
+    <li><strong>Fase di Presentazione (Delivery):</strong> All'apertura della pagina da parte dell'utente, <code>index.html</code> effettua un'unica chiamata HTTP <code>GET</code> asincrona (<code>fetch()</code>) a JSONBin. I dati vengono trasformati in tabelle HTML in meno di 200ms.</li>
+  </ol>
+
+  <!-- SEZIONE 3 -->
+  <h2 id="sec-3">3. Fonti dei Dati e Metodologie di Acquisizione <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
+
+  <h3 id="sec-3-1">3.1 MotoGP, Moto2 e Moto3: REST API Pulselive (Dorna Sports)</h3>
+  <p>
+    La Dorna Sports, detentrice dei diritti commerciali del Motomondiale, si affida all'infrastruttura cloud di <strong>Pulselive</strong> per alimentare i widget del sito ufficiale motogp.com. Overrevving si interfaccia direttamente con questi endpoint REST pubblici ad altissima affidabilità:
+  </p>
+  <table class="wikitable">
+    <tr>
+      <th>Parametro</th>
+      <th>Identificativo / Valore UUID 2026</th>
+    </tr>
+    <tr>
+      <td><strong>Base URL</strong></td>
+      <td><code>https://api.motogp.pulselive.com/motogp/v1/results/standings</code></td>
+    </tr>
+    <tr>
+      <td><strong>Season UUID 2026</strong></td>
+      <td><code>e88b4e43-2209-47aa-8e83-0e0b1cedde6e</code></td>
+    </tr>
+    <tr>
+      <td><strong>MotoGP Category UUID</strong></td>
+      <td><code>e8c110ad-64aa-4e8e-8a86-f2f152f6a942</code></td>
+    </tr>
+    <tr>
+      <td><strong>Moto2 Category UUID</strong></td>
+      <td><code>549640b8-fd9c-4245-acfd-60e4bc38b25c</code></td>
+    </tr>
+    <tr>
+      <td><strong>Moto3 Category UUID</strong></td>
+      <td><code>954f7e65-2ef2-4423-b949-4961cc603e45</code></td>
+    </tr>
+  </table>
+  <p>
+    L'API restituisce un oggetto contenente un array <code>classification</code>. Da ogni elemento vengono estratti:
+  </p>
+  <ul>
+    <li>Pilota: <code>c['rider']['full_name']</code></li>
+    <li>Punteggio: <code>float(c['points'])</code></li>
+    <li>Costruttore: <code>c['constructor']['name']</code> (o <code>c['manufacturer']['name']</code>)</li>
+    <li>Team: <code>c['team']['name']</code></li>
+  </ul>
+
+  <h3 id="sec-3-2">3.2 Formula 1: REST API Jolpica (Ergast API 2026)</h3>
+  <p>
+    Dopo la dismissione dei server storici di Ergast F1 alla fine del 2024, la community open-source del motorsport ha continuato il mantenimento del database tramite l'iniziativa <strong>Jolpica F1</strong>. L'endpoint interrogato è:
+  </p>
+  <pre><code>GET https://api.jolpi.ca/ergast/f1/2026/driverstandings.json</code></pre>
+  <p>
+    La risposta rispetta lo standard XML/JSON Ergast (sotto il nodo <code>MRData.StandingsTable.StandingsLists[0].DriverStandings</code>). Per ogni pilota vengono uniti <code>givenName</code> e <code>familyName</code> e parsato il valore numerico del campo <code>points</code>.
+  </p>
+
+  <h3 id="sec-3-3">3.3 Motocross MXGP e MX2: Web Scraping HTML (mxgpresults.com)</h3>
+  <p>
+    Poiché il promoter Infront Moto Racing non fornisce un'API REST pubblica aperta per il Motocross, Overrevving adotta una tecnica di web scraping mirata sul portale di riferimento <code>mxgpresults.com</code>:
+  </p>
+  <ul>
+    <li>URL MXGP: <code>https://mxgpresults.com/mxgp/standings</code></li>
+    <li>URL MX2: <code>https://mxgpresults.com/mx2/standings</code></li>
+  </ul>
+  <p>
+    Nello script Python (GitHub Actions) viene eseguita una <em>Regular Expression</em> che cattura le celle della tabella HTML senza caricare librerie pesanti come BeautifulSoup o Selenium:
+  </p>
+  <pre><code>rows = re.findall(
+    r'&lt;tr[^&gt;]*&gt;\s*&lt;td[^&gt;]*&gt;\d+\s*&lt;/td&gt;\s*&lt;td[^&gt;]*&gt;#\d+\s*&lt;/td&gt;\s*&lt;td[^&gt;]*&gt;(.*?)&lt;/td&gt;.*?&lt;td[^&gt;]*&gt;(\d+)\s*&lt;/td&gt;\s*&lt;/tr&gt;',
+    html,
+    re.DOTALL
+)</code></pre>
+  <div class="wiki-box wiki-box-info">
+    <strong>Gestione CORS da browser:</strong> Quando l'operazione di scraping viene lanciata manualmente dall'amministratore da <code>admin.html</code>, il browser bloccherebbe la richiesta a <code>mxgpresults.com</code> per la politica Same-Origin. Pertanto, <code>admin.html</code> incapsula l'URL tramite il proxy aperto <code>https://corsproxy.io/?url=...</code>.
+  </div>
+
+  <h3 id="sec-3-4">3.4 Superbike (WorldSBK): Parsing ottico-posizionale di PDF ufficiali</h3>
+  <p>
+    La Federazione Internazionale di Motociclismo (FIM) e Dorna WSBK pubblicano i risultati dei round di Superbike sotto forma di documenti PDF ufficiali (distribuiti sul portale worldsbk.com). A differenza dei file di testo, i PDF non contengono strutture tabellari esplicite, bensì singoli glifi o stringhe posizionate su assi cartesiani (X, Y).
+  </p>
+  <p>
+    Il sistema implementato in <code>admin.html</code> utilizza <strong>PDF.js</strong> con un algoritmo proprietario di <em>clustering geometrico</em>:
+  </p>
+  <ol>
+    <li>Il file <code>data/SBK.pdf</code> viene caricato in memoria come <code>ArrayBuffer</code>.</li>
+    <li>Viene estratta la prima pagina e normalizzata l'altezza del viewport: <code>y = pageHeight - it.transform[5]</code>.</li>
+    <li>Tutti i token con scostamento verticale <code>|y1 - y2| &lt;= 6px</code> vengono aggregati nella medesima riga logica.</li>
+    <li>Le righe vengono analizzate identificando:
+      <ul>
+        <li>Posizione numerica (da 1 a 100).</li>
+        <li>Cognome del pilota (scritto in caratteri <strong>MAIUSCOLI</strong>).</li>
+        <li>Nome del pilota (scritto in caratteri <em>Title Case</em>, ad es. "Nicolo").</li>
+        <li>Punteggio totale nella colonna di destra.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3 id="sec-3-5">3.5 Statistiche Costruttori e Team Motomondiale: Estrazione PDF a colonne</h3>
+  <p>
+    I report Dorna <code>MGP.pdf</code>, <code>M2.pdf</code> e <code>M3.pdf</code> presentano un layout inverso rispetto a quello piloti: la tabella di Team e Costruttori è impaginata in <strong>colonne verticali</strong> (i nomi si trovano sulla riga di intestazione, mentre i punteggi totali sono posizionati sulla coordinata orizzontale X corrispondente, alla coordinata Y dell'etichetta "Points").
+  </p>
+  <p>
+    La funzione <code>parseTeamsAndConstructors(tokens)</code> presente in <code>admin.html</code>:
+  </p>
+  <ul>
+    <li>Localizza la pagina del PDF contenente sia il termine "Constructor" sia il termine "Team".</li>
+    <li>Identifica i token di intestazione e memorizza la coordinata <code>x</code> di ciascun nome.</li>
+    <li>Identifica i token numerici nella fascia <code>Y ∈ [Points - 20, Points + 5]</code>.</li>
+    <li>Associa a ciascun costruttore/team il punteggio la cui coordinata X ha distanza euclidea <code>dist &lt; 2px</code>.</li>
+  </ul>
+
+  <!-- SEZIONE 4 -->
+  <h2 id="sec-4">4. Automazione Backend tramite GitHub Actions <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
+
+  <h3 id="sec-4-1">4.1 Il workflow automatico (.github/workflows/update-f1-v3.yaml)</h3>
+  <p>
+    Il "cuore pulsante" dell'aggiornamento automatico è rappresentato dal file di workflow GitHub Actions. Ogni volta che si conclude un Gran Premio o una Sprint Race, la pipeline si avvia in ambiente Linux Ubuntu pulito senza richiedere alcun intervento umano.
+  </p>
+
+  <h3 id="sec-4-2">4.2 Schedulazione Cron nei weekend di gara e Workflow Dispatch manuale</h3>
+  <p>Il workflow è programmato per attivarsi due volte alla settimana:</p>
+  <pre><code>on:
+  schedule:
+    - cron: '0 18 * * 6'   # Ogni Sabato alle ore 18:00 UTC (Post Qualifiche / Sprint Race)
+    - cron: '0 18 * * 0'   # Ogni Domenica alle ore 18:00 UTC (Post Gare lunghe della Domenica)
+  workflow_dispatch: {}     # Pulsante manuale eseguibile su richiesta dall'interfaccia GitHub</code></pre>
+
+  <h3 id="sec-4-3">4.3 Algoritmo Python di normalizzazione, merge e push HTTP PUT</h3>
+  <p>
+    Lo script Python incorporato nel runner:
+  </p>
+  <ol>
+    <li>Interroga contemporaneamente le API Pulselive (MotoGP, Moto2, Moto3), lo scraping di mxgpresults.com (MXGP, MX2) e l'API Jolpica (Formula 1).</li>
+    <li>Scarica lo stato attuale del bin da JSONBin.io (<code>GET /latest</code>).</li>
+    <li>Esegue il merge selettivo: sovrascrive solo i campionati che hanno restituito dati validi, preservando intatti quelli non ancora disputati o aggiornati via PDF (come la SBK).</li>
+    <li>Calcola l'ora italiana: <code>datetime.now(timezone.utc) + timedelta(hours=2)</code>.</li>
+    <li>Invia il payload completo a JSONBin.io tramite richiesta <strong>PUT</strong> con codice di stato HTTP <code>200 OK</code>.</li>
+  </ol>
+
+  <h3 id="sec-4-4">4.4 Gestione delle credenziali e Secrets di repository</h3>
+  <p>
+    Per impedire la manomissione pubblica del bin da parte di terzi, le credenziali di scrittura non sono archiviate in chiaro nel codice sorgente pubblico di GitHub, bensì memorizzate nelle <em>Encrypted Secrets</em> del repository:
+  </p>
+  <ul>
+    <li><code>JSONBIN_API_KEY</code>: La Master Key di JSONBin abilitata alle scritture PUT.</li>
+    <li><code>JSONBIN_BIN_ID</code>: L'identificativo esadecimale del record.</li>
+  </ul>
+
+  <!-- SEZIONE 5 -->
+  <h2 id="sec-5">5. Interfaccia Utente e Dashboard Pubblica (index.html) <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
+
+  <h3 id="sec-5-1">5.1 Griglia orizzontale a scorrimento (CSS Grid & Dark Theme)</h3>
+  <p>
+    La homepage presenta un tema scuro moderno (sfondo <code>#1e1e22</code>, pannelli <code>#2c2c32</code>, bordi <code>#3a3a42</code>) studiato per ridurre l'affaticamento visivo e valorizzare i colori sociali delle singole competizioni. La griglia è renderizzata mediante CSS Grid a larghezza fissa (275px per colonna), racchiusa in un contenitore <code>.grid-wrapper</code> con scorrimento orizzontale nativo a inerzia per dispositivi mobili e schermi desktop ultra-wide.
+  </p>
+
+  <h3 id="sec-5-2">5.2 Riorganizzazione colonne con SortableJS (Drag & Drop)</h3>
+  <p>
+    Su schermi desktop (&gt; 700px), l'utente può trascinare le colonne dei campionati nella sequenza desiderata (ad esempio mettendo la Formula 1 o la SBK al primo posto a sinistra). L'evento <code>onEnd</code> di <strong>SortableJS</strong> cattura l'ordine e lo memorizza nella chiave <code>overrevving_order</code> del LocalStorage. Su smartphone, l'ordinamento rimane fisso per evitare conflitti con il gesto di scroll orizzontale tattile.
+  </p>
+
+  <h3 id="sec-5-3">5.3 Sidebar di personalizzazione campionati e persistenza in LocalStorage</h3>
+  <p>
+    Premendo l'icona hamburger in alto a destra si apre una sidebar laterale che consente di:
+  </p>
+  <ul>
+    <li>Attivare o disattivare selettivamente qualsiasi categoria tramite checkbox animate.</li>
+    <li>Usare le funzioni rapide <em>"Mostra tutti"</em> o <em>"Nascondi tutti"</em>.</li>
+    <li>Ripristinare l'ordine predefinito delle colonne tramite il pulsante dedicato.</li>
+    <li>Le preferenze vengono conservate in memoria locale permanente: <code>overrevving_champs</code>.</li>
+  </ul>
+
+  <h3 id="sec-5-4">5.4 Sistema di Piloti Preferiti (evidenziazione visiva e stella)</h3>
+  <p>
+    Accanto a ogni pilota della tabella è presente un pulsante con una stella (★). Facendo clic:
+  </p>
+  <ul>
+    <li>Il pilota viene contrassegnato con la chiave univoca <code>campionato:nome_pilota</code> (es. <code>motogp:Francesco Bagnaia</code>).</li>
+    <li>La riga della tabella assume una colorazione viola evidenziata (<code>#2a1f3a</code>).</li>
+    <li>I preferiti vengono salvati in <code>overrevving_favorites</code> e rimangono attivi alle successive visite al sito.</li>
+  </ul>
+
+  <h3 id="sec-5-5">5.5 Motore di countdown dinamico per i Gran Premi della stagione 2026</h3>
+  <p>
+    Nell'intestazione di ciascuna colonna è presente un timer intelligente. La costante JavaScript <code>CALENDARS_2026</code> contiene le date ufficiali della domenica di gara per ciascun campionato. La funzione <code>loadCountdown()</code>:
+  </p>
+  <ul>
+    <li>Trova il primo appuntamento con data futura rispetto all'orologio del dispositivo.</li>
+    <li>Visualizza il nome del circuito e il tempo rimanente in giorni e ore (es. <code>🏁 → Thailand: 4d 12h</code>).</li>
+    <li>Se la gara si sta svolgendo, mostra <code>🏁 Round in progress!</code>.</li>
+    <li>A stagione conclusa, mostra <code>🏁 Season concluded</code>.</li>
+  </ul>
+
+  <h3 id="sec-5-6">5.6 Normalizzazione intelligente dei nomi dei piloti</h3>
+  <p>
+    A causa delle eterogenee convenzioni grafiche tra le varie federazioni (alcune usano <em>COGNOME Nome</em>, altre <em>Nome Cognome</em> tutto maiuscolo), la funzione JavaScript <code>formatName()</code> converte automaticamente ogni pilota nel formato abbreviato standard europeo da classifica televisiva: <strong>Iniziale del nome + punto + Cognome</strong> (es. <code>M. Marquez</code>, <code>F. Bagnaia</code>, <code>M. Verstappen</code>).
+  </p>
+
+  <!-- SEZIONE 6 -->
+  <h2 id="sec-6">6. Pagine di Dettaglio Categoria (category.html) <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
+
+  <h3 id="sec-6-1">6.1 Routing lato client basato su URL Query Parameters (?cat=)</h3>
+  <p>
+    Per le categorie che dispongono di dati statistici avanzati (MotoGP, Moto2, Moto3), il titolo di colonna in homepage è un link cliccabile che reindirizza a <code>category.html?cat=motogp</code>. La pagina legge il parametro <code>window.location.search</code> tramite <code>URLSearchParams</code> e adatta dinamicamente:
+  </p>
+  <ul>
+    <li>Colore e grafica dell'Hero banner in testata.</li>
+    <li>Dati anagrafici e numero di round previsti.</li>
+  </ul>
+
+  <h3 id="sec-6-2">6.2 Visualizzazione parallela Piloti, Costruttori e Team</h3>
+  <p>
+    La vista di categoria espande la classica graduatoria piloti affiancandovi due pannelli aggiuntivi:
+  </p>
+  <table class="wikitable">
+    <tr>
+      <th>Pannello</th>
+      <th>Dati Visualizzati</th>
+      <th>Provenienza</th>
+    </tr>
+    <tr>
+      <td><strong>Riders Championship</strong></td>
+      <td>Tutti i piloti con punti, distacco dalla vetta (gap) e preferiti</td>
+      <td>Chiave JSON <code>{cat}</code></td>
+    </tr>
+    <tr>
+      <td><strong>Constructors Championship</strong></td>
+      <td>Marche (Ducati, KTM, Aprilia, Yamaha, Honda, Kalex, ecc.)</td>
+      <td>Chiave JSON <code>{cat}_constructors</code></td>
+    </tr>
+    <tr>
+      <td><strong>Teams Championship</strong></td>
+      <td>Squadre ufficiali e satelliti con somma punti cumulativa</td>
+      <td>Chiave JSON <code>{cat}_teams</code></td>
+    </tr>
+  </table>
+
+  <h3 id="sec-6-3">6.3 Calendario completo con calcolo di stato (svolta, in corso, prossima)</h3>
+  <p>
+    La colonna destra di <code>category.html</code> mostra l'elenco cronologico di tutti i Gran Premi dell'anno. Ogni appuntamento viene colorato dinamicamente a seconda della data odierna:
+  </p>
+  <ul>
+    <li><strong>Gara conclusa:</strong> Opacità ridotta al 55% e segno di spunta grigio.</li>
+    <li><strong>Prossimo Gran Premio:</strong> Sfondo evidenziato in viola/blu (<code>#2a2438</code>) con icona di semaforo verde.</li>
+    <li><strong>Gare future:</strong> Visualizzazione standard in ordine cronologico.</li>
+  </ul>
+
+  <!-- SEZIONE 7 -->
+  <h2 id="sec-7">7. Pannello Amministrativo di Controllo (admin.html) <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
+
+  <h3 id="sec-7-1">7.1 Controllo accessi e sicurezza con password di protezione</h3>
+  <p>
+    L'accesso alla pagina <code>admin.html</code> è schermato da un overlay di login a tutto schermo (<code>#login-screen</code>). Il codice JavaScript confronta l'input dell'utente con la costante <code>ADMIN_PWD</code>. Solo a password corretta l'overlay viene rimosso dal DOM e vengono caricate le funzioni di sincronizzazione.
+  </p>
+
+  <h3 id="sec-7-2">7.2 Trigger manuale di aggiornamento live via API del browser</h3>
+  <p>
+    Il pulsante <span style="background:#2a2a3a; color:#8888ca; padding:3px 8px; border-radius:4px; font-weight:bold;">🔄 Aggiorna MotoGP/Moto2/Moto3/F1</span> esegue la funzione <code>fetchAllAPI()</code>. Il browser dell'amministratore interroga parallelamente tutte le fonti e mostra una serie di badge di stato in tempo reale:
+  </p>
+  <ul>
+    <li><code>⏳ Giallo:</code> Chiamata HTTP in corso.</li>
+    <li><code>✓ Verde:</code> Dati estratti con successo (con conteggio esatto dei piloti importati).</li>
+    <li><code>⚠ Rosso:</code> Segnalazione di errore (timeout, risposta non valida o mancata connessione).</li>
+  </ul>
+
+  <h3 id="sec-7-3">7.3 Parser PDF integrato nel browser (PDF.js)</h3>
+  <p>
+    Tramite i pulsanti verdi <span style="background:#3a5a3a; color:#8fca8f; padding:3px 8px; border-radius:4px; font-weight:bold;">📂 Importa PDF SBK</span> e <span style="background:#3a5a3a; color:#8fca8f; padding:3px 8px; border-radius:4px; font-weight:bold;">📊 Importa PDF Stats</span>, l'amministratore può far leggere a <code>admin.html</code> i file PDF posizionati nella cartella <code>data/</code> (usando una stringa timestamp per prevenire la memorizzazione nella cache del browser: <code>?t=Date.now()</code>) oppure trascinare nuovi PDF direttamente dalla propria scrivania. I file vengono elaborati dal motore client-side senza inviare i PDF a server esterni.
+  </p>
+
+  <h3 id="sec-7-4">7.4 Editor testuale rapido (modifica manuale CSV "Pilota, Punti")</h3>
+  <p>
+    In caso di penalità post-gara, squalifiche dell'ultimo minuto o guasti alle API ufficiali, l'amministratore può premere <strong>✏ Manuale</strong>. Si apre un modale contenente una casella di testo con la classifica attuale in formato CSV:
+  </p>
+  <pre><code>Francesco Bagnaia, 45
+Marc Marquez, 41
+Jorge Martin, 35</code></pre>
+  <p>
+    È sufficiente correggere le cifre e premere <em>"Salva"</em>: il sistema convalida i tipi di dato numerici e carica istantaneamente la modifica su JSONBin.
+  </p>
+
+  <!-- SEZIONE 8 -->
+  <h2 id="sec-8">8. Guida Operativa e Manutenzione <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
+
+  <h3 id="sec-8-1">8.1 Checklist operativa per il fine settimana di gara</h3>
+  <div class="wiki-box wiki-box-success">
+    <strong>Procedura raccomandata:</strong>
+    <ol>
+      <li><strong>Venerdì/Sabato mattina:</strong> Non è richiesta alcuna azione. Il sito visualizza il countdown al Gran Premio.</li>
+      <li><strong>Sabato sera (ore 18:00 UTC / 20:00 IT):</strong> La GitHub Action si attiva da sola al termine delle Sprint Race / qualifiche ed aggiorna i punti del sabato.</li>
+      <li><strong>Domenica sera:</strong> Al termine dei Gran Premi, la GitHub Action si riattiva e registra le classifiche ufficiali complete.</li>
+      <li><strong>Per la Superbike (WorldSBK):</strong> Quando FIM pubblica il PDF della gara, salvare il documento nella cartella <code>data/SBK.pdf</code>, eseguire un commit su GitHub e premere in <code>admin.html</code> il pulsante <em>"Importa PDF SBK"</em>.</li>
+    </ol>
+  </div>
+
+  <h3 id="sec-8-2">8.2 Risoluzione anomalie (Troubleshooting API, CORS, parsing PDF)</h3>
+  <table class="wikitable">
+    <tr>
+      <th>Problema riscontrato</th>
+      <th>Causa probabile</th>
+      <th>Soluzione pratica</th>
+    </tr>
+    <tr>
+      <td>Il sito mostra <em>"⚠ Error loading standings"</em></td>
+      <td>Raggiunto il limite di chiamate su JSONBin oppure API Key disabilitata</td>
+      <td>Accedere alla dashboard di JSONBin.io, verificare il credito mensile o generare una nuova Access Key</td>
+    </tr>
+    <tr>
+      <td>La colonna F1 o MXGP è vuota</td>
+      <td>L'API Jolpica è temporaneamente offline o mxgpresults.com ha cambiato struttura HTML</td>
+      <td>Aprire <code>admin.html</code> e aggiornare il punteggio tramite l'editor manuale (<strong>✏ Manuale</strong>)</td>
+    </tr>
+    <tr>
+      <td>Il parser SBK dice <em>"0 piloti trovati"</em></td>
+      <td>Il PDF fornito è un formato scansionato come immagine raster anziché testo vettoriale</td>
+      <td>Assicurarsi di scaricare il PDF originale con testo selezionabile dal sito worldsbk.com</td>
+    </tr>
+  </table>
+
+  <h3 id="sec-8-3">8.3 Rotazione delle chiavi API JSONBin e password amministratore</h3>
+  <p>
+    Se si desidera cambiare la password di <code>admin.html</code> o la chiave segreta di JSONBin:
+  </p>
+  <ul>
+    <li><strong>Password Admin:</strong> Modificare la variabile <code>const ADMIN_PWD = 'nuova_password';</code> alla riga 187 di <code>admin.html</code>.</li>
+    <li><strong>Chiavi JSONBin sul frontend:</strong> Modificare le costanti <code>BIN_ID</code> e <code>API_KEY</code> all'interno di <code>index.html</code> e <code>admin.html</code>.</li>
+    <li><strong>Chiavi JSONBin sul backend automatico:</strong> Andare sulle impostazioni del repository GitHub: <code>Settings &gt; Secrets and variables &gt; Actions</code> e aggiornare i valori di <code>JSONBIN_API_KEY</code> e <code>JSONBIN_BIN_ID</code>.</li>
+  </ul>
+
+  <!-- SEZIONE 9 -->
+  <h2 id="sec-9">9. Glossario Tecnico e Riferimenti Esterni <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
+  <dl>
+    <dt><strong>Jamstack</strong></dt>
+    <dd>Architettura di sviluppo web moderna basata su JavaScript lato client, API riutilizzabili e Markup pre-costruito distribuito su CDN.</dd>
+
+    <dt><strong>CORS (Cross-Origin Resource Sharing)</strong></dt>
+    <dd>Meccanismo di sicurezza del browser che impedisce a uno script su un dominio di richiedere risorse su un dominio differente. Nel progetto viene superato tramite backend GitHub Actions (che non ha vincoli browser) o tramite corsproxy.</dd>
+
+    <dt><strong>JSONBin.io</strong></dt>
+    <dd>Servizio SaaS di cloud storage per file JSON accessibile tramite semplici chiamate REST (GET, PUT, POST).</dd>
+
+    <dt><strong>PDF.js</strong></dt>
+    <dd>Libreria JavaScript creata da Mozilla Labs per renderizzare e parsare documenti Portable Document Format senza plugin esterni.</dd>
+  </dl>
+
+  <h3 style="margin-top:20px;">Collegamenti e Documentazione Ufficiale</h3>
+  <ul>
+    <li><a href="https://github.com" target="_blank">Documentazione Ufficiale GitHub Actions Workflow Syntax</a></li>
+    <li><a href="https://jsonbin.io/api-reference" target="_blank">Specifiche API JSONBin.io v3</a></li>
+    <li><a href="https://api.jolpi.ca" target="_blank">Documentazione Jolpica F1 Ergast API</a></li>
+    <li><a href="https://mozilla.github.io/pdf.js" target="_blank">Repository e documentazione Mozilla PDF.js</a></li>
+  </ul>
+
+  <div class="wiki-footer">
+    Questa pagina costituisce documentazione tecnica ad uso interno per il portale <strong>Overrevving</strong>.<br>
+    File locale: <code>guida.html</code> — Consultabile liberamente offline e integrabile con qualsiasi visualizzatore HTML.
+  </div>
+
+</div>
+
+</body>
+</html>

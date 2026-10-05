@@ -1,0 +1,12 @@
+# Logs & system
+.agents/
+.DS_Store
+Thumbs.db
+
+# Temporary inspect and debug files
+inspect_*
+test_debug.html
+*.tmp
+
+# Temporary PDF uploads
+data/*.pdf
