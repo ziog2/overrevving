@@ -30,7 +30,7 @@ jobs:
       - name: Installa dipendenze
         run: |
           npm install --quiet pdfjs-dist@3.11.174
-          pip install --quiet pypdf
+          pip install --quiet pypdf openpyxl
 
       - name: Scarica ed estrai classifiche da PDF Dorna e API
         env:
@@ -43,14 +43,18 @@ jobs:
         run: |
           python3 .github/scripts/update_event_data.py
 
+      - name: Esporta database multi-anno, CSV e Excel per BI
+        run: |
+          python3 .github/scripts/export_database.py
+
       - name: Commit e push automatico se ci sono aggiornamenti
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add event.html category.html motogp.html
+          git add event.html category.html motogp.html data/ exports/
           if git diff --staged --quiet; then
             echo "Nessuna modifica da inviare."
           else
-            git commit -m "Auto-update event data for latest MotoGP Grand Prix [skip ci]"
+            git commit -m "Auto-update motorsport database, standings, CSV and Excel [skip ci]"
             git push origin main
           fi

@@ -133,6 +133,7 @@
   <button class="edit-btn pdf-main-btn" onclick="fetchStatsFromRepo()">📊 Importa PDF Stats MotoGP/Moto2/Moto3</button>
   <button class="edit-btn f1-fetch-btn" onclick="fetchAllAPI()">🔄 Aggiorna MotoGP/Moto2/Moto3/F1</button>
   <button class="edit-btn" onclick="openEditor()">✏ Manuale</button>
+  <button class="edit-btn" style="background:#27ae60;color:#fff;" onclick="exportStandingsJson()" title="Scarica standings_latest.json aggiornato da salvare nella cartella data/">💾 Esporta JSON Git</button>
 </div>
 <div id="global-status"></div>
 
@@ -220,24 +221,49 @@ let currentData = { motogp:[], moto2:[], moto3:[], sbk:[], f1:[], _updated:'' };
 
 async function loadFromBin() {
   try {
+    try {
+      const resLocal = await fetch('data/standings_latest.json?t=' + Date.now());
+      if (resLocal.ok) {
+        currentData = await resLocal.json();
+        renderAll();
+        return;
+      }
+    } catch (localErr) {}
+
     const res = await fetch(BIN_URL + '/latest', { headers: { 'X-Access-Key': API_KEY } });
     if (!res.ok) throw new Error();
     const json = await res.json();
     currentData = json.record;
     renderAll();
   } catch(e) {
-    showGlobalStatus('err', '⚠ Errore caricamento dati da JSONBin');
+    showGlobalStatus('err', '⚠ Errore caricamento dati');
   }
 }
 
 async function saveToBin() {
   currentData['_updated'] = new Date().toLocaleString('it-IT');
-  const res = await fetch(BIN_URL, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'X-Access-Key': API_KEY },
-    body: JSON.stringify(currentData)
-  });
-  if (!res.ok) throw new Error('Errore salvataggio su JSONBin');
+  try {
+    const res = await fetch(BIN_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Access-Key': API_KEY },
+      body: JSON.stringify(currentData)
+    });
+    if (!res.ok) throw new Error('Errore salvataggio su JSONBin');
+  } catch(e) {
+    console.warn('JSONBin save warning:', e.message);
+  }
+}
+
+function exportStandingsJson() {
+  currentData['_updated'] = new Date().toLocaleString('it-IT');
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentData, null, 2));
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute("href", dataStr);
+  downloadAnchor.setAttribute("download", "standings_latest.json");
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+  showGlobalStatus('ok', '✓ File standings_latest.json scaricato! Sostituiscilo nella cartella data/ ed esegui commit.');
 }
 
 // ---- Render ----

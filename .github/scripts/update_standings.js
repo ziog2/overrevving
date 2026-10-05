@@ -170,13 +170,26 @@ function parseTeamsAndConstructors(tokens) {
 async function main() {
   console.log('Avvio routine aggiornamento classifiche...');
 
-  // 1. Carica bin attuale
+  // 1. Carica database attuale: prima da file locale data/standings_latest.json, poi fallback a JSONBin
+  const LOCAL_STANDINGS_PATH = path.resolve(__dirname, '..', '..', 'data', 'standings_latest.json');
   let current = {};
-  try {
-    const binData = await httpsGet(`${BIN_URL}/latest`, { 'X-Access-Key': API_KEY });
-    current = binData.record || {};
-  } catch (e) {
-    console.warn('Errore lettura JSONBin:', e.message);
+  if (fs.existsSync(LOCAL_STANDINGS_PATH)) {
+    try {
+      current = JSON.parse(fs.readFileSync(LOCAL_STANDINGS_PATH, 'utf8'));
+      console.log('✓ Dati attuali caricati da data/standings_latest.json');
+    } catch (err) {
+      console.warn('Avviso lettura data/standings_latest.json:', err.message);
+    }
+  }
+
+  if (Object.keys(current).length === 0 && BIN_ID && API_KEY) {
+    try {
+      const binData = await httpsGet(`${BIN_URL}/latest`, { 'X-Access-Key': API_KEY });
+      current = binData.record || {};
+      console.log('✓ Dati attuali caricati da JSONBin (fallback)');
+    } catch (e) {
+      console.warn('Errore lettura JSONBin:', e.message);
+    }
   }
 
   const results = {};
@@ -411,11 +424,24 @@ async function main() {
   const itDate = new Date(now.getTime() + (2 * 60 * 60 * 1000));
   cleanCurrent['_updated'] = itDate.toISOString().replace('T', ' ').substring(0, 19) + ' · Auto (Domenica)';
 
+  // A. Salvataggio primario su file locale Git
   try {
-    await httpsPut(BIN_URL, cleanCurrent, { 'X-Access-Key': API_KEY });
-    console.log('✓ Salvato su JSONBin con successo!');
-  } catch (e) {
-    console.error('Errore salvataggio JSONBin:', e.message);
+    const dataDir = path.dirname(LOCAL_STANDINGS_PATH);
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+    fs.writeFileSync(LOCAL_STANDINGS_PATH, JSON.stringify(cleanCurrent, null, 2), 'utf8');
+    console.log('✓ Salvato su data/standings_latest.json con successo!');
+  } catch (err) {
+    console.error('Errore salvataggio su data/standings_latest.json:', err.message);
+  }
+
+  // B. Salvataggio secondario su JSONBin se configurato
+  if (BIN_ID && API_KEY) {
+    try {
+      await httpsPut(BIN_URL, cleanCurrent, { 'X-Access-Key': API_KEY });
+      console.log('✓ Salvato su JSONBin con successo!');
+    } catch (e) {
+      console.error('Errore salvataggio JSONBin:', e.message);
+    }
   }
 }
 
