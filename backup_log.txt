@@ -3,22 +3,24 @@
 OVERREVVING BACKUP LOG
 =====================================================
 Backup Folder Name:
-G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261006_174549
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261006_235212
 
 Note / Log Message:
 Versione stabile con:
+- Grafici comparativi Race Progression (Lap Chart) ed evoluzione del distacco (Gap to Leader) integrati in event.html:
+  * Layout affiancato e reattivo a 2 colonne in un pannello unico coordinato sia per la Sprint Race che per la Main Race.
+  * Headroom dinamico ottimizzato sull'asse Y per il Gap to Leader, garantendo piena leggibilità alla linea del leader (LEAD) a quota 0.000s.
+  * Pulizia grafica con rimozione delle etichette chip in alto a destra e traduzione completa delle intestazioni e sottotitoli in inglese.
 - Architettura Git-as-a-database implementata per tutte e 7 le categorie (MotoGP, Moto2, Moto3, WorldSBK, F1, MXGP, MX2).
 - Database unificato data/standings_latest.json e archivi multi-anno per categoria data/<categoria>/2026.json.
 - Esportazioni analitiche Tidy in exports/csv/ (season_standings.csv, race_results_points.csv, calendar_events.csv) per Tableau e Grafana.
 - Cartella di lavoro Master Excel multi-foglio exports/motorsport_database_2026.xlsx.
-- Aggiornamento frontend (index.html, motogp.html, category.html, admin.html) con priorità di caricamento locale da Git e fallback resiliente.
-- Automazione CI/CD in .github/workflows/update-f1-v3.yaml ed ingestion in .github/scripts/update_standings.js con scrittura diretta su Git e auto-export.
-- Rimozione della cartella duplicata su OneDrive e consolidamento unico sul repository locale C:\Users\Andrea\Desktop\Sito overrevving.
+- Feed notizie orario automatico e frontend unificato.
 
 Git Commit Info:
-Commit Hash: 700e6f81758cbf5e36ab05bed1b6f38a730505bd Commit Date: Tue Oct 6 01:07:11 2026 +0200 Commit Message: Update backup_log.txt with complete history
+Commit Hash: 3378a25781c63b20a15a862770c89e27043e6abf Commit Date: Tue Oct 6 23:51:54 2026 +0200 Commit Message: Aggiornamento orario notizie motorsport [skip ci]
 
 Backup Timestamp:
-2026-10-06 17:45:49
+2026-10-06 23:52:12
 =====================================================
 
