@@ -84802,6 +84802,8 @@
 
       let yAxisMax = Math.ceil(maxGapFound + 1);
       if (yAxisMax < 3) yAxisMax = 3;
+      const yAxisHeadroom = Math.max(0.6, Math.round(yAxisMax * 0.05 * 10) / 10);
+      const yAxisBottom = yAxisMax + Math.max(0.5, Math.round(yAxisMax * 0.04 * 10) / 10);
 
       const ctx = canvasEl.getContext('2d');
       const chartInst = new Chart(ctx, {
@@ -84865,8 +84867,14 @@
             },
             y: {
               reverse: true,
-              min: 0,
-              max: yAxisMax,
+              min: -yAxisHeadroom,
+              max: yAxisBottom,
+              afterBuildTicks: function(axis) {
+                axis.ticks = axis.ticks.filter(t => t.value >= 0);
+                if (!axis.ticks.some(t => t.value === 0)) {
+                  axis.ticks.unshift({ value: 0 });
+                }
+              },
               grid: {
                 color: function(c) {
                   if (c.tick && c.tick.value === 0) return 'rgba(46, 204, 113, 0.35)';
@@ -84881,7 +84889,8 @@
                 font: { family: 'Inter', size: 11, weight: '600' },
                 callback: function(val) {
                   if (val === 0) return 'LEAD';
-                  return '+' + val + 's';
+                  if (val > 0) return '+' + val + 's';
+                  return '';
                 }
               }
             }
@@ -86042,8 +86051,8 @@
         <div class="sector-section" id="spr-progression-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">&#x1F4CA; SPR RACE - Race Progression &amp; Gap dal Leader</div>
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap-by-Lap Position (P1 to P22) &amp; Distacco dal leader (secondi) &middot; All laps included</div>
+              <div class="sector-title">&#x1F4CA; SPR RACE - Race Progression &amp; Gap to Leader</div>
+              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap-by-Lap Position (P1 to P22) &amp; Gap to leader (seconds) &middot; All laps included</div>
             </div>
             <button class="win-btn" id="spr-progression-min-btn" onclick="toggleSprProgressionMinimize()" title="Minimize / Expand">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="spr-progression-min-icon">
@@ -86055,7 +86064,6 @@
             <div class="sector-card">
               <div class="sector-card-title">
                 <span>Position Progression (Lap Chart)</span>
-                <span class="sector-card-badge badge-t3">P1 - P22</span>
               </div>
               <div class="progression-canvas-container">
                 <canvas id="chart-spr-lapchart"></canvas>
@@ -86063,8 +86071,7 @@
             </div>
             <div class="sector-card">
               <div class="sector-card-title">
-                <span>Gap dal Leader (Gap-to-Leader)</span>
-                <span class="sector-card-badge badge-t4">GAP (s)</span>
+                <span>Gap to Leader</span>
               </div>
               <div class="progression-canvas-container">
                 <canvas id="chart-spr-gapchart"></canvas>
@@ -86131,8 +86138,8 @@
         <div class="sector-section" id="rac-progression-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">&#x1F4CA; MAIN RACE - Race Progression &amp; Gap dal Leader</div>
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap-by-Lap Position (P1 to P22) &amp; Distacco dal leader (secondi) &middot; All laps included</div>
+              <div class="sector-title">&#x1F4CA; MAIN RACE - Race Progression &amp; Gap to Leader</div>
+              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap-by-Lap Position (P1 to P22) &amp; Gap to leader (seconds) &middot; All laps included</div>
             </div>
             <button class="win-btn" id="rac-progression-min-btn" onclick="toggleRacProgressionMinimize()" title="Minimize / Expand">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="rac-progression-min-icon">
@@ -86144,7 +86151,6 @@
             <div class="sector-card">
               <div class="sector-card-title">
                 <span>Position Progression (Lap Chart)</span>
-                <span class="sector-card-badge badge-t3">P1 - P22</span>
               </div>
               <div class="progression-canvas-container">
                 <canvas id="chart-rac-lapchart"></canvas>
@@ -86152,8 +86158,7 @@
             </div>
             <div class="sector-card">
               <div class="sector-card-title">
-                <span>Gap dal Leader (Gap-to-Leader)</span>
-                <span class="sector-card-badge badge-t4">GAP (s)</span>
+                <span>Gap to Leader</span>
               </div>
               <div class="progression-canvas-container">
                 <canvas id="chart-rac-gapchart"></canvas>
