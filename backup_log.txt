@@ -3,18 +3,22 @@
 OVERREVVING BACKUP LOG
 =====================================================
 Backup Folder Name:
-G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20260923_231408
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261006_174549
 
 Note / Log Message:
-Versione stabile e aggiornata con:
-- Integrazione completa dei GP di San Marino (Round 14) e Austria (Round 15) in event.html: 9 sessioni complete (FP1, PR, FP2, Q1, Q2, Grid ufficiale 22 piloti, Sprint, WUP, Race), condizioni meteo, Lap Charts completi (SPR e RAC) e telemetria settori T1-T4 per tutti i piloti.
-- Automazione completa weekend MotoGP (.github/scripts/update_event_data.py e workflow GitHub Actions): esecuzione automatica sabato sera (Sprint, LapChart Sprint, Settori Sprint) e domenica sera (Warm Up, Gara, LapChart Gara, Settori Gara, Classifiche generali), con supporto orari asiatici ed europei/americani.
-- Aggiornamento condizioni meteo (SPR: Dry RACE: Dry) per San Marino e Austria nei calendari di motogp.html e category.html (con aggiornamento automatico dei badge anche per i prossimi GP).
-- Personalizzazione stile barra di scroll orizzontale (longitudinale) in index.html, perfettamente uniformata allo stile scuro/sottile delle colonne verticali.
+Versione stabile con:
+- Architettura Git-as-a-database implementata per tutte e 7 le categorie (MotoGP, Moto2, Moto3, WorldSBK, F1, MXGP, MX2).
+- Database unificato data/standings_latest.json e archivi multi-anno per categoria data/<categoria>/2026.json.
+- Esportazioni analitiche Tidy in exports/csv/ (season_standings.csv, race_results_points.csv, calendar_events.csv) per Tableau e Grafana.
+- Cartella di lavoro Master Excel multi-foglio exports/motorsport_database_2026.xlsx.
+- Aggiornamento frontend (index.html, motogp.html, category.html, admin.html) con priorità di caricamento locale da Git e fallback resiliente.
+- Automazione CI/CD in .github/workflows/update-f1-v3.yaml ed ingestion in .github/scripts/update_standings.js con scrittura diretta su Git e auto-export.
+- Rimozione della cartella duplicata su OneDrive e consolidamento unico sul repository locale C:\Users\Andrea\Desktop\Sito overrevving.
 
 Git Commit Info:
-Commit Hash: c2341b42b4280baa847ecf7d07ebb5b661ce3aea Commit Date: Wed Sep 23 22:49:07 2026 Commit Message: Style horizontal scrollbar in index.html to match vertical column scrollbars
+Commit Hash: 700e6f81758cbf5e36ab05bed1b6f38a730505bd Commit Date: Tue Oct 6 01:07:11 2026 +0200 Commit Message: Update backup_log.txt with complete history
 
 Backup Timestamp:
-2026-09-23 23:14:08
+2026-10-06 17:45:49
 =====================================================
+
