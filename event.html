@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -587,7 +587,25 @@
       display: none !important;
     }
     /* 4-Quadrant Sector Times Comparison Section */
-        /* LAP CHART (POSITION PROGRESSION) STYLES */
+        /* LAP CHART & GAP CHART (RACE PROGRESSION) STYLES */
+    .progression-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 36px;
+      margin-bottom: 24px;
+      align-items: start;
+    }
+    .progression-grid-2col .lapchart-section {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    @media (max-width: 900px) {
+      .progression-grid-2col {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+      }
+    }
     .lapchart-section {
       background: #2c2c32;
       border: 1px solid #3a3a42;
@@ -873,11 +891,17 @@
     };
 
     logoImg.onload = () => {
-                  if (typeof sprLapChartInstance !== 'undefined' && sprLapChartInstance) {
+      if (typeof sprLapChartInstance !== 'undefined' && sprLapChartInstance) {
         try { sprLapChartInstance.update('none'); } catch(e) {}
       }
       if (typeof racLapChartInstance !== 'undefined' && racLapChartInstance) {
         try { racLapChartInstance.update('none'); } catch(e) {}
+      }
+      if (typeof sprGapChartInstance !== 'undefined' && sprGapChartInstance) {
+        try { sprGapChartInstance.update('none'); } catch(e) {}
+      }
+      if (typeof racGapChartInstance !== 'undefined' && racGapChartInstance) {
+        try { racGapChartInstance.update('none'); } catch(e) {}
       }
       if (typeof sprSectorChartInstances !== 'undefined') {
         for (let key in sprSectorChartInstances) {
@@ -894,7 +918,14 @@
         }
       }
       const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
-      if (cur) { if (typeof renderSprLapChart === 'function') renderSprLapChart(cur); if (typeof renderRacLapChart === 'function') renderRacLapChart(cur); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(cur); if (typeof renderSectorCharts === 'function') renderSectorCharts(cur); }
+      if (cur) {
+        if (typeof renderSprLapChart === 'function') renderSprLapChart(cur);
+        if (typeof renderRacLapChart === 'function') renderRacLapChart(cur);
+        if (typeof renderSprGapChart === 'function') renderSprGapChart(cur);
+        if (typeof renderRacGapChart === 'function') renderRacGapChart(cur);
+        if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(cur);
+        if (typeof renderSectorCharts === 'function') renderSectorCharts(cur);
+      }
     };
     const SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e";
     const CAT_MOTOGP = "e8c110ad-64aa-4e8e-8a86-f2f152f6a942";
@@ -19005,7 +19036,12 @@
       }
       saveSessionPrefs();
       applySessionVisibility();
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short); if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short); renderSectorCharts(gp.short);
+      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
+      if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short);
+      if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short);
+      if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short);
+      if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short);
+      renderSectorCharts(gp.short);
     }
 
     function selectAllSessions() {
@@ -19013,7 +19049,12 @@
       buildSidebarList();
       saveSessionPrefs();
       applySessionVisibility();
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short); if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short); renderSectorCharts(gp.short);
+      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
+      if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short);
+      if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short);
+      if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short);
+      if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short);
+      renderSectorCharts(gp.short);
     }
 
     function clearAllSessions() {
@@ -19021,7 +19062,12 @@
       buildSidebarList();
       saveSessionPrefs();
       applySessionVisibility();
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short); if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short); renderSectorCharts(gp.short);
+      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
+      if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short);
+      if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short);
+      if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short);
+      if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short);
+      renderSectorCharts(gp.short);
     }
 
     function applySessionVisibility() {
@@ -84648,10 +84694,306 @@
 
     function renderSprLapChart(currentGpShort) {
       renderSingleLapChart('SPR', 'chart-spr-lapchart', 'spr-lapchart-section', 'spr-lapchart-min-btn', 'spr-lapchart-min-icon', 'overrevving_spr_lapchart_minimized', currentGpShort);
+      updateProgressionGridDisplay('spr-progression-grid', 'spr-lapchart-section', 'spr-gapchart-section');
     }
 
     function renderRacLapChart(currentGpShort) {
       renderSingleLapChart('RAC', 'chart-rac-lapchart', 'rac-lapchart-section', 'rac-lapchart-min-btn', 'rac-lapchart-min-icon', 'overrevving_rac_lapchart_minimized', currentGpShort);
+      updateProgressionGridDisplay('rac-progression-grid', 'rac-lapchart-section', 'rac-gapchart-section');
+    }
+
+    function updateProgressionGridDisplay(gridId, sec1Id, sec2Id) {
+      const grid = document.getElementById(gridId);
+      const s1 = document.getElementById(sec1Id);
+      const s2 = document.getElementById(sec2Id);
+      if (!grid || !s1 || !s2) return;
+      const s1Vis = (s1.style.display !== 'none');
+      const s2Vis = (s2.style.display !== 'none');
+      if (s1Vis && s2Vis) {
+        grid.style.display = 'grid';
+        grid.style.gridTemplateColumns = '';
+      } else if (s1Vis || s2Vis) {
+        grid.style.display = 'grid';
+        grid.style.gridTemplateColumns = '1fr';
+      } else {
+        grid.style.display = 'none';
+      }
+    }
+
+    let sprGapChartInstance = null;
+    let racGapChartInstance = null;
+
+    function toggleSprGapChartMinimize() {
+      const section = document.getElementById('spr-gapchart-section');
+      if (!section) return;
+      const isMin = section.classList.toggle('minimized');
+      const btn = document.getElementById('spr-gapchart-min-btn');
+      const icon = document.getElementById('spr-gapchart-min-icon');
+      if (isMin) {
+        if (btn) btn.setAttribute('title', 'Expand');
+        if (icon) icon.innerHTML = '<rect x="2" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/>';
+      } else {
+        if (btn) btn.setAttribute('title', 'Minimize');
+        if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+        if (sprGapChartInstance) { try { sprGapChartInstance.resize(); } catch(e) {} }
+      }
+      try { localStorage.setItem('overrevving_spr_gapchart_minimized', isMin ? '1' : '0'); } catch(e) {}
+    }
+
+    function toggleRacGapChartMinimize() {
+      const section = document.getElementById('rac-gapchart-section');
+      if (!section) return;
+      const isMin = section.classList.toggle('minimized');
+      const btn = document.getElementById('rac-gapchart-min-btn');
+      const icon = document.getElementById('rac-gapchart-min-icon');
+      if (isMin) {
+        if (btn) btn.setAttribute('title', 'Expand');
+        if (icon) icon.innerHTML = '<rect x="2" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/>';
+      } else {
+        if (btn) btn.setAttribute('title', 'Minimize');
+        if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+        if (racGapChartInstance) { try { racGapChartInstance.resize(); } catch(e) {} }
+      }
+      try { localStorage.setItem('overrevving_rac_gapchart_minimized', isMin ? '1' : '0'); } catch(e) {}
+    }
+
+    function renderSingleGapChart(sessionKey, canvasId, sectionId, minBtnId, minIconId, storageKey, currentGpShort) {
+      if (!currentGpShort) currentGpShort = (window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA'));
+      const sectionEl = document.getElementById(sectionId);
+      const canvasEl = document.getElementById(canvasId);
+      if (!sectionEl || !canvasEl) return;
+
+      const rawLapsData = sessionKey === 'SPR'
+        ? ((typeof EVENT_SPR_LAPS_DATA !== 'undefined') ? EVENT_SPR_LAPS_DATA[currentGpShort] : null)
+        : ((typeof EVENT_LAPS_DATA !== 'undefined') ? EVENT_LAPS_DATA[currentGpShort] : null);
+
+      if (!rawLapsData || Object.keys(rawLapsData).length === 0) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      function parseTimeSec(tStr) {
+        if (!tStr) return null;
+        const m = String(tStr).trim().match(/(?:(\d+)[':])?(\d+)\.(\d+)/);
+        if (!m) return null;
+        const mins = m[1] ? parseInt(m[1], 10) : 0;
+        const secs = parseInt(m[2], 10);
+        const ms = parseFloat('0.' + m[3]);
+        return mins * 60 + secs + ms;
+      }
+
+      let maxLaps = 0;
+      for (let r in rawLapsData) {
+        if (Array.isArray(rawLapsData[r])) {
+          maxLaps = Math.max(maxLaps, rawLapsData[r].length);
+        }
+      }
+
+      if (maxLaps === 0) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      const allCumTimes = {};
+      for (let r in rawLapsData) {
+        const laps = rawLapsData[r] || [];
+        let cum = 0;
+        const arr = [];
+        for (let i = 0; i < maxLaps; i++) {
+          const l = laps[i];
+          const sec = l ? parseTimeSec(l.time) : null;
+          if (sec !== null && sec > 0) {
+            cum += sec;
+            arr.push(cum);
+          } else {
+            arr.push(null);
+          }
+        }
+        allCumTimes[r] = arr;
+      }
+
+      const leaderCumPerLap = [];
+      for (let lapIdx = 0; lapIdx < maxLaps; lapIdx++) {
+        let minCum = Infinity;
+        for (let r in allCumTimes) {
+          const c = allCumTimes[r][lapIdx];
+          if (c !== null && c > 0 && c < minCum) {
+            minCum = c;
+          }
+        }
+        leaderCumPerLap.push(minCum < Infinity ? minCum : null);
+      }
+
+      const activeFavRiders = [];
+      for (let rName of Object.keys(rawLapsData)) {
+        if (isRiderFavorite(rName)) {
+          activeFavRiders.push(rName);
+        }
+      }
+
+      if (activeFavRiders.length === 0) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      sectionEl.style.display = 'block';
+      if (localStorage.getItem(storageKey) === '1' && !sectionEl.classList.contains('minimized')) {
+        if (sessionKey === 'SPR') toggleSprGapChartMinimize();
+        else toggleRacGapChartMinimize();
+      }
+
+      const labels = [];
+      for (let i = 1; i <= maxLaps; i++) {
+        labels.push('L' + i);
+      }
+
+      let maxGapFound = 0;
+      const datasets = activeFavRiders.map((rName, idx) => {
+        const riderCum = allCumTimes[rName] || [];
+        const gaps = [];
+        for (let lapIdx = 0; lapIdx < maxLaps; lapIdx++) {
+          const c = riderCum[lapIdx];
+          const lead = leaderCumPerLap[lapIdx];
+          if (c !== null && lead !== null) {
+            const gap = Math.max(0, Math.round((c - lead) * 1000) / 1000);
+            gaps.push(gap);
+            if (gap > maxGapFound) maxGapFound = gap;
+          } else {
+            gaps.push(null);
+          }
+        }
+
+        const style = RIDER_STYLES[rName] || {};
+        const color = style.color || ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6'][idx % 5];
+
+        const ds = {
+          label: formatName(rName),
+          data: gaps,
+          borderColor: color,
+          backgroundColor: color + '15',
+          borderWidth: 3,
+          tension: 0.1,
+          pointRadius: 3.5,
+          pointHoverRadius: 6.5,
+          fill: false,
+          spanGaps: false
+        };
+
+        if (style.borderDash) {
+          ds.borderDash = style.borderDash;
+        }
+        return ds;
+      });
+
+      if (sessionKey === 'SPR' && sprGapChartInstance) {
+        try { sprGapChartInstance.destroy(); } catch(e) {}
+        sprGapChartInstance = null;
+      } else if (sessionKey === 'RAC' && racGapChartInstance) {
+        try { racGapChartInstance.destroy(); } catch(e) {}
+        racGapChartInstance = null;
+      }
+
+      let yAxisMax = Math.ceil(maxGapFound + 1);
+      if (yAxisMax < 3) yAxisMax = 3;
+
+      const ctx = canvasEl.getContext('2d');
+      const chartInst = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: datasets
+        },
+        plugins: [watermarkPlugin],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 300 },
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                color: '#ccc',
+                font: { family: 'Inter', size: 12 },
+                boxWidth: 24,
+                padding: 16
+              }
+            },
+            tooltip: {
+              backgroundColor: '#1e1e22',
+              titleColor: '#fff',
+              bodyColor: '#ddd',
+              borderColor: '#3a3a42',
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                label: function(context) {
+                  if (context.parsed.y === null || isNaN(context.parsed.y)) {
+                    return ' ' + context.dataset.label + ': OUT';
+                  }
+                  if (context.parsed.y === 0) {
+                    return ' ' + context.dataset.label + ': LEAD (0.000s)';
+                  }
+                  return ' ' + context.dataset.label + ': +' + context.parsed.y.toFixed(3) + 's';
+                }
+              }
+            }
+          },
+          layout: {
+            padding: {
+              top: 14,
+              bottom: 8,
+              left: 4,
+              right: 12
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.06)' },
+              ticks: { color: '#999', font: { family: 'Inter', size: 11, weight: '600' } }
+            },
+            y: {
+              reverse: true,
+              min: 0,
+              max: yAxisMax,
+              grid: {
+                color: function(c) {
+                  if (c.tick && c.tick.value === 0) return 'rgba(46, 204, 113, 0.35)';
+                  return 'rgba(255, 255, 255, 0.06)';
+                }
+              },
+              ticks: {
+                color: function(c) {
+                  if (c.tick && c.tick.value === 0) return '#2ecc71';
+                  return '#999';
+                },
+                font: { family: 'Inter', size: 11, weight: '600' },
+                callback: function(val) {
+                  if (val === 0) return 'LEAD';
+                  return '+' + val + 's';
+                }
+              }
+            }
+          }
+        }
+      });
+
+      if (sessionKey === 'SPR') sprGapChartInstance = chartInst;
+      else racGapChartInstance = chartInst;
+    }
+
+    function renderSprGapChart(currentGpShort) {
+      renderSingleGapChart('SPR', 'chart-spr-gapchart', 'spr-gapchart-section', 'spr-gapchart-min-btn', 'spr-gapchart-min-icon', 'overrevving_spr_gapchart_minimized', currentGpShort);
+      updateProgressionGridDisplay('spr-progression-grid', 'spr-lapchart-section', 'spr-gapchart-section');
+    }
+
+    function renderRacGapChart(currentGpShort) {
+      renderSingleGapChart('RAC', 'chart-rac-gapchart', 'rac-gapchart-section', 'rac-gapchart-min-btn', 'rac-gapchart-min-icon', 'overrevving_rac_gapchart_minimized', currentGpShort);
+      updateProgressionGridDisplay('rac-progression-grid', 'rac-lapchart-section', 'rac-gapchart-section');
     }
 
     function toggleSprSectorMinimize() {
@@ -85074,7 +85416,7 @@
           if (b) b.classList.toggle('active', isFavNow);
         }
       });
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(); if (typeof renderRacLapChart === 'function') renderRacLapChart(); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(); renderSectorCharts();
+      if (typeof renderSprLapChart === 'function') renderSprLapChart(); if (typeof renderRacLapChart === 'function') renderRacLapChart(); if (typeof renderSprGapChart === 'function') renderSprGapChart(); if (typeof renderRacGapChart === 'function') renderRacGapChart(); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(); renderSectorCharts();
     }
 
     function formatName(fullName) {
@@ -85715,22 +86057,39 @@
 
         </div>
 
-                        <!-- 4-QUADRANT SECTOR TIMES COMPARISON (SPRINT RACE - FAVORITE RIDERS) -->
-                <!-- POSITION PROGRESSION (SPRINT RACE - FAVORITE RIDERS) -->
-        <div class="lapchart-section" id="spr-lapchart-section" style="display: none;">
-          <div class="sector-header">
-            <div>
-              <div class="sector-title">&#x1F4CA; SPR RACE - Position Progression (Lap Chart)</div>
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap-by-Lap Position (P1 to P22) &middot; All laps included</div>
+        <!-- SPRINT RACE: POSITION PROGRESSION & GAP TO LEADER -->
+        <div class="progression-grid-2col" id="spr-progression-grid" style="display: none;">
+          <div class="lapchart-section" id="spr-lapchart-section" style="display: none;">
+            <div class="sector-header">
+              <div>
+                <div class="sector-title">&#x1F4CA; SPR RACE - Position Progression (Lap Chart)</div>
+                <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap-by-Lap Position (P1 to P22) &middot; All laps included</div>
+              </div>
+              <button class="win-btn" id="spr-lapchart-min-btn" onclick="toggleSprLapChartMinimize()" title="Minimize / Expand">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="spr-lapchart-min-icon">
+                  <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </button>
             </div>
-            <button class="win-btn" id="spr-lapchart-min-btn" onclick="toggleSprLapChartMinimize()" title="Minimize / Expand">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="spr-lapchart-min-icon">
-                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </button>
+            <div class="lapchart-canvas-container">
+              <canvas id="chart-spr-lapchart"></canvas>
+            </div>
           </div>
-          <div class="lapchart-canvas-container">
-            <canvas id="chart-spr-lapchart"></canvas>
+          <div class="lapchart-section" id="spr-gapchart-section" style="display: none;">
+            <div class="sector-header">
+              <div>
+                <div class="sector-title">&#x23F1;&#xFE0F; SPR RACE - Gap dal Leader (Gap-to-Leader)</div>
+                <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Distacco dal leader giro per giro &middot; All laps included</div>
+              </div>
+              <button class="win-btn" id="spr-gapchart-min-btn" onclick="toggleSprGapChartMinimize()" title="Minimize / Expand">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="spr-gapchart-min-icon">
+                  <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+            <div class="lapchart-canvas-container">
+              <canvas id="chart-spr-gapchart"></canvas>
+            </div>
           </div>
         </div>
         <div class="sector-section" id="spr-sector-section" style="display: none;">
@@ -85788,22 +86147,39 @@
             </div>
           </div>
         </div>
-        <!-- 4-QUADRANT SECTOR TIMES COMPARISON (MAIN RACE - FAVORITE RIDERS) -->
-                <!-- POSITION PROGRESSION (MAIN RACE - FAVORITE RIDERS) -->
-        <div class="lapchart-section" id="rac-lapchart-section" style="display: none;">
-          <div class="sector-header">
-            <div>
-              <div class="sector-title">&#x1F4CA; MAIN RACE - Position Progression (Lap Chart)</div>
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap-by-Lap Position (P1 to P22) &middot; All laps included</div>
+        <!-- MAIN RACE: POSITION PROGRESSION & GAP TO LEADER -->
+        <div class="progression-grid-2col" id="rac-progression-grid" style="display: none;">
+          <div class="lapchart-section" id="rac-lapchart-section" style="display: none;">
+            <div class="sector-header">
+              <div>
+                <div class="sector-title">&#x1F4CA; MAIN RACE - Position Progression (Lap Chart)</div>
+                <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap-by-Lap Position (P1 to P22) &middot; All laps included</div>
+              </div>
+              <button class="win-btn" id="rac-lapchart-min-btn" onclick="toggleRacLapChartMinimize()" title="Minimize / Expand">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="rac-lapchart-min-icon">
+                  <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </button>
             </div>
-            <button class="win-btn" id="rac-lapchart-min-btn" onclick="toggleRacLapChartMinimize()" title="Minimize / Expand">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="rac-lapchart-min-icon">
-                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </button>
+            <div class="lapchart-canvas-container">
+              <canvas id="chart-rac-lapchart"></canvas>
+            </div>
           </div>
-          <div class="lapchart-canvas-container">
-            <canvas id="chart-rac-lapchart"></canvas>
+          <div class="lapchart-section" id="rac-gapchart-section" style="display: none;">
+            <div class="sector-header">
+              <div>
+                <div class="sector-title">&#x23F1;&#xFE0F; MAIN RACE - Gap dal Leader (Gap-to-Leader)</div>
+                <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Distacco dal leader giro per giro &middot; All laps included</div>
+              </div>
+              <button class="win-btn" id="rac-gapchart-min-btn" onclick="toggleRacGapChartMinimize()" title="Minimize / Expand">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="rac-gapchart-min-icon">
+                  <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+            <div class="lapchart-canvas-container">
+              <canvas id="chart-rac-gapchart"></canvas>
+            </div>
           </div>
         </div>
         <div class="sector-section" id="sector-section" style="display: none;">
@@ -85889,7 +86265,7 @@
 
       buildSidebarList();
       applySessionVisibility();
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short); if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short); renderSectorCharts(gp.short);
+      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short); if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short); if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short); if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short); renderSectorCharts(gp.short);
     }
 
     document.addEventListener('DOMContentLoaded', initEventPage);
