@@ -191,9 +191,8 @@
   .pos-3 td:first-child { color: #cd7f32; }
   .driver-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
   .next-round { font-size: 13px; font-weight: 400; text-transform: none; letter-spacing: normal; margin-top: 4px; opacity: 0.9; }
-  .visitor-counter { text-align: center; margin-top: 40px; padding-top: 20px; display: flex; flex-direction: column; align-items: center; }
-  .visitor-badges-wrapper { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px; }
-  .visitor-badge-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .visitor-counter { text-align: center; margin-top: 40px; padding-top: 20px; display: flex; justify-content: center; align-items: center; }
+  .visitor-badges-wrapper { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
   .footer-social {
     max-width: 1100px;
     margin: 30px auto 0;
@@ -248,8 +247,11 @@
     letter-spacing: 0.08em;
   }
   .loading { text-align: center; color: #555; padding: 60px 0; font-size: 14px; }
-  @media (max-width: 700px) { body { padding: 16px 20px 40px; } #reset-order-btn { display: none; } }
-  @media (max-width: 600px) { .visitor-badges-wrapper { flex-direction: column; gap: 14px; } }
+  @media (max-width: 700px) {
+    body { padding: 16px 20px 40px; }
+    #reset-order-btn { display: none; }
+    .visitor-badges-wrapper { flex-direction: column; gap: 10px; }
+  }
   tbody tr.favorite { background: #2a1f3a !important; }
   tbody tr.favorite:hover { background: #332545 !important; }
   .fav-btn { background: none; border: none; cursor: pointer; font-size: 13px; padding: 0 4px; opacity: 0.3; transition: opacity 0.15s, color 0.15s; line-height: 1; color: #999; }
@@ -527,19 +529,13 @@
 
 <div class="visitor-counter">
   <div class="visitor-badges-wrapper">
-    <div class="visitor-badge-col">
-      <div class="visitor-counter-label">TODAY'S VISITS</div>
-      <div class="visitor-badge" id="daily-visitor-badge">
-        <span class="badge-title">VISITE OGGI</span>
-        <span class="badge-val" id="daily-visitor-count">...</span>
-      </div>
+    <div class="visitor-badge" id="daily-visitor-badge">
+      <span class="badge-title">TODAY'S VISITS</span>
+      <span class="badge-val" id="daily-visitor-count">...</span>
     </div>
-    <div class="visitor-badge-col">
-      <div class="visitor-counter-label">UNIQUE VISITORS</div>
-      <div class="visitor-badge" id="unique-visitor-badge">
-        <span class="badge-title">VISITATORI UNICI</span>
-        <span class="badge-val" id="unique-visitor-count">...</span>
-      </div>
+    <div class="visitor-badge" id="unique-visitor-badge">
+      <span class="badge-title">UNIQUE VISITORS</span>
+      <span class="badge-val" id="unique-visitor-count">...</span>
     </div>
   </div>
 </div>
