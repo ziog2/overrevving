@@ -106,6 +106,198 @@
   .btn-save:hover { background: #4d7bcd; }
   .error-msg { color: #e04040; font-size: 12px; margin-top: 8px; display: none; }
   @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } body { padding: 16px 40px 40px; } }
+
+  /* Analytics Dashboard */
+  .analytics-section {
+    max-width: 1400px;
+    margin: 28px auto 36px;
+    background: #25252b;
+    border: 1px solid #383842;
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  }
+  .analytics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .analytics-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #e8e8ed;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .analytics-title .analytics-badge {
+    background: #1e3a2e;
+    color: #4ade80;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+  .analytics-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .analytics-btn-group {
+    display: inline-flex;
+    background: #1c1c21;
+    border: 1px solid #3a3a44;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .analytics-tab-btn {
+    background: transparent;
+    color: #8f92a1;
+    border: none;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .analytics-tab-btn:hover {
+    color: #fff;
+    background: #2a2a34;
+  }
+  .analytics-tab-btn.active {
+    background: #e10600;
+    color: #fff;
+  }
+  .analytics-btn-icon {
+    background: #1c1c21;
+    color: #a0a2b0;
+    border: 1px solid #3a3a44;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+  }
+  .analytics-btn-icon:hover {
+    background: #2e2e38;
+    color: #fff;
+  }
+  .analytics-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .kpi-card {
+    background: #1c1c22;
+    border: 1px solid #32323d;
+    border-radius: 10px;
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #555;
+  }
+  .kpi-card.kpi-today-visits::before { background: #3b82f6; }
+  .kpi-card.kpi-today-unique::before { background: #10b981; }
+  .kpi-card.kpi-total-unique::before { background: #f59e0b; }
+  .kpi-card.kpi-avg-visits::before   { background: #8b5cf6; }
+  .kpi-card.kpi-device::before       { background: #ec4899; }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #8b8e9e;
+    margin-bottom: 6px;
+  }
+  .kpi-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    font-family: 'Inter', -apple-system, sans-serif;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+  .kpi-subtext {
+    font-size: 11px;
+    color: #6b6e7e;
+    margin-top: 6px;
+  }
+  .analytics-charts-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  .analytics-charts-grid.secondary-row {
+    grid-template-columns: 1fr;
+  }
+  .analytics-chart-card {
+    background: #1c1c22;
+    border: 1px solid #32323d;
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .analytics-chart-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #d1d4e0;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .analytics-chart-subtitle {
+    font-size: 11px;
+    color: #6e7182;
+    margin-bottom: 14px;
+  }
+  .chart-canvas-wrap {
+    position: relative;
+    width: 100%;
+    min-height: 250px;
+    height: 260px;
+  }
+  .chart-canvas-wrap.doughnut-wrap {
+    min-height: 220px;
+    height: 230px;
+  }
+  .chart-canvas-wrap.hourly-wrap {
+    min-height: 200px;
+    height: 210px;
+  }
+  .analytics-body.minimized {
+    display: none;
+  }
+  .analytics-status-tag {
+    font-size: 11px;
+    color: #9aa0a6;
+    margin-left: 8px;
+  }
+  @media (max-width: 980px) {
+    .analytics-charts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 </head>
 <body>
@@ -137,6 +329,95 @@
 </div>
 <div id="global-status"></div>
 
+<!-- Analytics & Monitoraggio Traffico ed Audience -->
+<div class="analytics-section" id="analytics-section">
+  <div class="analytics-header">
+    <div class="analytics-title">
+      <span>📈 Monitoraggio Traffico & Audience</span>
+      <span class="analytics-badge">LIVE METRICS</span>
+      <span class="analytics-status-tag" id="analytics-status-tag">Caricamento...</span>
+    </div>
+    <div class="analytics-controls">
+      <div class="analytics-btn-group">
+        <button class="analytics-tab-btn active" id="btn-range-14" onclick="switchAnalyticsDays(14)">14 Giorni</button>
+        <button class="analytics-tab-btn" id="btn-range-30" onclick="switchAnalyticsDays(30)">30 Giorni</button>
+      </div>
+      <button class="analytics-btn-icon" onclick="refreshAnalyticsData()" title="Aggiorna metriche">🔄 Aggiorna</button>
+      <button class="analytics-btn-icon" id="btn-toggle-analytics" onclick="toggleAnalyticsMinimize()" title="Riduci / Espandi">▼</button>
+    </div>
+  </div>
+
+  <div class="analytics-body" id="analytics-body">
+    <!-- Row 1: KPI Cards -->
+    <div class="analytics-kpi-row">
+      <div class="kpi-card kpi-today-visits">
+        <div class="kpi-label">Visite Oggi</div>
+        <div class="kpi-value" id="kpi-today-visits">---</div>
+        <div class="kpi-subtext" id="kpi-today-date">Visualizzazioni pagina odierne</div>
+      </div>
+      <div class="kpi-card kpi-today-unique">
+        <div class="kpi-label">Visitatori Unici Oggi</div>
+        <div class="kpi-value" id="kpi-today-unique">---</div>
+        <div class="kpi-subtext">Dispositivi singoli oggi</div>
+      </div>
+      <div class="kpi-card kpi-total-unique">
+        <div class="kpi-label">Unici Storici Totali</div>
+        <div class="kpi-value" id="kpi-total-unique">---</div>
+        <div class="kpi-subtext">Utenti totali dall'apertura</div>
+      </div>
+      <div class="kpi-card kpi-avg-visits">
+        <div class="kpi-label" id="kpi-avg-label">Media Giornaliera (14gg)</div>
+        <div class="kpi-value" id="kpi-avg-visits">---</div>
+        <div class="kpi-subtext" id="kpi-avg-subtext">Visite / giorno nel periodo</div>
+      </div>
+      <div class="kpi-card kpi-device">
+        <div class="kpi-label">Ripartizione Dispositivi</div>
+        <div class="kpi-value" id="kpi-device-ratio">---</div>
+        <div class="kpi-subtext" id="kpi-device-subtext">Mobile vs Desktop</div>
+      </div>
+    </div>
+
+    <!-- Row 2: Charts (Daily Trend & Device Breakdown) -->
+    <div class="analytics-charts-grid">
+      <div class="analytics-chart-card">
+        <div class="analytics-chart-title">
+          <span>Andamento Visite Giornaliere</span>
+          <span style="font-size:11px;color:#8f92a1;font-weight:normal;" id="trend-range-label">Ultimi 14 giorni</span>
+        </div>
+        <div class="analytics-chart-subtitle">Confronto tra visite totali e visitatori unici giornalieri</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="chart-daily-trend"></canvas>
+        </div>
+      </div>
+
+      <div class="analytics-chart-card">
+        <div class="analytics-chart-title">
+          <span>Dispositivi Audience</span>
+          <span style="font-size:11px;color:#8f92a1;font-weight:normal;">Storico</span>
+        </div>
+        <div class="analytics-chart-subtitle">Percentuale visitatori Mobile vs Desktop</div>
+        <div class="chart-canvas-wrap doughnut-wrap">
+          <canvas id="chart-device-breakdown"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: Hourly Activity -->
+    <div class="analytics-charts-grid secondary-row">
+      <div class="analytics-chart-card">
+        <div class="analytics-chart-title">
+          <span>Distribuzione Oraria Visite (00:00 - 23:00)</span>
+          <span style="font-size:11px;color:#8f92a1;font-weight:normal;">Fuso Orario Roma (CET/CEST)</span>
+        </div>
+        <div class="analytics-chart-subtitle">Fasce orarie più attive del pubblico (barra accesa = ora attuale)</div>
+        <div class="chart-canvas-wrap hourly-wrap">
+          <canvas id="chart-hourly-activity"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Modal manuale -->
 <div class="overlay" id="overlay">
   <div class="modal">
@@ -162,6 +443,7 @@
   </div>
 </div>
 
+<script src="js/chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 function formatName(fullName) {
@@ -210,6 +492,7 @@ function checkPwd() {
   if (val === ADMIN_PWD) {
     document.getElementById('login-screen').style.display = 'none';
     loadFromBin();
+    initAnalyticsDashboard();
   } else {
     document.getElementById('login-error').style.display = 'block';
     document.getElementById('pwd-input').value = '';
@@ -1093,6 +1376,451 @@ async function saveData() {
   catch(e) { showGlobalStatus('err','⚠ Errore salvataggio: '+e.message); }
 }
 document.getElementById('overlay').addEventListener('click',function(e){if(e.target===this)closeEditor();});
+
+// ==========================================
+// MONITORAGGIO TRAFFICO & AUDIENCE (DASHBOARD)
+// ==========================================
+let analyticsRangeDays = 14;
+let chartDailyTrendInstance = null;
+let chartDeviceInstance = null;
+let chartHourlyInstance = null;
+let isAnalyticsInitialized = false;
+
+function toggleAnalyticsMinimize() {
+  const bodyEl = document.getElementById('analytics-body');
+  const btnEl = document.getElementById('btn-toggle-analytics');
+  if (!bodyEl) return;
+  const isCurrentlyMin = bodyEl.classList.toggle('minimized');
+  if (btnEl) btnEl.textContent = isCurrentlyMin ? '▲' : '▼';
+  try {
+    localStorage.setItem('overrevving_admin_analytics_minimized', isCurrentlyMin ? '1' : '0');
+  } catch(e) {}
+}
+
+function switchAnalyticsDays(days) {
+  if (analyticsRangeDays === days) return;
+  analyticsRangeDays = days;
+  const btn14 = document.getElementById('btn-range-14');
+  const btn30 = document.getElementById('btn-range-30');
+  if (btn14 && btn30) {
+    if (days === 14) {
+      btn14.classList.add('active');
+      btn30.classList.remove('active');
+    } else {
+      btn30.classList.add('active');
+      btn14.classList.remove('active');
+    }
+  }
+  const rangeLbl = document.getElementById('trend-range-label');
+  if (rangeLbl) rangeLbl.textContent = 'Ultimi ' + days + ' giorni';
+  const avgLbl = document.getElementById('kpi-avg-label');
+  if (avgLbl) avgLbl.textContent = 'Media Giornaliera (' + days + 'gg)';
+  loadAnalyticsData();
+}
+
+function refreshAnalyticsData() {
+  loadAnalyticsData();
+}
+
+async function safeFetchCount(key, timeoutMs = 4500) {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    const res = await fetch('https://countapi.mileshilliard.com/api/v1/get/' + encodeURIComponent(key), {
+      signal: controller.signal
+    });
+    clearTimeout(timer);
+    if (!res.ok) return 0;
+    const json = await res.json();
+    return (json && typeof json.value === 'number') ? json.value : 0;
+  } catch (err) {
+    return 0;
+  }
+}
+
+function formatItalianDateKey(date) {
+  try {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Europe/Rome',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).formatToParts(date);
+    const y = parts.find(p => p.type === 'year')?.value;
+    const m = parts.find(p => p.type === 'month')?.value;
+    const d = parts.find(p => p.type === 'day')?.value;
+    return `${y}-${m}-${d}`;
+  } catch (e) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+  }
+}
+
+async function loadAnalyticsData() {
+  const statusEl = document.getElementById('analytics-status-tag');
+  if (statusEl) statusEl.textContent = 'Aggiornamento in corso...';
+
+  // 1. Costruisci date per il periodo selezionato (14 o 30 giorni)
+  const now = new Date();
+  const dayKeys = [];
+  const dayLabels = [];
+
+  for (let i = analyticsRangeDays - 1; i >= 0; i--) {
+    const d = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
+    const key = formatItalianDateKey(d);
+    dayKeys.push(key);
+    // Label giorno: DD/MM
+    const p = key.split('-');
+    dayLabels.push(p.length === 3 ? `${p[2]}/${p[1]}` : key);
+  }
+
+  const todayKey = dayKeys[dayKeys.length - 1];
+
+  // 2. Query parallele CountAPI
+  // Giorni totali e unici
+  const dailyTotalPromises = dayKeys.map(k => safeFetchCount('overrevving_daily_' + k));
+  const dailyUniquePromises = dayKeys.map(k => safeFetchCount('overrevving_daily_unique_' + k));
+
+  // Totali globali & audience
+  const totalUniquePromise = safeFetchCount('overrevving_unique_visitors');
+  const mobileDevPromise = safeFetchCount('overrevving_device_mobile');
+  const deskDevPromise = safeFetchCount('overrevving_device_desktop');
+
+  // Distribuzione oraria 00..23
+  const hourKeys = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
+  const hourPromises = hourKeys.map(h => safeFetchCount('overrevving_hour_' + h));
+
+  // Esecuzione parallela aggregata
+  const [
+    dailyTotals,
+    dailyUniques,
+    totalUniqueAllTime,
+    mobileHits,
+    deskHits,
+    hourlyHits
+  ] = await Promise.all([
+    Promise.all(dailyTotalPromises),
+    Promise.all(dailyUniquePromises),
+    totalUniquePromise,
+    mobileDevPromise,
+    deskDevPromise,
+    Promise.all(hourPromises)
+  ]);
+
+  // 3. Calcolo KPI
+  const todayVisits = dailyTotals[dailyTotals.length - 1] || 0;
+  const todayUnique = dailyUniques[dailyUniques.length - 1] || 0;
+  const sumVisits = dailyTotals.reduce((a, b) => a + b, 0);
+  const avgVisits = (sumVisits / analyticsRangeDays).toFixed(1);
+
+  const totalDev = mobileHits + deskHits;
+  let mobPct = 0;
+  let deskPct = 0;
+  if (totalDev > 0) {
+    mobPct = Math.round((mobileHits / totalDev) * 100);
+    deskPct = 100 - mobPct;
+  }
+
+  // Aggiornamento DOM KPI
+  const elTodayVis = document.getElementById('kpi-today-visits');
+  if (elTodayVis) elTodayVis.textContent = todayVisits.toLocaleString('it-IT');
+
+  const elTodayUniq = document.getElementById('kpi-today-unique');
+  if (elTodayUniq) elTodayUniq.textContent = todayUnique.toLocaleString('it-IT');
+
+  const elTotalUniq = document.getElementById('kpi-total-unique');
+  if (elTotalUniq) elTotalUniq.textContent = totalUniqueAllTime.toLocaleString('it-IT');
+
+  const elAvg = document.getElementById('kpi-avg-visits');
+  if (elAvg) elAvg.textContent = avgVisits;
+
+  const elDev = document.getElementById('kpi-device-ratio');
+  const elDevSub = document.getElementById('kpi-device-subtext');
+  if (elDev) {
+    if (totalDev > 0) {
+      elDev.textContent = `${mobPct}% / ${deskPct}%`;
+      if (elDevSub) elDevSub.textContent = `Mobile: ${mobileHits.toLocaleString('it-IT')} | Desk: ${deskHits.toLocaleString('it-IT')}`;
+    } else {
+      elDev.textContent = `---`;
+      if (elDevSub) elDevSub.textContent = `Nessun dato registrato`;
+    }
+  }
+
+  // 4. Render Grafici Chart.js
+  renderDailyTrendChart(dayLabels, dailyTotals, dailyUniques);
+  renderDeviceChart(mobileHits, deskHits);
+  renderHourlyChart(hourKeys, hourlyHits);
+
+  if (statusEl) {
+    const timeStr = new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+    statusEl.textContent = 'Aggiornato alle ' + timeStr;
+  }
+}
+
+function renderDailyTrendChart(labels, totals, uniques) {
+  const canvas = document.getElementById('chart-daily-trend');
+  if (!canvas || typeof Chart === 'undefined') return;
+
+  if (chartDailyTrendInstance) {
+    chartDailyTrendInstance.destroy();
+  }
+
+  const ctx = canvas.getContext('2d');
+  const gradTot = ctx.createLinearGradient(0, 0, 0, 240);
+  gradTot.addColorStop(0, 'rgba(59, 130, 246, 0.45)');
+  gradTot.addColorStop(1, 'rgba(59, 130, 246, 0.02)');
+
+  const gradUniq = ctx.createLinearGradient(0, 0, 0, 240);
+  gradUniq.addColorStop(0, 'rgba(16, 185, 129, 0.40)');
+  gradUniq.addColorStop(1, 'rgba(16, 185, 129, 0.02)');
+
+  chartDailyTrendInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Visite Totali',
+          data: totals,
+          borderColor: '#3b82f6',
+          backgroundColor: gradTot,
+          borderWidth: 2.5,
+          tension: 0.3,
+          fill: true,
+          pointRadius: 3.5,
+          pointHoverRadius: 6,
+          pointBackgroundColor: '#3b82f6',
+          pointBorderColor: '#1e1e24'
+        },
+        {
+          label: 'Visitatori Unici',
+          data: uniques,
+          borderColor: '#10b981',
+          backgroundColor: gradUniq,
+          borderWidth: 2.2,
+          tension: 0.3,
+          fill: true,
+          pointRadius: 3,
+          pointHoverRadius: 5.5,
+          pointBackgroundColor: '#10b981',
+          pointBorderColor: '#1e1e24'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: 'index',
+        intersect: false
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            color: '#c2c4d1',
+            boxWidth: 12,
+            boxHeight: 12,
+            font: { size: 11, family: 'Inter, sans-serif' }
+          }
+        },
+        tooltip: {
+          backgroundColor: '#1b1b22',
+          titleColor: '#ffffff',
+          bodyColor: '#e0e0e0',
+          borderColor: '#3c3c4a',
+          borderWidth: 1,
+          padding: 10
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          ticks: { color: '#8b8e9e', font: { size: 10 } }
+        },
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(255,255,255,0.06)' },
+          ticks: {
+            color: '#8b8e9e',
+            font: { size: 10 },
+            precision: 0
+          }
+        }
+      }
+    }
+  });
+}
+
+function renderDeviceChart(mobileCount, desktopCount) {
+  const canvas = document.getElementById('chart-device-breakdown');
+  if (!canvas || typeof Chart === 'undefined') return;
+
+  if (chartDeviceInstance) {
+    chartDeviceInstance.destroy();
+  }
+
+  const total = mobileCount + desktopCount;
+  const hasData = total > 0;
+  const dataVals = hasData ? [mobileCount, desktopCount] : [1, 0];
+  const bgColors = hasData ? ['#ec4899', '#6366f1'] : ['#383844', '#2a2a34'];
+
+  const ctx = canvas.getContext('2d');
+  chartDeviceInstance = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: hasData ? ['Mobile', 'Desktop'] : ['Nessun dato registrato'],
+      datasets: [
+        {
+          data: dataVals,
+          backgroundColor: bgColors,
+          borderColor: '#1c1c22',
+          borderWidth: 3,
+          hoverOffset: 6
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '70%',
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+            color: '#c2c4d1',
+            boxWidth: 12,
+            boxHeight: 12,
+            padding: 12,
+            font: { size: 11, family: 'Inter, sans-serif' }
+          }
+        },
+        tooltip: {
+          enabled: hasData,
+          backgroundColor: '#1b1b22',
+          titleColor: '#ffffff',
+          bodyColor: '#e0e0e0',
+          borderColor: '#3c3c4a',
+          borderWidth: 1,
+          callbacks: {
+            label: function(ctx) {
+              const val = ctx.parsed;
+              const pct = total > 0 ? Math.round((val / total) * 100) : 0;
+              return ` ${ctx.label}: ${val.toLocaleString('it-IT')} (${pct}%)`;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function renderHourlyChart(hours, counts) {
+  const canvas = document.getElementById('chart-hourly-activity');
+  if (!canvas || typeof Chart === 'undefined') return;
+
+  if (chartHourlyInstance) {
+    chartHourlyInstance.destroy();
+  }
+
+  // Identifica ora attuale Roma per evidenziarla
+  let currentHour = '12';
+  try {
+    currentHour = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Rome', hour: '2-digit', hour12: false }).format(new Date());
+  } catch(e) {
+    currentHour = String(new Date().getHours()).padStart(2, '0');
+  }
+  if (currentHour === '24') currentHour = '00';
+
+  const bgColors = hours.map(h => (h === currentHour ? '#f59e0b' : 'rgba(168, 85, 247, 0.65)'));
+  const borderColors = hours.map(h => (h === currentHour ? '#fbbf24' : '#c084fc'));
+  const labels = hours.map(h => `${h}:00`);
+
+  const ctx = canvas.getContext('2d');
+  chartHourlyInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Visite per fascia oraria',
+          data: counts,
+          backgroundColor: bgColors,
+          borderColor: borderColors,
+          borderWidth: 1.5,
+          borderRadius: 4
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1b1b22',
+          titleColor: '#ffffff',
+          bodyColor: '#e0e0e0',
+          borderColor: '#3c3c4a',
+          borderWidth: 1,
+          callbacks: {
+            title: function(items) {
+              const it = items[0];
+              const h = hours[it.dataIndex];
+              return `${h}:00 - ${h}:59 (Roma)`;
+            },
+            label: function(ctx) {
+              return ` Visite registrate: ${ctx.parsed.y.toLocaleString('it-IT')}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: {
+            color: '#8b8e9e',
+            font: { size: 10 },
+            maxRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 12
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(255,255,255,0.06)' },
+          ticks: {
+            color: '#8b8e9e',
+            font: { size: 10 },
+            precision: 0
+          }
+        }
+      }
+    }
+  });
+}
+
+function initAnalyticsDashboard() {
+  if (isAnalyticsInitialized) return;
+  isAnalyticsInitialized = true;
+
+  // Ripristina preferenza di apertura/chiusura
+  try {
+    const isMin = localStorage.getItem('overrevving_admin_analytics_minimized') === '1';
+    if (isMin) {
+      const bodyEl = document.getElementById('analytics-body');
+      const btnEl = document.getElementById('btn-toggle-analytics');
+      if (bodyEl) bodyEl.classList.add('minimized');
+      if (btnEl) btnEl.textContent = '▲';
+    }
+  } catch(e) {}
+
+  loadAnalyticsData();
+}
 </script>
 </body>
 </html>

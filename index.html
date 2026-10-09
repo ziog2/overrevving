@@ -1260,6 +1260,15 @@ async function initVisitorCounters() {
         dailyCountEl.textContent = '---';
       }
     }
+
+    // 1b. Visitatore univoco del giorno (1 sola volta al giorno per browser)
+    try {
+      const daySeenKey = 'overrevving_day_seen_' + todayStr;
+      if (!localStorage.getItem(daySeenKey)) {
+        localStorage.setItem(daySeenKey, '1');
+        fetch('https://countapi.mileshilliard.com/api/v1/hit/overrevving_daily_unique_' + todayStr).catch(() => {});
+      }
+    } catch(e) {}
   }
 
   // 2. Visitatori univoci totali
@@ -1303,6 +1312,25 @@ async function initVisitorCounters() {
       }
     }
   }
+
+  // 3. Tracciamento anonimo device (mobile vs desktop)
+  try {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
+    const devKey = isMobile ? 'overrevving_device_mobile' : 'overrevving_device_desktop';
+    fetch('https://countapi.mileshilliard.com/api/v1/hit/' + devKey).catch(() => {});
+  } catch(e) {}
+
+  // 4. Tracciamento anonimo orario (00 - 23, Europe/Rome)
+  try {
+    let hr = '12';
+    try {
+      hr = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Rome', hour: '2-digit', hour12: false }).format(new Date());
+    } catch(e) {
+      hr = String(new Date().getHours()).padStart(2, '0');
+    }
+    if (hr === '24') hr = '00';
+    fetch('https://countapi.mileshilliard.com/api/v1/hit/overrevving_hour_' + hr).catch(() => {});
+  } catch(e) {}
 }
 
 initVisitorCounters();
