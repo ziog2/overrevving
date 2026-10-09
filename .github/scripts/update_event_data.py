@@ -583,11 +583,11 @@ def main():
         print(f"Errore caricamento lista eventi: {e}")
         return
 
-    # Filter events: FINISHED or currently ongoing (RUNNING, LIVE, IN_PROGRESS)
+    # Filter events: FINISHED or currently ongoing (CURRENT, ONGOING, RUNNING, LIVE, IN_PROGRESS)
     relevant_events = [
         ev for ev in events
         if isinstance(ev, dict)
-        and ev.get('status') in ('FINISHED', 'RUNNING', 'LIVE', 'IN_PROGRESS')
+        and ev.get('status') in ('FINISHED', 'CURRENT', 'ONGOING', 'RUNNING', 'LIVE', 'IN_PROGRESS')
         and not str(ev.get('short_name', '')).endswith(('1', '2', '3'))
     ]
 
