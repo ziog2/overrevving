@@ -191,7 +191,9 @@
   .pos-3 td:first-child { color: #cd7f32; }
   .driver-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
   .next-round { font-size: 13px; font-weight: 400; text-transform: none; letter-spacing: normal; margin-top: 4px; opacity: 0.9; }
-  .visitor-counter { text-align: center; margin-top: 40px; padding-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .visitor-counter { text-align: center; margin-top: 40px; padding-top: 20px; display: flex; flex-direction: column; align-items: center; }
+  .visitor-badges-wrapper { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px; }
+  .visitor-badge-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
   .footer-social {
     max-width: 1100px;
     margin: 30px auto 0;
@@ -247,6 +249,7 @@
   }
   .loading { text-align: center; color: #555; padding: 60px 0; font-size: 14px; }
   @media (max-width: 700px) { body { padding: 16px 20px 40px; } #reset-order-btn { display: none; } }
+  @media (max-width: 600px) { .visitor-badges-wrapper { flex-direction: column; gap: 14px; } }
   tbody tr.favorite { background: #2a1f3a !important; }
   tbody tr.favorite:hover { background: #332545 !important; }
   .fav-btn { background: none; border: none; cursor: pointer; font-size: 13px; padding: 0 4px; opacity: 0.3; transition: opacity 0.15s, color 0.15s; line-height: 1; color: #999; }
@@ -523,10 +526,21 @@
 </section>
 
 <div class="visitor-counter">
-  <div class="visitor-counter-label">UNIQUE VISITORS</div>
-  <div class="visitor-badge" id="unique-visitor-badge">
-    <span class="badge-title">VISITATORI UNICI</span>
-    <span class="badge-val" id="unique-visitor-count">...</span>
+  <div class="visitor-badges-wrapper">
+    <div class="visitor-badge-col">
+      <div class="visitor-counter-label">TODAY'S VISITS</div>
+      <div class="visitor-badge" id="daily-visitor-badge">
+        <span class="badge-title">VISITE OGGI</span>
+        <span class="badge-val" id="daily-visitor-count">...</span>
+      </div>
+    </div>
+    <div class="visitor-badge-col">
+      <div class="visitor-counter-label">UNIQUE VISITORS</div>
+      <div class="visitor-badge" id="unique-visitor-badge">
+        <span class="badge-title">VISITATORI UNICI</span>
+        <span class="badge-val" id="unique-visitor-count">...</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1205,50 +1219,97 @@ async function initNews() {
 
 initNews();
 
-// ---- Contatore Visitatori Univoci ----
-async function initUniqueVisitorCounter() {
-  const countEl = document.getElementById('unique-visitor-count');
-  if (!countEl) return;
+// ---- Contatori Visite ----
+async function initVisitorCounters() {
+  const dailyCountEl = document.getElementById('daily-visitor-count');
+  const uniqueCountEl = document.getElementById('unique-visitor-count');
 
-  const storageKey = 'overrevving_unique_visited';
-  const hasVisited = localStorage.getItem(storageKey);
-  
-  // Se già visitato in precedenza, legge solo il totale con /get; altrimenti incrementa con /hit
-  const endpoint = hasVisited
-    ? 'https://countapi.mileshilliard.com/api/v1/get/overrevving_unique_visitors'
-    : 'https://countapi.mileshilliard.com/api/v1/hit/overrevving_unique_visitors';
-
-  try {
-    const res = await fetch(endpoint);
-    if (!res.ok) throw new Error('API response status ' + res.status);
-    const data = await res.json();
-    const count = (data && (typeof data.value === 'number' || typeof data.count === 'number'))
-      ? (data.value !== undefined ? data.value : data.count)
-      : null;
-
-    if (count !== null) {
-      countEl.textContent = Number(count).toLocaleString();
-      if (!hasVisited) {
-        localStorage.setItem(storageKey, new Date().toISOString());
-      }
-    } else {
-      countEl.textContent = '---';
-    }
-  } catch (err) {
-    console.warn('Errore caricamento visitatori unici:', err);
+  // 1. Visite totali del singolo giorno (fuso orario Europe/Rome)
+  if (dailyCountEl) {
+    let todayStr = '';
     try {
-      const fallbackRes = await fetch('https://countapi.mileshilliard.com/api/v1/get/overrevving_unique_visitors');
-      const fallbackData = await fallbackRes.json();
-      if (fallbackData && typeof fallbackData.value === 'number') {
-        countEl.textContent = fallbackData.value.toLocaleString();
-        return;
+      todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Rome' }).format(new Date());
+    } catch(e) {
+      const d = new Date();
+      todayStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+    const dailyKey = 'overrevving_daily_' + todayStr;
+    const dailyEndpoint = 'https://countapi.mileshilliard.com/api/v1/hit/' + dailyKey;
+
+    try {
+      const res = await fetch(dailyEndpoint);
+      if (!res.ok) throw new Error('Daily API response status ' + res.status);
+      const data = await res.json();
+      const count = (data && (typeof data.value === 'number' || typeof data.count === 'number'))
+        ? (data.value !== undefined ? data.value : data.count)
+        : null;
+
+      if (count !== null) {
+        dailyCountEl.textContent = Number(count).toLocaleString();
+      } else {
+        dailyCountEl.textContent = '---';
       }
-    } catch(e) {}
-    countEl.textContent = '---';
+    } catch (err) {
+      console.warn('Errore caricamento visite del giorno:', err);
+      try {
+        const fallbackRes = await fetch('https://countapi.mileshilliard.com/api/v1/get/' + dailyKey);
+        const fallbackData = await fallbackRes.json();
+        if (fallbackData && typeof fallbackData.value === 'number') {
+          dailyCountEl.textContent = fallbackData.value.toLocaleString();
+        } else {
+          dailyCountEl.textContent = '---';
+        }
+      } catch(e) {
+        dailyCountEl.textContent = '---';
+      }
+    }
+  }
+
+  // 2. Visitatori univoci totali
+  if (uniqueCountEl) {
+    const storageKey = 'overrevving_unique_visited';
+    const hasVisited = localStorage.getItem(storageKey);
+    
+    // Se già visitato in precedenza, legge solo il totale con /get; altrimenti incrementa con /hit
+    const uniqueEndpoint = hasVisited
+      ? 'https://countapi.mileshilliard.com/api/v1/get/overrevving_unique_visitors'
+      : 'https://countapi.mileshilliard.com/api/v1/hit/overrevving_unique_visitors';
+
+    try {
+      const res = await fetch(uniqueEndpoint);
+      if (!res.ok) throw new Error('Unique API response status ' + res.status);
+      const data = await res.json();
+      const count = (data && (typeof data.value === 'number' || typeof data.count === 'number'))
+        ? (data.value !== undefined ? data.value : data.count)
+        : null;
+
+      if (count !== null) {
+        uniqueCountEl.textContent = Number(count).toLocaleString();
+        if (!hasVisited) {
+          localStorage.setItem(storageKey, new Date().toISOString());
+        }
+      } else {
+        uniqueCountEl.textContent = '---';
+      }
+    } catch (err) {
+      console.warn('Errore caricamento visitatori unici:', err);
+      try {
+        const fallbackRes = await fetch('https://countapi.mileshilliard.com/api/v1/get/overrevving_unique_visitors');
+        const fallbackData = await fallbackRes.json();
+        if (fallbackData && typeof fallbackData.value === 'number') {
+          uniqueCountEl.textContent = fallbackData.value.toLocaleString();
+        } else {
+          uniqueCountEl.textContent = '---';
+        }
+      } catch(e) {
+        uniqueCountEl.textContent = '---';
+      }
+    }
   }
 }
 
-initUniqueVisitorCounter();
+initVisitorCounters();
 </script>
 </body>
 </html>
