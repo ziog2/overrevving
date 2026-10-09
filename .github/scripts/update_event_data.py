@@ -654,20 +654,29 @@ def main():
             s_start, s_end, s_parsed = find_matching_object(s_slice, short)
 
             if s_start is not None and s_end is not None:
-                has_race = False
-                has_spr = False
-                if isinstance(s_parsed, dict):
-                    has_race = bool(s_parsed.get("race") and isinstance(s_parsed["race"], list) and len(s_parsed["race"]) > 0)
-                    has_spr = bool(s_parsed.get("sprint") and isinstance(s_parsed["sprint"], list) and len(s_parsed["sprint"]) > 0)
+                existing = s_parsed if isinstance(s_parsed, dict) else {}
+                has_fp1 = bool(existing.get("fp1") and isinstance(existing["fp1"], list) and len(existing["fp1"]) > 0)
+                has_pr  = bool(existing.get("pr") and isinstance(existing["pr"], list) and len(existing["pr"]) > 0)
+                has_q1  = bool(existing.get("q1") and isinstance(existing["q1"], list) and len(existing["q1"]) > 0)
+                has_q2  = bool(existing.get("q2") and isinstance(existing["q2"], list) and len(existing["q2"]) > 0)
+                has_spr = bool(existing.get("sprint") and isinstance(existing["sprint"], list) and len(existing["sprint"]) > 0)
+                has_race = bool(existing.get("race") and isinstance(existing["race"], list) and len(existing["race"]) > 0)
 
                 needs_update = False
-                if not has_race and rac:
+                if not has_fp1 and fp1:
+                    needs_update = True
+                elif not has_pr and pr:
+                    needs_update = True
+                elif not has_q1 and q1:
+                    needs_update = True
+                elif not has_q2 and q2:
                     needs_update = True
                 elif not has_spr and spr:
                     needs_update = True
+                elif not has_race and rac:
+                    needs_update = True
 
                 if needs_update:
-                    existing = s_parsed if isinstance(s_parsed, dict) else {}
                     static_obj = {
                         "fp1": fp1 if fp1 else (existing.get("fp1") if isinstance(existing.get("fp1"), list) else []),
                         "pr": pr if pr else (existing.get("pr") if isinstance(existing.get("pr"), list) else []),

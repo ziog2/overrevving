@@ -18845,12 +18845,21 @@
           const sessionsUrl = `https://api.motogp.pulselive.com/motogp/v1/results/sessions?eventUuid=${apiEvent.id}&categoryUuid=${CAT_MOTOGP}`;
           const sessions = await fetch(sessionsUrl).then(r => r.json());
 
-                    const fpSessions = sessions.filter(s => (s.type === 'FP' || s.type === 'PR') && s.status === 'FINISHED');
+          const fpSessions = sessions.filter(s => s.type === 'FP' && s.status === 'FINISHED');
+          const prSession = sessions.find(s => s.type === 'PR' && s.status === 'FINISHED');
+
           if (fpSessions.length >= 1) {
             try {
               const classUrl = `https://api.motogp.pulselive.com/motogp/v1/results/session/${fpSessions[0].id}/classification`;
               const data = await fetch(classUrl).then(r => r.json());
               if (data.classification && data.classification.length) fp1Results = data.classification;
+            } catch(e) {}
+          }
+          if (prSession) {
+            try {
+              const classUrl = `https://api.motogp.pulselive.com/motogp/v1/results/session/${prSession.id}/classification`;
+              const data = await fetch(classUrl).then(r => r.json());
+              if (data.classification && data.classification.length) prResults = data.classification;
             } catch(e) {}
           }
           if (fpSessions.length >= 2) {
