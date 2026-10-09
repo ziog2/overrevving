@@ -1,436 +1,436 @@
-﻿{
-    "calendar":  [
-                     {
-                         "date":  "2026-03-08",
-                         "round":  1,
-                         "name":  "Argentina"
-                     },
-                     {
-                         "date":  "2026-03-22",
-                         "round":  2,
-                         "name":  "Andalucia"
-                     },
-                     {
-                         "date":  "2026-03-29",
-                         "round":  3,
-                         "name":  "Switzerland"
-                     },
-                     {
-                         "date":  "2026-04-12",
-                         "round":  4,
-                         "name":  "Sardegna"
-                     },
-                     {
-                         "date":  "2026-04-19",
-                         "round":  5,
-                         "name":  "Trentino"
-                     },
-                     {
-                         "date":  "2026-05-24",
-                         "round":  6,
-                         "name":  "France"
-                     },
-                     {
-                         "date":  "2026-05-31",
-                         "round":  7,
-                         "name":  "Germany"
-                     },
-                     {
-                         "date":  "2026-06-07",
-                         "round":  8,
-                         "name":  "Latvia"
-                     },
-                     {
-                         "date":  "2026-06-21",
-                         "round":  9,
-                         "name":  "Italy"
-                     },
-                     {
-                         "date":  "2026-06-28",
-                         "round":  10,
-                         "name":  "Portugal"
-                     },
-                     {
-                         "date":  "2026-07-05",
-                         "round":  11,
-                         "name":  "South Africa"
-                     },
-                     {
-                         "date":  "2026-07-19",
-                         "round":  12,
-                         "name":  "Great Britain"
-                     },
-                     {
-                         "date":  "2026-07-26",
-                         "round":  13,
-                         "name":  "Czech Republic"
-                     },
-                     {
-                         "date":  "2026-08-02",
-                         "round":  14,
-                         "name":  "Flanders"
-                     },
-                     {
-                         "date":  "2026-08-16",
-                         "round":  15,
-                         "name":  "Sweden"
-                     },
-                     {
-                         "date":  "2026-08-23",
-                         "round":  16,
-                         "name":  "Netherlands"
-                     },
-                     {
-                         "date":  "2026-09-06",
-                         "round":  17,
-                         "name":  "Turkey"
-                     }
-                 ],
-    "teams":  null,
-    "constructors":  null,
-    "lastUpdated":  "2026-10-04 22:39:35 · Auto (Domenica)",
-    "riders":  [
-                   {
-                       "name":  "Guillem Farres",
-                       "pts":  904
-                   },
-                   {
-                       "name":  "Camden McLellan",
-                       "pts":  868
-                   },
-                   {
-                       "name":  "Sacha Coenen",
-                       "pts":  814
-                   },
-                   {
-                       "name":  "Liam Everts",
-                       "pts":  795
-                   },
-                   {
-                       "name":  "Simon Längenfelder",
-                       "pts":  768
-                   },
-                   {
-                       "name":  "Janis Martins Reisulis",
-                       "pts":  691
-                   },
-                   {
-                       "name":  "Karlis Alberts Reisulis",
-                       "pts":  555
-                   },
-                   {
-                       "name":  "Valerio Lata",
-                       "pts":  414
-                   },
-                   {
-                       "name":  "Julius Mikula",
-                       "pts":  401
-                   },
-                   {
-                       "name":  "Kay Karssemakers",
-                       "pts":  388
-                   },
-                   {
-                       "name":  "Maxime Grau",
-                       "pts":  354
-                   },
-                   {
-                       "name":  "Mathis Valin",
-                       "pts":  352
-                   },
-                   {
-                       "name":  "Noel Zanocz",
-                       "pts":  237
-                   },
-                   {
-                       "name":  "Ferruccio Zanchi",
-                       "pts":  172
-                   },
-                   {
-                       "name":  "Jens Walvoort",
-                       "pts":  168
-                   },
-                   {
-                       "name":  "Scott Smulders",
-                       "pts":  138
-                   },
-                   {
-                       "name":  "Andrea Rossi",
-                       "pts":  112
-                   },
-                   {
-                       "name":  "Cas Valk",
-                       "pts":  87
-                   },
-                   {
-                       "name":  "Ollie Colmer",
-                       "pts":  79
-                   },
-                   {
-                       "name":  "Pelle Gundersen",
-                       "pts":  70
-                   },
-                   {
-                       "name":  "Byron Dennis",
-                       "pts":  61
-                   },
-                   {
-                       "name":  "Alessandro Gaspari",
-                       "pts":  51
-                   },
-                   {
-                       "name":  "Alve Callemo",
-                       "pts":  45
-                   },
-                   {
-                       "name":  "Gyan Doensen",
-                       "pts":  40
-                   },
-                   {
-                       "name":  "Valentin Kees",
-                       "pts":  38
-                   },
-                   {
-                       "name":  "Ben Mustoe",
-                       "pts":  37
-                   },
-                   {
-                       "name":  "Nike Korsbeck",
-                       "pts":  37
-                   },
-                   {
-                       "name":  "Rodolfo Bicalho",
-                       "pts":  35
-                   },
-                   {
-                       "name":  "Brian Gyles",
-                       "pts":  32
-                   },
-                   {
-                       "name":  "Simone Mancini",
-                       "pts":  27
-                   },
-                   {
-                       "name":  "Francisco Garcia",
-                       "pts":  25
-                   },
-                   {
-                       "name":  "Hugo Forsgren",
-                       "pts":  25
-                   },
-                   {
-                       "name":  "Luca Ruffini",
-                       "pts":  23
-                   },
-                   {
-                       "name":  "Deacon Paice",
-                       "pts":  20
-                   },
-                   {
-                       "name":  "William Askew",
-                       "pts":  20
-                   },
-                   {
-                       "name":  "Adria Monne",
-                       "pts":  20
-                   },
-                   {
-                       "name":  "Joshua Voelker",
-                       "pts":  19
-                   },
-                   {
-                       "name":  "Manuel Carreras",
-                       "pts":  18
-                   },
-                   {
-                       "name":  "Benjamin Garib",
-                       "pts":  18
-                   },
-                   {
-                       "name":  "Francesco Bellei",
-                       "pts":  18
-                   },
-                   {
-                       "name":  "Riley BURGESS",
-                       "pts":  17
-                   },
-                   {
-                       "name":  "Tommaso Lodi",
-                       "pts":  17
-                   },
-                   {
-                       "name":  "Morgan Bennati",
-                       "pts":  17
-                   },
-                   {
-                       "name":  "Thomas O\u0026#39;NEILL",
-                       "pts":  15
-                   },
-                   {
-                       "name":  "Trey Cox",
-                       "pts":  14
-                   },
-                   {
-                       "name":  "Remo Schudel",
-                       "pts":  14
-                   },
-                   {
-                       "name":  "Jinyu Yang",
-                       "pts":  13
-                   },
-                   {
-                       "name":  "Italo Medina",
-                       "pts":  13
-                   },
-                   {
-                       "name":  "Noah Ludwig",
-                       "pts":  12
-                   },
-                   {
-                       "name":  "Jake Cannon",
-                       "pts":  12
-                   },
-                   {
-                       "name":  "Brando Polato",
-                       "pts":  12
-                   },
-                   {
-                       "name":  "Jordan van Wyk",
-                       "pts":  12
-                   },
-                   {
-                       "name":  "Valentino Vazquez",
-                       "pts":  11
-                   },
-                   {
-                       "name":  "Joe Brookes",
-                       "pts":  10
-                   },
-                   {
-                       "name":  "Carlos Andres Padilla Duran",
-                       "pts":  10
-                   },
-                   {
-                       "name":  "Nicolai Skovbjerg",
-                       "pts":  10
-                   },
-                   {
-                       "name":  "Junior Bal",
-                       "pts":  9
-                   },
-                   {
-                       "name":  "Jaka Peklaj",
-                       "pts":  9
-                   },
-                   {
-                       "name":  "David Braceras",
-                       "pts":  8
-                   },
-                   {
-                       "name":  "Riley Rocher",
-                       "pts":  8
-                   },
-                   {
-                       "name":  "Felipe Quirno Costa",
-                       "pts":  8
-                   },
-                   {
-                       "name":  "Samuel Oechslin",
-                       "pts":  8
-                   },
-                   {
-                       "name":  "Sandro Sools",
-                       "pts":  8
-                   },
-                   {
-                       "name":  "Charlie Richmond",
-                       "pts":  8
-                   },
-                   {
-                       "name":  "Lotte Van Drunen",
-                       "pts":  8
-                   },
-                   {
-                       "name":  "Alessandro Traversini",
-                       "pts":  7
-                   },
-                   {
-                       "name":  "Juan Felipe Garcia",
-                       "pts":  7
-                   },
-                   {
-                       "name":  "Tristan Durow",
-                       "pts":  6
-                   },
-                   {
-                       "name":  "Miguel Rojas",
-                       "pts":  6
-                   },
-                   {
-                       "name":  "Ledi Wang",
-                       "pts":  5
-                   },
-                   {
-                       "name":  "Aiden Henley",
-                       "pts":  5
-                   },
-                   {
-                       "name":  "Alfonso Bratschi",
-                       "pts":  5
-                   },
-                   {
-                       "name":  "Martin Ashton",
-                       "pts":  5
-                   },
-                   {
-                       "name":  "Sebastian Sundman",
-                       "pts":  5
-                   },
-                   {
-                       "name":  "Thomas Oechslin",
-                       "pts":  4
-                   },
-                   {
-                       "name":  "Jan Krug",
-                       "pts":  4
-                   },
-                   {
-                       "name":  "Luke John Grundy",
-                       "pts":  4
-                   },
-                   {
-                       "name":  "Rodrigo Stuardo",
-                       "pts":  4
-                   },
-                   {
-                       "name":  "Ben Almagor",
-                       "pts":  4
-                   },
-                   {
-                       "name":  "Petr Rathousky",
-                       "pts":  4
-                   },
-                   {
-                       "name":  "Douwe Van Mechgelen",
-                       "pts":  3
-                   },
-                   {
-                       "name":  "Jose Morera",
-                       "pts":  3
-                   },
-                   {
-                       "name":  "Thor Johnson",
-                       "pts":  2
-                   },
-                   {
-                       "name":  "Manuel Torrado",
-                       "pts":  2
-                   },
-                   {
-                       "name":  "Damian Zdunek",
-                       "pts":  1
-                   }
-               ],
-    "category":  "mx2",
-    "season":  2026
+{
+  "season": 2026,
+  "category": "mx2",
+  "lastUpdated": "2026-10-09 14:59:04 · Auto (Domenica)",
+  "calendar": [
+    {
+      "round": 1,
+      "name": "Argentina",
+      "date": "2026-03-08"
+    },
+    {
+      "round": 2,
+      "name": "Andalucia",
+      "date": "2026-03-22"
+    },
+    {
+      "round": 3,
+      "name": "Switzerland",
+      "date": "2026-03-29"
+    },
+    {
+      "round": 4,
+      "name": "Sardegna",
+      "date": "2026-04-12"
+    },
+    {
+      "round": 5,
+      "name": "Trentino",
+      "date": "2026-04-19"
+    },
+    {
+      "round": 6,
+      "name": "France",
+      "date": "2026-05-24"
+    },
+    {
+      "round": 7,
+      "name": "Germany",
+      "date": "2026-05-31"
+    },
+    {
+      "round": 8,
+      "name": "Latvia",
+      "date": "2026-06-07"
+    },
+    {
+      "round": 9,
+      "name": "Italy",
+      "date": "2026-06-21"
+    },
+    {
+      "round": 10,
+      "name": "Portugal",
+      "date": "2026-06-28"
+    },
+    {
+      "round": 11,
+      "name": "South Africa",
+      "date": "2026-07-05"
+    },
+    {
+      "round": 12,
+      "name": "Great Britain",
+      "date": "2026-07-19"
+    },
+    {
+      "round": 13,
+      "name": "Czech Republic",
+      "date": "2026-07-26"
+    },
+    {
+      "round": 14,
+      "name": "Flanders",
+      "date": "2026-08-02"
+    },
+    {
+      "round": 15,
+      "name": "Sweden",
+      "date": "2026-08-16"
+    },
+    {
+      "round": 16,
+      "name": "Netherlands",
+      "date": "2026-08-23"
+    },
+    {
+      "round": 17,
+      "name": "Turkey",
+      "date": "2026-09-06"
+    }
+  ],
+  "riders": [
+    {
+      "name": "Guillem Farres",
+      "pts": 904
+    },
+    {
+      "name": "Camden McLellan",
+      "pts": 868
+    },
+    {
+      "name": "Sacha Coenen",
+      "pts": 814
+    },
+    {
+      "name": "Liam Everts",
+      "pts": 795
+    },
+    {
+      "name": "Simon Längenfelder",
+      "pts": 768
+    },
+    {
+      "name": "Janis Martins Reisulis",
+      "pts": 691
+    },
+    {
+      "name": "Karlis Alberts Reisulis",
+      "pts": 555
+    },
+    {
+      "name": "Valerio Lata",
+      "pts": 414
+    },
+    {
+      "name": "Julius Mikula",
+      "pts": 401
+    },
+    {
+      "name": "Kay Karssemakers",
+      "pts": 388
+    },
+    {
+      "name": "Maxime Grau",
+      "pts": 354
+    },
+    {
+      "name": "Mathis Valin",
+      "pts": 352
+    },
+    {
+      "name": "Noel Zanocz",
+      "pts": 237
+    },
+    {
+      "name": "Ferruccio Zanchi",
+      "pts": 172
+    },
+    {
+      "name": "Jens Walvoort",
+      "pts": 168
+    },
+    {
+      "name": "Scott Smulders",
+      "pts": 138
+    },
+    {
+      "name": "Andrea Rossi",
+      "pts": 112
+    },
+    {
+      "name": "Cas Valk",
+      "pts": 87
+    },
+    {
+      "name": "Ollie Colmer",
+      "pts": 79
+    },
+    {
+      "name": "Pelle Gundersen",
+      "pts": 70
+    },
+    {
+      "name": "Byron Dennis",
+      "pts": 61
+    },
+    {
+      "name": "Alessandro Gaspari",
+      "pts": 51
+    },
+    {
+      "name": "Alve Callemo",
+      "pts": 45
+    },
+    {
+      "name": "Gyan Doensen",
+      "pts": 40
+    },
+    {
+      "name": "Valentin Kees",
+      "pts": 38
+    },
+    {
+      "name": "Ben Mustoe",
+      "pts": 37
+    },
+    {
+      "name": "Nike Korsbeck",
+      "pts": 37
+    },
+    {
+      "name": "Rodolfo Bicalho",
+      "pts": 35
+    },
+    {
+      "name": "Brian Gyles",
+      "pts": 32
+    },
+    {
+      "name": "Simone Mancini",
+      "pts": 27
+    },
+    {
+      "name": "Francisco Garcia",
+      "pts": 25
+    },
+    {
+      "name": "Hugo Forsgren",
+      "pts": 25
+    },
+    {
+      "name": "Luca Ruffini",
+      "pts": 23
+    },
+    {
+      "name": "Deacon Paice",
+      "pts": 20
+    },
+    {
+      "name": "William Askew",
+      "pts": 20
+    },
+    {
+      "name": "Adria Monne",
+      "pts": 20
+    },
+    {
+      "name": "Joshua Voelker",
+      "pts": 19
+    },
+    {
+      "name": "Manuel Carreras",
+      "pts": 18
+    },
+    {
+      "name": "Benjamin Garib",
+      "pts": 18
+    },
+    {
+      "name": "Francesco Bellei",
+      "pts": 18
+    },
+    {
+      "name": "Riley BURGESS",
+      "pts": 17
+    },
+    {
+      "name": "Tommaso Lodi",
+      "pts": 17
+    },
+    {
+      "name": "Morgan Bennati",
+      "pts": 17
+    },
+    {
+      "name": "Thomas O&#39;NEILL",
+      "pts": 15
+    },
+    {
+      "name": "Trey Cox",
+      "pts": 14
+    },
+    {
+      "name": "Remo Schudel",
+      "pts": 14
+    },
+    {
+      "name": "Jinyu Yang",
+      "pts": 13
+    },
+    {
+      "name": "Italo Medina",
+      "pts": 13
+    },
+    {
+      "name": "Noah Ludwig",
+      "pts": 12
+    },
+    {
+      "name": "Jake Cannon",
+      "pts": 12
+    },
+    {
+      "name": "Brando Polato",
+      "pts": 12
+    },
+    {
+      "name": "Jordan van Wyk",
+      "pts": 12
+    },
+    {
+      "name": "Valentino Vazquez",
+      "pts": 11
+    },
+    {
+      "name": "Joe Brookes",
+      "pts": 10
+    },
+    {
+      "name": "Carlos Andres Padilla Duran",
+      "pts": 10
+    },
+    {
+      "name": "Nicolai Skovbjerg",
+      "pts": 10
+    },
+    {
+      "name": "Junior Bal",
+      "pts": 9
+    },
+    {
+      "name": "Jaka Peklaj",
+      "pts": 9
+    },
+    {
+      "name": "David Braceras",
+      "pts": 8
+    },
+    {
+      "name": "Riley Rocher",
+      "pts": 8
+    },
+    {
+      "name": "Felipe Quirno Costa",
+      "pts": 8
+    },
+    {
+      "name": "Samuel Oechslin",
+      "pts": 8
+    },
+    {
+      "name": "Sandro Sools",
+      "pts": 8
+    },
+    {
+      "name": "Charlie Richmond",
+      "pts": 8
+    },
+    {
+      "name": "Lotte Van Drunen",
+      "pts": 8
+    },
+    {
+      "name": "Alessandro Traversini",
+      "pts": 7
+    },
+    {
+      "name": "Juan Felipe Garcia",
+      "pts": 7
+    },
+    {
+      "name": "Tristan Durow",
+      "pts": 6
+    },
+    {
+      "name": "Miguel Rojas",
+      "pts": 6
+    },
+    {
+      "name": "Ledi Wang",
+      "pts": 5
+    },
+    {
+      "name": "Aiden Henley",
+      "pts": 5
+    },
+    {
+      "name": "Alfonso Bratschi",
+      "pts": 5
+    },
+    {
+      "name": "Martin Ashton",
+      "pts": 5
+    },
+    {
+      "name": "Sebastian Sundman",
+      "pts": 5
+    },
+    {
+      "name": "Thomas Oechslin",
+      "pts": 4
+    },
+    {
+      "name": "Jan Krug",
+      "pts": 4
+    },
+    {
+      "name": "Luke John Grundy",
+      "pts": 4
+    },
+    {
+      "name": "Rodrigo Stuardo",
+      "pts": 4
+    },
+    {
+      "name": "Ben Almagor",
+      "pts": 4
+    },
+    {
+      "name": "Petr Rathousky",
+      "pts": 4
+    },
+    {
+      "name": "Douwe Van Mechgelen",
+      "pts": 3
+    },
+    {
+      "name": "Jose Morera",
+      "pts": 3
+    },
+    {
+      "name": "Thor Johnson",
+      "pts": 2
+    },
+    {
+      "name": "Manuel Torrado",
+      "pts": 2
+    },
+    {
+      "name": "Damian Zdunek",
+      "pts": 1
+    }
+  ],
+  "constructors": [],
+  "teams": []
 }

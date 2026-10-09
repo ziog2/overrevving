@@ -1,218 +1,218 @@
-﻿{
-    "calendar":  [
-                     {
-                         "date":  "2026-03-08",
-                         "round":  1,
-                         "name":  "Australia"
-                     },
-                     {
-                         "date":  "2026-03-15",
-                         "round":  2,
-                         "name":  "China"
-                     },
-                     {
-                         "date":  "2026-03-29",
-                         "round":  3,
-                         "name":  "Japan"
-                     },
-                     {
-                         "date":  "2026-04-12",
-                         "round":  4,
-                         "name":  "Bahrain"
-                     },
-                     {
-                         "date":  "2026-04-19",
-                         "round":  5,
-                         "name":  "Saudi Arabia"
-                     },
-                     {
-                         "date":  "2026-05-03",
-                         "round":  6,
-                         "name":  "Miami"
-                     },
-                     {
-                         "date":  "2026-05-24",
-                         "round":  7,
-                         "name":  "Canada"
-                     },
-                     {
-                         "date":  "2026-06-07",
-                         "round":  8,
-                         "name":  "Monaco"
-                     },
-                     {
-                         "date":  "2026-06-14",
-                         "round":  9,
-                         "name":  "Spain"
-                     },
-                     {
-                         "date":  "2026-06-28",
-                         "round":  10,
-                         "name":  "Austria"
-                     },
-                     {
-                         "date":  "2026-07-05",
-                         "round":  11,
-                         "name":  "Great Britain"
-                     },
-                     {
-                         "date":  "2026-07-19",
-                         "round":  12,
-                         "name":  "Belgium"
-                     },
-                     {
-                         "date":  "2026-08-23",
-                         "round":  13,
-                         "name":  "Netherlands"
-                     },
-                     {
-                         "date":  "2026-09-06",
-                         "round":  14,
-                         "name":  "Italy"
-                     },
-                     {
-                         "date":  "2026-09-13",
-                         "round":  15,
-                         "name":  "Madrid"
-                     },
-                     {
-                         "date":  "2026-09-20",
-                         "round":  16,
-                         "name":  "Azerbaijan"
-                     },
-                     {
-                         "date":  "2026-10-04",
-                         "round":  17,
-                         "name":  "Singapore"
-                     },
-                     {
-                         "date":  "2026-10-25",
-                         "round":  18,
-                         "name":  "Austin"
-                     },
-                     {
-                         "date":  "2026-11-01",
-                         "round":  19,
-                         "name":  "Mexico"
-                     },
-                     {
-                         "date":  "2026-11-08",
-                         "round":  20,
-                         "name":  "SÃ£o Paulo"
-                     },
-                     {
-                         "date":  "2026-11-21",
-                         "round":  21,
-                         "name":  "Las Vegas"
-                     },
-                     {
-                         "date":  "2026-11-29",
-                         "round":  22,
-                         "name":  "Qatar"
-                     },
-                     {
-                         "date":  "2026-12-06",
-                         "round":  23,
-                         "name":  "Abu Dhabi"
-                     }
-                 ],
-    "teams":  null,
-    "constructors":  null,
-    "lastUpdated":  "2026-10-04 22:39:35 · Auto (Domenica)",
-    "riders":  [
-                   {
-                       "name":  "Andrea Kimi Antonelli",
-                       "pts":  320
-                   },
-                   {
-                       "name":  "George Russell",
-                       "pts":  236
-                   },
-                   {
-                       "name":  "Lewis Hamilton",
-                       "pts":  214
-                   },
-                   {
-                       "name":  "Charles Leclerc",
-                       "pts":  191
-                   },
-                   {
-                       "name":  "Lando Norris",
-                       "pts":  188
-                   },
-                   {
-                       "name":  "Max Verstappen",
-                       "pts":  188
-                   },
-                   {
-                       "name":  "Oscar Piastri",
-                       "pts":  128
-                   },
-                   {
-                       "name":  "Isack Hadjar",
-                       "pts":  96
-                   },
-                   {
-                       "name":  "Liam Lawson",
-                       "pts":  65
-                   },
-                   {
-                       "name":  "Pierre Gasly",
-                       "pts":  41
-                   },
-                   {
-                       "name":  "Arvid Lindblad",
-                       "pts":  38
-                   },
-                   {
-                       "name":  "Franco Colapinto",
-                       "pts":  27
-                   },
-                   {
-                       "name":  "Oliver Bearman",
-                       "pts":  20
-                   },
-                   {
-                       "name":  "Gabriel Bortoleto",
-                       "pts":  10
-                   },
-                   {
-                       "name":  "Nico Hülkenberg",
-                       "pts":  7
-                   },
-                   {
-                       "name":  "Esteban Ocon",
-                       "pts":  7
-                   },
-                   {
-                       "name":  "Fernando Alonso",
-                       "pts":  7
-                   },
-                   {
-                       "name":  "Carlos Sainz",
-                       "pts":  7
-                   },
-                   {
-                       "name":  "Alexander Albon",
-                       "pts":  5
-                   },
-                   {
-                       "name":  "Yuki Tsunoda",
-                       "pts":  1
-                   },
-                   {
-                       "name":  "Lance Stroll",
-                       "pts":  0
-                   },
-                   {
-                       "name":  "Valtteri Bottas",
-                       "pts":  0
-                   },
-                   {
-                       "name":  "Sergio Pérez",
-                       "pts":  0
-                   }
-               ],
-    "category":  "f1",
-    "season":  2026
+{
+  "season": 2026,
+  "category": "f1",
+  "lastUpdated": "2026-10-09 14:59:04 · Auto (Domenica)",
+  "calendar": [
+    {
+      "round": 1,
+      "name": "Australia",
+      "date": "2026-03-08"
+    },
+    {
+      "round": 2,
+      "name": "China",
+      "date": "2026-03-15"
+    },
+    {
+      "round": 3,
+      "name": "Japan",
+      "date": "2026-03-29"
+    },
+    {
+      "round": 4,
+      "name": "Bahrain",
+      "date": "2026-04-12"
+    },
+    {
+      "round": 5,
+      "name": "Saudi Arabia",
+      "date": "2026-04-19"
+    },
+    {
+      "round": 6,
+      "name": "Miami",
+      "date": "2026-05-03"
+    },
+    {
+      "round": 7,
+      "name": "Canada",
+      "date": "2026-05-24"
+    },
+    {
+      "round": 8,
+      "name": "Monaco",
+      "date": "2026-06-07"
+    },
+    {
+      "round": 9,
+      "name": "Spain",
+      "date": "2026-06-14"
+    },
+    {
+      "round": 10,
+      "name": "Austria",
+      "date": "2026-06-28"
+    },
+    {
+      "round": 11,
+      "name": "Great Britain",
+      "date": "2026-07-05"
+    },
+    {
+      "round": 12,
+      "name": "Belgium",
+      "date": "2026-07-19"
+    },
+    {
+      "round": 13,
+      "name": "Netherlands",
+      "date": "2026-08-23"
+    },
+    {
+      "round": 14,
+      "name": "Italy",
+      "date": "2026-09-06"
+    },
+    {
+      "round": 15,
+      "name": "Madrid",
+      "date": "2026-09-13"
+    },
+    {
+      "round": 16,
+      "name": "Azerbaijan",
+      "date": "2026-09-20"
+    },
+    {
+      "round": 17,
+      "name": "Singapore",
+      "date": "2026-10-04"
+    },
+    {
+      "round": 18,
+      "name": "Austin",
+      "date": "2026-10-25"
+    },
+    {
+      "round": 19,
+      "name": "Mexico",
+      "date": "2026-11-01"
+    },
+    {
+      "round": 20,
+      "name": "São Paulo",
+      "date": "2026-11-08"
+    },
+    {
+      "round": 21,
+      "name": "Las Vegas",
+      "date": "2026-11-21"
+    },
+    {
+      "round": 22,
+      "name": "Qatar",
+      "date": "2026-11-29"
+    },
+    {
+      "round": 23,
+      "name": "Abu Dhabi",
+      "date": "2026-12-06"
+    }
+  ],
+  "riders": [
+    {
+      "name": "Andrea Kimi Antonelli",
+      "pts": 320
+    },
+    {
+      "name": "George Russell",
+      "pts": 236
+    },
+    {
+      "name": "Lewis Hamilton",
+      "pts": 214
+    },
+    {
+      "name": "Charles Leclerc",
+      "pts": 191
+    },
+    {
+      "name": "Lando Norris",
+      "pts": 188
+    },
+    {
+      "name": "Max Verstappen",
+      "pts": 188
+    },
+    {
+      "name": "Oscar Piastri",
+      "pts": 128
+    },
+    {
+      "name": "Isack Hadjar",
+      "pts": 96
+    },
+    {
+      "name": "Liam Lawson",
+      "pts": 65
+    },
+    {
+      "name": "Pierre Gasly",
+      "pts": 41
+    },
+    {
+      "name": "Arvid Lindblad",
+      "pts": 38
+    },
+    {
+      "name": "Franco Colapinto",
+      "pts": 27
+    },
+    {
+      "name": "Oliver Bearman",
+      "pts": 20
+    },
+    {
+      "name": "Gabriel Bortoleto",
+      "pts": 10
+    },
+    {
+      "name": "Nico Hülkenberg",
+      "pts": 7
+    },
+    {
+      "name": "Esteban Ocon",
+      "pts": 7
+    },
+    {
+      "name": "Fernando Alonso",
+      "pts": 7
+    },
+    {
+      "name": "Carlos Sainz",
+      "pts": 7
+    },
+    {
+      "name": "Alexander Albon",
+      "pts": 5
+    },
+    {
+      "name": "Yuki Tsunoda",
+      "pts": 1
+    },
+    {
+      "name": "Lance Stroll",
+      "pts": 0
+    },
+    {
+      "name": "Valtteri Bottas",
+      "pts": 0
+    },
+    {
+      "name": "Sergio Pérez",
+      "pts": 0
+    }
+  ],
+  "constructors": [],
+  "teams": []
 }
