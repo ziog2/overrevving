@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "motogp",
-  "lastUpdated": "2026-10-10 08:30:05 · Auto (Domenica)",
+  "lastUpdated": "2026-10-10 15:08:25 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -132,68 +132,8 @@
   ],
   "riders": [
     {
-      "name": "Jorge Martin",
-      "pts": 333,
-      "history": [
-        18,
-        27,
-        32,
-        13,
-        37,
-        0,
-        29,
-        4,
-        12,
-        21,
-        15,
-        32,
-        16,
-        18,
-        32,
-        27
-      ],
-      "sprint_pts": 106,
-      "sprint_history": [
-        5,
-        7,
-        12,
-        0,
-        12,
-        0,
-        9,
-        4,
-        5,
-        5,
-        4,
-        12,
-        5,
-        7,
-        12,
-        7
-      ],
-      "long_pts": 227,
-      "long_history": [
-        13,
-        20,
-        20,
-        13,
-        25,
-        0,
-        20,
-        0,
-        7,
-        16,
-        11,
-        20,
-        11,
-        11,
-        20,
-        20
-      ]
-    },
-    {
       "name": "Marc Marquez",
-      "pts": 331,
+      "pts": 343,
       "history": [
         9,
         25,
@@ -210,7 +150,7 @@
         37,
         37,
         20,
-        37
+        49
       ],
       "sprint_pts": 119,
       "sprint_history": [
@@ -249,6 +189,66 @@
         25,
         11,
         25
+      ]
+    },
+    {
+      "name": "Jorge Martin",
+      "pts": 339,
+      "history": [
+        18,
+        27,
+        32,
+        13,
+        37,
+        0,
+        29,
+        4,
+        12,
+        21,
+        15,
+        32,
+        16,
+        18,
+        32,
+        33
+      ],
+      "sprint_pts": 106,
+      "sprint_history": [
+        5,
+        7,
+        12,
+        0,
+        12,
+        0,
+        9,
+        4,
+        5,
+        5,
+        4,
+        12,
+        5,
+        7,
+        12,
+        7
+      ],
+      "long_pts": 227,
+      "long_history": [
+        13,
+        20,
+        20,
+        13,
+        25,
+        0,
+        20,
+        0,
+        7,
+        16,
+        11,
+        20,
+        11,
+        11,
+        20,
+        20
       ]
     },
     {
@@ -313,7 +313,7 @@
     },
     {
       "name": "Pedro Acosta",
-      "pts": 243,
+      "pts": 247,
       "history": [
         32,
         10,
@@ -330,7 +330,7 @@
         26,
         20,
         25,
-        9
+        13
       ],
       "sprint_pts": 57,
       "sprint_history": [
@@ -373,7 +373,7 @@
     },
     {
       "name": "Ai Ogura",
-      "pts": 237,
+      "pts": 246,
       "history": [
         17,
         16,
@@ -390,7 +390,7 @@
         0,
         0,
         19,
-        23
+        32
       ],
       "sprint_pts": 66,
       "sprint_history": [
@@ -433,7 +433,7 @@
     },
     {
       "name": "Fabio Di Giannantonio",
-      "pts": 230,
+      "pts": 237,
       "history": [
         12,
         25,
@@ -450,7 +450,7 @@
         9,
         15,
         7,
-        25
+        32
       ],
       "sprint_pts": 61,
       "sprint_history": [
@@ -553,7 +553,7 @@
     },
     {
       "name": "Francesco Bagnaia",
-      "pts": 164,
+      "pts": 166,
       "history": [
         8,
         2,
@@ -570,7 +570,7 @@
         0,
         0,
         13,
-        24
+        26
       ],
       "sprint_pts": 60,
       "sprint_history": [
@@ -613,7 +613,7 @@
     },
     {
       "name": "Alex Marquez",
-      "pts": 158,
+      "pts": 163,
       "history": [
         0,
         13,
@@ -630,7 +630,7 @@
         22,
         25,
         5,
-        0
+        5
       ],
       "sprint_pts": 57,
       "sprint_history": [
@@ -673,7 +673,7 @@
     },
     {
       "name": "Fermin Aldeguer",
-      "pts": 122,
+      "pts": 125,
       "history": [
         0,
         8,
@@ -690,7 +690,7 @@
         14,
         15,
         10,
-        27
+        30
       ],
       "sprint_pts": 19,
       "sprint_history": [
@@ -973,7 +973,7 @@
     },
     {
       "name": "Fabio Quartararo",
-      "pts": 66,
+      "pts": 67,
       "history": [
         2,
         4,
@@ -990,7 +990,7 @@
         0,
         6,
         0,
-        16
+        17
       ],
       "sprint_pts": 14,
       "sprint_history": [
@@ -1933,6 +1933,66 @@
     },
     {
       "name": "Michele Pirro",
+      "pts": 0,
+      "history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sprint_pts": 0,
+      "sprint_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_pts": 0,
+      "long_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Aleix Espargaro",
       "pts": 0,
       "history": [
         0,
