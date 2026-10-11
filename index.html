@@ -937,7 +937,7 @@ function loadCountdown() {
     const cal = CALENDARS_2026[catId];
     if (!cal) return;
 
-    const completedCount = cal.filter(e => new Date(e.date + 'T23:59:59') < now).length;
+    const completedCount = cal.filter(e => new Date(e.date + 'T18:00:00') < now).length;
     const pct = Math.round((completedCount / cal.length) * 100);
     const pctBadge = ` · ${pct}%`;
 

@@ -774,7 +774,7 @@ function renderCalendar() {
 
   CALENDAR.forEach(ev => {
     const evDate = new Date(ev.date + 'T23:59:59');
-    const isPast = evDate < now;
+    const isPast = evDate < now || Boolean(ev.weather) || (new Date(ev.date + 'T18:00:00') < now);
     if (isPast) completedCount++;
 
     const d = new Date(ev.date);
