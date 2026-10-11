@@ -657,9 +657,11 @@ def main():
                 existing = s_parsed if isinstance(s_parsed, dict) else {}
                 has_fp1 = bool(existing.get("fp1") and isinstance(existing["fp1"], list) and len(existing["fp1"]) > 0)
                 has_pr  = bool(existing.get("pr") and isinstance(existing["pr"], list) and len(existing["pr"]) > 0)
+                has_fp2 = bool(existing.get("fp2") and isinstance(existing["fp2"], list) and len(existing["fp2"]) > 0)
                 has_q1  = bool(existing.get("q1") and isinstance(existing["q1"], list) and len(existing["q1"]) > 0)
                 has_q2  = bool(existing.get("q2") and isinstance(existing["q2"], list) and len(existing["q2"]) > 0)
                 has_spr = bool(existing.get("sprint") and isinstance(existing["sprint"], list) and len(existing["sprint"]) > 0)
+                has_wup = bool(existing.get("wup") and isinstance(existing["wup"], list) and len(existing["wup"]) > 0)
                 has_race = bool(existing.get("race") and isinstance(existing["race"], list) and len(existing["race"]) > 0)
 
                 needs_update = False
@@ -667,11 +669,15 @@ def main():
                     needs_update = True
                 elif not has_pr and pr:
                     needs_update = True
+                elif not has_fp2 and fp2:
+                    needs_update = True
                 elif not has_q1 and q1:
                     needs_update = True
                 elif not has_q2 and q2:
                     needs_update = True
                 elif not has_spr and spr:
+                    needs_update = True
+                elif not has_wup and wup:
                     needs_update = True
                 elif not has_race and rac:
                     needs_update = True
