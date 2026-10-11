@@ -6322,41 +6322,41 @@
   "moto3_constructors": [
     {
       "name": "KTM",
-      "pts": 395
+      "pts": 420
     },
     {
       "name": "HONDA",
-      "pts": 190
+      "pts": 200
     }
   ],
   "moto3_teams": [
     {
       "name": "CFMOTO Gaviota Aspar Team",
-      "pts": 472
+      "pts": 497
     },
     {
       "name": "Red Bull KTM Ajo",
-      "pts": 378
+      "pts": 394
     },
     {
       "name": "Liqui Moly Dynavolt Intact GP",
-      "pts": 273
+      "pts": 293
     },
     {
       "name": "Red Bull KTM Tech3",
-      "pts": 201
+      "pts": 215
     },
     {
       "name": "LEVEL UP - MTA",
-      "pts": 162
+      "pts": 182
     },
     {
       "name": "AEON Credit - MT Helmets - MSI",
-      "pts": 144
+      "pts": 151
     },
     {
       "name": "Leopard Racing",
-      "pts": 132
+      "pts": 149
     },
     {
       "name": "GRYD Racing",
@@ -6364,11 +6364,11 @@
     },
     {
       "name": "CIP Green Power",
-      "pts": 109
+      "pts": 119
     },
     {
       "name": "Honda Team Asia",
-      "pts": 108
+      "pts": 118
     },
     {
       "name": "SIC58 Squadra Corse",
@@ -6376,7 +6376,7 @@
     },
     {
       "name": "Rivacold Snipers Team",
-      "pts": 49
+      "pts": 50
     },
     {
       "name": "CODE Motorsports",
@@ -7200,39 +7200,39 @@
   "f1": [
     {
       "name": "Andrea Kimi Antonelli",
-      "pts": 325
+      "pts": 340
     },
     {
       "name": "George Russell",
-      "pts": 236
+      "pts": 238
     },
     {
       "name": "Lewis Hamilton",
+      "pts": 229
+    },
+    {
+      "name": "Max Verstappen",
       "pts": 221
     },
     {
       "name": "Charles Leclerc",
-      "pts": 197
-    },
-    {
-      "name": "Max Verstappen",
-      "pts": 196
+      "pts": 215
     },
     {
       "name": "Lando Norris",
-      "pts": 189
+      "pts": 201
     },
     {
       "name": "Oscar Piastri",
-      "pts": 128
+      "pts": 138
     },
     {
       "name": "Isack Hadjar",
-      "pts": 96
+      "pts": 97
     },
     {
       "name": "Liam Lawson",
-      "pts": 69
+      "pts": 75
     },
     {
       "name": "Pierre Gasly",
@@ -7251,12 +7251,12 @@
       "pts": 23
     },
     {
-      "name": "Gabriel Bortoleto",
-      "pts": 10
+      "name": "Nico Hülkenberg",
+      "pts": 13
     },
     {
-      "name": "Nico Hülkenberg",
-      "pts": 9
+      "name": "Gabriel Bortoleto",
+      "pts": 10
     },
     {
       "name": "Esteban Ocon",
@@ -7291,5 +7291,5 @@
       "pts": 0
     }
   ],
-  "_updated": "2026-10-11 15:37:00 · Auto (Domenica)"
+  "_updated": "2026-10-11 20:31:12 · Auto (Domenica)"
 }

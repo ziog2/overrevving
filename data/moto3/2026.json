@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "moto3",
-  "lastUpdated": "2026-10-11 15:37:00 · Auto (Domenica)",
+  "lastUpdated": "2026-10-11 20:31:12 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -2135,41 +2135,41 @@
   "constructors": [
     {
       "name": "KTM",
-      "pts": 395
+      "pts": 420
     },
     {
       "name": "HONDA",
-      "pts": 190
+      "pts": 200
     }
   ],
   "teams": [
     {
       "name": "CFMOTO Gaviota Aspar Team",
-      "pts": 472
+      "pts": 497
     },
     {
       "name": "Red Bull KTM Ajo",
-      "pts": 378
+      "pts": 394
     },
     {
       "name": "Liqui Moly Dynavolt Intact GP",
-      "pts": 273
+      "pts": 293
     },
     {
       "name": "Red Bull KTM Tech3",
-      "pts": 201
+      "pts": 215
     },
     {
       "name": "LEVEL UP - MTA",
-      "pts": 162
+      "pts": 182
     },
     {
       "name": "AEON Credit - MT Helmets - MSI",
-      "pts": 144
+      "pts": 151
     },
     {
       "name": "Leopard Racing",
-      "pts": 132
+      "pts": 149
     },
     {
       "name": "GRYD Racing",
@@ -2177,11 +2177,11 @@
     },
     {
       "name": "CIP Green Power",
-      "pts": 109
+      "pts": 119
     },
     {
       "name": "Honda Team Asia",
-      "pts": 108
+      "pts": 118
     },
     {
       "name": "SIC58 Squadra Corse",
@@ -2189,7 +2189,7 @@
     },
     {
       "name": "Rivacold Snipers Team",
-      "pts": 49
+      "pts": 50
     },
     {
       "name": "CODE Motorsports",

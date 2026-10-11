@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "f1",
-  "lastUpdated": "2026-10-11 15:37:00 · Auto (Domenica)",
+  "lastUpdated": "2026-10-11 20:31:12 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -122,39 +122,39 @@
   "riders": [
     {
       "name": "Andrea Kimi Antonelli",
-      "pts": 325
+      "pts": 340
     },
     {
       "name": "George Russell",
-      "pts": 236
+      "pts": 238
     },
     {
       "name": "Lewis Hamilton",
+      "pts": 229
+    },
+    {
+      "name": "Max Verstappen",
       "pts": 221
     },
     {
       "name": "Charles Leclerc",
-      "pts": 197
-    },
-    {
-      "name": "Max Verstappen",
-      "pts": 196
+      "pts": 215
     },
     {
       "name": "Lando Norris",
-      "pts": 189
+      "pts": 201
     },
     {
       "name": "Oscar Piastri",
-      "pts": 128
+      "pts": 138
     },
     {
       "name": "Isack Hadjar",
-      "pts": 96
+      "pts": 97
     },
     {
       "name": "Liam Lawson",
-      "pts": 69
+      "pts": 75
     },
     {
       "name": "Pierre Gasly",
@@ -173,12 +173,12 @@
       "pts": 23
     },
     {
-      "name": "Gabriel Bortoleto",
-      "pts": 10
+      "name": "Nico Hülkenberg",
+      "pts": 13
     },
     {
-      "name": "Nico Hülkenberg",
-      "pts": 9
+      "name": "Gabriel Bortoleto",
+      "pts": 10
     },
     {
       "name": "Esteban Ocon",
