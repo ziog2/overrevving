@@ -1,9 +1,636 @@
 {
-  "lastUpdated": "2026-10-11 08:26:06",
-  "totalItems": 140,
+  "lastUpdated": "2026-10-11 15:26:23",
+  "totalItems": 142,
   "items": [
     {
-      "id": "18a110b5",
+      "id": "6300eca0",
+      "title": "Lewis Hamilton ‘unwell’ after Singapore GP as Ferrari shares health update",
+      "link": "https://www.crash.net/f1/news/1107499/1/lewis-hamilton-unwell-after-singapore-gp-ferrari-shares-health-update",
+      "pubDate": "2026-10-11 16:20:35",
+      "pubDateISO": "2026-10-11T16:20:35+01:00",
+      "aiSummary": "Lewis Hamilton was seen by the FIA medical team due to feeling unwell after the Singapore Grand Prix.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444152_hires.jpg?width=1200"
+    },
+    {
+      "id": "ef405617",
+      "title": "2026 Estoril WorldSBK, Race 2 Results: Bulega dominates as Bautista loses podium",
+      "link": "https://www.crash.net/wsbk/results/1107497/1/2026-estoril-worldsbk-race-2-results-bulega-dominates-bautista-loses-podium",
+      "pubDate": "2026-10-11 16:01:13",
+      "pubDateISO": "2026-10-11T16:01:13+01:00",
+      "aiSummary": "Full results from Race 2 at the 2026 Estoril WorldSBK at the Circuito do Estoril.",
+      "source": "Crash WSBK",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354655_hires.jpg?width=1200"
+    },
+    {
+      "id": "c130e32f",
+      "title": "Lewis Hamilton apologises for ‘letting down’ Ferrari at Singapore GP",
+      "link": "https://www.crash.net/f1/news/1107485/1/lewis-hamilton-apologises-letting-down-ferrari-singapore-gp",
+      "pubDate": "2026-10-11 15:47:44",
+      "pubDateISO": "2026-10-11T15:47:44+01:00",
+      "aiSummary": "Lewis Hamilton apologised to Ferrari over team radio after a disappointing Singapore Grand Prix.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444069_hires.jpg?width=1200"
+    },
+    {
+      "id": "8618a129",
+      "title": "How can Antonelli become F1 world champion at US GP?",
+      "link": "https://www.autosport.com/f1/news/how-can-antonelli-become-f1-world-champion-at-us-gp/10864377/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
+      "pubDate": "2026-10-11 15:19:09",
+      "pubDateISO": "2026-10-11T15:19:09+00:00",
+      "aiSummary": "It has been very clear from early on that Kimi Antonelli will become Formula 1 world champion in 2026 after an impressively dominant year for the Mercedes driver. The 20-year-old has made a huge jump from his up-and-down rookie campaign and with five, consecutive wins from round two to six, Antonelli has been the man to beat virtually all season. Now, the first chance for him to wrap up the...",
+      "source": "Autosport F1",
+      "category": "SBK",
+      "image": "https://cdn-4.motorsport.com/images/amp/6n7boQg0/s6/andrea-kimi-antonelli-mercedes-2.jpg"
+    },
+    {
+      "id": "abd020dd",
+      "title": "New F1 championship standings after the Singapore Grand Prix",
+      "link": "https://www.crash.net/f1/results/1107471/1/new-f1-championship-standings-after-singapore-grand-prix",
+      "pubDate": "2026-10-11 15:18:57",
+      "pubDateISO": "2026-10-11T15:18:57+01:00",
+      "aiSummary": "Updated F1 championship results after the Singapore Grand Prix.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444474_hires.jpg?width=1200"
+    },
+    {
+      "id": "dedb4653",
+      "title": "How can Kimi Antonelli become world champion at F1 US GP?",
+      "link": "https://www.motorsport.com/f1/news/how-can-kimi-antonelli-become-world-champion-at-f1-us-gp/10864359/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 15:18:49",
+      "pubDateISO": "2026-10-11T15:18:49+00:00",
+      "aiSummary": "È stato molto chiaro fin dall'inizio che Kimi Antonelli diventerà campione del mondo di Formula 1 nel 2026 dopo un anno straordinariamente dominante per il pilota Mercedes. Il ventenne ha fatto un enorme salto dalla sua stagione da rookie su e giù e con cinque vittorie consecutive dal secondo al sesto round, Antonelli è stato l'uomo da battere praticamente per tutta la stagione. Ora, la prima possibilità per lui di concludere il...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-1.motorsport.com/images/amp/YBVjplMY/s6/andrea-kimi-antonelli-mercedes.jpg"
+    },
+    {
+      "id": "615e7203",
+      "title": "Toto Wolff delivers brutal verdict on F1’s overtaking after Russell’s Singapore nightmare",
+      "link": "https://www.motorsport.com/f1/news/toto-wolff-delivers-brutal-verdict-on-f1s-overtaking-flaws-after-russells-singapore-nightmare/10864368/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 15:11:14",
+      "pubDateISO": "2026-10-11T15:11:14+00:00",
+      "aiSummary": "Il Gran Premio di Singapore del 2026 ha fornito fortune selvaggiamente contrastanti per il Mercedes F1 Team. Mentre Andrea Kimi Antonelli caricava dalla quarta posizione in griglia per assicurarsi un podio, il suo veterano compagno di squadra George Russell era intrappolato in una battaglia estenuante e frustrante in fondo al gruppo. A seguito di un guasto catastrofico al motore nel round precedente a Sepang, Mercedes è stata costretta a dotare...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-5.motorsport.com/images/amp/0kZXoQj6/s6/untitled-design-88-2.jpg"
+    },
+    {
+      "id": "55926a89",
+      "title": "Charles Leclerc demands Ferrari upgrades after agonising Singapore GP",
+      "link": "https://www.motorsport.com/f1/news/leclerc-demands-more-ferrari-upgrades-after-agonizing-singapore-gp-p2/10864334/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 15:06:05",
+      "pubDateISO": "2026-10-11T15:06:05+00:00",
+      "aiSummary": "La Scuderia Ferrari ha spinto la Red Bull Racing al limite assoluto sotto i riflettori di Marina Bay, ma Charles Leclerc alla fine ha dovuto accontentarsi del secondo posto al Gran Premio di Singapore 2026. Dopo essersi lanciato in prima fila insieme al polesitter Max Verstappen, Leclerc ha esercitato una pressione incessante per tutto lo stint di apertura. Tuttavia, un elevato degrado degli pneumatici e una fossa aggressiva e divergente......",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-7.motorsport.com/images/amp/2eZxn91Y/s6/untitled-design-87-2.jpg"
+    },
+    {
+      "id": "daa5c5f3",
+      "title": "When is the next F1 race? United States Grand Prix dates and schedule",
+      "link": "https://www.crash.net/f1/news/1107273/1/when-next-f1-race-united-states-grand-prix-dates-and-schedule",
+      "pubDate": "2026-10-11 14:59:23",
+      "pubDateISO": "2026-10-11T14:59:23+01:00",
+      "aiSummary": "The next round of the 2026 Formula 1 season takes place at the United States Grand Prix.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1380566_hires.jpg?width=1200"
+    },
+    {
+      "id": "43cec50b",
+      "title": "Formula 1 Singapore Grand Prix: Full race results",
+      "link": "https://www.crash.net/f1/results/1107465/1/formula-1-singapore-grand-prix-full-race-results",
+      "pubDate": "2026-10-11 14:57:37",
+      "pubDateISO": "2026-10-11T14:57:37+01:00",
+      "aiSummary": "Full race results from the 2026 Formula 1 Singapore Grand Prix",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443461_hires.jpg?width=1200"
+    },
+    {
+      "id": "81683b54",
+      "title": "Ferrari boss reveals Lewis Hamilton deliberately ignored Singapore GP pit orders",
+      "link": "https://www.motorsport.com/f1/news/ferrari-boss-reveals-lewis-hamilton-deliberately-ignored-singapore-gp-pit-orders/10864361/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 14:57:22",
+      "pubDateISO": "2026-10-11T14:57:22+00:00",
+      "aiSummary": "La Scuderia Ferrari ha disputato un Gran Premio di Singapore 2026 altamente competitivo, ma il garage di Maranello sta lasciando il circuito di Marina Bay Street chiedendosi cosa avrebbe potuto essere. Mentre Charles Leclerc si è assicurato con successo il secondo posto dietro al vincitore della gara Max Verstappen, il suo compagno di squadra Lewis Hamilton è sceso in classifica per finire in sesta posizione. Il massiccio calo della posizione della pista è stato il diretto...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-2.motorsport.com/images/amp/25dL7El0/s6/untitled-design-86-2.jpg"
+    },
+    {
+      "id": "a15a68ed",
+      "title": "Peerless Max Verstappen beats Charles Leclerc for first Singapore GP win",
+      "link": "https://www.crash.net/f1/race-report/1107463/1/peerless-max-verstappen-beats-charles-leclerc-first-singapore-gp-win",
+      "pubDate": "2026-10-11 14:49:58",
+      "pubDateISO": "2026-10-11T14:49:58+01:00",
+      "aiSummary": "Max Verstappen wins the Singapore Grand Prix for the first time.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444483_hires.jpg?width=1200"
+    },
+    {
+      "id": "4bf05ef6",
+      "title": "Max Verstappen reacts to breaking Singapore GP curse after years of heartbreak",
+      "link": "https://www.motorsport.com/f1/news/max-verstappen-reacts-to-breaking-singapore-gp-curse-after-years-of-heartbreak/10864353/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 14:33:55",
+      "pubDateISO": "2026-10-11T14:33:55+00:00",
+      "aiSummary": "Dopo una carriera in cui si è perso una vittoria del Gran Premio di Singapore, Max Verstappen è finalmente salito sul podio di una gara domenicale al Marina Bay Street Circuit. Dopo quella che è stata una stagione mista per il team Red Bull, questa è la seconda vittoria consecutiva del quattro volte campione. Con questa notizia si chiude un'impegnativa tripla testata che copre Baku, Sepang e Singapore…",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-3.motorsport.com/images/amp/0Zq83WR6/s6/untitled-design-85.jpg"
+    },
+    {
+      "id": "442574b2",
+      "title": "Estoril WorldSBK LIVE: Reaction after Nicolo Bulega wins Race 2 in Portugal",
+      "link": "https://www.crash.net/wsbk/live/1044288/estoril-worldsbk-live-updates-superpole-race-portugal",
+      "pubDate": "2026-10-11 14:30:00",
+      "pubDateISO": "2026-10-11T14:30:00+01:00",
+      "aiSummary": "Live updates from Race 2 at the 2026 Estoril WorldSBK at the Circuito do Estoril.",
+      "source": "Crash WSBK",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354503_hires.jpg?width=1200"
+    },
+    {
+      "id": "c9b110a5",
+      "title": "Hamilton takes blame for poor Singapore GP strategy call",
+      "link": "https://www.autosport.com/f1/news/lewis-hamilton-takes-blame-for-poor-singapore-gp-strategy/10864343/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
+      "pubDate": "2026-10-11 14:24:02",
+      "pubDateISO": "2026-10-11T14:24:02+00:00",
+      "aiSummary": "Lewis Hamilton has taken responsibility for his strategy in Formula 1’s Singapore Grand Prix, after a decision not to pit under a virtual safety car cost him dear. The VSC was called into action by race control on lap 39 when Lance Stroll pulled aside due to a suspected clutch issue in his Aston Martin. At that stage of the race, Hamilton had already done 21 laps on softs, while Leclerc ......",
+      "source": "Autosport F1",
+      "category": "SBK",
+      "image": "https://cdn-1.motorsport.com/images/amp/6b8Zode2/s6/lewis-hamilton-ferrari-2.jpg"
+    },
+    {
+      "id": "cd0cb603",
+      "title": "Lewis Hamilton takes blame for poor Singapore GP strategy",
+      "link": "https://www.motorsport.com/f1/news/lewis-hamilton-takes-blame-for-poor-singapore-gp-strategy/10864338/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 14:22:13",
+      "pubDateISO": "2026-10-11T14:22:13+00:00",
+      "aiSummary": "Lewis Hamilton si è assunto la responsabilità della sua strategia nel Gran Premio di Singapore di Formula 1, dopo che la decisione di non piazzarsi sotto una safety car virtuale gli è costata cara. Il VSC è stato chiamato in azione dal controllo di gara al giro 39 quando Lance Stroll si è tirato da parte a causa di un sospetto problema alla frizione della sua Aston Martin. In quella fase della gara Hamilton aveva già fatto 21 giri sulle soft, mentre Leclerc ......",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-5.motorsport.com/images/amp/YBVjKnJY/s6/lewis-hamilton-ferrari.jpg"
+    },
+    {
+      "id": "1fcca377",
+      "title": "How Antonelli can clinch the F1 world championship at the next race in Austin | Formula 1",
+      "link": "https://www.racefans.net/2026/10/11/how-antonelli-can-clinch-the-f1-world-championship-at-the-next-race-in-austin/",
+      "pubDate": "2026-10-11 14:15:03",
+      "pubDateISO": "2026-10-11T14:15:03+00:00",
+      "aiSummary": "Andrea Kimi Antonelli can win the world championship in the next round depending on where he, George Russell and Lewis Hamilton finish.",
+      "source": "RaceFans F1",
+      "category": "SBK",
+      "image": ""
+    },
+    {
+      "id": "cc5e4b38",
+      "title": "Kimi Antonelli caught off guard by major F1 title news after Singapore GP",
+      "link": "https://www.motorsport.com/f1/news/kimi-antonelli-refuses-to-celebrate-his-imminent-f1-championship-after-the-singapore-gp/10864326/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 14:11:51",
+      "pubDateISO": "2026-10-11T14:11:51+00:00",
+      "aiSummary": "Dopo un estenuante Gran Premio di Singapore 2026, il pilota del Mercedes AMG Petronas F1 Team Kimi Antonelli ha tagliato il traguardo al terzo posto per assicurarsi un altro podio cruciale. Mentre Max Verstappen della Red Bull Racing ha dominato la gara per conquistare la vittoria davanti a Charles Leclerc della Scuderia Ferrari, il podio di Antonelli pone ufficialmente le basi per una massiccia incoronazione in campionato. Durante...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-3.motorsport.com/images/amp/0kZXoZj6/s6/untitled-design-84-2.jpg"
+    },
+    {
+      "id": "6d895676",
+      "title": "Hamilton apologises to Ferrari after failing to pit when they told him to | Formula 1",
+      "link": "https://www.racefans.net/2026/10/11/hamilton-apologises-to-ferrari-after-missing-pit-entry-when-told-to-come-in/",
+      "pubDate": "2026-10-11 14:06:51",
+      "pubDateISO": "2026-10-11T14:06:51+00:00",
+      "aiSummary": "Ferrari team principal Frederic Vasseur revealed the team called Hamilton in but \"he missed the pit entry\".",
+      "source": "RaceFans F1",
+      "category": "F1",
+      "image": ""
+    },
+    {
+      "id": "f331f67d",
+      "title": "Vote for your 2026 Singapore Grand Prix Driver of the Weekend | Formula 1",
+      "link": "https://www.racefans.net/2026/10/11/vote-for-your-2026-singapore-grand-prix-driver-of-the-weekend/",
+      "pubDate": "2026-10-11 13:58:06",
+      "pubDateISO": "2026-10-11T13:58:06+00:00",
+      "aiSummary": "Who was the best driver during the 2026 Singapore Grand Prix weekend? Compare how they did and vote for the best.",
+      "source": "RaceFans F1",
+      "category": "F1",
+      "image": ""
+    },
+    {
+      "id": "6abf45ec",
+      "title": "F1 Singapore GP: Max Verstappen dominates for Marina Bay double",
+      "link": "https://www.motorsport.com/f1/news/f1-singapore-gp-report/10864310/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 13:56:11",
+      "pubDateISO": "2026-10-11T13:56:11+00:00",
+      "aiSummary": "Max Verstappen ha vinto per la prima volta il Gran Premio di Formula 1 di Singapore, portando Charles Leclerc e Kimi Antonelli alla bandiera a scacchi. Verstappen ha resistito a una prima sfida di Leclerc e si è dimostrato più veloce nel resto della gara. La strategia è costata cara a Lewis Hamilton, permettendo ad Antonelli di finire sul podio e di estendere ulteriormente il suo vantaggio in campionato – nella misura in cui lo farà ......",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-6.motorsport.com/images/amp/0JXRq4AY/s6/max-verstappen-red-bull-racing-2.jpg"
+    },
+    {
+      "id": "51595087",
+      "title": "2026 Singapore Grand Prix race result and championship points | Formula 1",
+      "link": "https://www.racefans.net/2026/10/11/2026-singapore-grand-prix-race-result-and-championship-points/",
+      "pubDate": "2026-10-11 13:53:52",
+      "pubDateISO": "2026-10-11T13:53:52+00:00",
+      "aiSummary": "Max Verstappen won the Singapore Grand Prix for Red Bull while Andrea Kimi Antonelli increased his championship lead to 102 points.",
+      "source": "RaceFans F1",
+      "category": "SBK",
+      "image": ""
+    },
+    {
+      "id": "3b0b1321",
+      "title": "F1 Singapore GP: Verstappen takes comfortable victory from Leclerc and Antonelli",
+      "link": "https://www.autosport.com/f1/news/f1-singapore-gp-report/10864312/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
+      "pubDate": "2026-10-11 13:53:45",
+      "pubDateISO": "2026-10-11T13:53:45+00:00",
+      "aiSummary": "Max Verstappen won Formula 1’s Singapore Grand Prix for the very first time on Sunday, leading Charles Leclerc and Kimi Antonelli under the chequered flag. Verstappen’s withstood an early challenge from Leclerc and proved quicker over the remainder of the race. Strategy cost Lewis Hamilton dear, allowing Antonelli to finish on the podium and further extend his championship lead – to ... Keep...",
+      "source": "Autosport F1",
+      "category": "SBK",
+      "image": "https://cdn-2.motorsport.com/images/amp/2GdKqjzY/s6/max-verstappen-red-bull-racing-2.jpg"
+    },
+    {
+      "id": "3fba29fb",
+      "title": "Verstappen cruises to Singapore Grand Prix victory as Ferrari threat fades | 2026 Singapore Grand Prix report",
+      "link": "https://www.racefans.net/2026/10/11/verstappen-cruises-to-singapore-grand-prix-victory-as-ferrari-threat-fades/",
+      "pubDate": "2026-10-11 13:53:05",
+      "pubDateISO": "2026-10-11T13:53:05+00:00",
+      "aiSummary": "Max Verstappen dominated proceedings in Singapore to claim his first grand prix victory in the event.",
+      "source": "RaceFans F1",
+      "category": "SBK",
+      "image": ""
+    },
+    {
+      "id": "db2f2318",
+      "title": "Five quick takeaways from Singapore GP",
+      "link": "https://www.motorsport.com/f1/news/five-quick-conclusions-from-singapore-gp/10864297/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 13:49:27",
+      "pubDateISO": "2026-10-11T13:49:27+00:00",
+      "aiSummary": "Red Bull's Baku upgrade was \"the good stuff\" \"Whatever Red Bull's upgrade in Azerbaijan was, it was good stuff,\" McLaren's Oscar Piastri said with a wry smile when we asked him about the state of play in F1 right now. Following brief spells for Ferrari and McLaren at the top as Mercedes' main challengers, Red Bull's improved RB22 is not only quicker but also more predictable to drive. \"Say ......",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-6.motorsport.com/images/amp/6DGgoB9Y/s6/charles-leclerc-ferrari-lewis-.jpg"
+    },
+    {
+      "id": "aea7c42d",
+      "title": "Rate the race: 2026 Singapore Grand Prix | Formula 1",
+      "link": "https://www.racefans.net/2026/10/11/rate-the-race-2026-singapore-grand-prix/",
+      "pubDate": "2026-10-11 13:47:04",
+      "pubDateISO": "2026-10-11T13:47:04+00:00",
+      "aiSummary": "What did you think of today's race? Share your verdict on the 2026 Singapore Grand Prix.",
+      "source": "RaceFans F1",
+      "category": "F1",
+      "image": ""
+    },
+    {
+      "id": "1d3102fb",
+      "title": "2026 Singapore Grand Prix in pictures | F1 Pictures",
+      "link": "https://www.racefans.net/2026/10/11/2026-singapore-grand-prix-in-pictures/",
+      "pubDate": "2026-10-11 13:27:12",
+      "pubDateISO": "2026-10-11T13:27:12+00:00",
+      "aiSummary": "The 2026 Singapore Grand Prix at Singapore in pictures.",
+      "source": "RaceFans F1",
+      "category": "F1",
+      "image": ""
+    },
+    {
+      "id": "4cc3fec7",
+      "title": "Kim Kardashian finally breaks silence with Martin Brundle after awkward F1 snub",
+      "link": "https://www.motorsport.com/f1/news/kim-kardashian-finally-breaks-silence-with-martin-brundle-after-awkward-f1-snub/10864306/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 13:09:01",
+      "pubDateISO": "2026-10-11T13:09:01+00:00",
+      "aiSummary": "Kim Kardashian e Martin Brundle hanno finalmente condiviso un'intervista in vista del Gran Premio di Singapore del 2026, con la star del reality che si è finalmente lasciata alle spalle il suo imbarazzante momento di Monaco. I due si sono finalmente incontrati durante la camminata in griglia dell'ex pilota domenica al Marina Bay Circuit, dove Kardashian era lì per sostenere il suo partner Lewis Hamilton. Brundle si avvicinò alla stella ......",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-3.motorsport.com/images/amp/01QNaKq0/s6/untitled-design-83-2.jpg"
+    },
+    {
+      "id": "4a08dd19",
+      "title": "Martin Brundle buries hatchet with Kim Kardashian: ‘Did I not know the rules?’",
+      "link": "https://www.crash.net/f1/news/1107317/1/martin-brundle-buries-hatchet-kim-kardashian-did-i-not-know-rules",
+      "pubDate": "2026-10-11 12:59:58",
+      "pubDateISO": "2026-10-11T12:59:58+01:00",
+      "aiSummary": "Martin Brundle speaks to Kim Kardashian on the F1 grid at the second attempt.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/screenshot-2026-10-11-at-12.54.28.png?width=1200"
+    },
+    {
+      "id": "19d4c797",
+      "title": "Race results: Dutch National – Valkenswaard",
+      "link": "https://gatedrop.com/race-results-dutch-national-valkenswaard/",
+      "pubDate": "2026-10-11 12:56:12",
+      "pubDateISO": "2026-10-11T12:56:12+00:00",
+      "aiSummary": "MX1 Race One: Race Two: To be updated MX2 Race One: Race Two: To be updated 125cc Race One: Race Two: To be updated 85cc Race One: Race Two: To be updated",
+      "source": "GateDrop MXGP",
+      "category": "MX2",
+      "image": "https://gatedrop.com/wp-content/uploads/Coldenhoff-4-150x150.jpeg"
+    },
+    {
+      "id": "ca1759bf",
+      "title": "F1 Singapore Grand Prix LIVE: Max Verstappen wins",
+      "link": "https://www.crash.net/f1/live/f1-singapore-grand-prix-live-race-updates-max-verstappen-pole",
+      "pubDate": "2026-10-11 12:50:00",
+      "pubDateISO": "2026-10-11T12:50:00+01:00",
+      "aiSummary": "Live updates from Sunday's Formula 1 Singapore Grand Prix at Marina Bay.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443989_hires.jpg?width=1200"
+    },
+    {
+      "id": "bcb88dee",
+      "title": "Marc Marquez hits back at new MotoGP penalty for missing PR events",
+      "link": "https://www.crash.net/motogp/news/1107311/1/marc-marquez-hits-back-new-motogp-penalty-missing-pr-events",
+      "pubDate": "2026-10-11 12:38:50",
+      "pubDateISO": "2026-10-11T12:38:50+01:00",
+      "aiSummary": "MotoGP riders will be fined for missing promotional events now",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354427_hires.jpg?width=1200"
+    },
+    {
+      "id": "0d979829",
+      "title": "Video: Four drivers collide in pits during Japanese Super Formula race in Fuji | Briefs",
+      "link": "https://www.racefans.net/2026/10/11/video-four-drivers-collide-in-pits-during-japanese-super-formula-race-in-fuji/",
+      "pubDate": "2026-10-11 12:27:46",
+      "pubDateISO": "2026-10-11T12:27:46+00:00",
+      "aiSummary": "Four-car pit lane pile-up in Japanese Super Formula",
+      "source": "RaceFans F1",
+      "category": "F1",
+      "image": ""
+    },
+    {
+      "id": "993045f4",
+      "title": "Video: Herlings v Vialle match-up – Herlings goes down going for the win!",
+      "link": "https://gatedrop.com/video-herlings-v-vialle-match-up-herlings-goes-down-going-for-the-win/",
+      "pubDate": "2026-10-11 12:18:44",
+      "pubDateISO": "2026-10-11T12:18:44+00:00",
+      "aiSummary": "Tom Vialle beat Jeffrey Herlings and then Cooper Webb to win the head-to-head match-up at the Fastcross but Herlings did all he could until he went down in the final corner trying to take the win! ðŸ‡®ðŸ‡¹ | ⚔️ Tom Vialle vs Jeffrey Herlings ðŸ“ Fastcross pic.twitter.com/mxskNiDHTY — Santiago ðŸ—ž️ðŸ (@santicrevo) October 11, 2026",
+      "source": "GateDrop MXGP",
+      "category": "MXGP",
+      "image": "https://gatedrop.com/wp-content/uploads/Screenshot_20261011_131808_X-150x150.jpg"
+    },
+    {
+      "id": "9bb3a47b",
+      "title": "Iker Lecuona blames weather for Estoril WorldSBK blunder that gave Nicolo Bulega win",
+      "link": "https://www.crash.net/wsbk/news/1107304/1/iker-lecuona-blames-weather-estoril-worldsbk-blunder-gave-nicolo-bulega-win",
+      "pubDate": "2026-10-11 12:16:36",
+      "pubDateISO": "2026-10-11T12:16:36+01:00",
+      "aiSummary": "Iker Lecuona says the wind caused him to make a mistake at turn one in the Estoril WorldSBK Superpole Race.",
+      "source": "Crash WSBK",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354492_hires.jpg?width=1200"
+    },
+    {
+      "id": "93a4c271",
+      "title": "Kimi Antonelli hit with a major pre-race scare in Singapore",
+      "link": "https://www.motorsport.com/f1/news/kimi-antonelli-hit-with-a-major-pre-race-scare-in-singapore/10864300/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 12:15:49",
+      "pubDateISO": "2026-10-11T12:15:49+00:00",
+      "aiSummary": "Il Gran Premio di Singapore 2026 è stato un momento dall'inizio ufficiale quando è scoppiato il caos sulla griglia di partenza per il team Mercedes-AMG Petronas F1. Pochi minuti prima che il campo fosse programmato per rotolare via per il giro di formazione obbligatorio intorno al circuito di Marina Bay Street, scoppiò un forte panico intorno alla seconda fila. Il leader del campionato Andrea Kimi Antonelli era legato e ......",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-3.motorsport.com/images/amp/YXyKqKQ6/s6/untitled-design-82-2.jpg"
+    },
+    {
+      "id": "14305258",
+      "title": "Marco Bezzecchi “will keep fighting” after historic 300th Italian MotoGP victory at Mandalika",
+      "link": "https://www.crash.net/motogp/news/1107294/1/marco-bezzecchi-will-keep-fighting-after-historic-300th-italian-motogp",
+      "pubDate": "2026-10-11 11:52:03",
+      "pubDateISO": "2026-10-11T11:52:03+01:00",
+      "aiSummary": "Marco Bezzecchi keeps slim MotoGP title hopes alive with victory at Mandalika, Valentino Rossi victories dominate his most memorable wins from Italy's 300.",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354419_hires_1600x900.jpg?width=1200"
+    },
+    {
+      "id": "87dbf65d",
+      "title": "Jorge Martin hails “great day” as he retakes MotoGP title lead, “won’t struggle anymore” warning",
+      "link": "https://www.crash.net/motogp/news/1107283/1/jorge-martin-hails-great-day-he-retakes-motogp-title-lead-wont-struggle",
+      "pubDate": "2026-10-11 11:15:05",
+      "pubDateISO": "2026-10-11T11:15:05+01:00",
+      "aiSummary": "Jorge Martin reclaimed the MotoGP championship lead in Indonesia and declared he expects to be competitive at all of the remaining rounds.",
+      "source": "Crash MotoGP",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354176_hires_1600x900.jpg?width=1200"
+    },
+    {
+      "id": "9727adcf",
+      "title": "George Russell handed another 20-place penalty before the Singapore Grand Prix",
+      "link": "https://www.motorsport.com/f1/news/george-russell-handed-another-20-place-penalty-before-the-singapore-grand-prix/10864262/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 11:08:56",
+      "pubDateISO": "2026-10-11T11:08:56+00:00",
+      "aiSummary": "Il weekend del Mercedes AMG Petronas F1 Team al Marina Bay Street Circuit è ufficialmente andato di male in peggio. Una retrocessione di 60 posti per Russell Secondo la sentenza ufficiale della FIA, George Russell è stato schiaffeggiato con un'ulteriore penalità di 20 posti in griglia poche ore prima dell'inizio del Gran Premio di Singapore del 2026. La penalità è stata emessa dai commissari di gara dopo la FIA ... Continua a leggere",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-5.motorsport.com/images/amp/YBVjpo8Y/s6/untitled-design-46-2.jpg"
+    },
+    {
+      "id": "92adb70d",
+      "title": "Marco Bezzecchi with conflicting feelings: Indonesian GP feels ‘more like a loss than a win’",
+      "link": "https://www.motorsport.com/motogp/news/marco-bezzecchi-with-conflicting-feelings-indonesian-gp-feels-more-like-a-loss-than-a-win/10864259/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 11:08:33",
+      "pubDateISO": "2026-10-11T11:08:33+00:00",
+      "aiSummary": "Marco Bezzecchi admitted that the Indonesian Grand Prix weekend felt ‘more like a loss than a win’, even after bouncing from a sprint crash to dominate Sunday’s race. Bezzecchi claimed his first victory in MotoGP since the Italian Grand Prix back in May, leading a historic 1-2-3-4 finish for Aprilia at one of the marque’s strongest tracks on the calendar. But the result came in the ... Keep...",
+      "source": "Motorsport.com MotoGP",
+      "category": "SBK",
+      "image": "https://cdn-8.motorsport.com/images/amp/6AlvbWwY/s6/marco-bezzecchi-aprilia-racing.jpg"
+    },
+    {
+      "id": "8c7c926a",
+      "title": "Pierre Gasly questions FIA stewards' decision not to penalise Lando Norris after Singapore crash",
+      "link": "https://www.motorsport.com/f1/news/gasly-questions-fia-stewards-decision-not-to-penalise-norris-after-singapore-crash/10864257/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 10:58:52",
+      "pubDateISO": "2026-10-11T10:58:52+00:00",
+      "aiSummary": "\"Abbiamo degli steward per questo. Hanno preso una decisione. Qualunque cosa dica l'arbitro, l'arbitro ha ragione\", ha detto Pierre Gasly di Alpine della decisione di non penalizzare Lando Norris per la collisione con Oscar Piastri nell'ultimo giro della gara sprint di Singapore. Questo è il linguaggio codificato che i calciatori e i manager di calcio usano in genere quando non sono d'accordo con l'arbitro. Le McLaren erano ... tieni...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-8.motorsport.com/images/amp/Y9lNgnZ2/s6/pierre-gasly-alpine.jpg"
+    },
+    {
+      "id": "c52d35c8",
+      "title": "F1 Singapore Grand Prix: Full starting grid after 60-place penalty for George Russell",
+      "link": "https://www.crash.net/f1/news/1107179/1/f1-singapore-grand-prix-full-starting-grid-after-penalties",
+      "pubDate": "2026-10-11 10:56:25",
+      "pubDateISO": "2026-10-11T10:56:25+01:00",
+      "aiSummary": "The full starting grid for the 2026 Formula 1 Singapore Grand Prix.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444054_hires.jpg?width=1200"
+    },
+    {
+      "id": "14670d9b",
+      "title": "Pedro Acosta fumes at MotoGP tyre pressure rule: “We looked like donkeys”",
+      "link": "https://www.crash.net/motogp/news/1107274/1/pedro-acosta-fumes-motogp-tyre-pressure-rule-we-looked-donkeys",
+      "pubDate": "2026-10-11 10:48:06",
+      "pubDateISO": "2026-10-11T10:48:06+01:00",
+      "aiSummary": "Pedro Acosta says MotoGP needs to change its tyre pressure rule",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352098_hires.jpg?width=1200"
+    },
+    {
+      "id": "674f20fe",
+      "title": "2026 Estoril WorldSBK, Superpole Race Results: Another record for Bulega",
+      "link": "https://www.crash.net/wsbk/results/1107292/1/2026-estoril-worldsbk-superpole-race-results-another-record-bulega",
+      "pubDate": "2026-10-11 10:32:01",
+      "pubDateISO": "2026-10-11T10:32:01+01:00",
+      "aiSummary": "Full results from the Superpole Race at the 2026 Estoril WorldSBK, the 11th round of the season.",
+      "source": "Crash WSBK",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354542_hires.jpg?width=1200"
+    },
+    {
+      "id": "bf955427",
+      "title": "Race results: 2026 FastCross – Herlings wins",
+      "link": "https://gatedrop.com/race-results-2026-fastcross-herlings-wins/",
+      "pubDate": "2026-10-11 10:19:40",
+      "pubDateISO": "2026-10-11T10:19:40+00:00",
+      "aiSummary": "Race One: Despite his huge crash at the MXoN just one week agao, Tom Vialle is back racing in Italy this weekend and took the first race win ahead of the impressive privateer of Jan Pancar. Cooper Webb finished in third with Liam Everts fourth and Jeffrey Herlings rounding out the top five. Everts and Herlings...",
+      "source": "GateDrop MXGP",
+      "category": "MXGP",
+      "image": "https://gatedrop.com/wp-content/uploads/Herlings-150x150.png"
+    },
+    {
+      "id": "32dc05c7",
+      "title": "Fermin Aldeguer heads for surgery after Mandalika MotoGP injury",
+      "link": "https://www.crash.net/motogp/news/1107265/1/fermin-aldeguer-heads-surgery-after-mandalika-motogp-injury",
+      "pubDate": "2026-10-11 10:19:05",
+      "pubDateISO": "2026-10-11T10:19:05+01:00",
+      "aiSummary": "Fermin Aldeguer will require surgery after a hand injury in the Mandalika MotoGP.",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354037_hires_1600x900.jpg?width=1200"
+    },
+    {
+      "id": "e6a6954a",
+      "title": "Marc Marquez achieves “dream” Indonesian GP result",
+      "link": "https://www.crash.net/motogp/news/1107266/1/marc-marquez-achieves-dream-indonesian-gp-result",
+      "pubDate": "2026-10-11 10:17:48",
+      "pubDateISO": "2026-10-11T10:17:48+01:00",
+      "aiSummary": "Marquez finished sixth at the Indonesian Grand Prix",
+      "source": "Crash MotoGP",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354040_hires.jpg?width=1200"
+    },
+    {
+      "id": "4e153ab6",
+      "title": "Marc Marquez: Indonesian GP results a “dream” at my “worst circuit”",
+      "link": "https://www.motorsport.com/motogp/news/marc-marquez-dream-result-indonesian-gp-worst-track/10864221/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 10:17:02",
+      "pubDateISO": "2026-10-11T10:17:02+00:00",
+      "aiSummary": "Marc Marquez says it is a \"dream\" that he didn't lose any points to Jorge Martin in the title fight at his \"worst circuit\" after finishing first and sixth across the two races at the Indonesian Grand Prix. The reigning MotoGP champion has a habit of analysing the upcoming rounds on the calendar to get an idea of where to attack and where to try to fend off his rivals’ blows. His ... Keep reading",
+      "source": "Motorsport.com MotoGP",
+      "category": "SBK",
+      "image": "https://cdn-4.motorsport.com/images/amp/YN7v4jm6/s6/marc-marquez-ducati-team.jpg"
+    },
+    {
+      "id": "61bb9d1d",
+      "title": "Video: Herlings first turn crash at Fastcross!",
+      "link": "https://gatedrop.com/video-herlings-first-turn-crash-at-fastcross/",
+      "pubDate": "2026-10-11 10:14:44",
+      "pubDateISO": "2026-10-11T10:14:44+00:00",
+      "aiSummary": "Jeffrey Herlings didn’t have the start he wanted in the first Fastcross moto after going down in turn one after a bump by Vialle and collecting Liam Everts in the carnage! Herlings got back to fifth with Everts fourth, Webb third with Pancar second and Vialle taking the win! ...",
+      "source": "GateDrop MXGP",
+      "category": "MXGP",
+      "image": "https://gatedrop.com/wp-content/uploads/Screenshot_20261011_111145_Instagram-150x150.jpg"
+    },
+    {
+      "id": "16f6280c",
+      "title": "Fermin Aldeguer set for surgery after fracturing hand at Mandalika",
+      "link": "https://www.motorsport.com/motogp/news/fermin-aldeguer-set-for-surgery-after-fracturing-hand-at-mandalika/10864224/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 10:05:57",
+      "pubDateISO": "2026-10-11T10:05:57+00:00",
+      "aiSummary": "Gresini Ducati rider Fermin Aldeguer will have to undergo surgery on his right hand following a crash-riddled Indonesian Grand Prix weekend. Having taken his first and only grand prix win at this race a year ago, it was far from a dream defence for the Spaniard. He crashed twice on Friday, putting him on the back foot as he was relegated to Q1. Although he progressed from there to Q2, he ......",
+      "source": "Motorsport.com MotoGP",
+      "category": "SBK",
+      "image": "https://cdn-7.motorsport.com/images/amp/2eZxlRjY/s6/fermin-aldeguer-gresini-racing.jpg"
+    },
+    {
+      "id": "ee4c2f19",
+      "title": "Qualifying results: Dutch National – Valkenswaard",
+      "link": "https://gatedrop.com/qualifying-results-dutch-national-valkenswaard-2026/",
+      "pubDate": "2026-10-11 10:01:14",
+      "pubDateISO": "2026-10-11T10:01:14+00:00",
+      "aiSummary": "Dave Kooiker set the pace in the MX1 class ahead of Glenn Coldenhoff and Boris Blanken. In MX2, Cas Valk set the pace on his KTM with Freek van der Vlist second and Kay Karssemakers third quickest. Sem van Helvoirt and Jan Spliethof topped the 125cc groups. Kash van Hamond topped the 85cc group with...",
+      "source": "GateDrop MXGP",
+      "category": "MX2",
+      "image": "https://gatedrop.com/wp-content/uploads/Valk-3-150x150.jpg"
+    },
+    {
+      "id": "fe689d91",
+      "title": "'I don't know how I did that,' says Raul Fernandez after ride to Indonesian GP podium with broken finger",
+      "link": "https://www.motorsport.com/motogp/news/i-dont-know-how-i-did-that-says-raul-fernandez-after-ride-to-indonesian-gp-podium-with-broken-finger/10864210/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 09:42:53",
+      "pubDateISO": "2026-10-11T09:42:53+00:00",
+      "aiSummary": "Raul Fernandez produced one of the rides of the season as he took second place in the Indonesian Grand Prix with two broken fingers. Afterwards, a very satisfied Fernandez praised MotoGP's medical staff for helping him achieve the result following the nightmare Saturday on which he had picked up the injuries. Read Also: MotoGPRaul Fernandez slams \"unprofessional\" Marco Bezzecchi ... Keep reading",
+      "source": "Motorsport.com MotoGP",
+      "category": "SBK",
+      "image": "https://cdn-4.motorsport.com/images/amp/2QedNVJ2/s6/raul-fernandez-trackhouse-raci.jpg"
+    },
+    {
+      "id": "d8afb538",
+      "title": "Raul Fernandez makes shocking MotoGP injury revelation after Indonesia podium",
+      "link": "https://www.crash.net/motogp/news/1107262/1/raul-fernandez-makes-shocking-motogp-injury-revelation-after-indonesia-podium",
+      "pubDate": "2026-10-11 09:36:38",
+      "pubDateISO": "2026-10-11T09:36:38+01:00",
+      "aiSummary": "Raul Fernandez says his hand injury was worse than anyone knew",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354166_hires.jpg?width=1200"
+    },
+    {
+      "id": "c6abcdf2",
+      "title": "2026 Estoril WorldSBK, Warm Up Results: Lecuona beats Bulega to top spot",
+      "link": "https://www.crash.net/wsbk/results/1107261/1/2026-estoril-worldsbk-warm-results-lecuona-beats-bulega-top-spot",
+      "pubDate": "2026-10-11 09:31:44",
+      "pubDateISO": "2026-10-11T09:31:44+01:00",
+      "aiSummary": "Full results from the Warm Up session at the 2026 Estoril WorldSBK, the 11th round of the season.",
+      "source": "Crash WSBK",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1353688_hires.jpg?width=1200"
+    },
+    {
+      "id": "0c74f114",
+      "title": "Video: 2026 Fastcross highlights day one – qualifying",
+      "link": "https://gatedrop.com/video-2026-fastcross-highlights-day-one-qualifying/",
+      "pubDate": "2026-10-11 09:25:50",
+      "pubDateISO": "2026-10-11T09:25:50+00:00",
+      "aiSummary": "Get the highlights from day one at the 2026 Fastcross with Jeffrey Herlings and Tom Vialle quickest while Cooper Webb qualified sixth behind Pancar Everts and Adamo and just ahead of Kitchen’s nemesis Forato.",
+      "source": "GateDrop MXGP",
+      "category": "MXGP",
+      "image": "https://gatedrop.com/wp-content/uploads/Screenshot_20261011_102247_YouTube-150x150.jpg"
+    },
+    {
+      "id": "d04535a6",
+      "title": "FIA admits F1 qualifying blunder “interfered with the results” at Singapore GP",
+      "link": "https://www.crash.net/f1/news/1107260/1/fia-admits-f1-qualifying-blunder-interfered-results-singapore-gp",
+      "pubDate": "2026-10-11 09:25:20",
+      "pubDateISO": "2026-10-11T09:25:20+01:00",
+      "aiSummary": "The FIA has made a key admission about the \"human error\" that impacted sprint qualifying in Singapore.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444158_hires.jpg?width=1200"
+    },
+    {
+      "id": "75f0390f",
+      "title": "Pedro Acosta: MotoGP tyre pressure rules make us look like “donkeys”",
+      "link": "https://www.motorsport.com/motogp/news/pedro-acosta-motogp-tyre-pressure-rules-make-us-look-like-donkeys/10864204/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 09:23:46",
+      "pubDateISO": "2026-10-11T09:23:46+00:00",
+      "aiSummary": "Pedro Acosta has hit out at MotoGP’s much-maligned tyre pressure rules, saying riders were made to look like “donkeys” in the Indonesian Grand Prix. The 22-year-old passed the factory Ducati of Marc Marquez for fourth with ease on lap 7, having shown strong pace in the early stages after starting ninth on the grid. But as the pressure on his front Michelin tyre went beyond the ... Keep reading",
+      "source": "Motorsport.com MotoGP",
+      "category": "SBK",
+      "image": "https://cdn-4.motorsport.com/images/amp/6b8ZowL2/s6/pedro-acosta-red-bull-ktm-fact.jpg"
+    },
+    {
+      "id": "dfcdc6b8",
       "title": "When is the next MotoGP race? Australian Grand Prix dates and schedule",
       "link": "https://www.crash.net/motogp/news/1107259/1/when-next-motogp-race-australian-grand-prix-dates-and-schedule",
       "pubDate": "2026-10-11 09:15:38",
@@ -14,7 +641,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-07/gng_1275167_hires.jpg?width=1200"
     },
     {
-      "id": "642cbf14",
+      "id": "92ab2d34",
       "title": "Max Verstappen’s biggest concern heading into the Singapore GP",
       "link": "https://www.crash.net/f1/news/1107185/1/max-verstappens-biggest-concern-heading-singapore-gp",
       "pubDate": "2026-10-11 09:07:10",
@@ -25,7 +652,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/si202610100444.jpg?width=1200"
     },
     {
-      "id": "f5b752d6",
+      "id": "1bbb213a",
       "title": "Mandalika: New 2026 MotoGP World Championship standings",
       "link": "https://www.crash.net/motogp/results/1107006/1/mandalika-new-2026-motogp-world-championship-standings",
       "pubDate": "2026-10-11 09:00:50",
@@ -36,7 +663,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354089_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "ed5182eb",
+      "id": "86576135",
       "title": "The all-time MotoGP winners' list after the 2026 Indonesian Grand Prix",
       "link": "https://www.crash.net/motogp/news/1078437/1/all-time-motogp-winners-list-who-has-most-victories",
       "pubDate": "2026-10-11 08:59:00",
@@ -47,7 +674,18 @@
       "image": "https://www.crash.net/sites/default/files/2025-07/gng_724326_hires.jpg?width=1200"
     },
     {
-      "id": "e8ed6b52",
+      "id": "92994376",
+      "title": "Isack Hadjar \"pissed off\" after mechanical problems strike at Singapore GP",
+      "link": "https://www.motorsport.com/f1/news/isack-hadjar-pissed-off-after-mechanical-problems-strike-at-singapore-gp/10864184/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-10-11 08:51:23",
+      "pubDateISO": "2026-10-11T08:51:23+00:00",
+      "aiSummary": "Isack Hadjar è rimasto \"incazzato\" dopo che vari problemi meccanici hanno interrotto il suo sabato al Gran Premio di Singapore, lasciandolo con una partenza in seconda fila per la gara di Formula 1 di domenica. Una violazione dei limiti della pista ha costretto il pilota della Red Bull a iniziare lo sprint dal nono posto, ma si è ritirato dopo soli due giri a causa di un guasto alla power unit. La squadra austriaca ha riparato provvisoriamente l'RB22 in ... Keep...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-9.motorsport.com/images/amp/0Zq8y786/s6/isack-hadjar-red-bull-racing.jpg"
+    },
+    {
+      "id": "a15c00d5",
       "title": "Marco Bezzecchi wins in Indonesia, Jorge Martin retakes MotoGP points lead",
       "link": "https://www.crash.net/motogp/news/1107256/1/marco-bezzecchi-wins-indonesia-jorge-martin-retakes-motogp-points-lead",
       "pubDate": "2026-10-11 08:50:11",
@@ -58,7 +696,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354046_hires.jpg?width=1200"
     },
     {
-      "id": "97d5984c",
+      "id": "51df2a29",
       "title": "2026 Indonesian MotoGP, Mandalika - Race Results",
       "link": "https://www.crash.net/motogp/results/1107003/1/2026-indonesian-motogp-mandalika-race-results",
       "pubDate": "2026-10-11 08:45:50",
@@ -69,18 +707,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354077_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "75f7e904",
-      "title": "F1 Singapore Grand Prix: Full starting grid after George Russell penalty",
-      "link": "https://www.crash.net/f1/news/1107179/1/f1-singapore-grand-prix-full-starting-grid-after-penalties",
-      "pubDate": "2026-10-11 08:27:25",
-      "pubDateISO": "2026-10-11T08:27:25+01:00",
-      "aiSummary": "The full starting grid for the 2026 Formula 1 Singapore Grand Prix.",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444054_hires.jpg?width=1200"
-    },
-    {
-      "id": "7e216ac5",
+      "id": "4bd2a7b5",
       "title": "F1 2026 Singapore Grand Prix: Start time and full weekend schedule",
       "link": "https://www.crash.net/f1/news/1106593/1/f1-2026-singapore-grand-prix-start-time-and-full-weekend-schedule",
       "pubDate": "2026-10-11 08:20:00",
@@ -91,7 +718,18 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1377357_hires.jpg?width=1200"
     },
     {
-      "id": "4a1e573a",
+      "id": "77cd2dde",
+      "title": "Watch the Fastcross live – Herlings v Webb!",
+      "link": "https://gatedrop.com/watch-the-fastcross-live-herlings-v-webb/",
+      "pubDate": "2026-10-11 08:13:43",
+      "pubDateISO": "2026-10-11T08:13:43+00:00",
+      "aiSummary": "The Fastcross used to be one of the best events of the year as the MXGP and AMA riders faced off on what was essentially an SMX circuit back in the 1990s. But now it is back with six time world champ, Jeffrey Herlings, and three time 450 Supecross champ and former 250 outdoor champ,...",
+      "source": "GateDrop MXGP",
+      "category": "MXGP",
+      "image": "https://gatedrop.com/wp-content/uploads/Screenshot_20261010_091222_Instagram-150x150.jpg"
+    },
+    {
+      "id": "77b49e32",
       "title": "MotoGP Indonesian GP: Marco Bezzecchi leads Aprilia 1-2-3-4; Jorge Martin reclaims points lead",
       "link": "https://www.motorsport.com/motogp/news/motogp-indonesian-gp-marco-bezzecchi-leads-aprilia-1-2-3-4-jorge-martin-reclaims-points-lead/10864170/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-10-11 07:54:20",
@@ -102,7 +740,7 @@
       "image": "https://cdn-1.motorsport.com/images/amp/6lmAGK10/s6/marco-bezzecchi-aprilia-racing.jpg"
     },
     {
-      "id": "9366b13c",
+      "id": "208cc1bb",
       "title": "FIA admits fairness was compromised in Singapore GP sprint qualifying “mess”",
       "link": "https://www.autosport.com/f1/news/fia-admits-fairness-was-compromised-in-singapore-f1-sprint-qualifying-mess/10864155/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-10-11 07:02:49",
@@ -110,10 +748,10 @@
       "aiSummary": "The FIA has again owned up to its human error at Formula 1’s Singapore Grand Prix, with its single-seater director Nikolas Tombazis describing it as “the worst thing” for the federation. After sprint qualifying was red-flagged following Sergio Perez’s crash, the end of SQ1 was impacted by race control first failing to reactivate overtake mode, then turning it back on for 27 seconds and ......",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-6.motorsport.com/images/amp/0arE17P2/s6/franco-colapinto-alpine-pierre-2.jpg"
+      "image": "https://cdn-2.motorsport.com/images/amp/0arE17P2/s6/franco-colapinto-alpine-pierre-2.jpg"
     },
     {
-      "id": "02bc5a8c",
+      "id": "c52ecfdf",
       "title": "FIA admits fairness was compromised in Singapore F1 sprint qualifying “mess”",
       "link": "https://www.motorsport.com/f1/news/fia-admits-fairness-was-compromised-in-singapore-f1-sprint-qualifying-mess/10864037/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-11 06:59:21",
@@ -121,21 +759,21 @@
       "aiSummary": "La FIA ha di nuovo ammesso il suo errore umano al Gran Premio di Singapore di Formula 1, con il suo direttore monoposto Nikolas Tombazis che lo descrive come \"la cosa peggiore\" per la federazione. Dopo che le qualifiche dello sprint sono state contrassegnate in rosso in seguito all'incidente di Sergio Perez, la fine di SQ1 è stata influenzata dal controllo della gara che non è riuscito a riattivare la modalità sorpasso, quindi l'ha riaccesa per 27 secondi e ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/0rVPvzd0/s6/andrea-kimi-antonelli-mercedes.jpg"
+      "image": "https://cdn-4.motorsport.com/images/amp/0rVPvzd0/s6/andrea-kimi-antonelli-mercedes.jpg"
     },
     {
-      "id": "abca7b09",
-      "title": "Mandalika MotoGP LIVE: Race reaction from Indonesia",
+      "id": "63ae60aa",
+      "title": "Mandalika MotoGP: Race - As it happened",
       "link": "https://www.crash.net/motogp/live/1044234/mandalika-motogp-live-race-updates-indonesia",
       "pubDate": "2026-10-11 06:57:54",
       "pubDateISO": "2026-10-11T06:57:54+01:00",
       "aiSummary": "Live race updates for the 2026 Indonesian MotoGP at Mandalika.",
       "source": "Crash MotoGP",
-      "category": "SBK",
+      "category": "MotoGP",
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352735_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "50ec4dad",
+      "id": "b99bfb6f",
       "title": "MotoGP to fine riders €5,000 for failing to attend promotional events",
       "link": "https://www.motorsport.com/motogp/news/motogp-rider-fines-not-attending-promotional-events/10864127/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-10-11 06:14:54",
@@ -143,10 +781,10 @@
       "aiSummary": "MotoGP will impose fines on riders who fail to meet minimum attendance requirements at promotional events, Motorsport.com understands. MotoGP Sports Entertainment Group considers the presence of riders at championship events and promotional activities vital for the series' image, and the repeated lack of commitment from some riders throughout the season has prompted it to introduce penalties...",
       "source": "Motorsport.com MotoGP",
       "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/0R7BNeV2/s6/motogp-hero-walk.jpg"
+      "image": "https://cdn-9.motorsport.com/images/amp/0R7BNeV2/s6/motogp-hero-walk.jpg"
     },
     {
-      "id": "3f5c445c",
+      "id": "96eadaa0",
       "title": "Starting grid for the 2026 Mandalika MotoGP race after a penalty",
       "link": "https://www.crash.net/motogp/news/1106955/1/starting-grid-2026-mandalika-motogp-race",
       "pubDate": "2026-10-11 06:01:33",
@@ -157,7 +795,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352615_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "4d377ea3",
+      "id": "dcd028fe",
       "title": "Toprak Razgatlioglu penalised ahead of Indonesian MotoGP",
       "link": "https://www.crash.net/motogp/news/1107204/1/toprak-razgatlioglu-penalised-ahead-indonesian-motogp",
       "pubDate": "2026-10-11 06:00:05",
@@ -168,7 +806,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1353111_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "e3dad936",
+      "id": "5d9c6ea0",
       "title": "Marc Marquez’s protege Max Quiles wraps up 2026 Moto3 title in Indonesia",
       "link": "https://www.motorsport.com/moto3/news/marc-marquez-protege-max-quiles-wraps-up-2026-moto3-title-in-indonesia/10864119/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-10-11 04:45:37",
@@ -176,10 +814,10 @@
       "aiSummary": "Maximo Quiles sealed the 2026 Moto3 title with five rounds to spare following a dominant victory in the Indonesian Grand Prix on Sunday. The CF Moto Aspar rider arrived in Mandalika with a 127-point buffer over his closest championship rival David Almansa, while Alvaro Carpe and Brian Uriarte also remained in contention for the title. Quiles only needed to maintain an advantage of 125 ... Keep...",
       "source": "Motorsport.com MotoGP",
       "category": "Moto3",
-      "image": "https://cdn-6.motorsport.com/images/amp/0Ld5AWV0/s6/maximo-quiles-aspar-team.jpg"
+      "image": "https://cdn-4.motorsport.com/images/amp/0Ld5AWV0/s6/maximo-quiles-aspar-team.jpg"
     },
     {
-      "id": "a4b80c97",
+      "id": "e5f5b02f",
       "title": "Marco Bezzecchi fastest as tempers flare in Mandalika MotoGP warm-up, Jorge Martin falls",
       "link": "https://www.crash.net/motogp/news/1107202/1/marco-bezzecchi-fastest-tempers-flare-jorge-martin-falls-mandalika-motogp",
       "pubDate": "2026-10-11 04:34:05",
@@ -190,7 +828,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1353771_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "2dea2903",
+      "id": "1aac7faf",
       "title": "Aleix Espargaro withdraws from the Indonesian MotoGP",
       "link": "https://www.crash.net/motogp/news/1107201/1/honda-withdraws-aleix-espargaro-indonesian-motogp",
       "pubDate": "2026-10-11 03:28:05",
@@ -201,7 +839,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352588_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "6575784d",
+      "id": "09b53088",
       "title": "Aleix Espargaro withdraws from the Indonesian GP and focuses on Malaysia 850cc test",
       "link": "https://www.motorsport.com/motogp/news/aleix-espargaro-withdraws-from-the-indonesian-gp-and-focuses-on-the-malaysian-850cc-test/10864105/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-10-11 02:38:45",
@@ -209,10 +847,10 @@
       "aiSummary": "Honda test rider Aleix Espargaro, who was substituting for Joan Mir, will not take part in Sunday's Indonesian Grand Prix. The 37-year-old, who retired at the end of 2024, was called up by Honda for the Mandalika weekend to replace Joan Mir, who has been medically unfit since mid-September. In his role as a test and development rider, Espargaro suffered a serious back injury in April ... Keep...",
       "source": "Motorsport.com MotoGP",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/Y9lNgZG2/s6/aleix-espargaro-honda-hrc.jpg"
+      "image": "https://cdn-1.motorsport.com/images/amp/Y9lNgZG2/s6/aleix-espargaro-honda-hrc.jpg"
     },
     {
-      "id": "e6609531",
+      "id": "48a42af1",
       "title": "2026 Indonesian MotoGP race at Mandalika today: Start times and how to watch",
       "link": "https://www.crash.net/motogp/news/1106544/1/2026-indonesian-motogp-mandalika-start-times-and-how-watch",
       "pubDate": "2026-10-11 02:22:04",
@@ -223,7 +861,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1350749_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "bb3b7ba4",
+      "id": "bf3bf22f",
       "title": "MotoGP Indonesian GP: Full starting grid",
       "link": "https://www.motorsport.com/motogp/news/motogp-indonesian-gp-full-starting-grid/10863678/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-10-11 02:19:07",
@@ -231,175 +869,10 @@
       "aiSummary": "Raul Fernandez is due to start the Indonesian Grand Prix from the front after claiming his maiden pole position in Saturday's qualifying. However, the Trackhouse rider's participation in the race remains subject to his physical condition after he broke his finger in a crash with factory Aprilia rider Marco Bezzecchi in the sprint. Fernandez will take part in Sunday morning's warm-up to ......",
       "source": "Motorsport.com MotoGP",
       "category": "SBK",
-      "image": "https://cdn-6.motorsport.com/images/amp/63QalD82/s6/start-action.jpg"
+      "image": "https://cdn-9.motorsport.com/images/amp/63QalD82/s6/start-action.jpg"
     },
     {
-      "id": "aa0de22e",
-      "title": "Toprak Razgatlioglu explains 'power problem' after Mandalika shoulder dislocation",
-      "link": "https://www.crash.net/motogp/news/1107203/1/toprak-razgatlioglu-explains-power-problem-after-mandalika-shoulder",
-      "pubDate": "2026-10-11 01:27:05",
-      "pubDateISO": "2026-10-11T01:27:05+01:00",
-      "aiSummary": "Toprak Razgatlioglu says lost strength, rather than pain, is his biggest concern for Sunday’s 27-lap Indonesian MotoGP at Mandalika.",
-      "source": "Crash MotoGP",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352872_hires_1600x900.jpg?width=1200"
-    },
-    {
-      "id": "9e5d5354",
-      "title": "Nicolo Bulega on the brink of another WorldSBK record but \"just thinking to win\"",
-      "link": "https://www.crash.net/wsbk/news/1107200/1/nicolo-bulega-brink-another-worldsbk-record-just-thinking-win",
-      "pubDate": "2026-10-10 20:25:48",
-      "pubDateISO": "2026-10-10T20:25:48+01:00",
-      "aiSummary": "Nicolo Bulega says race wins are more important to him than records as he sits on the brink of another WorldSBK milestone.",
-      "source": "Crash WSBK",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1353612_hires.jpg?width=1200"
-    },
-    {
-      "id": "924ceb43",
-      "title": "“Big challenge” for Miguel Oliveira to stand on Estoril WorldSBK podium",
-      "link": "https://www.crash.net/wsbk/news/1107198/1/big-challenge-miguel-oliveira-stand-estoril-worldsbk-podium",
-      "pubDate": "2026-10-10 19:58:56",
-      "pubDateISO": "2026-10-10T19:58:56+01:00",
-      "aiSummary": "Miguel Oliveira admits it’s a “big challenge” to get on the Estoril WorldSBK podium with three strong Ducati riders.",
-      "source": "Crash WSBK",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352376_hires.jpg?width=1200"
-    },
-    {
-      "id": "7ea2ab0c",
-      "title": "Why McLaren considers Norris-Piastri Singapore clash so “serious”",
-      "link": "https://www.autosport.com/f1/news/whats-so-serious-for-mclaren-about-the-norris-piastri-singapore-collision/10864087/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
-      "pubDate": "2026-10-10 19:54:03",
-      "pubDateISO": "2026-10-10T19:54:03+00:00",
-      "aiSummary": "If you thought you'd never have to hear the term \"Papaya Rules\" again now that McLaren is no longer F1's dominant team, a new flashpoint over the 2026 Singapore Grand Prix weekend provided McLaren with a most unwanted flashback to 2025. Exactly one year ago, Norris barged Piastri out of the way at the start of the 2025 edition, not causing either car any damage but - as the two drivers were...",
-      "source": "Autosport F1",
-      "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/25dLLLQ0/s6/andrea-stella-mclaren-2.jpg"
-    },
-    {
-      "id": "81235ef3",
-      "title": "Yari Montella reacts to extraordinary “video of the year” WorldSBK save",
-      "link": "https://www.crash.net/wsbk/news/1107196/1/yari-montella-reacts-extraordinary-video-year-worldsbk-save",
-      "pubDate": "2026-10-10 19:37:16",
-      "pubDateISO": "2026-10-10T19:37:16+01:00",
-      "aiSummary": "Yari Montella thinks his save in FP3 at the Estoril WorldSBK created “the video of the year”.",
-      "source": "Crash WSBK",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352447_hires_0.jpg?width=1200"
-    },
-    {
-      "id": "ab0eb49f",
-      "title": "F1 Singapore GP: Sunday schedule, weather forecast and how to watch",
-      "link": "https://www.motorsport.com/f1/news/f1-singapore-gp-sunday-schedule-weather-forecast-and-how-to-watch/10863995/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 19:19:12",
-      "pubDateISO": "2026-10-10T19:19:12+00:00",
-      "aiSummary": "La Formula 1 si dirige verso domenica a Marina Bay con Max Verstappen in pole per il Gran Premio di Singapore dopo aver completato un sabato di comando. Il pilota della Red Bull ha seguito la vittoria in una volata colpita dalla pioggia conquistando la pole position del Gran Premio, battendo Charles Leclerc di soli 0,054 secondi in qualifica. Lewis Hamilton parte terzo per la Ferrari, con il leader del campionato Kimi Antonelli quarto. Lando Norris si è qualificato...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/0kZXGzA6/s6/max-verstappen-red-bull-racing.jpg"
-    },
-    {
-      "id": "ade6987a",
-      "title": "Lewis Hamilton plots Ferrari ambush on Max Verstappen after frustrating qualifying",
-      "link": "https://www.motorsport.com/f1/news/lewis-hamilton-plots-massive-ferrari-ambush-on-verstappen-after-frustrating-qualifying/10863953/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 18:53:32",
-      "pubDateISO": "2026-10-10T18:53:32+00:00",
-      "aiSummary": "Dopo una sessione di qualifiche incredibilmente intensa sotto i riflettori del Marina Bay Street Circuit, il pilota della Scuderia Ferrari Lewis Hamilton inizierà il Gran Premio di Singapore di domenica dalla seconda fila della griglia. Mentre Max Verstappen della Red Bull Racing si è assicurato con successo la pole position, superando Charles Leclerc di soli 0,054 secondi, Hamilton lo ha seguito da vicino in terza posizione, a soli 0,123 secondi...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/2QedNqO2/s6/untitled-design-81-2.jpg"
-    },
-    {
-      "id": "bb1b5b28",
-      "title": "Toto Wolff defends George Russell after costly sprint crash in Singapore",
-      "link": "https://www.motorsport.com/f1/news/toto-wolff-defends-george-russell-after-costly-sprint-crash-in-singapore/10863986/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 18:48:08",
-      "pubDateISO": "2026-10-10T18:48:08+00:00",
-      "aiSummary": "Il formato sprint del Gran Premio di Singapore 2026 ha messo a dura prova i limiti del garage del Mercedes AMG Petronas F1 Team. Dopo che George Russell ha commesso un errore raro e costoso e ha schiantato la sua W17 contro le barriere in testa durante la gara Sprint in condizioni di bagnato di sabato, i meccanici della fabbrica sono stati costretti a eseguire una ricostruzione massiccia e frenetica solo per preparare l'auto per il Gran Premio serale... Continua a leggere",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/6AlvbjqY/s6/untitled-design-80-3.jpg"
-    },
-    {
-      "id": "33a077e5",
-      "title": "What Verstappen will change after Red Bull’s poor F1 starts in Malaysia and Singapore",
-      "link": "https://www.autosport.com/f1/news/max-verstappen-hints-at-change-after-red-bulls-poor-f1-starts-in-malaysia-and-singapore/10864060/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
-      "pubDate": "2026-10-10 18:35:02",
-      "pubDateISO": "2026-10-10T18:35:02+00:00",
-      "aiSummary": "The Singapore weekend is one of milestones for Verstappen. The Dutchman is contesting his 250th Formula 1 Grand Prix this weekend and has claimed his 50th pole position in the process. Verstappen now belongs to an exclusive group of just five drivers – alongside Lewis Hamilton, Michael Schumacher, Ayrton Senna and Sebastian Vettel – who have secured 50 or more pole positions, but the ... Keep...",
-      "source": "Autosport F1",
-      "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/2dEoGn3Y/s6/max-verstappen-red-bull-racing.jpg"
-    },
-    {
-      "id": "d5f39591",
-      "title": "What's so \"serious\" for McLaren about the Norris-Piastri Singapore collision",
-      "link": "https://www.motorsport.com/f1/news/whats-so-serious-for-mclaren-about-the-norris-piastri-singapore-collision/10864071/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 18:27:59",
-      "pubDateISO": "2026-10-10T18:27:59+00:00",
-      "aiSummary": "Se pensavi che non avresti mai più sentito il termine \"Papaya Rules\" ora che la McLaren non è più la squadra dominante della F1, un nuovo punto di infiammabilità durante il weekend del Gran Premio di Singapore del 2026 ha fornito alla McLaren un flashback indesiderato fino al 2025. Esattamente un anno fa, Norris fece saltare in aria Piastri all'inizio dell'edizione 2025, non causando danni a nessuna delle due auto ma - poiché i due piloti erano...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/0JXRvxOY/s6/lando-norris-mclaren-oscar-pia.jpg"
-    },
-    {
-      "id": "3e1897af",
-      "title": "“I know it’s possible”: Ducati’s unlikely WorldSBK breakout star sure of future podiums",
-      "link": "https://www.crash.net/wsbk/news/1107194/1/i-know-its-possible-ducatis-unlikely-worldsbk-breakout-star-sure-future-podiums",
-      "pubDate": "2026-10-10 18:23:06",
-      "pubDateISO": "2026-10-10T18:23:06+01:00",
-      "aiSummary": "Alberto Surra is sure there are more WorldSBK podiums coming in his future.",
-      "source": "Crash WSBK",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352387_hires.jpg?width=1200"
-    },
-    {
-      "id": "f5ace88c",
-      "title": "Isack Hadjar fumes amid Singapore GP nightmare: “Everything is breaking apart”",
-      "link": "https://www.crash.net/f1/news/1107193/1/isack-hadjar-fumes-amid-singapore-gp-nightmare-everything-breaking-apart",
-      "pubDate": "2026-10-10 17:52:37",
-      "pubDateISO": "2026-10-10T17:52:37+01:00",
-      "aiSummary": "Isack Hadjar was left to run a disastrous Saturday at the Singapore Grand Prix.",
-      "source": "Crash F1",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443187_hires.jpg?width=1200"
-    },
-    {
-      "id": "c97effee",
-      "title": "Max Verstappen hints at change after Red Bull's poor F1 starts in Malaysia and Singapore",
-      "link": "https://www.motorsport.com/f1/news/max-verstappen-hints-at-change-after-red-bulls-poor-f1-starts-in-malaysia-and-singapore/10864048/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 17:50:18",
-      "pubDateISO": "2026-10-10T17:50:18+00:00",
-      "aiSummary": "Il weekend di Singapore è una delle tappe fondamentali per Verstappen. L'olandese sta disputando il suo 250° Gran Premio di Formula 1 questo fine settimana e ha conquistato la sua 50° pole position nel processo. Verstappen ora appartiene a un gruppo esclusivo di soli cinque piloti – insieme a Lewis Hamilton, Michael Schumacher, Ayrton Senna e Sebastian Vettel – che si sono assicurati 50 o più pole position, ma il ... Keep...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/2dEoGn3Y/s6/max-verstappen-red-bull-racing.jpg"
-    },
-    {
-      "id": "85d32fcf",
-      "title": "A \"better job\" or more engine power? Verstappen's Singapore pole unpicked",
-      "link": "https://www.autosport.com/f1/news/a-better-job-or-more-engine-power-verstappens-singapore-pole-unpicked/10864047/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
-      "pubDate": "2026-10-10 17:45:04",
-      "pubDateISO": "2026-10-10T17:45:04+00:00",
-      "aiSummary": "There's many a slip twixt cup and lip – and the ifs, buts and maybes nag even more insistently when the gap between pole position and P2 is measured in the thousandths of a second. \"I think there was potential to be on pole today, but Max just did a better job,\" said Charles Leclerc after falling 0.054s short of Max Verstappen in final qualifying for the Singapore Grand Prix. Ferrari ... Keep...",
-      "source": "Autosport F1",
-      "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/68VwagD2/s6/max-verstappen-red-bull-racing.jpg"
-    },
-    {
-      "id": "3c60b39a",
-      "title": "Lewis Hamilton 'not great enough' as F1 Singapore GP pole gets away",
-      "link": "https://www.crash.net/f1/news/1107192/1/lewis-hamilton-not-great-enough-f1-singapore-gp-pole-gets-away",
-      "pubDate": "2026-10-10 17:26:06",
-      "pubDateISO": "2026-10-10T17:26:06+01:00",
-      "aiSummary": "Lewis Hamilton reflects on a missed opportunity to potentially land pole position at the Singapore Grand Prix.",
-      "source": "Crash F1",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444154_hires.jpg?width=1200"
-    },
-    {
-      "id": "66b5cdb1",
+      "id": "d743dd95",
       "title": "Mercedes offers fresh judgement on upgrade after Singapore GP qualifying",
       "link": "https://www.crash.net/f1/news/1107191/1/mercedes-offers-fresh-judgement-upgrade-after-singapore-gp-qualifying",
       "pubDate": "2026-10-10 17:15:00",
@@ -410,29 +883,18 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444007_hires.jpg?width=1200"
     },
     {
-      "id": "f0d458f7",
+      "id": "916d5e8e",
       "title": "Featured Comment: F1’s latest technical glitch shows its power unit rules are too intrusive | Briefs",
       "link": "https://www.racefans.net/2026/10/10/featured-comment-f1s-latest-technical-glitch-shows-its-power-unit-rules-are-too-intrusive/",
       "pubDate": "2026-10-10 16:56:05",
       "pubDateISO": "2026-10-10T16:56:05+00:00",
-      "aiSummary": "Singapore qualifying glitch shows FIA has too much control over F1 cars",
+      "aiSummary": "Qualifying glitch shows FIA has too much control over F1 cars",
       "source": "RaceFans F1",
       "category": "F1",
       "image": ""
     },
     {
-      "id": "9337ec92",
-      "title": "How Mercedes’ tricky F1 upgrade has been working at Singapore GP",
-      "link": "https://www.motorsport.com/f1/news/how-mercedes-tricky-f1-upgrade-has-been-working-at-singapore-gp/10864023/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 16:47:30",
-      "pubDateISO": "2026-10-10T16:47:30+00:00",
-      "aiSummary": "Il leader del campionato di Formula 1 Kimi Antonelli ritiene che la Mercedes W17 aggiornata funzioni meglio, nonostante l'incertezza sulle prestazioni effettive delle nuove parti. Mercedes ha preso la decisione – insolita per un team di alto livello – di dividere le sue auto in termini di aggiornamenti a Singapore. Antonelli ha eseguito la Freccia d'Argento aggiornata, con pavimento e sidepod rivisti, mentre George Russell, condannato ......",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/0Zq8yKV6/s6/andrea-kimi-antonelli-mercedes.jpg"
-    },
-    {
-      "id": "42369a31",
+      "id": "2debaa33",
       "title": "Hamilton admits set-up change spoiled car balance after missing out on pole position | Formula 1",
       "link": "https://www.racefans.net/2026/10/10/hamilton-admits-set-up-change-spoiled-car-balance-after-missing-out-on-pole-position/",
       "pubDate": "2026-10-10 16:41:53",
@@ -443,7 +905,7 @@
       "image": ""
     },
     {
-      "id": "6feed1d3",
+      "id": "d54bd962",
       "title": "Russell aiming for sixth from back of grid in Singapore | Formula 1",
       "link": "https://www.racefans.net/2026/10/10/russell-aiming-for-sixth-from-back-of-grid-in-singapore/",
       "pubDate": "2026-10-10 16:35:42",
@@ -454,106 +916,7 @@
       "image": ""
     },
     {
-      "id": "6b15fc60",
-      "title": "McLaren warns drivers over \"not acceptable\" Singapore GP crash",
-      "link": "https://www.crash.net/f1/news/1107186/1/mclaren-warns-drivers-over-not-acceptable-singapore-gp-crash",
-      "pubDate": "2026-10-10 16:35:00",
-      "pubDateISO": "2026-10-10T16:35:00+01:00",
-      "aiSummary": "Andrea Stella has given a stern warning to his drivers after their Singapore GP sprint race collision",
-      "source": "Crash F1",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443648_hires.jpg?width=1200"
-    },
-    {
-      "id": "bc414549",
-      "title": "McLaren to talk internally after \"simply not acceptable\" Norris-Piastri clash",
-      "link": "https://www.autosport.com/f1/news/andrea-stella-singapore-f1-sprint-collision-between-lando-norris-and-oscar-piastri-simply-not-accep/10864014/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
-      "pubDate": "2026-10-10 16:34:34",
-      "pubDateISO": "2026-10-10T16:34:34+00:00",
-      "aiSummary": "On the final lap of a wet 20-lap sprint, Lando Norris made a lunge on Oscar Piastri on the inside of Turn 5, unsuccessfully backing out of a closing gap and striking his McLarne team-mate's right-rear corner. The tangle sent both cars into a spin, with Piastri eliminated and sustaining severe damage to the rear of his MCL40 and Norris dropping down to eighth at the finish. The stewards...",
-      "source": "Autosport F1",
-      "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/01QN4ve0/s6/lando-norris-mclaren-oscar-pia.jpg"
-    },
-    {
-      "id": "fe3d1354",
-      "title": "Andrea Stella: Singapore F1 sprint collision between Lando Norris and Oscar Piastri \"simply not acceptable\"",
-      "link": "https://www.motorsport.com/f1/news/andrea-stella-singapore-f1-sprint-collision-between-lando-norris-and-oscar-piastri-simply-not-accep/10864011/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 16:32:40",
-      "pubDateISO": "2026-10-10T16:32:40+00:00",
-      "aiSummary": "Nell'ultimo giro di una volata bagnata di 20 giri, Lando Norris ha fatto un affondo su Oscar Piastri all'interno della curva 5, indietreggiando senza successo da un gap di chiusura e colpendo la curva posteriore destra del suo compagno di squadra McLarne. Il groviglio ha mandato in tilt entrambe le vetture, con Piastri eliminato e che ha subito gravi danni alla parte posteriore della sua MCL40 e Norris che è sceso all'ottavo posto al traguardo. I commissari ......",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/YpbAGnX0/s6/lando-norris-mclaren-oscar-pia.jpg"
-    },
-    {
-      "id": "6d20a4c7",
-      "title": "2026 Estoril WorldSBK: Championship standings after Race 1",
-      "link": "https://www.crash.net/wsbk/results/1107187/1/2026-estoril-worldsbk-championship-standings-after-race-1",
-      "pubDate": "2026-10-10 16:30:41",
-      "pubDateISO": "2026-10-10T16:30:41+01:00",
-      "aiSummary": "World Superbike Championship standings after Race 1 at the Estoril WorldSBK, the 10th and penultimate round of the 2026 season.",
-      "source": "Crash WSBK",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1353323_hires.jpg?width=1200"
-    },
-    {
-      "id": "a17258d6",
-      "title": "How Hamilton \"tipped it over the edge\" with a setup change too far in Singapore GP qualifying",
-      "link": "https://www.motorsport.com/f1/news/how-hamilton-tipped-it-over-the-edge-with-a-setup-change-too-far-in-singapore-gp-qualifying/10863998/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 16:10:45",
-      "pubDateISO": "2026-10-10T16:10:45+00:00",
-      "aiSummary": "La Ferrari si chiederà se entrambe le sue vetture avrebbero dovuto essere in prima fila per il Gran Premio di Singapore. Lewis Hamilton ha stabilito un ritmo impressionante attraverso i segmenti di apertura delle qualifiche e il compagno di squadra Charles Leclerc ha dichiarato: \"Penso che la macchina avesse un potenziale per la pole\". Ma alla fine Leclerc è arrivato a 0,054 secondi prima di battere la Red Bull di Max Verstappen in pole position, con Hamilton a ulteriori 0,069 secondi...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/0mXyKrX6/s6/lewis-hamilton-ferrari.jpg"
-    },
-    {
-      "id": "26007299",
-      "title": "Russell bemoans \"very bad\" Saturday at Singapore GP",
-      "link": "https://www.autosport.com/f1/news/russell-bemoans-very-bad-saturday-at-singapore-gp/10863982/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
-      "pubDate": "2026-10-10 15:52:51",
-      "pubDateISO": "2026-10-10T15:52:51+00:00",
-      "aiSummary": "Mercedes Formula 1 driver George Russell conceded it was his own mistake that led to him crashing out of the Singapore Grand Prix sprint race – an accident which may have hindered his performance in qualifying. Front-row starter Russell surged into the lead on a wet Marina Bay track with a much better getaway than polesitter Max Verstappen, but lost control as he ran ever so slightly wide on...",
-      "source": "Autosport F1",
-      "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/Y9lNg3X2/s6/george-russell-mercedes-3.jpg"
-    },
-    {
-      "id": "1525453c",
-      "title": "2026 Estoril WorldSBK Results, Race 1: Bulega back to winning ways",
-      "link": "https://www.crash.net/wsbk/results/1107183/1/2026-estoril-worldsbk-results-race-1",
-      "pubDate": "2026-10-10 15:50:22",
-      "pubDateISO": "2026-10-10T15:50:22+01:00",
-      "aiSummary": "Full results from Race 1 at the 2026 Estoril WorldSBK at the Autodromo do Estoril.",
-      "source": "Crash WSBK",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1353636_hires.jpg?width=1200"
-    },
-    {
-      "id": "4c7e9866",
-      "title": "George Russell: ‘A very bad day because of my own mistake’",
-      "link": "https://www.motorsport.com/f1/news/george-russell-owns-up-to-singapore-f1-crash-a-very-bad-day-because-of-my-own-mistake/10863974/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 15:48:58",
-      "pubDateISO": "2026-10-10T15:48:58+00:00",
-      "aiSummary": "Il pilota di Formula 1 Mercedes George Russell ha ammesso che è stato un suo errore a portarlo a schiantarsi fuori dalla gara sprint del Gran Premio di Singapore – un incidente che potrebbe aver ostacolato la sua prestazione in qualifica. Il partente in prima fila Russell è salito in testa su una pista bagnata di Marina Bay con una fuga molto migliore del polesitter Max Verstappen, ma ha perso il controllo mentre correva leggermente largo...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/24QGlVqY/s6/george-russell-mercedes-2.jpg"
-    },
-    {
-      "id": "602aa344",
-      "title": "Isack Hadjar demands massive red Bull engine changes: “Everything is breaking apart”",
-      "link": "https://www.motorsport.com/f1/news/isack-hadjar-demands-massive-red-bull-engine-changes-everything-is-breaking-apart/10863966/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 15:44:11",
-      "pubDateISO": "2026-10-10T15:44:11+00:00",
-      "aiSummary": "La Red Bull Racing sta vivendo fortune estremamente contrastanti al Gran Premio di Singapore del 2026. Mentre Max Verstappen si è assicurato con successo la pole position per l'evento principale di domenica, il suo compagno di squadra, Isack Hadjar, ha sopportato un incubo meccanico assoluto sotto i riflettori del Marina Bay Street Circuit. Dopo aver subito un guasto all'unità di alimentazione terminale che lo ha costretto a ritirarsi dalla......",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/27Nogzv0/s6/untitled-design-78-2.jpg"
-    },
-    {
-      "id": "16984ba7",
+      "id": "5fce1f59",
       "title": "F1 Singapore Grand Prix: Full qualifying results",
       "link": "https://www.crash.net/f1/results/1107170/1/f1-singapore-grand-prix-full-qualifying-results",
       "pubDate": "2026-10-10 15:40:00",
@@ -564,7 +927,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444020_hires_0.jpg?width=1200"
     },
     {
-      "id": "bd30bf49",
+      "id": "6c3a3f61",
       "title": "Max Verstappen edges Charles Leclerc and Lewis Hamilton to claim F1 Singapore GP pole",
       "link": "https://www.crash.net/f1/news/1107167/1/max-verstappen-edges-two-ferraris-singapore-gp-pole",
       "pubDate": "2026-10-10 15:35:23",
@@ -575,51 +938,18 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444005_hires.jpg?width=1200"
     },
     {
-      "id": "1174e728",
+      "id": "600e9f10",
       "title": "Video: Cooper Webb’s close call at Fastcross!",
       "link": "https://gatedrop.com/video-cooper-webbs-close-call-at-fastcross/",
       "pubDate": "2026-10-10 15:31:10",
       "pubDateISO": "2026-10-10T15:31:10+00:00",
-      "aiSummary": "Cooper Webb qualified sixth fastest at the 2026 Fastcrosd with Jeffrey Herlings fastest from Tom Vialle but the American survived this nasty overjump! Footage from Webb’s IG story Get the qualifying times below:",
+      "aiSummary": "Cooper Webb qualified sixth fastest at the 2026 Fastcross with Jeffrey Herlings fastest from Tom Vialle but the American survived this nasty overjump! Footage from Webb’s IG story Get the qualifying times below:",
       "source": "GateDrop MXGP",
       "category": "MXGP",
       "image": "https://gatedrop.com/wp-content/uploads/FastClip.net_AQNELn5e-3bLZg0a6OMui6hDJCx5wagiQngkjQI2PV5GP-QF1QYOIYHmIHSUcP8OE3z7hxtbKVZelv8Xh9Vz2c1J-h-rjHitZx6YqtQ.mp4"
     },
     {
-      "id": "3478e651",
-      "title": "Kim Kardashian's private jet makes 6,700-mile journey for Lewis Hamilton's Singapore GP",
-      "link": "https://www.motorsport.com/f1/news/hamilton-gets-massive-6700-mile-boost-as-kim-kardashian-touches-down-for-singapore-gp/10863940/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 15:28:01",
-      "pubDateISO": "2026-10-10T15:28:01+00:00",
-      "aiSummary": "Quando l'aereo personale di una celebrità di serie A compie un massiccio viaggio intercontinentale durante un weekend di gara di Formula 1, il paddock inizia immediatamente a parlare. Secondo l'account Instagram di sport e cultura pulsesports.hq, il Gulfstream G650ER privato di Kim Kardashian, ufficialmente registrato come N1980K, è partito da Honolulu, Hawaii, venerdì 9 ottobre. L'aereo ha completato un estenuante ... Continua...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/YMXbNmV2/s6/untitled-design-79-4.jpg"
-    },
-    {
-      "id": "41d2904f",
-      "title": "Collision between Norris and Piastri was “simply not acceptable” – Stella | Formula 1",
-      "link": "https://www.racefans.net/2026/10/10/collision-between-norris-and-piastri-was-simply-not-acceptable-stella/",
-      "pubDate": "2026-10-10 15:26:32",
-      "pubDateISO": "2026-10-10T15:26:32+00:00",
-      "aiSummary": "McLaren team principal Andrea Stella says the team cannot accept the collision between its drivers in today's sprint race.",
-      "source": "RaceFans F1",
-      "category": "SBK",
-      "image": ""
-    },
-    {
-      "id": "d40dbe93",
-      "title": "Starting grid for the 2026 F1 Singapore GP",
-      "link": "https://www.motorsport.com/f1/news/2026-f1-singapore-grand-prix-starting-grid/10863947/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 15:00:45",
-      "pubDateISO": "2026-10-10T15:00:45+00:00",
-      "aiSummary": "continuate a leggere...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/6AlvbNkY/s6/max-verstappen-red-bull-racing.jpg"
-    },
-    {
-      "id": "9e3f4fde",
+      "id": "675a1465",
       "title": "Why Lando Norris avoided a penalty for crashing into Oscar Piastri at F1 Singapore GP",
       "link": "https://www.crash.net/f1/news/1107132/1/why-lando-norris-avoided-penalty-crashing-oscar-piastri-f1-singapore-gp",
       "pubDate": "2026-10-10 14:48:36",
@@ -630,41 +960,8 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443710_hires.jpg?width=1200"
     },
     {
-      "id": "a4d62cdd",
-      "title": "F1 2026 qualifying head-to-head: Singapore GP",
-      "link": "https://www.motorsport.com/f1/news/f1-2026-qualifying-head-to-head-singapore-gp/10863288/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 14:44:49",
-      "pubDateISO": "2026-10-10T14:44:49+00:00",
-      "aiSummary": "Dopo ogni sessione di qualifica di Formula 1, Motorsport.com pubblica il record di qualifica di ogni squadra in termini di battaglie con i compagni di squadra. Questo record si basa esclusivamente sui risultati qualificati in modo che le penalità in griglia non alterino le statistiche. Quando un pilota non può inserire un tempo sul giro rappresentativo a causa di un problema tecnico o di un incidente, questo sarà menzionato nella tabella. Leggi ... Continua a leggere",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/YWKAEeBY/s6/nico-hulkenberg-audi-f1-team-6.jpg"
-    },
-    {
-      "id": "f7f2386f",
-      "title": "F1 Singapore GP: Max Verstappen overcomes Ferrari challenge for pole",
-      "link": "https://www.motorsport.com/f1/news/f1-singapore-gp-qualifying-report/10863917/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-10 14:44:06",
-      "pubDateISO": "2026-10-10T14:44:06+00:00",
-      "aiSummary": "Max Verstappen ha conquistato la pole position per il Gran Premio di Formula 1 di Singapore, superando le Ferrari di Charles Leclerc e Lewis Hamilton mentre Mercedes lottava. Il quattro volte campione ha fatto del suo meglio con un 1m31.373s per finire solo 0,054s più veloce di Leclerc e assicurarsi la sua seconda pole del fine settimana, dopo averlo fatto per lo sprint. Leader del campionato Kimi Antonelli e Mercedes ... Continua a leggere",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/YpbAGEA0/s6/max-verstappen-red-bull-racing-2.jpg"
-    },
-    {
-      "id": "03dd822b",
-      "title": "F1 Singapore GP: Verstappen continues recent dominance with pole",
-      "link": "https://www.autosport.com/f1/news/f1-singapore-gp-verstappen-on-pole/10863921/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
-      "pubDate": "2026-10-10 14:41:05",
-      "pubDateISO": "2026-10-10T14:41:05+00:00",
-      "aiSummary": "Max Verstappen clinched pole position for Formula 1’s Singapore Grand Prix, outpacing the Ferraris of Charles Leclerc and Lewis Hamilton as Mercedes struggled. Championship leader Kimi Antonelli and George Russell finished just fourth and sixth, while Verstappen’s Red Bull team-mate, Isack Hadjar, will start from the back of the grid. Q1 – Hadjar failed by his Red Bull ... Keep reading",
-      "source": "Autosport F1",
-      "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/2GdKNaVY/s6/max-verstappen-red-bull-racing-3.jpg"
-    },
-    {
-      "id": "c39748a9",
-      "title": "Verstappen takes second pole position in Singapore ahead of the Ferraris | 2026 Singapore Grand Prix qualifying report",
+      "id": "dd12f7cd",
+      "title": "Verstappen takes second pole position in Singapore ahead of the Ferraris | 2026 Singapore GP qualifying report",
       "link": "https://www.racefans.net/2026/10/10/verstappen-takes-second-pole-position-in-singapore-ahead-of-the-ferraris/",
       "pubDate": "2026-10-10 14:38:39",
       "pubDateISO": "2026-10-10T14:38:39+00:00",
@@ -674,18 +971,18 @@
       "image": ""
     },
     {
-      "id": "744cfb40",
+      "id": "899613df",
       "title": "2026 Singapore Grand Prix grid | Formula 1",
       "link": "https://www.racefans.net/2026/10/10/2026-singapore-grand-prix-grid/",
       "pubDate": "2026-10-10 14:33:08",
       "pubDateISO": "2026-10-10T14:33:08+00:00",
-      "aiSummary": "Max Verstappen has taken provisional pole position for the Singapore Grand Prix for Red Bull ahead of Charles Leclerc and Lewis Hamilton.",
+      "aiSummary": "Max Verstappen has taken pole position for the Singapore Grand Prix for Red Bull ahead of Charles Leclerc and Lewis Hamilton.",
       "source": "RaceFans F1",
       "category": "F1",
       "image": ""
     },
     {
-      "id": "8609c932",
+      "id": "1e355079",
       "title": "Kim Kardashian makes surprise F1 Singapore GP appearance to cheer on boyfriend Lewis Hamilton",
       "link": "https://www.crash.net/f1/news/1107102/1/kim-kardashian-makes-surprise-f1-singapore-gp-appearance-cheer-lewis-hamilton",
       "pubDate": "2026-10-10 13:57:24",
@@ -696,7 +993,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1414051_hires.jpg?width=1200"
     },
     {
-      "id": "fdb61cce",
+      "id": "a970a2fe",
       "title": "Pedro Acosta explains KTM’s Indonesian Grand Prix struggles",
       "link": "https://www.crash.net/motogp/news/1107101/1/pedro-acosta-explains-ktms-indonesian-grand-prix-struggles",
       "pubDate": "2026-10-10 13:53:05",
@@ -707,7 +1004,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1353120_hires.jpg?width=1200"
     },
     {
-      "id": "8da25a40",
+      "id": "5905f5a3",
       "title": "Martin Brundle delivers verdict on McLaren's Singapore GP clash",
       "link": "https://www.crash.net/f1/news/1107095/1/martin-brundle-delivers-verdict-mclarens-singapore-gp-clash",
       "pubDate": "2026-10-10 13:32:09",
@@ -718,8 +1015,8 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443876_hires.jpg?width=1200"
     },
     {
-      "id": "474f9c20",
-      "title": "F1 Singapore Grand Prix LIVE: Qualifying as it happened",
+      "id": "a1117984",
+      "title": "F1 Singapore Grand Prix: Qualifying as it happened",
       "link": "https://www.crash.net/f1/live/1044267/f1-singapore-grand-prix-live-sprint-updates-max-verstappen-pole",
       "pubDate": "2026-10-10 13:30:00",
       "pubDateISO": "2026-10-10T13:30:00+01:00",
@@ -729,7 +1026,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443461_hires.jpg?width=1200"
     },
     {
-      "id": "03b02dee",
+      "id": "9490a04a",
       "title": "Why Honda could bench Aleix Espargaro at the Indonesian Grand Prix",
       "link": "https://www.crash.net/motogp/news/1107097/1/why-honda-could-bench-aleix-espargaro-indonesian-grand-prix",
       "pubDate": "2026-10-10 13:29:41",
@@ -740,7 +1037,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352477_hires.jpg?width=1200"
     },
     {
-      "id": "25387d43",
+      "id": "7d433582",
       "title": "2026 Singapore Grand Prix qualifying and sprint race day in pictures | F1 Pictures",
       "link": "https://www.racefans.net/2026/10/10/2026-singapore-grand-prix-qualifying-and-sprint-race-day-in-pictures/",
       "pubDate": "2026-10-10 12:45:48",
@@ -751,7 +1048,7 @@
       "image": ""
     },
     {
-      "id": "61d25c76",
+      "id": "1f9d4e69",
       "title": "Max Verstappen slates F1 for holding sprint races “where you can’t pass”",
       "link": "https://www.crash.net/f1/news/1107091/1/max-verstappen-slates-f1-holding-sprint-races-where-you-cant-pass",
       "pubDate": "2026-10-10 12:38:11",
@@ -762,7 +1059,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1442880_hires.jpg?width=1200"
     },
     {
-      "id": "2f42a6dd",
+      "id": "3d7bc1db",
       "title": "F1 Singapore Grand Prix qualifying delayed after rain disrupted proceedings",
       "link": "https://www.crash.net/f1/news/1107089/1/f1-singapore-grand-prix-qualifying-delayed-after-rain-disrupted-proceedings",
       "pubDate": "2026-10-10 12:15:00",
@@ -773,7 +1070,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443768_hires.jpg?width=1200"
     },
     {
-      "id": "555381b8",
+      "id": "7e221c88",
       "title": "Blunt Lando Norris defends Oscar Piastri overtake attempt as he faces crash investigation",
       "link": "https://www.crash.net/f1/news/1107087/1/blunt-lando-norris-defends-oscar-piastri-overtake-attempt-he-faces-crash",
       "pubDate": "2026-10-10 12:09:00",
@@ -784,7 +1081,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443646_hires.jpg?width=1200"
     },
     {
-      "id": "df6ba305",
+      "id": "3707c9d2",
       "title": "Fabio di Giannantonio “got hit”, stuck “on the limiter” in Turn 1 mayhem",
       "link": "https://www.crash.net/motogp/news/1107084/1/fabio-di-giannantonio-got-hit-stuck-limiter-turn-1-mayhem",
       "pubDate": "2026-10-10 11:55:50",
@@ -795,7 +1092,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352745_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "3feee478",
+      "id": "44d3b120",
       "title": "New F1 championship standings after the Singapore Grand Prix sprint race",
       "link": "https://www.crash.net/f1/results/1107082/1/new-f1-championship-standings-after-singapore-grand-prix-sprint-race",
       "pubDate": "2026-10-10 11:52:12",
@@ -806,7 +1103,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/si202610100339.jpg?width=1200"
     },
     {
-      "id": "6bc2fa45",
+      "id": "08443162",
       "title": "Verstappen: F1 shouldn’t hold sprint races on tracks where you can’t pass | Formula 1",
       "link": "https://www.racefans.net/2026/10/10/verstappen-f1-shouldnt-hold-sprint-races-on-tracks-where-you-cant-pass/",
       "pubDate": "2026-10-10 11:39:10",
@@ -817,7 +1114,7 @@
       "image": ""
     },
     {
-      "id": "3201f8b8",
+      "id": "fafe062c",
       "title": "Alex Rins explains outburst against MotoGP marshal in ‘strange misunderstanding’",
       "link": "https://www.crash.net/motogp/news/1107081/1/alex-rins-explains-outburst-against-motogp-marshal-strange-misunderstanding",
       "pubDate": "2026-10-10 11:33:22",
@@ -828,7 +1125,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/3.png?width=1200"
     },
     {
-      "id": "a8fc0ce4",
+      "id": "7e944d4a",
       "title": "F1 Singapore Grand Prix: Full sprint race results",
       "link": "https://www.crash.net/f1/results/1107073/1/f1-singapore-grand-prix-full-sprint-race-results",
       "pubDate": "2026-10-10 11:28:00",
@@ -839,7 +1136,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443763_hires.jpg?width=1200"
     },
     {
-      "id": "e02a0bf0",
+      "id": "146b7a33",
       "title": "Russell admits “overly confident” driving led to first-lap crash in sprint race | Formula 1",
       "link": "https://www.racefans.net/2026/10/10/russell-admits-overly-confident-driving-led-to-first-lap-crash-in-sprint-race/",
       "pubDate": "2026-10-10 11:21:54",
@@ -850,7 +1147,7 @@
       "image": ""
     },
     {
-      "id": "7c2fa1c6",
+      "id": "bc6a4ab0",
       "title": "Max Verstappen beats Lewis Hamilton to win chaotic Singapore sprint as McLarens collide",
       "link": "https://www.crash.net/f1/news/1107067/1/max-verstappen-beats-lewis-hamilton-win-chaotic-singapore-sprint",
       "pubDate": "2026-10-10 11:17:05",
@@ -861,7 +1158,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/si202610100302.jpg?width=1200"
     },
     {
-      "id": "84123f85",
+      "id": "63a26689",
       "title": "Marco Bezzecchi responds to \"angry\" Raul Fernandez: \"He touched me\"",
       "link": "https://www.crash.net/motogp/news/1107058/1/marco-bezzecchi-responds-angry-raul-fernandez-he-touched-me",
       "pubDate": "2026-10-10 11:12:50",
@@ -872,7 +1169,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352738_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "c92dcf39",
+      "id": "17dfae9d",
       "title": "George Russell crashes out of lead of Singapore GP sprint",
       "link": "https://www.crash.net/f1/news/1107040/1/george-russell-crashes-out-lead-singapore-gp-sprint",
       "pubDate": "2026-10-10 10:50:06",
@@ -883,7 +1180,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443740_hires.jpg?width=1200"
     },
     {
-      "id": "14becc40",
+      "id": "66940c15",
       "title": "Norris and Piastri cleared over last-lap crash in Singapore | Formula 1",
       "link": "https://www.racefans.net/2026/10/10/norris-and-piastri-cleared-over-last-lap-crash-in-singapore/",
       "pubDate": "2026-10-10 10:43:18",
@@ -894,7 +1191,7 @@
       "image": ""
     },
     {
-      "id": "88a9d6df",
+      "id": "873810ec",
       "title": "Raul Fernandez slams ‘unprofessional’ Marco Bezzecchi after MotoGP sprint clash",
       "link": "https://www.crash.net/motogp/news/1107029/1/raul-fernandez-slams-unprofessional-marco-bezzecchi-after-motogp-sprint-clash",
       "pubDate": "2026-10-10 10:33:48",
@@ -905,7 +1202,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352733_hires.jpg?width=1200"
     },
     {
-      "id": "a30cf5eb",
+      "id": "b2326aa4",
       "title": "Verstappen wins sprint race after Russell crashes out of lead on wet track | 2026 Singapore GP sprint race report",
       "link": "https://www.racefans.net/2026/10/10/verstappen-wins-sprint-race-after-russell-crashes-out-of-lead-on-wet-track/",
       "pubDate": "2026-10-10 10:24:45",
@@ -916,18 +1213,7 @@
       "image": ""
     },
     {
-      "id": "69d66cfa",
-      "title": "Rate the Race: 2026 Singapore Grand Prix sprint race | Formula 1",
-      "link": "https://www.racefans.net/2026/10/10/rate-the-race-2026-singapore-grand-prix-sprint-race/",
-      "pubDate": "2026-10-10 10:20:07",
-      "pubDateISO": "2026-10-10T10:20:07+00:00",
-      "aiSummary": "What did you think of today's race? Share your verdict on the Singapore Grand Prix sprint race.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "fe00ed58",
+      "id": "ac821970",
       "title": "Marc Marquez reveals he was “dizzy” after Indonesia MotoGP sprint win",
       "link": "https://www.crash.net/motogp/news/1107013/1/marc-marquez-reveals-he-was-dizzy-after-indonesia-motogp-sprint-win",
       "pubDate": "2026-10-10 10:16:35",
@@ -938,18 +1224,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352805_hires.jpg?width=1200"
     },
     {
-      "id": "745af161",
-      "title": "Martin Brundle brands F1 glitches in Singapore sprint qualifying “embarrassing”",
-      "link": "https://www.crash.net/f1/news/1106896/1/martin-brundle-brands-f1-timing-glitch-singapore-sprint-qualifying-embarrassing",
-      "pubDate": "2026-10-10 09:43:51",
-      "pubDateISO": "2026-10-10T09:43:51+01:00",
-      "aiSummary": "Martin Brundle says F1's latest hiccup in Singapore is \"embarrassing\" after the farcical scenes at the start of the Bahrain Grand Prix.",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-09/xpb_1376369_hires.jpg?width=1200"
-    },
-    {
-      "id": "c1ae7901",
+      "id": "9a87db69",
       "title": "The all-time MotoGP Sprint winners' list after Mandalika",
       "link": "https://www.crash.net/motogp/news/1092378/1/all-time-motogp-sprint-race-winners-list",
       "pubDate": "2026-10-10 09:19:03",
@@ -960,18 +1235,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352838_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "e4c5bd72",
-      "title": "F1 2026 Singapore Grand Prix: Full starting grid for sprint race after Max Verstappen avoids penalty",
-      "link": "https://www.crash.net/f1/news/1106890/1/f1-2026-singapore-grand-prix-full-starting-grid-sprint-race-after-max-verstappen",
-      "pubDate": "2026-10-10 09:06:00",
-      "pubDateISO": "2026-10-10T09:06:00+01:00",
-      "aiSummary": "The full starting grid for the F1 Singapore Grand Prix sprint race.",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443359_hires.jpg?width=1200"
-    },
-    {
-      "id": "9f80b55c",
+      "id": "c3fcbb52",
       "title": "“I’m not surprised”: Marc Marquez blamed for Aprilia crash in Indonesia sprint",
       "link": "https://www.crash.net/motogp/news/1106988/1/im-not-surprised-marc-marquez-blamed-aprilia-crash-indonesia-sprint",
       "pubDate": "2026-10-10 08:50:34",
@@ -982,7 +1246,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352739_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "aea8ae06",
+      "id": "4c06d214",
       "title": "Mandalika Sprint Race: New 2026 MotoGP World Championship standings",
       "link": "https://www.crash.net/motogp/results/1106767/1/mandalika-sprint-race-new-2026-motogp-world-championship-standings",
       "pubDate": "2026-10-10 08:40:30",
@@ -993,7 +1257,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352053_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "6e9317f9",
+      "id": "096cf127",
       "title": "Marc Marquez wins wild Indonesian GP sprint after late Jorge Martin drama",
       "link": "https://www.crash.net/motogp/news/1106986/1/marc-marquez-wins-wild-indonesian-gp-sprint-after-late-jorge-martin-drama",
       "pubDate": "2026-10-10 08:32:02",
@@ -1004,7 +1268,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352765_hires.jpg?width=1200"
     },
     {
-      "id": "821a0716",
+      "id": "4e313cb9",
       "title": "2026 Indonesian MotoGP, Mandalika - Sprint Race Results",
       "link": "https://www.crash.net/motogp/results/1106762/1/2026-indonesian-motogp-mandalika-sprint-race-results",
       "pubDate": "2026-10-10 08:20:30",
@@ -1015,18 +1279,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352750_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "350e97c3",
-      "title": "Watch the Fastcross live – Herlings v Webb!",
-      "link": "https://gatedrop.com/watch-the-fastcross-live-herlings-v-webb/",
-      "pubDate": "2026-10-10 08:13:43",
-      "pubDateISO": "2026-10-10T08:13:43+00:00",
-      "aiSummary": "The Fastcross used to be one of the best events of the year as the MXGP and AMA riders faced off on what was essentially an SMX circuit back in the 1990s. But now it is back with six time world champ, Jeffrey Herlings, and three time 450 Supecross champ and former 250 outdoor champ,...",
-      "source": "GateDrop MXGP",
-      "category": "MXGP",
-      "image": "https://gatedrop.com/wp-content/uploads/Screenshot_20261010_091222_Instagram-150x150.jpg"
-    },
-    {
-      "id": "df2c4de5",
+      "id": "ac7af6a3",
       "title": "Mandalika MotoGP LIVE: Sprint - As it happened",
       "link": "https://www.crash.net/motogp/live/1044234/mandalika-motogp-live-saturday-qualifying-sprint-updates-indonesia",
       "pubDate": "2026-10-10 07:45:00",
@@ -1037,7 +1290,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352553_hires.jpg?width=1200"
     },
     {
-      "id": "97fd7f50",
+      "id": "f4938aed",
       "title": "WATCH: Marc Marquez plays games with Jorge Martin as MotoGP title fight heats up",
       "link": "https://www.crash.net/motogp/news/1106958/1/watch-marc-marquez-plays-games-jorge-martin-motogp-title-fight-heats",
       "pubDate": "2026-10-10 07:10:50",
@@ -1048,18 +1301,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352594_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "92070360",
-      "title": "Wolff admits he mishandled 2016 title-decider between Hamilton and Rosberg | Formula 1",
-      "link": "https://www.racefans.net/2026/10/10/wolff-admits-he-mishandled-2016-title-decider-between-hamilton-and-rosberg/",
-      "pubDate": "2026-10-10 06:15:29",
-      "pubDateISO": "2026-10-10T06:15:29+00:00",
-      "aiSummary": "Mercedes team principal Toto Wolff admits he was wrong to \"micromanage\" the title fight between Lewis Hamilton and Nico Rosberg.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "5967a614",
+      "id": "a12ef3d5",
       "title": "First MotoGP pole for Fernandez, Marc Marquez stalks Jorge Martin",
       "link": "https://www.crash.net/motogp/news/1106953/1/first-motogp-pole-fernandez-marc-marquez-stalks-jorge-martin",
       "pubDate": "2026-10-10 05:50:50",
@@ -1070,18 +1312,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352619_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "55dbc95f",
-      "title": "On This Day: Bottas wins as Verstappen regains points lead from Hamilton | Brief",
-      "link": "https://www.racefans.net/2026/10/10/on-this-day-turkish-grand-prix/",
-      "pubDate": "2026-10-09 23:01:00",
-      "pubDateISO": "2026-10-09T23:01:00+00:00",
-      "aiSummary": "Verstappen retakes championship lead as Bottas wins in Istanbul",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "601da816",
+      "id": "a1b00ac4",
       "title": "How Somkiat Chantra is using one-off MotoGP ride to boost WorldSBK performance",
       "link": "https://www.crash.net/wsbk/news/1106899/1/how-somkiat-chantra-using-one-motogp-ride-boost-worldsbk-performance",
       "pubDate": "2026-10-09 19:21:03",
@@ -1092,95 +1323,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352350_hires.jpg?width=1200"
     },
     {
-      "id": "d45604e3",
-      "title": "Video: Justin Barcia on the HEP Suzuki",
-      "link": "https://gatedrop.com/video-justin-barcia-on-the-hep-suzuki/",
-      "pubDate": "2026-10-09 18:59:34",
-      "pubDateISO": "2026-10-09T18:59:34+00:00",
-      "aiSummary": "See how Justin Barcia looks on the HEP Suzuki with Barcia very pleased to get on the yellow machine after he had the opportunity to stay with Ducati but said no! See how Barcia looks in Supercross via his IG story:",
-      "source": "GateDrop MXGP",
-      "category": "MXGP",
-      "image": "https://gatedrop.com/wp-content/uploads/FastClip.net_AQOYJX_BUk4QDwuTEuXS3YbK62lN7FaTgTdY8BwPdSejAjEoG70FYMLk_ieKrBKepSOaFloMQHigiN5obyxpk4_1pcqD6X9Jy_3BLfQ.mp4"
-    },
-    {
-      "id": "69984864",
-      "title": "Max Verstappen escapes penalty and keeps Singapore sprint pole after Lewis Hamilton incident",
-      "link": "https://www.crash.net/f1/news/1106889/1/max-verstappen-escapes-penalty-and-keeps-singapore-sprint-pole-after-lewis",
-      "pubDate": "2026-10-09 16:49:50",
-      "pubDateISO": "2026-10-09T16:49:50+01:00",
-      "aiSummary": "Max Verstappen keeps his pole position for the Singapore Grand Prix sprint race.",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-10/si202610090637.jpg?width=1200"
-    },
-    {
-      "id": "60febad3",
-      "title": "Lando Norris confident McLaren has solved fuel system issue",
-      "link": "https://www.crash.net/f1/news/1106887/1/lando-norris-confident-mclaren-has-solved-fuel-system-issue",
-      "pubDate": "2026-10-09 16:33:00",
-      "pubDateISO": "2026-10-09T16:33:00+01:00",
-      "aiSummary": "Lando Norris takes full blame for missing the front row despite positive signs from McLaren's technical fixes",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1442683_hires.jpg?width=1200"
-    },
-    {
-      "id": "a538ad43",
-      "title": "Revealed: 2027 Dutch Masters of Motocross calendar",
-      "link": "https://gatedrop.com/revealed-2027-dutch-masters-of-motocross-calendar/",
-      "pubDate": "2026-10-09 16:20:41",
-      "pubDateISO": "2026-10-09T16:20:41+00:00",
-      "aiSummary": "The calendar for the 2027 CAD2M Dutch Masters of Motocross has been officially announced today. The prestigious Dutch motocross championship will once again consist of four rounds next year. The title battle will kick off in Markelo on 21 March and conclude in Halle on 11 July. The organisers have selected four circuits to...",
-      "source": "GateDrop MXGP",
-      "category": "MXGP",
-      "image": "https://gatedrop.com/wp-content/uploads/Dutch-Masters-150x150.jpg"
-    },
-    {
-      "id": "7b627d03",
-      "title": "Lewis Hamilton owns up to mistake as Singapore GP sprint qualifying run plan backfires",
-      "link": "https://www.crash.net/f1/news/1106884/1/lewis-hamilton-owns-mistake-singapore-gp-sprint-qualifying-run-plan-backfires",
-      "pubDate": "2026-10-09 16:00:20",
-      "pubDateISO": "2026-10-09T16:00:20+01:00",
-      "aiSummary": "Lewis Hamilton acknowledges personal strategy choice backfired as car balance shifted on soft tyres in final session",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1442611_hires.jpg?width=1200"
-    },
-    {
-      "id": "83f5c206",
-      "title": "Carlos Sainz slams FIA after ‘human error’ left drivers with power inequality in sprint qualifying",
-      "link": "https://www.crash.net/f1/news/1106883/1/carlos-sainz-slams-fia-after-human-error-left-drivers-power-inequality-sprint",
-      "pubDate": "2026-10-09 15:54:04",
-      "pubDateISO": "2026-10-09T15:54:04+01:00",
-      "aiSummary": "Carlos Sainz has blasted the FIA after a \"human error\" left drivers in different power modes during sprint qualifying in Singapore.",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1442753_hires.jpg?width=1200"
-    },
-    {
-      "id": "821796a3",
-      "title": "Verstappen keeps sprint race pole position after passing Hamilton under yellow flags | Formula 1",
-      "link": "https://www.racefans.net/2026/10/09/verstappen-keeps-sprint-race-pole-position-after-passing-hamilton-under-yellow-flags/",
-      "pubDate": "2026-10-09 15:41:33",
-      "pubDateISO": "2026-10-09T15:41:33+00:00",
-      "aiSummary": "The stewards ruled Max Verstappen overtook Lewis Hamilton under yellow flags but chose not to penalise him.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "774abe36",
-      "title": "Kimi Antonelli makes \"very unpredictable\" admission about new Mercedes F1 car",
-      "link": "https://www.crash.net/f1/news/1106873/1/kimi-antonelli-makes-very-unpredictable-admission-about-new-mercedes-f1-car",
-      "pubDate": "2026-10-09 15:25:00",
-      "pubDateISO": "2026-10-09T15:25:00+01:00",
-      "aiSummary": "Kimi Antonelli has admitted that the Mercedes upgrades have been 'very unpredictable' at the Singapore GP",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443321_hires.jpg?width=1200"
-    },
-    {
-      "id": "68450aa9",
+      "id": "2d19aa87",
       "title": "MotoGP Indonesia: What we learned after Friday practice at Mandalika",
       "link": "https://www.crash.net/motogp/feature/1106869/1/motogp-indonesia-what-we-learned-after-friday-practice-mandalika",
       "pubDate": "2026-10-09 15:07:14",
@@ -1191,51 +1334,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352073_hires.jpg?width=1200"
     },
     {
-      "id": "5194cbb7",
-      "title": "F1 Singapore Grand Prix: Full sprint qualifying results",
-      "link": "https://www.crash.net/f1/results/1106861/1/f1-singapore-grand-prix-full-sprint-qualifying-results",
-      "pubDate": "2026-10-09 14:50:05",
-      "pubDateISO": "2026-10-09T14:50:05+01:00",
-      "aiSummary": "Full results from sprint qualifying at the 2026 Formula 1 Singapore Grand Prix",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1443326_hires.jpg?width=1200"
-    },
-    {
-      "id": "cdbd5dcd",
-      "title": "Max Verstappen beats George Russell in old Mercedes to Singapore GP sprint pole",
-      "link": "https://www.crash.net/f1/news/1106859/1/max-verstappen-takes-singapore-gp-sprint-pole-risk-penalty",
-      "pubDate": "2026-10-09 14:48:44",
-      "pubDateISO": "2026-10-09T14:48:44+01:00",
-      "aiSummary": "Max Verstappen beats George Russell to sprint pole in Singapore.",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-10/si202610090512.jpg?width=1200"
-    },
-    {
-      "id": "7f6c6ad5",
-      "title": "Video: Herlings v Prado at Ernee MXoN",
-      "link": "https://gatedrop.com/video-herlings-v-prado-at-ernee-mxon/",
-      "pubDate": "2026-10-09 14:48:36",
-      "pubDateISO": "2026-10-09T14:48:36+00:00",
-      "aiSummary": "Two legends of the sport went at it for the win in a pivotal final moto last weekend at Ernee as six time FIM World champ Jeffrey Herlings went head-to-head with four time FIM World champion and recently crowned SMX world champ, Jorge Prado. It was Herlings that came out on top after a stunning...",
-      "source": "GateDrop MXGP",
-      "category": "MXGP",
-      "image": "https://gatedrop.com/wp-content/uploads/Screenshot_20261009_153431_YouTube-150x150.jpg"
-    },
-    {
-      "id": "cde01381",
-      "title": "Sainz slates FIA for qualifying blunder which left some drivers down on power | Formula 1",
-      "link": "https://www.racefans.net/2026/10/09/sainz-slates-fia-for-qualifying-blunder-which-left-some-drivers-down-on-power/",
-      "pubDate": "2026-10-09 14:36:17",
-      "pubDateISO": "2026-10-09T14:36:17+00:00",
-      "aiSummary": "Carlos Sainz Jnr says the FIA showed no regard for \"sporting equity\" after an error left some drivers down on power in qualifying.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "78a972ad",
+      "id": "05925456",
       "title": "Alex Rins gives Indonesia MotoGP marshal middle finger in heated exchange",
       "link": "https://www.crash.net/motogp/news/1106839/1/alex-rins-gives-indonesia-motogp-marshal-middle-finger-heated-exchange",
       "pubDate": "2026-10-09 14:01:47",
@@ -1246,7 +1345,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1351465_hires.jpg?width=1200"
     },
     {
-      "id": "ff4a2098",
+      "id": "29a62a16",
       "title": "Fabio Quartararo “lucky” to avoid Marc Marquez-style Indonesia crash",
       "link": "https://www.crash.net/motogp/news/1106802/1/fabio-quartararo-lucky-avoid-marc-marquez-style-indonesia-crash",
       "pubDate": "2026-10-09 12:14:10",
@@ -1257,7 +1356,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352124_hires.jpg?width=1200"
     },
     {
-      "id": "b429de2e",
+      "id": "c1becf66",
       "title": "Mandalika “ideal for Aprilia”, but could Raul be “in the middle” of MotoGP title fight?",
       "link": "https://www.crash.net/motogp/news/1106800/1/mandalika-ideal-aprilia-could-raul-be-middle-motogp-title-fight",
       "pubDate": "2026-10-09 12:00:30",
@@ -1268,7 +1367,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352172_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "b1dd1905",
+      "id": "29f2ca2b",
       "title": "Jett Lawrence Updates Timeline for Return to Riding",
       "link": "https://www.vurbmoto.com/jett-lawrence-updates-timeline-for-return-to-riding/",
       "pubDate": "2026-10-09 12:00:00",
@@ -1279,7 +1378,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/jett-lawrence-return-to-riding-when-1024x683.jpg"
     },
     {
-      "id": "9a20e8a5",
+      "id": "4c1bdf23",
       "title": "Marc Marquez “closer than we thought” in Indonesia MotoGP practice",
       "link": "https://www.crash.net/motogp/news/1106796/1/marc-marquez-closer-we-thought-indonesia-motogp-practice",
       "pubDate": "2026-10-09 11:40:24",
@@ -1290,7 +1389,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1351943_hires.jpg?width=1200"
     },
     {
-      "id": "9be23f9a",
+      "id": "bb6046a4",
       "title": "Is MotoGP Qatar going ahead? Here's everything we know so far",
       "link": "https://www.crash.net/motogp/news/1106795/1/motogp-qatar-going-ahead-heres-everything-we-know-so-far",
       "pubDate": "2026-10-09 11:20:53",
@@ -1301,7 +1400,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-08/gng_1221645_hires.jpg?width=1200"
     },
     {
-      "id": "0311f349",
+      "id": "36f1d11c",
       "title": "MotoGP Indonesian Grand Prix: Which riders are in Q2?",
       "link": "https://www.crash.net/motogp/results/1106754/1/motogp-indonesian-grand-prix-which-riders-are-q2",
       "pubDate": "2026-10-09 09:53:24",
@@ -1312,18 +1411,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1351544_hires.jpg?width=1200"
     },
     {
-      "id": "ee2ef591",
-      "title": "Raul Fernandez tops crash-strewn Indonesia MotoGP Practice",
-      "link": "https://www.crash.net/motogp/news/1106744/1/raul-fernandez-tops-crash-strewn-indonesia-motogp-practice",
-      "pubDate": "2026-10-09 09:46:16",
-      "pubDateISO": "2026-10-09T09:46:16+01:00",
-      "aiSummary": "Raul Fernandez led an Aprilia 1-2-3 in Practice at the Indonesian Grand Prix",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1351466_hires.jpg?width=1200"
-    },
-    {
-      "id": "0be6e444",
+      "id": "c34a08ed",
       "title": "2026 Indonesian MotoGP, Mandalika - Friday Practice Results",
       "link": "https://www.crash.net/motogp/results/1106596/1/2026-indonesian-motogp-mandalika-friday-practice-results",
       "pubDate": "2026-10-09 09:40:34",
@@ -1334,7 +1422,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1351514_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "ddacc54c",
+      "id": "35e12b41",
       "title": "Mandalika MotoGP LIVE: Practice - As it happened",
       "link": "https://www.crash.net/motogp/live/1044234/mandalika-motogp-live-friday-practice-updates-indonesia",
       "pubDate": "2026-10-09 08:35:00",
@@ -1345,40 +1433,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1350758_hires_1600x900_0.jpg?width=1200"
     },
     {
-      "id": "e09a23d6",
-      "title": "Revealed: Bradley Thompson set to race Dutch National at Valkenswaard",
-      "link": "https://gatedrop.com/revealed-bradley-thompson-set-to-race-dutch-national-at-valkenswaard/",
-      "pubDate": "2026-10-09 08:20:58",
-      "pubDateISO": "2026-10-09T08:20:58+00:00",
-      "aiSummary": "Bradley Thompson has enjoyed a strong 2026 season in Ireland and the UK, securing an Irish Championship 85cc title while also proving himself at the sharp end of the Plews British Masters series. The young Irish rider finished sixth in the highly competitive championship, with his best overall result coming at Hawkstone Park where he...",
-      "source": "GateDrop MXGP",
-      "category": "MXGP",
-      "image": "https://gatedrop.com/wp-content/uploads/Thompson-150x150.jpg"
-    },
-    {
-      "id": "f884e629",
-      "title": "Indonesia MotoGP Practice delayed due to stewards’ room issue",
-      "link": "https://www.crash.net/motogp/news/1106681/1/indonesia-motogp-practice-delayed-due-stewards-room-issue",
-      "pubDate": "2026-10-09 08:10:25",
-      "pubDateISO": "2026-10-09T08:10:25+01:00",
-      "aiSummary": "Technical issues at Mandalika have delayed the second MotoGP session on Friday",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1351417_hires_1600x900.jpg?width=1200"
-    },
-    {
-      "id": "67bed17f",
-      "title": "Ezpeleta admits riders “not fully understanding” 2027 MotoGP race weekend changes",
-      "link": "https://www.crash.net/motogp/news/1106667/1/ezpeleta-admits-riders-not-fully-understanding-2027-motogp-changes",
-      "pubDate": "2026-10-09 07:03:30",
-      "pubDateISO": "2026-10-09T07:03:30+01:00",
-      "aiSummary": "Carlos Ezpeleta says MotoGP must improve communication after some riders criticised the 2027 race weekend format without fully understanding new tyre restrictions.",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1337249_hires_1600x900.jpg?width=1200"
-    },
-    {
-      "id": "5218724c",
+      "id": "fe99d2be",
       "title": "Takes: Silly Season | Official 450 Signings for 2027",
       "link": "https://www.vurbmoto.com/takes-silly-season-official-450-signings-for-2027/",
       "pubDate": "2026-10-08 16:00:00",
@@ -1389,40 +1444,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/2027-450-smx-silly-season-guide-justin-barcia.jpg"
     },
     {
-      "id": "439e557f",
-      "title": "Trackhouse riders outline stance on MotoGP team orders as title pressure mounts",
-      "link": "https://www.crash.net/motogp/news/1106613/1/trackhouse-riders-outline-stance-motogp-team-orders-title-pressure-mounts",
-      "pubDate": "2026-10-08 10:27:34",
-      "pubDateISO": "2026-10-08T10:27:34+01:00",
-      "aiSummary": "Raul Fernandez says he will race for victory in MotoGP until Aprilia’s title situation potentially changes over the final two rounds.",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1349606_hires_1600x900.jpg?width=1200"
-    },
-    {
-      "id": "0d3d2615",
-      "title": "Aprilia: Beating Marc Marquez in MotoGP “most difficult” task we could face",
-      "link": "https://www.crash.net/motogp/news/1106609/1/aprilia-beating-marc-marquez-motogp-most-difficult-task-we-could-face",
-      "pubDate": "2026-10-08 09:29:34",
-      "pubDateISO": "2026-10-08T09:29:34+01:00",
-      "aiSummary": "Aprilia CEO Massimo Rivola says beating Marc Marquez and Ducati to the MotoGP crown is the “most difficult task” they could face.",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1330783_hires_1600x900.jpg?width=1200"
-    },
-    {
-      "id": "6f3a0060",
-      "title": "Marc Marquez's blunt response to new MotoGP format: \"We must shut up”",
-      "link": "https://www.crash.net/motogp/news/1106608/1/marc-marquezs-blunt-response-new-motogp-format-we-must-shut",
-      "pubDate": "2026-10-08 09:26:04",
-      "pubDateISO": "2026-10-08T09:26:04+01:00",
-      "aiSummary": "Marc Marquez has questioned the aim of MotoGP’s new weekend format",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1351309_hires.jpg?width=1200"
-    },
-    {
-      "id": "9f1b44b3",
+      "id": "00940f5b",
       "title": "FIM World Supercross Cancels Remainder of 2026 Season",
       "link": "https://www.vurbmoto.com/fim-world-supercross-cancels-remainder-of-2026-season/",
       "pubDate": "2026-10-07 19:42:17",
@@ -1433,7 +1455,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/CanadianGP_SX2-1200x683-1-1024x583.jpg"
     },
     {
-      "id": "2a944552",
+      "id": "3ced0a42",
       "title": "RJ Hampshire Inks Multi-Year Deal with Troy Lee Designs Red Bull Ducati Factory Racing",
       "link": "https://www.vurbmoto.com/rj-hampshire-inks-multi-year-deal-with-troy-lee-designs-red-bull-ducati-factory-racing/",
       "pubDate": "2026-10-07 16:43:24",
@@ -1444,7 +1466,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/rj-hampshire-ducati-2027-1024x683.webp"
     },
     {
-      "id": "bfd2cd5c",
+      "id": "1730d8ec",
       "title": "Michelin Vurbmoto 500 East Virtual Riders Meeting: What You Need to Know",
       "link": "https://www.vurbmoto.com/michelin-vurbmoto-500-east-virtual-riders-meeting-what-you-need-to-know/",
       "pubDate": "2026-10-07 12:13:28",
@@ -1455,7 +1477,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/2026-500-east-virtual-riders-meeting.jpg"
     },
     {
-      "id": "46d1fbe0",
+      "id": "bbecbcff",
       "title": "HRC names Jake Dixon’s team-mate in 2027 Honda WorldSBK line-up",
       "link": "https://www.crash.net/wsbk/news/1106578/1/hrc-names-jake-dixons-team-mate-2027-honda-worldsbk-team",
       "pubDate": "2026-10-07 09:40:24",
@@ -1466,7 +1488,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1319676_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "dfcaba87",
+      "id": "06d392aa",
       "title": "What to Expect at the 500 East? Here’s a Look at 2025",
       "link": "https://www.vurbmoto.com/what-to-expect-at-the-500-east-heres-a-look-at-2025/",
       "pubDate": "2026-10-06 18:03:41",
@@ -1477,7 +1499,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/maxresdefault-3-1024x576.jpg"
     },
     {
-      "id": "595fa18b",
+      "id": "9b1d5406",
       "title": "Is TwoTwo Motorsports Coming Back? Chad Reed Says It Could Happen",
       "link": "https://www.vurbmoto.com/the-twotwo-motorsports-comeback-chad-reed-says-it-could-happen/",
       "pubDate": "2026-10-06 13:19:53",
@@ -1488,7 +1510,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/chad-reed-two-two-motorsports-return.jpg"
     },
     {
-      "id": "88743962",
+      "id": "6c3c0b15",
       "title": "Jake Dixon “overachieved” for best WorldSBK finish, Jonathan Rea pushes Honda “hard”",
       "link": "https://www.crash.net/wsbk/news/1105895/1/jake-dixon-overachieved-best-worldsbk-finish-jonathan-rea-pushes-honda-hard",
       "pubDate": "2026-09-29 16:06:05",
@@ -1499,7 +1521,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-09/gng_1347876_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "055dbb81",
+      "id": "1a1ee460",
       "title": "Somkiat Chantra to move to WSBK with Honda after losing MotoGP ride",
       "link": "https://www.motorsport.com/motogp/news/somkiat-chantra-wsbk-honda-losing-motogp-ride/10757002/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2025-09-06 12:12:13",
@@ -1510,7 +1532,7 @@
       "image": "https://cdn-8.motorsport.com/images/amp/0mbBzL42/s6/somkiat-chantra-team-lcr-honda.jpg"
     },
     {
-      "id": "4adac73a",
+      "id": "aab933af",
       "title": "World Superbike performs U-turn on 2024 minimum weight rules",
       "link": "https://www.motorsport.com/wsbk/news/2024-rule-changes-minimum-weight/10531777/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-10-12 00:22:10",
@@ -1521,7 +1543,7 @@
       "image": "https://cdn-2.motorsport.com/images/amp/0qXZJNE6/s6/toprak-razgatlioglu-pata-yamah.jpg"
     },
     {
-      "id": "f182f635",
+      "id": "d550e087",
       "title": "Ducati hands Bulega works World Superbike seat for 2024",
       "link": "https://www.motorsport.com/wsbk/news/ducati-bulega-2024-announcement-rinaldi/10516484/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-09-05 08:25:31",
@@ -1532,7 +1554,7 @@
       "image": "https://cdn-8.motorsport.com/images/amp/6b7zawp0/s6/nicolo-bulega-1.jpg"
     },
     {
-      "id": "bec8d734",
+      "id": "2f0ef8ef",
       "title": "Sam Lowes to make 2024 WSBK switch with Marc VDS",
       "link": "https://www.motorsport.com/wsbk/news/sam-lowes-to-make-2024-wsbk-switch-with-marc-vds/10495359/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-07-13 09:54:11",
