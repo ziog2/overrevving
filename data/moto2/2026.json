@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "moto2",
-  "lastUpdated": "2026-10-10 20:06:28 · Auto (Domenica)",
+  "lastUpdated": "2026-10-11 08:35:50 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -117,7 +117,7 @@
   "riders": [
     {
       "name": "Manuel Gonzalez",
-      "pts": 245.5,
+      "pts": 265.5,
       "history": [
         0,
         16,
@@ -134,7 +134,7 @@
         10,
         25,
         13,
-        12.5
+        32.5
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -177,7 +177,7 @@
     },
     {
       "name": "Izan Guevara",
-      "pts": 235,
+      "pts": 260,
       "history": [
         0,
         10,
@@ -194,7 +194,7 @@
         20,
         10,
         25,
-        35
+        60
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -237,7 +237,7 @@
     },
     {
       "name": "Ivan Ortola",
-      "pts": 181.5,
+      "pts": 191.5,
       "history": [
         0,
         6,
@@ -254,7 +254,7 @@
         11,
         13,
         11,
-        19.5
+        29.5
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -293,6 +293,66 @@
         13,
         11,
         13
+      ]
+    },
+    {
+      "name": "Daniel Holgado",
+      "pts": 170,
+      "history": [
+        0,
+        25,
+        0,
+        5,
+        0,
+        11,
+        16,
+        11,
+        9,
+        10,
+        20,
+        13,
+        9,
+        0,
+        9,
+        32
+      ],
+      "sprint_pts": 0,
+      "sprint_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_pts": 146,
+      "long_history": [
+        0,
+        25,
+        0,
+        5,
+        0,
+        11,
+        16,
+        11,
+        9,
+        10,
+        20,
+        13,
+        9,
+        0,
+        9,
+        8
       ]
     },
     {
@@ -356,68 +416,8 @@
       ]
     },
     {
-      "name": "Daniel Holgado",
-      "pts": 154,
-      "history": [
-        0,
-        25,
-        0,
-        5,
-        0,
-        11,
-        16,
-        11,
-        9,
-        10,
-        20,
-        13,
-        9,
-        0,
-        9,
-        16
-      ],
-      "sprint_pts": 0,
-      "sprint_history": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "long_pts": 146,
-      "long_history": [
-        0,
-        25,
-        0,
-        5,
-        0,
-        11,
-        16,
-        11,
-        9,
-        10,
-        20,
-        13,
-        9,
-        0,
-        9,
-        8
-      ]
-    },
-    {
       "name": "Senna Agius",
-      "pts": 152,
+      "pts": 165,
       "history": [
         0,
         0,
@@ -434,7 +434,7 @@
         13,
         0,
         0,
-        3
+        16
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -477,7 +477,7 @@
     },
     {
       "name": "Filip Salac",
-      "pts": 144,
+      "pts": 153,
       "history": [
         0,
         1,
@@ -494,7 +494,7 @@
         0,
         0,
         20,
-        16
+        25
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -597,7 +597,7 @@
     },
     {
       "name": "Alonso Lopez",
-      "pts": 117.5,
+      "pts": 125.5,
       "history": [
         0,
         5,
@@ -614,7 +614,7 @@
         25,
         8,
         10,
-        11.5
+        19.5
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -656,25 +656,25 @@
       ]
     },
     {
-      "name": "Collin Veijer",
-      "pts": 75.5,
+      "name": "Daniel Muñoz",
+      "pts": 83,
       "history": [
         0,
-        8,
-        0,
-        16,
-        0,
-        0,
-        7,
+        20,
+        2,
+        10,
         0,
         5,
-        7,
-        7,
         0,
         0,
-        20,
+        4,
         0,
-        5.5
+        0,
+        9,
+        5,
+        4,
+        5,
+        19
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -695,29 +695,29 @@
         0,
         0
       ],
-      "long_pts": 70,
+      "long_pts": 68,
       "long_history": [
         0,
-        8,
-        0,
-        16,
-        0,
-        0,
-        7,
+        20,
+        2,
+        10,
         0,
         5,
-        7,
-        7,
         0,
         0,
-        20,
+        4,
         0,
-        0
+        0,
+        9,
+        5,
+        4,
+        5,
+        4
       ]
     },
     {
       "name": "Tony Arbolino",
-      "pts": 75.5,
+      "pts": 82.5,
       "history": [
         0,
         9,
@@ -734,7 +734,7 @@
         0,
         11,
         2,
-        21.5
+        28.5
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -776,25 +776,25 @@
       ]
     },
     {
-      "name": "Daniel Muñoz",
-      "pts": 72,
+      "name": "Collin Veijer",
+      "pts": 80.5,
       "history": [
         0,
+        8,
+        0,
+        16,
+        0,
+        0,
+        7,
+        0,
+        5,
+        7,
+        7,
+        0,
+        0,
         20,
-        2,
-        10,
         0,
-        5,
-        0,
-        0,
-        4,
-        0,
-        0,
-        9,
-        5,
-        4,
-        5,
-        8
+        10.5
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -815,24 +815,24 @@
         0,
         0
       ],
-      "long_pts": 68,
+      "long_pts": 70,
       "long_history": [
         0,
+        8,
+        0,
+        16,
+        0,
+        0,
+        7,
+        0,
+        5,
+        7,
+        7,
+        0,
+        0,
         20,
-        2,
-        10,
         0,
-        5,
-        0,
-        0,
-        4,
-        0,
-        0,
-        9,
-        5,
-        4,
-        5,
-        4
+        0
       ]
     },
     {
@@ -1076,6 +1076,66 @@
       ]
     },
     {
+      "name": "Jose Antonio Rueda",
+      "pts": 43,
+      "history": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        4,
+        3,
+        5,
+        6,
+        0,
+        8,
+        0,
+        0,
+        0,
+        4,
+        12
+      ],
+      "sprint_pts": 0,
+      "sprint_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_pts": 37,
+      "long_history": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        4,
+        3,
+        5,
+        6,
+        0,
+        8,
+        0,
+        0,
+        0,
+        4,
+        6
+      ]
+    },
+    {
       "name": "Adrian Huertas",
       "pts": 42,
       "history": [
@@ -1136,68 +1196,8 @@
       ]
     },
     {
-      "name": "Jose Antonio Rueda",
-      "pts": 37,
-      "history": [
-        0,
-        0,
-        1,
-        0,
-        0,
-        4,
-        3,
-        5,
-        6,
-        0,
-        8,
-        0,
-        0,
-        0,
-        4,
-        6
-      ],
-      "sprint_pts": 0,
-      "sprint_history": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "long_pts": 37,
-      "long_history": [
-        0,
-        0,
-        1,
-        0,
-        0,
-        4,
-        3,
-        5,
-        6,
-        0,
-        8,
-        0,
-        0,
-        0,
-        4,
-        6
-      ]
-    },
-    {
       "name": "Luca Lunetta",
-      "pts": 23,
+      "pts": 27,
       "history": [
         0,
         0,
@@ -1214,7 +1214,7 @@
         0,
         0,
         6,
-        0
+        4
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -1257,7 +1257,7 @@
     },
     {
       "name": "Ayumu Sasaki",
-      "pts": 21,
+      "pts": 24,
       "history": [
         0,
         0,
@@ -1274,7 +1274,7 @@
         3,
         0,
         0,
-        5
+        8
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -1437,7 +1437,7 @@
     },
     {
       "name": "Taiyo Furusato",
-      "pts": 15,
+      "pts": 17,
       "history": [
         0,
         0,
@@ -1454,7 +1454,7 @@
         0,
         0,
         0,
-        0
+        2
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -1497,7 +1497,7 @@
     },
     {
       "name": "Zonta Vd Goorbergh",
-      "pts": 13,
+      "pts": 14,
       "history": [
         0,
         0,
@@ -1514,7 +1514,7 @@
         0,
         0,
         0,
-        1
+        2
       ],
       "sprint_pts": 0,
       "sprint_history": [
