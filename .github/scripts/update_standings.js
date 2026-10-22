@@ -241,7 +241,8 @@ async function main() {
         try { sessions = await httpsGet(sessionsUrl); } catch(e) { continue; }
 
         const sprSession = (Array.isArray(sessions) ? sessions : []).find(s => s && s.type === 'SPR' && s.status === 'FINISHED');
-        const racSession = (Array.isArray(sessions) ? sessions : []).find(s => s && s.type === 'RAC' && s.status === 'FINISHED');
+        const racSessions = (Array.isArray(sessions) ? sessions : []).filter(s => s && String(s.type || '').startsWith('RAC') && s.status === 'FINISHED');
+        const racSession = racSessions.length > 0 ? racSessions[racSessions.length - 1] : null;
 
         if (sprSession) {
           try {
@@ -290,11 +291,6 @@ async function main() {
         const sprPts = sprHist.reduce((a, b) => a + b, 0);
         const racPts = racHist.reduce((a, b) => a + b, 0);
         const officialTotal = officialPts[name] !== undefined ? officialPts[name] : totHist.reduce((a, b) => a + b, 0);
-
-        const diff = officialTotal - totHist.reduce((a, b) => a + b, 0);
-        if (Math.abs(diff) > 0.001 && totHist.length > 0) {
-          totHist[totHist.length - 1] += diff;
-        }
 
         cleanRiders.push({
           name: name,

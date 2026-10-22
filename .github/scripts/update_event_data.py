@@ -614,7 +614,8 @@ def main():
         q_sess  = sorted([s for s in sessions if s.get('type') == 'Q'], key=lambda s: s.get('date', ''))
         spr_sess = next((s for s in sessions if s.get('type') == 'SPR'), None)
         wup_sess = next((s for s in sessions if s.get('type') == 'WUP'), None)
-        rac_sess = next((s for s in sessions if s.get('type') == 'RAC'), None)
+        rac_sessions = [s for s in sessions if str(s.get('type', '')).startswith('RAC')]
+        rac_sess = rac_sessions[-1] if rac_sessions else None
 
         fp1 = format_class(fp_sess[0]['id']) if len(fp_sess) >= 1 else []
         pr  = format_class(pr_sess['id']) if pr_sess else []
@@ -662,7 +663,7 @@ def main():
                 has_q2  = bool(existing.get("q2") and isinstance(existing["q2"], list) and len(existing["q2"]) > 0)
                 has_spr = bool(existing.get("sprint") and isinstance(existing["sprint"], list) and len(existing["sprint"]) > 0)
                 has_wup = bool(existing.get("wup") and isinstance(existing["wup"], list) and len(existing["wup"]) > 0)
-                has_race = bool(existing.get("race") and isinstance(existing["race"], list) and len(existing["race"]) > 0)
+                has_race = bool(existing.get("race") and isinstance(existing["race"], list) and len(existing["race"]) > 0 and any((r.get("pts") or 0) > 0 for r in existing["race"]))
 
                 needs_update = False
                 if not has_fp1 and fp1:
@@ -798,13 +799,20 @@ def main():
 
         # 3.2 MAIN RACE (Available Sunday evening)
         if rac:
+            rac_num = rac_sess.get('number') if rac_sess else None
+            rac_pdf_folders = [f"RAC{rac_num}", "RAC"] if (rac_num and int(rac_num) > 1) else ["RAC"]
+
             idx_rac_charts = html_content.find('"RAC":')
             idx_spr_sec = html_content.find('const EVENT_SPR_LAPS_DATA =', idx_rac_charts) if idx_rac_charts != -1 else -1
             rac_chart_present = (f'"{short}":' in html_content[idx_rac_charts:idx_spr_sec]) if idx_spr_sec != -1 else False
 
             if not rac_chart_present:
-                rac_lap_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/RAC/LapChart.pdf"
-                rac_lap_bytes = download_bytes(rac_lap_pdf_url)
+                rac_lap_bytes = None
+                for rf in rac_pdf_folders:
+                    rac_lap_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/{rf}/LapChart.pdf"
+                    rac_lap_bytes = download_bytes(rac_lap_pdf_url)
+                    if rac_lap_bytes:
+                        break
                 if rac_lap_bytes:
                     print(f"  Estrazione LapChart Gara per {short}...")
                     rac_lap_data = extract_lap_chart_from_pdf(rac_lap_bytes)
@@ -821,8 +829,12 @@ def main():
             rac_sec_present = (f'"{short}":' in html_content[idx_rac_sec:]) if idx_rac_sec != -1 else False
 
             if not rac_sec_present:
-                rac_ana_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/RAC/Analysis.pdf"
-                rac_ana_bytes = download_bytes(rac_ana_pdf_url)
+                rac_ana_bytes = None
+                for rf in rac_pdf_folders:
+                    rac_ana_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/{rf}/Analysis.pdf"
+                    rac_ana_bytes = download_bytes(rac_ana_pdf_url)
+                    if rac_ana_bytes:
+                        break
                 if rac_ana_bytes:
                     print(f"  Estrazione Settori Gara per {short}...")
                     rac_sectors_data = extract_sectors_from_pdf(rac_ana_bytes, max_laps=30)
