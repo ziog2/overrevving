@@ -70,26 +70,32 @@ def normalize_rider_name(raw_name):
     if "MARTIN" in n: return "Jorge Martin"
     if "GIANNANTONIO" in n: return "Fabio Di Giannantonio"
     if "ACOSTA" in n: return "Pedro Acosta"
-    if "FERNANDEZ" in n or "FERNAN" in n: return "Raul Fernandez"
-    if "EGUER" in n: return "Fermin Aldeguer"
+    if "AUGUSTO" in n: return "Augusto Fernandez"
+    if "FERNANDEZ" in n or "FERNAN" in n or "RAUL" in n: return "Raul Fernandez"
+    if "EGUER" in n or r"ALDE\UER" in n: return "Fermin Aldeguer"
     if "MARINI" in n: return "Luca Marini"
     if "ZARCO" in n: return "Johann Zarco"
     if "MOREIRA" in n: return "Diogo Moreira"
     if "MORBI" in n: return "Franco Morbidelli"
-    if "BAGNAIA" in n: return "Francesco Bagnaia"
+    if "BAGNAIA" in n or r"BA\NAIA" in n: return "Francesco Bagnaia"
     if "BIN" in n: return "Brad Binder"
     if "BASTIANINI" in n: return "Enea Bastianini"
-    if "ESPARGARO" in n: return "Pol Espargaro"
+    if "ALEIX" in n: return "Aleix Espargaro"
+    if "ESPARGARO" in n or "POL" in n: return "Pol Espargaro"
     if "MILLER" in n: return "Jack Miller"
     if "RINS" in n: return "Alex Rins"
     if "MIR" in n: return "Joan Mir"
     if "QUARTARARO" in n: return "Fabio Quartararo"
-    if "VIÑALES" in n or "VINALES" in n or "VI.ALES" in n: return "Maverick Viñales"
-    if "OGURA" in n: return "Ai Ogura"
-    if "RAZGATLIOGLU" in n: return "Toprak Razgatlioglu"
+    if "VIÑALES" in n or "VINALES" in n or "VI.ALES" in n or re.search(r"VI.ALES", n): return "Maverick Viñales"
+    if "OGURA" in n or r"O\URA" in n: return "Ai Ogura"
+    if "RAZGATLIOGLU" in n or "TOPRAK" in n: return "Toprak Razgatlioglu"
     if "CHANTRA" in n: return "Somkiat Chantra"
     if "PIRRO" in n: return "Michele Pirro"
     if "NAKAGAMI" in n: return "Takaaki Nakagami"
+    if "SAVADORI" in n: return "Lorenzo Savadori"
+    if "FOLGER" in n: return "Jonas Folger"
+    if "CRUTCHLOW" in n: return "Cal Crutchlow"
+    if "LECUONA" in n: return "Iker Lecuona"
     return clean_name(raw_name)
 
 def format_class(sess_id):
@@ -235,7 +241,8 @@ def parse_dorna_analysis_pdf(pdf_bytes):
                         str_matches = re.findall(r'\((.*?)\)', raw_arr)
                         decoded_str = ""
                         for sm in str_matches:
-                            val = sm.replace(r'\n', '\n').replace(r'\r', '\r').replace(r'\t', '\t').replace(r'\(', '(').replace(r'\)', ')').replace(r'\\', '\\')
+                            val = re.sub(r'\\([0-7]{3})', lambda m_oct: chr(int(m_oct.group(1), 8)), sm)
+                            val = val.replace(r'\n', '\n').replace(r'\r', '\r').replace(r'\t', '\t').replace(r'\(', '(').replace(r'\)', ')').replace(r'\\', '\\')
                             for ch in val:
                                 b_code = ord(ch)
                                 if cur_cmap and b_code in cur_cmap:
@@ -250,25 +257,28 @@ def parse_dorna_analysis_pdf(pdf_bytes):
     return "\n=== PAGE ===\n".join(decoded_pages)
 
 def unpack_numbers(text):
-    res = text
+    res = re.sub(r"(\d)\s+'(\d{2}\.\d{3})", r"\1'\2", text)
     for _ in range(4):
-        res = re.sub(r'(\d{2}\.\d{3})(\d{2}\.\d{3})', r'\1 \2', res)
-        res = re.sub(r'(\d{2}\.\d{3})(\d{3}\.\d{1})', r'\1 \2', res)
-        res = re.sub(r'(\d{3}\.\d{1})(\d{2}\.\d{3})', r'\1 \2', res)
-        res = re.sub(r'(\d+\'\d{2}\.\d{3})(\d{2}\.\d{3})', r'\1 \2', res)
+        res = re.sub(r'(\b\d{2,3}\.\d{1})(\d{2}\.\d{3}\b)', r'\1 \2', res)
+        res = re.sub(r'(\d{2}\.\d{3})(?=[A-Za-z0-9])', r'\1 ', res)
+        res = re.sub(r'([A-Za-z])(\d{2}\.\d{3})', r'\1 \2', res)
+        res = re.sub(r'(\d+\'\d{2}\.\d{3})(?=[A-Za-z0-9])', r'\1 ', res)
     return res
+
+def parse_sector_val(s):
+    m = re.match(r"^(\d)'(\d{2}\.\d{3})$", s)
+    if m:
+        return round(int(m.group(1)) * 60.0 + float(m.group(2)), 3)
+    return round(float(s), 3)
 
 def extract_sectors_from_pdf(pdf_bytes, max_laps):
     raw_text = parse_dorna_analysis_pdf(pdf_bytes)
-    clean = re.sub(r'(?s)Fastest Lap:.*? MotoGP Sports Entertainment Group, 2026', '', raw_text)
+    clean = re.sub(r'(?s)Page\s+\d+\s+of\b(?:(?!Page\s+\d+\s+of\b).){0,400}?Fastest Lap:', '', raw_text)
     clean = re.sub(r'(?m)^Official MotoGP Timing.*$', '', clean)
     clean = re.sub(r'(?m)^These data/results.*$', '', clean)
-    clean = re.sub(r'(?m)^Page \d+ of \d+.*$', '', clean)
-    clean = re.sub(r'(?m)^.*?, (?:Sunday|Saturday).*$', '', clean)
     clean = clean.replace('=== PAGE ===', '')
-    clean = unpack_numbers(clean)
 
-    pat = r'(?m)^(?:ITA|SPA|FRA|RSA|AUS|JPN|GER|GBR|POR|USA|THA|BRA|HUN|CZE|NED|INA|MAL|QAT)\s*\n([^\n]+)\s*\n(?:\d+(?:st|nd|rd|th|t\\)|NC)'
+    pat = r'(?m)^(?:ITA|SPA|FRA|RSA|AUS|JPN|GER|GBR|POR|USA|THA|BRA|HUN|CZE|NED|INA|MAL|QAT|TUR|SWI|MON)\s*\r?\n([^\r\n]+)\s*\r?\n(?:\d+(?:st|nd|rd|th|t\\)|NC|unfinished)'
     matches = list(re.finditer(pat, clean))
     result = {}
 
@@ -277,27 +287,62 @@ def extract_sectors_from_pdf(pdf_bytes, max_laps):
         canonical_name = normalize_rider_name(raw_name)
         start_idx = m.end()
         end_idx = matches[i+1].start() if i + 1 < len(matches) else len(clean)
-        block = clean[start_idx:end_idx]
+        raw_block = clean[start_idx:end_idx]
 
-        l_matches = list(re.finditer(r'(\d+\'\d{2}\.\d{3})\s*([\s\S]*?)(?=\d+\'\d{2}\.\d{3}|$)', block))
+        rider_max = max_laps
+        tl_m = re.search(r'Total\s+laps\s*=\s*(\d+)', raw_block)
+        if tl_m:
+            rider_max = min(max_laps, int(tl_m.group(1)))
+        if rider_max <= 0:
+            continue
+
+        block = unpack_numbers(raw_block)
+        l_matches = list(re.finditer(r"(\d'\d{2}\.\d{3})\s+(\d{1,2})\b(?!\.)", block))
         laps = []
         lap_num = 1
 
-        for lm in l_matches:
-            if lap_num > max_laps: break
+        for j, lm in enumerate(l_matches):
+            if lap_num > rider_max: break
             lap_time = lm.group(1)
-            sub_block = lm.group(2)
-            s_toks = re.findall(r'\b\d{2}\.\d{3}\b', sub_block)
-            spd_toks = re.findall(r'\b\d{3}\.\d\b', sub_block)
+            sub_start = lm.end()
+            sub_end = l_matches[j+1].start() if j + 1 < len(l_matches) else len(block)
+            sub_block = block[sub_start:sub_end]
+            s_toks = re.findall(r"(?:\d'\d{2}\.\d{3}|\b\d{2}\.\d{3}\b)", sub_block)
+            spd_toks = re.findall(r'\b[123]\d{2}\.\d\b', sub_block)
 
-            if len(s_toks) >= 4:
+            if len(s_toks) >= 1:
+                if len(s_toks) >= 4:
+                    t1_v = parse_sector_val(s_toks[0])
+                    t2_v = parse_sector_val(s_toks[1])
+                    t3_v = parse_sector_val(s_toks[2])
+                    t4_v = parse_sector_val(s_toks[3])
+                    tot_sec = parse_sector_val(lap_time)
+                    diff_sec = round(tot_sec - (t1_v + t2_v + t3_v + t4_v), 3)
+                    if diff_sec > 0.05:
+                        t1_v = round(t1_v + diff_sec, 3)
+                else:
+                    tot_sec = parse_sector_val(lap_time)
+                    t1_v = parse_sector_val(s_toks[0]) if len(s_toks) >= 1 else 0.0
+                    t2_v = parse_sector_val(s_toks[1]) if len(s_toks) >= 2 else 0.0
+                    t3_v = parse_sector_val(s_toks[2]) if len(s_toks) >= 3 else 0.0
+                    rem = max(0.0, round(tot_sec - (t1_v + t2_v + t3_v), 3))
+                    if len(s_toks) == 3:
+                        t4_v = rem
+                    elif len(s_toks) == 2:
+                        t3_v = round(rem / 2.0, 3)
+                        t4_v = round(rem - t3_v, 3)
+                    else:
+                        t2_v = round(rem / 3.0, 3)
+                        t3_v = t2_v
+                        t4_v = round(rem - t2_v - t3_v, 3)
+
                 laps.append({
                     "lap": lap_num,
                     "time": lap_time,
-                    "t1": float(s_toks[0]),
-                    "t2": float(s_toks[1]),
-                    "t3": float(s_toks[2]),
-                    "t4": float(s_toks[3]),
+                    "t1": t1_v,
+                    "t2": t2_v,
+                    "t3": t3_v,
+                    "t4": t4_v,
                     "speed": float(spd_toks[0]) if spd_toks else 300.0
                 })
                 lap_num += 1
@@ -787,7 +832,8 @@ def main():
                 spr_ana_bytes = download_bytes(spr_ana_pdf_url)
                 if spr_ana_bytes:
                     print(f"  Estrazione Settori Sprint per {short}...")
-                    spr_sectors_data = extract_sectors_from_pdf(spr_ana_bytes, max_laps=15)
+                    spr_win_laps = int(spr[0]['laps']) if (spr and str(spr[0].get('laps', '')).isdigit()) else 15
+                    spr_sectors_data = extract_sectors_from_pdf(spr_ana_bytes, max_laps=spr_win_laps)
                     if spr_sectors_data:
                         spr_sec_json = json.dumps(spr_sectors_data, separators=(',', ':'))
                         m_spr_sec = re.search(r'const EVENT_SPR_LAPS_DATA\s*=\s*\{', html_content)
@@ -837,7 +883,8 @@ def main():
                         break
                 if rac_ana_bytes:
                     print(f"  Estrazione Settori Gara per {short}...")
-                    rac_sectors_data = extract_sectors_from_pdf(rac_ana_bytes, max_laps=30)
+                    rac_win_laps = int(rac[0]['laps']) if (rac and str(rac[0].get('laps', '')).isdigit()) else 30
+                    rac_sectors_data = extract_sectors_from_pdf(rac_ana_bytes, max_laps=rac_win_laps)
                     if rac_sectors_data:
                         rac_sec_json = json.dumps(rac_sectors_data, separators=(',', ':'))
                         m_rac_sec = re.search(r'const EVENT_LAPS_DATA\s*=\s*\{', html_content)
