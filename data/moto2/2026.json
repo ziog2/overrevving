@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "moto2",
-  "lastUpdated": "2026-10-18 21:14:13 · Auto (Domenica)",
+  "lastUpdated": "2026-10-23 07:31:29 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -119,7 +119,7 @@
       "name": "Manuel Gonzalez",
       "pts": 265.5,
       "history": [
-        0,
+        12.5,
         16,
         11,
         20,
@@ -135,7 +135,7 @@
         25,
         13,
         0,
-        32.5
+        20
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -157,9 +157,9 @@
         0,
         0
       ],
-      "long_pts": 253,
+      "long_pts": 265.5,
       "long_history": [
-        0,
+        12.5,
         16,
         11,
         20,
@@ -182,7 +182,7 @@
       "name": "Izan Guevara",
       "pts": 260,
       "history": [
-        0,
+        10,
         10,
         16,
         9,
@@ -198,7 +198,7 @@
         10,
         25,
         25,
-        35
+        25
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -220,9 +220,9 @@
         0,
         0
       ],
-      "long_pts": 250,
+      "long_pts": 260,
       "long_history": [
-        0,
+        10,
         10,
         16,
         9,
@@ -245,7 +245,7 @@
       "name": "Ivan Ortola",
       "pts": 191.5,
       "history": [
-        0,
+        6.5,
         6,
         5,
         6,
@@ -261,7 +261,7 @@
         13,
         11,
         13,
-        16.5
+        10
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -283,9 +283,9 @@
         0,
         0
       ],
-      "long_pts": 185,
+      "long_pts": 191.5,
       "long_history": [
-        0,
+        6.5,
         6,
         5,
         6,
@@ -308,7 +308,7 @@
       "name": "Daniel Holgado",
       "pts": 170,
       "history": [
-        0,
+        8,
         25,
         0,
         5,
@@ -324,7 +324,7 @@
         0,
         9,
         8,
-        24
+        16
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -346,9 +346,9 @@
         0,
         0
       ],
-      "long_pts": 162,
+      "long_pts": 170,
       "long_history": [
-        0,
+        8,
         25,
         0,
         5,
@@ -560,7 +560,7 @@
       "name": "Celestino Vietti",
       "pts": 133,
       "history": [
-        0,
+        5,
         7,
         20,
         11,
@@ -576,7 +576,7 @@
         9,
         0,
         10,
-        5
+        0
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -598,9 +598,9 @@
         0,
         0
       ],
-      "long_pts": 128,
+      "long_pts": 133,
       "long_history": [
-        0,
+        5,
         7,
         20,
         11,
@@ -623,7 +623,7 @@
       "name": "Alonso Lopez",
       "pts": 125.5,
       "history": [
-        0,
+        4.5,
         5,
         9,
         0,
@@ -639,7 +639,7 @@
         8,
         10,
         7,
-        12.5
+        8
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -661,9 +661,9 @@
         0,
         0
       ],
-      "long_pts": 121,
+      "long_pts": 125.5,
       "long_history": [
-        0,
+        4.5,
         5,
         9,
         0,
@@ -686,7 +686,7 @@
       "name": "Daniel Muñoz",
       "pts": 83,
       "history": [
-        0,
+        4,
         20,
         2,
         10,
@@ -702,7 +702,7 @@
         4,
         5,
         4,
-        15
+        11
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -724,9 +724,9 @@
         0,
         0
       ],
-      "long_pts": 79,
+      "long_pts": 83,
       "long_history": [
-        0,
+        4,
         20,
         2,
         10,
@@ -749,7 +749,7 @@
       "name": "Tony Arbolino",
       "pts": 82.5,
       "history": [
-        0,
+        1.5,
         9,
         6,
         8,
@@ -765,7 +765,7 @@
         11,
         2,
         20,
-        8.5
+        7
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -787,9 +787,9 @@
         0,
         0
       ],
-      "long_pts": 81,
+      "long_pts": 82.5,
       "long_history": [
-        0,
+        1.5,
         9,
         6,
         8,
@@ -812,7 +812,7 @@
       "name": "Collin Veijer",
       "pts": 80.5,
       "history": [
-        0,
+        5.5,
         8,
         0,
         16,
@@ -828,7 +828,7 @@
         20,
         0,
         0,
-        10.5
+        5
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -850,9 +850,9 @@
         0,
         0
       ],
-      "long_pts": 75,
+      "long_pts": 80.5,
       "long_history": [
-        0,
+        5.5,
         8,
         0,
         16,
@@ -875,7 +875,7 @@
       "name": "Alex Escrig",
       "pts": 63,
       "history": [
-        0,
+        2,
         13,
         8,
         7,
@@ -891,7 +891,7 @@
         6,
         0,
         0,
-        2
+        0
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -913,9 +913,9 @@
         0,
         0
       ],
-      "long_pts": 61,
+      "long_pts": 63,
       "long_history": [
-        0,
+        2,
         13,
         8,
         7,
@@ -938,7 +938,7 @@
       "name": "Barry Baltus",
       "pts": 60,
       "history": [
-        0,
+        1,
         2,
         10,
         0,
@@ -954,7 +954,7 @@
         16,
         8,
         0,
-        1
+        0
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -976,9 +976,9 @@
         0,
         0
       ],
-      "long_pts": 59,
+      "long_pts": 60,
       "long_history": [
-        0,
+        1,
         2,
         10,
         0,
@@ -1001,7 +1001,7 @@
       "name": "Deniz öncü",
       "pts": 47.5,
       "history": [
-        0,
+        3.5,
         0,
         0,
         3,
@@ -1017,7 +1017,7 @@
         0,
         7,
         9,
-        3.5
+        0
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -1039,9 +1039,9 @@
         0,
         0
       ],
-      "long_pts": 44,
+      "long_pts": 47.5,
       "long_history": [
-        0,
+        3.5,
         0,
         0,
         3,
@@ -1316,7 +1316,7 @@
       "name": "Ayumu Sasaki",
       "pts": 24,
       "history": [
-        0,
+        3,
         0,
         0,
         4,
@@ -1332,7 +1332,7 @@
         0,
         0,
         2,
-        6
+        3
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -1354,9 +1354,9 @@
         0,
         0
       ],
-      "long_pts": 21,
+      "long_pts": 24,
       "long_history": [
-        0,
+        3,
         0,
         0,
         4,
@@ -1379,7 +1379,7 @@
       "name": "Alberto Ferrandez",
       "pts": 17.5,
       "history": [
-        0,
+        0.5,
         0,
         0,
         0,
@@ -1395,7 +1395,7 @@
         2,
         0,
         0,
-        0.5
+        0
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -1417,9 +1417,9 @@
         0,
         0
       ],
-      "long_pts": 17,
+      "long_pts": 17.5,
       "long_history": [
-        0,
+        0.5,
         0,
         0,
         0,
@@ -1442,7 +1442,7 @@
       "name": "Aron Canet",
       "pts": 17.5,
       "history": [
-        0,
+        2.5,
         0,
         3,
         0,
@@ -1458,7 +1458,7 @@
         1,
         3,
         0,
-        2.5
+        0
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -1480,9 +1480,9 @@
         0,
         0
       ],
-      "long_pts": 15,
+      "long_pts": 17.5,
       "long_history": [
-        0,
+        2.5,
         0,
         3,
         0,
