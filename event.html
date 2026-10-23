@@ -1019,7 +1019,7 @@
             },
     "CAT": {"grid":"Dry | Air: 19\u00b0C | Track: 37\u00b0C","race":"Dry | Air: 19\u00b0C | Track: 37\u00b0C","sprint":"Dry | Air: 20\u00b0C | Track: 41\u00b0C","fp1":"Dry | Air: 13\u00b0C | Track: 17\u00b0C","fp2":"Dry | Air: 14\u00b0C | Track: 15\u00b0C","wup":"Dry | Air: 16\u00b0C | Track: 19\u00b0C","pr":"Dry | Air: 17\u00b0C | Track: 31\u00b0C","q2":"Dry | Air: 17\u00b0C | Track: 15\u00b0C","q1":"Dry | Air: 15\u00b0C | Track: 15\u00b0C"},
     "CZE": {"grid":"Dry | Air: 31\u00b0C | Track: 47\u00b0C","race":"Dry | Air: 31\u00b0C | Track: 47\u00b0C","sprint":"Dry | Air: 33\u00b0C | Track: 49\u00b0C","fp1":"Dry | Air: 28\u00b0C | Track: 42\u00b0C","fp2":"Dry | Air: 27\u00b0C | Track: 38\u00b0C","wup":"Dry | Air: 27\u00b0C | Track: 35\u00b0C","pr":"Dry | Air: 31\u00b0C | Track: 48\u00b0C","q2":"Dry | Air: 28\u00b0C | Track: 42\u00b0C","q1":"Dry | Air: 28\u00b0C | Track: 40\u00b0C"},
-    "AUS": {"grid":" | Air: 20\u00b0C | Track: 25\u00b0C","race":" | Air: 20\u00b0C | Track: 25\u00b0C","sprint":" | Air: 20\u00b0C | Track: 25\u00b0C","fp1":"Dry | Air: 25\u00b0C | Track: 37\u00b0C","fp2":" | Air: 20\u00b0C | Track: 25\u00b0C","wup":" | Air: 20\u00b0C | Track: 25\u00b0C","pr":"Dry | Air: 29\u00b0C | Track: 48\u00b0C","q2":" | Air: 20\u00b0C | Track: 25\u00b0C","q1":" | Air: 20\u00b0C | Track: 25\u00b0C"},
+    "AUS": {"grid":"","race":"","sprint":"","fp1":"Dry | Air: 25\u00b0C | Track: 37\u00b0C","fp2":"","wup":"","pr":"Dry | Air: 29\u00b0C | Track: 48\u00b0C","q2":"","q1":""},
     "SPA": {"grid":"Dry | Air: 23\u00b0C | Track: 36\u00b0C","race":"Dry | Air: 23\u00b0C | Track: 36\u00b0C","sprint":"Dry | Air: 19\u00b0C | Track: 23\u00b0C","fp1":"Dry | Air: 17\u00b0C | Track: 21\u00b0C","fp2":"Wet | Air: 16\u00b0C | Track: 17\u00b0C","wup":"Wet | Air: 19\u00b0C | Track: 19\u00b0C","pr":"Dry | Air: 20\u00b0C | Track: 26\u00b0C","q2":"Wet | Air: 18\u00b0C | Track: 22\u00b0C","q1":"Wet | Air: 16\u00b0C | Track: 18\u00b0C"},
     "THA": {"grid":"Dry | Air: 35\u00b0C | Track: 55\u00b0C","race":"Dry | Air: 35\u00b0C | Track: 55\u00b0C","sprint":"Dry | Air: 33\u00b0C | Track: 52\u00b0C","fp1":"Dry | Air: 31\u00b0C | Track: 39\u00b0C","fp2":"Dry | Air: 28\u00b0C | Track: 31\u00b0C","wup":"Dry | Air: 30\u00b0C | Track: 29\u00b0C","pr":"Dry | Air: 32\u00b0C | Track: 40\u00b0C","q2":"Dry | Air: 30\u00b0C | Track: 40\u00b0C","q1":"Dry | Air: 30\u00b0C | Track: 39\u00b0C"},
     "VC1":  {
@@ -1080,7 +1080,7 @@
                 "q2":  "Dry | Air: -- | Track: --",
                 "q1":  "Dry | Air: -- | Track: --"
             },
-    "INA": {"grid":"Dry | Air: 29\u00b0C | Track: 62\u00b0C","race":"Dry | Air: 29\u00b0C | Track: 62\u00b0C","sprint":"Dry | Air: 29\u00b0C | Track: 63\u00b0C","fp1":"Dry | Air: 29\u00b0C | Track: 58\u00b0C","fp2":"Dry | Air: 29\u00b0C | Track: 53\u00b0C","wup":" | Air: 20\u00b0C | Track: 25\u00b0C","pr":"Dry | Air: 29\u00b0C | Track: 59\u00b0C","q2":"Dry | Air: 29\u00b0C | Track: 59\u00b0C","q1":"Dry | Air: 29\u00b0C | Track: 57\u00b0C"}
+    "INA": {"grid":"Dry | Air: 29\u00b0C | Track: 62\u00b0C","race":"Dry | Air: 29\u00b0C | Track: 62\u00b0C","sprint":"Dry | Air: 29\u00b0C | Track: 63\u00b0C","fp1":"Dry | Air: 29\u00b0C | Track: 58\u00b0C","fp2":"Dry | Air: 29\u00b0C | Track: 53\u00b0C","wup":"Dry | Air: -- | Track: --","pr":"Dry | Air: 29\u00b0C | Track: 59\u00b0C","q2":"Dry | Air: 29\u00b0C | Track: 59\u00b0C","q1":"Dry | Air: 29\u00b0C | Track: 57\u00b0C"}
 }
 ;
 
@@ -20176,19 +20176,21 @@
 
     function renderPageLayout(year, gp, prevGp, nextGp, weather, fp1Results, prResults, fp2Results, q1Results, q2Results, gridResults, sprintResults, wupResults, raceResults) {
       const gpWeather = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[gp.short]) ? SESSION_WEATHER_DATA[gp.short] : {};
-      const cleanW = (txt) => {
-        if (!txt) return 'Dry | Air: -- | Track: --';
+      const cleanW = (txt, hasData) => {
+        if (!txt || !txt.trim() || txt.trim().startsWith('|')) {
+          return hasData ? 'Dry | Air: -- | Track: --' : 'Not started yet';
+        }
         return txt.replace(/&#xB0;/g, '°').replace(/Â°/g, '°').replace(/Â/g, '').replace(/°C°C/g, '°C');
       };
-      const fp1W = cleanW(gpWeather.fp1);
-      const prW = cleanW(gpWeather.pr);
-      const fp2W = cleanW(gpWeather.fp2);
-      const q1W = cleanW(gpWeather.q1);
-      const q2W = cleanW(gpWeather.q2);
-      const gridW = cleanW(gpWeather.grid);
-      const sprintW = cleanW(gpWeather.sprint);
-      const wupW = cleanW(gpWeather.wup);
-      const raceW = cleanW(gpWeather.race);
+      const fp1W = cleanW(gpWeather.fp1, fp1Results.length > 0);
+      const prW = cleanW(gpWeather.pr, prResults.length > 0);
+      const fp2W = cleanW(gpWeather.fp2, fp2Results.length > 0);
+      const q1W = cleanW(gpWeather.q1, q1Results.length > 0);
+      const q2W = cleanW(gpWeather.q2, q2Results.length > 0);
+      const gridW = cleanW(gpWeather.grid, gridResults.length > 0);
+      const sprintW = cleanW(gpWeather.sprint, sprintResults.length > 0);
+      const wupW = cleanW(gpWeather.wup, wupResults.length > 0);
+      const raceW = cleanW(gpWeather.race, raceResults.length > 0);
       const mainEl = document.getElementById('main-content');
       const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/RAC`;
       const flagHtml = `<img src="https://flagcdn.com/w20/${gp.countryCode}.png" srcset="https://flagcdn.com/w40/${gp.countryCode}.png 2x" class="flag-img" alt="${gp.location}">`;

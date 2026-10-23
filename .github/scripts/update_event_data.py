@@ -130,15 +130,18 @@ def format_class(sess_id):
         return []
 
 def format_cond(sess):
-    if not sess or not sess.get('condition'):
-        return "Dry | Air: 20°C | Track: 25°C"
-    c = sess.get('condition', {})
-    tr = c.get('track', 'Dry')
-    air_raw = str(c.get('air', '20'))
-    air_num = re.sub(r'[^0-9\-]', '', air_raw) or '20'
-    ground_raw = str(c.get('ground', '25'))
-    ground_num = re.sub(r'[^0-9\-]', '', ground_raw) or '25'
-    return f"{tr} | Air: {air_num}°C | Track: {ground_num}°C"
+    if not sess or sess.get('status') != 'FINISHED':
+        return ""
+    c = sess.get('condition') or {}
+    tr = str(c.get('track') or '').strip()
+    air_num = re.sub(r'[^0-9\-]', '', str(c.get('air') or ''))
+    ground_num = re.sub(r'[^0-9\-]', '', str(c.get('ground') or ''))
+    if not tr and not air_num and not ground_num:
+        return ""
+    tr_label = tr if tr else "Dry"
+    air_label = f"{air_num}°C" if air_num else "--"
+    ground_label = f"{ground_num}°C" if ground_num else "--"
+    return f"{tr_label} | Air: {air_label} | Track: {ground_label}"
 
 # --- PDF PARSING HELPERS (PURE PYTHON, NO DEPENDENCIES) ---
 
@@ -449,401 +452,7 @@ def extract_lap_chart_from_pdf(pdf_bytes):
                     cells.append({"x": round(cur_x, 2), "y": round(cur_y, 2), "text": cur_text})
 
     lap_lbls = sorted(
-        [c for c in cells if 25 <= c["x"] < 56 and 110 <= c["y"] <= 665 and re.match(r'^\d{1,2}
-
-def find_matching_object(text, search_key):
-    """
-    Finds '"{search_key}": {' and returns (full_start, full_end, parsed_dict_or_raw)
-    using depth-balanced brace matching within `text`.
-    """
-    pattern = rf'"{search_key}"\s*:\s*\{{'
-    m = re.search(pattern, text)
-    if not m:
-        return None, None, None
-    full_start = m.start()
-    brace_start = text.find('{', full_start)
-
-    depth = 0
-    in_string = False
-    escape = False
-    full_end = None
-
-    for i in range(brace_start, len(text)):
-        ch = text[i]
-        if escape:
-            escape = False
-            continue
-        if ch == '\\':
-            if in_string:
-                escape = True
-            continue
-        if ch == '"':
-            in_string = not in_string
-            continue
-        if not in_string:
-            if ch == '{':
-                depth += 1
-            elif ch == '}':
-                depth -= 1
-                if depth == 0:
-                    full_end = i + 1
-                    break
-
-    if full_end is None:
-        return None, None, None
-
-    json_str = text[brace_start:full_end]
-    parsed = None
-    try:
-        parsed = json.loads(json_str)
-    except Exception:
-        pass
-
-    return full_start, full_end, parsed
-
-SHORT_TO_CAL_NAME = {
-    'THA': 'Thailand', 'BRA': 'Brazil', 'USA': 'USA', 'SPA': 'Spain',
-    'FRA': 'France', 'CAT': 'Catalonia', 'ITA': 'Italy', 'HUN': 'Hungary',
-    'CZE': 'Czechia', 'NED': 'Netherlands', 'GER': 'Germany', 'GBR': 'Great Britain',
-    'ARA': 'Aragon', 'RSM': 'San Marino', 'AUT': 'Austria', 'JPN': 'Japan',
-    'INA': 'Indonesia', 'AUS': 'Australia', 'MAL': 'Malaysia', 'QAT': 'Qatar',
-    'POR': 'Portugal', 'VAL': 'Valencia'
-}
-
-def get_track_cond(sess):
-    if not sess:
-        return None
-    cond = sess.get('condition')
-    if isinstance(cond, dict):
-        track = cond.get('track', '')
-        if track:
-            return 'Wet' if 'wet' in str(track).lower() else 'Dry'
-    return 'Dry'
-
-def update_file_calendar_weather(file_path, cal_name, weather_str):
-    if not os.path.exists(file_path):
-        return
-    with open(file_path, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    # Check if weather is already present with the desired string
-    if re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'{re.escape(weather_str)}'", content):
-        return
-
-    # If weather is already present with a partial string (e.g. SPR only), update it
-    if re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'[^']*'", content):
-        content = re.sub(rf"(name:\s*'{cal_name}'[^\}}]*weather:\s*)'[^']*'", rf"\1'{weather_str}'", content)
-    else:
-        # Append weather
-        content = re.sub(rf"(name:\s*'{cal_name}',\s*date:\s*'[^']+')(?!\s*,\s*weather:)(\s*\}})", rf"\1, weather: '{weather_str}'\2", content)
-
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(content)
-    print(f"✓ Aggiornato meteo calendario per {cal_name} in {file_path}: {weather_str}")
-
-# --- MAIN AUTOMATION FUNCTION ---
-
-def main():
-    event_html_path = "event.html"
-    if not os.path.exists(event_html_path):
-        print(f"File {event_html_path} non trovato.")
-        return
-
-    with open(event_html_path, "r", encoding="utf-8") as f:
-        html_content = f.read()
-
-    orig_len = len(html_content)
-
-    events_url = f"https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid={SEASON_2026}&categoryUuid={CAT_MOTOGP}"
-    try:
-        events = http_get(events_url)
-    except Exception as e:
-        print(f"Errore caricamento lista eventi: {e}")
-        return
-
-    # Filter events: FINISHED or currently ongoing (CURRENT, ONGOING, RUNNING, LIVE, IN_PROGRESS)
-    relevant_events = [
-        ev for ev in events
-        if isinstance(ev, dict)
-        and ev.get('status') in ('FINISHED', 'CURRENT', 'ONGOING', 'RUNNING', 'LIVE', 'IN_PROGRESS')
-        and not str(ev.get('short_name', '')).endswith(('1', '2', '3'))
-    ]
-
-    updated = False
-
-    for ev in relevant_events:
-        short = ev.get('short_name')
-        ev_id = ev.get('id')
-        ev_status = ev.get('status')
-        if not short or not ev_id: continue
-
-        print(f"\n==========================================")
-        print(f"Controllo evento {short} ({ev.get('name')}) [Status: {ev_status}]")
-
-        sessions_url = f"https://api.motogp.pulselive.com/motogp/v1/results/sessions?eventUuid={ev_id}&categoryUuid={CAT_MOTOGP}"
-        try:
-            sessions = http_get(sessions_url)
-        except Exception as e:
-            print(f"Errore caricamento sessioni {short}: {e}")
-            continue
-
-        fp_sess = [s for s in sessions if s.get('type') == 'FP']
-        pr_sess = next((s for s in sessions if s.get('type') == 'PR'), None)
-        q_sess  = sorted([s for s in sessions if s.get('type') == 'Q'], key=lambda s: s.get('date', ''))
-        spr_sess = next((s for s in sessions if s.get('type') == 'SPR'), None)
-        wup_sess = next((s for s in sessions if s.get('type') == 'WUP'), None)
-        rac_sessions = [s for s in sessions if str(s.get('type', '')).startswith('RAC')]
-        rac_sess = rac_sessions[-1] if rac_sessions else None
-
-        fp1 = format_class(fp_sess[0]['id']) if len(fp_sess) >= 1 else []
-        pr  = format_class(pr_sess['id']) if pr_sess else []
-        fp2 = format_class(fp_sess[1]['id']) if len(fp_sess) >= 2 else []
-
-        q1_sess = q_sess[0] if len(q_sess) >= 1 else None
-        q2_sess = q_sess[1] if len(q_sess) >= 2 else None
-
-        q1 = format_class(q1_sess['id']) if q1_sess else []
-        q2 = format_class(q2_sess['id']) if q2_sess else []
-        spr = format_class(spr_sess['id']) if spr_sess else []
-        wup = format_class(wup_sess['id']) if wup_sess else []
-        rac = format_class(rac_sess['id']) if rac_sess else []
-
-        # Build grid if Q1 & Q2 are available
-        grid = []
-        if q2:
-            promoted = set()
-            if len(q1) >= 2:
-                promoted.add(q1[0]['rider'])
-                promoted.add(q1[1]['rider'])
-            p = 1
-            for r in q2:
-                grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
-                p += 1
-            for r in q1:
-                if r['rider'] not in promoted:
-                    grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
-                    p += 1
-
-        # 1. Update STATIC_EVENT_DATA using bounded brace matching
-        idx_s_start = html_content.find('const STATIC_EVENT_DATA = {')
-        idx_s_end = html_content.find('function getQueryParams()', idx_s_start) if idx_s_start != -1 else -1
-
-        if idx_s_start != -1 and idx_s_end != -1:
-            s_slice = html_content[idx_s_start:idx_s_end]
-            s_start, s_end, s_parsed = find_matching_object(s_slice, short)
-
-            if s_start is not None and s_end is not None:
-                existing = s_parsed if isinstance(s_parsed, dict) else {}
-                has_fp1 = bool(existing.get("fp1") and isinstance(existing["fp1"], list) and len(existing["fp1"]) > 0)
-                has_pr  = bool(existing.get("pr") and isinstance(existing["pr"], list) and len(existing["pr"]) > 0)
-                has_fp2 = bool(existing.get("fp2") and isinstance(existing["fp2"], list) and len(existing["fp2"]) > 0)
-                has_q1  = bool(existing.get("q1") and isinstance(existing["q1"], list) and len(existing["q1"]) > 0)
-                has_q2  = bool(existing.get("q2") and isinstance(existing["q2"], list) and len(existing["q2"]) > 0)
-                has_spr = bool(existing.get("sprint") and isinstance(existing["sprint"], list) and len(existing["sprint"]) > 0)
-                has_wup = bool(existing.get("wup") and isinstance(existing["wup"], list) and len(existing["wup"]) > 0)
-                has_race = bool(existing.get("race") and isinstance(existing["race"], list) and len(existing["race"]) > 0 and any((r.get("pts") or 0) > 0 for r in existing["race"]))
-
-                needs_update = False
-                if not has_fp1 and fp1:
-                    needs_update = True
-                elif not has_pr and pr:
-                    needs_update = True
-                elif not has_fp2 and fp2:
-                    needs_update = True
-                elif not has_q1 and q1:
-                    needs_update = True
-                elif not has_q2 and q2:
-                    needs_update = True
-                elif not has_spr and spr:
-                    needs_update = True
-                elif not has_wup and wup:
-                    needs_update = True
-                elif not has_race and rac:
-                    needs_update = True
-
-                if needs_update:
-                    static_obj = {
-                        "fp1": fp1 if fp1 else (existing.get("fp1") if isinstance(existing.get("fp1"), list) else []),
-                        "pr": pr if pr else (existing.get("pr") if isinstance(existing.get("pr"), list) else []),
-                        "fp2": fp2 if fp2 else (existing.get("fp2") if isinstance(existing.get("fp2"), list) else []),
-                        "q1": q1 if q1 else (existing.get("q1") if isinstance(existing.get("q1"), list) else []),
-                        "q2": q2 if q2 else (existing.get("q2") if isinstance(existing.get("q2"), list) else []),
-                        "grid": grid if grid else (existing.get("grid") if isinstance(existing.get("grid"), list) else []),
-                        "sprint": spr if spr else (existing.get("sprint") if isinstance(existing.get("sprint"), list) else []),
-                        "wup": wup if wup else (existing.get("wup") if isinstance(existing.get("wup"), list) else []),
-                        "race": rac if rac else (existing.get("race") if isinstance(existing.get("race"), list) else [])
-                    }
-                    static_json = json.dumps(static_obj, separators=(',', ':'))
-                    new_s_entry = f'"{short}": {static_json}'
-                    new_s_slice = s_slice[:s_start] + new_s_entry + s_slice[s_end:]
-                    html_content = html_content[:idx_s_start] + new_s_slice + html_content[idx_s_end:]
-                    updated = True
-                    label = "Gara Domenica" if rac else ("Sprint Sabato" if spr else "Qualifiche")
-                    print(f"✓ Aggiornato blocco {short} in STATIC_EVENT_DATA ({label})!")
-
-        # 2. Update SESSION_WEATHER_DATA using bounded brace matching
-        idx_w_start = html_content.find('const SESSION_WEATHER_DATA = {')
-        idx_w_end = html_content.find('const STATIC_EVENT_DATA =', idx_w_start) if idx_w_start != -1 else -1
-
-        if idx_w_start != -1 and idx_w_end != -1:
-            w_slice = html_content[idx_w_start:idx_w_end]
-            w_start, w_end, w_parsed = find_matching_object(w_slice, short)
-
-            if w_start is not None and w_end is not None:
-                weather_obj = {
-                    "grid": format_cond(rac_sess or q2_sess),
-                    "race": format_cond(rac_sess),
-                    "sprint": format_cond(spr_sess),
-                    "fp1": format_cond(fp_sess[0] if len(fp_sess) >= 1 else None),
-                    "fp2": format_cond(fp_sess[1] if len(fp_sess) >= 2 else None),
-                    "wup": format_cond(wup_sess),
-                    "pr": format_cond(pr_sess),
-                    "q2": format_cond(q2_sess),
-                    "q1": format_cond(q1_sess)
-                }
-                has_w = any(isinstance(v, str) and ('°C' in v or 'Wet' in v) for v in weather_obj.values())
-                if has_w:
-                    merged_w = dict(w_parsed) if isinstance(w_parsed, dict) else weather_obj
-                    for k, v in weather_obj.items():
-                        if '°C' in v or 'Wet' in v:
-                            merged_w[k] = v
-                    if merged_w != w_parsed:
-                        merged_w_json = json.dumps(merged_w, separators=(',', ':'))
-                        new_w_entry = f'"{short}": {merged_w_json}'
-                        new_w_slice = w_slice[:w_start] + new_w_entry + w_slice[w_end:]
-                        html_content = html_content[:idx_w_start] + new_w_slice + html_content[idx_w_end:]
-                        updated = True
-                        print(f"✓ Aggiornato meteo per {short} in SESSION_WEATHER_DATA!")
-
-        # Update calendar badges in category.html and motogp.html
-        cal_name = SHORT_TO_CAL_NAME.get(short)
-        if cal_name:
-            spr_cond = get_track_cond(spr_sess) if spr_sess else ('Dry' if spr else None)
-            rac_cond = get_track_cond(rac_sess) if rac_sess else ('Dry' if rac else None)
-            if spr_cond and rac_cond:
-                cal_badge = f"SPR: {spr_cond} RACE: {rac_cond}"
-            elif spr_cond:
-                cal_badge = f"SPR: {spr_cond}"
-            elif rac_cond:
-                cal_badge = f"RACE: {rac_cond}"
-            else:
-                cal_badge = None
-
-            if cal_badge:
-                update_file_calendar_weather("category.html", cal_name, cal_badge)
-                update_file_calendar_weather("motogp.html", cal_name, cal_badge)
-
-        # 3. LAP CHARTS & SECTOR TELEMETRY
-
-        # 3.1 SPRINT (Available Saturday evening)
-        if spr:
-            idx_spr_charts = html_content.find('const EVENT_LAP_CHARTS_DATA =')
-            idx_rac_in_charts = html_content.find('"RAC":', idx_spr_charts) if idx_spr_charts != -1 else -1
-            spr_chart_present = (f'"{short}":' in html_content[idx_spr_charts:idx_rac_in_charts]) if idx_rac_in_charts != -1 else False
-
-            if not spr_chart_present:
-                spr_lap_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/SPR/LapChart.pdf"
-                spr_lap_bytes = download_bytes(spr_lap_pdf_url)
-                if spr_lap_bytes:
-                    print(f"  Estrazione LapChart Sprint per {short}...")
-                    spr_lap_data = extract_lap_chart_from_pdf(spr_lap_bytes)
-                    if spr_lap_data and spr_lap_data.get("riders"):
-                        spr_lap_json = json.dumps(spr_lap_data, separators=(',', ':'))
-                        m_spr_c = re.search(r'"SPR":\s*\{', html_content[idx_spr_charts:idx_rac_in_charts])
-                        if m_spr_c:
-                            pos = idx_spr_charts + m_spr_c.end()
-                            html_content = html_content[:pos] + f'\n        "{short}": ' + spr_lap_json + ',' + html_content[pos:]
-                            updated = True
-                            print(f"  ✓ Inserito LapChart Sprint {short} ({spr_lap_data['totalLaps']} giri)!")
-
-            idx_spr_sec_start = html_content.find('const EVENT_SPR_LAPS_DATA =')
-            idx_rac_sec_start = html_content.find('const EVENT_LAPS_DATA =')
-            spr_sec_present = (f'"{short}":' in html_content[idx_spr_sec_start:idx_rac_sec_start]) if (idx_spr_sec_start != -1 and idx_rac_sec_start != -1) else False
-
-            if not spr_sec_present:
-                spr_ana_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/SPR/Analysis.pdf"
-                spr_ana_bytes = download_bytes(spr_ana_pdf_url)
-                if spr_ana_bytes:
-                    print(f"  Estrazione Settori Sprint per {short}...")
-                    spr_win_laps = int(spr[0]['laps']) if (spr and str(spr[0].get('laps', '')).isdigit()) else 15
-                    spr_sectors_data = extract_sectors_from_pdf(spr_ana_bytes, max_laps=spr_win_laps)
-                    if spr_sectors_data:
-                        spr_sec_json = json.dumps(spr_sectors_data, separators=(',', ':'))
-                        m_spr_sec = re.search(r'const EVENT_SPR_LAPS_DATA\s*=\s*\{', html_content)
-                        if m_spr_sec:
-                            pos = m_spr_sec.end()
-                            html_content = html_content[:pos] + f'\n    "{short}": ' + spr_sec_json + ',' + html_content[pos:]
-                            updated = True
-                            print(f"  ✓ Inseriti Settori Sprint {short} ({len(spr_sectors_data)} piloti)!")
-
-        # 3.2 MAIN RACE (Available Sunday evening)
-        if rac:
-            rac_num = rac_sess.get('number') if rac_sess else None
-            rac_pdf_folders = [f"RAC{rac_num}", "RAC"] if (rac_num and int(rac_num) > 1) else ["RAC"]
-
-            idx_rac_charts = html_content.find('"RAC":')
-            idx_spr_sec = html_content.find('const EVENT_SPR_LAPS_DATA =', idx_rac_charts) if idx_rac_charts != -1 else -1
-            rac_chart_present = (f'"{short}":' in html_content[idx_rac_charts:idx_spr_sec]) if idx_spr_sec != -1 else False
-
-            if not rac_chart_present:
-                rac_lap_bytes = None
-                for rf in rac_pdf_folders:
-                    rac_lap_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/{rf}/LapChart.pdf"
-                    rac_lap_bytes = download_bytes(rac_lap_pdf_url)
-                    if rac_lap_bytes:
-                        break
-                if rac_lap_bytes:
-                    print(f"  Estrazione LapChart Gara per {short}...")
-                    rac_lap_data = extract_lap_chart_from_pdf(rac_lap_bytes)
-                    if rac_lap_data and rac_lap_data.get("riders"):
-                        rac_lap_json = json.dumps(rac_lap_data, separators=(',', ':'))
-                        m_rac_c = re.search(r'"RAC":\s*\{', html_content[idx_rac_charts:idx_spr_sec])
-                        if m_rac_c:
-                            pos = idx_rac_charts + m_rac_c.end()
-                            html_content = html_content[:pos] + f'\n        "{short}": ' + rac_lap_json + ',' + html_content[pos:]
-                            updated = True
-                            print(f"  ✓ Inserito LapChart Gara {short} ({rac_lap_data['totalLaps']} giri)!")
-
-            idx_rac_sec = html_content.find('const EVENT_LAPS_DATA =')
-            rac_sec_present = (f'"{short}":' in html_content[idx_rac_sec:]) if idx_rac_sec != -1 else False
-
-            if not rac_sec_present:
-                rac_ana_bytes = None
-                for rf in rac_pdf_folders:
-                    rac_ana_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/{rf}/Analysis.pdf"
-                    rac_ana_bytes = download_bytes(rac_ana_pdf_url)
-                    if rac_ana_bytes:
-                        break
-                if rac_ana_bytes:
-                    print(f"  Estrazione Settori Gara per {short}...")
-                    rac_win_laps = int(rac[0]['laps']) if (rac and str(rac[0].get('laps', '')).isdigit()) else 30
-                    rac_sectors_data = extract_sectors_from_pdf(rac_ana_bytes, max_laps=rac_win_laps)
-                    if rac_sectors_data:
-                        rac_sec_json = json.dumps(rac_sectors_data, separators=(',', ':'))
-                        m_rac_sec = re.search(r'const EVENT_LAPS_DATA\s*=\s*\{', html_content)
-                        if m_rac_sec:
-                            pos = m_rac_sec.end()
-                            html_content = html_content[:pos] + f'\n    "{short}": ' + rac_sec_json + ',' + html_content[pos:]
-                            updated = True
-                            print(f"  ✓ Inseriti Settori Gara {short} ({len(rac_sectors_data)} piloti)!")
-
-    if updated:
-        # Integrity verification before writing
-        if len(html_content) < orig_len * 0.95:
-            raise RuntimeError(f"ABORT: html_content shrunk suspiciously from {orig_len} to {len(html_content)}")
-        for req_tag in ("const SESSION_WEATHER_DATA =", "const STATIC_EVENT_DATA =", "const EVENT_LAP_CHARTS_DATA =", "const EVENT_SPR_LAPS_DATA =", "const EVENT_LAPS_DATA =", "function initEventPage()"):
-            if req_tag not in html_content:
-                raise RuntimeError(f"ABORT: Missing required section '{req_tag}' in html_content")
-
-        with open(event_html_path, "w", encoding="utf-8") as f:
-            f.write(html_content)
-        print("\n✓ event.html aggiornato e validato con successo!")
-    else:
-        print("\nNessun nuovo dato da aggiornare in event.html.")
-
-if __name__ == '__main__':
-    main()
-, c["text"])],
+        [c for c in cells if 25 <= c["x"] < 56 and 110 <= c["y"] <= 665 and re.match(r'^\d{1,2}$', c["text"])],
         key=lambda c: c["y"],
         reverse=True
     )
@@ -856,436 +465,45 @@ if __name__ == '__main__':
             lap_rows.append({"lap": l_num, "y": ll["y"], "cells": []})
             expected_lap += 1
 
-    rider_cells = [c for c in cells if 56 <= c["x"] <= 450 and 110 <= c["y"] <= 665 and re.match(r'^\d{1,2}
-
-def find_matching_object(text, search_key):
-    """
-    Finds '"{search_key}": {' and returns (full_start, full_end, parsed_dict_or_raw)
-    using depth-balanced brace matching within `text`.
-    """
-    pattern = rf'"{search_key}"\s*:\s*\{{'
-    m = re.search(pattern, text)
-    if not m:
-        return None, None, None
-    full_start = m.start()
-    brace_start = text.find('{', full_start)
-
-    depth = 0
-    in_string = False
-    escape = False
-    full_end = None
-
-    for i in range(brace_start, len(text)):
-        ch = text[i]
-        if escape:
-            escape = False
-            continue
-        if ch == '\\':
-            if in_string:
-                escape = True
-            continue
-        if ch == '"':
-            in_string = not in_string
-            continue
-        if not in_string:
-            if ch == '{':
-                depth += 1
-            elif ch == '}':
-                depth -= 1
-                if depth == 0:
-                    full_end = i + 1
-                    break
-
-    if full_end is None:
-        return None, None, None
-
-    json_str = text[brace_start:full_end]
-    parsed = None
-    try:
-        parsed = json.loads(json_str)
-    except Exception:
-        pass
-
-    return full_start, full_end, parsed
-
-SHORT_TO_CAL_NAME = {
-    'THA': 'Thailand', 'BRA': 'Brazil', 'USA': 'USA', 'SPA': 'Spain',
-    'FRA': 'France', 'CAT': 'Catalonia', 'ITA': 'Italy', 'HUN': 'Hungary',
-    'CZE': 'Czechia', 'NED': 'Netherlands', 'GER': 'Germany', 'GBR': 'Great Britain',
-    'ARA': 'Aragon', 'RSM': 'San Marino', 'AUT': 'Austria', 'JPN': 'Japan',
-    'INA': 'Indonesia', 'AUS': 'Australia', 'MAL': 'Malaysia', 'QAT': 'Qatar',
-    'POR': 'Portugal', 'VAL': 'Valencia'
-}
-
-def get_track_cond(sess):
-    if not sess:
-        return None
-    cond = sess.get('condition')
-    if isinstance(cond, dict):
-        track = cond.get('track', '')
-        if track:
-            return 'Wet' if 'wet' in str(track).lower() else 'Dry'
-    return 'Dry'
-
-def update_file_calendar_weather(file_path, cal_name, weather_str):
-    if not os.path.exists(file_path):
-        return
-    with open(file_path, "r", encoding="utf-8") as f:
-        content = f.read()
-
-    # Check if weather is already present with the desired string
-    if re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'{re.escape(weather_str)}'", content):
-        return
-
-    # If weather is already present with a partial string (e.g. SPR only), update it
-    if re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'[^']*'", content):
-        content = re.sub(rf"(name:\s*'{cal_name}'[^\}}]*weather:\s*)'[^']*'", rf"\1'{weather_str}'", content)
-    else:
-        # Append weather
-        content = re.sub(rf"(name:\s*'{cal_name}',\s*date:\s*'[^']+')(?!\s*,\s*weather:)(\s*\}})", rf"\1, weather: '{weather_str}'\2", content)
-
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(content)
-    print(f"✓ Aggiornato meteo calendario per {cal_name} in {file_path}: {weather_str}")
-
-# --- MAIN AUTOMATION FUNCTION ---
-
-def main():
-    event_html_path = "event.html"
-    if not os.path.exists(event_html_path):
-        print(f"File {event_html_path} non trovato.")
-        return
-
-    with open(event_html_path, "r", encoding="utf-8") as f:
-        html_content = f.read()
-
-    orig_len = len(html_content)
-
-    events_url = f"https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid={SEASON_2026}&categoryUuid={CAT_MOTOGP}"
-    try:
-        events = http_get(events_url)
-    except Exception as e:
-        print(f"Errore caricamento lista eventi: {e}")
-        return
-
-    # Filter events: FINISHED or currently ongoing (CURRENT, ONGOING, RUNNING, LIVE, IN_PROGRESS)
-    relevant_events = [
-        ev for ev in events
-        if isinstance(ev, dict)
-        and ev.get('status') in ('FINISHED', 'CURRENT', 'ONGOING', 'RUNNING', 'LIVE', 'IN_PROGRESS')
-        and not str(ev.get('short_name', '')).endswith(('1', '2', '3'))
-    ]
-
-    updated = False
-
-    for ev in relevant_events:
-        short = ev.get('short_name')
-        ev_id = ev.get('id')
-        ev_status = ev.get('status')
-        if not short or not ev_id: continue
-
-        print(f"\n==========================================")
-        print(f"Controllo evento {short} ({ev.get('name')}) [Status: {ev_status}]")
-
-        sessions_url = f"https://api.motogp.pulselive.com/motogp/v1/results/sessions?eventUuid={ev_id}&categoryUuid={CAT_MOTOGP}"
-        try:
-            sessions = http_get(sessions_url)
-        except Exception as e:
-            print(f"Errore caricamento sessioni {short}: {e}")
-            continue
-
-        fp_sess = [s for s in sessions if s.get('type') == 'FP']
-        pr_sess = next((s for s in sessions if s.get('type') == 'PR'), None)
-        q_sess  = sorted([s for s in sessions if s.get('type') == 'Q'], key=lambda s: s.get('date', ''))
-        spr_sess = next((s for s in sessions if s.get('type') == 'SPR'), None)
-        wup_sess = next((s for s in sessions if s.get('type') == 'WUP'), None)
-        rac_sessions = [s for s in sessions if str(s.get('type', '')).startswith('RAC')]
-        rac_sess = rac_sessions[-1] if rac_sessions else None
-
-        fp1 = format_class(fp_sess[0]['id']) if len(fp_sess) >= 1 else []
-        pr  = format_class(pr_sess['id']) if pr_sess else []
-        fp2 = format_class(fp_sess[1]['id']) if len(fp_sess) >= 2 else []
-
-        q1_sess = q_sess[0] if len(q_sess) >= 1 else None
-        q2_sess = q_sess[1] if len(q_sess) >= 2 else None
-
-        q1 = format_class(q1_sess['id']) if q1_sess else []
-        q2 = format_class(q2_sess['id']) if q2_sess else []
-        spr = format_class(spr_sess['id']) if spr_sess else []
-        wup = format_class(wup_sess['id']) if wup_sess else []
-        rac = format_class(rac_sess['id']) if rac_sess else []
-
-        # Build grid if Q1 & Q2 are available
-        grid = []
-        if q2:
-            promoted = set()
-            if len(q1) >= 2:
-                promoted.add(q1[0]['rider'])
-                promoted.add(q1[1]['rider'])
-            p = 1
-            for r in q2:
-                grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
-                p += 1
-            for r in q1:
-                if r['rider'] not in promoted:
-                    grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
-                    p += 1
-
-        # 1. Update STATIC_EVENT_DATA using bounded brace matching
-        idx_s_start = html_content.find('const STATIC_EVENT_DATA = {')
-        idx_s_end = html_content.find('function getQueryParams()', idx_s_start) if idx_s_start != -1 else -1
-
-        if idx_s_start != -1 and idx_s_end != -1:
-            s_slice = html_content[idx_s_start:idx_s_end]
-            s_start, s_end, s_parsed = find_matching_object(s_slice, short)
-
-            if s_start is not None and s_end is not None:
-                existing = s_parsed if isinstance(s_parsed, dict) else {}
-                has_fp1 = bool(existing.get("fp1") and isinstance(existing["fp1"], list) and len(existing["fp1"]) > 0)
-                has_pr  = bool(existing.get("pr") and isinstance(existing["pr"], list) and len(existing["pr"]) > 0)
-                has_fp2 = bool(existing.get("fp2") and isinstance(existing["fp2"], list) and len(existing["fp2"]) > 0)
-                has_q1  = bool(existing.get("q1") and isinstance(existing["q1"], list) and len(existing["q1"]) > 0)
-                has_q2  = bool(existing.get("q2") and isinstance(existing["q2"], list) and len(existing["q2"]) > 0)
-                has_spr = bool(existing.get("sprint") and isinstance(existing["sprint"], list) and len(existing["sprint"]) > 0)
-                has_wup = bool(existing.get("wup") and isinstance(existing["wup"], list) and len(existing["wup"]) > 0)
-                has_race = bool(existing.get("race") and isinstance(existing["race"], list) and len(existing["race"]) > 0 and any((r.get("pts") or 0) > 0 for r in existing["race"]))
-
-                needs_update = False
-                if not has_fp1 and fp1:
-                    needs_update = True
-                elif not has_pr and pr:
-                    needs_update = True
-                elif not has_fp2 and fp2:
-                    needs_update = True
-                elif not has_q1 and q1:
-                    needs_update = True
-                elif not has_q2 and q2:
-                    needs_update = True
-                elif not has_spr and spr:
-                    needs_update = True
-                elif not has_wup and wup:
-                    needs_update = True
-                elif not has_race and rac:
-                    needs_update = True
-
-                if needs_update:
-                    static_obj = {
-                        "fp1": fp1 if fp1 else (existing.get("fp1") if isinstance(existing.get("fp1"), list) else []),
-                        "pr": pr if pr else (existing.get("pr") if isinstance(existing.get("pr"), list) else []),
-                        "fp2": fp2 if fp2 else (existing.get("fp2") if isinstance(existing.get("fp2"), list) else []),
-                        "q1": q1 if q1 else (existing.get("q1") if isinstance(existing.get("q1"), list) else []),
-                        "q2": q2 if q2 else (existing.get("q2") if isinstance(existing.get("q2"), list) else []),
-                        "grid": grid if grid else (existing.get("grid") if isinstance(existing.get("grid"), list) else []),
-                        "sprint": spr if spr else (existing.get("sprint") if isinstance(existing.get("sprint"), list) else []),
-                        "wup": wup if wup else (existing.get("wup") if isinstance(existing.get("wup"), list) else []),
-                        "race": rac if rac else (existing.get("race") if isinstance(existing.get("race"), list) else [])
-                    }
-                    static_json = json.dumps(static_obj, separators=(',', ':'))
-                    new_s_entry = f'"{short}": {static_json}'
-                    new_s_slice = s_slice[:s_start] + new_s_entry + s_slice[s_end:]
-                    html_content = html_content[:idx_s_start] + new_s_slice + html_content[idx_s_end:]
-                    updated = True
-                    label = "Gara Domenica" if rac else ("Sprint Sabato" if spr else "Qualifiche")
-                    print(f"✓ Aggiornato blocco {short} in STATIC_EVENT_DATA ({label})!")
-
-        # 2. Update SESSION_WEATHER_DATA using bounded brace matching
-        idx_w_start = html_content.find('const SESSION_WEATHER_DATA = {')
-        idx_w_end = html_content.find('const STATIC_EVENT_DATA =', idx_w_start) if idx_w_start != -1 else -1
-
-        if idx_w_start != -1 and idx_w_end != -1:
-            w_slice = html_content[idx_w_start:idx_w_end]
-            w_start, w_end, w_parsed = find_matching_object(w_slice, short)
-
-            if w_start is not None and w_end is not None:
-                weather_obj = {
-                    "grid": format_cond(rac_sess or q2_sess),
-                    "race": format_cond(rac_sess),
-                    "sprint": format_cond(spr_sess),
-                    "fp1": format_cond(fp_sess[0] if len(fp_sess) >= 1 else None),
-                    "fp2": format_cond(fp_sess[1] if len(fp_sess) >= 2 else None),
-                    "wup": format_cond(wup_sess),
-                    "pr": format_cond(pr_sess),
-                    "q2": format_cond(q2_sess),
-                    "q1": format_cond(q1_sess)
-                }
-                has_w = any(isinstance(v, str) and ('°C' in v or 'Wet' in v) for v in weather_obj.values())
-                if has_w:
-                    merged_w = dict(w_parsed) if isinstance(w_parsed, dict) else weather_obj
-                    for k, v in weather_obj.items():
-                        if '°C' in v or 'Wet' in v:
-                            merged_w[k] = v
-                    if merged_w != w_parsed:
-                        merged_w_json = json.dumps(merged_w, separators=(',', ':'))
-                        new_w_entry = f'"{short}": {merged_w_json}'
-                        new_w_slice = w_slice[:w_start] + new_w_entry + w_slice[w_end:]
-                        html_content = html_content[:idx_w_start] + new_w_slice + html_content[idx_w_end:]
-                        updated = True
-                        print(f"✓ Aggiornato meteo per {short} in SESSION_WEATHER_DATA!")
-
-        # Update calendar badges in category.html and motogp.html
-        cal_name = SHORT_TO_CAL_NAME.get(short)
-        if cal_name:
-            spr_cond = get_track_cond(spr_sess) if spr_sess else ('Dry' if spr else None)
-            rac_cond = get_track_cond(rac_sess) if rac_sess else ('Dry' if rac else None)
-            if spr_cond and rac_cond:
-                cal_badge = f"SPR: {spr_cond} RACE: {rac_cond}"
-            elif spr_cond:
-                cal_badge = f"SPR: {spr_cond}"
-            elif rac_cond:
-                cal_badge = f"RACE: {rac_cond}"
-            else:
-                cal_badge = None
-
-            if cal_badge:
-                update_file_calendar_weather("category.html", cal_name, cal_badge)
-                update_file_calendar_weather("motogp.html", cal_name, cal_badge)
-
-        # 3. LAP CHARTS & SECTOR TELEMETRY
-
-        # 3.1 SPRINT (Available Saturday evening)
-        if spr:
-            idx_spr_charts = html_content.find('const EVENT_LAP_CHARTS_DATA =')
-            idx_rac_in_charts = html_content.find('"RAC":', idx_spr_charts) if idx_spr_charts != -1 else -1
-            spr_chart_present = (f'"{short}":' in html_content[idx_spr_charts:idx_rac_in_charts]) if idx_rac_in_charts != -1 else False
-
-            if not spr_chart_present:
-                spr_lap_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/SPR/LapChart.pdf"
-                spr_lap_bytes = download_bytes(spr_lap_pdf_url)
-                if spr_lap_bytes:
-                    print(f"  Estrazione LapChart Sprint per {short}...")
-                    spr_lap_data = extract_lap_chart_from_pdf(spr_lap_bytes)
-                    if spr_lap_data and spr_lap_data.get("riders"):
-                        spr_lap_json = json.dumps(spr_lap_data, separators=(',', ':'))
-                        m_spr_c = re.search(r'"SPR":\s*\{', html_content[idx_spr_charts:idx_rac_in_charts])
-                        if m_spr_c:
-                            pos = idx_spr_charts + m_spr_c.end()
-                            html_content = html_content[:pos] + f'\n        "{short}": ' + spr_lap_json + ',' + html_content[pos:]
-                            updated = True
-                            print(f"  ✓ Inserito LapChart Sprint {short} ({spr_lap_data['totalLaps']} giri)!")
-
-            idx_spr_sec_start = html_content.find('const EVENT_SPR_LAPS_DATA =')
-            idx_rac_sec_start = html_content.find('const EVENT_LAPS_DATA =')
-            spr_sec_present = (f'"{short}":' in html_content[idx_spr_sec_start:idx_rac_sec_start]) if (idx_spr_sec_start != -1 and idx_rac_sec_start != -1) else False
-
-            if not spr_sec_present:
-                spr_ana_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/SPR/Analysis.pdf"
-                spr_ana_bytes = download_bytes(spr_ana_pdf_url)
-                if spr_ana_bytes:
-                    print(f"  Estrazione Settori Sprint per {short}...")
-                    spr_win_laps = int(spr[0]['laps']) if (spr and str(spr[0].get('laps', '')).isdigit()) else 15
-                    spr_sectors_data = extract_sectors_from_pdf(spr_ana_bytes, max_laps=spr_win_laps)
-                    if spr_sectors_data:
-                        spr_sec_json = json.dumps(spr_sectors_data, separators=(',', ':'))
-                        m_spr_sec = re.search(r'const EVENT_SPR_LAPS_DATA\s*=\s*\{', html_content)
-                        if m_spr_sec:
-                            pos = m_spr_sec.end()
-                            html_content = html_content[:pos] + f'\n    "{short}": ' + spr_sec_json + ',' + html_content[pos:]
-                            updated = True
-                            print(f"  ✓ Inseriti Settori Sprint {short} ({len(spr_sectors_data)} piloti)!")
-
-        # 3.2 MAIN RACE (Available Sunday evening)
-        if rac:
-            rac_num = rac_sess.get('number') if rac_sess else None
-            rac_pdf_folders = [f"RAC{rac_num}", "RAC"] if (rac_num and int(rac_num) > 1) else ["RAC"]
-
-            idx_rac_charts = html_content.find('"RAC":')
-            idx_spr_sec = html_content.find('const EVENT_SPR_LAPS_DATA =', idx_rac_charts) if idx_rac_charts != -1 else -1
-            rac_chart_present = (f'"{short}":' in html_content[idx_rac_charts:idx_spr_sec]) if idx_spr_sec != -1 else False
-
-            if not rac_chart_present:
-                rac_lap_bytes = None
-                for rf in rac_pdf_folders:
-                    rac_lap_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/{rf}/LapChart.pdf"
-                    rac_lap_bytes = download_bytes(rac_lap_pdf_url)
-                    if rac_lap_bytes:
-                        break
-                if rac_lap_bytes:
-                    print(f"  Estrazione LapChart Gara per {short}...")
-                    rac_lap_data = extract_lap_chart_from_pdf(rac_lap_bytes)
-                    if rac_lap_data and rac_lap_data.get("riders"):
-                        rac_lap_json = json.dumps(rac_lap_data, separators=(',', ':'))
-                        m_rac_c = re.search(r'"RAC":\s*\{', html_content[idx_rac_charts:idx_spr_sec])
-                        if m_rac_c:
-                            pos = idx_rac_charts + m_rac_c.end()
-                            html_content = html_content[:pos] + f'\n        "{short}": ' + rac_lap_json + ',' + html_content[pos:]
-                            updated = True
-                            print(f"  ✓ Inserito LapChart Gara {short} ({rac_lap_data['totalLaps']} giri)!")
-
-            idx_rac_sec = html_content.find('const EVENT_LAPS_DATA =')
-            rac_sec_present = (f'"{short}":' in html_content[idx_rac_sec:]) if idx_rac_sec != -1 else False
-
-            if not rac_sec_present:
-                rac_ana_bytes = None
-                for rf in rac_pdf_folders:
-                    rac_ana_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/{rf}/Analysis.pdf"
-                    rac_ana_bytes = download_bytes(rac_ana_pdf_url)
-                    if rac_ana_bytes:
-                        break
-                if rac_ana_bytes:
-                    print(f"  Estrazione Settori Gara per {short}...")
-                    rac_win_laps = int(rac[0]['laps']) if (rac and str(rac[0].get('laps', '')).isdigit()) else 30
-                    rac_sectors_data = extract_sectors_from_pdf(rac_ana_bytes, max_laps=rac_win_laps)
-                    if rac_sectors_data:
-                        rac_sec_json = json.dumps(rac_sectors_data, separators=(',', ':'))
-                        m_rac_sec = re.search(r'const EVENT_LAPS_DATA\s*=\s*\{', html_content)
-                        if m_rac_sec:
-                            pos = m_rac_sec.end()
-                            html_content = html_content[:pos] + f'\n    "{short}": ' + rac_sec_json + ',' + html_content[pos:]
-                            updated = True
-                            print(f"  ✓ Inseriti Settori Gara {short} ({len(rac_sectors_data)} piloti)!")
-
-    if updated:
-        # Integrity verification before writing
-        if len(html_content) < orig_len * 0.95:
-            raise RuntimeError(f"ABORT: html_content shrunk suspiciously from {orig_len} to {len(html_content)}")
-        for req_tag in ("const SESSION_WEATHER_DATA =", "const STATIC_EVENT_DATA =", "const EVENT_LAP_CHARTS_DATA =", "const EVENT_SPR_LAPS_DATA =", "const EVENT_LAPS_DATA =", "function initEventPage()"):
-            if req_tag not in html_content:
-                raise RuntimeError(f"ABORT: Missing required section '{req_tag}' in html_content")
-
-        with open(event_html_path, "w", encoding="utf-8") as f:
-            f.write(html_content)
-        print("\n✓ event.html aggiornato e validato con successo!")
-    else:
-        print("\nNessun nuovo dato da aggiornare in event.html.")
-
-if __name__ == '__main__':
-    main()
-, c["text"])]
+    rider_cells = [c for c in cells if 56 <= c["x"] <= 450 and 110 <= c["y"] <= 665 and re.match(r'^\d{1,2}$', c["text"])]
     for rc in rider_cells:
         best_row = None
         best_dist = 999.0
         for lr in lap_rows:
             d = abs(rc["y"] - lr["y"])
-            if d <= 4.5 and d < best_dist:
+            if d < best_dist:
                 best_dist = d
                 best_row = lr
-        if best_row is not None:
+        if best_row is not None and best_dist <= 8.0:
             best_row["cells"].append(rc)
 
-    rider_positions = {}
-    num_laps = len(lap_rows)
+    grid_row = []
+    for c in cells:
+        if 56 <= c["x"] <= 450 and 668 <= c["y"] <= 695 and re.match(r'^\d{1,2}$', c["text"]):
+            grid_row.append(c)
+    grid_row.sort(key=lambda c: c["x"])
 
-    for l_idx in range(num_laps):
-        row_cells = sorted(lap_rows[l_idx]["cells"], key=lambda c: c["x"])
-        seen_in_lap = set()
-        pos = 1
-        for c in row_cells:
-            r_num = int(c["text"])
-            if r_num not in FULL_NUM_TO_RIDER:
-                continue
-            r_name = FULL_NUM_TO_RIDER[r_num]
-            if r_name in seen_in_lap:
-                continue
-            seen_in_lap.add(r_name)
-            if r_name not in rider_positions:
-                rider_positions[r_name] = [None] * l_idx
-            rider_positions[r_name].append(pos)
-            pos += 1
-        for r_name in rider_positions:
-            while len(rider_positions[r_name]) <= l_idx:
-                rider_positions[r_name].append(None)
+    rider_laps = {}
+    for g in grid_row:
+        r_num = int(g["text"])
+        r_name = FULL_NUM_TO_RIDER.get(r_num)
+        if r_name and r_name not in rider_laps:
+            rider_laps[r_name] = [None] * len(lap_rows)
 
-    return {"totalLaps": num_laps, "riders": rider_positions}
+    for idx_r, lr in enumerate(lap_rows):
+        row_cells = sorted(lr["cells"], key=lambda c: c["x"])
+        for pos_idx, cell in enumerate(row_cells):
+            r_num = int(cell["text"])
+            r_name = FULL_NUM_TO_RIDER.get(r_num)
+            if r_name:
+                if r_name not in rider_laps:
+                    rider_laps[r_name] = [None] * len(lap_rows)
+                rider_laps[r_name][idx_r] = pos_idx + 1
+
+    total_laps = len(lap_rows)
+    if total_laps == 0 or not rider_laps:
+        return None
+    return {"totalLaps": total_laps, "riders": rider_laps}
 
 def find_matching_object(text, search_key):
     """
@@ -1347,13 +565,13 @@ SHORT_TO_CAL_NAME = {
 }
 
 def get_track_cond(sess):
-    if not sess:
+    if not sess or sess.get('status') != 'FINISHED':
         return None
     cond = sess.get('condition')
     if isinstance(cond, dict):
-        track = cond.get('track', '')
+        track = str(cond.get('track') or '').strip()
         if track:
-            return 'Wet' if 'wet' in str(track).lower() else 'Dry'
+            return 'Wet' if 'wet' in track.lower() else 'Dry'
     return 'Dry'
 
 def update_file_calendar_weather(file_path, cal_name, weather_str):
@@ -1423,12 +641,12 @@ def main():
             print(f"Errore caricamento sessioni {short}: {e}")
             continue
 
-        fp_sess = [s for s in sessions if s.get('type') == 'FP']
-        pr_sess = next((s for s in sessions if s.get('type') == 'PR'), None)
-        q_sess  = sorted([s for s in sessions if s.get('type') == 'Q'], key=lambda s: s.get('date', ''))
-        spr_sess = next((s for s in sessions if s.get('type') == 'SPR'), None)
-        wup_sess = next((s for s in sessions if s.get('type') == 'WUP'), None)
-        rac_sessions = [s for s in sessions if str(s.get('type', '')).startswith('RAC')]
+        fp_sess = [s for s in sessions if s.get('type') == 'FP' and s.get('status') == 'FINISHED']
+        pr_sess = next((s for s in sessions if s.get('type') == 'PR' and s.get('status') == 'FINISHED'), None)
+        q_sess  = sorted([s for s in sessions if s.get('type') == 'Q' and s.get('status') == 'FINISHED'], key=lambda s: s.get('date', ''))
+        spr_sess = next((s for s in sessions if s.get('type') == 'SPR' and s.get('status') == 'FINISHED'), None)
+        wup_sess = next((s for s in sessions if s.get('type') == 'WUP' and s.get('status') == 'FINISHED'), None)
+        rac_sessions = [s for s in sessions if str(s.get('type', '')).startswith('RAC') and s.get('status') == 'FINISHED']
         rac_sess = rac_sessions[-1] if rac_sessions else None
 
         fp1 = format_class(fp_sess[0]['id']) if len(fp_sess) >= 1 else []
@@ -1554,8 +772,8 @@ def main():
         # Update calendar badges in category.html and motogp.html
         cal_name = SHORT_TO_CAL_NAME.get(short)
         if cal_name:
-            spr_cond = get_track_cond(spr_sess) if spr_sess else ('Dry' if spr else None)
-            rac_cond = get_track_cond(rac_sess) if rac_sess else ('Dry' if rac else None)
+            spr_cond = get_track_cond(spr_sess) if (spr_sess and spr) else None
+            rac_cond = get_track_cond(rac_sess) if (rac_sess and rac) else None
             if spr_cond and rac_cond:
                 cal_badge = f"SPR: {spr_cond} RACE: {rac_cond}"
             elif spr_cond:

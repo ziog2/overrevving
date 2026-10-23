@@ -600,7 +600,7 @@ const CALENDAR = [
   { round: 'R15', name: 'Austria',       date: '2026-09-20', weather: 'SPR: Dry RACE: Dry' },
   { round: 'R16', name: 'Japan',         date: '2026-10-04', weather: 'SPR: Dry RACE: Dry' },
   { round: 'R17', name: 'Indonesia',     date: '2026-10-11', weather: 'SPR: Dry RACE: Dry' },
-  { round: 'R18', name: 'Australia',     date: '2026-10-25', weather: 'SPR: Dry RACE: Dry' },
+  { round: 'R18', name: 'Australia',     date: '2026-10-25' },
   { round: 'R19', name: 'Malaysia',      date: '2026-11-01' },
   { round: 'R20', name: 'Qatar',         date: '2026-11-08' },
   { round: 'R21', name: 'Portugal',      date: '2026-11-22' },
@@ -773,17 +773,23 @@ function renderCalendar() {
   let html = '';
 
   CALENDAR.forEach(ev => {
-    const evDate = new Date(ev.date + 'T23:59:59');
-    const isPast = evDate < now || Boolean(ev.weather) || (new Date(ev.date + 'T18:00:00') < now);
+    const evStart = new Date(new Date(ev.date + 'T00:00:00').getTime() - 2 * 86400000);
+    const evEnd = new Date(ev.date + 'T18:00:00');
+    const evLateEnd = new Date(ev.date + 'T23:59:59');
+    const hasRaceWeather = Boolean(ev.weather && ev.weather.includes('RACE'));
+    const isPast = (evEnd < now) || hasRaceWeather;
+    const isOngoing = !isPast && ((now >= evStart && now <= evLateEnd) || Boolean(ev.weather));
     if (isPast) completedCount++;
 
     const d = new Date(ev.date);
     const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
-    const checkMark = isPast ? '<span style="color:#2ecc71;margin-right:6px;font-size:11px;">✓</span>' : '';
-    const weatherBadge = (isPast && ev.weather) ? `<span class="cal-weather-badge">${ev.weather}</span>` : '';
+    const statusIcon = isPast
+      ? '<span style="color:#2ecc71;margin-right:6px;font-size:11px;" title="Completed">✓</span>'
+      : (isOngoing ? '<span style="color:#f39c12;margin-right:6px;font-size:11px;" title="Weekend in corso">🏁</span>' : '');
+    const weatherBadge = ((isPast || isOngoing) && ev.weather) ? `<span class="cal-weather-badge">${ev.weather}</span>` : '';
     
-    html += `<a href="event.html?year=2026&round=${ev.round}" class="cal-item${isPast ? ' past' : ''}">
-      <span class="cal-name">${checkMark}${ev.name}${weatherBadge}</span>
+    html += `<a href="event.html?year=2026&round=${ev.round}" class="cal-item${isPast ? ' past' : (isOngoing ? ' ongoing' : '')}">
+      <span class="cal-name">${statusIcon}${ev.name}${weatherBadge}</span>
       <span class="cal-date">${dateStr}</span>
     </a>`;
   });
