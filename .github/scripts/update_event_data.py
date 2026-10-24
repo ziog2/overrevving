@@ -245,11 +245,11 @@ def parse_dorna_analysis_pdf(pdf_bytes):
                     tj_m = re.search(r'\[(.*)\]\s*TJ', line) or re.search(r'\((.*)\)\s*Tj', line)
                     if tj_m:
                         raw_arr = tj_m.group(1)
-                        str_matches = re.findall(r'\((.*?)\)', raw_arr)
+                        str_matches = [sm.group(1) for sm in re.finditer(r'\(((?:\\.|[^\\)])*)\)', raw_arr)]
                         decoded_str = ""
                         for sm in str_matches:
                             val = re.sub(r'\\([0-7]{3})', lambda m_oct: chr(int(m_oct.group(1), 8)), sm)
-                            val = val.replace(r'\n', '\n').replace(r'\r', '\r').replace(r'\t', '\t').replace(r'\(', '(').replace(r'\)', ')').replace(r'\\', '\\')
+                            val = val.replace(r'\n', '\n').replace(r'\r', '\r').replace(r'\t', '\t').replace(r'\b', '\b').replace(r'\f', '\f').replace(r'\(', '(').replace(r'\)', ')').replace(r'\\', '\\')
                             for ch in val:
                                 b_code = ord(ch)
                                 if cur_cmap and b_code in cur_cmap:
@@ -278,6 +278,40 @@ def parse_sector_val(s):
         return round(int(m.group(1)) * 60.0 + float(m.group(2)), 3)
     return round(float(s), 3)
 
+def compute_lap_chart_from_sectors(sectors_dict, total_laps):
+    if not sectors_dict or total_laps <= 0:
+        return None
+    def parse_t(s):
+        m = re.match(r"^(\d+)'(\d+\.\d+)$", str(s).strip())
+        return int(m.group(1))*60 + float(m.group(2)) if m else None
+
+    rider_cum = {}
+    for r, laps in sectors_dict.items():
+        cum = 0.0
+        active = True
+        arr = []
+        for ln in range(1, total_laps + 1):
+            lm = next((l for l in laps if l.get('lap') == ln), None)
+            sec = parse_t(lm.get('time')) if lm else None
+            if sec and sec > 0 and active:
+                cum += sec
+                arr.append(round(cum, 3))
+            else:
+                active = False
+                arr.append(None)
+        rider_cum[r] = arr
+
+    chart_riders = {r: [None] * total_laps for r in sectors_dict}
+    for lap_idx in range(total_laps):
+        active = []
+        for r, arr in rider_cum.items():
+            if arr[lap_idx] is not None:
+                active.append((r, arr[lap_idx]))
+        active.sort(key=lambda x: x[1])
+        for pos, (r, _) in enumerate(active, 1):
+            chart_riders[r][lap_idx] = pos
+    return {"totalLaps": total_laps, "riders": chart_riders}
+
 def extract_sectors_from_pdf(pdf_bytes, max_laps):
     raw_text = parse_dorna_analysis_pdf(pdf_bytes)
     clean = re.sub(r'(?s)Page\s+\d+\s+of\b(?:(?!Page\s+\d+\s+of\b).){0,400}?Fastest Lap:', '', raw_text)
@@ -304,7 +338,7 @@ def extract_sectors_from_pdf(pdf_bytes, max_laps):
             continue
 
         block = unpack_numbers(raw_block)
-        l_matches = list(re.finditer(r"(\d'\d{2}\.\d{3})\s+(\d{1,2})\b(?!\.)", block))
+        l_matches = list(re.finditer(r"(\d+'\d{2}\.\d{3})", block))
         laps = []
         lap_num = 1
 
@@ -798,17 +832,24 @@ def main():
             if not spr_chart_present:
                 spr_lap_pdf_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/SPR/LapChart.pdf"
                 spr_lap_bytes = download_bytes(spr_lap_pdf_url)
-                if spr_lap_bytes:
-                    print(f"  Estrazione LapChart Sprint per {short}...")
-                    spr_lap_data = extract_lap_chart_from_pdf(spr_lap_bytes)
-                    if spr_lap_data and spr_lap_data.get("riders"):
-                        spr_lap_json = json.dumps(spr_lap_data, separators=(',', ':'))
-                        m_spr_c = re.search(r'"SPR":\s*\{', html_content[idx_spr_charts:idx_rac_in_charts])
-                        if m_spr_c:
-                            pos = idx_spr_charts + m_spr_c.end()
-                            html_content = html_content[:pos] + f'\n        "{short}": ' + spr_lap_json + ',' + html_content[pos:]
-                            updated = True
-                            print(f"  ✓ Inserito LapChart Sprint {short} ({spr_lap_data['totalLaps']} giri)!")
+                spr_lap_data = extract_lap_chart_from_pdf(spr_lap_bytes) if spr_lap_bytes else None
+                if not spr_lap_data and spr:
+                    # Fallback: compute lap chart positions from Analysis.pdf
+                    spr_ana_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/SPR/Analysis.pdf"
+                    ana_bytes = download_bytes(spr_ana_url)
+                    if ana_bytes:
+                        win_laps = int(spr[0]['laps']) if (spr and str(spr[0].get('laps', '')).isdigit()) else 15
+                        sec_dict = extract_sectors_from_pdf(ana_bytes, max_laps=win_laps)
+                        if sec_dict:
+                            spr_lap_data = compute_lap_chart_from_sectors(sec_dict, win_laps)
+                if spr_lap_data and spr_lap_data.get("riders"):
+                    spr_lap_json = json.dumps(spr_lap_data, separators=(',', ':'))
+                    m_spr_c = re.search(r'"SPR":\s*\{', html_content[idx_spr_charts:idx_rac_in_charts])
+                    if m_spr_c:
+                        pos = idx_spr_charts + m_spr_c.end()
+                        html_content = html_content[:pos] + f'\n        "{short}": ' + spr_lap_json + ',' + html_content[pos:]
+                        updated = True
+                        print(f"  ✓ Inserito LapChart Sprint {short} ({spr_lap_data['totalLaps']} giri)!")
 
             idx_spr_sec_start = html_content.find('const EVENT_SPR_LAPS_DATA =')
             idx_rac_sec_start = html_content.find('const EVENT_LAPS_DATA =')
