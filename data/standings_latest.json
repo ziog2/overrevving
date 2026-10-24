@@ -254,7 +254,7 @@
     },
     {
       "name": "Ai Ogura",
-      "pts": 263,
+      "pts": 259,
       "history": [
         17,
         16,
@@ -758,7 +758,7 @@
     },
     {
       "name": "Brad Binder",
-      "pts": 107,
+      "pts": 108,
       "history": [
         13,
         0,
@@ -821,7 +821,7 @@
     },
     {
       "name": "Diogo Moreira",
-      "pts": 75,
+      "pts": 76,
       "history": [
         3,
         3,
@@ -1136,7 +1136,7 @@
     },
     {
       "name": "Jack Miller",
-      "pts": 30,
+      "pts": 31,
       "history": [
         0,
         0,
@@ -1388,7 +1388,7 @@
     },
     {
       "name": "Iker Lecuona",
-      "pts": 9,
+      "pts": 10,
       "history": [
         0,
         0,
@@ -7291,5 +7291,5 @@
       "pts": 0
     }
   ],
-  "_updated": "2026-10-24 07:10:25 · Auto (Domenica)"
+  "_updated": "2026-10-24 11:55:05 · Auto (Domenica)"
 }
