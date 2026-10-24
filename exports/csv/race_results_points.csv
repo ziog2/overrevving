@@ -1,9 +1,9 @@
 Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_Points,Points_Earned,Cumulative_Points,Gap_To_Leader,Is_Zero_Points,Weather
-2026,MOTOGP,1,Thailand,2026-03-01,Jorge Martin,5,13,18,18,-14,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Marc Marquez,9,0,9,9,-23,0,Dry
+2026,MOTOGP,1,Thailand,2026-03-01,Jorge Martin,5,13,18,18,-14,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Marco Bezzecchi,0,25,25,25,-7,0,Dry
-2026,MOTOGP,1,Thailand,2026-03-01,Ai Ogura,6,11,17,17,-15,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Pedro Acosta,12,20,32,32,0,0,Dry
+2026,MOTOGP,1,Thailand,2026-03-01,Ai Ogura,6,11,17,17,-15,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Fabio Di Giannantonio,2,10,12,12,-20,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Raul Fernandez,7,16,23,23,-9,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Alex Marquez,0,0,0,0,-32,1,Dry
@@ -12,8 +12,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,1,Thailand,2026-03-01,Enea Bastianini,0,4,4,4,-28,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Luca Marini,0,6,6,6,-26,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Brad Binder,4,9,13,13,-19,0,Dry
-2026,MOTOGP,1,Thailand,2026-03-01,Fabio Quartararo,0,2,2,2,-30,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Diogo Moreira,0,3,3,3,-29,0,Dry
+2026,MOTOGP,1,Thailand,2026-03-01,Fabio Quartararo,0,2,2,2,-30,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Franco Morbidelli,0,8,8,8,-24,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Johann Zarco,0,5,5,5,-27,0,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Joan Mir,3,0,3,3,-29,0,Dry
@@ -31,11 +31,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,1,Thailand,2026-03-01,Lorenzo Savadori,0,0,0,0,-32,1,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Michele Pirro,0,0,0,0,-32,1,Dry
 2026,MOTOGP,1,Thailand,2026-03-01,Aleix Espargaro,0,0,0,0,-32,1,Dry
-2026,MOTOGP,2,Brazil,2026-03-22,Jorge Martin,7,20,27,45,-11,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Marc Marquez,12,13,25,34,-22,0,Dry
+2026,MOTOGP,2,Brazil,2026-03-22,Jorge Martin,7,20,27,45,-11,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Marco Bezzecchi,6,25,31,56,0,0,Dry
-2026,MOTOGP,2,Brazil,2026-03-22,Ai Ogura,5,11,16,33,-23,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Pedro Acosta,1,9,10,42,-14,0,Dry
+2026,MOTOGP,2,Brazil,2026-03-22,Ai Ogura,5,11,16,33,-23,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Fabio Di Giannantonio,9,16,25,37,-19,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Raul Fernandez,0,6,6,29,-27,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Alex Marquez,3,10,13,13,-43,0,Dry
@@ -44,8 +44,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,2,Brazil,2026-03-22,Enea Bastianini,0,1,1,5,-51,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Luca Marini,0,5,5,11,-45,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Brad Binder,0,0,0,13,-43,1,Dry
-2026,MOTOGP,2,Brazil,2026-03-22,Fabio Quartararo,4,0,4,6,-50,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Diogo Moreira,0,3,3,6,-50,0,Dry
+2026,MOTOGP,2,Brazil,2026-03-22,Fabio Quartararo,4,0,4,6,-50,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Franco Morbidelli,0,4,4,12,-44,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Johann Zarco,0,7,7,12,-44,0,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Joan Mir,0,0,0,3,-53,1,Dry
@@ -63,11 +63,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,2,Brazil,2026-03-22,Lorenzo Savadori,0,0,0,0,-56,1,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Michele Pirro,0,0,0,0,-56,1,Dry
 2026,MOTOGP,2,Brazil,2026-03-22,Aleix Espargaro,0,0,0,0,-56,1,Dry
-2026,MOTOGP,3,USA,2026-03-29,Jorge Martin,12,20,32,77,-4,0,Dry
 2026,MOTOGP,3,USA,2026-03-29,Marc Marquez,0,11,11,45,-36,0,Dry
+2026,MOTOGP,3,USA,2026-03-29,Jorge Martin,12,20,32,77,-4,0,Dry
 2026,MOTOGP,3,USA,2026-03-29,Marco Bezzecchi,0,25,25,81,0,0,Dry
-2026,MOTOGP,3,USA,2026-03-29,Ai Ogura,4,0,4,37,-44,0,Dry
 2026,MOTOGP,3,USA,2026-03-29,Pedro Acosta,2,16,18,60,-21,0,Dry
+2026,MOTOGP,3,USA,2026-03-29,Ai Ogura,4,0,4,37,-44,0,Dry
 2026,MOTOGP,3,USA,2026-03-29,Fabio Di Giannantonio,0,13,13,50,-31,0,Dry
 2026,MOTOGP,3,USA,2026-03-29,Raul Fernandez,3,8,11,40,-41,0,Dry
 2026,MOTOGP,3,USA,2026-03-29,Alex Marquez,6,9,15,28,-53,0,Dry
@@ -76,8 +76,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,3,USA,2026-03-29,Enea Bastianini,7,10,17,22,-59,0,Dry
 2026,MOTOGP,3,USA,2026-03-29,Luca Marini,5,7,12,23,-58,0,Dry
 2026,MOTOGP,3,USA,2026-03-29,Brad Binder,0,4,4,17,-64,0,Dry
-2026,MOTOGP,3,USA,2026-03-29,Fabio Quartararo,0,0,0,6,-75,1,Dry
 2026,MOTOGP,3,USA,2026-03-29,Diogo Moreira,0,3,3,9,-72,0,Dry
+2026,MOTOGP,3,USA,2026-03-29,Fabio Quartararo,0,0,0,6,-75,1,Dry
 2026,MOTOGP,3,USA,2026-03-29,Franco Morbidelli,0,2,2,14,-67,0,Dry
 2026,MOTOGP,3,USA,2026-03-29,Johann Zarco,1,0,1,13,-68,0,Dry
 2026,MOTOGP,3,USA,2026-03-29,Joan Mir,0,0,0,3,-78,1,Dry
@@ -95,11 +95,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,3,USA,2026-03-29,Lorenzo Savadori,0,0,0,0,-81,1,Dry
 2026,MOTOGP,3,USA,2026-03-29,Michele Pirro,0,0,0,0,-81,1,Dry
 2026,MOTOGP,3,USA,2026-03-29,Aleix Espargaro,0,0,0,0,-81,1,Dry
-2026,MOTOGP,4,Spain,2026-04-26,Jorge Martin,0,13,13,90,-11,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Marc Marquez,12,0,12,57,-44,0,Dry
+2026,MOTOGP,4,Spain,2026-04-26,Jorge Martin,0,13,13,90,-11,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Marco Bezzecchi,0,20,20,101,0,0,Dry
-2026,MOTOGP,4,Spain,2026-04-26,Ai Ogura,0,11,11,48,-53,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Pedro Acosta,0,6,6,66,-35,0,Dry
+2026,MOTOGP,4,Spain,2026-04-26,Ai Ogura,0,11,11,48,-53,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Fabio Di Giannantonio,5,16,21,71,-30,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Raul Fernandez,4,10,14,54,-47,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Alex Marquez,0,25,25,53,-48,0,Dry
@@ -108,8 +108,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,4,Spain,2026-04-26,Enea Bastianini,0,8,8,30,-71,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Luca Marini,1,3,4,27,-74,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Brad Binder,6,5,11,28,-73,0,Dry
-2026,MOTOGP,4,Spain,2026-04-26,Fabio Quartararo,3,2,5,11,-90,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Diogo Moreira,0,0,0,9,-92,1,Dry
+2026,MOTOGP,4,Spain,2026-04-26,Fabio Quartararo,3,2,5,11,-90,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Franco Morbidelli,7,4,11,25,-76,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Johann Zarco,2,9,11,24,-77,0,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Joan Mir,0,1,1,4,-97,0,Dry
@@ -127,11 +127,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,4,Spain,2026-04-26,Lorenzo Savadori,0,0,0,0,-101,1,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Michele Pirro,0,0,0,0,-101,1,Dry
 2026,MOTOGP,4,Spain,2026-04-26,Aleix Espargaro,0,0,0,0,-101,1,Dry
-2026,MOTOGP,5,France,2026-05-10,Jorge Martin,12,25,37,127,-1,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Marc Marquez,0,0,0,57,-71,1,Dry
+2026,MOTOGP,5,France,2026-05-10,Jorge Martin,12,25,37,127,-1,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Marco Bezzecchi,7,20,27,128,0,0,Dry
-2026,MOTOGP,5,France,2026-05-10,Ai Ogura,3,16,19,67,-61,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Pedro Acosta,6,11,17,83,-45,0,Dry
+2026,MOTOGP,5,France,2026-05-10,Ai Ogura,3,16,19,67,-61,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Fabio Di Giannantonio,0,13,13,84,-44,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Raul Fernandez,0,8,8,62,-66,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Alex Marquez,2,0,2,55,-73,0,Dry
@@ -140,8 +140,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,5,France,2026-05-10,Enea Bastianini,0,9,9,39,-89,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Luca Marini,0,6,6,33,-95,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Brad Binder,0,0,0,28,-100,1,Dry
-2026,MOTOGP,5,France,2026-05-10,Fabio Quartararo,5,10,15,26,-102,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Diogo Moreira,1,0,1,10,-118,0,Dry
+2026,MOTOGP,5,France,2026-05-10,Fabio Quartararo,5,10,15,26,-102,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Franco Morbidelli,0,2,2,27,-101,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Johann Zarco,0,5,5,29,-99,0,Dry
 2026,MOTOGP,5,France,2026-05-10,Joan Mir,4,0,4,8,-120,0,Dry
@@ -159,11 +159,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,5,France,2026-05-10,Lorenzo Savadori,0,0,0,0,-128,1,Dry
 2026,MOTOGP,5,France,2026-05-10,Michele Pirro,0,0,0,0,-128,1,Dry
 2026,MOTOGP,5,France,2026-05-10,Aleix Espargaro,0,0,0,0,-128,1,Dry
-2026,MOTOGP,6,Catalonia,2026-05-17,Jorge Martin,0,0,0,127,-15,1,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Marc Marquez,0,0,0,57,-85,1,Dry
+2026,MOTOGP,6,Catalonia,2026-05-17,Jorge Martin,0,0,0,127,-15,1,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Marco Bezzecchi,1,13,14,142,0,0,Dry
-2026,MOTOGP,6,Catalonia,2026-05-17,Ai Ogura,2,8,10,77,-65,0,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Pedro Acosta,9,0,9,92,-50,0,Dry
+2026,MOTOGP,6,Catalonia,2026-05-17,Ai Ogura,2,8,10,77,-65,0,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Fabio Di Giannantonio,7,25,32,116,-26,0,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Raul Fernandez,6,0,6,68,-74,0,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Alex Marquez,12,0,12,67,-75,0,Dry
@@ -172,8 +172,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,6,Catalonia,2026-05-17,Enea Bastianini,0,0,0,39,-103,1,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Luca Marini,0,10,10,43,-99,0,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Brad Binder,0,9,9,37,-105,0,Dry
-2026,MOTOGP,6,Catalonia,2026-05-17,Fabio Quartararo,0,11,11,37,-105,0,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Diogo Moreira,0,7,7,17,-125,0,Dry
+2026,MOTOGP,6,Catalonia,2026-05-17,Fabio Quartararo,0,11,11,37,-105,0,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Franco Morbidelli,3,6,9,36,-106,0,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Johann Zarco,5,0,5,34,-108,0,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Joan Mir,0,3,3,11,-131,0,Dry
@@ -191,11 +191,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,6,Catalonia,2026-05-17,Lorenzo Savadori,0,0,0,0,-142,1,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Michele Pirro,0,0,0,0,-142,1,Dry
 2026,MOTOGP,6,Catalonia,2026-05-17,Aleix Espargaro,0,0,0,0,-142,1,Dry
-2026,MOTOGP,7,Italy,2026-05-31,Jorge Martin,9,20,29,156,-17,0,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Marc Marquez,5,9,14,71,-102,0,Dry
+2026,MOTOGP,7,Italy,2026-05-31,Jorge Martin,9,20,29,156,-17,0,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Marco Bezzecchi,6,25,31,173,0,0,Dry
-2026,MOTOGP,7,Italy,2026-05-31,Ai Ogura,2,13,15,92,-81,0,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Pedro Acosta,1,10,11,103,-70,0,Dry
+2026,MOTOGP,7,Italy,2026-05-31,Ai Ogura,2,13,15,92,-81,0,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Fabio Di Giannantonio,7,11,18,134,-39,0,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Raul Fernandez,12,7,19,87,-86,0,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Alex Marquez,0,0,0,67,-106,1,Dry
@@ -204,8 +204,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,7,Italy,2026-05-31,Enea Bastianini,0,0,0,39,-134,1,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Luca Marini,0,3,3,46,-127,0,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Brad Binder,0,5,5,42,-131,0,Dry
-2026,MOTOGP,7,Italy,2026-05-31,Fabio Quartararo,0,0,0,37,-136,1,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Diogo Moreira,0,6,6,23,-150,0,Dry
+2026,MOTOGP,7,Italy,2026-05-31,Fabio Quartararo,0,0,0,37,-136,1,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Franco Morbidelli,0,2,2,38,-135,0,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Johann Zarco,0,0,0,34,-139,1,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Joan Mir,0,4,4,15,-158,0,Dry
@@ -223,11 +223,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,7,Italy,2026-05-31,Lorenzo Savadori,0,0,0,0,-173,1,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Michele Pirro,0,0,0,0,-173,1,Dry
 2026,MOTOGP,7,Italy,2026-05-31,Aleix Espargaro,0,0,0,0,-173,1,Dry
-2026,MOTOGP,8,Hungary,2026-06-07,Jorge Martin,4,0,4,160,-20,0,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Marc Marquez,12,25,37,108,-72,0,Dry
+2026,MOTOGP,8,Hungary,2026-06-07,Jorge Martin,4,0,4,160,-20,0,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Marco Bezzecchi,7,0,7,180,0,0,Dry
-2026,MOTOGP,8,Hungary,2026-06-07,Ai Ogura,0,13,13,105,-75,0,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Pedro Acosta,9,20,29,132,-48,0,Dry
+2026,MOTOGP,8,Hungary,2026-06-07,Ai Ogura,0,13,13,105,-75,0,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Fabio Di Giannantonio,0,4,4,138,-42,0,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Raul Fernandez,6,0,6,93,-87,0,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Alex Marquez,0,0,0,67,-113,1,Dry
@@ -236,8 +236,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,8,Hungary,2026-06-07,Enea Bastianini,2,7,9,48,-132,0,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Luca Marini,0,11,11,57,-123,0,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Brad Binder,0,6,6,48,-132,0,Dry
-2026,MOTOGP,8,Hungary,2026-06-07,Fabio Quartararo,0,0,0,37,-143,1,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Diogo Moreira,3,10,13,36,-144,0,Dry
+2026,MOTOGP,8,Hungary,2026-06-07,Fabio Quartararo,0,0,0,37,-143,1,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Franco Morbidelli,0,2,2,40,-140,0,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Johann Zarco,0,0,0,34,-146,1,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Joan Mir,0,0,0,15,-165,1,Dry
@@ -255,11 +255,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,8,Hungary,2026-06-07,Lorenzo Savadori,0,0,0,0,-180,1,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Michele Pirro,0,0,0,0,-180,1,Dry
 2026,MOTOGP,8,Hungary,2026-06-07,Aleix Espargaro,0,0,0,0,-180,1,Dry
-2026,MOTOGP,9,Czechia,2026-06-21,Jorge Martin,5,7,12,172,-8,0,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Marc Marquez,7,25,32,140,-40,0,Dry
+2026,MOTOGP,9,Czechia,2026-06-21,Jorge Martin,5,7,12,172,-8,0,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Marco Bezzecchi,0,0,0,180,0,1,Dry
-2026,MOTOGP,9,Czechia,2026-06-21,Ai Ogura,9,20,29,134,-46,0,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Pedro Acosta,0,0,0,132,-48,1,Dry
+2026,MOTOGP,9,Czechia,2026-06-21,Ai Ogura,9,20,29,134,-46,0,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Fabio Di Giannantonio,6,13,19,157,-23,0,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Raul Fernandez,4,9,13,106,-74,0,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Alex Marquez,0,0,0,67,-113,1,Dry
@@ -268,8 +268,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,9,Czechia,2026-06-21,Enea Bastianini,3,6,9,57,-123,0,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Luca Marini,0,8,8,65,-115,0,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Brad Binder,1,4,5,53,-127,0,Dry
-2026,MOTOGP,9,Czechia,2026-06-21,Fabio Quartararo,0,0,0,37,-143,1,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Diogo Moreira,0,5,5,41,-139,0,Dry
+2026,MOTOGP,9,Czechia,2026-06-21,Fabio Quartararo,0,0,0,37,-143,1,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Franco Morbidelli,0,3,3,43,-137,0,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Johann Zarco,0,0,0,34,-146,1,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Joan Mir,0,11,11,26,-154,0,Dry
@@ -287,11 +287,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,9,Czechia,2026-06-21,Lorenzo Savadori,0,0,0,0,-180,1,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Michele Pirro,0,0,0,0,-180,1,Dry
 2026,MOTOGP,9,Czechia,2026-06-21,Aleix Espargaro,0,0,0,0,-180,1,Dry
-2026,MOTOGP,10,Netherlands,2026-06-28,Jorge Martin,5,16,21,193,0,0,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Marc Marquez,4,9,13,153,-40,0,Dry
+2026,MOTOGP,10,Netherlands,2026-06-28,Jorge Martin,5,16,21,193,0,0,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Marco Bezzecchi,6,0,6,186,-7,0,Dry
-2026,MOTOGP,10,Netherlands,2026-06-28,Ai Ogura,9,25,34,168,-25,0,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Pedro Acosta,1,0,1,133,-60,0,Dry
+2026,MOTOGP,10,Netherlands,2026-06-28,Ai Ogura,9,25,34,168,-25,0,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Fabio Di Giannantonio,7,13,20,177,-16,0,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Raul Fernandez,12,20,32,138,-55,0,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Alex Marquez,0,11,11,78,-115,0,Dry
@@ -300,8 +300,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,10,Netherlands,2026-06-28,Enea Bastianini,2,10,12,69,-124,0,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Luca Marini,0,6,6,71,-122,0,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Brad Binder,0,5,5,58,-135,0,Dry
-2026,MOTOGP,10,Netherlands,2026-06-28,Fabio Quartararo,0,8,8,45,-148,0,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Diogo Moreira,0,2,2,43,-150,0,Dry
+2026,MOTOGP,10,Netherlands,2026-06-28,Fabio Quartararo,0,8,8,45,-148,0,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Franco Morbidelli,0,0,0,43,-150,1,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Johann Zarco,0,0,0,34,-159,1,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Joan Mir,0,0,0,26,-167,1,Dry
@@ -319,11 +319,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,10,Netherlands,2026-06-28,Lorenzo Savadori,0,0,0,0,-193,1,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Michele Pirro,0,0,0,0,-193,1,Dry
 2026,MOTOGP,10,Netherlands,2026-06-28,Aleix Espargaro,0,0,0,0,-193,1,Dry
-2026,MOTOGP,11,Germany,2026-07-12,Jorge Martin,4,11,15,208,0,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Marc Marquez,12,25,37,190,-18,0,Dry
+2026,MOTOGP,11,Germany,2026-07-12,Jorge Martin,4,11,15,208,0,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Marco Bezzecchi,0,0,0,186,-22,1,Dry
-2026,MOTOGP,11,Germany,2026-07-12,Ai Ogura,6,20,26,194,-14,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Pedro Acosta,2,13,15,148,-60,0,Dry
+2026,MOTOGP,11,Germany,2026-07-12,Ai Ogura,6,20,26,194,-14,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Fabio Di Giannantonio,7,0,7,184,-24,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Raul Fernandez,5,16,21,159,-49,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Alex Marquez,9,0,9,87,-121,0,Dry
@@ -332,8 +332,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,11,Germany,2026-07-12,Enea Bastianini,0,7,7,76,-132,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Luca Marini,0,8,8,79,-129,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Brad Binder,0,6,6,64,-144,0,Dry
-2026,MOTOGP,11,Germany,2026-07-12,Fabio Quartararo,1,9,10,55,-153,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Diogo Moreira,0,5,5,48,-160,0,Dry
+2026,MOTOGP,11,Germany,2026-07-12,Fabio Quartararo,1,9,10,55,-153,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Franco Morbidelli,0,3,3,46,-162,0,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Johann Zarco,0,0,0,34,-174,1,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Joan Mir,0,0,0,26,-182,1,Dry
@@ -351,11 +351,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,11,Germany,2026-07-12,Lorenzo Savadori,0,0,0,0,-208,1,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Michele Pirro,0,0,0,0,-208,1,Dry
 2026,MOTOGP,11,Germany,2026-07-12,Aleix Espargaro,0,0,0,0,-208,1,Dry
-2026,MOTOGP,12,Great Britain,2026-08-09,Jorge Martin,12,20,32,240,0,0,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Marc Marquez,1,9,10,200,-40,0,Dry
+2026,MOTOGP,12,Great Britain,2026-08-09,Jorge Martin,12,20,32,240,0,0,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Marco Bezzecchi,7,16,23,209,-31,0,Dry
-2026,MOTOGP,12,Great Britain,2026-08-09,Ai Ogura,9,0,9,203,-37,0,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Pedro Acosta,4,11,15,163,-77,0,Dry
+2026,MOTOGP,12,Great Britain,2026-08-09,Ai Ogura,9,0,9,203,-37,0,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Fabio Di Giannantonio,5,10,15,199,-41,0,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Raul Fernandez,0,25,25,184,-56,0,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Alex Marquez,6,13,19,106,-134,0,Dry
@@ -364,8 +364,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,12,Great Britain,2026-08-09,Enea Bastianini,0,0,0,76,-164,1,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Luca Marini,0,7,7,86,-154,0,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Brad Binder,0,8,8,72,-168,0,Dry
-2026,MOTOGP,12,Great Britain,2026-08-09,Fabio Quartararo,0,0,0,55,-185,1,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Diogo Moreira,0,6,6,54,-186,0,Dry
+2026,MOTOGP,12,Great Britain,2026-08-09,Fabio Quartararo,0,0,0,55,-185,1,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Franco Morbidelli,2,5,7,53,-187,0,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Johann Zarco,0,0,0,34,-206,1,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Joan Mir,3,0,3,29,-211,0,Dry
@@ -383,11 +383,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,12,Great Britain,2026-08-09,Lorenzo Savadori,0,0,0,0,-240,1,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Michele Pirro,0,0,0,0,-240,1,Dry
 2026,MOTOGP,12,Great Britain,2026-08-09,Aleix Espargaro,0,0,0,0,-240,1,Dry
-2026,MOTOGP,13,Aragon,2026-08-30,Jorge Martin,5,11,16,256,0,0,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Marc Marquez,12,25,37,237,-19,0,Dry
+2026,MOTOGP,13,Aragon,2026-08-30,Jorge Martin,5,11,16,256,0,0,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Marco Bezzecchi,7,16,23,232,-24,0,Dry
-2026,MOTOGP,13,Aragon,2026-08-30,Ai Ogura,0,0,0,203,-53,1,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Pedro Acosta,6,20,26,189,-67,0,Dry
+2026,MOTOGP,13,Aragon,2026-08-30,Ai Ogura,0,0,0,203,-53,1,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Fabio Di Giannantonio,0,9,9,208,-48,0,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Raul Fernandez,2,0,2,186,-70,0,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Alex Marquez,9,13,22,128,-128,0,Dry
@@ -396,8 +396,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,13,Aragon,2026-08-30,Enea Bastianini,0,8,8,84,-172,0,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Luca Marini,0,2,2,88,-168,0,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Brad Binder,0,6,6,78,-178,0,Dry
-2026,MOTOGP,13,Aragon,2026-08-30,Fabio Quartararo,0,0,0,55,-201,1,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Diogo Moreira,3,7,10,64,-192,0,Dry
+2026,MOTOGP,13,Aragon,2026-08-30,Fabio Quartararo,0,0,0,55,-201,1,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Franco Morbidelli,0,0,0,53,-203,1,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Johann Zarco,1,1,2,36,-220,0,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Joan Mir,0,4,4,33,-223,0,Dry
@@ -415,11 +415,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,13,Aragon,2026-08-30,Lorenzo Savadori,0,0,0,0,-256,1,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Michele Pirro,0,0,0,0,-256,1,Dry
 2026,MOTOGP,13,Aragon,2026-08-30,Aleix Espargaro,0,0,0,0,-256,1,Dry
-2026,MOTOGP,14,San Marino,2026-09-13,Jorge Martin,7,11,18,274,0,0,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Marc Marquez,12,25,37,274,0,0,Dry
+2026,MOTOGP,14,San Marino,2026-09-13,Jorge Martin,7,11,18,274,0,0,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Marco Bezzecchi,9,0,9,241,-33,0,Dry
-2026,MOTOGP,14,San Marino,2026-09-13,Ai Ogura,0,0,0,203,-71,1,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Pedro Acosta,4,16,20,209,-65,0,Dry
+2026,MOTOGP,14,San Marino,2026-09-13,Ai Ogura,0,0,0,203,-71,1,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Fabio Di Giannantonio,6,9,15,223,-51,0,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Raul Fernandez,3,10,13,199,-75,0,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Alex Marquez,5,20,25,153,-121,0,Dry
@@ -428,8 +428,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,14,San Marino,2026-09-13,Enea Bastianini,0,8,8,92,-182,0,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Luca Marini,1,7,8,96,-178,0,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Brad Binder,0,5,5,83,-191,0,Dry
-2026,MOTOGP,14,San Marino,2026-09-13,Fabio Quartararo,0,6,6,61,-213,0,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Diogo Moreira,0,0,0,64,-210,1,Dry
+2026,MOTOGP,14,San Marino,2026-09-13,Fabio Quartararo,0,6,6,61,-213,0,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Franco Morbidelli,0,3,3,56,-218,0,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Johann Zarco,0,0,0,36,-238,1,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Joan Mir,0,0,0,33,-241,1,Dry
@@ -447,11 +447,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,14,San Marino,2026-09-13,Lorenzo Savadori,0,0,0,0,-274,1,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Michele Pirro,0,0,0,0,-274,1,Dry
 2026,MOTOGP,14,San Marino,2026-09-13,Aleix Espargaro,0,0,0,0,-274,1,Dry
-2026,MOTOGP,15,Austria,2026-09-20,Jorge Martin,12,20,32,306,0,0,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Marc Marquez,9,11,20,294,-12,0,Dry
+2026,MOTOGP,15,Austria,2026-09-20,Jorge Martin,12,20,32,306,0,0,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Marco Bezzecchi,7,16,23,264,-42,0,Dry
-2026,MOTOGP,15,Austria,2026-09-20,Ai Ogura,6,13,19,222,-84,0,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Pedro Acosta,0,25,25,234,-72,0,Dry
+2026,MOTOGP,15,Austria,2026-09-20,Ai Ogura,6,13,19,222,-84,0,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Fabio Di Giannantonio,0,7,7,230,-76,0,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Raul Fernandez,0,4,4,203,-103,0,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Alex Marquez,5,0,5,158,-148,0,Dry
@@ -460,8 +460,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,15,Austria,2026-09-20,Enea Bastianini,0,5,5,97,-209,0,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Luca Marini,0,2,2,98,-208,0,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Brad Binder,1,10,11,94,-212,0,Dry
-2026,MOTOGP,15,Austria,2026-09-20,Fabio Quartararo,0,0,0,61,-245,1,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Diogo Moreira,0,1,1,65,-241,0,Dry
+2026,MOTOGP,15,Austria,2026-09-20,Fabio Quartararo,0,0,0,61,-245,1,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Franco Morbidelli,0,0,0,56,-250,1,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Johann Zarco,3,6,9,45,-261,0,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Joan Mir,0,0,0,33,-273,1,Dry
@@ -479,11 +479,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,15,Austria,2026-09-20,Lorenzo Savadori,0,0,0,0,-306,1,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Michele Pirro,0,0,0,0,-306,1,Dry
 2026,MOTOGP,15,Austria,2026-09-20,Aleix Espargaro,0,0,0,0,-306,1,Dry
-2026,MOTOGP,16,Japan,2026-10-04,Jorge Martin,7,20,27,333,0,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Marc Marquez,12,25,37,331,-2,0,Dry
+2026,MOTOGP,16,Japan,2026-10-04,Jorge Martin,7,20,27,333,0,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Marco Bezzecchi,4,16,20,284,-49,0,Dry
-2026,MOTOGP,16,Japan,2026-10-04,Ai Ogura,5,10,15,237,-96,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Pedro Acosta,0,9,9,243,-90,0,Dry
+2026,MOTOGP,16,Japan,2026-10-04,Ai Ogura,5,10,15,237,-96,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Fabio Di Giannantonio,0,0,0,230,-103,1,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Raul Fernandez,2,11,13,216,-117,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Alex Marquez,0,0,0,158,-175,1,Dry
@@ -492,8 +492,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,16,Japan,2026-10-04,Enea Bastianini,6,13,19,116,-217,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Luca Marini,0,6,6,104,-229,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Brad Binder,0,5,5,99,-234,0,Dry
-2026,MOTOGP,16,Japan,2026-10-04,Fabio Quartararo,1,4,5,66,-267,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Diogo Moreira,9,0,9,74,-259,0,Dry
+2026,MOTOGP,16,Japan,2026-10-04,Fabio Quartararo,1,4,5,66,-267,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Franco Morbidelli,0,1,1,57,-276,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Johann Zarco,3,0,3,48,-285,0,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Joan Mir,0,0,0,33,-300,1,Dry
@@ -511,11 +511,11 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,16,Japan,2026-10-04,Lorenzo Savadori,0,0,0,0,-333,1,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Michele Pirro,0,0,0,0,-333,1,Dry
 2026,MOTOGP,16,Japan,2026-10-04,Aleix Espargaro,0,0,0,0,-333,1,Dry
-2026,MOTOGP,17,Indonesia,2026-10-11,Jorge Martin,6,16,22,355,0,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Marc Marquez,12,10,22,353,-2,0,Dry
+2026,MOTOGP,17,Indonesia,2026-10-11,Jorge Martin,6,16,22,355,0,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Marco Bezzecchi,0,25,25,309,-46,0,Dry
-2026,MOTOGP,17,Indonesia,2026-10-11,Ai Ogura,9,13,22,259,-96,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Pedro Acosta,4,11,15,258,-97,0,Dry
+2026,MOTOGP,17,Indonesia,2026-10-11,Ai Ogura,9,13,22,259,-96,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Fabio Di Giannantonio,7,8,15,245,-110,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Raul Fernandez,0,20,20,236,-119,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Alex Marquez,5,9,14,172,-183,0,Dry
@@ -524,8 +524,8 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTOGP,17,Indonesia,2026-10-11,Enea Bastianini,0,6,6,122,-233,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Luca Marini,0,4,4,108,-247,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Brad Binder,0,5,5,104,-251,0,Dry
-2026,MOTOGP,17,Indonesia,2026-10-11,Fabio Quartararo,1,7,8,74,-281,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Diogo Moreira,0,0,0,74,-281,1,Dry
+2026,MOTOGP,17,Indonesia,2026-10-11,Fabio Quartararo,1,7,8,74,-281,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Franco Morbidelli,0,2,2,59,-296,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Johann Zarco,0,3,3,51,-304,0,Dry
 2026,MOTOGP,17,Indonesia,2026-10-11,Joan Mir,0,0,0,33,-322,1,Dry
