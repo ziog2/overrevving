@@ -206,8 +206,9 @@ async function main() {
     try {
       const eventsUrl = `https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid=${SEASON_2026}&categoryUuid=${cfg.uuid}`;
       const events = await httpsGet(eventsUrl);
+      const todayISO = new Date().toISOString().slice(0, 10);
       const finishedEvents = (Array.isArray(events) ? events : []).filter(ev =>
-        ev && ev.status === 'FINISHED' && !String(ev.short_name || '').endsWith('1') && !String(ev.short_name || '').endsWith('2') && !String(ev.short_name || '').endsWith('3')
+        ev && (ev.status === 'FINISHED' || (ev.status === 'CURRENT' && ev.date_end && ev.date_end <= todayISO)) && !String(ev.short_name || '').endsWith('1') && !String(ev.short_name || '').endsWith('2') && !String(ev.short_name || '').endsWith('3')
       );
       const gpShortNames = finishedEvents.map(ev => ev.short_name);
       const gpEventsMap = {};

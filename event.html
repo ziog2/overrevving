@@ -1019,7 +1019,7 @@
             },
     "CAT": {"grid":"Dry | Air: 19\u00b0C | Track: 37\u00b0C","race":"Dry | Air: 19\u00b0C | Track: 37\u00b0C","sprint":"Dry | Air: 20\u00b0C | Track: 41\u00b0C","fp1":"Dry | Air: 13\u00b0C | Track: 17\u00b0C","fp2":"Dry | Air: 14\u00b0C | Track: 15\u00b0C","wup":"Dry | Air: 16\u00b0C | Track: 19\u00b0C","pr":"Dry | Air: 17\u00b0C | Track: 31\u00b0C","q2":"Dry | Air: 17\u00b0C | Track: 15\u00b0C","q1":"Dry | Air: 15\u00b0C | Track: 15\u00b0C"},
     "CZE": {"grid":"Dry | Air: 31\u00b0C | Track: 47\u00b0C","race":"Dry | Air: 31\u00b0C | Track: 47\u00b0C","sprint":"Dry | Air: 33\u00b0C | Track: 49\u00b0C","fp1":"Dry | Air: 28\u00b0C | Track: 42\u00b0C","fp2":"Dry | Air: 27\u00b0C | Track: 38\u00b0C","wup":"Dry | Air: 27\u00b0C | Track: 35\u00b0C","pr":"Dry | Air: 31\u00b0C | Track: 48\u00b0C","q2":"Dry | Air: 28\u00b0C | Track: 42\u00b0C","q1":"Dry | Air: 28\u00b0C | Track: 40\u00b0C"},
-    "AUS": {"grid":"Wet | Air: 16\u00b0C | Track: 22\u00b0C","race":"","sprint":"Dry | Air: 17\u00b0C | Track: 31\u00b0C","fp1":"Dry | Air: 25\u00b0C | Track: 37\u00b0C","fp2":"Wet | Air: 16\u00b0C | Track: 21\u00b0C","wup":"","pr":"Dry | Air: 29\u00b0C | Track: 48\u00b0C","q2":"Wet | Air: 16\u00b0C | Track: 22\u00b0C","q1":"Wet | Air: 16\u00b0C | Track: 23\u00b0C"},
+    "AUS": {"grid":"Wet | Air: 16\u00b0C | Track: 22\u00b0C","race":"Cancelled","sprint":"Dry | Air: 17\u00b0C | Track: 31\u00b0C","fp1":"Dry | Air: 25\u00b0C | Track: 37\u00b0C","fp2":"Wet | Air: 16\u00b0C | Track: 21\u00b0C","wup":"Cancelled","pr":"Dry | Air: 29\u00b0C | Track: 48\u00b0C","q2":"Wet | Air: 16\u00b0C | Track: 22\u00b0C","q1":"Wet | Air: 16\u00b0C | Track: 23\u00b0C"},
     "SPA": {"grid":"Dry | Air: 23\u00b0C | Track: 36\u00b0C","race":"Dry | Air: 23\u00b0C | Track: 36\u00b0C","sprint":"Dry | Air: 19\u00b0C | Track: 23\u00b0C","fp1":"Dry | Air: 17\u00b0C | Track: 21\u00b0C","fp2":"Wet | Air: 16\u00b0C | Track: 17\u00b0C","wup":"Wet | Air: 19\u00b0C | Track: 19\u00b0C","pr":"Dry | Air: 20\u00b0C | Track: 26\u00b0C","q2":"Wet | Air: 18\u00b0C | Track: 22\u00b0C","q1":"Wet | Air: 16\u00b0C | Track: 18\u00b0C"},
     "THA": {"grid":"Dry | Air: 35\u00b0C | Track: 55\u00b0C","race":"Dry | Air: 35\u00b0C | Track: 55\u00b0C","sprint":"Dry | Air: 33\u00b0C | Track: 52\u00b0C","fp1":"Dry | Air: 31\u00b0C | Track: 39\u00b0C","fp2":"Dry | Air: 28\u00b0C | Track: 31\u00b0C","wup":"Dry | Air: 30\u00b0C | Track: 29\u00b0C","pr":"Dry | Air: 32\u00b0C | Track: 40\u00b0C","q2":"Dry | Air: 30\u00b0C | Track: 40\u00b0C","q1":"Dry | Air: 30\u00b0C | Track: 39\u00b0C"},
     "VC1":  {
@@ -18739,6 +18739,7 @@
           const motogpBin = binJson.record.motogp || [];
 
           // Compute Sprint & Main Race Standings from JSONBin history
+          const isRaceCancelled = Boolean(typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[gp.short] && String(SESSION_WEATHER_DATA[gp.short].race || '').toLowerCase().includes('cancel'));
           const sprList = [];
           const longList = [];
 
@@ -18763,7 +18764,7 @@
           longList.sort((a, b) => b.pts - a.pts);
 
           if (!sprintResults.length) sprintResults = sprList;
-          if (!raceResults.length) raceResults = longList;
+          if (!raceResults.length && !isRaceCancelled) raceResults = longList;
         }
       } catch (binErr) {
         console.warn("JSONBin fallback load notice:", binErr);
@@ -20178,7 +20179,12 @@
 
     function renderPageLayout(year, gp, prevGp, nextGp, weather, fp1Results, prResults, fp2Results, q1Results, q2Results, gridResults, sprintResults, wupResults, raceResults) {
       const gpWeather = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[gp.short]) ? SESSION_WEATHER_DATA[gp.short] : {};
+      const isRaceCancelled = Boolean(gpWeather.race && gpWeather.race.toLowerCase().includes('cancel'));
+      const isWupCancelled = Boolean(gpWeather.wup && gpWeather.wup.toLowerCase().includes('cancel'));
       const cleanW = (txt, hasData) => {
+        if (txt && (txt.toLowerCase() === 'cancelled' || txt.toLowerCase() === 'canceled')) {
+          return 'Cancelled';
+        }
         if (!txt || !txt.trim() || txt.trim().startsWith('|')) {
           return hasData ? 'Dry | Air: -- | Track: --' : 'Not started yet';
         }
@@ -20194,7 +20200,7 @@
       const wupW = cleanW(gpWeather.wup, wupResults.length > 0);
       const raceW = cleanW(gpWeather.race, raceResults.length > 0);
       const mainEl = document.getElementById('main-content');
-      const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/RAC`;
+      const pdfBase = isRaceCancelled ? `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/SPR` : `https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/RAC`;
       const flagHtml = `<img src="https://flagcdn.com/w20/${gp.countryCode}.png" srcset="https://flagcdn.com/w40/${gp.countryCode}.png 2x" class="flag-img" alt="${gp.location}">`;
 
       let fp1Rows = '';
@@ -20443,12 +20449,21 @@
             <td class="gap-cell">${gapStr}</td>
           </tr>`;
         });
+      } else if (isWupCancelled) {
+        wupRows = `<tr><td colspan="6" style="text-align:center; padding: 32px 16px;">
+          <div style="display:inline-block; padding: 6px 14px; background: rgba(231, 76, 60, 0.15); border: 1px solid rgba(231, 76, 60, 0.4); border-radius: 6px; color: #ff6b6b; font-weight: 600; font-size: 13px; margin-bottom: 6px;">
+            🛑 Warm Up Cancelled
+          </div>
+          <div style="color: var(--text-sub); font-size: 12px; margin-top: 4px;">
+            Session cancelled due to severe weather conditions.
+          </div>
+        </td></tr>`;
       } else {
         wupRows = `<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-sub);">No Warm Up (WUP) data available for this round.</td></tr>`;
       }
 
             let raceRows = '';
-      if (raceResults.length) {
+      if (raceResults.length && !isRaceCancelled) {
         raceResults.forEach((r, idx) => {
           const isDNF = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null || r.status === 'NOTFINISHFIRST';
           const posNum = r.pos || r.position || idx + 1;
@@ -20471,6 +20486,15 @@
             <td class="pts-scored" style="${isDNF ? 'color: #666;' : ''}">${pts}</td>
           </tr>`;
         });
+      } else if (isRaceCancelled) {
+        raceRows = `<tr><td colspan="4" style="text-align:center; padding: 32px 16px;">
+          <div style="display:inline-block; padding: 6px 14px; background: rgba(231, 76, 60, 0.15); border: 1px solid rgba(231, 76, 60, 0.4); border-radius: 6px; color: #ff6b6b; font-weight: 600; font-size: 13px; margin-bottom: 6px;">
+            🛑 Race Cancelled
+          </div>
+          <div style="color: var(--text-sub); font-size: 12px; margin-top: 4px;">
+            Cancelled by Race Direction due to severe weather and hazardous wind conditions.
+          </div>
+        </td></tr>`;
       } else {
         raceRows = `<tr><td colspan="4" style="text-align:center; padding: 24px; color: var(--text-sub);">No Main Race data available for this round.</td></tr>`;
       }
@@ -20555,6 +20579,11 @@
                 <span>•</span>
                 <span>${gp.date}</span>
               </div>
+              ${isRaceCancelled ? `
+              <div style="margin-top: 10px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: rgba(231, 76, 60, 0.15); border: 1px solid rgba(231, 76, 60, 0.4); border-radius: 6px; color: #ff8585; font-size: 12px;">
+                <span>🛑</span>
+                <span><strong>Notice:</strong> Sunday Main Race was cancelled due to adverse weather and hazardous wind conditions. Official GP classification & championship points are awarded based on the Sprint Race.</span>
+              </div>` : ''}
             </div>
           </div>
         </div>
@@ -20562,11 +20591,18 @@
         <div class="pdf-bar">
           <div class="pdf-title">📄 Official Dorna PDF Documents:</div>
           <div class="pdf-links">
+            ${isRaceCancelled ? `
+            <a href="${pdfBase}/Classification.pdf" target="_blank" class="pdf-btn">📊 Sprint Classification.pdf</a>
+            <a href="${pdfBase}/Analysis.pdf" target="_blank" class="pdf-btn">⏱️ Sprint Analysis.pdf</a>
+            <a href="https://resources.motogp.com/files/results/${year}/${gp.short}/CircuitInformation.pdf" target="_blank" class="pdf-btn">📍 CircuitInformation.pdf</a>
+            <a href="https://resources.motogp.com/files/results/${year}/${gp.short}/PolePositions.pdf" target="_blank" class="pdf-btn">🏁 PolePositions.pdf</a>
+            ` : `
             <a href="${pdfBase}/Classification.pdf" target="_blank" class="pdf-btn">📊 Classification.pdf</a>
             <a href="${pdfBase}/Analysis.pdf" target="_blank" class="pdf-btn">⏱️ Analysis.pdf</a>
             <a href="${pdfBase}/MaximumSpeed.pdf" target="_blank" class="pdf-btn">🚀 TopSpeed.pdf</a>
             <a href="${pdfBase}/Grid.pdf" target="_blank" class="pdf-btn">🏁 Grid.pdf</a>
             <a href="${pdfBase}/WorldStanding.pdf" target="_blank" class="pdf-btn">🏆 WorldStanding.pdf</a>
+            `}
           </div>
         </div>
 

@@ -130,7 +130,11 @@ def format_class(sess_id):
         return []
 
 def format_cond(sess):
-    if not sess or sess.get('status') != 'FINISHED':
+    if not sess:
+        return ""
+    if sess.get('status') == 'CANCELLED':
+        return "Cancelled"
+    if sess.get('status') != 'FINISHED':
         return ""
     c = sess.get('condition') or {}
     tr = str(c.get('track') or '').strip()
@@ -599,7 +603,11 @@ SHORT_TO_CAL_NAME = {
 }
 
 def get_track_cond(sess):
-    if not sess or sess.get('status') != 'FINISHED':
+    if not sess:
+        return None
+    if sess.get('status') == 'CANCELLED':
+        return 'Cancelled'
+    if sess.get('status') != 'FINISHED':
         return None
     cond = sess.get('condition')
     if isinstance(cond, dict):
@@ -778,22 +786,24 @@ def main():
             w_start, w_end, w_parsed = find_matching_object(w_slice, short)
 
             if w_start is not None and w_end is not None:
+                raw_rac_sess = next((s for s in sessions if str(s.get('type', '')).startswith('RAC')), None)
+                raw_wup_sess = next((s for s in sessions if s.get('type') == 'WUP'), None)
                 weather_obj = {
                     "grid": format_cond(rac_sess or q2_sess),
-                    "race": format_cond(rac_sess),
+                    "race": format_cond(rac_sess or raw_rac_sess),
                     "sprint": format_cond(spr_sess),
                     "fp1": format_cond(fp_sess[0] if len(fp_sess) >= 1 else None),
                     "fp2": format_cond(fp_sess[1] if len(fp_sess) >= 2 else None),
-                    "wup": format_cond(wup_sess),
+                    "wup": format_cond(wup_sess or raw_wup_sess),
                     "pr": format_cond(pr_sess),
                     "q2": format_cond(q2_sess),
                     "q1": format_cond(q1_sess)
                 }
-                has_w = any(isinstance(v, str) and ('°C' in v or 'Wet' in v) for v in weather_obj.values())
+                has_w = any(isinstance(v, str) and ('°C' in v or 'Wet' in v or v == 'Cancelled') for v in weather_obj.values())
                 if has_w:
                     merged_w = dict(w_parsed) if isinstance(w_parsed, dict) else weather_obj
                     for k, v in weather_obj.items():
-                        if '°C' in v or 'Wet' in v:
+                        if '°C' in v or 'Wet' in v or v == 'Cancelled':
                             merged_w[k] = v
                     if merged_w != w_parsed:
                         merged_w_json = json.dumps(merged_w, separators=(',', ':'))
@@ -806,8 +816,9 @@ def main():
         # Update calendar badges in category.html and motogp.html
         cal_name = SHORT_TO_CAL_NAME.get(short)
         if cal_name:
+            raw_rac_sess = next((s for s in sessions if str(s.get('type', '')).startswith('RAC')), None)
             spr_cond = get_track_cond(spr_sess) if (spr_sess and spr) else None
-            rac_cond = get_track_cond(rac_sess) if (rac_sess and rac) else None
+            rac_cond = get_track_cond(rac_sess) if (rac_sess and rac) else (get_track_cond(raw_rac_sess) if (raw_rac_sess and raw_rac_sess.get('status') == 'CANCELLED') else None)
             if spr_cond and rac_cond:
                 cal_badge = f"SPR: {spr_cond} RACE: {rac_cond}"
             elif spr_cond:

@@ -600,7 +600,7 @@ const CALENDAR = [
   { round: 'R15', name: 'Austria',       date: '2026-09-20', weather: 'SPR: Dry RACE: Dry' },
   { round: 'R16', name: 'Japan',         date: '2026-10-04', weather: 'SPR: Dry RACE: Dry' },
   { round: 'R17', name: 'Indonesia',     date: '2026-10-11', weather: 'SPR: Dry RACE: Dry' },
-  { round: 'R18', name: 'Australia',     date: '2026-10-25', weather: 'SPR: Dry' },
+  { round: 'R18', name: 'Australia',     date: '2026-10-25', weather: 'SPR: Dry RACE: Cancelled' },
   { round: 'R19', name: 'Malaysia',      date: '2026-11-01' },
   { round: 'R20', name: 'Qatar',         date: '2026-11-08' },
   { round: 'R21', name: 'Portugal',      date: '2026-11-22' },
@@ -785,7 +785,7 @@ function renderCalendar() {
     const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
     const statusIcon = isPast
       ? '<span style="color:#2ecc71;margin-right:6px;font-size:11px;" title="Completed">✓</span>'
-      : (isOngoing ? '<span style="color:#f39c12;margin-right:6px;font-size:11px;" title="Weekend in corso">🏁</span>' : '');
+      : (isOngoing ? '<span style="color:#f39c12;margin-right:6px;font-size:11px;" title="Weekend in progress">🏁</span>' : '');
     const weatherBadge = ((isPast || isOngoing) && ev.weather) ? `<span class="cal-weather-badge">${ev.weather}</span>` : '';
     
     html += `<a href="event.html?year=2026&round=${ev.round}" class="cal-item${isPast ? ' past' : (isOngoing ? ' ongoing' : '')}">
