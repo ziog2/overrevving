@@ -52,5 +52,6 @@ jobs:
             echo "Nessuna modifica da inviare."
           else
             git commit -m "Auto-update motorsport database, standings, CSV and Excel [skip ci]"
+            git pull --rebase origin main
             git push origin main
           fi

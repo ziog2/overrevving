@@ -34,5 +34,6 @@ jobs:
             echo "Nessuna nuova notizia da inviare."
           else
             git commit -m "Aggiornamento orario notizie motorsport [skip ci]"
+            git pull --rebase origin main
             git push origin main
           fi
