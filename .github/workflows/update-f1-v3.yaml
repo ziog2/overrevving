@@ -35,7 +35,7 @@ jobs:
         run: |
           node .github/scripts/update_standings.js
 
-      - name: Aggiorna dati evento (event.html e event_moto2.html)
+      - name: Aggiorna dati evento (event.html, event_moto2.html, event_moto3.html)
         run: |
           python3 .github/scripts/update_event_data.py
 
@@ -47,7 +47,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add event.html event_moto2.html category.html motogp.html data/ exports/
+          git add event.html event_moto2.html event_moto3.html category.html motogp.html data/ exports/
           if git diff --staged --quiet; then
             echo "Nessuna modifica da inviare."
           else

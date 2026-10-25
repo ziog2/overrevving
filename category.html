@@ -560,7 +560,7 @@ const CALENDARS = {
     { name: 'USA',           date: '2026-03-29', weather: 'RACE: Dry' },
     { name: 'Spain',         date: '2026-04-26', weather: 'RACE: Dry' },
     { name: 'France',        date: '2026-05-10', weather: 'RACE: Dry' },
-    { name: 'Catalonia',     date: '2026-05-17', weather: 'SPR: Dry RACE: Dry' },
+    { name: 'Catalonia',     date: '2026-05-17', weather: 'RACE: Dry' },
     { name: 'Italy',         date: '2026-05-31', weather: 'RACE: Dry' },
     { name: 'Hungary',       date: '2026-06-07', weather: 'RACE: Dry' },
     { name: 'Czechia',       date: '2026-06-21', weather: 'RACE: Dry' },
@@ -570,8 +570,8 @@ const CALENDARS = {
     { name: 'Aragon',        date: '2026-08-30', weather: 'RACE: Dry' },
     { name: 'San Marino',    date: '2026-09-13', weather: 'RACE: Dry' },
     { name: 'Austria',       date: '2026-09-20', weather: 'RACE: Dry' },
-    { name: 'Japan',         date: '2026-10-04', weather: 'SPR: Dry RACE: Dry' },
-    { name: 'Indonesia',     date: '2026-10-11', weather: 'SPR: Dry RACE: Dry' },
+    { name: 'Japan',         date: '2026-10-04', weather: 'RACE: Dry' },
+    { name: 'Indonesia',     date: '2026-10-11', weather: 'RACE: Dry' },
     { name: 'Australia',     date: '2026-10-25', weather: 'RACE: Cancelled' },
     { name: 'Malaysia',      date: '2026-11-01' },
     { name: 'Qatar',         date: '2026-11-08' },
@@ -584,7 +584,7 @@ const CALENDARS = {
     { name: 'USA',           date: '2026-03-29', weather: 'RACE: Dry' },
     { name: 'Spain',         date: '2026-04-26', weather: 'RACE: Dry' },
     { name: 'France',        date: '2026-05-10', weather: 'RACE: Wet' },
-    { name: 'Catalonia',     date: '2026-05-17', weather: 'SPR: Dry RACE: Dry' },
+    { name: 'Catalonia',     date: '2026-05-17', weather: 'RACE: Dry' },
     { name: 'Italy',         date: '2026-05-31', weather: 'RACE: Dry' },
     { name: 'Hungary',       date: '2026-06-07', weather: 'RACE: Dry' },
     { name: 'Czechia',       date: '2026-06-21', weather: 'RACE: Dry' },
@@ -594,8 +594,8 @@ const CALENDARS = {
     { name: 'Aragon',        date: '2026-08-30', weather: 'RACE: Dry' },
     { name: 'San Marino',    date: '2026-09-13', weather: 'RACE: Dry' },
     { name: 'Austria',       date: '2026-09-20', weather: 'RACE: Dry' },
-    { name: 'Japan',         date: '2026-10-04', weather: 'SPR: Dry RACE: Dry' },
-    { name: 'Indonesia',     date: '2026-10-11', weather: 'SPR: Dry RACE: Dry' },
+    { name: 'Japan',         date: '2026-10-04', weather: 'RACE: Dry' },
+    { name: 'Indonesia',     date: '2026-10-11', weather: 'RACE: Dry' },
     { name: 'Australia',     date: '2026-10-25', weather: 'RACE: Cancelled' },
     { name: 'Malaysia',      date: '2026-11-01' },
     { name: 'Qatar',         date: '2026-11-08' },
@@ -782,6 +782,8 @@ function renderCalendar() {
     let eventHref = '';
     if (catId === 'moto2') {
       eventHref = `event_moto2.html?year=2026&round=${rNum}`;
+    } else if (catId === 'moto3') {
+      eventHref = `event_moto3.html?year=2026&round=${rNum}`;
     } else if (catId === 'motogp') {
       eventHref = `event.html?year=2026&round=${rNum}`;
     }
