@@ -520,10 +520,10 @@
         <span id="news-last-updated-text">Last update: ...</span>
       </div>
     </div>
-    <div class="news-badge-count" id="news-count">Aggiornate ogni ora</div>
+    <div class="news-badge-count" id="news-count">Updated hourly</div>
   </div>
   <div class="news-grid-container" id="news-grid">
-    <div class="news-empty">⏳ Caricamento notizie...</div>
+    <div class="news-empty">⏳ Loading news...</div>
   </div>
 </section>
 
@@ -581,16 +581,6 @@ async function loadAndRender() {
     document.getElementById('standings-grid').innerHTML =
       '<div class="loading" style="color:#ca5f5f">⚠ Error loading standings</div>';
     document.getElementById('last-updated').textContent = '';
-  }
-});
-      if (!resFallback.ok) throw new Error('Fallback fetch error');
-      const json = await resFallback.json();
-      renderAll(json.record);
-    } catch(err) {
-      document.getElementById('standings-grid').innerHTML =
-        '<div class="loading" style="color:#ca5f5f">⚠ Error loading standings</div>';
-      document.getElementById('last-updated').textContent = '';
-    }
   }
 }
 
@@ -1094,8 +1084,8 @@ function renderNews() {
   if (!container) return;
 
   if (!allNewsItems || allNewsItems.length === 0) {
-    container.innerHTML = '<div class="news-empty">Nessuna notizia disponibile al momento.</div>';
-    if (countEl) countEl.textContent = '0 notizie';
+    container.innerHTML = '<div class="news-empty">No news available at the moment.</div>';
+    if (countEl) countEl.textContent = '0 news';
     return;
   }
 
@@ -1104,8 +1094,8 @@ function renderNews() {
   const activeChampsList = [...visibleChamps];
 
   if (activeChampsList.length === 0) {
-    container.innerHTML = '<div class="news-empty">Seleziona almeno una categoria dalla barra laterale per visualizzare le notizie.</div>';
-    if (countEl) countEl.textContent = 'Nessuna categoria selezionata';
+    container.innerHTML = '<div class="news-empty">Select at least one category from the sidebar to view news.</div>';
+    if (countEl) countEl.textContent = 'No category selected';
     return;
   }
 
@@ -1137,13 +1127,13 @@ function renderNews() {
   uniqueNews.sort((a, b) => new Date(b.pubDateISO || b.pubDate) - new Date(a.pubDateISO || a.pubDate));
 
   if (uniqueNews.length === 0) {
-    container.innerHTML = '<div class="news-empty">Nessuna notizia trovata per le categorie selezionate.</div>';
-    if (countEl) countEl.textContent = '0 notizie';
+    container.innerHTML = '<div class="news-empty">No news found for the selected categories.</div>';
+    if (countEl) countEl.textContent = '0 news';
     return;
   }
 
   if (countEl) {
-    countEl.textContent = `${uniqueNews.length} notizie (${activeChampsList.length} categorie)`;
+    countEl.textContent = `${uniqueNews.length} articles (${activeChampsList.length} categories)`;
   }
 
   let html = '';
@@ -1170,7 +1160,7 @@ function renderNews() {
           <div class="news-summary" title="${escapedTitle}">${escapedSummary}</div>
           <div class="news-action">
             <a class="news-link" href="${escapeHtml(item.link)}" target="_blank" rel="noopener">
-              Leggi notizia
+              Read article
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
           </div>
