@@ -281,7 +281,7 @@
 
     .grid-moto2-col {
       display: grid;
-      grid-template-columns: repeat(7, 350px);
+      grid-template-columns: 350px 350px 350px 350px 350px 350px 325px;
       gap: 16px;
       width: fit-content;
       margin: 0 auto 32px;
@@ -325,92 +325,6 @@
     .grid-header { background: #2980b9; color: #fff; }
     .race-header { background: #c0392b; color: #fff; }
 
-    .standings-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    .standings-table thead th {
-      padding: 7px 8px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: #999;
-      background: #24242a;
-      border-bottom: 1px solid #3a3a42;
-    }
-
-    .standings-table tbody tr {
-      border-bottom: 1px solid #32323a;
-      transition: background 0.15s ease;
-    }
-
-    .standings-table tbody tr:hover {
-      background: #35353d;
-    }
-
-    .standings-table td {
-      padding: 5px 8px;
-      vertical-align: middle;
-      font-size: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .standings-table tbody tr.favorite {
-      background: rgba(241, 196, 15, 0.12) !important;
-    }
-
-    .standings-table tbody tr.favorite:hover {
-      background: rgba(241, 196, 15, 0.2) !important;
-    }
-
-    .standings-table tbody tr.favorite td {
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .fav-btn {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font-size: 14px;
-      color: #555;
-      padding: 0 4px;
-      line-height: 1;
-      transition: color 0.15s ease, transform 0.15s ease;
-    }
-
-    .fav-btn:hover {
-      color: #f1c40f;
-      transform: scale(1.2);
-    }
-
-    .fav-btn.active {
-      color: #f1c40f;
-      text-shadow: 0 0 8px rgba(241, 196, 15, 0.6);
-    }
-
-    .pos-col {
-      text-align: center;
-      font-weight: 700;
-      font-size: 12px;
-      color: var(--text-sub);
-      width: 24px;
-    }
-
-    .pos-1 { color: #ffd700; font-weight: 800; }
-    .pos-2 { color: #c0c0c0; font-weight: 800; }
-    .pos-3 { color: #cd7f32; font-weight: 800; }
-
-    .rider-cell {
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
     .laps-cell {
       text-align: center !important;
       font-family: 'Inter', monospace;
@@ -433,14 +347,6 @@
       color: #999;
     }
 
-    .pts-cell {
-      text-align: right !important;
-      font-weight: 800;
-      font-size: 13px;
-      color: #f1c40f;
-      padding-right: 12px !important;
-    }
-
     .pos-dnf {
       color: #ff5555 !important;
       background: rgba(255, 85, 85, 0.15);
@@ -451,6 +357,117 @@
       font-size: 10px;
       display: inline-block;
       line-height: 1.2;
+    }
+
+    /* Standings Tables (Identical to event.html) */
+    .standings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .standings-table thead th {
+      padding: 7px 8px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #888;
+      border-bottom: 1px solid #3a3a42;
+      background: #252528;
+      height: 34px;
+      box-sizing: border-box;
+    }
+
+    .standings-table thead th.star-col { width: 28px; text-align: center; }
+    .standings-table thead th:nth-child(2) { text-align: center; width: 34px; }
+    .standings-table thead th:last-child { text-align: right; }
+
+    .standings-table tbody tr {
+      border-bottom: 1px solid #3a3a42;
+      height: 38px;
+    }
+
+    .standings-table tbody tr:nth-child(even) {
+      background: #28282e;
+    }
+
+    .standings-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .standings-table tbody tr:hover {
+      background: #333340;
+    }
+
+    .standings-table tbody tr.favorite {
+      background: #2a1f3a !important;
+    }
+
+    .standings-table tbody tr.favorite:hover {
+      background: #332545 !important;
+    }
+
+    .standings-table tbody tr.favorite td {
+      background: transparent !important;
+    }
+
+    .standings-table tbody td {
+      padding: 6px 8px;
+      color: #ddd;
+      vertical-align: middle;
+      height: 38px;
+      box-sizing: border-box;
+    }
+
+    .star-col { width: 28px; text-align: center !important; }
+
+    .fav-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 0 4px;
+      opacity: 0.3;
+      transition: opacity 0.15s, color 0.15s;
+      line-height: 1;
+      color: #999;
+    }
+
+    .fav-btn.active {
+      opacity: 1;
+      color: #ffd700;
+    }
+
+    .fav-btn:hover {
+      opacity: 0.8;
+    }
+
+    .pos-cell {
+      text-align: center !important;
+      font-weight: 700;
+      color: #aaa;
+      font-size: 12px;
+      width: 28px;
+    }
+
+    .pos-1 { color: #f1c40f; font-weight: 700; }
+    .pos-2 { color: #bdc3c7; font-weight: 700; }
+    .pos-3 { color: #e67e22; font-weight: 700; }
+    .pos-nc { color: #777 !important; font-weight: bold; font-size: 11px; }
+
+    .rider-name {
+      font-weight: 400;
+      color: #ddd;
+      font-size: 13px;
+    }
+
+    .pts-scored {
+      text-align: right !important;
+      font-weight: 700;
+      color: #f0c040;
+      font-size: 14px;
     }
 
     /* Sector & Lap Chart Section */
@@ -3701,7 +3718,7 @@
       { id: 'q1', label: 'Q1', color: '#0984e3', width: '350px' },
       { id: 'q2', label: 'Q2', color: '#6c5ce7', width: '350px' },
       { id: 'grid', label: 'Starting Grid', color: '#2980b9', width: '350px' },
-      { id: 'race', label: 'Race', color: '#c0392b', width: '350px' }
+      { id: 'race', label: 'Race', color: '#c0392b', width: '325px' }
     ];
 
     let visibleSessions = new Set(
@@ -4297,27 +4314,31 @@
         if (!items || items.length === 0) {
           return '<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-sub);">No session data available yet.</td></tr>';
         }
-        const p1Time = (items[0] && items[0].time && items[0].time !== '-') ? items[0].time : null;
+        const p1TimeStr = (items[0] && items[0].time && items[0].time !== '-') ? items[0].time : (items[0] && items[0].best_lap ? items[0].best_lap.time : null);
         let html = '';
         items.forEach((r, idx) => {
-          const isDNF = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null || r.status === 'NOTFINISHFIRST';
-          const posNum = r.pos || r.position || idx + 1;
-          const posCell = isDNF ? '<span class="pos-dnf">OUT</span>' : `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
+          const isNC = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null;
+          const posNum = isNC ? 'NC' : (r.pos || r.position || idx + 1);
+          const posCell = isNC 
+            ? `<span class="pos-dnf">NC</span>` 
+            : `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
           const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
           const isFav = isRiderFavorite(rawName);
-          const time = isDNF ? '-' : (r.time || '-');
-          const gap = isDNF ? '-' : (idx === 0 ? '-' : calculateGap(p1Time, time));
-          const laps = r.laps !== undefined && r.laps !== null ? r.laps : '-';
+          const totalLaps = r.laps !== undefined ? r.laps : (r.total_laps !== undefined ? r.total_laps : '-');
+          const lapTime = r.time || (r.best_lap ? r.best_lap.time : '-');
+          const gapStr = calculateGap(p1TimeStr, lapTime);
 
           html += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'") }')" title="Favorite Rider">★</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
-            <td class="pos-col">${posCell}</td>
-            <td class="rider-cell" title="${rawName}">${formatName(rawName)}</td>
-            <td class="laps-cell">${laps}</td>
-            <td class="time-cell">${time}</td>
-            <td class="gap-cell">${gap}</td>
+            <td class="pos-cell">${posCell}</td>
+            <td>
+              <div class="rider-name">${formatName(rawName)}</div>
+            </td>
+            <td class="laps-cell">${totalLaps}</td>
+            <td class="time-cell">${lapTime}</td>
+            <td class="gap-cell">${gapStr}</td>
           </tr>`;
         });
         return html;
@@ -4325,26 +4346,31 @@
 
       function renderGridRows(items) {
         if (!items || items.length === 0) {
-          return '<tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-sub);">No grid data available yet.</td></tr>';
+          return '<tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-sub);">No Starting Grid data available for this round.</td></tr>';
         }
-        const p1Time = (items[0] && items[0].time && items[0].time !== '-') ? items[0].time : null;
+        const p1TimeStr = (items[0] && items[0].time && items[0].time !== '-') ? items[0].time : (items[0] && items[0].best_lap ? items[0].best_lap.time : null);
         let html = '';
         items.forEach((r, idx) => {
-          const posNum = r.pos || idx + 1;
-          const posCell = `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
+          const isNC = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null;
+          const posNum = isNC ? 'NC' : (r.pos || r.position || idx + 1);
+          const posCell = isNC 
+            ? `<span class="pos-dnf">NC</span>` 
+            : `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
           const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
           const isFav = isRiderFavorite(rawName);
-          const time = r.time || '-';
-          const gap = idx === 0 ? '-' : calculateGap(p1Time, time);
+          const lapTime = r.time || (r.best_lap ? r.best_lap.time : '-');
+          const gapStr = calculateGap(p1TimeStr, lapTime);
 
           html += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'") }')" title="Favorite Rider">★</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
-            <td class="pos-col">${posCell}</td>
-            <td class="rider-cell" title="${rawName}">${formatName(rawName)}</td>
-            <td class="time-cell">${time}</td>
-            <td class="gap-cell">${gap}</td>
+            <td class="pos-cell">${posCell}</td>
+            <td>
+              <div class="rider-name">${formatName(rawName)}</div>
+            </td>
+            <td class="time-cell">${lapTime}</td>
+            <td class="gap-cell">${gapStr}</td>
           </tr>`;
         });
         return html;
@@ -4352,7 +4378,7 @@
 
       function renderRaceRows(items) {
         if (isRaceCancelled) {
-          return `<tr><td colspan="5" style="text-align:center; padding: 32px 16px;">
+          return `<tr><td colspan="4" style="text-align:center; padding: 32px 16px;">
             <div style="display:inline-block; padding: 6px 14px; background: rgba(231, 76, 60, 0.15); border: 1px solid rgba(231, 76, 60, 0.4); border-radius: 6px; color: #ff6b6b; font-weight: 600; font-size: 13px; margin-bottom: 6px;">
               🛑 Race Cancelled
             </div>
@@ -4362,26 +4388,28 @@
           </td></tr>`;
         }
         if (!items || items.length === 0) {
-          return '<tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-sub);">No Race data available yet for this round.</td></tr>';
+          return '<tr><td colspan="4" style="text-align:center; padding: 24px; color: var(--text-sub);">No Race data available for this round.</td></tr>';
         }
         let html = '';
         items.forEach((r, idx) => {
           const isDNF = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null || r.status === 'NOTFINISHFIRST';
           const posNum = r.pos || r.position || idx + 1;
-          const posCell = isDNF ? '<span class="pos-dnf">OUT</span>' : `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
+          const posCell = isDNF 
+            ? `<span class="pos-dnf">DNF</span>` 
+            : `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
+          const pts = isDNF ? '-' : (r.pts !== undefined && r.pts !== null ? r.pts : calculateRacePts(posNum));
           const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
           const isFav = isRiderFavorite(rawName);
-          const pts = isDNF ? '-' : (r.pts !== undefined && r.pts !== null ? r.pts : calculateRacePts(posNum));
-          const time = isDNF ? '-' : (r.time || '-');
 
           html += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
             <td class="star-col">
-              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'") }')" title="Favorite Rider">★</button>
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'")}')" title="Favorite">&#x2605;</button>
             </td>
-            <td class="pos-col">${posCell}</td>
-            <td class="rider-cell" title="${rawName}">${formatName(rawName)}</td>
-            <td class="time-cell">${time}</td>
-            <td class="pts-cell">${pts}</td>
+            <td class="pos-cell">${posCell}</td>
+            <td>
+              <div class="rider-name">${formatName(rawName)}</div>
+            </td>
+            <td class="pts-scored" style="${isDNF ? 'color: #666;' : ''}">${pts}</td>
           </tr>`;
         });
         return html;
@@ -4449,76 +4477,135 @@
           <div class="grid-moto2-col">
             <!-- COLUMN 1: FP1 -->
             <div class="col-card" data-session="fp1">
-              <div class="col-header fp1-header"><div class="col-header-title">⏱️ FP1</div><div class="col-header-sub">${fp1W}</div></div>
-              <table class="standings-table">
-                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:140px;"><col style="width:40px;"><col style="width:70px;"><col style="width:52px;"></colgroup>
-                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:center">Laps</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+              <div class="col-header fp1-header"><div class="col-header-title">&#x23F1;&#xFE0F; FP1</div><div class="col-header-sub" id="fp1-weather">${fp1W}</div></div>
+              <table class="standings-table" style="table-layout: fixed;">
+                <colgroup><col style="width: 22px;"><col style="width: 22px;"><col style="width: 130px;"><col style="width: 42px;"><col style="width: 72px;"><col style="width: 62px;"></colgroup>
+                <thead>
+                  <tr>
+                    <th class="star-col"></th>
+                    <th style="text-align:center">#</th>
+                    <th>Rider</th>
+                    <th style="text-align:center">Laps</th>
+                    <th style="text-align:right">Time</th>
+                    <th style="text-align:right">Gap</th>
+                  </tr>
+                </thead>
                 <tbody>${fp1Rows}</tbody>
               </table>
             </div>
 
             <!-- COLUMN 2: PR -->
             <div class="col-card" data-session="pr">
-              <div class="col-header pr-header"><div class="col-header-title">⏱️ PR</div><div class="col-header-sub">${prW}</div></div>
-              <table class="standings-table">
-                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:140px;"><col style="width:40px;"><col style="width:70px;"><col style="width:52px;"></colgroup>
-                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:center">Laps</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+              <div class="col-header pr-header"><div class="col-header-title">&#x23F1;&#xFE0F; PR</div><div class="col-header-sub" id="pr-weather">${prW}</div></div>
+              <table class="standings-table" style="table-layout: fixed;">
+                <colgroup><col style="width: 22px;"><col style="width: 22px;"><col style="width: 130px;"><col style="width: 42px;"><col style="width: 72px;"><col style="width: 62px;"></colgroup>
+                <thead>
+                  <tr>
+                    <th class="star-col"></th>
+                    <th style="text-align:center">#</th>
+                    <th>Rider</th>
+                    <th style="text-align:center">Laps</th>
+                    <th style="text-align:right">Time</th>
+                    <th style="text-align:right">Gap</th>
+                  </tr>
+                </thead>
                 <tbody>${prRows}</tbody>
               </table>
             </div>
 
             <!-- COLUMN 3: FP2 -->
             <div class="col-card" data-session="fp2">
-              <div class="col-header fp2-header"><div class="col-header-title">⏱️ FP2</div><div class="col-header-sub">${fp2W}</div></div>
-              <table class="standings-table">
-                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:140px;"><col style="width:40px;"><col style="width:70px;"><col style="width:52px;"></colgroup>
-                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:center">Laps</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+              <div class="col-header fp2-header"><div class="col-header-title">&#x23F1;&#xFE0F; FP2</div><div class="col-header-sub" id="fp2-weather">${fp2W}</div></div>
+              <table class="standings-table" style="table-layout: fixed;">
+                <colgroup><col style="width: 22px;"><col style="width: 22px;"><col style="width: 130px;"><col style="width: 42px;"><col style="width: 72px;"><col style="width: 62px;"></colgroup>
+                <thead>
+                  <tr>
+                    <th class="star-col"></th>
+                    <th style="text-align:center">#</th>
+                    <th>Rider</th>
+                    <th style="text-align:center">Laps</th>
+                    <th style="text-align:right">Time</th>
+                    <th style="text-align:right">Gap</th>
+                  </tr>
+                </thead>
                 <tbody>${fp2Rows}</tbody>
               </table>
             </div>
 
             <!-- COLUMN 4: Q1 -->
             <div class="col-card" data-session="q1">
-              <div class="col-header q1-header"><div class="col-header-title">⏱️ Q1</div><div class="col-header-sub">${q1W}</div></div>
-              <table class="standings-table">
-                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:140px;"><col style="width:40px;"><col style="width:70px;"><col style="width:52px;"></colgroup>
-                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:center">Laps</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+              <div class="col-header q1-header"><div class="col-header-title">&#x23F1;&#xFE0F; Q1</div><div class="col-header-sub" id="q1-weather">${q1W}</div></div>
+              <table class="standings-table" style="table-layout: fixed;">
+                <colgroup><col style="width: 22px;"><col style="width: 22px;"><col style="width: 130px;"><col style="width: 42px;"><col style="width: 72px;"><col style="width: 62px;"></colgroup>
+                <thead>
+                  <tr>
+                    <th class="star-col"></th>
+                    <th style="text-align:center">#</th>
+                    <th>Rider</th>
+                    <th style="text-align:center">Laps</th>
+                    <th style="text-align:right">Time</th>
+                    <th style="text-align:right">Gap</th>
+                  </tr>
+                </thead>
                 <tbody>${q1Rows}</tbody>
               </table>
             </div>
 
             <!-- COLUMN 5: Q2 -->
             <div class="col-card" data-session="q2">
-              <div class="col-header q2-header"><div class="col-header-title">⏱️ Q2</div><div class="col-header-sub">${q2W}</div></div>
-              <table class="standings-table">
-                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:140px;"><col style="width:40px;"><col style="width:70px;"><col style="width:52px;"></colgroup>
-                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:center">Laps</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+              <div class="col-header q2-header"><div class="col-header-title">&#x23F1;&#xFE0F; Q2</div><div class="col-header-sub" id="q2-weather">${q2W}</div></div>
+              <table class="standings-table" style="table-layout: fixed;">
+                <colgroup><col style="width: 22px;"><col style="width: 22px;"><col style="width: 130px;"><col style="width: 42px;"><col style="width: 72px;"><col style="width: 62px;"></colgroup>
+                <thead>
+                  <tr>
+                    <th class="star-col"></th>
+                    <th style="text-align:center">#</th>
+                    <th>Rider</th>
+                    <th style="text-align:center">Laps</th>
+                    <th style="text-align:right">Time</th>
+                    <th style="text-align:right">Gap</th>
+                  </tr>
+                </thead>
                 <tbody>${q2Rows}</tbody>
               </table>
             </div>
 
             <!-- COLUMN 6: STARTING GRID -->
             <div class="col-card" data-session="grid">
-              <div class="col-header grid-header"><div class="col-header-title">🏁 STARTING GRID</div><div class="col-header-sub">${gridW}</div></div>
-              <table class="standings-table">
-                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:150px;"><col style="width:80px;"><col style="width:72px;"></colgroup>
-                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+              <div class="col-header grid-header"><div class="col-header-title">&#x1F3C1; STARTING GRID</div><div class="col-header-sub" id="grid-weather">${gridW}</div></div>
+              <table class="standings-table" style="table-layout: fixed;">
+                <colgroup><col style="width: 22px;"><col style="width: 24px;"><col style="width: 150px;"><col style="width: 84px;"><col style="width: 70px;"></colgroup>
+                <thead>
+                  <tr>
+                    <th class="star-col"></th>
+                    <th style="text-align:center">#</th>
+                    <th>Rider</th>
+                    <th style="text-align:right">Time</th>
+                    <th style="text-align:right">Gap</th>
+                  </tr>
+                </thead>
                 <tbody>${gridRows}</tbody>
               </table>
             </div>
 
             <!-- COLUMN 7: RACE -->
             <div class="col-card" data-session="race">
-              <div class="col-header race-header"><div class="col-header-title">🏆 RACE</div><div class="col-header-sub">${raceW}</div></div>
-              <table class="standings-table">
-                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:170px;"><col style="width:72px;"><col style="width:60px;"></colgroup>
-                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:right">Time</th><th style="text-align:right">Pts</th></tr></thead>
+              <div class="col-header race-header"><div class="col-header-title">&#x1F3C1; RACE</div><div class="col-header-sub" id="race-weather">${raceW}</div></div>
+              <table class="standings-table" style="table-layout: fixed;">
+                <colgroup><col style="width: 22px;"><col style="width: 24px;"><col style="width: 210px;"><col style="width: 69px;"></colgroup>
+                <thead>
+                  <tr>
+                    <th class="star-col"></th>
+                    <th style="text-align:center">#</th>
+                    <th>Rider</th>
+                    <th style="text-align:right">Pts</th>
+                  </tr>
+                </thead>
                 <tbody>${raceRows}</tbody>
               </table>
             </div>
           </div>
         </div>
-
         <!-- RACE: POSITION PROGRESSION & GAP TO LEADER -->
         <div class="sector-section" id="rac-progression-section" style="display: none;">
           <div class="sector-header">
