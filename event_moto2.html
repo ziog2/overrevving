@@ -4395,7 +4395,7 @@
       const gridRows = renderGridRows(gridResults);
       const raceRows = renderRaceRows(raceResults);
 
-      const flagHtml = gp.countryCode ? `<img src="https://flagcdn.com/w40/${gp.countryCode}.png" alt="${gp.countryCode}" class="flag-img">` : '';
+      const flagHtml = gp.countryCode ? `<img src="https://flagcdn.com/w20/${gp.countryCode}.png" srcset="https://flagcdn.com/w40/${gp.countryCode}.png 2x" class="flag-img" alt="${gp.location}">` : '';
       const specs = (typeof CIRCUIT_SPECS !== 'undefined' && CIRCUIT_SPECS[gp.short]) ? CIRCUIT_SPECS[gp.short] : { length: '4.55 km', corners: '12 (5 left &middot; 7 right)', straight: '1000 m' };
       const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/Moto2/RAC`;
 
@@ -4408,7 +4408,7 @@
               <span class="round-badge">${gp.round} &middot; ${year}</span>
               <h1 class="event-title">${gp.name}</h1>
               <div class="event-meta">
-                <span class="meta-item">📍 ${flagHtml ? flagHtml + ' ' : ''}${gp.circuit} &middot; ${gp.location}</span>
+                <span class="meta-item">${flagHtml} ${gp.circuit} &middot; ${gp.location}</span>
                 <span class="meta-item">📅 ${gp.date}</span>
               </div>
             </div>
