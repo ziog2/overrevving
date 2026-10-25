@@ -32,10 +32,7 @@ jobs:
           pip install --quiet pypdf openpyxl
 
       - name: Scarica ed estrai classifiche da PDF Dorna e API
-        env:
-          JSONBIN_API_KEY: ${{ secrets.JSONBIN_API_KEY }}
-          JSONBIN_BIN_ID: ${{ secrets.JSONBIN_BIN_ID }}
-        run: |
+run: |
           node .github/scripts/update_standings.js
 
       - name: Aggiorna dati evento (event.html)

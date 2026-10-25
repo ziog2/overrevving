@@ -577,9 +577,6 @@
 </footer>
 
 <script>
-const BIN_ID = '6a3064e4f5f4af5e29f7958b';
-const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
-const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
 const catId = 'motogp';
 
 const CALENDAR = [
@@ -645,22 +642,14 @@ function switchStandingsMode(mode) {
 
 async function init() {
   renderCalendar();
-  await loadRidersFromBin();
+  await loadRidersData();
 }
 
-async function loadRidersFromBin() {
+async function loadRidersData() {
   try {
-    let record;
-    try {
-      const res = await fetch('data/standings_latest.json?t=' + Date.now());
-      if (!res.ok) throw new Error('Local file fetch error');
-      record = await res.json();
-    } catch (localErr) {
-      const res = await fetch(BIN_URL, { headers: { 'X-Access-Key': API_KEY } });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const json = await res.json();
-      record = json.record;
-    }
+    const res = await fetch('data/standings_latest.json?t=' + Date.now());
+    if (!res.ok) throw new Error('Failed to load data/standings_latest.json');
+    const record = await res.json();
     const riders = record[catId] || [];
     currentRiders = riders;
 

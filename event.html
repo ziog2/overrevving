@@ -912,10 +912,6 @@
     };
     const SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e";
     const CAT_MOTOGP = "e8c110ad-64aa-4e8e-8a86-f2f152f6a942";
-    const BIN_ID = '6a3064e4f5f4af5e29f7958b';
-    const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
-    const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
-
     const GP_ROUNDS = [
       { round: 'R01', short: 'THA', countryCode: 'th', name: 'PT Grand Prix of Thailand', circuit: 'Chang International Circuit', location: 'Buriram', date: '27 Feb - 01 Mar 2026' },
       { round: 'R02', short: 'BRA', countryCode: 'br', name: 'Grand Prix of Brazil', circuit: 'Autódromo Internacional de Goiânia', location: 'Goiânia', date: '20 Mar - 22 Mar 2026' },
@@ -18731,19 +18727,19 @@
       // RENDER INSTANTLY FROM EMBEDDED DATA (0ms DELAY)
       renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, fp1Results, prResults, fp2Results, q1Results, q2Results, gridResults, sprintResults, wupResults, raceResults);
 
-      // Load JSONBin Data (Guaranteed Fallback)
+      // Load Standings Data (Fallback for Sprint & Main race points)
       try {
-        const binRes = await fetch(BIN_URL, { headers: { 'X-Access-Key': API_KEY } });
-        if (binRes.ok) {
-          const binJson = await binRes.json();
-          const motogpBin = binJson.record.motogp || [];
+        const standingsRes = await fetch('data/standings_latest.json?t=' + Date.now());
+        if (standingsRes.ok) {
+          const standingsJson = await standingsRes.json();
+          const motogpData = standingsJson.motogp || [];
 
-          // Compute Sprint & Main Race Standings from JSONBin history
+          // Compute Sprint & Main Race Standings from history
           const isRaceCancelled = Boolean(typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[gp.short] && String(SESSION_WEATHER_DATA[gp.short].race || '').toLowerCase().includes('cancel'));
           const sprList = [];
           const longList = [];
 
-          motogpBin.forEach(r => {
+          motogpData.forEach(r => {
             const sprPts = (r.sprint_history && r.sprint_history[rIdx] !== undefined) ? r.sprint_history[rIdx] : 0;
             const longPts = (r.long_history && r.long_history[rIdx] !== undefined) ? r.long_history[rIdx] : 0;
 
@@ -18766,8 +18762,8 @@
           if (!sprintResults.length) sprintResults = sprList;
           if (!raceResults.length && !isRaceCancelled) raceResults = longList;
         }
-      } catch (binErr) {
-        console.warn("JSONBin fallback load notice:", binErr);
+      } catch (standingsErr) {
+        console.warn("Standings fallback load notice:", standingsErr);
       }
 
       // Try Live Pulselive API for rich data (starting grid, top speeds, lap times)
@@ -18898,7 +18894,7 @@
           }
         }
       } catch (apiErr) {
-        console.warn("Live API query warning (using JSONBin data):", apiErr);
+        console.warn("Live API query warning (using local data):", apiErr);
       }
 
       if (!gridResults.length && (sprintResults.length || raceResults.length)) {

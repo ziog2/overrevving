@@ -3,10 +3,6 @@ const path = require('path');
 const https = require('https');
 const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js');
 
-const BIN_ID = process.env.JSONBIN_BIN_ID;
-const API_KEY = process.env.JSONBIN_API_KEY;
-const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
-
 const HEADERS_BASE = {
   'Content-Type': 'application/json',
   'User-Agent': 'Mozilla/5.0 (compatible; GitHubActions-MotorsportUpdater/1.0)'
@@ -182,15 +178,7 @@ async function main() {
     }
   }
 
-  if (Object.keys(current).length === 0 && BIN_ID && API_KEY) {
-    try {
-      const binData = await httpsGet(`${BIN_URL}/latest`, { 'X-Access-Key': API_KEY });
-      current = binData.record || {};
-      console.log('✓ Dati attuali caricati da JSONBin (fallback)');
-    } catch (e) {
-      console.warn('Errore lettura JSONBin:', e.message);
-    }
-  }
+
 
   const results = {};
 
@@ -431,15 +419,7 @@ async function main() {
     console.error('Errore salvataggio su data/standings_latest.json:', err.message);
   }
 
-  // B. Salvataggio secondario su JSONBin se configurato
-  if (BIN_ID && API_KEY) {
-    try {
-      await httpsPut(BIN_URL, cleanCurrent, { 'X-Access-Key': API_KEY });
-      console.log('✓ Salvato su JSONBin con successo!');
-    } catch (e) {
-      console.error('Errore salvataggio JSONBin:', e.message);
-    }
-  }
+
 }
 
 main().catch(console.error);

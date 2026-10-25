@@ -401,7 +401,7 @@
     </tr>
     <tr>
       <th scope="row">Database / Storage</th>
-      <td><a href="https://jsonbin.io" target="_blank">JSONBin.io</a> (Bin REST cloud JSON con chiave di sicurezza)</td>
+      <td><strong>Git-as-a-database</strong> (File JSON nativi versionati su GitHub in <code>data/</code> e serviti via CDN)</td>
     </tr>
     <tr>
       <th scope="row">Orchestratore Backend</th>
@@ -422,7 +422,7 @@
     <strong>Overrevving</strong> è una piattaforma web specializzata nel tracciamento in tempo reale delle classifiche mondiali dei principali sport motoristici su due e quattro ruote per la stagione agonistica 2026. Il progetto nasce per offrire agli appassionati una visualizzazione unificata, priva di pubblicità invasive, ultra-veloce e interattiva, capace di affiancare in un'unica interfaccia sia le categorie del Motomondiale (MotoGP, Moto2, Moto3), sia le derivate di serie (WorldSBK), il fuoristrada iridato (MXGP, MX2) e la Formula 1.
   </p>
   <p>
-    L'infrastruttura tecnologica è costruita secondo la filosofia <strong>Jamstack Serverless</strong>: il sito non necessita di server applicativi proprietari attivi h24 né di database SQL a pagamento. I dati risiedono su un servizio cloud di archiviazione JSON (<a href="https://jsonbin.io" target="_blank">JSONBin.io</a>) e vengono aggiornati automaticamente nei fine settimana di gara tramite pipeline <strong>GitHub Actions</strong> scritte in Python, con il supporto di un pannello amministrativo protetto da credenziali (<code>admin.html</code>) in grado di estrarre i dati direttamente dai bollettini PDF ufficiali di gara.
+    L'infrastruttura tecnologica è costruita secondo la filosofia <strong>Jamstack Serverless</strong>: il sito non necessita di server applicativi proprietari attivi h24 né di database SQL a pagamento. I dati risiedono direttamente come file JSON all'interno del repository Git (<code>data/standings_latest.json</code>) e vengono aggiornati automaticamente nei fine settimana di gara tramite pipeline <strong>GitHub Actions</strong> scritte in Python, con il supporto di un pannello amministrativo protetto da credenziali (<code>admin.html</code>) in grado di estrarre i dati direttamente dai bollettini PDF ufficiali di gara.
   </p>
 
   <!-- TABELLA DEI CONTENUTI (INDICE GENERALE WIKIPEDIA) -->
@@ -443,7 +443,7 @@
       <li>
         <a href="#sec-2"><span class="tocnumber">2</span> <span class="toctext">Architettura dei Dati e Flusso Informativo</span></a>
         <ul>
-          <li><a href="#sec-2-1"><span class="tocnumber">2.1</span> <span class="toctext">Il ruolo centrale di JSONBin.io</span></a></li>
+          <li><a href="#sec-2-1"><span class="tocnumber">2.1</span> <span class="toctext">Architettura Git-as-a-Database ed Esportazione Grafana / BI</span></a></li>
           <li><a href="#sec-2-2"><span class="tocnumber">2.2</span> <span class="toctext">Struttura dello schema JSON unificato</span></a></li>
           <li><a href="#sec-2-3"><span class="tocnumber">2.3</span> <span class="toctext">Ciclo di vita dell'informazione: Ingestione, Elaborazione e Visualizzazione</span></a></li>
         </ul>
@@ -534,7 +534,7 @@
   </p>
   <ul>
     <li><strong>Nessun server fisso da mantenere:</strong> Il portale non necessita di macchine virtuali EC2, VPS o container Docker sempre accesi. L'hosting è delegato all'infrastruttura CDN globale di <strong>GitHub Pages</strong>, garantendo tempi di caricamento (TTFB) inferiori a 50 millisecondi ovunque nel mondo.</li>
-    <li><strong>Costi di esercizio nulli:</strong> Sia GitHub Pages, sia JSONBin.io (nel tier free con fino a 10.000 richieste al mese), sia le GitHub Actions (fino a 2.000 minuti di esecuzione gratuita al mese per account) operano interamente a costo zero.</li>
+    <li><strong>Costi di esercizio nulli:</strong> Sia GitHub Pages (con CDN globale a costo zero e zero limiti di quota terzi), sia le GitHub Actions (fino a 2.000 minuti di esecuzione gratuita al mese per account) operano interamente a costo zero.</li>
     <li><strong>Massima sicurezza e resilienza:</strong> Essendo costituito da file statici (HTML, CSS, JS), il sito non presenta superfici di attacco tipiche dei CMS tradizionali (come iniezioni SQL, exploit WordPress o vulnerabilità PHP).</li>
   </ul>
 
@@ -562,35 +562,40 @@
 
   <!-- SEZIONE 2 -->
   <h2 id="sec-2">2. Architettura dei Dati e Flusso Informativo <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
-  <h3 id="sec-2-1">2.1 Il ruolo centrale di JSONBin.io</h3>
+  <h3 id="sec-2-1">2.1 Architettura Git-as-a-Database ed Esportazione Grafana / BI</h3>
   <p>
-    Tutte le pagine del portale non si collegano direttamente e simultaneamente a decine di API esterne (cosa che causerebbe problemi di rate limiting, latenza e blocchi CORS sui browser degli utenti). Invece, si interfacciano con un unico bin cloud hosted su <strong>JSONBin.io</strong>, che funge da database NoSQL centralizzato (<em>Single Source of Truth</em>).
+    Il portale adotta un'architettura <strong>Git-as-a-Database</strong> completamente autonoma e disaccoppiata da servizi terzi esterni (come JSONBin.io). Tutti i dati di classifica, progressione punti e round risiedono come file JSON versionati direttamente nel repository Git sotto <code>data/</code> e vengono serviti dal CDN globale ad altissima velocità di GitHub Pages a latenza zero.
   </p>
   <table class="wikitable">
     <tr>
-      <th>Parametro</th>
-      <th>Valore di Configurazione</th>
-      <th>Note</th>
+      <th>File / Dataset</th>
+      <th>Percorso nel Repository</th>
+      <th>Utilizzo & Destinazione</th>
     </tr>
     <tr>
-      <td><strong>BIN ID</strong></td>
-      <td><code>6a3064e4f5f4af5e29f7958b</code></td>
-      <td>Identificativo univoco globale del record cloud</td>
+      <td><strong>Master Record Globale</strong></td>
+      <td><code>data/standings_latest.json</code></td>
+      <td>Tutte le categorie unificate per <code>index.html</code> e pannello amministrativo</td>
     </tr>
     <tr>
-      <td><strong>Endpoint di Lettura (Pubblica)</strong></td>
-      <td><code>https://api.jsonbin.io/v3/b/6a3064e4f5f4af5e29f7958b/latest</code></td>
-      <td>Utilizzato da <code>index.html</code> e <code>category.html</code></td>
+      <td><strong>Database Singola Categoria</strong></td>
+      <td><code>data/&lt;cat&gt;/2026.json</code></td>
+      <td>Alimentazione diretta di <code>motogp.html</code> e <code>category.html</code></td>
     </tr>
     <tr>
-      <td><strong>Metodo di Scrittura</strong></td>
-      <td><code>PUT https://api.jsonbin.io/v3/b/6a3064e4f5f4af5e29f7958b</code></td>
-      <td>Riservato alle GitHub Actions e ad <code>admin.html</code></td>
+      <td><strong>Dataset Tidy per Grafana / BI</strong></td>
+      <td><code>exports/csv/race_results_points.csv</code></td>
+      <td>Formato granulare (1 riga per pilota per round) per dashboard in tempo reale</td>
     </tr>
     <tr>
-      <td><strong>Header di Autenticazione</strong></td>
-      <td><code>X-Access-Key: &lt;API_KEY&gt;</code></td>
-      <td>Richiesto per autorizzare la lettura/scrittura dei dati</td>
+      <td><strong>Classifiche Stagionali CSV</strong></td>
+      <td><code>exports/csv/season_standings.csv</code></td>
+      <td>Punti totali, gap dal leader, split sprint e gara principale</td>
+    </tr>
+    <tr>
+      <td><strong>Database Excel</strong></td>
+      <td><code>exports/motorsport_database_2026.xlsx</code></td>
+      <td>Foglio di lavoro multi-tab formattato per analisi offline</td>
     </tr>
   </table>
 
@@ -637,8 +642,8 @@
   <p>Il percorso compiuto dai dati è suddiviso in tre macro-fasi:</p>
   <ol>
     <li><strong>Fase di Raccolta (Ingestion):</strong> Le sorgenti ufficiali (API Dorna, API Jolpica, scraping mxgpresults o PDF) rilasciano i punteggi al termine delle sessioni di qualifica e delle gare.</li>
-    <li><strong>Fase di Normalizzazione & Aggiornamento (Storage):</strong> I punteggi vengono estratti, i nomi dei piloti ripuliti, e l'oggetto JSON su JSONBin viene aggiornato tramite una chiamata HTTP <code>PUT</code> con il timestamp corrente salvato nella proprietà <code>_updated</code>.</li>
-    <li><strong>Fase di Presentazione (Delivery):</strong> All'apertura della pagina da parte dell'utente, <code>index.html</code> effettua un'unica chiamata HTTP <code>GET</code> asincrona (<code>fetch()</code>) a JSONBin. I dati vengono trasformati in tabelle HTML in meno di 200ms.</li>
+    <li><strong>Fase di Normalizzazione & Aggiornamento (Storage):</strong> I punteggi vengono estratti, i nomi dei piloti ripuliti, e l'oggetto JSON viene salvato direttamente nel repository Git in <code>data/standings_latest.json</code> e nei file di categoria <code>data/&lt;cat&gt;/2026.json</code> con il timestamp corrente salvato nella proprietà <code>_updated</code>.</li>
+    <li><strong>Fase di Presentazione (Delivery):</strong> All'apertura della pagina da parte dell'utente, <code>index.html</code> effettua un'unica chiamata HTTP <code>GET</code> asincrona (<code>fetch()</code>) al file statico locale su CDN <code>data/standings_latest.json</code>. I dati vengono trasformati in tabelle HTML in meno di 200ms.</li>
   </ol>
 
   <!-- SEZIONE 3 -->
@@ -770,20 +775,16 @@
   </p>
   <ol>
     <li>Interroga contemporaneamente le API Pulselive (MotoGP, Moto2, Moto3), lo scraping di mxgpresults.com (MXGP, MX2) e l'API Jolpica (Formula 1).</li>
-    <li>Scarica lo stato attuale del bin da JSONBin.io (<code>GET /latest</code>).</li>
+    <li>Carica lo stato attuale dal database Git <code>data/standings_latest.json</code>.</li>
     <li>Esegue il merge selettivo: sovrascrive solo i campionati che hanno restituito dati validi, preservando intatti quelli non ancora disputati o aggiornati via PDF (come la SBK).</li>
     <li>Calcola l'ora italiana: <code>datetime.now(timezone.utc) + timedelta(hours=2)</code>.</li>
-    <li>Invia il payload completo a JSONBin.io tramite richiesta <strong>PUT</strong> con codice di stato HTTP <code>200 OK</code>.</li>
+    <li>Salva il payload aggiornato direttamente in <code>data/standings_latest.json</code>, rigenera i file per categoria e produce i CSV per Grafana in <code>exports/csv/</code>.</li>
   </ol>
 
-  <h3 id="sec-4-4">4.4 Gestione delle credenziali e Secrets di repository</h3>
+  <h3 id="sec-4-4">4.4 Architettura Serverless e assenza di dipendenze esterne</h3>
   <p>
-    Per impedire la manomissione pubblica del bin da parte di terzi, le credenziali di scrittura non sono archiviate in chiaro nel codice sorgente pubblico di GitHub, bensì memorizzate nelle <em>Encrypted Secrets</em> del repository:
+    Grazie alla migrazione all'architettura <strong>Git-as-a-Database</strong>, non sono più richieste chiavi API o credenziali esterne di terze parti (come JSONBin). La pipeline di GitHub Actions opera con i permessi standard nativi di scrittura sul repository (<code>contents: write</code>), rendendo l'intero sistema a prova di guasti esterni e completamente autonomo.
   </p>
-  <ul>
-    <li><code>JSONBIN_API_KEY</code>: La Master Key di JSONBin abilitata alle scritture PUT.</li>
-    <li><code>JSONBIN_BIN_ID</code>: L'identificativo esadecimale del record.</li>
-  </ul>
 
   <!-- SEZIONE 5 -->
   <h2 id="sec-5">5. Interfaccia Utente e Dashboard Pubblica (index.html) <a href="#toc" class="top-jump">[torna all'indice ↑]</a></h2>
@@ -941,8 +942,8 @@ Jorge Martin, 35</code></pre>
     </tr>
     <tr>
       <td>Il sito mostra <em>"⚠ Error loading standings"</em></td>
-      <td>Raggiunto il limite di chiamate su JSONBin oppure API Key disabilitata</td>
-      <td>Accedere alla dashboard di JSONBin.io, verificare il credito mensile o generare una nuova Access Key</td>
+      <td>File <code>data/standings_latest.json</code> assente o errore di rete locale</td>
+      <td>Verificare la presenza del file nel repository GitHub o rieseguire l'esportazione da <code>admin.html</code></td>
     </tr>
     <tr>
       <td>La colonna F1 o MXGP è vuota</td>
@@ -956,14 +957,12 @@ Jorge Martin, 35</code></pre>
     </tr>
   </table>
 
-  <h3 id="sec-8-3">8.3 Rotazione delle chiavi API JSONBin e password amministratore</h3>
+  <h3 id="sec-8-3">8.3 Gestione della password amministratore</h3>
   <p>
-    Se si desidera cambiare la password di <code>admin.html</code> o la chiave segreta di JSONBin:
+    Se si desidera cambiare la password di <code>admin.html</code>:
   </p>
   <ul>
-    <li><strong>Password Admin:</strong> Modificare la variabile <code>const ADMIN_PWD = 'nuova_password';</code> alla riga 187 di <code>admin.html</code>.</li>
-    <li><strong>Chiavi JSONBin sul frontend:</strong> Modificare le costanti <code>BIN_ID</code> e <code>API_KEY</code> all'interno di <code>index.html</code> e <code>admin.html</code>.</li>
-    <li><strong>Chiavi JSONBin sul backend automatico:</strong> Andare sulle impostazioni del repository GitHub: <code>Settings &gt; Secrets and variables &gt; Actions</code> e aggiornare i valori di <code>JSONBIN_API_KEY</code> e <code>JSONBIN_BIN_ID</code>.</li>
+    <li><strong>Password Admin:</strong> Modificare la variabile <code>const ADMIN_PWD = 'nuova_password';</code> all'interno di <code>admin.html</code>. Non sono necessarie chiavi API o database terzi.</li>
   </ul>
 
   <!-- SEZIONE 9 -->
@@ -975,7 +974,7 @@ Jorge Martin, 35</code></pre>
     <dt><strong>CORS (Cross-Origin Resource Sharing)</strong></dt>
     <dd>Meccanismo di sicurezza del browser che impedisce a uno script su un dominio di richiedere risorse su un dominio differente. Nel progetto viene superato tramite backend GitHub Actions (che non ha vincoli browser) o tramite corsproxy.</dd>
 
-    <dt><strong>JSONBin.io</strong></dt>
+    <dt><strong>Git-as-a-Database</strong></dt>
     <dd>Servizio SaaS di cloud storage per file JSON accessibile tramite semplici chiamate REST (GET, PUT, POST).</dd>
 
     <dt><strong>PDF.js</strong></dt>
@@ -985,7 +984,7 @@ Jorge Martin, 35</code></pre>
   <h3 style="margin-top:20px;">Collegamenti e Documentazione Ufficiale</h3>
   <ul>
     <li><a href="https://github.com" target="_blank">Documentazione Ufficiale GitHub Actions Workflow Syntax</a></li>
-    <li><a href="https://jsonbin.io/api-reference" target="_blank">Specifiche API JSONBin.io v3</a></li>
+    <li><a href="https://grafana.com/docs/grafana/latest/datasources/infinity/" target="_blank">Grafana Infinity Data Source Documentation</a></li>
     <li><a href="https://api.jolpi.ca" target="_blank">Documentazione Jolpica F1 Ergast API</a></li>
     <li><a href="https://mozilla.github.io/pdf.js" target="_blank">Repository e documentazione Mozilla PDF.js</a></li>
   </ul>

@@ -561,10 +561,6 @@
 <script src="js/news.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
 <script>
-const BIN_ID = '6a3064e4f5f4af5e29f7958b';
-const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
-const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
-
 const CATEGORIES = [
   { id: 'motogp', label: 'MotoGP', cls: 'motogp', url: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings' },
   { id: 'moto2',  label: 'Moto2',  cls: 'moto2',  url: 'https://www.motogp.com/en/world-standing/2026/moto2/championship-standings' },
@@ -578,12 +574,15 @@ const CATEGORIES = [
 async function loadAndRender() {
   try {
     const res = await fetch('data/standings_latest.json?t=' + Date.now());
-    if (!res.ok) throw new Error('Local file fetch error');
+    if (!res.ok) throw new Error('Failed to load standings data');
     const all = await res.json();
     renderAll(all);
   } catch(e) {
-    try {
-      const resFallback = await fetch(BIN_URL, { headers: { 'X-Access-Key': API_KEY } });
+    document.getElementById('standings-grid').innerHTML =
+      '<div class="loading" style="color:#ca5f5f">⚠ Error loading standings</div>';
+    document.getElementById('last-updated').textContent = '';
+  }
+});
       if (!resFallback.ok) throw new Error('Fallback fetch error');
       const json = await resFallback.json();
       renderAll(json.record);

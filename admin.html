@@ -460,9 +460,6 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 // ---- Config ----
-const BIN_ID  = '6a3064e4f5f4af5e29f7958b';
-const API_KEY = '$2a$10$2L.MrbfdS65XDm66PZZX4eBYUV6s5aSf3eZB8YafsKpQpxMc7VNwe';
-const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 const ADMIN_PWD = 'andrea99!'; // ← CAMBIA QUESTA PASSWORD
 
 const CATEGORIES = [
@@ -501,37 +498,22 @@ let currentData = { motogp:[], moto2:[], moto3:[], sbk:[], f1:[], _updated:'' };
 
 async function loadFromBin() {
   try {
-    try {
-      const resLocal = await fetch('data/standings_latest.json?t=' + Date.now());
-      if (resLocal.ok) {
-        currentData = await resLocal.json();
-        renderAll();
-        return;
-      }
-    } catch (localErr) {}
-
-    const res = await fetch(BIN_URL + '/latest', { headers: { 'X-Access-Key': API_KEY } });
-    if (!res.ok) throw new Error();
-    const json = await res.json();
-    currentData = json.record;
-    renderAll();
+    const resLocal = await fetch('data/standings_latest.json?t=' + Date.now());
+    if (resLocal.ok) {
+      currentData = await resLocal.json();
+      renderAll();
+      return;
+    }
+    throw new Error('Could not load data/standings_latest.json');
   } catch(e) {
-    showGlobalStatus('err', '⚠ Errore caricamento dati');
+    showGlobalStatus('err', '⚠ Errore caricamento dati locali: ' + e.message);
   }
 }
 
 async function saveToBin() {
   currentData['_updated'] = new Date().toLocaleString('it-IT');
-  try {
-    const res = await fetch(BIN_URL, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'X-Access-Key': API_KEY },
-      body: JSON.stringify(currentData)
-    });
-    if (!res.ok) throw new Error('Errore salvataggio su JSONBin');
-  } catch(e) {
-    console.warn('JSONBin save warning:', e.message);
-  }
+  exportStandingsJson();
+  showGlobalStatus('ok', '✓ File JSON esportato con successo per il commit Git!');
 }
 
 function exportStandingsJson() {
@@ -668,12 +650,12 @@ async function handleMultiPDF(e) {
     statusDiv.appendChild(tag);
   }
   await Promise.all(tasks.map(({ file, catId }) => processPDF(file, catId)));
-  // Salva tutto su JSONBin dopo aver processato tutti i PDF
+  // Esporta tutto dopo aver processato tutti i PDF
   try {
     await saveToBin();
     renderAll();
   } catch(e) {
-    showGlobalStatus('err', '⚠ Errore salvataggio su JSONBin: ' + e.message);
+    showGlobalStatus('err', '⚠ Errore esportazione dati: ' + e.message);
   }
 }
 
@@ -1133,7 +1115,7 @@ async function fetchStatsFromRepo() {
     await saveToBin();
     renderAll();
   } catch (e) {
-    showGlobalStatus('err', '⚠ Errore salvataggio su JSONBin: ' + e.message);
+    showGlobalStatus('err', '⚠ Errore esportazione dati: ' + e.message);
   }
 }
 
@@ -1341,7 +1323,7 @@ async function fetchAllAPI() {
     await saveToBin();
     renderAll();
   } catch (e) {
-    showGlobalStatus('err', '⚠ Errore salvataggio su JSONBin: ' + e.message);
+    showGlobalStatus('err', '⚠ Errore esportazione dati: ' + e.message);
   }
 }
 
