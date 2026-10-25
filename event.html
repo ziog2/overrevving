@@ -241,26 +241,26 @@
 
     .weather-chip span { color: var(--text-sub); font-weight: 400; }
 
-    /* PDF Downloads Bar */
+    /* PDF Bar */
     .pdf-bar {
-      background: var(--card-bg);
+      background: #202026;
       border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 16px 24px;
-      margin-bottom: 32px;
+      padding: 14px 20px;
+      margin-bottom: 24px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       flex-wrap: wrap;
+      align-items: center;
       gap: 16px;
     }
 
     .pdf-title {
+      font-size: 13px;
       font-weight: 700;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-sub);
+      margin-right: 8px;
     }
 
     .pdf-links {
@@ -273,20 +273,20 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 12px;
+      padding: 6px 14px;
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      border-radius: 6px;
-      font-size: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #3498db;
+      font-size: 13px;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.2s ease;
     }
 
     .pdf-btn:hover {
-      background: var(--accent-red);
-      border-color: var(--accent-red);
+      background: rgba(52, 152, 219, 0.15);
+      border-color: #3498db;
       color: #fff;
     }
 
@@ -20685,14 +20685,17 @@
             ${isRaceCancelled ? `
             <a href="${pdfBase}/Classification.pdf" target="_blank" class="pdf-btn">📊 Sprint Classification.pdf</a>
             <a href="${pdfBase}/Analysis.pdf" target="_blank" class="pdf-btn">⏱️ Sprint Analysis.pdf</a>
+            <a href="${pdfBase}/MaximumSpeed.pdf" target="_blank" class="pdf-btn">🚀 TopSpeed.pdf</a>
+            <a href="${pdfBase}/Grid.pdf" target="_blank" class="pdf-btn">🏁 Grid.pdf</a>
+            <a href="https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/WorldStanding.pdf" target="_blank" class="pdf-btn">🏆 WorldStanding.pdf</a>
             <a href="https://resources.motogp.com/files/results/${year}/${gp.short}/CircuitInformation.pdf" target="_blank" class="pdf-btn">📍 CircuitInformation.pdf</a>
-            <a href="https://resources.motogp.com/files/results/${year}/${gp.short}/PolePositions.pdf" target="_blank" class="pdf-btn">🏁 PolePositions.pdf</a>
             ` : `
             <a href="${pdfBase}/Classification.pdf" target="_blank" class="pdf-btn">📊 Classification.pdf</a>
             <a href="${pdfBase}/Analysis.pdf" target="_blank" class="pdf-btn">⏱️ Analysis.pdf</a>
             <a href="${pdfBase}/MaximumSpeed.pdf" target="_blank" class="pdf-btn">🚀 TopSpeed.pdf</a>
             <a href="${pdfBase}/Grid.pdf" target="_blank" class="pdf-btn">🏁 Grid.pdf</a>
-            <a href="${pdfBase}/WorldStanding.pdf" target="_blank" class="pdf-btn">🏆 WorldStanding.pdf</a>
+            <a href="https://resources.motogp.com/files/results/${year}/${gp.short}/MotoGP/WorldStanding.pdf" target="_blank" class="pdf-btn">🏆 WorldStanding.pdf</a>
+            <a href="https://resources.motogp.com/files/results/${year}/${gp.short}/CircuitInformation.pdf" target="_blank" class="pdf-btn">📍 CircuitInformation.pdf</a>
             `}
           </div>
         </div>
