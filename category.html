@@ -778,9 +778,15 @@ function renderCalendar() {
       : (isOngoing ? '<span style="color:#f39c12;margin-right:6px;font-size:11px;" title="Weekend in progress">🏁</span>' : '');
     const weatherBadge = ((isPast || isOngoing) && ev.weather) ? `<span class="cal-weather-badge">${ev.weather}</span>` : '';
     
-    const hasEventLink = (catId === 'moto2' && (idx === 0 || ev.name.toLowerCase().includes('thailand')));
-    const tag = hasEventLink ? 'a' : 'div';
-    const hrefAttr = hasEventLink ? ` href="event_moto2.html?year=2026&round=R01"` : '';
+    const rNum = 'R' + String(idx + 1).padStart(2, '0');
+    let eventHref = '';
+    if (catId === 'moto2') {
+      eventHref = `event_moto2.html?year=2026&round=${rNum}`;
+    } else if (catId === 'motogp') {
+      eventHref = `event.html?year=2026&round=${rNum}`;
+    }
+    const tag = eventHref ? 'a' : 'div';
+    const hrefAttr = eventHref ? ` href="${eventHref}"` : '';
     html += `<${tag}${hrefAttr} class="cal-item${isPast ? ' past' : (isOngoing ? ' ongoing' : '')}">
       <span class="cal-name">${statusIcon}${ev.name}${weatherBadge}</span>
       <span class="cal-date">${dateStr}</span>

@@ -277,10 +277,13 @@ def unpack_numbers(text):
     return res
 
 def parse_sector_val(s):
-    m = re.match(r"^(\d)'(\d{2}\.\d{3})$", s)
+    m = re.match(r"^(\d+)'(\d{2}\.\d{3})$", s)
     if m:
         return round(int(m.group(1)) * 60.0 + float(m.group(2)), 3)
-    return round(float(s), 3)
+    try:
+        return round(float(s), 3)
+    except Exception:
+        return 0.0
 
 def compute_lap_chart_from_sectors(sectors_dict, total_laps):
     if not sectors_dict or total_laps <= 0:
@@ -947,5 +950,202 @@ def main():
     else:
         print("\nNessun nuovo dato da aggiornare in event.html.")
 
+
+def update_moto2():
+    event_moto2_path = "event_moto2.html"
+    if not os.path.exists(event_moto2_path):
+        return
+
+    with open(event_moto2_path, "r", encoding="utf-8") as f:
+        html_content = f.read()
+
+    orig_len = len(html_content)
+    CAT_MOTO2 = "549640b8-fd9c-4245-acfd-60e4bc38b25c"
+    events_url = f"https://api.motogp.pulselive.com/motogp/v1/results/events?seasonUuid={SEASON_2026}&categoryUuid={CAT_MOTO2}"
+    try:
+        events = http_get(events_url)
+    except Exception as e:
+        print(f"Errore caricamento lista eventi Moto2: {e}")
+        return
+
+    relevant_events = [
+        ev for ev in events
+        if isinstance(ev, dict)
+        and ev.get('status') in ('FINISHED', 'CURRENT', 'ONGOING', 'RUNNING', 'LIVE', 'IN_PROGRESS')
+        and not str(ev.get('short_name', '')).endswith(('1', '2', '3'))
+    ]
+
+    updated = False
+    for ev in relevant_events:
+        short = ev.get('short_name')
+        ev_id = ev.get('id')
+        if not short or not ev_id: continue
+
+        sessions_url = f"https://api.motogp.pulselive.com/motogp/v1/results/sessions?eventUuid={ev_id}&categoryUuid={CAT_MOTO2}"
+        try:
+            sessions = http_get(sessions_url)
+        except Exception as e:
+            continue
+
+        fp_sess = [s for s in sessions if s.get('type') == 'FP' and s.get('status') == 'FINISHED']
+        pr_sess = next((s for s in sessions if s.get('type') == 'PR' and s.get('status') == 'FINISHED'), None)
+        q_sess  = sorted([s for s in sessions if s.get('type') == 'Q' and s.get('status') == 'FINISHED'], key=lambda s: s.get('date', ''))
+        rac_sessions = [s for s in sessions if str(s.get('type', '')).startswith('RAC')]
+        rac_sess = next((s for s in rac_sessions if s.get('status') == 'FINISHED'), None)
+        raw_rac_sess = rac_sessions[-1] if rac_sessions else None
+
+        q1_sess = q_sess[0] if len(q_sess) >= 1 else None
+        q2_sess = q_sess[1] if len(q_sess) >= 2 else None
+
+        idx_s_start = html_content.find('const STATIC_EVENT_DATA = {')
+        idx_s_end = html_content.find('const EVENT_LAP_CHARTS_DATA =', idx_s_start) if idx_s_start != -1 else -1
+
+        existing = {}
+        if idx_s_start != -1 and idx_s_end != -1:
+            s_slice = html_content[idx_s_start:idx_s_end]
+            s_start, s_end, s_parsed = find_matching_object(s_slice, short)
+            existing = s_parsed if isinstance(s_parsed, dict) else {}
+            has_race = bool(existing.get("race") and len(existing["race"]) > 0)
+
+            if not has_race and (rac_sess or q2_sess):
+                def fmt_class_m2(sid):
+                    if not sid: return []
+                    u = f"https://api.motogp.pulselive.com/motogp/v1/results/session/{sid}/classification?categoryUuid={CAT_MOTO2}"
+                    try:
+                        d = http_get(u)
+                        res = []
+                        for idx, c in enumerate(d.get('classification', []), 1):
+                            res.append({
+                                "pos": c.get('position', idx),
+                                "rider": clean_name(c.get('rider', {}).get('full_name') if c.get('rider') else 'Rider'),
+                                "laps": c.get('total_laps') if c.get('total_laps') is not None else (c.get('laps') if c.get('laps') is not None else "-"),
+                                "time": c.get('time') if c.get('time') else (c.get('best_lap', {}).get('time') if c.get('best_lap') else "-"),
+                                "status": c.get('status', 'INSTND'),
+                                "pts": c.get('points', None)
+                            })
+                        return res
+                    except Exception:
+                        return []
+
+                fp1 = fmt_class_m2(fp_sess[0]['id']) if len(fp_sess) >= 1 else []
+                pr = fmt_class_m2(pr_sess['id']) if pr_sess else []
+                fp2 = fmt_class_m2(fp_sess[1]['id']) if len(fp_sess) >= 2 else []
+                q1 = fmt_class_m2(q1_sess['id']) if q1_sess else []
+                q2 = fmt_class_m2(q2_sess['id']) if q2_sess else []
+                rac = fmt_class_m2(rac_sess['id']) if rac_sess else []
+
+                grid = []
+                if q2:
+                    promoted = set(r['rider'] for r in q1[:4])
+                    p = 1
+                    for r in q2:
+                        grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
+                        p += 1
+                    for r in q1:
+                        if r['rider'] not in promoted:
+                            grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
+                            p += 1
+
+                if rac or q2:
+                    static_obj = {
+                        "fp1": fp1 if fp1 else existing.get("fp1", []),
+                        "pr": pr if pr else existing.get("pr", []),
+                        "fp2": fp2 if fp2 else existing.get("fp2", []),
+                        "q1": q1 if q1 else existing.get("q1", []),
+                        "q2": q2 if q2 else existing.get("q2", []),
+                        "grid": grid if grid else existing.get("grid", []),
+                        "race": rac if rac else existing.get("race", [])
+                    }
+                    static_json = json.dumps(static_obj, separators=(',', ':'))
+                    if s_start is not None and s_end is not None:
+                        new_s_entry = f'"{short}": {static_json}'
+                        new_s_slice = s_slice[:s_start] + new_s_entry + s_slice[s_end:]
+                    else:
+                        m_insert = re.search(r'const STATIC_EVENT_DATA\s*=\s*\{', s_slice)
+                        pos_in = m_insert.end()
+                        new_s_slice = s_slice[:pos_in] + f'\n  "{short}": {static_json},' + s_slice[pos_in:]
+                    html_content = html_content[:idx_s_start] + new_s_slice + html_content[idx_s_end:]
+                    updated = True
+                    print(f"✓ Aggiornato blocco {short} in STATIC_EVENT_DATA Moto2!")
+
+        # Weather update
+        idx_w_start = html_content.find('const SESSION_WEATHER_DATA = {')
+        idx_w_end = html_content.find('const STATIC_EVENT_DATA =', idx_w_start) if idx_w_start != -1 else -1
+        if idx_w_start != -1 and idx_w_end != -1:
+            w_slice = html_content[idx_w_start:idx_w_end]
+            w_start, w_end, w_parsed = find_matching_object(w_slice, short)
+            weather_obj = {
+                "grid": format_cond(rac_sess or q2_sess),
+                "race": format_cond(rac_sess or raw_rac_sess),
+                "fp1": format_cond(fp_sess[0] if len(fp_sess) >= 1 else None),
+                "fp2": format_cond(fp_sess[1] if len(fp_sess) >= 2 else None),
+                "pr": format_cond(pr_sess),
+                "q2": format_cond(q2_sess),
+                "q1": format_cond(q1_sess)
+            }
+            has_w = any(isinstance(v, str) and ('°C' in v or 'Wet' in v or v == 'Cancelled') for v in weather_obj.values())
+            if has_w:
+                merged_w = dict(w_parsed) if isinstance(w_parsed, dict) else weather_obj
+                for k, v in weather_obj.items():
+                    if '°C' in v or 'Wet' in v or v == 'Cancelled':
+                        merged_w[k] = v
+                if merged_w != w_parsed:
+                    merged_w_json = json.dumps(merged_w, separators=(',', ':'))
+                    if w_start is not None and w_end is not None:
+                        new_w_entry = f'"{short}": {merged_w_json}'
+                        new_w_slice = w_slice[:w_start] + new_w_entry + w_slice[w_end:]
+                    else:
+                        m_insert = re.search(r'const SESSION_WEATHER_DATA\s*=\s*\{', w_slice)
+                        pos_in = m_insert.end()
+                        new_w_slice = w_slice[:pos_in] + f'\n  "{short}": {merged_w_json},' + w_slice[pos_in:]
+                    html_content = html_content[:idx_w_start] + new_w_slice + html_content[idx_w_end:]
+                    updated = True
+                    print(f"✓ Aggiornato meteo {short} in SESSION_WEATHER_DATA Moto2!")
+
+        # Lap charts & sectors from Analysis.pdf
+        if rac_sess:
+            idx_rac_sec = html_content.find('const EVENT_LAPS_DATA =')
+            rac_sec_present = (f'"{short}":' in html_content[idx_rac_sec:]) if idx_rac_sec != -1 else False
+            if not rac_sec_present:
+                rf = "RAC2" if short == 'THA' else "RAC"
+                ana_url = f"https://resources.motogp.com/files/results/2026/{short}/Moto2/{rf}/Analysis.pdf"
+                b = download_bytes(ana_url)
+                if b:
+                    rac_class = existing.get("race", [])
+                    win_laps = int(rac_class[0]['laps']) if (rac_class and str(rac_class[0].get('laps', '')).isdigit()) else 25
+                    sec_data = extract_sectors_from_pdf(b, max_laps=win_laps)
+                    if sec_data:
+                        sec_json = json.dumps(sec_data, separators=(',', ':'))
+                        m_sec = re.search(r'const EVENT_LAPS_DATA\s*=\s*\{', html_content)
+                        if m_sec:
+                            pos = m_sec.end()
+                            html_content = html_content[:pos] + f'\n    "{short}": ' + sec_json + ',' + html_content[pos:]
+                            updated = True
+                            print(f"  ✓ Inseriti Settori Moto2 {short} ({len(sec_data)} piloti)!")
+
+                        lap_chart = compute_lap_chart_from_sectors(sec_data, win_laps)
+                        if lap_chart and lap_chart.get('riders'):
+                            lap_json = json.dumps(lap_chart, separators=(',', ':'))
+                            m_lc = re.search(r'"RAC":\s*\{', html_content)
+                            if m_lc:
+                                pos = m_lc.end()
+                                html_content = html_content[:pos] + f'\n        "{short}": ' + lap_json + ',' + html_content[pos:]
+                                updated = True
+                                print(f"  ✓ Inserito LapChart Moto2 {short}!")
+
+    if updated:
+        if len(html_content) < orig_len * 0.95:
+            raise RuntimeError(f"ABORT: html_content shrunk suspiciously from {orig_len} to {len(html_content)}")
+        for req_tag in ("const SESSION_WEATHER_DATA =", "const STATIC_EVENT_DATA =", "const EVENT_LAP_CHARTS_DATA =", "const EVENT_LAPS_DATA =", "function initEventPage()"):
+            if req_tag not in html_content:
+                raise RuntimeError(f"ABORT: Missing required section '{req_tag}' in event_moto2.html")
+
+        with open(event_moto2_path, "w", encoding="utf-8") as f:
+            f.write(html_content)
+        print("\n✓ event_moto2.html aggiornato e validato con successo!")
+    else:
+        print("\nNessun nuovo dato da aggiornare in event_moto2.html.")
+
 if __name__ == '__main__':
     main()
+    update_moto2()
