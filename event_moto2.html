@@ -589,8 +589,9 @@
 
     .progression-canvas-container {
       position: relative;
-      height: 380px;
+      height: 330px;
       width: 100%;
+      min-width: 0;
     }
 
     .sector-canvas-container {
@@ -4017,8 +4018,8 @@
             },
             y: {
               reverse: true,
-              min: 0.5,
-              max: maxPosToShow + 0.5,
+              min: 1 - Math.min(0.5, Math.max(0.12, (maxPosToShow - 1) * 0.04)),
+              max: maxPosToShow + Math.min(0.5, Math.max(0.12, (maxPosToShow - 1) * 0.04)),
               afterBuildTicks: function(axis) {
                 const tickVals = [];
                 for (let i = 1; i <= maxPosToShow; i++) {
@@ -4163,8 +4164,8 @@
       const effectiveMaxGap = maxGapFound > 0 ? maxGapFound : Math.min(maxRawGapFound, GAP_OUTLIER_THRESHOLD);
       let yAxisMax = Math.min(GAP_OUTLIER_THRESHOLD, Math.ceil(effectiveMaxGap + 1));
       if (yAxisMax < 1) yAxisMax = 1;
-      const yAxisHeadroom = Math.max(0.6, Math.round(yAxisMax * 0.08 * 10) / 10);
-      const yAxisBottom = yAxisMax + Math.max(0.5, Math.round(yAxisMax * 0.05 * 10) / 10);
+      const yAxisHeadroom = Math.max(0.08, Math.round(yAxisMax * 0.04 * 100) / 100);
+      const yAxisBottom = yAxisMax + Math.max(0.15, Math.round(yAxisMax * 0.04 * 100) / 100);
 
       const ctx = canvasEl.getContext('2d');
       racGapChartInstance = new Chart(ctx, {
