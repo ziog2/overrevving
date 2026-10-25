@@ -1,0 +1,4581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moto2 Event Details · Overrevving</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="js/chart.min.js"></script>
+  <style>
+    :root {
+      --bg: #18181c;
+      --card-bg: #2c2c32;
+      --card-border: #3a3a42;
+      --accent-orange: #d35400;
+      --accent-red: #c0392b;
+      --accent-yellow: #f1c40f;
+      --accent-blue: #2980b9;
+      --accent-green: #2ecc71;
+      --text-main: #e0e0e0;
+      --text-sub: #888888;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: rgba(20, 20, 24, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 24px;
+    }
+
+    .nav-container {
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-logo-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .header-logo-img {
+      height: 64px;
+      width: auto;
+      max-width: 360px;
+      opacity: 0.95;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+    }
+
+    .header-logo-img:hover {
+      opacity: 1;
+      transform: scale(1.03);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: #282832;
+      border-color: #4a4a58;
+      color: #fff;
+    }
+
+    main {
+      max-width: 3650px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Hero Event Card */
+    .hero-card {
+      background: linear-gradient(135deg, #1c1c24 0%, #252532 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(211, 84, 0, 0.15) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .cat-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--accent-orange);
+      color: #fff;
+      border-radius: 6px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      margin-right: 8px;
+    }
+
+    .round-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(211, 84, 0, 0.2);
+      border: 1px solid var(--accent-orange);
+      color: #e67e22;
+      border-radius: 20px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .event-title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .event-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text-sub);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .event-details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .detail-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    .detail-val {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    /* PDF Bar */
+    .pdf-bar {
+      background: #202026;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pdf-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-sub);
+      margin-right: 8px;
+    }
+
+    .pdf-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pdf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #3498db;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .pdf-btn:hover {
+      background: rgba(52, 152, 219, 0.15);
+      border-color: #3498db;
+      color: #fff;
+    }
+
+    /* Grid Wrapper: Moto2 7 Columns (FP1, PR, FP2, Q1, Q2, STARTING GRID, RACE) */
+    .grid-wrapper-event {
+      overflow-x: auto;
+      padding: 0 0 16px 0;
+      width: 100%;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .grid-moto2-col {
+      display: grid;
+      grid-template-columns: repeat(7, 350px);
+      gap: 16px;
+      width: fit-content;
+      margin: 0 auto 32px;
+    }
+
+    .col-card {
+      background: #2c2c32;
+      border: 1px solid #3a3a42;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+    }
+
+    .col-header {
+      padding: 10px 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .col-header-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .col-header-sub {
+      font-size: 11px;
+      font-weight: 500;
+      opacity: 0.88;
+      margin-top: 3px;
+      letter-spacing: 0.02em;
+    }
+
+    .fp1-header { background: #8e44ad; color: #fff; }
+    .pr-header  { background: #d35400; color: #fff; }
+    .fp2-header { background: #16a085; color: #fff; }
+    .q1-header  { background: #0984e3; color: #fff; }
+    .q2-header  { background: #6c5ce7; color: #fff; }
+    .grid-header { background: #2980b9; color: #fff; }
+    .race-header { background: #c0392b; color: #fff; }
+
+    .standings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .standings-table thead th {
+      padding: 7px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #999;
+      background: #24242a;
+      border-bottom: 1px solid #3a3a42;
+    }
+
+    .standings-table tbody tr {
+      border-bottom: 1px solid #32323a;
+      transition: background 0.15s ease;
+    }
+
+    .standings-table tbody tr:hover {
+      background: #35353d;
+    }
+
+    .standings-table td {
+      padding: 5px 8px;
+      vertical-align: middle;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .standings-table tbody tr.favorite {
+      background: rgba(241, 196, 15, 0.12) !important;
+    }
+
+    .standings-table tbody tr.favorite:hover {
+      background: rgba(241, 196, 15, 0.2) !important;
+    }
+
+    .standings-table tbody tr.favorite td {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .fav-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      color: #555;
+      padding: 0 4px;
+      line-height: 1;
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+
+    .fav-btn:hover {
+      color: #f1c40f;
+      transform: scale(1.2);
+    }
+
+    .fav-btn.active {
+      color: #f1c40f;
+      text-shadow: 0 0 8px rgba(241, 196, 15, 0.6);
+    }
+
+    .pos-col {
+      text-align: center;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--text-sub);
+      width: 24px;
+    }
+
+    .pos-1 { color: #ffd700; font-weight: 800; }
+    .pos-2 { color: #c0c0c0; font-weight: 800; }
+    .pos-3 { color: #cd7f32; font-weight: 800; }
+
+    .rider-cell {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .laps-cell {
+      text-align: center !important;
+      font-family: 'Inter', monospace;
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    .time-cell {
+      text-align: right !important;
+      font-family: 'Inter', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: #e0e0e0;
+    }
+
+    .gap-cell {
+      text-align: right !important;
+      font-family: 'Inter', monospace;
+      font-size: 11px;
+      color: #999;
+    }
+
+    .pts-cell {
+      text-align: right !important;
+      font-weight: 800;
+      font-size: 13px;
+      color: #f1c40f;
+      padding-right: 12px !important;
+    }
+
+    .pos-dnf {
+      color: #ff5555 !important;
+      background: rgba(255, 85, 85, 0.15);
+      border: 1px solid rgba(255, 85, 85, 0.3);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 10px;
+      display: inline-block;
+      line-height: 1.2;
+    }
+
+    /* Sector & Lap Chart Section */
+    .sector-section {
+      background: #202026;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .sector-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sector-title {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #fff;
+    }
+
+    .sector-subtitle {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    .win-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      padding: 6px;
+      cursor: pointer;
+      color: var(--text-sub);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .win-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+
+    .progression-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .progression-grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sector-grid-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .sector-grid-2x2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sector-card {
+      background: #272730;
+      border: 1px solid #363642;
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sector-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #bbb;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sector-card-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .badge-t1 { background: rgba(52, 152, 219, 0.2); color: #3498db; }
+    .badge-t2 { background: rgba(230, 126, 34, 0.2); color: #e67e22; }
+    .badge-t3 { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+    .badge-t4 { background: rgba(155, 89, 182, 0.2); color: #9b59b6; }
+
+    .progression-canvas-container {
+      position: relative;
+      height: 380px;
+      width: 100%;
+    }
+
+    .sector-canvas-container {
+      position: relative;
+      height: 300px;
+      width: 100%;
+    }
+
+    /* Sidebar controls */
+    .sidebar-panel {
+      position: fixed;
+      right: 20px;
+      bottom: 24px;
+      z-index: 1000;
+    }
+
+    .sidebar-toggle-btn {
+      background: #252530;
+      border: 1px solid #3e3e50;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-toggle-btn:hover {
+      background: #30303e;
+      border-color: #55556a;
+      transform: translateY(-2px);
+    }
+
+    .sidebar-content {
+      display: none;
+      position: absolute;
+      bottom: 48px;
+      right: 0;
+      width: 260px;
+      background: #202028;
+      border: 1px solid #3a3a4c;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+    }
+
+    .sidebar-content.open {
+      display: block;
+    }
+
+    .sidebar-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #888;
+      margin-bottom: 12px;
+    }
+
+    .sess-toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 13px;
+      color: #ccc;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .sess-toggle-item:hover {
+      color: #fff;
+    }
+
+    .sess-toggle-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
+      display: inline-block;
+    }
+
+    .sess-toggle-check {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fff;
+    }
+
+    .sess-toggle-item.active .sess-toggle-check {
+      background: var(--accent-orange);
+      border-color: var(--accent-orange);
+    }
+
+    .sess-toggle-item.active .sess-toggle-check::after {
+      content: '✓';
+    }
+
+    /* Bottom round navigation */
+    .round-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover:not(.disabled) {
+      background: #33333d;
+      border-color: #555566;
+      color: #fff;
+    }
+
+    .nav-link.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .footer-social-inline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-social-title {
+      font-size: 12px;
+      color: var(--text-sub);
+      font-weight: 600;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .social-icon:hover {
+      transform: scale(1.15);
+    }
+
+    .social-icon svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 60px 0;
+      color: var(--text-sub);
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="header-logo-link">
+        <img src="logo.png" alt="Overrevving" class="header-logo-img">
+      </a>
+      <a href="category.html?cat=moto2" class="back-btn">&larr; Back to Moto2</a>
+    </div>
+  </header>
+
+  <main id="event-main">
+    <div class="loading-spinner">Loading Moto2 Grand Prix details...</div>
+  </main>
+
+  <div class="sidebar-panel">
+    <button class="sidebar-toggle-btn" onclick="toggleSidebarMenu()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <span>Sessions</span>
+    </button>
+    <div class="sidebar-content" id="sidebar-menu">
+      <div class="sidebar-title">Toggle Sessions</div>
+      <div id="session-toggle-list"></div>
+    </div>
+  </div>
+
+  <script>
+    const logoImg = new Image();
+    logoImg.src = 'logo.png';
+
+    const watermarkPlugin = {
+      id: 'watermarkLogo',
+      beforeDraw: (chart) => {
+        if (!logoImg.complete || logoImg.naturalWidth === 0) return;
+        const ctx = chart.ctx;
+        const { chartArea } = chart;
+        if (!chartArea) return;
+
+        ctx.save();
+        ctx.globalAlpha = 0.09;
+        const targetWidth = Math.min(220, (chartArea.right - chartArea.left) * 0.45);
+        const targetHeight = (logoImg.naturalHeight / logoImg.naturalWidth) * targetWidth;
+        const x = chartArea.left + 12;
+        const y = chartArea.top + 10;
+        ctx.drawImage(logoImg, x, y, targetWidth, targetHeight);
+        ctx.restore();
+      }
+    };
+
+    logoImg.onload = () => {
+      if (typeof racLapChartInstance !== 'undefined' && racLapChartInstance) {
+        try { racLapChartInstance.update('none'); } catch(e) {}
+      }
+      if (typeof racGapChartInstance !== 'undefined' && racGapChartInstance) {
+        try { racGapChartInstance.update('none'); } catch(e) {}
+      }
+      if (typeof sectorChartInstances !== 'undefined') {
+        for (let key in sectorChartInstances) {
+          if (sectorChartInstances[key]) {
+            try { sectorChartInstances[key].update('none'); } catch(e) {}
+          }
+        }
+      }
+      const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
+      if (cur) {
+        if (typeof renderRacLapChart === 'function') renderRacLapChart(cur);
+        if (typeof renderRacGapChart === 'function') renderRacGapChart(cur);
+        if (typeof renderSectorCharts === 'function') renderSectorCharts(cur);
+      }
+    };
+
+    const SEASON_2026 = "e88b4e43-2209-47aa-8e83-0e0b1cedde6e";
+    const CAT_MOTO2 = "549640b8-fd9c-4245-acfd-60e4bc38b25c";
+
+    const GP_ROUNDS = [
+      { round: 'R01', short: 'THA', countryCode: 'th', name: 'PT Grand Prix of Thailand', circuit: 'Chang International Circuit', location: 'Buriram', date: '27 Feb - 01 Mar 2026' },
+      { round: 'R02', short: 'BRA', countryCode: 'br', name: 'Grand Prix of Brazil', circuit: 'Autódromo Internacional de Goiânia', location: 'Goiânia', date: '20 Mar - 22 Mar 2026' },
+      { round: 'R03', short: 'USA', countryCode: 'us', name: 'Grand Prix of The Americas', circuit: 'Circuit of the Americas', location: 'Austin', date: '27 Mar - 29 Mar 2026' },
+      { round: 'R04', short: 'SPA', countryCode: 'es', name: 'Gran Premio de España', circuit: 'Circuito de Jerez', location: 'Jerez de la Frontera', date: '24 Apr - 26 Apr 2026' },
+      { round: 'R05', short: 'FRA', countryCode: 'fr', name: 'Grand Prix de France', circuit: 'Le Mans Bug Circuit', location: 'Le Mans', date: '08 May - 10 May 2026' },
+      { round: 'R06', short: 'CAT', countryCode: 'es', name: 'Gran Premi de Catalunya', circuit: 'Circuit de Barcelona-Catalunya', location: 'Montmeló', date: '15 May - 17 May 2026' },
+      { round: 'R07', short: 'ITA', countryCode: 'it', name: 'Gran Premio d\'Italia', circuit: 'Autodromo Internazionale del Mugello', location: 'Scarperia e San Piero', date: '29 May - 31 May 2026' },
+      { round: 'R08', short: 'HUN', countryCode: 'hu', name: 'Hungarian Grand Prix', circuit: 'Balaton Park Circuit', location: 'Balatonfőkajár', date: '05 Jun - 07 Jun 2026' },
+      { round: 'R09', short: 'CZE', countryCode: 'cz', name: 'Grand Prix of Czechia', circuit: 'Automotodrom Brno', location: 'Brno', date: '19 Jun - 21 Jun 2026' },
+      { round: 'R10', short: 'NED', countryCode: 'nl', name: 'TT Assen', circuit: 'TT Circuit Assen', location: 'Assen', date: '26 Jun - 28 Jun 2026' },
+      { round: 'R11', short: 'GER', countryCode: 'de', name: 'Motorrad Grand Prix Deutschland', circuit: 'Sachsenring', location: 'Hohenstein-Ernstthal', date: '10 Jul - 12 Jul 2026' },
+      { round: 'R12', short: 'GBR', countryCode: 'gb', name: 'British Grand Prix', circuit: 'Silverstone Circuit', location: 'Silverstone', date: '07 Aug - 09 Aug 2026' },
+      { round: 'R13', short: 'ARA', countryCode: 'es', name: 'Gran Premio de Aragón', circuit: 'MotorLand Aragón', location: 'Alcañiz', date: '28 Aug - 30 Aug 2026' },
+      { round: 'R14', short: 'RSM', countryCode: 'sm', name: 'Gran Premio di San Marino', circuit: 'Misano World Circuit Marco Simoncelli', location: 'Misano Adriatico', date: '11 Sep - 13 Sep 2026' },
+      { round: 'R15', short: 'AUT', countryCode: 'at', name: 'Austrian Grand Prix', circuit: 'Red Bull Ring', location: 'Spielberg', date: '18 Sep - 20 Sep 2026' },
+      { round: 'R16', short: 'JPN', countryCode: 'jp', name: 'Grand Prix of Japan', circuit: 'Mobility Resort Motegi', location: 'Motegi', date: '02 Oct - 04 Oct 2026' },
+      { round: 'R17', short: 'INA', countryCode: 'id', name: 'Indonesian Grand Prix', circuit: 'Pertamina Mandalika Circuit', location: 'Lombok', date: '09 Oct - 11 Oct 2026' },
+      { round: 'R18', short: 'AUS', countryCode: 'au', name: 'Australian Grand Prix', circuit: 'Phillip Island Grand Prix Circuit', location: 'Phillip Island', date: '23 Oct - 25 Oct 2026' },
+      { round: 'R19', short: 'MAL', countryCode: 'my', name: 'Malaysian Grand Prix', circuit: 'PETRONAS Sepang International Circuit', location: 'Sepang', date: '30 Oct - 01 Nov 2026' },
+      { round: 'R20', short: 'QAT', countryCode: 'qa', name: 'Qatar Grand Prix', circuit: 'Lusail International Circuit', location: 'Lusail', date: '06 Nov - 08 Nov 2026' },
+      { round: 'R21', short: 'POR', countryCode: 'pt', name: 'Grande Prémio de Portugal', circuit: 'Autódromo Internacional do Algarve', location: 'Portimão', date: '20 Nov - 22 Nov 2026' },
+      { round: 'R22', short: 'VAL', countryCode: 'es', name: 'Gran Premio de la Comunitat Valenciana', circuit: 'Circuit Ricardo Tormo', location: 'Cheste', date: '27 Nov - 29 Nov 2026' }
+    ];
+
+    const SESSION_WEATHER_DATA = {
+  "THA": {
+    "fp1": "Dry | Air: 30\u00b0C | Track: 37\u00b0C",
+    "pr": "Dry | Air: 31\u00b0C | Track: 39\u00b0C",
+    "fp2": "Dry | Air: 27\u00b0C | Track: 28\u00b0C",
+    "q1": "Dry | Air: 33\u00b0C | Track: 52\u00b0C",
+    "q2": "Dry | Air: 33\u00b0C | Track: 53\u00b0C",
+    "grid": "Dry | Air: 33\u00b0C | Track: 53\u00b0C",
+    "race": "Dry | Air: 34\u00b0C | Track: 54\u00b0C"
+  }
+};
+
+    const STATIC_EVENT_DATA = {
+  "THA": {
+    "fp1": [
+      {
+        "pos": 1,
+        "rider": "David Alonso",
+        "laps": 21,
+        "time": "01:35.148",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 2,
+        "rider": "Izan Guevara",
+        "laps": 19,
+        "time": "01:35.160",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 3,
+        "rider": "Filip Salac",
+        "laps": 19,
+        "time": "01:35.245",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 4,
+        "rider": "Collin Veijer",
+        "laps": 20,
+        "time": "01:35.294",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 5,
+        "rider": "Manuel Gonzalez",
+        "laps": 20,
+        "time": "01:35.306",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 6,
+        "rider": "Daniel Holgado",
+        "laps": 20,
+        "time": "01:35.365",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 7,
+        "rider": "Senna Agius",
+        "laps": 19,
+        "time": "01:35.444",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 8,
+        "rider": "Barry Baltus",
+        "laps": 19,
+        "time": "01:35.551",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 9,
+        "rider": "Ivan Ortola",
+        "laps": 20,
+        "time": "01:35.553",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 10,
+        "rider": "Tony Arbolino",
+        "laps": 19,
+        "time": "01:35.703",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 11,
+        "rider": "Angel Piqueras",
+        "laps": 19,
+        "time": "01:35.763",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 12,
+        "rider": "Luca Lunetta",
+        "laps": 18,
+        "time": "01:35.786",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 13,
+        "rider": "Alex Escrig",
+        "laps": 8,
+        "time": "01:35.809",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 14,
+        "rider": "Deniz \u00f6nc\u00fc",
+        "laps": 18,
+        "time": "01:35.855",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 15,
+        "rider": "Ayumu Sasaki",
+        "laps": 18,
+        "time": "01:35.881",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 16,
+        "rider": "Joe Roberts",
+        "laps": 18,
+        "time": "01:35.917",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 17,
+        "rider": "Mario Aji",
+        "laps": 19,
+        "time": "01:35.923",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 18,
+        "rider": "Celestino Vietti",
+        "laps": 18,
+        "time": "01:35.985",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 19,
+        "rider": "Zonta Vd Goorbergh",
+        "laps": 19,
+        "time": "01:36.028",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 20,
+        "rider": "Sergio Garcia",
+        "laps": 19,
+        "time": "01:36.141",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 21,
+        "rider": "Alonso Lopez",
+        "laps": 19,
+        "time": "01:36.181",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 22,
+        "rider": "Aron Canet",
+        "laps": 10,
+        "time": "01:36.202",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 23,
+        "rider": "Daniel Mu\u00f1oz",
+        "laps": 18,
+        "time": "01:36.332",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 24,
+        "rider": "Taiyo Furusato",
+        "laps": 17,
+        "time": "01:36.555",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 25,
+        "rider": "Adrian Huertas",
+        "laps": 12,
+        "time": "01:36.561",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 26,
+        "rider": "Jose Antonio Rueda",
+        "laps": 19,
+        "time": "01:36.568",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 27,
+        "rider": "Alberto Ferrandez",
+        "laps": 19,
+        "time": "01:36.589",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 28,
+        "rider": "Jorge Navarro",
+        "laps": 3,
+        "time": "01:37.782",
+        "status": "INSTND",
+        "pts": null
+      }
+    ],
+    "pr": [
+      {
+        "pos": 1,
+        "rider": "Manuel Gonzalez",
+        "laps": 18,
+        "time": "01:34.501",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 2,
+        "rider": "Alex Escrig",
+        "laps": 16,
+        "time": "01:34.625",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 3,
+        "rider": "Izan Guevara",
+        "laps": 14,
+        "time": "01:34.686",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 4,
+        "rider": "Daniel Holgado",
+        "laps": 19,
+        "time": "01:34.703",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 5,
+        "rider": "Mario Aji",
+        "laps": 16,
+        "time": "01:34.736",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 6,
+        "rider": "Senna Agius",
+        "laps": 16,
+        "time": "01:34.796",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 7,
+        "rider": "Ayumu Sasaki",
+        "laps": 15,
+        "time": "01:34.830",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 8,
+        "rider": "Ivan Ortola",
+        "laps": 20,
+        "time": "01:34.845",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 9,
+        "rider": "Celestino Vietti",
+        "laps": 16,
+        "time": "01:34.883",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 10,
+        "rider": "Collin Veijer",
+        "laps": 15,
+        "time": "01:34.968",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 11,
+        "rider": "Barry Baltus",
+        "laps": 20,
+        "time": "01:34.971",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 12,
+        "rider": "Sergio Garcia",
+        "laps": 15,
+        "time": "01:34.971",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 13,
+        "rider": "Angel Piqueras",
+        "laps": 21,
+        "time": "01:34.974",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 14,
+        "rider": "Filip Salac",
+        "laps": 17,
+        "time": "01:35.060",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 15,
+        "rider": "Alonso Lopez",
+        "laps": 16,
+        "time": "01:35.110",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 16,
+        "rider": "Joe Roberts",
+        "laps": 16,
+        "time": "01:35.134",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 17,
+        "rider": "Daniel Mu\u00f1oz",
+        "laps": 17,
+        "time": "01:35.168",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 18,
+        "rider": "Zonta Vd Goorbergh",
+        "laps": 11,
+        "time": "01:35.189",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 19,
+        "rider": "Tony Arbolino",
+        "laps": 19,
+        "time": "01:35.219",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 20,
+        "rider": "Deniz \u00f6nc\u00fc",
+        "laps": 16,
+        "time": "01:35.261",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 21,
+        "rider": "Luca Lunetta",
+        "laps": 18,
+        "time": "01:35.504",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 22,
+        "rider": "David Alonso",
+        "laps": 20,
+        "time": "01:35.605",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 23,
+        "rider": "Adrian Huertas",
+        "laps": 16,
+        "time": "01:35.623",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 24,
+        "rider": "Aron Canet",
+        "laps": 15,
+        "time": "01:35.755",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 25,
+        "rider": "Taiyo Furusato",
+        "laps": 19,
+        "time": "01:36.019",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 26,
+        "rider": "Jose Antonio Rueda",
+        "laps": 15,
+        "time": "01:36.062",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 27,
+        "rider": "Jorge Navarro",
+        "laps": 10,
+        "time": "01:36.316",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 28,
+        "rider": "Alberto Ferrandez",
+        "laps": 16,
+        "time": "01:36.453",
+        "status": "INSTND",
+        "pts": null
+      }
+    ],
+    "fp2": [
+      {
+        "pos": 1,
+        "rider": "Daniel Holgado",
+        "laps": 19,
+        "time": "01:34.838",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 2,
+        "rider": "Izan Guevara",
+        "laps": 15,
+        "time": "01:34.845",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 3,
+        "rider": "Senna Agius",
+        "laps": 18,
+        "time": "01:34.946",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 4,
+        "rider": "David Alonso",
+        "laps": 13,
+        "time": "01:34.981",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 5,
+        "rider": "Barry Baltus",
+        "laps": 19,
+        "time": "01:35.010",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 6,
+        "rider": "Collin Veijer",
+        "laps": 13,
+        "time": "01:35.043",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 7,
+        "rider": "Alex Escrig",
+        "laps": 19,
+        "time": "01:35.047",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 8,
+        "rider": "Ivan Ortola",
+        "laps": 18,
+        "time": "01:35.055",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 9,
+        "rider": "Celestino Vietti",
+        "laps": 14,
+        "time": "01:35.169",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 10,
+        "rider": "Manuel Gonzalez",
+        "laps": 10,
+        "time": "01:35.254",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 11,
+        "rider": "Joe Roberts",
+        "laps": 14,
+        "time": "01:35.300",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 12,
+        "rider": "Ayumu Sasaki",
+        "laps": 19,
+        "time": "01:35.330",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 13,
+        "rider": "Filip Salac",
+        "laps": 19,
+        "time": "01:35.379",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 14,
+        "rider": "Alonso Lopez",
+        "laps": 14,
+        "time": "01:35.390",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 15,
+        "rider": "Deniz \u00f6nc\u00fc",
+        "laps": 16,
+        "time": "01:35.398",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 16,
+        "rider": "Tony Arbolino",
+        "laps": 13,
+        "time": "01:35.407",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 17,
+        "rider": "Angel Piqueras",
+        "laps": 17,
+        "time": "01:35.419",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 18,
+        "rider": "Aron Canet",
+        "laps": 13,
+        "time": "01:35.426",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 19,
+        "rider": "Mario Aji",
+        "laps": 17,
+        "time": "01:35.574",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 20,
+        "rider": "Daniel Mu\u00f1oz",
+        "laps": 19,
+        "time": "01:35.638",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 21,
+        "rider": "Sergio Garcia",
+        "laps": 16,
+        "time": "01:35.652",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 22,
+        "rider": "Alberto Ferrandez",
+        "laps": 12,
+        "time": "01:35.756",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 23,
+        "rider": "Jose Antonio Rueda",
+        "laps": 14,
+        "time": "01:35.759",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 24,
+        "rider": "Luca Lunetta",
+        "laps": 14,
+        "time": "01:35.828",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 25,
+        "rider": "Taiyo Furusato",
+        "laps": 16,
+        "time": "01:35.855",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 26,
+        "rider": "Zonta Vd Goorbergh",
+        "laps": 15,
+        "time": "01:35.936",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 27,
+        "rider": "Jorge Navarro",
+        "laps": 17,
+        "time": "01:36.499",
+        "status": "INSTND",
+        "pts": null
+      }
+    ],
+    "q1": [
+      {
+        "pos": 1,
+        "rider": "Daniel Mu\u00f1oz",
+        "laps": 8,
+        "time": "01:34.896",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 2,
+        "rider": "Deniz \u00f6nc\u00fc",
+        "laps": 8,
+        "time": "01:35.013",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 3,
+        "rider": "Aron Canet",
+        "laps": 8,
+        "time": "01:35.120",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 4,
+        "rider": "David Alonso",
+        "laps": 7,
+        "time": "01:35.141",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 5,
+        "rider": "Alonso Lopez",
+        "laps": 8,
+        "time": "01:35.170",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 6,
+        "rider": "Luca Lunetta",
+        "laps": 8,
+        "time": "01:35.188",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 7,
+        "rider": "Tony Arbolino",
+        "laps": 8,
+        "time": "01:35.189",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 8,
+        "rider": "Taiyo Furusato",
+        "laps": 8,
+        "time": "01:35.256",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 9,
+        "rider": "Zonta Vd Goorbergh",
+        "laps": 7,
+        "time": "01:35.315",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 10,
+        "rider": "Jose Antonio Rueda",
+        "laps": 8,
+        "time": "01:35.453",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 11,
+        "rider": "Joe Roberts",
+        "laps": 8,
+        "time": "01:35.505",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 12,
+        "rider": "Alberto Ferrandez",
+        "laps": 7,
+        "time": "01:35.549",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 13,
+        "rider": "Jorge Navarro",
+        "laps": 8,
+        "time": "01:35.644",
+        "status": "INSTND",
+        "pts": null
+      }
+    ],
+    "q2": [
+      {
+        "pos": 1,
+        "rider": "Senna Agius",
+        "laps": 8,
+        "time": "01:34.576",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 2,
+        "rider": "Izan Guevara",
+        "laps": 8,
+        "time": "01:34.604",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 3,
+        "rider": "Daniel Holgado",
+        "laps": 8,
+        "time": "01:34.625",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 4,
+        "rider": "Ivan Ortola",
+        "laps": 7,
+        "time": "01:34.693",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 5,
+        "rider": "Celestino Vietti",
+        "laps": 8,
+        "time": "01:34.746",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 6,
+        "rider": "Collin Veijer",
+        "laps": 8,
+        "time": "01:34.788",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 7,
+        "rider": "Manuel Gonzalez",
+        "laps": 7,
+        "time": "01:34.796",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 8,
+        "rider": "Filip Salac",
+        "laps": 7,
+        "time": "01:34.830",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 9,
+        "rider": "Mario Aji",
+        "laps": 7,
+        "time": "01:34.835",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 10,
+        "rider": "David Alonso",
+        "laps": 7,
+        "time": "01:34.860",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 11,
+        "rider": "Angel Piqueras",
+        "laps": 7,
+        "time": "01:35.007",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 12,
+        "rider": "Ayumu Sasaki",
+        "laps": 7,
+        "time": "01:35.040",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 13,
+        "rider": "Barry Baltus",
+        "laps": 7,
+        "time": "01:35.181",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 14,
+        "rider": "Daniel Mu\u00f1oz",
+        "laps": 8,
+        "time": "01:35.191",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 15,
+        "rider": "Aron Canet",
+        "laps": 8,
+        "time": "01:35.200",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 16,
+        "rider": "Sergio Garcia",
+        "laps": 6,
+        "time": "01:35.544",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 17,
+        "rider": "Deniz \u00f6nc\u00fc",
+        "laps": 4,
+        "time": "01:35.888",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": null,
+        "rider": "Alex Escrig",
+        "laps": 0,
+        "time": "-",
+        "status": "OUTSTND",
+        "pts": null
+      }
+    ],
+    "grid": [
+      {
+        "pos": 1,
+        "rider": "Senna Agius",
+        "laps": 8,
+        "time": "01:34.576",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 2,
+        "rider": "Izan Guevara",
+        "laps": 8,
+        "time": "01:34.604",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 3,
+        "rider": "Daniel Holgado",
+        "laps": 8,
+        "time": "01:34.625",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 4,
+        "rider": "Ivan Ortola",
+        "laps": 7,
+        "time": "01:34.693",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 5,
+        "rider": "Celestino Vietti",
+        "laps": 8,
+        "time": "01:34.746",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 6,
+        "rider": "Collin Veijer",
+        "laps": 8,
+        "time": "01:34.788",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 7,
+        "rider": "Manuel Gonzalez",
+        "laps": 7,
+        "time": "01:34.796",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 8,
+        "rider": "Filip Salac",
+        "laps": 7,
+        "time": "01:34.830",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 9,
+        "rider": "Mario Aji",
+        "laps": 7,
+        "time": "01:34.835",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 10,
+        "rider": "David Alonso",
+        "laps": 7,
+        "time": "01:34.860",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 11,
+        "rider": "Angel Piqueras",
+        "laps": 7,
+        "time": "01:35.007",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 12,
+        "rider": "Ayumu Sasaki",
+        "laps": 7,
+        "time": "01:35.040",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 13,
+        "rider": "Barry Baltus",
+        "laps": 7,
+        "time": "01:35.181",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 14,
+        "rider": "Daniel Mu\u00f1oz",
+        "laps": 8,
+        "time": "01:35.191",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 15,
+        "rider": "Aron Canet",
+        "laps": 8,
+        "time": "01:35.200",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 16,
+        "rider": "Sergio Garcia",
+        "laps": 6,
+        "time": "01:35.544",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 17,
+        "rider": "Deniz \u00f6nc\u00fc",
+        "laps": 4,
+        "time": "01:35.888",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": null,
+        "rider": "Alex Escrig",
+        "laps": 0,
+        "time": "-",
+        "status": "OUTSTND",
+        "pts": null
+      },
+      {
+        "pos": 19,
+        "rider": "Alonso Lopez",
+        "laps": 8,
+        "time": "01:35.170",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 20,
+        "rider": "Luca Lunetta",
+        "laps": 8,
+        "time": "01:35.188",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 21,
+        "rider": "Tony Arbolino",
+        "laps": 8,
+        "time": "01:35.189",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 22,
+        "rider": "Taiyo Furusato",
+        "laps": 8,
+        "time": "01:35.256",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 23,
+        "rider": "Zonta Vd Goorbergh",
+        "laps": 7,
+        "time": "01:35.315",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 24,
+        "rider": "Jose Antonio Rueda",
+        "laps": 8,
+        "time": "01:35.453",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 25,
+        "rider": "Joe Roberts",
+        "laps": 8,
+        "time": "01:35.505",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 26,
+        "rider": "Alberto Ferrandez",
+        "laps": 7,
+        "time": "01:35.549",
+        "status": "INSTND",
+        "pts": null
+      },
+      {
+        "pos": 27,
+        "rider": "Jorge Navarro",
+        "laps": 8,
+        "time": "01:35.644",
+        "status": "INSTND",
+        "pts": null
+      }
+    ],
+    "race": [
+      {
+        "pos": 1,
+        "rider": "Manuel Gonzalez",
+        "laps": 7,
+        "time": "11:11.575",
+        "status": "INSTND",
+        "pts": 12.5
+      },
+      {
+        "pos": 2,
+        "rider": "Izan Guevara",
+        "laps": 7,
+        "time": "11:11.674",
+        "status": "INSTND",
+        "pts": 10
+      },
+      {
+        "pos": 3,
+        "rider": "Daniel Holgado",
+        "laps": 7,
+        "time": "11:12.029",
+        "status": "INSTND",
+        "pts": 8
+      },
+      {
+        "pos": 4,
+        "rider": "Ivan Ortola",
+        "laps": 7,
+        "time": "11:12.713",
+        "status": "INSTND",
+        "pts": 6.5
+      },
+      {
+        "pos": 5,
+        "rider": "Collin Veijer",
+        "laps": 7,
+        "time": "11:14.242",
+        "status": "INSTND",
+        "pts": 5.5
+      },
+      {
+        "pos": 6,
+        "rider": "Celestino Vietti",
+        "laps": 7,
+        "time": "11:14.786",
+        "status": "INSTND",
+        "pts": 5
+      },
+      {
+        "pos": 7,
+        "rider": "Alonso Lopez",
+        "laps": 7,
+        "time": "11:15.795",
+        "status": "INSTND",
+        "pts": 4.5
+      },
+      {
+        "pos": 8,
+        "rider": "Daniel Mu\u00f1oz",
+        "laps": 7,
+        "time": "11:15.915",
+        "status": "INSTND",
+        "pts": 4
+      },
+      {
+        "pos": 9,
+        "rider": "Deniz \u00f6nc\u00fc",
+        "laps": 7,
+        "time": "11:17.410",
+        "status": "INSTND",
+        "pts": 3.5
+      },
+      {
+        "pos": 10,
+        "rider": "Ayumu Sasaki",
+        "laps": 7,
+        "time": "11:17.755",
+        "status": "INSTND",
+        "pts": 3
+      },
+      {
+        "pos": 11,
+        "rider": "Aron Canet",
+        "laps": 7,
+        "time": "11:18.125",
+        "status": "INSTND",
+        "pts": 2.5
+      },
+      {
+        "pos": 12,
+        "rider": "Alex Escrig",
+        "laps": 7,
+        "time": "11:18.363",
+        "status": "INSTND",
+        "pts": 2
+      },
+      {
+        "pos": 13,
+        "rider": "Tony Arbolino",
+        "laps": 7,
+        "time": "11:18.678",
+        "status": "INSTND",
+        "pts": 1.5
+      },
+      {
+        "pos": 14,
+        "rider": "Barry Baltus",
+        "laps": 7,
+        "time": "11:21.315",
+        "status": "INSTND",
+        "pts": 1
+      },
+      {
+        "pos": 15,
+        "rider": "Alberto Ferrandez",
+        "laps": 7,
+        "time": "11:21.351",
+        "status": "INSTND",
+        "pts": 0.5
+      },
+      {
+        "pos": 16,
+        "rider": "Taiyo Furusato",
+        "laps": 7,
+        "time": "11:21.953",
+        "status": "INSTND",
+        "pts": 0
+      },
+      {
+        "pos": 17,
+        "rider": "Jorge Navarro",
+        "laps": 7,
+        "time": "11:23.901",
+        "status": "INSTND",
+        "pts": 0
+      },
+      {
+        "pos": 18,
+        "rider": "Senna Agius",
+        "laps": 7,
+        "time": "11:24.176",
+        "status": "INSTND",
+        "pts": 0
+      },
+      {
+        "pos": 19,
+        "rider": "Filip Salac",
+        "laps": 7,
+        "time": "11:29.533",
+        "status": "INSTND",
+        "pts": 0
+      },
+      {
+        "pos": null,
+        "rider": "Zonta Vd Goorbergh",
+        "laps": 1,
+        "time": "03:46.211",
+        "status": "OUTSTND",
+        "pts": 0
+      },
+      {
+        "pos": null,
+        "rider": "Joe Roberts",
+        "laps": 0,
+        "time": "-",
+        "status": "NOTFINISHFIRST",
+        "pts": 0
+      },
+      {
+        "pos": null,
+        "rider": "Sergio Garcia",
+        "laps": 0,
+        "time": "-",
+        "status": "NOTSTARTED",
+        "pts": 0
+      },
+      {
+        "pos": null,
+        "rider": "Mario Aji",
+        "laps": 0,
+        "time": "-",
+        "status": "NOTONRESTARTGRID",
+        "pts": 0
+      },
+      {
+        "pos": null,
+        "rider": "Luca Lunetta",
+        "laps": 0,
+        "time": "-",
+        "status": "NOTSTARTED",
+        "pts": 0
+      },
+      {
+        "pos": null,
+        "rider": "David Alonso",
+        "laps": 0,
+        "time": "-",
+        "status": "NOTONRESTARTGRID",
+        "pts": 0
+      },
+      {
+        "pos": null,
+        "rider": "Angel Piqueras",
+        "laps": 0,
+        "time": "-",
+        "status": "NOTONRESTARTGRID",
+        "pts": 0
+      },
+      {
+        "pos": null,
+        "rider": "Jose Antonio Rueda",
+        "laps": 0,
+        "time": "-",
+        "status": "NOTFINISHFIRST",
+        "pts": 0
+      }
+    ]
+  }
+};
+
+    const EVENT_LAP_CHARTS_DATA = {
+  "RAC": {
+    "THA": {
+      "totalLaps": 7,
+      "riders": {
+        "Senna Agius": [
+          18,
+          18,
+          18,
+          18,
+          18,
+          18,
+          18
+        ],
+        "Izan Guevara": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2
+        ],
+        "Daniel Holgado": [
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "Sergio Garcia": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "Ivan Ortola": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "Celestino Vietti": [
+          8,
+          8,
+          8,
+          7,
+          7,
+          6,
+          6
+        ],
+        "Collin Veijer": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "Manuel Gonzalez": [
+          3,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1
+        ],
+        "Barry Baltus": [
+          17,
+          17,
+          17,
+          17,
+          16,
+          15,
+          14
+        ],
+        "Filip Salac": [
+          19,
+          19,
+          19,
+          19,
+          19,
+          19,
+          19
+        ],
+        "Mario Aji": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "Jorge Navarro": [
+          14,
+          16,
+          16,
+          16,
+          17,
+          17,
+          17
+        ],
+        "David Alonso": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "Alex Escrig": [
+          13,
+          12,
+          12,
+          12,
+          12,
+          12,
+          12
+        ],
+        "Angel Piqueras": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "Ayumu Sasaki": [
+          9,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ],
+        "Tony Arbolino": [
+          15,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13
+        ],
+        "Daniel Mu\u00f1oz": [
+          7,
+          7,
+          7,
+          8,
+          8,
+          8,
+          8
+        ],
+        "Aron Canet": [
+          11,
+          11,
+          11,
+          11,
+          11,
+          11,
+          11
+        ],
+        "Joe Roberts": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "Deniz \u00f6nc\u00fc": [
+          10,
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "Alonso Lopez": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          7,
+          7
+        ],
+        "Luca Lunetta": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "Taiyo Furusato": [
+          16,
+          15,
+          15,
+          15,
+          15,
+          16,
+          16
+        ],
+        "Zonta Vd Goorbergh": [
+          20,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "Jose Antonio Rueda": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "Alberto Ferrandez": [
+          12,
+          14,
+          14,
+          14,
+          14,
+          14,
+          15
+        ]
+      }
+    }
+  }
+};
+
+    const EVENT_LAPS_DATA = {
+  "THA": {
+    "Manuel Gonzalez": [
+      {
+        "lap": 1,
+        "time": "1'37.875",
+        "t1": 22.546,
+        "t2": 27.713,
+        "t3": 22.783,
+        "t4": 24.833,
+        "speed": 281.9
+      },
+      {
+        "lap": 2,
+        "time": "1'35.379",
+        "t1": 20.417,
+        "t2": 27.812,
+        "t3": 22.488,
+        "t4": 24.662,
+        "speed": 282.7
+      },
+      {
+        "lap": 3,
+        "time": "1'35.387",
+        "t1": 20.51,
+        "t2": 27.529,
+        "t3": 22.518,
+        "t4": 24.83,
+        "speed": 278.3
+      },
+      {
+        "lap": 4,
+        "time": "1'35.499",
+        "t1": 20.469,
+        "t2": 27.523,
+        "t3": 22.713,
+        "t4": 24.794,
+        "speed": 279.0
+      },
+      {
+        "lap": 5,
+        "time": "1'35.651",
+        "t1": 20.538,
+        "t2": 27.637,
+        "t3": 22.574,
+        "t4": 24.902,
+        "speed": 279.0
+      },
+      {
+        "lap": 6,
+        "time": "1'35.960",
+        "t1": 20.422,
+        "t2": 27.584,
+        "t3": 22.874,
+        "t4": 25.08,
+        "speed": 279.0
+      },
+      {
+        "lap": 7,
+        "time": "1'35.824",
+        "t1": 20.557,
+        "t2": 27.537,
+        "t3": 22.608,
+        "t4": 25.122,
+        "speed": 276.9
+      }
+    ],
+    "Izan Guevara": [
+      {
+        "lap": 1,
+        "time": "1'37.461",
+        "t1": 22.484,
+        "t2": 27.572,
+        "t3": 22.699,
+        "t4": 24.706,
+        "speed": 279.0
+      },
+      {
+        "lap": 2,
+        "time": "1'35.410",
+        "t1": 20.61,
+        "t2": 27.547,
+        "t3": 22.597,
+        "t4": 24.656,
+        "speed": 275.5
+      },
+      {
+        "lap": 3,
+        "time": "1'35.504",
+        "t1": 20.615,
+        "t2": 27.611,
+        "t3": 22.607,
+        "t4": 24.671,
+        "speed": 274.8
+      },
+      {
+        "lap": 4,
+        "time": "1'35.599",
+        "t1": 20.578,
+        "t2": 27.514,
+        "t3": 22.766,
+        "t4": 24.741,
+        "speed": 274.8
+      },
+      {
+        "lap": 5,
+        "time": "1'35.605",
+        "t1": 20.568,
+        "t2": 27.626,
+        "t3": 22.594,
+        "t4": 24.817,
+        "speed": 274.8
+      },
+      {
+        "lap": 6,
+        "time": "1'36.249",
+        "t1": 20.518,
+        "t2": 27.518,
+        "t3": 23.126,
+        "t4": 25.087,
+        "speed": 275.5
+      },
+      {
+        "lap": 7,
+        "time": "1'35.846",
+        "t1": 20.515,
+        "t2": 27.648,
+        "t3": 22.641,
+        "t4": 25.042,
+        "speed": 279.0
+      }
+    ],
+    "Daniel Holgado": [
+      {
+        "lap": 1,
+        "time": "1'37.661",
+        "t1": 22.391,
+        "t2": 27.773,
+        "t3": 22.651,
+        "t4": 24.846,
+        "speed": 271.3
+      },
+      {
+        "lap": 2,
+        "time": "1'35.819",
+        "t1": 20.552,
+        "t2": 27.734,
+        "t3": 22.85,
+        "t4": 24.683,
+        "speed": 274.8
+      },
+      {
+        "lap": 3,
+        "time": "1'35.450",
+        "t1": 20.499,
+        "t2": 27.514,
+        "t3": 22.559,
+        "t4": 24.878,
+        "speed": 278.3
+      },
+      {
+        "lap": 4,
+        "time": "1'35.558",
+        "t1": 20.606,
+        "t2": 27.612,
+        "t3": 22.504,
+        "t4": 24.836,
+        "speed": 276.2
+      },
+      {
+        "lap": 5,
+        "time": "1'35.649",
+        "t1": 20.594,
+        "t2": 27.605,
+        "t3": 22.568,
+        "t4": 24.882,
+        "speed": 276.2
+      },
+      {
+        "lap": 6,
+        "time": "1'35.952",
+        "t1": 20.58,
+        "t2": 27.672,
+        "t3": 22.665,
+        "t4": 25.035,
+        "speed": 274.8
+      },
+      {
+        "lap": 7,
+        "time": "1'35.940",
+        "t1": 20.524,
+        "t2": 27.688,
+        "t3": 22.722,
+        "t4": 25.006,
+        "speed": 274.1
+      }
+    ],
+    "Ivan Ortola": [
+      {
+        "lap": 1,
+        "time": "1'38.043",
+        "t1": 22.585,
+        "t2": 27.796,
+        "t3": 22.786,
+        "t4": 24.876,
+        "speed": 281.9
+      },
+      {
+        "lap": 2,
+        "time": "1'35.662",
+        "t1": 20.498,
+        "t2": 27.64,
+        "t3": 22.708,
+        "t4": 24.816,
+        "speed": 275.5
+      },
+      {
+        "lap": 3,
+        "time": "1'35.407",
+        "t1": 20.477,
+        "t2": 27.585,
+        "t3": 22.473,
+        "t4": 24.872,
+        "speed": 278.3
+      },
+      {
+        "lap": 4,
+        "time": "1'35.557",
+        "t1": 20.504,
+        "t2": 27.695,
+        "t3": 22.51,
+        "t4": 24.848,
+        "speed": 281.2
+      },
+      {
+        "lap": 5,
+        "time": "1'35.817",
+        "t1": 20.593,
+        "t2": 27.664,
+        "t3": 22.552,
+        "t4": 25.008,
+        "speed": 279.7
+      },
+      {
+        "lap": 6,
+        "time": "1'35.960",
+        "t1": 20.528,
+        "t2": 27.727,
+        "t3": 22.686,
+        "t4": 25.019,
+        "speed": 279.0
+      },
+      {
+        "lap": 7,
+        "time": "1'36.267",
+        "t1": 20.591,
+        "t2": 27.748,
+        "t3": 22.733,
+        "t4": 25.195,
+        "speed": 277.6
+      }
+    ],
+    "Collin Veijer": [
+      {
+        "lap": 1,
+        "time": "1'38.839",
+        "t1": 23.1,
+        "t2": 28.101,
+        "t3": 22.794,
+        "t4": 24.844,
+        "speed": 279.0
+      },
+      {
+        "lap": 2,
+        "time": "1'35.690",
+        "t1": 20.627,
+        "t2": 27.699,
+        "t3": 22.562,
+        "t4": 24.802,
+        "speed": 275.5
+      },
+      {
+        "lap": 3,
+        "time": "1'35.856",
+        "t1": 20.665,
+        "t2": 27.709,
+        "t3": 22.524,
+        "t4": 24.958,
+        "speed": 275.5
+      },
+      {
+        "lap": 4,
+        "time": "1'35.629",
+        "t1": 20.623,
+        "t2": 27.686,
+        "t3": 22.495,
+        "t4": 24.825,
+        "speed": 275.5
+      },
+      {
+        "lap": 5,
+        "time": "1'35.776",
+        "t1": 20.586,
+        "t2": 27.673,
+        "t3": 22.569,
+        "t4": 24.948,
+        "speed": 274.8
+      },
+      {
+        "lap": 6,
+        "time": "1'36.120",
+        "t1": 20.612,
+        "t2": 27.725,
+        "t3": 22.773,
+        "t4": 25.01,
+        "speed": 275.5
+      },
+      {
+        "lap": 7,
+        "time": "1'36.332",
+        "t1": 20.568,
+        "t2": 27.832,
+        "t3": 22.75,
+        "t4": 25.182,
+        "speed": 277.6
+      }
+    ],
+    "Celestino Vietti": [
+      {
+        "lap": 1,
+        "time": "1'39.442",
+        "t1": 23.115,
+        "t2": 28.351,
+        "t3": 23.097,
+        "t4": 24.879,
+        "speed": 275.5
+      },
+      {
+        "lap": 2,
+        "time": "1'35.859",
+        "t1": 20.858,
+        "t2": 27.642,
+        "t3": 22.476,
+        "t4": 24.883,
+        "speed": 276.2
+      },
+      {
+        "lap": 3,
+        "time": "1'36.089",
+        "t1": 20.748,
+        "t2": 27.809,
+        "t3": 22.641,
+        "t4": 24.891,
+        "speed": 274.1
+      },
+      {
+        "lap": 4,
+        "time": "1'35.952",
+        "t1": 20.607,
+        "t2": 27.698,
+        "t3": 22.74,
+        "t4": 24.907,
+        "speed": 274.8
+      },
+      {
+        "lap": 5,
+        "time": "1'35.702",
+        "t1": 20.6,
+        "t2": 27.688,
+        "t3": 22.58,
+        "t4": 24.834,
+        "speed": 274.1
+      },
+      {
+        "lap": 6,
+        "time": "1'35.907",
+        "t1": 20.564,
+        "t2": 27.599,
+        "t3": 22.682,
+        "t4": 25.062,
+        "speed": 276.2
+      },
+      {
+        "lap": 7,
+        "time": "1'35.835",
+        "t1": 20.62,
+        "t2": 27.646,
+        "t3": 22.614,
+        "t4": 24.955,
+        "speed": 275.5
+      }
+    ],
+    "Alonso Lopez": [
+      {
+        "lap": 1,
+        "time": "1'39.112",
+        "t1": 23.159,
+        "t2": 28.128,
+        "t3": 23.025,
+        "t4": 24.8,
+        "speed": 273.4
+      },
+      {
+        "lap": 2,
+        "time": "1'35.660",
+        "t1": 20.657,
+        "t2": 27.627,
+        "t3": 22.534,
+        "t4": 24.842,
+        "speed": 274.8
+      },
+      {
+        "lap": 3,
+        "time": "1'36.025",
+        "t1": 20.709,
+        "t2": 27.847,
+        "t3": 22.569,
+        "t4": 24.9,
+        "speed": 274.8
+      },
+      {
+        "lap": 4,
+        "time": "1'36.186",
+        "t1": 20.735,
+        "t2": 27.848,
+        "t3": 22.677,
+        "t4": 24.926,
+        "speed": 273.4
+      },
+      {
+        "lap": 5,
+        "time": "1'35.874",
+        "t1": 20.744,
+        "t2": 27.716,
+        "t3": 22.538,
+        "t4": 24.876,
+        "speed": 272.0
+      },
+      {
+        "lap": 6,
+        "time": "1'36.339",
+        "t1": 20.8,
+        "t2": 27.689,
+        "t3": 22.724,
+        "t4": 25.126,
+        "speed": 272.7
+      },
+      {
+        "lap": 7,
+        "time": "1'36.599",
+        "t1": 20.717,
+        "t2": 27.893,
+        "t3": 22.899,
+        "t4": 25.09,
+        "speed": 274.1
+      }
+    ],
+    "Daniel Mu\u00f1oz": [
+      {
+        "lap": 1,
+        "time": "1'39.310",
+        "t1": 23.057,
+        "t2": 28.233,
+        "t3": 23.22,
+        "t4": 24.8,
+        "speed": 277.6
+      },
+      {
+        "lap": 2,
+        "time": "1'35.762",
+        "t1": 20.578,
+        "t2": 27.78,
+        "t3": 22.514,
+        "t4": 24.89,
+        "speed": 278.3
+      },
+      {
+        "lap": 3,
+        "time": "1'35.929",
+        "t1": 20.669,
+        "t2": 27.858,
+        "t3": 22.567,
+        "t4": 24.835,
+        "speed": 276.9
+      },
+      {
+        "lap": 4,
+        "time": "1'36.490",
+        "t1": 20.602,
+        "t2": 27.779,
+        "t3": 22.996,
+        "t4": 25.113,
+        "speed": 278.3
+      },
+      {
+        "lap": 5,
+        "time": "1'35.971",
+        "t1": 20.677,
+        "t2": 27.703,
+        "t3": 22.563,
+        "t4": 25.028,
+        "speed": 277.6
+      },
+      {
+        "lap": 6,
+        "time": "1'36.231",
+        "t1": 20.692,
+        "t2": 27.789,
+        "t3": 22.695,
+        "t4": 25.055,
+        "speed": 277.6
+      },
+      {
+        "lap": 7,
+        "time": "1'36.222",
+        "t1": 20.674,
+        "t2": 27.788,
+        "t3": 22.695,
+        "t4": 25.065,
+        "speed": 279.0
+      }
+    ],
+    "Deniz \u00f6nc\u00fc": [
+      {
+        "lap": 1,
+        "time": "1'39.821",
+        "t1": 23.3,
+        "t2": 28.361,
+        "t3": 23.178,
+        "t4": 24.982,
+        "speed": 276.2
+      },
+      {
+        "lap": 2,
+        "time": "1'35.837",
+        "t1": 20.587,
+        "t2": 27.82,
+        "t3": 22.683,
+        "t4": 24.747,
+        "speed": 284.2
+      },
+      {
+        "lap": 3,
+        "time": "1'35.897",
+        "t1": 20.596,
+        "t2": 27.871,
+        "t3": 22.648,
+        "t4": 24.782,
+        "speed": 279.7
+      },
+      {
+        "lap": 4,
+        "time": "1'36.131",
+        "t1": 20.59,
+        "t2": 27.763,
+        "t3": 22.845,
+        "t4": 24.933,
+        "speed": 281.2
+      },
+      {
+        "lap": 5,
+        "time": "1'36.586",
+        "t1": 20.6,
+        "t2": 27.883,
+        "t3": 23.022,
+        "t4": 25.081,
+        "speed": 281.2
+      },
+      {
+        "lap": 6,
+        "time": "1'36.408",
+        "t1": 20.597,
+        "t2": 27.831,
+        "t3": 22.907,
+        "t4": 25.073,
+        "speed": 277.6
+      },
+      {
+        "lap": 7,
+        "time": "1'36.730",
+        "t1": 20.796,
+        "t2": 27.784,
+        "t3": 23.039,
+        "t4": 25.111,
+        "speed": 278.3
+      }
+    ],
+    "Ayumu Sasaki": [
+      {
+        "lap": 1,
+        "time": "1'39.752",
+        "t1": 23.176,
+        "t2": 28.472,
+        "t3": 23.135,
+        "t4": 24.969,
+        "speed": 275.5
+      },
+      {
+        "lap": 2,
+        "time": "1'35.988",
+        "t1": 20.57,
+        "t2": 27.783,
+        "t3": 22.682,
+        "t4": 24.953,
+        "speed": 279.0
+      },
+      {
+        "lap": 3,
+        "time": "1'36.198",
+        "t1": 20.658,
+        "t2": 27.889,
+        "t3": 22.699,
+        "t4": 24.952,
+        "speed": 279.0
+      },
+      {
+        "lap": 4,
+        "time": "1'36.069",
+        "t1": 20.66,
+        "t2": 27.658,
+        "t3": 22.753,
+        "t4": 24.998,
+        "speed": 277.6
+      },
+      {
+        "lap": 5,
+        "time": "1'36.588",
+        "t1": 20.664,
+        "t2": 27.834,
+        "t3": 22.899,
+        "t4": 25.191,
+        "speed": 277.6
+      },
+      {
+        "lap": 6,
+        "time": "1'36.535",
+        "t1": 20.75,
+        "t2": 27.738,
+        "t3": 22.887,
+        "t4": 25.16,
+        "speed": 277.6
+      },
+      {
+        "lap": 7,
+        "time": "1'36.625",
+        "t1": 20.699,
+        "t2": 27.84,
+        "t3": 22.943,
+        "t4": 25.143,
+        "speed": 278.3
+      }
+    ],
+    "Aron Canet": [
+      {
+        "lap": 1,
+        "time": "1'39.955",
+        "t1": 23.499,
+        "t2": 28.293,
+        "t3": 23.18,
+        "t4": 24.983,
+        "speed": 273.4
+      },
+      {
+        "lap": 2,
+        "time": "1'36.423",
+        "t1": 20.653,
+        "t2": 28.085,
+        "t3": 22.844,
+        "t4": 24.841,
+        "speed": 279.0
+      },
+      {
+        "lap": 3,
+        "time": "1'35.995",
+        "t1": 20.689,
+        "t2": 27.733,
+        "t3": 22.687,
+        "t4": 24.886,
+        "speed": 274.8
+      },
+      {
+        "lap": 4,
+        "time": "1'36.606",
+        "t1": 20.786,
+        "t2": 27.858,
+        "t3": 22.992,
+        "t4": 24.97,
+        "speed": 273.4
+      },
+      {
+        "lap": 5,
+        "time": "1'36.393",
+        "t1": 20.748,
+        "t2": 27.874,
+        "t3": 22.821,
+        "t4": 24.95,
+        "speed": 273.4
+      },
+      {
+        "lap": 6,
+        "time": "1'36.342",
+        "t1": 20.712,
+        "t2": 27.789,
+        "t3": 22.85,
+        "t4": 24.991,
+        "speed": 274.8
+      },
+      {
+        "lap": 7,
+        "time": "1'36.411",
+        "t1": 20.685,
+        "t2": 27.774,
+        "t3": 22.905,
+        "t4": 25.047,
+        "speed": 275.5
+      }
+    ],
+    "Alex Escrig": [
+      {
+        "lap": 1,
+        "time": "1'40.470",
+        "t1": 23.664,
+        "t2": 28.393,
+        "t3": 23.222,
+        "t4": 25.191,
+        "speed": 272.7
+      },
+      {
+        "lap": 2,
+        "time": "1'36.388",
+        "t1": 20.693,
+        "t2": 27.835,
+        "t3": 23.066,
+        "t4": 24.794,
+        "speed": 279.7
+      },
+      {
+        "lap": 3,
+        "time": "1'35.917",
+        "t1": 20.652,
+        "t2": 27.835,
+        "t3": 22.629,
+        "t4": 24.801,
+        "speed": 276.9
+      },
+      {
+        "lap": 4,
+        "time": "1'36.298",
+        "t1": 20.645,
+        "t2": 27.951,
+        "t3": 22.769,
+        "t4": 24.933,
+        "speed": 276.9
+      },
+      {
+        "lap": 5,
+        "time": "1'36.494",
+        "t1": 20.712,
+        "t2": 28.023,
+        "t3": 22.74,
+        "t4": 25.019,
+        "speed": 278.3
+      },
+      {
+        "lap": 6,
+        "time": "1'36.417",
+        "t1": 20.612,
+        "t2": 28.002,
+        "t3": 22.712,
+        "t4": 25.091,
+        "speed": 278.3
+      },
+      {
+        "lap": 7,
+        "time": "1'36.379",
+        "t1": 20.631,
+        "t2": 27.881,
+        "t3": 22.771,
+        "t4": 25.096,
+        "speed": 279.0
+      }
+    ],
+    "Tony Arbolino": [
+      {
+        "lap": 1,
+        "time": "1'40.876",
+        "t1": 23.78,
+        "t2": 28.757,
+        "t3": 23.025,
+        "t4": 25.314,
+        "speed": 274.8
+      },
+      {
+        "lap": 2,
+        "time": "1'36.365",
+        "t1": 20.561,
+        "t2": 27.93,
+        "t3": 22.924,
+        "t4": 24.95,
+        "speed": 277.6
+      },
+      {
+        "lap": 3,
+        "time": "1'36.060",
+        "t1": 20.636,
+        "t2": 27.832,
+        "t3": 22.653,
+        "t4": 24.939,
+        "speed": 274.1
+      },
+      {
+        "lap": 4,
+        "time": "1'36.171",
+        "t1": 20.673,
+        "t2": 27.858,
+        "t3": 22.696,
+        "t4": 24.944,
+        "speed": 275.5
+      },
+      {
+        "lap": 5,
+        "time": "1'36.427",
+        "t1": 20.656,
+        "t2": 27.952,
+        "t3": 22.789,
+        "t4": 25.03,
+        "speed": 276.2
+      },
+      {
+        "lap": 6,
+        "time": "1'36.269",
+        "t1": 20.688,
+        "t2": 27.815,
+        "t3": 22.708,
+        "t4": 25.058,
+        "speed": 274.8
+      },
+      {
+        "lap": 7,
+        "time": "1'36.510",
+        "t1": 20.622,
+        "t2": 27.841,
+        "t3": 22.873,
+        "t4": 25.174,
+        "speed": 274.8
+      }
+    ],
+    "Alberto Ferrandez": [
+      {
+        "lap": 1,
+        "time": "1'40.169",
+        "t1": 23.498,
+        "t2": 28.304,
+        "t3": 23.293,
+        "t4": 25.074,
+        "speed": 272.7
+      },
+      {
+        "lap": 2,
+        "time": "1'37.257",
+        "t1": 20.648,
+        "t2": 28.153,
+        "t3": 23.444,
+        "t4": 25.012,
+        "speed": 276.9
+      },
+      {
+        "lap": 3,
+        "time": "1'36.730",
+        "t1": 20.625,
+        "t2": 28.114,
+        "t3": 22.844,
+        "t4": 25.147,
+        "speed": 277.6
+      },
+      {
+        "lap": 4,
+        "time": "1'36.786",
+        "t1": 20.734,
+        "t2": 28.093,
+        "t3": 22.825,
+        "t4": 25.134,
+        "speed": 275.5
+      },
+      {
+        "lap": 5,
+        "time": "1'36.649",
+        "t1": 20.67,
+        "t2": 28.151,
+        "t3": 22.737,
+        "t4": 25.091,
+        "speed": 276.2
+      },
+      {
+        "lap": 6,
+        "time": "1'36.780",
+        "t1": 20.71,
+        "t2": 28.024,
+        "t3": 22.932,
+        "t4": 25.114,
+        "speed": 276.9
+      },
+      {
+        "lap": 7,
+        "time": "1'36.980",
+        "t1": 20.637,
+        "t2": 28.055,
+        "t3": 22.907,
+        "t4": 25.381,
+        "speed": 278.3
+      }
+    ],
+    "Taiyo Furusato": [
+      {
+        "lap": 1,
+        "time": "1'41.103",
+        "t1": 24.112,
+        "t2": 28.598,
+        "t3": 23.031,
+        "t4": 25.362,
+        "speed": 279.7
+      },
+      {
+        "lap": 2,
+        "time": "1'36.749",
+        "t1": 20.707,
+        "t2": 27.88,
+        "t3": 22.941,
+        "t4": 25.221,
+        "speed": 279.0
+      },
+      {
+        "lap": 3,
+        "time": "1'36.603",
+        "t1": 20.701,
+        "t2": 27.801,
+        "t3": 22.862,
+        "t4": 25.239,
+        "speed": 276.9
+      },
+      {
+        "lap": 4,
+        "time": "1'36.690",
+        "t1": 20.798,
+        "t2": 27.922,
+        "t3": 22.883,
+        "t4": 25.087,
+        "speed": 275.5
+      },
+      {
+        "lap": 5,
+        "time": "1'36.709",
+        "t1": 20.703,
+        "t2": 27.983,
+        "t3": 22.867,
+        "t4": 25.156,
+        "speed": 276.9
+      },
+      {
+        "lap": 6,
+        "time": "1'36.964",
+        "t1": 20.72,
+        "t2": 27.77,
+        "t3": 23.087,
+        "t4": 25.387,
+        "speed": 274.1
+      },
+      {
+        "lap": 7,
+        "time": "1'37.135",
+        "t1": 20.717,
+        "t2": 28.296,
+        "t3": 22.904,
+        "t4": 25.218,
+        "speed": 277.6
+      }
+    ],
+    "Jorge Navarro": [
+      {
+        "lap": 1,
+        "time": "1'40.663",
+        "t1": 23.955,
+        "t2": 28.463,
+        "t3": 23.009,
+        "t4": 25.236,
+        "speed": 272.0
+      },
+      {
+        "lap": 2,
+        "time": "1'37.304",
+        "t1": 20.779,
+        "t2": 28.129,
+        "t3": 22.944,
+        "t4": 25.452,
+        "speed": 277.6
+      },
+      {
+        "lap": 3,
+        "time": "1'36.612",
+        "t1": 20.768,
+        "t2": 27.977,
+        "t3": 22.782,
+        "t4": 25.085,
+        "speed": 276.2
+      },
+      {
+        "lap": 4,
+        "time": "1'36.918",
+        "t1": 20.718,
+        "t2": 28.098,
+        "t3": 22.837,
+        "t4": 25.265,
+        "speed": 278.3
+      },
+      {
+        "lap": 5,
+        "time": "1'37.192",
+        "t1": 20.899,
+        "t2": 28.184,
+        "t3": 23.012,
+        "t4": 25.097,
+        "speed": 272.0
+      },
+      {
+        "lap": 6,
+        "time": "1'37.501",
+        "t1": 20.919,
+        "t2": 28.138,
+        "t3": 23.11,
+        "t4": 25.334,
+        "speed": 272.0
+      },
+      {
+        "lap": 7,
+        "time": "1'37.711",
+        "t1": 20.98,
+        "t2": 28.249,
+        "t3": 23.079,
+        "t4": 25.403,
+        "speed": 273.4
+      }
+    ],
+    "Senna Agius": [
+      {
+        "lap": 1,
+        "time": "1'48.002",
+        "t1": 32.527,
+        "t2": 28.103,
+        "t3": 22.597,
+        "t4": 24.775,
+        "speed": 267.3
+      },
+      {
+        "lap": 2,
+        "time": "1'35.869",
+        "t1": 20.689,
+        "t2": 27.956,
+        "t3": 22.516,
+        "t4": 24.708,
+        "speed": 270.6
+      },
+      {
+        "lap": 3,
+        "time": "1'35.879",
+        "t1": 20.742,
+        "t2": 27.829,
+        "t3": 22.561,
+        "t4": 24.747,
+        "speed": 271.3
+      },
+      {
+        "lap": 4,
+        "time": "1'36.155",
+        "t1": 20.728,
+        "t2": 27.9,
+        "t3": 22.626,
+        "t4": 24.901,
+        "speed": 271.3
+      },
+      {
+        "lap": 5,
+        "time": "1'36.137",
+        "t1": 20.746,
+        "t2": 27.846,
+        "t3": 22.627,
+        "t4": 24.918,
+        "speed": 272.0
+      },
+      {
+        "lap": 6,
+        "time": "1'36.064",
+        "t1": 20.767,
+        "t2": 27.802,
+        "t3": 22.694,
+        "t4": 24.801,
+        "speed": 272.7
+      },
+      {
+        "lap": 7,
+        "time": "1'36.070",
+        "t1": 20.723,
+        "t2": 27.785,
+        "t3": 22.601,
+        "t4": 24.961,
+        "speed": 275.5
+      }
+    ],
+    "Filip Salac": [
+      {
+        "lap": 1,
+        "time": "1'48.554",
+        "t1": 32.612,
+        "t2": 28.228,
+        "t3": 22.675,
+        "t4": 25.039,
+        "speed": 268.6
+      },
+      {
+        "lap": 2,
+        "time": "1'35.633",
+        "t1": 20.673,
+        "t2": 27.613,
+        "t3": 22.503,
+        "t4": 24.844,
+        "speed": 274.1
+      },
+      {
+        "lap": 3,
+        "time": "1'35.963",
+        "t1": 20.714,
+        "t2": 27.773,
+        "t3": 22.562,
+        "t4": 24.914,
+        "speed": 274.8
+      },
+      {
+        "lap": 4,
+        "time": "1'36.169",
+        "t1": 20.769,
+        "t2": 27.774,
+        "t3": 22.66,
+        "t4": 24.966,
+        "speed": 274.1
+      },
+      {
+        "lap": 5,
+        "time": "1'36.521",
+        "t1": 20.859,
+        "t2": 27.823,
+        "t3": 22.822,
+        "t4": 25.017,
+        "speed": 274.1
+      },
+      {
+        "lap": 6,
+        "time": "1'36.416",
+        "t1": 20.744,
+        "t2": 27.818,
+        "t3": 22.786,
+        "t4": 25.068,
+        "speed": 274.1
+      },
+      {
+        "lap": 7,
+        "time": "1'40.277",
+        "t1": 20.779,
+        "t2": 27.923,
+        "t3": 25.39,
+        "t4": 26.185,
+        "speed": 274.8
+      }
+    ],
+    "Zonta Vd Goorbergh": [
+      {
+        "lap": 1,
+        "time": "3'46.211",
+        "t1": 23.926,
+        "t2": 29.129,
+        "t3": 22.977,
+        "t4": 150.179,
+        "speed": 274.8
+      }
+    ]
+  }
+};
+
+    const EVENT_SESSIONS = [
+      { id: 'fp1', label: 'FP1', color: '#8e44ad', width: '350px' },
+      { id: 'pr', label: 'PR', color: '#d35400', width: '350px' },
+      { id: 'fp2', label: 'FP2', color: '#16a085', width: '350px' },
+      { id: 'q1', label: 'Q1', color: '#0984e3', width: '350px' },
+      { id: 'q2', label: 'Q2', color: '#6c5ce7', width: '350px' },
+      { id: 'grid', label: 'Starting Grid', color: '#2980b9', width: '350px' },
+      { id: 'race', label: 'Race', color: '#c0392b', width: '350px' }
+    ];
+
+    let visibleSessions = new Set(
+      JSON.parse(localStorage.getItem('overrevving_event_moto2_sessions') ||
+      JSON.stringify(EVENT_SESSIONS.map(s => s.id)))
+    );
+
+    function saveSessionPrefs() {
+      localStorage.setItem('overrevving_event_moto2_sessions', JSON.stringify([...visibleSessions]));
+    }
+
+    function toggleSidebarMenu() {
+      const menu = document.getElementById('sidebar-menu');
+      if (menu) menu.classList.toggle('open');
+    }
+
+    function buildSidebarList() {
+      const list = document.getElementById('session-toggle-list');
+      if (!list) return;
+      list.innerHTML = '';
+      EVENT_SESSIONS.forEach(sess => {
+        const active = visibleSessions.has(sess.id);
+        const div = document.createElement('div');
+        div.className = 'sess-toggle-item' + (active ? ' active' : '');
+        div.onclick = () => toggleSession(sess.id, div);
+        div.innerHTML = `
+          <div style="display:flex;align-items:center;">
+            <span class="sess-toggle-dot" style="background:${sess.color}"></span>
+            <span>${sess.label}</span>
+          </div>
+          <div class="sess-toggle-check"></div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function toggleSession(id, el) {
+      if (visibleSessions.has(id)) {
+        visibleSessions.delete(id);
+        el.classList.remove('active');
+      } else {
+        visibleSessions.add(id);
+        el.classList.add('active');
+      }
+      saveSessionPrefs();
+      applySessionVisibility();
+    }
+
+    function applySessionVisibility() {
+      EVENT_SESSIONS.forEach(sess => {
+        const cards = document.querySelectorAll(`.col-card[data-session="${sess.id}"]`);
+        cards.forEach(c => {
+          c.style.display = visibleSessions.has(sess.id) ? '' : 'none';
+        });
+      });
+    }
+
+    const LINE_COLORS = [
+      '#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6',
+      '#e67e22', '#1abc9c', '#e84393', '#00cec9', '#fdcb6e',
+      '#6c5ce7', '#d63031', '#00b894', '#e17055', '#0984e3'
+    ];
+
+    const RIDER_STYLES = {
+      'Manuel Gonzalez': { color: '#535357' },
+      'Senna Agius': { color: '#535357', borderDash: [6, 4] },
+      'Izan Guevara': { color: '#133a72' },
+      'Alberto Ferrandez': { color: '#133a72', borderDash: [6, 4] },
+      'David Alonso': { color: '#009bb4' },
+      'Daniel Holgado': { color: '#009bb4', borderDash: [6, 4] },
+      'Ivan Ortola': { color: '#d80c24' },
+      'Angel Piqueras': { color: '#d80c24', borderDash: [6, 4] },
+      'Marcos Ramirez': { color: '#d80c24', borderDash: [6, 4] },
+      'Unai Orradre': { color: '#d80c24', borderDash: [6, 4] },
+      'Celestino Vietti': { color: '#f24d44' },
+      'Dennis Foggia': { color: '#f24d44', borderDash: [6, 4] },
+      'Luca Lunetta': { color: '#f24d44', borderDash: [6, 4] },
+      'Joe Roberts': { color: '#0d34b2' },
+      'Filip Salac': { color: '#0d34b2', borderDash: [6, 4] },
+      'Alonso Lopez': { color: '#9baee4' },
+      'Sergio Garcia': { color: '#9baee4', borderDash: [6, 4] },
+      'Milan Pawelec': { color: '#9baee4', borderDash: [6, 4] },
+      'Collin Veijer': { color: '#ff6600' },
+      'Jose Antonio Rueda': { color: '#ff6600', borderDash: [6, 4] },
+      'Daniel Muñoz': { color: '#106ba9' },
+      'Adrian Huertas': { color: '#106ba9', borderDash: [6, 4] },
+      'Tony Arbolino': { color: '#afb9b9' },
+      'Barry Baltus': { color: '#afb9b9', borderDash: [6, 4] },
+      'Jorge Navarro': { color: '#afb9b9', borderDash: [6, 4] },
+      'Alex Escrig': { color: '#73cdba' },
+      'Xabi Zurutuza': { color: '#73cdba', borderDash: [6, 4] },
+      'Aron Canet': { color: '#682a38' },
+      'Deniz Öncü': { color: '#682a38', borderDash: [6, 4] },
+      'Ayumu Sasaki': { color: '#eb5b1d' },
+      'Zonta Van Den Goorbergh': { color: '#eb5b1d', borderDash: [6, 4] },
+      'Taiyo Furusato': { color: '#fafafa' },
+      'Mario Suryo Aji': { color: '#fafafa', borderDash: [6, 4] },
+      'Jacob Roulstone': { color: '#fafafa', borderDash: [6, 4] }
+    };
+
+    let racLapChartInstance = null;
+    let racGapChartInstance = null;
+    let sectorChartInstances = {};
+
+    function renderSingleLapChart(sessionKey, canvasId, currentGpShort, activeFavRiders) {
+      const canvasEl = document.getElementById(canvasId);
+      if (!canvasEl) return;
+      const sessionLapData = (typeof EVENT_LAP_CHARTS_DATA !== 'undefined' && EVENT_LAP_CHARTS_DATA[sessionKey]) ? EVENT_LAP_CHARTS_DATA[sessionKey][currentGpShort] : null;
+      if (!sessionLapData || !sessionLapData.riders) return;
+
+      const totalLaps = sessionLapData.totalLaps || 7;
+      const labels = Array.from({ length: totalLaps }, (_, i) => `L${i + 1}`);
+
+      const datasets = [];
+      activeFavRiders.forEach((rName, idx) => {
+        const normKey = Object.keys(sessionLapData.riders).find(k => k.toLowerCase() === rName.toLowerCase());
+        const positions = normKey ? sessionLapData.riders[normKey] : null;
+        if (!positions) return;
+
+        const style = RIDER_STYLES[rName] || {};
+        const color = style.color || LINE_COLORS[idx % LINE_COLORS.length];
+        const borderDash = style.borderDash || [];
+
+        datasets.push({
+          label: rName,
+          data: positions.slice(0, totalLaps),
+          borderColor: color,
+          backgroundColor: color,
+          borderDash: borderDash,
+          borderWidth: 2.5,
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          tension: 0.2,
+          spanGaps: true
+        });
+      });
+
+      if (racLapChartInstance) racLapChartInstance.destroy();
+
+      const ctx = canvasEl.getContext('2d');
+      racLapChartInstance = new Chart(ctx, {
+        type: 'line',
+        plugins: [watermarkPlugin],
+        data: { labels, datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              reverse: true,
+              min: 1,
+              max: 27,
+              ticks: { stepSize: 1, color: '#aaa', font: { size: 10 } },
+              grid: { color: 'rgba(255,255,255,0.06)' }
+            },
+            x: {
+              ticks: { color: '#aaa', font: { size: 10 } },
+              grid: { color: 'rgba(255,255,255,0.06)' }
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: { color: '#e0e0e0', font: { size: 11, family: 'Inter' }, boxWidth: 12, usePointStyle: true }
+            },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.dataset.label}: P${ctx.parsed.y}`
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderSingleGapChart(sessionKey, canvasId, currentGpShort, activeFavRiders) {
+      const canvasEl = document.getElementById(canvasId);
+      if (!canvasEl) return;
+      const rawLapsData = (typeof EVENT_LAPS_DATA !== 'undefined') ? EVENT_LAPS_DATA[currentGpShort] : null;
+      if (!rawLapsData) return;
+
+      const normKeys = Object.keys(rawLapsData);
+      if (normKeys.length === 0) return;
+
+      function parseTimeToSec(tStr) {
+        if (!tStr) return null;
+        const m = String(tStr).trim().match(/^(\d+)'(\d+\.\d+)$/);
+        return m ? parseInt(m[1]) * 60 + parseFloat(m[2]) : parseFloat(tStr);
+      }
+
+      // Calculate cumulative time per rider
+      const cumTimes = {};
+      let maxLaps = 0;
+      for (let r of normKeys) {
+        const laps = rawLapsData[r] || [];
+        cumTimes[r] = [];
+        let cum = 0;
+        laps.forEach(l => {
+          const sec = parseTimeToSec(l.time);
+          if (sec && sec > 0) {
+            cum += sec;
+            cumTimes[r].push(cum);
+          }
+        });
+        if (cumTimes[r].length > maxLaps) maxLaps = cumTimes[r].length;
+      }
+
+      if (maxLaps === 0) return;
+      const labels = Array.from({ length: maxLaps }, (_, i) => `L${i + 1}`);
+
+      // Find leader at each lap
+      const leaderTimes = [];
+      for (let i = 0; i < maxLaps; i++) {
+        let minT = 999999;
+        for (let r of normKeys) {
+          if (cumTimes[r][i] && cumTimes[r][i] < minT) {
+            minT = cumTimes[r][i];
+          }
+        }
+        leaderTimes.push(minT < 999999 ? minT : 0);
+      }
+
+      const datasets = [];
+      activeFavRiders.forEach((rName, idx) => {
+        const matched = normKeys.find(k => k.toLowerCase() === rName.toLowerCase());
+        if (!matched || !cumTimes[matched]) return;
+
+        const gapData = cumTimes[matched].map((ct, lapIdx) => {
+          const lead = leaderTimes[lapIdx];
+          return lead > 0 ? Number((ct - lead).toFixed(3)) : 0;
+        });
+
+        const style = RIDER_STYLES[rName] || {};
+        const color = style.color || LINE_COLORS[idx % LINE_COLORS.length];
+        const borderDash = style.borderDash || [];
+
+        datasets.push({
+          label: rName,
+          data: gapData,
+          borderColor: color,
+          backgroundColor: color,
+          borderDash: borderDash,
+          borderWidth: 2.5,
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          tension: 0.2
+        });
+      });
+
+      if (racGapChartInstance) racGapChartInstance.destroy();
+
+      const ctx = canvasEl.getContext('2d');
+      racGapChartInstance = new Chart(ctx, {
+        type: 'line',
+        plugins: [watermarkPlugin],
+        data: { labels, datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              min: 0,
+              ticks: {
+                color: '#aaa',
+                font: { size: 10 },
+                callback: (v) => `+${v}s`
+              },
+              grid: { color: 'rgba(255,255,255,0.06)' }
+            },
+            x: {
+              ticks: { color: '#aaa', font: { size: 10 } },
+              grid: { color: 'rgba(255,255,255,0.06)' }
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: { color: '#e0e0e0', font: { size: 11, family: 'Inter' }, boxWidth: 12, usePointStyle: true }
+            },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.dataset.label}: +${ctx.parsed.y}s`
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderSectorCharts(currentGpShort) {
+      const sectionEl = document.getElementById('sector-section');
+      if (!sectionEl) return;
+      if (!currentGpShort) currentGpShort = window.CURRENT_EVENT_SHORT;
+      if (!currentGpShort || typeof EVENT_LAPS_DATA === 'undefined' || !EVENT_LAPS_DATA[currentGpShort]) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      const gpLaps = EVENT_LAPS_DATA[currentGpShort];
+      const normKeys = Object.keys(gpLaps);
+      const activeFavRiders = [];
+      for (let rName of normKeys) {
+        if (isRiderFavorite(rName)) {
+          activeFavRiders.push(rName);
+        }
+      }
+
+      if (activeFavRiders.length === 0) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      sectionEl.style.display = 'block';
+
+      const sectors = ['t1', 't2', 't3', 't4'];
+      sectors.forEach(secKey => {
+        const canvasId = 'chart-sector-' + secKey;
+        const canvasEl = document.getElementById(canvasId);
+        if (!canvasEl) return;
+
+        let maxLaps = 0;
+        activeFavRiders.forEach(r => {
+          const matched = normKeys.find(k => k.toLowerCase() === r.toLowerCase());
+          if (matched && gpLaps[matched]) {
+            // Exclude lap 1 and final lap
+            const valid = gpLaps[matched].slice(1, -1);
+            if (valid.length > maxLaps) maxLaps = valid.length;
+          }
+        });
+
+        if (maxLaps === 0) return;
+        const labels = Array.from({ length: maxLaps }, (_, i) => `L${i + 2}`);
+
+        const datasets = [];
+        activeFavRiders.forEach((rName, idx) => {
+          const matched = normKeys.find(k => k.toLowerCase() === rName.toLowerCase());
+          if (!matched || !gpLaps[matched]) return;
+
+          const data = gpLaps[matched].slice(1, -1).map(l => {
+            const val = l[secKey];
+            return val ? parseFloat(val) : null;
+          });
+
+          const style = RIDER_STYLES[rName] || {};
+          const color = style.color || LINE_COLORS[idx % LINE_COLORS.length];
+          const borderDash = style.borderDash || [];
+
+          datasets.push({
+            label: rName,
+            data: data,
+            borderColor: color,
+            backgroundColor: color,
+            borderDash: borderDash,
+            borderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            tension: 0.2,
+            spanGaps: true
+          });
+        });
+
+        if (sectorChartInstances[secKey]) sectorChartInstances[secKey].destroy();
+
+        const ctx = canvasEl.getContext('2d');
+        sectorChartInstances[secKey] = new Chart(ctx, {
+          type: 'line',
+          plugins: [watermarkPlugin],
+          data: { labels, datasets },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                ticks: {
+                  color: '#aaa',
+                  font: { size: 10 },
+                  callback: (v) => `${v}s`
+                },
+                grid: { color: 'rgba(255,255,255,0.06)' }
+              },
+              x: {
+                ticks: { color: '#aaa', font: { size: 10 } },
+                grid: { color: 'rgba(255,255,255,0.06)' }
+              }
+            },
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: { color: '#e0e0e0', font: { size: 10, family: 'Inter' }, boxWidth: 10, usePointStyle: true }
+              }
+            }
+          }
+        });
+      });
+    }
+
+    function renderRacProgression(currentGpShort) {
+      const sectionEl = document.getElementById('rac-progression-section');
+      if (!sectionEl) return;
+      if (!currentGpShort) currentGpShort = window.CURRENT_EVENT_SHORT;
+      if (!currentGpShort) return;
+
+      const sessionLapData = (typeof EVENT_LAP_CHARTS_DATA !== 'undefined' && EVENT_LAP_CHARTS_DATA['RAC']) ? EVENT_LAP_CHARTS_DATA['RAC'][currentGpShort] : null;
+      const rawLapsData = (typeof EVENT_LAPS_DATA !== 'undefined') ? EVENT_LAPS_DATA[currentGpShort] : null;
+
+      if (!sessionLapData && !rawLapsData) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      const ridersPool = new Set([
+        ...Object.keys((sessionLapData && sessionLapData.riders) || {}),
+        ...Object.keys(rawLapsData || {})
+      ]);
+
+      const activeFavRiders = [];
+      for (let rName of ridersPool) {
+        if (isRiderFavorite(rName)) {
+          activeFavRiders.push(rName);
+        }
+      }
+
+      if (activeFavRiders.length === 0) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      sectionEl.style.display = 'block';
+      renderSingleLapChart('RAC', 'chart-rac-lapchart', currentGpShort, activeFavRiders);
+      renderSingleGapChart('RAC', 'chart-rac-gapchart', currentGpShort, activeFavRiders);
+    }
+
+    function toggleRacProgressionMinimize() {
+      const sec = document.getElementById('rac-progression-section');
+      if (sec) sec.classList.toggle('minimized');
+    }
+
+    function toggleSectorMinimize() {
+      const sec = document.getElementById('sector-section');
+      if (sec) sec.classList.toggle('minimized');
+    }
+
+    function renderRacLapChart(cur) { renderRacProgression(cur); }
+    function renderRacGapChart(cur) { renderRacProgression(cur); }
+
+    const FAV_KEY = 'overrevving_favorites';
+
+    function getFavoritesSet() {
+      try {
+        const list = JSON.parse(localStorage.getItem(FAV_KEY) || '[]');
+        return new Set(list);
+      } catch(e) {
+        return new Set();
+      }
+    }
+
+    function isRiderFavorite(riderName) {
+      if (!riderName) return false;
+      const favs = getFavoritesSet();
+      const nameTrim = riderName.trim();
+      if (favs.has(`moto2:${nameTrim}`) || favs.has(nameTrim)) return true;
+      for (let item of favs) {
+        const cleanItem = item.includes(':') ? item.split(':')[1] : item;
+        if (cleanItem.toLowerCase() === nameTrim.toLowerCase()) return true;
+      }
+      return false;
+    }
+
+    function toggleFav(btn, riderName) {
+      if (!riderName) return;
+      const nameTrim = riderName.trim();
+      const favKey = `moto2:${nameTrim}`;
+      const favs = getFavoritesSet();
+      let isFavNow = false;
+
+      if (isRiderFavorite(nameTrim)) {
+        favs.delete(favKey);
+        favs.delete(nameTrim);
+        for (let item of Array.from(favs)) {
+          const cleanItem = item.includes(':') ? item.split(':')[1] : item;
+          if (cleanItem.toLowerCase() === nameTrim.toLowerCase()) favs.delete(item);
+        }
+        isFavNow = false;
+      } else {
+        favs.add(favKey);
+        isFavNow = true;
+      }
+
+      try {
+        localStorage.setItem(FAV_KEY, JSON.stringify(Array.from(favs)));
+      } catch(e) {}
+
+      document.querySelectorAll(`tr[data-rider-name]`).forEach(tr => {
+        if (tr.dataset.riderName.toLowerCase() === nameTrim.toLowerCase()) {
+          tr.classList.toggle('favorite', isFavNow);
+          const b = tr.querySelector('.fav-btn');
+          if (b) b.classList.toggle('active', isFavNow);
+        }
+      });
+
+      renderRacProgression();
+      renderSectorCharts();
+    }
+
+    function formatName(fullName) {
+      if (!fullName) return '';
+      const parts = fullName.trim().split(' ');
+      if (parts.length < 2) return fullName;
+      const normalized = parts.map(w =>
+        w === w.toUpperCase() && w.length > 1 ? w.charAt(0) + w.slice(1).toLowerCase() : w
+      );
+      return normalized[0][0].toUpperCase() + '. ' + normalized.slice(1).join(' ');
+    }
+
+    function calculateRacePts(pos) {
+      const ptsMap = { 1: 25, 2: 20, 3: 16, 4: 13, 5: 11, 6: 10, 7: 9, 8: 8, 9: 7, 10: 6, 11: 5, 12: 4, 13: 3, 14: 2, 15: 1 };
+      return ptsMap[pos] || 0;
+    }
+
+    function parseLapTimeToSeconds(timeStr) {
+      if (!timeStr || timeStr === '-' || !timeStr.includes(':')) return null;
+      const parts = timeStr.trim().split(':');
+      if (parts.length < 2) return null;
+      const min = parseFloat(parts[0]);
+      const sec = parseFloat(parts[1]);
+      return min * 60 + sec;
+    }
+
+    function calculateGap(p1TimeStr, riderTimeStr) {
+      const p1Sec = parseLapTimeToSeconds(p1TimeStr);
+      const rSec = parseLapTimeToSeconds(riderTimeStr);
+      if (p1Sec === null || rSec === null) return '-';
+      const diff = rSec - p1Sec;
+      if (diff <= 0.0001) return '-';
+      return '+' + diff.toFixed(3);
+    }
+
+    function renderPageLayout(year, gp, prevGp, nextGp, weather, fp1Results, prResults, fp2Results, q1Results, q2Results, gridResults, raceResults) {
+      const gpWeather = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[gp.short]) ? SESSION_WEATHER_DATA[gp.short] : {};
+      const isRaceCancelled = Boolean(gpWeather.race && gpWeather.race.toLowerCase().includes('cancel'));
+      const cleanW = (txt, hasData) => {
+        if (!txt || txt === 'Cancelled') return '';
+        if (txt.includes('--') && !hasData) return '';
+        return txt;
+      };
+
+      const fp1W = cleanW(gpWeather.fp1, fp1Results.length > 0);
+      const prW = cleanW(gpWeather.pr, prResults.length > 0);
+      const fp2W = cleanW(gpWeather.fp2, fp2Results.length > 0);
+      const q1W = cleanW(gpWeather.q1, q1Results.length > 0);
+      const q2W = cleanW(gpWeather.q2, q2Results.length > 0);
+      const gridW = cleanW(gpWeather.grid, gridResults.length > 0);
+      const raceW = gpWeather.race === 'Cancelled' ? 'Cancelled' : cleanW(gpWeather.race, raceResults.length > 0);
+
+      window.CURRENT_EVENT_SHORT = gp.short;
+
+      function renderStandardRows(items) {
+        if (!items || items.length === 0) {
+          return '<tr><td colspan="6" style="text-align:center; padding: 24px; color: var(--text-sub);">No session data available yet.</td></tr>';
+        }
+        const p1Time = (items[0] && items[0].time && items[0].time !== '-') ? items[0].time : null;
+        let html = '';
+        items.forEach((r, idx) => {
+          const isDNF = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null || r.status === 'NOTFINISHFIRST';
+          const posNum = r.pos || r.position || idx + 1;
+          const posCell = isDNF ? '<span class="pos-dnf">OUT</span>' : `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
+          const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
+          const isFav = isRiderFavorite(rawName);
+          const time = isDNF ? '-' : (r.time || '-');
+          const gap = isDNF ? '-' : (idx === 0 ? '-' : calculateGap(p1Time, time));
+          const laps = r.laps !== undefined && r.laps !== null ? r.laps : '-';
+
+          html += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
+            <td class="star-col">
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'") }')" title="Favorite Rider">★</button>
+            </td>
+            <td class="pos-col">${posCell}</td>
+            <td class="rider-cell" title="${rawName}">${formatName(rawName)}</td>
+            <td class="laps-cell">${laps}</td>
+            <td class="time-cell">${time}</td>
+            <td class="gap-cell">${gap}</td>
+          </tr>`;
+        });
+        return html;
+      }
+
+      function renderGridRows(items) {
+        if (!items || items.length === 0) {
+          return '<tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-sub);">No grid data available yet.</td></tr>';
+        }
+        const p1Time = (items[0] && items[0].time && items[0].time !== '-') ? items[0].time : null;
+        let html = '';
+        items.forEach((r, idx) => {
+          const posNum = r.pos || idx + 1;
+          const posCell = `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
+          const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
+          const isFav = isRiderFavorite(rawName);
+          const time = r.time || '-';
+          const gap = idx === 0 ? '-' : calculateGap(p1Time, time);
+
+          html += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
+            <td class="star-col">
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'") }')" title="Favorite Rider">★</button>
+            </td>
+            <td class="pos-col">${posCell}</td>
+            <td class="rider-cell" title="${rawName}">${formatName(rawName)}</td>
+            <td class="time-cell">${time}</td>
+            <td class="gap-cell">${gap}</td>
+          </tr>`;
+        });
+        return html;
+      }
+
+      function renderRaceRows(items) {
+        if (isRaceCancelled) {
+          return `<tr><td colspan="5" style="text-align:center; padding: 32px 16px;">
+            <div style="display:inline-block; padding: 6px 14px; background: rgba(231, 76, 60, 0.15); border: 1px solid rgba(231, 76, 60, 0.4); border-radius: 6px; color: #ff6b6b; font-weight: 600; font-size: 13px; margin-bottom: 6px;">
+              🛑 Race Cancelled
+            </div>
+            <div style="color: var(--text-sub); font-size: 12px; margin-top: 4px;">
+              Cancelled by Race Direction due to severe weather.
+            </div>
+          </td></tr>`;
+        }
+        if (!items || items.length === 0) {
+          return '<tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-sub);">No Race data available yet for this round.</td></tr>';
+        }
+        let html = '';
+        items.forEach((r, idx) => {
+          const isDNF = r.pos === 'NC' || r.status === 'OUTSTND' || r.position === null || r.status === 'NOTFINISHFIRST';
+          const posNum = r.pos || r.position || idx + 1;
+          const posCell = isDNF ? '<span class="pos-dnf">OUT</span>' : `<span class="${posNum === 1 ? 'pos-1' : posNum === 2 ? 'pos-2' : posNum === 3 ? 'pos-3' : ''}">${posNum}</span>`;
+          const rawName = r.rider ? (typeof r.rider === 'string' ? r.rider : (r.rider.full_name || r.name)) : (r.name || 'Rider');
+          const isFav = isRiderFavorite(rawName);
+          const pts = isDNF ? '-' : (r.pts !== undefined && r.pts !== null ? r.pts : calculateRacePts(posNum));
+          const time = isDNF ? '-' : (r.time || '-');
+
+          html += `<tr class="${isFav ? 'favorite' : ''}" data-rider-name="${rawName.replace(/"/g, '&quot;')}">
+            <td class="star-col">
+              <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${rawName.replace(/'/g, "\\'") }')" title="Favorite Rider">★</button>
+            </td>
+            <td class="pos-col">${posCell}</td>
+            <td class="rider-cell" title="${rawName}">${formatName(rawName)}</td>
+            <td class="time-cell">${time}</td>
+            <td class="pts-cell">${pts}</td>
+          </tr>`;
+        });
+        return html;
+      }
+
+      const fp1Rows = renderStandardRows(fp1Results);
+      const prRows = renderStandardRows(prResults);
+      const fp2Rows = renderStandardRows(fp2Results);
+      const q1Rows = renderStandardRows(q1Results);
+      const q2Rows = renderStandardRows(q2Results);
+      const gridRows = renderGridRows(gridResults);
+      const raceRows = renderRaceRows(raceResults);
+
+      const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/Moto2/RAC`;
+
+      const mainEl = document.getElementById('event-main');
+      mainEl.innerHTML = `
+        <div class="hero-card">
+          <div class="hero-top">
+            <div>
+              <span class="cat-badge">MOTO2</span>
+              <span class="round-badge">${gp.round} &middot; 2026</span>
+              <h1 class="event-title">${gp.name}</h1>
+              <div class="event-meta">
+                <span class="meta-item">📍 ${gp.circuit} &middot; ${gp.location}</span>
+                <span class="meta-item">📅 ${gp.date}</span>
+              </div>
+            </div>
+          </div>
+          <div class="event-details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Circuit Length</span>
+              <span class="detail-val">4.55 km</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Corners</span>
+              <span class="detail-val">12 (5 left &middot; 7 right)</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Longest Straight</span>
+              <span class="detail-val">1000 m</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Category</span>
+              <span class="detail-val">Moto2 World Championship</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pdf-bar">
+          <div class="pdf-title">📄 Official Dorna PDF Documents:</div>
+          <div class="pdf-links">
+            <a href="${pdfBase}2/Classification.pdf" target="_blank" class="pdf-btn">📊 Classification.pdf</a>
+            <a href="${pdfBase}2/Analysis.pdf" target="_blank" class="pdf-btn">⏱️ Analysis.pdf</a>
+            <a href="${pdfBase}2/MaximumSpeed.pdf" target="_blank" class="pdf-btn">🚀 TopSpeed.pdf</a>
+            <a href="${pdfBase}2/Grid.pdf" target="_blank" class="pdf-btn">🏁 Grid.pdf</a>
+            <a href="https://resources.motogp.com/files/results/${year}/${gp.short}/Moto2/WorldStanding.pdf" target="_blank" class="pdf-btn">🏆 WorldStanding.pdf</a>
+            <a href="https://resources.motogp.com/files/results/${year}/${gp.short}/CircuitInformation.pdf" target="_blank" class="pdf-btn">📍 CircuitInformation.pdf</a>
+          </div>
+        </div>
+
+        <div class="grid-wrapper-event">
+          <div class="grid-moto2-col">
+            <!-- COLUMN 1: FP1 -->
+            <div class="col-card" data-session="fp1">
+              <div class="col-header fp1-header"><div class="col-header-title">⏱️ FP1</div><div class="col-header-sub">${fp1W}</div></div>
+              <table class="standings-table">
+                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:140px;"><col style="width:40px;"><col style="width:70px;"><col style="width:52px;"></colgroup>
+                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:center">Laps</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+                <tbody>${fp1Rows}</tbody>
+              </table>
+            </div>
+
+            <!-- COLUMN 2: PR -->
+            <div class="col-card" data-session="pr">
+              <div class="col-header pr-header"><div class="col-header-title">⏱️ PR</div><div class="col-header-sub">${prW}</div></div>
+              <table class="standings-table">
+                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:140px;"><col style="width:40px;"><col style="width:70px;"><col style="width:52px;"></colgroup>
+                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:center">Laps</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+                <tbody>${prRows}</tbody>
+              </table>
+            </div>
+
+            <!-- COLUMN 3: FP2 -->
+            <div class="col-card" data-session="fp2">
+              <div class="col-header fp2-header"><div class="col-header-title">⏱️ FP2</div><div class="col-header-sub">${fp2W}</div></div>
+              <table class="standings-table">
+                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:140px;"><col style="width:40px;"><col style="width:70px;"><col style="width:52px;"></colgroup>
+                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:center">Laps</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+                <tbody>${fp2Rows}</tbody>
+              </table>
+            </div>
+
+            <!-- COLUMN 4: Q1 -->
+            <div class="col-card" data-session="q1">
+              <div class="col-header q1-header"><div class="col-header-title">⏱️ Q1</div><div class="col-header-sub">${q1W}</div></div>
+              <table class="standings-table">
+                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:140px;"><col style="width:40px;"><col style="width:70px;"><col style="width:52px;"></colgroup>
+                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:center">Laps</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+                <tbody>${q1Rows}</tbody>
+              </table>
+            </div>
+
+            <!-- COLUMN 5: Q2 -->
+            <div class="col-card" data-session="q2">
+              <div class="col-header q2-header"><div class="col-header-title">⏱️ Q2</div><div class="col-header-sub">${q2W}</div></div>
+              <table class="standings-table">
+                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:140px;"><col style="width:40px;"><col style="width:70px;"><col style="width:52px;"></colgroup>
+                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:center">Laps</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+                <tbody>${q2Rows}</tbody>
+              </table>
+            </div>
+
+            <!-- COLUMN 6: STARTING GRID -->
+            <div class="col-card" data-session="grid">
+              <div class="col-header grid-header"><div class="col-header-title">🏁 STARTING GRID</div><div class="col-header-sub">${gridW}</div></div>
+              <table class="standings-table">
+                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:150px;"><col style="width:80px;"><col style="width:72px;"></colgroup>
+                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:right">Time</th><th style="text-align:right">Gap</th></tr></thead>
+                <tbody>${gridRows}</tbody>
+              </table>
+            </div>
+
+            <!-- COLUMN 7: RACE -->
+            <div class="col-card" data-session="race">
+              <div class="col-header race-header"><div class="col-header-title">🏆 RACE</div><div class="col-header-sub">${raceW}</div></div>
+              <table class="standings-table">
+                <colgroup><col style="width:24px;"><col style="width:24px;"><col style="width:170px;"><col style="width:72px;"><col style="width:60px;"></colgroup>
+                <thead><tr><th class="star-col"></th><th style="text-align:center">#</th><th>Rider</th><th style="text-align:right">Time</th><th style="text-align:right">Pts</th></tr></thead>
+                <tbody>${raceRows}</tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- RACE: POSITION PROGRESSION & GAP TO LEADER -->
+        <div class="sector-section" id="rac-progression-section" style="display: none;">
+          <div class="sector-header">
+            <div>
+              <div class="sector-title">📊 RACE - Race Progression &amp; Gap to Leader</div>
+              <div class="sector-subtitle">Comparing favorite riders (★) &middot; Lap-by-Lap Position &amp; Gap to leader (seconds) &middot; All laps included</div>
+            </div>
+            <button class="win-btn" onclick="toggleRacProgressionMinimize()" title="Minimize / Expand">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <div class="progression-grid-2col">
+            <div class="sector-card">
+              <div class="sector-card-title"><span>Position Progression (Lap Chart)</span></div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-rac-lapchart"></canvas>
+              </div>
+            </div>
+            <div class="sector-card">
+              <div class="sector-card-title"><span>Gap to Leader</span></div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-rac-gapchart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RACE: SECTOR TIMES COMPARISON -->
+        <div class="sector-section" id="sector-section" style="display: none;">
+          <div class="sector-header">
+            <div>
+              <div class="sector-title">⏱️ RACE - Lap-by-Lap Sector Times Comparison</div>
+              <div class="sector-subtitle">Comparing favorite riders (★) &middot; Sectors T1, T2, T3, T4 &middot; Excludes Lap 1 &amp; Final Lap</div>
+            </div>
+            <button class="win-btn" onclick="toggleSectorMinimize()" title="Minimize / Expand">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <div class="sector-grid-2x2">
+            <div class="sector-card">
+              <div class="sector-card-title"><span>Sector 1 (T1)</span><span class="sector-card-badge badge-t1">T1</span></div>
+              <div class="sector-canvas-container"><canvas id="chart-sector-t1"></canvas></div>
+            </div>
+            <div class="sector-card">
+              <div class="sector-card-title"><span>Sector 2 (T2)</span><span class="sector-card-badge badge-t2">T2</span></div>
+              <div class="sector-canvas-container"><canvas id="chart-sector-t2"></canvas></div>
+            </div>
+            <div class="sector-card">
+              <div class="sector-card-title"><span>Sector 3 (T3)</span><span class="sector-card-badge badge-t3">T3</span></div>
+              <div class="sector-canvas-container"><canvas id="chart-sector-t3"></canvas></div>
+            </div>
+            <div class="sector-card">
+              <div class="sector-card-title"><span>Sector 4 (T4)</span><span class="sector-card-badge badge-t4">T4</span></div>
+              <div class="sector-canvas-container"><canvas id="chart-sector-t4"></canvas></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="round-nav-bar">
+          ${prevGp ? `<a href="event_moto2.html?year=${year}&round=${prevGp.round}" class="nav-link">&larr; ${prevGp.round}: ${prevGp.name}</a>` : `<span class="nav-link disabled">&larr; First Round</span>`}
+          
+          <div class="footer-social-inline">
+            <div class="footer-social-title">Get in touch with ZioG</div>
+            <div class="social-icons">
+              <a class="social-icon" href="https://www.instagram.com/ziog.2/" target="_blank" rel="noopener" title="Instagram" style="color:#e1306c">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+              <a class="social-icon" href="https://www.youtube.com/@ZioG91" target="_blank" rel="noopener" title="YouTube" style="color:#ff0000">
+                <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+              </a>
+              <a class="social-icon" href="https://www.tiktok.com/@ziog91" target="_blank" rel="noopener" title="TikTok" style="color:#ccc">
+                <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+              </a>
+              <a class="social-icon" href="https://www.facebook.com/ZioG91" target="_blank" rel="noopener" title="Facebook" style="color:#1877f2">
+                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          ${nextGp ? `<a href="event_moto2.html?year=${year}&round=${nextGp.round}" class="nav-link">${nextGp.round}: ${nextGp.name} &rarr;</a>` : `<span class="nav-link disabled">Final Round &rarr;</span>`}
+        </div>
+      `;
+
+      buildSidebarList();
+      applySessionVisibility();
+      renderRacProgression(gp.short);
+      renderSectorCharts(gp.short);
+    }
+
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      let r = params.get('round') || 'R01';
+      if (/^\d+$/.test(r)) {
+        r = 'R' + r.padStart(2, '0');
+      }
+      return {
+        year: params.get('year') || '2026',
+        round: r.toUpperCase()
+      };
+    }
+
+    async function initEventPage() {
+      const { year, round } = getQueryParams();
+      const roundIdx = GP_ROUNDS.findIndex(r => r.round === round);
+      const gp = GP_ROUNDS[roundIdx >= 0 ? roundIdx : 0];
+      const prevGp = roundIdx > 0 ? GP_ROUNDS[roundIdx - 1] : null;
+      const nextGp = roundIdx < GP_ROUNDS.length - 1 ? GP_ROUNDS[roundIdx + 1] : null;
+
+      document.title = `${year} Moto2 ${gp.round} · ${gp.name} · Overrevving`;
+
+      let fp1Results = [];
+      let prResults = [];
+      let fp2Results = [];
+      let q1Results = [];
+      let q2Results = [];
+      let gridResults = [];
+      let raceResults = [];
+      let weatherInfo = { track: 'Dry', weather: 'Partly-Cloudy', air: '34°C', ground: '54°C', humidity: '42%' };
+
+      if (typeof STATIC_EVENT_DATA !== 'undefined' && STATIC_EVENT_DATA[gp.short]) {
+        const evData = STATIC_EVENT_DATA[gp.short];
+        if (evData.fp1) fp1Results = evData.fp1;
+        if (evData.pr) prResults = evData.pr;
+        if (evData.fp2) fp2Results = evData.fp2;
+        if (evData.q1) q1Results = evData.q1;
+        if (evData.q2) q2Results = evData.q2;
+        if (evData.grid) gridResults = evData.grid;
+        if (evData.race) raceResults = evData.race;
+      }
+
+      renderPageLayout(year, gp, prevGp, nextGp, weatherInfo, fp1Results, prResults, fp2Results, q1Results, q2Results, gridResults, raceResults);
+    }
+
+    document.addEventListener('DOMContentLoaded', initEventPage);
+  </script>
+</body>
+</html>

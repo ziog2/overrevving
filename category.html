@@ -170,6 +170,12 @@
     justify-content: space-between;
     align-items: center;
     font-size: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease;
+  }
+  .cal-item:hover {
+    background: rgba(255, 255, 255, 0.06);
   }
   .cal-item:last-child { border-bottom: none; }
   .cal-item.past {
@@ -756,7 +762,7 @@ function renderCalendar() {
   let completedCount = 0;
   let html = '';
 
-  events.forEach(ev => {
+  events.forEach((ev, idx) => {
     const evStart = new Date(new Date(ev.date + 'T00:00:00').getTime() - 2 * 86400000);
     const evEnd = new Date(ev.date + 'T18:00:00');
     const evLateEnd = new Date(ev.date + 'T23:59:59');
@@ -772,10 +778,13 @@ function renderCalendar() {
       : (isOngoing ? '<span style="color:#f39c12;margin-right:6px;font-size:11px;" title="Weekend in progress">🏁</span>' : '');
     const weatherBadge = ((isPast || isOngoing) && ev.weather) ? `<span class="cal-weather-badge">${ev.weather}</span>` : '';
     
-    html += `<div class="cal-item${isPast ? ' past' : (isOngoing ? ' ongoing' : '')}">
+    const hasEventLink = (catId === 'moto2' && (idx === 0 || ev.name.toLowerCase().includes('thailand')));
+    const tag = hasEventLink ? 'a' : 'div';
+    const hrefAttr = hasEventLink ? ` href="event_moto2.html?year=2026&round=R01"` : '';
+    html += `<${tag}${hrefAttr} class="cal-item${isPast ? ' past' : (isOngoing ? ' ongoing' : '')}">
       <span class="cal-name">${statusIcon}${ev.name}${weatherBadge}</span>
       <span class="cal-date">${dateStr}</span>
-    </div>`;
+    </${tag}>`;
   });
 
   const pct = Math.round((completedCount / events.length) * 100);

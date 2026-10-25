@@ -12,3 +12,4 @@ __pycache__/
 
 # Temporary PDF uploads
 data/*.pdf
+scratch/
