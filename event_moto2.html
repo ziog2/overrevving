@@ -178,6 +178,15 @@
       font-weight: 500;
     }
 
+    .flag-img {
+      width: 22px;
+      height: 15px;
+      object-fit: cover;
+      border-radius: 3px;
+      vertical-align: middle;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
     .meta-item {
       display: flex;
       align-items: center;
@@ -845,6 +854,31 @@
       { round: 'R21', short: 'POR', countryCode: 'pt', name: 'Grande Prémio de Portugal', circuit: 'Autódromo Internacional do Algarve', location: 'Portimão', date: '20 Nov - 22 Nov 2026' },
       { round: 'R22', short: 'VAL', countryCode: 'es', name: 'Gran Premio de la Comunitat Valenciana', circuit: 'Circuit Ricardo Tormo', location: 'Cheste', date: '27 Nov - 29 Nov 2026' }
     ];
+
+    const CIRCUIT_SPECS = {
+      THA: { length: '4.55 km', corners: '12 (5 left &middot; 7 right)', straight: '1000 m' },
+      BRA: { length: '3.84 km', corners: '12 (4 left &middot; 8 right)', straight: '1000 m' },
+      USA: { length: '5.51 km', corners: '20 (11 left &middot; 9 right)', straight: '1200 m' },
+      SPA: { length: '4.42 km', corners: '13 (5 left &middot; 8 right)', straight: '607 m' },
+      FRA: { length: '4.19 km', corners: '14 (5 left &middot; 9 right)', straight: '674 m' },
+      CAT: { length: '4.66 km', corners: '14 (6 left &middot; 8 right)', straight: '1047 m' },
+      ITA: { length: '5.25 km', corners: '15 (6 left &middot; 9 right)', straight: '1141 m' },
+      HUN: { length: '4.11 km', corners: '16 (6 left &middot; 10 right)', straight: '760 m' },
+      CZE: { length: '5.40 km', corners: '14 (6 left &middot; 8 right)', straight: '636 m' },
+      NED: { length: '4.54 km', corners: '18 (6 left &middot; 12 right)', straight: '487 m' },
+      GER: { length: '3.67 km', corners: '13 (10 left &middot; 3 right)', straight: '700 m' },
+      GBR: { length: '5.90 km', corners: '18 (8 left &middot; 10 right)', straight: '770 m' },
+      ARA: { length: '5.08 km', corners: '17 (10 left &middot; 7 right)', straight: '968 m' },
+      RSM: { length: '4.23 km', corners: '16 (6 left &middot; 10 right)', straight: '530 m' },
+      AUT: { length: '4.35 km', corners: '10 (3 left &middot; 7 right)', straight: '626 m' },
+      JPN: { length: '4.80 km', corners: '14 (6 left &middot; 8 right)', straight: '762 m' },
+      INA: { length: '4.30 km', corners: '17 (6 left &middot; 11 right)', straight: '507 m' },
+      AUS: { length: '4.45 km', corners: '12 (7 left &middot; 5 right)', straight: '900 m' },
+      MAL: { length: '5.54 km', corners: '15 (5 left &middot; 10 right)', straight: '920 m' },
+      QAT: { length: '5.38 km', corners: '16 (6 left &middot; 10 right)', straight: '1068 m' },
+      POR: { length: '4.59 km', corners: '15 (6 left &middot; 9 right)', straight: '970 m' },
+      VAL: { length: '4.01 km', corners: '14 (9 left &middot; 5 right)', straight: '876 m' }
+    };
 
     const SESSION_WEATHER_DATA = {
   "THA": {
@@ -4361,6 +4395,8 @@
       const gridRows = renderGridRows(gridResults);
       const raceRows = renderRaceRows(raceResults);
 
+      const flagHtml = gp.countryCode ? `<img src="https://flagcdn.com/w40/${gp.countryCode}.png" alt="${gp.countryCode}" class="flag-img">` : '';
+      const specs = (typeof CIRCUIT_SPECS !== 'undefined' && CIRCUIT_SPECS[gp.short]) ? CIRCUIT_SPECS[gp.short] : { length: '4.55 km', corners: '12 (5 left &middot; 7 right)', straight: '1000 m' };
       const pdfBase = `https://resources.motogp.com/files/results/${year}/${gp.short}/Moto2/RAC`;
 
       const mainEl = document.getElementById('event-main');
@@ -4369,10 +4405,10 @@
           <div class="hero-top">
             <div>
               <span class="cat-badge">MOTO2</span>
-              <span class="round-badge">${gp.round} &middot; 2026</span>
+              <span class="round-badge">${gp.round} &middot; ${year}</span>
               <h1 class="event-title">${gp.name}</h1>
               <div class="event-meta">
-                <span class="meta-item">📍 ${gp.circuit} &middot; ${gp.location}</span>
+                <span class="meta-item">📍 ${flagHtml ? flagHtml + ' ' : ''}${gp.circuit} &middot; ${gp.location}</span>
                 <span class="meta-item">📅 ${gp.date}</span>
               </div>
             </div>
@@ -4380,15 +4416,15 @@
           <div class="event-details-grid">
             <div class="detail-item">
               <span class="detail-label">Circuit Length</span>
-              <span class="detail-val">4.55 km</span>
+              <span class="detail-val">${specs.length}</span>
             </div>
             <div class="detail-item">
               <span class="detail-label">Corners</span>
-              <span class="detail-val">12 (5 left &middot; 7 right)</span>
+              <span class="detail-val">${specs.corners}</span>
             </div>
             <div class="detail-item">
               <span class="detail-label">Longest Straight</span>
-              <span class="detail-val">1000 m</span>
+              <span class="detail-val">${specs.straight}</span>
             </div>
             <div class="detail-item">
               <span class="detail-label">Category</span>
