@@ -32,10 +32,10 @@ jobs:
           pip install --quiet pypdf openpyxl
 
       - name: Scarica ed estrai classifiche da PDF Dorna e API
-run: |
+        run: |
           node .github/scripts/update_standings.js
 
-      - name: Aggiorna dati evento (event.html)
+      - name: Aggiorna dati evento (event.html e event_moto2.html)
         run: |
           python3 .github/scripts/update_event_data.py
 
