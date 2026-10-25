@@ -90897,6 +90897,10 @@
       'Veda Pratama': { color: '#ffffff', borderDash: [6, 4] }
     };
 
+    let racLapChartInstance = null;
+    let racGapChartInstance = null;
+    let sectorChartInstances = {};
+
     function extractLapTimeSec(lapObj) {
       if (!lapObj) return null;
       if (typeof lapObj.t1 === 'number' && typeof lapObj.t2 === 'number' && typeof lapObj.t3 === 'number' && typeof lapObj.t4 === 'number') {
@@ -91306,6 +91310,21 @@
       }
 
       if (activeFavRiders.length === 0) {
+        const raceList = (typeof STATIC_EVENT_DATA !== 'undefined' && STATIC_EVENT_DATA[currentGpShort] && STATIC_EVENT_DATA[currentGpShort].race) || [];
+        for (let item of raceList) {
+          const rName = item.rider;
+          const matched = normKeys.find(k => k.toLowerCase() === (rName || '').toLowerCase());
+          if (matched && !activeFavRiders.includes(matched)) {
+            activeFavRiders.push(matched);
+            if (activeFavRiders.length >= 3) break;
+          }
+        }
+        if (activeFavRiders.length === 0) {
+          activeFavRiders.push(...normKeys.slice(0, 3));
+        }
+      }
+
+      if (activeFavRiders.length === 0) {
         sectionEl.style.display = 'none';
         return;
       }
@@ -91419,6 +91438,7 @@
         });
       });
     }
+
     function renderRacProgression(currentGpShort) {
       const sectionEl = document.getElementById('rac-progression-section');
       if (!sectionEl) return;
@@ -91442,6 +91462,23 @@
       for (let rName of ridersPool) {
         if (isRiderFavorite(rName)) {
           activeFavRiders.push(rName);
+        }
+      }
+
+      if (activeFavRiders.length === 0) {
+        const raceList = (typeof STATIC_EVENT_DATA !== 'undefined' && STATIC_EVENT_DATA[currentGpShort] && STATIC_EVENT_DATA[currentGpShort].race) || [];
+        for (let item of raceList) {
+          const rName = item.rider;
+          if (rName) {
+            const matched = Array.from(ridersPool).find(k => k.toLowerCase() === rName.toLowerCase());
+            if (matched && !activeFavRiders.includes(matched)) {
+              activeFavRiders.push(matched);
+              if (activeFavRiders.length >= 3) break;
+            }
+          }
+        }
+        if (activeFavRiders.length === 0) {
+          activeFavRiders.push(...Array.from(ridersPool).slice(0, 3));
         }
       }
 
