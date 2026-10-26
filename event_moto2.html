@@ -531,6 +531,33 @@
       color: #fff;
     }
 
+        /* RACE PROGRESSION, GAP & PACE DELTA UNIFIED SECTION */
+    .progression-grid-unified {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: 14px;
+      width: 100%;
+    }
+    .progression-grid-unified.no-pace {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+    @media (max-width: 1200px) {
+      .progression-grid-unified {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+      .progression-grid-unified > .sector-card:nth-child(3) {
+        grid-column: span 2;
+      }
+    }
+    @media (max-width: 768px) {
+      .progression-grid-unified {
+        grid-template-columns: 1fr !important;
+      }
+      .progression-grid-unified > .sector-card:nth-child(3) {
+        grid-column: span 1;
+      }
+    }
+
     .progression-grid-2col {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -98270,6 +98297,99 @@
 
     let racLapChartInstance = null;
     let racGapChartInstance = null;
+    let racPaceChartInstance = null;
+
+    const raceBoundariesPlugin = {
+      id: 'raceBoundaries',
+      beforeDraw: (chart) => {
+        const info = chart.raceBoundariesInfo;
+        if (!info || !info.totalLaps || info.totalLaps < 4) return;
+        const { ctx, chartArea, scales: { x } } = chart;
+        if (!x || !chartArea) return;
+
+        const p1End = info.part1EndLap;
+        const p2End = info.part2EndLap;
+        if (!p1End || !p2End || p1End <= 1) return;
+
+        // Start of pace (between L1 and L2)
+        const xStart = (x.getPixelForValue(0) + x.getPixelForValue(1)) / 2;
+        // Boundary between 1/3 and 2/3 (between p1End and p1End+1)
+        const xCut1 = (x.getPixelForValue(p1End - 1) + x.getPixelForValue(p1End)) / 2;
+        // Boundary between 2/3 and 3/3 (between p2End and p2End+1)
+        const xCut2 = (x.getPixelForValue(p2End - 1) + x.getPixelForValue(p2End)) / 2;
+        const xEnd = chartArea.right;
+
+        ctx.save();
+        // Subtle background tint for alternating race parts
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.012)';
+        ctx.fillRect(xStart, chartArea.top, xCut1 - xStart, chartArea.bottom - chartArea.top);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.038)';
+        ctx.fillRect(xCut1, chartArea.top, xCut2 - xCut1, chartArea.bottom - chartArea.top);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.012)';
+        ctx.fillRect(xCut2, chartArea.top, xEnd - xCut2, chartArea.bottom - chartArea.top);
+
+        // Vertical boundary lines
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([4, 4]);
+        [xStart, xCut1, xCut2].forEach(xp => {
+          ctx.beginPath();
+          ctx.moveTo(xp, chartArea.top);
+          ctx.lineTo(xp, chartArea.bottom);
+          ctx.stroke();
+        });
+        ctx.restore();
+      },
+      afterDatasetsDraw: (chart) => {
+        const info = chart.raceBoundariesInfo;
+        if (!info || !info.totalLaps || info.totalLaps < 4) return;
+        const { ctx, chartArea, scales: { x } } = chart;
+        if (!x || !chartArea) return;
+
+        const p1End = info.part1EndLap;
+        const p2End = info.part2EndLap;
+        if (!p1End || !p2End || p1End <= 1) return;
+
+        const xStart = (x.getPixelForValue(0) + x.getPixelForValue(1)) / 2;
+        const xCut1 = (x.getPixelForValue(p1End - 1) + x.getPixelForValue(p1End)) / 2;
+        const xCut2 = (x.getPixelForValue(p2End - 1) + x.getPixelForValue(p2End)) / 2;
+        const xEnd = chartArea.right;
+
+        // Bottom stint labels (where indicated by user)
+        const labelY = chartArea.bottom - 13;
+        const stints = [
+          { text: '1/3 race', x: (xStart + xCut1) / 2 },
+          { text: '2/3 race', x: (xCut1 + xCut2) / 2 },
+          { text: '3/3 race', x: (xCut2 + xEnd) / 2 }
+        ];
+
+        stints.forEach(st => {
+          ctx.save();
+          ctx.font = '600 10.5px Inter, sans-serif';
+          const textW = ctx.measureText(st.text).width;
+          const bgW = textW + 14;
+          const bgH = 18;
+
+          ctx.fillStyle = 'rgba(20, 24, 33, 0.85)';
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(st.x - bgW / 2, labelY - bgH / 2, bgW, bgH, 4);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          } else {
+            ctx.fillRect(st.x - bgW / 2, labelY - bgH / 2, bgW, bgH);
+          }
+
+          ctx.fillStyle = '#b0b8c4';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(st.text, st.x, labelY);
+          ctx.restore();
+        });
+      }
+    };
     let sectorChartInstances = {};
 
     function extractLapTimeSec(lapObj) {
@@ -98367,7 +98487,7 @@
           labels: labels,
           datasets: datasets
         },
-        plugins: [watermarkPlugin],
+        plugins: [watermarkPlugin, raceBoundariesPlugin],
         options: {
           responsive: true,
           maintainAspectRatio: false,
@@ -98406,8 +98526,8 @@
           },
           layout: {
             padding: {
-              top: 14,
-              bottom: 8,
+              top: 10,
+              bottom: 6,
               left: 4,
               right: 12
             }
@@ -98441,6 +98561,16 @@
           }
         }
       });
+
+      const availLaps = [];
+      for (let i = 2; i <= totalLaps; i++) availLaps.push(i);
+      const cut1 = Math.round(availLaps.length / 3);
+      const cut2 = Math.round((2 * availLaps.length) / 3);
+      racLapChartInstance.raceBoundariesInfo = {
+        totalLaps: totalLaps,
+        part1EndLap: availLaps[cut1 - 1],
+        part2EndLap: availLaps[cut2 - 1]
+      };
     }
 
     function renderSingleGapChart(sessionKey, canvasId, currentGpShort, activeFavRiders) {
@@ -98575,7 +98705,7 @@
           labels: labels,
           datasets: datasets
         },
-        plugins: [watermarkPlugin],
+        plugins: [watermarkPlugin, raceBoundariesPlugin],
         options: {
           responsive: true,
           maintainAspectRatio: false,
@@ -98617,8 +98747,8 @@
           },
           layout: {
             padding: {
-              top: 14,
-              bottom: 8,
+              top: 10,
+              bottom: 6,
               left: 4,
               right: 12
             }
@@ -98660,6 +98790,468 @@
           }
         }
       });
+
+      const availGapLaps = [];
+      for (let i = 2; i <= maxLaps; i++) availGapLaps.push(i);
+      const cutGap1 = Math.round(availGapLaps.length / 3);
+      const cutGap2 = Math.round((2 * availGapLaps.length) / 3);
+      racGapChartInstance.raceBoundariesInfo = {
+        totalLaps: maxLaps,
+        part1EndLap: availGapLaps[cutGap1 - 1],
+        part2EndLap: availGapLaps[cutGap2 - 1]
+      };
+    }
+
+
+    const paceBarBorderPlugin = {
+      id: 'paceBarBorder',
+      afterDatasetsDraw: (chart) => {
+        const ctx = chart.ctx;
+        chart.data.datasets.forEach((dataset, dIdx) => {
+          const meta = chart.getDatasetMeta(dIdx);
+          if (!meta || !meta.data || meta.hidden) return;
+          const style = dataset.riderStyle || {};
+          const color = style.color || '#3498db';
+          const borderDash = style.borderDash || [];
+
+          meta.data.forEach((bar, idx) => {
+            if (!bar || bar.skip || isNaN(bar.x) || isNaN(bar.y) || isNaN(bar.base)) return;
+            const val = dataset.data[idx];
+            if (val === null || isNaN(val)) return;
+
+            const left = bar.x - bar.width / 2;
+            const top = Math.min(bar.y, bar.base);
+            const height = Math.abs(bar.y - bar.base);
+            const width = bar.width;
+
+            if (width <= 0) return;
+
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1.8;
+
+            if (borderDash && borderDash.length) {
+              ctx.setLineDash(borderDash);
+            } else {
+              ctx.setLineDash([]);
+            }
+
+            if (height < 1.5) {
+              ctx.beginPath();
+              ctx.moveTo(left, bar.base);
+              ctx.lineTo(left + width, bar.base);
+              ctx.stroke();
+            } else {
+              if (ctx.roundRect) {
+                ctx.beginPath();
+                ctx.roundRect(left, top, width, height, 3);
+                ctx.stroke();
+              } else {
+                ctx.strokeRect(left, top, width, height);
+              }
+            }
+
+            if (width >= 16) {
+              ctx.save();
+              ctx.setLineDash([]);
+              ctx.fillStyle = '#ffffff';
+              ctx.font = '600 9.5px Inter, sans-serif';
+              ctx.textAlign = 'center';
+              let valStr;
+              if (width >= 26) {
+                valStr = val === 0 ? '0.000s' : (val > 0 ? '+' + val.toFixed(3) + 's' : val.toFixed(3) + 's');
+              } else {
+                valStr = val === 0 ? '0.00s' : (val > 0 ? '+' + val.toFixed(2) + 's' : val.toFixed(2) + 's');
+              }
+              let textY = val >= 0 ? (top - 4) : (top + height + 11);
+              if (textY < chart.chartArea.top + 10) {
+                textY = Math.min(top + 11, bar.base - 4);
+              }
+              ctx.fillText(valStr, bar.x, textY);
+              ctx.restore();
+            }
+
+            ctx.restore();
+          });
+        });
+      }
+    };
+
+    function formatLapTime(sec) {
+      if (sec === null || isNaN(sec)) return '-';
+      const mins = Math.floor(sec / 60);
+      const remSec = (sec % 60).toFixed(3);
+      const remSecStr = (sec % 60) < 10 ? '0' + remSec : remSec;
+      return mins > 0 ? (mins + "'" + remSecStr) : (remSecStr + 's');
+    }
+
+    function findResultInList(rName, list) {
+      if (!list || !list.length) return null;
+      const target = rName.toLowerCase().trim();
+      for (let item of list) {
+        const raw = item.rider ? (typeof item.rider === 'string' ? item.rider : (item.rider.full_name || item.name)) : (item.name || '');
+        if (raw && raw.toLowerCase().trim() === target) return item;
+      }
+      const normTarget = target.normalize("NFD").replace(/[̀-ͯ]/g, "");
+      for (let item of list) {
+        const raw = item.rider ? (typeof item.rider === 'string' ? item.rider : (item.rider.full_name || item.name)) : (item.name || '');
+        if (raw && raw.toLowerCase().trim().normalize("NFD").replace(/[̀-ͯ]/g, "") === normTarget) return item;
+      }
+      const parts = target.split(' ');
+      const lastName = parts[parts.length - 1];
+      if (lastName.length > 2) {
+        for (let item of list) {
+          const raw = item.rider ? (typeof item.rider === 'string' ? item.rider : (item.rider.full_name || item.name)) : (item.name || '');
+          if (raw && raw.toLowerCase().includes(lastName)) return item;
+        }
+      }
+      return null;
+    }
+
+    function getSessionWinner(sessionKey, rawLapsData, currentGpShort) {
+      const results = (typeof window !== 'undefined' && window.CURRENT_RACE_RESULTS && window.CURRENT_RACE_RESULTS.length)
+        ? window.CURRENT_RACE_RESULTS
+        : ((typeof STATIC_EVENT_DATA !== 'undefined' && currentGpShort && STATIC_EVENT_DATA[currentGpShort] && STATIC_EVENT_DATA[currentGpShort].race) || []);
+      if (results && results.length) {
+        for (let item of results) {
+          const isDNF = item.pos === 'NC' || item.status === 'OUTSTND' || item.position === null || item.status === 'NOTFINISHFIRST';
+          const pos = item.pos || item.position;
+          if (!isDNF && (pos === 1 || pos === '1' || results.indexOf(item) === 0)) {
+            const raw = item.rider ? (typeof item.rider === 'string' ? item.rider : (item.rider.full_name || item.name)) : (item.name || '');
+            for (let r in rawLapsData) {
+              if (r.toLowerCase().trim() === raw.toLowerCase().trim()) return r;
+              if (r.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase() === raw.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()) return r;
+            }
+          }
+        }
+      }
+      const sessionLapData = (typeof EVENT_LAP_CHARTS_DATA !== 'undefined' && EVENT_LAP_CHARTS_DATA[sessionKey]) ? EVENT_LAP_CHARTS_DATA[sessionKey][currentGpShort] : null;
+      if (sessionLapData && sessionLapData.riders && sessionLapData.totalLaps > 0) {
+        const lastLapIdx = sessionLapData.totalLaps - 1;
+        for (let r in sessionLapData.riders) {
+          if (sessionLapData.riders[r][lastLapIdx] === 1) return r;
+        }
+      }
+      return Object.keys(rawLapsData)[0];
+    }
+
+    function getRiderRankAndPos(rName, sessionKey, rawLapsData, currentGpShort) {
+      const results = (typeof window !== 'undefined' && window.CURRENT_RACE_RESULTS && window.CURRENT_RACE_RESULTS.length)
+        ? window.CURRENT_RACE_RESULTS
+        : ((typeof STATIC_EVENT_DATA !== 'undefined' && currentGpShort && STATIC_EVENT_DATA[currentGpShort] && STATIC_EVENT_DATA[currentGpShort].race) || []);
+      const resItem = findResultInList(rName, results);
+      if (resItem) {
+        const isDNF = resItem.pos === 'NC' || resItem.status === 'OUTSTND' || resItem.position === null || resItem.status === 'NOTFINISHFIRST';
+        const posNum = parseInt(resItem.pos || resItem.position || (results.indexOf(resItem) + 1), 10);
+        if (isDNF) {
+          return { rank: 1000 + results.indexOf(resItem), posLabel: 'DNF' };
+        }
+        const finalPos = isNaN(posNum) ? (results.indexOf(resItem) + 1) : posNum;
+        return { rank: finalPos, posLabel: 'P' + finalPos };
+      }
+      const sessionLapData = (typeof EVENT_LAP_CHARTS_DATA !== 'undefined' && EVENT_LAP_CHARTS_DATA[sessionKey]) ? EVENT_LAP_CHARTS_DATA[sessionKey][currentGpShort] : null;
+      if (sessionLapData && sessionLapData.riders && sessionLapData.riders[rName]) {
+        const lastPos = sessionLapData.riders[rName][sessionLapData.totalLaps - 1];
+        if (typeof lastPos === 'number') {
+          return { rank: lastPos, posLabel: 'P' + lastPos };
+        }
+      }
+      return { rank: 999, posLabel: 'P?' };
+    }
+
+    function renderPaceSection(sessionKey, currentGpShort, passedFavRiders) {
+      if (!currentGpShort) currentGpShort = (window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA'));
+      const cardEl = document.getElementById('rac-pace-card');
+      const gridEl = document.getElementById('rac-progression-grid');
+      const canvasEl = document.getElementById('chart-rac-pace');
+      if (!cardEl || !canvasEl) return;
+
+      const rawLapsData = (typeof EVENT_LAPS_DATA !== 'undefined') ? EVENT_LAPS_DATA[currentGpShort] : null;
+
+      if (!rawLapsData || Object.keys(rawLapsData).length === 0) {
+        cardEl.style.display = 'none';
+        if (gridEl) gridEl.classList.add('no-pace');
+        return;
+      }
+
+      const allRiderNames = Object.keys(rawLapsData);
+      let activeFavRiders = allRiderNames.filter(r => isRiderFavorite(r));
+      if (activeFavRiders.length === 0 && passedFavRiders && passedFavRiders.length > 0) {
+        activeFavRiders = passedFavRiders.filter(r => allRiderNames.includes(r) || allRiderNames.some(k => k.toLowerCase() === r.toLowerCase()));
+      }
+
+      if (activeFavRiders.length === 0) {
+        cardEl.style.display = 'none';
+        if (gridEl) gridEl.classList.add('no-pace');
+        return;
+      }
+
+      let totalLaps = 0;
+      allRiderNames.forEach(r => {
+        (rawLapsData[r] || []).forEach((l, idx) => {
+          const lapNum = (l && typeof l.lap === 'number') ? l.lap : (idx + 1);
+          if (lapNum > totalLaps) totalLaps = lapNum;
+        });
+      });
+      const sessionLapData = (typeof EVENT_LAP_CHARTS_DATA !== 'undefined' && EVENT_LAP_CHARTS_DATA[sessionKey]) ? EVENT_LAP_CHARTS_DATA[sessionKey][currentGpShort] : null;
+      if (sessionLapData && sessionLapData.totalLaps > totalLaps) {
+        totalLaps = sessionLapData.totalLaps;
+      }
+
+      if (totalLaps < 4) {
+        cardEl.style.display = 'none';
+        if (gridEl) gridEl.classList.add('no-pace');
+        return;
+      }
+
+      cardEl.style.display = '';
+      if (gridEl) gridEl.classList.remove('no-pace');
+
+      const availableLaps = [];
+      for (let i = 2; i <= totalLaps; i++) availableLaps.push(i);
+      const totalAvail = availableLaps.length;
+      const cut1 = Math.round(totalAvail / 3);
+      const cut2 = Math.round((2 * totalAvail) / 3);
+      const partsLaps = [
+        availableLaps.slice(0, cut1),
+        availableLaps.slice(cut1, cut2),
+        availableLaps.slice(cut2)
+      ];
+
+      const badgeEl = document.getElementById('rac-pace-badge');
+      if (badgeEl && availableLaps.length) {
+        badgeEl.textContent = 'L' + availableLaps[0] + ' - L' + availableLaps[availableLaps.length - 1] + ' · Escluso Giro 1';
+      }
+
+      const lapMinTime = {};
+      for (let i = 2; i <= totalLaps; i++) {
+        let minT = Infinity;
+        allRiderNames.forEach(r => {
+          const laps = rawLapsData[r] || [];
+          let l = laps.find(x => x && x.lap === i);
+          if (!l && laps[i - 1] && laps[i - 1].lap == null) l = laps[i - 1];
+          const s = extractLapTimeSec(l);
+          if (s !== null && s > 0 && s < minT) minT = s;
+        });
+        lapMinTime[i] = minT;
+      }
+
+      function getRiderStintAvg(riderName, stintLaps) {
+        const laps = rawLapsData[riderName] || [];
+        const validSecs = [];
+        stintLaps.forEach(lapNum => {
+          let l = laps.find(x => x && x.lap === lapNum);
+          if (!l && laps[lapNum - 1] && laps[lapNum - 1].lap == null) l = laps[lapNum - 1];
+          const sec = extractLapTimeSec(l);
+          const minT = lapMinTime[lapNum];
+          const maxAllowed = (minT && minT < Infinity) ? (minT * 1.25) : 300;
+          if (sec !== null && sec > 0 && sec <= maxAllowed) {
+            validSecs.push(sec);
+          }
+        });
+        if (validSecs.length === 0) return null;
+        return validSecs.reduce((a, b) => a + b, 0) / validSecs.length;
+      }
+
+      const allStintAvgs = {};
+      allRiderNames.forEach(r => {
+        allStintAvgs[r] = [
+          getRiderStintAvg(r, partsLaps[0]),
+          getRiderStintAvg(r, partsLaps[1]),
+          getRiderStintAvg(r, partsLaps[2])
+        ];
+      });
+
+      const winnerName = getSessionWinner(sessionKey, rawLapsData, currentGpShort);
+      const winnerAvgs = allStintAvgs[winnerName] || [null, null, null];
+      for (let p = 0; p < 3; p++) {
+        if (winnerAvgs[p] === null) {
+          let bestAvg = Infinity;
+          allRiderNames.forEach(r => {
+            const a = allStintAvgs[r][p];
+            if (a !== null && a < bestAvg) bestAvg = a;
+          });
+          winnerAvgs[p] = bestAvg < Infinity ? bestAvg : 90;
+        }
+      }
+
+      const activeFavObjects = activeFavRiders.map(rName => {
+        const info = getRiderRankAndPos(rName, sessionKey, rawLapsData, currentGpShort);
+        return {
+          name: rName,
+          rank: info.rank,
+          posLabel: info.posLabel
+        };
+      });
+      activeFavObjects.sort((a, b) => a.rank - b.rank);
+
+      let globalMin = 0;
+      let globalMax = 0;
+      for (let p = 0; p < 3; p++) {
+        const wAvg = winnerAvgs[p];
+        activeFavObjects.forEach(r => {
+          const avg = allStintAvgs[r.name][p];
+          if (avg !== null && wAvg !== null) {
+            const delta = avg - wAvg;
+            if (delta < globalMin) globalMin = delta;
+            if (delta > globalMax) globalMax = delta;
+          }
+        });
+      }
+      const yMin = globalMin < 0 ? (Math.floor((globalMin - 0.15) * 10) / 10) : 0;
+      const yMax = Math.max(0.5, Math.ceil((globalMax + 0.25) * 10) / 10);
+
+      // Stint labels on the shared X axis
+      const xLabels = [
+        ['1/3 race', 'L' + partsLaps[0][0] + ' - L' + partsLaps[0][partsLaps[0].length - 1]],
+        ['2/3 race', 'L' + partsLaps[1][0] + ' - L' + partsLaps[1][partsLaps[1].length - 1]],
+        ['3/3 race', 'L' + partsLaps[2][0] + ' - L' + partsLaps[2][partsLaps[2].length - 1]]
+      ];
+
+      // Grouped bars: each Rider is a Dataset across the 3 stints
+      const datasets = activeFavObjects.map((r, idx) => {
+        const style = RIDER_STYLES[r.name] || {};
+        const color = style.color || ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6'][idx % 5];
+        const borderDash = style.borderDash || [];
+        const riderStyle = { color, borderDash, rName: r.name, posLabel: r.posLabel };
+
+        const riderDeltas = [0, 1, 2].map(p => {
+          const wAvg = winnerAvgs[p];
+          const avg = allStintAvgs[r.name][p];
+          if (avg !== null && wAvg !== null) {
+            return Math.round((avg - wAvg) * 1000) / 1000;
+          }
+          return null;
+        });
+
+        const riderAvgs = [0, 1, 2].map(p => allStintAvgs[r.name][p]);
+
+        return {
+          label: r.posLabel + ' ' + formatName(r.name),
+          data: riderDeltas,
+          backgroundColor: color + '99',
+          borderColor: color,
+          borderWidth: 0,
+          borderRadius: 4,
+          categoryPercentage: 0.82,
+          barPercentage: 0.90,
+          riderStyle: riderStyle,
+          rawAverages: riderAvgs,
+          winnerAvgs: winnerAvgs
+        };
+      });
+
+      if (racPaceChartInstance) {
+        try { racPaceChartInstance.destroy(); } catch(e) {}
+        racPaceChartInstance = null;
+      }
+
+      const ctx = canvasEl.getContext('2d');
+      const chartInst = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: xLabels,
+          datasets: datasets
+        },
+        plugins: [watermarkPlugin, paceBarBorderPlugin],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 300 },
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                color: '#ddd',
+                font: { size: 11, family: 'Inter' },
+                boxWidth: 12,
+                padding: 10,
+                generateLabels: function(chart) {
+                  return chart.data.datasets.map((ds, idx) => {
+                    const style = ds.riderStyle || {};
+                    const hasDash = style.borderDash && style.borderDash.length > 0;
+                    return {
+                      text: ds.label,
+                      fillStyle: style.color ? (style.color + 'aa') : '#3498db',
+                      strokeStyle: style.color || '#3498db',
+                      lineWidth: 1.5,
+                      lineDash: hasDash ? [3, 2] : [],
+                      fontColor: '#ddd',
+                      hidden: !chart.isDatasetVisible(idx),
+                      datasetIndex: idx
+                    };
+                  });
+                }
+              }
+            },
+            tooltip: {
+              backgroundColor: '#1e1e22',
+              titleColor: '#fff',
+              bodyColor: '#ddd',
+              borderColor: '#3a3a42',
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                title: function(items) {
+                  if (!items.length) return '';
+                  const item = items[0];
+                  const stintIdx = item.dataIndex;
+                  const stintNames = ['1/3 race', '2/3 race', '3/3 race'];
+                  const lapsStr = partsLaps[stintIdx] ? (' (L' + partsLaps[stintIdx][0] + ' - L' + partsLaps[stintIdx][partsLaps[stintIdx].length - 1] + ')') : '';
+                  return item.dataset.label + ' · ' + stintNames[stintIdx] + lapsStr;
+                },
+                label: function(context) {
+                  const val = context.parsed.y;
+                  if (val === null || isNaN(val)) return ' DNF / Nessun giro completato';
+                  const ds = context.dataset;
+                  const rAvg = ds.rawAverages ? ds.rawAverages[context.dataIndex] : null;
+                  const sign = val > 0 ? '+' : '';
+                  const valStr = val === 0 ? '0.000s (Rif. Vincitore)' : (sign + val.toFixed(3) + 's');
+                  let text = ' Delta passo: ' + valStr;
+                  if (rAvg !== null) {
+                    text += ' (Passo: ' + formatLapTime(rAvg) + ')';
+                  }
+                  return text;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.08)' },
+              ticks: {
+                color: '#ccc',
+                font: { family: 'Inter', size: 11, weight: '700' }
+              }
+            },
+            y: {
+              min: yMin,
+              max: yMax,
+              grid: {
+                color: function(c) {
+                  if (c.tick && c.tick.value === 0) return 'rgba(46, 204, 113, 0.4)';
+                  return 'rgba(255, 255, 255, 0.06)';
+                }
+              },
+              ticks: {
+                color: function(c) {
+                  if (c.tick && c.tick.value === 0) return '#2ecc71';
+                  return '#999';
+                },
+                font: { family: 'Inter', size: 11, weight: '600' },
+                callback: function(val) {
+                  if (val === 0) return '0.000s';
+                  if (val > 0) return '+' + val.toFixed(2) + 's';
+                  return val.toFixed(2) + 's';
+                }
+              }
+            }
+          }
+        }
+      });
+
+      racPaceChartInstance = chartInst;
     }
 
     function renderSectorCharts(currentGpShort) {
@@ -98858,13 +99450,32 @@
       }
 
       sectionEl.style.display = 'block';
+      if (localStorage.getItem('overrevving_rac_progression_minimized') === '1' && !sectionEl.classList.contains('minimized')) {
+        toggleRacProgressionMinimize();
+      }
+
       renderSingleLapChart('RAC', 'chart-rac-lapchart', currentGpShort, activeFavRiders);
       renderSingleGapChart('RAC', 'chart-rac-gapchart', currentGpShort, activeFavRiders);
+      renderPaceSection('RAC', currentGpShort, activeFavRiders);
     }
 
     function toggleRacProgressionMinimize() {
-      const sec = document.getElementById('rac-progression-section');
-      if (sec) sec.classList.toggle('minimized');
+      const section = document.getElementById('rac-progression-section');
+      if (!section) return;
+      const isMin = section.classList.toggle('minimized');
+      const btn = document.querySelector('#rac-progression-section .win-btn');
+      const icon = document.getElementById('rac-progression-min-icon');
+      if (isMin) {
+        if (btn) btn.setAttribute('title', 'Expand');
+        if (icon) icon.innerHTML = '<path d="M2 6H10M6 2V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+      } else {
+        if (btn) btn.setAttribute('title', 'Minimize');
+        if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+        if (racLapChartInstance) { try { racLapChartInstance.resize(); } catch(e) {} }
+        if (racGapChartInstance) { try { racGapChartInstance.resize(); } catch(e) {} }
+        if (racPaceChartInstance) { try { racPaceChartInstance.resize(); } catch(e) {} }
+      }
+      try { localStorage.setItem('overrevving_rac_progression_minimized', isMin ? '1' : '0'); } catch(e) {}
     }
 
     function toggleSectorMinimize() {
@@ -99287,14 +99898,14 @@
         <div class="sector-section" id="rac-progression-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">📊 RACE - Race Progression &amp; Gap to Leader</div>
-              <div class="sector-subtitle">Comparing favorite riders (★) &middot; Lap-by-Lap Position &amp; Gap to leader (seconds) &middot; All laps included</div>
+              <div class="sector-title">📊 RACE - Progression, Gap to Leader &amp; Pace Delta</div>
+              <div class="sector-subtitle">Comparing favorite riders (★) &middot; Lap Chart, Gap to Leader &amp; 3-Part Pace Delta (1/3, 2/3, 3/3) &middot; Excludes Lap 1 for Pace</div>
             </div>
             <button class="win-btn" onclick="toggleRacProgressionMinimize()" title="Minimize / Expand">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="rac-progression-min-icon"><path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
             </button>
           </div>
-          <div class="progression-grid-2col">
+          <div class="progression-grid-unified" id="rac-progression-grid">
             <div class="sector-card">
               <div class="sector-card-title"><span>Position Progression (Lap Chart)</span></div>
               <div class="progression-canvas-container">
@@ -99305,6 +99916,15 @@
               <div class="sector-card-title"><span>Gap to Leader</span></div>
               <div class="progression-canvas-container">
                 <canvas id="chart-rac-gapchart"></canvas>
+              </div>
+            </div>
+            <div class="sector-card" id="rac-pace-card">
+              <div class="sector-card-title">
+                <span>Pace Delta [3 Part Race]</span>
+                <span class="sector-card-badge" id="rac-pace-badge">1/3 &middot; 2/3 &middot; 3/3</span>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-rac-pace"></canvas>
               </div>
             </div>
           </div>
