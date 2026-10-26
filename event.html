@@ -637,48 +637,59 @@
       display: none !important;
     }
     /* 4-Quadrant Sector Times Comparison Section */
-    /* RACE PROGRESSION & GAP CHART STYLES (MATCHING SECTOR SECTION) */
-    .progression-grid-2col {
+    /* RACE PROGRESSION, GAP & PACE DELTA UNIFIED SECTION */
+    .progression-grid-unified {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 20px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1.35fr) minmax(0, 2fr);
+      gap: 14px;
       width: 100%;
     }
-    @media (max-width: 900px) {
-      .progression-grid-2col {
+    .progression-grid-unified.no-pace {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+    .progression-pace-group {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .progression-pace-group .sector-card {
+      padding: 12px 8px;
+    }
+    .progression-pace-group .sector-card-title {
+      font-size: 11px;
+      margin-bottom: 8px;
+    }
+    @media (max-width: 1250px) {
+      .progression-grid-unified {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+      .progression-pace-group {
+        grid-column: span 2;
+      }
+    }
+    @media (max-width: 800px) {
+      .progression-grid-unified {
         grid-template-columns: 1fr !important;
-        gap: 16px;
+      }
+      .progression-pace-group {
+        grid-column: span 1;
+        grid-template-columns: 1fr !important;
       }
     }
     .progression-canvas-container {
       position: relative;
-      height: 330px;
+      height: 320px;
       width: 100%;
       min-width: 0;
     }
-    .sector-section.minimized .progression-grid-2col {
-      display: none;
-    }
-    /* PACE DELTA 3-PART RACE STYLES */
-    .pace-grid-3col {
+    .progression-grid-2col {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
       width: 100%;
     }
-    @media (max-width: 1100px) {
-      .pace-grid-3col {
-        grid-template-columns: 1fr !important;
-        gap: 16px;
-      }
-    }
-    .pace-canvas-container {
-      position: relative;
-      height: 330px;
-      width: 100%;
-      min-width: 0;
-    }
-    .sector-section.minimized .pace-grid-3col {
+    .sector-section.minimized .progression-grid-unified,
+    .sector-section.minimized .progression-grid-2col {
       display: none;
     }
     .sector-section {
@@ -19248,6 +19259,7 @@
         if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
         if (sprLapChartInstance) { try { sprLapChartInstance.resize(); } catch(e) {} }
         if (sprGapChartInstance) { try { sprGapChartInstance.resize(); } catch(e) {} }
+        sprPaceChartInstances.forEach(inst => { if (inst) { try { inst.resize(); } catch(e) {} } });
       }
       try { localStorage.setItem('overrevving_spr_progression_minimized', isMin ? '1' : '0'); } catch(e) {}
     }
@@ -19266,6 +19278,7 @@
         if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
         if (racLapChartInstance) { try { racLapChartInstance.resize(); } catch(e) {} }
         if (racGapChartInstance) { try { racGapChartInstance.resize(); } catch(e) {} }
+        racPaceChartInstances.forEach(inst => { if (inst) { try { inst.resize(); } catch(e) {} } });
       }
       try { localStorage.setItem('overrevving_rac_progression_minimized', isMin ? '1' : '0'); } catch(e) {}
     }
@@ -20193,39 +20206,8 @@
     let sprPaceChartInstances = [null, null, null];
     let racPaceChartInstances = [null, null, null];
 
-    function toggleSprPaceMinimize() {
-      const section = document.getElementById('spr-pace-section');
-      if (!section) return;
-      const isMin = section.classList.toggle('minimized');
-      const btn = document.getElementById('spr-pace-min-btn');
-      const icon = document.getElementById('spr-pace-min-icon');
-      if (isMin) {
-        if (btn) btn.setAttribute('title', 'Expand');
-        if (icon) icon.innerHTML = '<rect x="2" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/>';
-      } else {
-        if (btn) btn.setAttribute('title', 'Minimize');
-        if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
-        sprPaceChartInstances.forEach(inst => { if (inst) { try { inst.resize(); } catch(e) {} } });
-      }
-      try { localStorage.setItem('overrevving_spr_pace_minimized', isMin ? '1' : '0'); } catch(e) {}
-    }
-
-    function toggleRacPaceMinimize() {
-      const section = document.getElementById('rac-pace-section');
-      if (!section) return;
-      const isMin = section.classList.toggle('minimized');
-      const btn = document.getElementById('rac-pace-min-btn');
-      const icon = document.getElementById('rac-pace-min-icon');
-      if (isMin) {
-        if (btn) btn.setAttribute('title', 'Expand');
-        if (icon) icon.innerHTML = '<rect x="2" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/>';
-      } else {
-        if (btn) btn.setAttribute('title', 'Minimize');
-        if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
-        racPaceChartInstances.forEach(inst => { if (inst) { try { inst.resize(); } catch(e) {} } });
-      }
-      try { localStorage.setItem('overrevving_rac_pace_minimized', isMin ? '1' : '0'); } catch(e) {}
-    }
+    function toggleSprPaceMinimize() { toggleSprProgressionMinimize(); }
+    function toggleRacPaceMinimize() { toggleRacProgressionMinimize(); }
 
     function formatLapTime(sec) {
       if (typeof sec !== 'number' || isNaN(sec) || sec <= 0) return '-';
@@ -20374,15 +20356,17 @@
 
     function renderPaceSection(sessionKey, currentGpShort) {
       if (!currentGpShort) currentGpShort = (window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA'));
-      const sectionEl = document.getElementById(sessionKey === 'SPR' ? 'spr-pace-section' : 'rac-pace-section');
-      if (!sectionEl) return;
+      const groupEl = document.getElementById(sessionKey === 'SPR' ? 'spr-pace-group' : 'rac-pace-group');
+      const gridEl = document.getElementById(sessionKey === 'SPR' ? 'spr-progression-grid' : 'rac-progression-grid');
+      if (!groupEl) return;
 
       const rawLapsData = sessionKey === 'SPR'
         ? ((typeof EVENT_SPR_LAPS_DATA !== 'undefined') ? EVENT_SPR_LAPS_DATA[currentGpShort] : null)
         : ((typeof EVENT_LAPS_DATA !== 'undefined') ? EVENT_LAPS_DATA[currentGpShort] : null);
 
       if (!rawLapsData || Object.keys(rawLapsData).length === 0) {
-        sectionEl.style.display = 'none';
+        groupEl.style.display = 'none';
+        if (gridEl) gridEl.classList.add('no-pace');
         return;
       }
 
@@ -20390,15 +20374,9 @@
       const activeFavRiders = allRiderNames.filter(r => isRiderFavorite(r));
 
       if (activeFavRiders.length === 0) {
-        sectionEl.style.display = 'none';
+        groupEl.style.display = 'none';
+        if (gridEl) gridEl.classList.add('no-pace');
         return;
-      }
-
-      sectionEl.style.display = 'block';
-      const prefKey = sessionKey === 'SPR' ? 'overrevving_spr_pace_minimized' : 'overrevving_rac_pace_minimized';
-      if (localStorage.getItem(prefKey) === '1' && !sectionEl.classList.contains('minimized')) {
-        if (sessionKey === 'SPR') toggleSprPaceMinimize();
-        else toggleRacPaceMinimize();
       }
 
       let totalLaps = 0;
@@ -20414,9 +20392,13 @@
       }
 
       if (totalLaps < 4) {
-        sectionEl.style.display = 'none';
+        groupEl.style.display = 'none';
+        if (gridEl) gridEl.classList.add('no-pace');
         return;
       }
+
+      groupEl.style.display = '';
+      if (gridEl) gridEl.classList.remove('no-pace');
 
       const availableLaps = [];
       for (let i = 2; i <= totalLaps; i++) availableLaps.push(i);
@@ -21406,12 +21388,12 @@
 
         </div>
 
-        <!-- SPRINT RACE: POSITION PROGRESSION & GAP TO LEADER (UNIFIED PANEL) -->
+        <!-- SPRINT RACE: POSITION PROGRESSION, GAP TO LEADER & PACE DELTA (UNIFIED PANEL) -->
         <div class="sector-section" id="spr-progression-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">&#x1F4CA; SPR RACE - Race Progression &amp; Gap to Leader</div>
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap-by-Lap Position (P1 to P22) &amp; Gap to leader (seconds) &middot; All laps included</div>
+              <div class="sector-title">&#x1F4CA; SPR RACE - Progression, Gap to Leader &amp; Pace Delta</div>
+              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap Chart, Gap to Leader &amp; 3-Part Pace Delta (1/3, 2/3, 3/3) &middot; Excludes Lap 1 for Pace</div>
             </div>
             <button class="win-btn" id="spr-progression-min-btn" onclick="toggleSprProgressionMinimize()" title="Minimize / Expand">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="spr-progression-min-icon">
@@ -21419,7 +21401,7 @@
               </svg>
             </button>
           </div>
-          <div class="progression-grid-2col">
+          <div class="progression-grid-unified" id="spr-progression-grid">
             <div class="sector-card">
               <div class="sector-card-title">
                 <span>Position Progression (Lap Chart)</span>
@@ -21436,48 +21418,33 @@
                 <canvas id="chart-spr-gapchart"></canvas>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- SPRINT RACE: DELTA PASSO [3 PART RACE] -->
-        <div class="sector-section" id="spr-pace-section" style="display: none;">
-          <div class="sector-header">
-            <div>
-              <div class="sector-title">&#x23F2;&#xFE0F; SPR RACE - Pace Delta [3 Part Race]</div>
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Delta lap time medio dal vincitore nelle 3 parti di gara &middot; Escluso Giro 1</div>
-            </div>
-            <button class="win-btn" id="spr-pace-min-btn" onclick="toggleSprPaceMinimize()" title="Minimize / Expand">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="spr-pace-min-icon">
-                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
-          <div class="pace-grid-3col">
-            <div class="sector-card">
-              <div class="sector-card-title">
-                <span>1/3 race</span>
-                <span class="sector-card-badge" id="spr-pace-badge-1">1/3</span>
+            <div class="progression-pace-group" id="spr-pace-group">
+              <div class="sector-card">
+                <div class="sector-card-title">
+                  <span>1/3 race</span>
+                  <span class="sector-card-badge" id="spr-pace-badge-1">1/3</span>
+                </div>
+                <div class="progression-canvas-container">
+                  <canvas id="chart-spr-pace-1"></canvas>
+                </div>
               </div>
-              <div class="pace-canvas-container">
-                <canvas id="chart-spr-pace-1"></canvas>
+              <div class="sector-card">
+                <div class="sector-card-title">
+                  <span>2/3 race</span>
+                  <span class="sector-card-badge" id="spr-pace-badge-2">2/3</span>
+                </div>
+                <div class="progression-canvas-container">
+                  <canvas id="chart-spr-pace-2"></canvas>
+                </div>
               </div>
-            </div>
-            <div class="sector-card">
-              <div class="sector-card-title">
-                <span>2/3 race</span>
-                <span class="sector-card-badge" id="spr-pace-badge-2">2/3</span>
-              </div>
-              <div class="pace-canvas-container">
-                <canvas id="chart-spr-pace-2"></canvas>
-              </div>
-            </div>
-            <div class="sector-card">
-              <div class="sector-card-title">
-                <span>3/3 race</span>
-                <span class="sector-card-badge" id="spr-pace-badge-3">3/3</span>
-              </div>
-              <div class="pace-canvas-container">
-                <canvas id="chart-spr-pace-3"></canvas>
+              <div class="sector-card">
+                <div class="sector-card-title">
+                  <span>3/3 race</span>
+                  <span class="sector-card-badge" id="spr-pace-badge-3">3/3</span>
+                </div>
+                <div class="progression-canvas-container">
+                  <canvas id="chart-spr-pace-3"></canvas>
+                </div>
               </div>
             </div>
           </div>
@@ -21537,12 +21504,12 @@
             </div>
           </div>
         </div>
-        <!-- MAIN RACE: POSITION PROGRESSION & GAP TO LEADER (UNIFIED PANEL) -->
+        <!-- MAIN RACE: POSITION PROGRESSION, GAP TO LEADER & PACE DELTA (UNIFIED PANEL) -->
         <div class="sector-section" id="rac-progression-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">&#x1F4CA; MAIN RACE - Race Progression &amp; Gap to Leader</div>
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap-by-Lap Position (P1 to P22) &amp; Gap to leader (seconds) &middot; All laps included</div>
+              <div class="sector-title">&#x1F4CA; MAIN RACE - Progression, Gap to Leader &amp; Pace Delta</div>
+              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap Chart, Gap to Leader &amp; 3-Part Pace Delta (1/3, 2/3, 3/3) &middot; Excludes Lap 1 for Pace</div>
             </div>
             <button class="win-btn" id="rac-progression-min-btn" onclick="toggleRacProgressionMinimize()" title="Minimize / Expand">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="rac-progression-min-icon">
@@ -21550,7 +21517,7 @@
               </svg>
             </button>
           </div>
-          <div class="progression-grid-2col">
+          <div class="progression-grid-unified" id="rac-progression-grid">
             <div class="sector-card">
               <div class="sector-card-title">
                 <span>Position Progression (Lap Chart)</span>
@@ -21567,48 +21534,33 @@
                 <canvas id="chart-rac-gapchart"></canvas>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- MAIN RACE: DELTA PASSO [3 PART RACE] -->
-        <div class="sector-section" id="rac-pace-section" style="display: none;">
-          <div class="sector-header">
-            <div>
-              <div class="sector-title">&#x23F2;&#xFE0F; MAIN RACE - Pace Delta [3 Part Race]</div>
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Delta lap time medio dal vincitore nelle 3 parti di gara &middot; Escluso Giro 1</div>
-            </div>
-            <button class="win-btn" id="rac-pace-min-btn" onclick="toggleRacPaceMinimize()" title="Minimize / Expand">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="rac-pace-min-icon">
-                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
-          <div class="pace-grid-3col">
-            <div class="sector-card">
-              <div class="sector-card-title">
-                <span>1/3 race</span>
-                <span class="sector-card-badge" id="rac-pace-badge-1">1/3</span>
+            <div class="progression-pace-group" id="rac-pace-group">
+              <div class="sector-card">
+                <div class="sector-card-title">
+                  <span>1/3 race</span>
+                  <span class="sector-card-badge" id="rac-pace-badge-1">1/3</span>
+                </div>
+                <div class="progression-canvas-container">
+                  <canvas id="chart-rac-pace-1"></canvas>
+                </div>
               </div>
-              <div class="pace-canvas-container">
-                <canvas id="chart-rac-pace-1"></canvas>
+              <div class="sector-card">
+                <div class="sector-card-title">
+                  <span>2/3 race</span>
+                  <span class="sector-card-badge" id="rac-pace-badge-2">2/3</span>
+                </div>
+                <div class="progression-canvas-container">
+                  <canvas id="chart-rac-pace-2"></canvas>
+                </div>
               </div>
-            </div>
-            <div class="sector-card">
-              <div class="sector-card-title">
-                <span>2/3 race</span>
-                <span class="sector-card-badge" id="rac-pace-badge-2">2/3</span>
-              </div>
-              <div class="pace-canvas-container">
-                <canvas id="chart-rac-pace-2"></canvas>
-              </div>
-            </div>
-            <div class="sector-card">
-              <div class="sector-card-title">
-                <span>3/3 race</span>
-                <span class="sector-card-badge" id="rac-pace-badge-3">3/3</span>
-              </div>
-              <div class="pace-canvas-container">
-                <canvas id="chart-rac-pace-3"></canvas>
+              <div class="sector-card">
+                <div class="sector-card-title">
+                  <span>3/3 race</span>
+                  <span class="sector-card-badge" id="rac-pace-badge-3">3/3</span>
+                </div>
+                <div class="progression-canvas-container">
+                  <canvas id="chart-rac-pace-3"></canvas>
+                </div>
               </div>
             </div>
           </div>
