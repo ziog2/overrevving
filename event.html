@@ -19314,11 +19314,11 @@
         if (!p1End || !p2End || p1End <= 1) return;
 
         // Start of pace (between L1 and L2)
-        const xStart = (x.getPixelForTick(0) + x.getPixelForTick(1)) / 2;
+        const xStart = (x.getPixelForValue(0) + x.getPixelForValue(1)) / 2;
         // Boundary between 1/3 and 2/3 (between p1End and p1End+1)
-        const xCut1 = (x.getPixelForTick(p1End - 1) + x.getPixelForTick(p1End)) / 2;
+        const xCut1 = (x.getPixelForValue(p1End - 1) + x.getPixelForValue(p1End)) / 2;
         // Boundary between 2/3 and 3/3 (between p2End and p2End+1)
-        const xCut2 = (x.getPixelForTick(p2End - 1) + x.getPixelForTick(p2End)) / 2;
+        const xCut2 = (x.getPixelForValue(p2End - 1) + x.getPixelForValue(p2End)) / 2;
         const xEnd = chartArea.right;
 
         ctx.save();
@@ -19340,17 +19340,56 @@
           ctx.lineTo(xp, chartArea.bottom);
           ctx.stroke();
         });
-
-        // Top labels in the margin above chartArea.top
-        const labelY = chartArea.top - 8;
-        ctx.fillStyle = '#888';
-        ctx.font = '600 10px Inter, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('1/3 race', (xStart + xCut1) / 2, labelY);
-        ctx.fillText('2/3 race', (xCut1 + xCut2) / 2, labelY);
-        ctx.fillText('3/3 race', (xCut2 + xEnd) / 2, labelY);
         ctx.restore();
+      },
+      afterDatasetsDraw: (chart) => {
+        const info = chart.raceBoundariesInfo;
+        if (!info || !info.totalLaps || info.totalLaps < 4) return;
+        const { ctx, chartArea, scales: { x } } = chart;
+        if (!x || !chartArea) return;
+
+        const p1End = info.part1EndLap;
+        const p2End = info.part2EndLap;
+        if (!p1End || !p2End || p1End <= 1) return;
+
+        const xStart = (x.getPixelForValue(0) + x.getPixelForValue(1)) / 2;
+        const xCut1 = (x.getPixelForValue(p1End - 1) + x.getPixelForValue(p1End)) / 2;
+        const xCut2 = (x.getPixelForValue(p2End - 1) + x.getPixelForValue(p2End)) / 2;
+        const xEnd = chartArea.right;
+
+        // Bottom stint labels (where indicated by user)
+        const labelY = chartArea.bottom - 13;
+        const stints = [
+          { text: '1/3 race', x: (xStart + xCut1) / 2 },
+          { text: '2/3 race', x: (xCut1 + xCut2) / 2 },
+          { text: '3/3 race', x: (xCut2 + xEnd) / 2 }
+        ];
+
+        stints.forEach(st => {
+          ctx.save();
+          ctx.font = '600 10.5px Inter, sans-serif';
+          const textW = ctx.measureText(st.text).width;
+          const bgW = textW + 14;
+          const bgH = 18;
+
+          ctx.fillStyle = 'rgba(20, 24, 33, 0.85)';
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(st.x - bgW / 2, labelY - bgH / 2, bgW, bgH, 4);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          } else {
+            ctx.fillRect(st.x - bgW / 2, labelY - bgH / 2, bgW, bgH);
+          }
+
+          ctx.fillStyle = '#b0b8c4';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(st.text, st.x, labelY);
+          ctx.restore();
+        });
       }
     };
 
@@ -19469,8 +19508,8 @@
           },
           layout: {
             padding: {
-              top: 22,
-              bottom: 8,
+              top: 10,
+              bottom: 6,
               left: 4,
               right: 12
             }
@@ -19696,8 +19735,8 @@
           },
           layout: {
             padding: {
-              top: 22,
-              bottom: 8,
+              top: 10,
+              bottom: 6,
               left: 4,
               right: 12
             }
@@ -20285,17 +20324,15 @@
         const ctx = chart.ctx;
         chart.data.datasets.forEach((dataset, dIdx) => {
           const meta = chart.getDatasetMeta(dIdx);
-          if (!meta || !meta.data) return;
-          const riderStyles = dataset.riderStyles || [];
+          if (!meta || !meta.data || meta.hidden) return;
+          const style = dataset.riderStyle || {};
+          const color = style.color || '#3498db';
+          const borderDash = style.borderDash || [];
 
           meta.data.forEach((bar, idx) => {
             if (!bar || bar.skip || isNaN(bar.x) || isNaN(bar.y) || isNaN(bar.base)) return;
             const val = dataset.data[idx];
             if (val === null || isNaN(val)) return;
-
-            const style = riderStyles[idx] || {};
-            const color = style.color || '#3498db';
-            const borderDash = style.borderDash || [];
 
             const left = bar.x - bar.width / 2;
             const top = Math.min(bar.y, bar.base);
@@ -20329,19 +20366,22 @@
               }
             }
 
-            if (width >= 18) {
+            if (width >= 16) {
               ctx.save();
               ctx.setLineDash([]);
               ctx.fillStyle = '#ffffff';
               ctx.font = '600 9.5px Inter, sans-serif';
               ctx.textAlign = 'center';
               let valStr;
-              if (width >= 28) {
+              if (width >= 26) {
                 valStr = val === 0 ? '0.000s' : (val > 0 ? '+' + val.toFixed(3) + 's' : val.toFixed(3) + 's');
               } else {
                 valStr = val === 0 ? '0.00s' : (val > 0 ? '+' + val.toFixed(2) + 's' : val.toFixed(2) + 's');
               }
-              const textY = val >= 0 ? (top - 4) : (top + height + 11);
+              let textY = val >= 0 ? (top - 4) : (top + height + 11);
+              if (textY < chart.chartArea.top + 10) {
+                textY = Math.min(top + 11, bar.base - 4);
+              }
               ctx.fillText(valStr, bar.x, textY);
               ctx.restore();
             }
@@ -20564,50 +20604,45 @@
       const yMin = globalMin < 0 ? (Math.floor((globalMin - 0.15) * 10) / 10) : 0;
       const yMax = Math.max(0.5, Math.ceil((globalMax + 0.25) * 10) / 10);
 
-      const xLabels = activeFavObjects.map(r => r.posLabel + ' ' + formatName(r.name));
+      // Stint labels on the shared X axis
+      const xLabels = [
+        ['1/3 race', 'L' + partsLaps[0][0] + ' - L' + partsLaps[0][partsLaps[0].length - 1]],
+        ['2/3 race', 'L' + partsLaps[1][0] + ' - L' + partsLaps[1][partsLaps[1].length - 1]],
+        ['3/3 race', 'L' + partsLaps[2][0] + ' - L' + partsLaps[2][partsLaps[2].length - 1]]
+      ];
 
-      const riderStyles = activeFavObjects.map((r, idx) => {
+      // Grouped bars: each Rider is a Dataset across the 3 stints
+      const datasets = activeFavObjects.map((r, idx) => {
         const style = RIDER_STYLES[r.name] || {};
         const color = style.color || ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6'][idx % 5];
         const borderDash = style.borderDash || [];
-        return { color, borderDash, rName: r.name, posLabel: r.posLabel };
-      });
+        const riderStyle = { color, borderDash, rName: r.name, posLabel: r.posLabel };
 
-      const partLabels = [
-        '1/3 race (L' + partsLaps[0][0] + '-L' + partsLaps[0][partsLaps[0].length - 1] + ')',
-        '2/3 race (L' + partsLaps[1][0] + '-L' + partsLaps[1][partsLaps[1].length - 1] + ')',
-        '3/3 race (L' + partsLaps[2][0] + '-L' + partsLaps[2][partsLaps[2].length - 1] + ')'
-      ];
-
-      const deltasPerPart = [[], [], []];
-      const avgsPerPart = [[], [], []];
-
-      for (let p = 0; p < 3; p++) {
-        const wAvg = winnerAvgs[p];
-        activeFavObjects.forEach(r => {
+        const riderDeltas = [0, 1, 2].map(p => {
+          const wAvg = winnerAvgs[p];
           const avg = allStintAvgs[r.name][p];
-          let delta = null;
           if (avg !== null && wAvg !== null) {
-            delta = Math.round((avg - wAvg) * 1000) / 1000;
+            return Math.round((avg - wAvg) * 1000) / 1000;
           }
-          deltasPerPart[p].push(delta);
-          avgsPerPart[p].push(avg);
+          return null;
         });
-      }
 
-      const opacities = ['38', '80', 'd9']; // 22%, 50%, 85% fill
-      const datasets = [0, 1, 2].map(p => ({
-        label: partLabels[p],
-        data: deltasPerPart[p],
-        backgroundColor: riderStyles.map(s => s.color + opacities[p]),
-        borderColor: riderStyles.map(s => s.color),
-        borderWidth: 0,
-        borderRadius: 4,
-        partIndex: p,
-        rawAverages: avgsPerPart[p],
-        winnerAvg: winnerAvgs[p],
-        riderStyles: riderStyles
-      }));
+        const riderAvgs = [0, 1, 2].map(p => allStintAvgs[r.name][p]);
+
+        return {
+          label: r.posLabel + ' ' + formatName(r.name),
+          data: riderDeltas,
+          backgroundColor: color + '99',
+          borderColor: color,
+          borderWidth: 0,
+          borderRadius: 4,
+          categoryPercentage: 0.82,
+          barPercentage: 0.90,
+          riderStyle: riderStyle,
+          rawAverages: riderAvgs,
+          winnerAvgs: winnerAvgs
+        };
+      });
 
       if (sessionKey === 'SPR' && sprPaceChartInstance) {
         try { sprPaceChartInstance.destroy(); } catch(e) {}
@@ -20637,18 +20672,22 @@
                 color: '#ddd',
                 font: { size: 11, family: 'Inter' },
                 boxWidth: 12,
-                padding: 12,
+                padding: 10,
                 generateLabels: function(chart) {
-                  const legendOpacities = [0.25, 0.55, 0.90];
-                  return chart.data.datasets.map((ds, idx) => ({
-                    text: ds.label,
-                    fillStyle: 'rgba(255, 255, 255, ' + legendOpacities[idx] + ')',
-                    strokeStyle: 'rgba(255, 255, 255, 0.6)',
-                    lineWidth: 1,
-                    fontColor: '#ddd',
-                    hidden: !chart.isDatasetVisible(idx),
-                    datasetIndex: idx
-                  }));
+                  return chart.data.datasets.map((ds, idx) => {
+                    const style = ds.riderStyle || {};
+                    const hasDash = style.borderDash && style.borderDash.length > 0;
+                    return {
+                      text: ds.label,
+                      fillStyle: style.color ? (style.color + 'aa') : '#3498db',
+                      strokeStyle: style.color || '#3498db',
+                      lineWidth: 1.5,
+                      lineDash: hasDash ? [3, 2] : [],
+                      fontColor: '#ddd',
+                      hidden: !chart.isDatasetVisible(idx),
+                      datasetIndex: idx
+                    };
+                  });
                 }
               }
             },
@@ -20663,8 +20702,10 @@
                 title: function(items) {
                   if (!items.length) return '';
                   const item = items[0];
-                  const rObj = activeFavObjects[item.dataIndex];
-                  return (rObj ? rObj.posLabel + ' ' + formatName(rObj.name) : item.label) + ' · ' + item.dataset.label;
+                  const stintIdx = item.dataIndex;
+                  const stintNames = ['1/3 race', '2/3 race', '3/3 race'];
+                  const lapsStr = partsLaps[stintIdx] ? (' (L' + partsLaps[stintIdx][0] + ' - L' + partsLaps[stintIdx][partsLaps[stintIdx].length - 1] + ')') : '';
+                  return item.dataset.label + ' · ' + stintNames[stintIdx] + lapsStr;
                 },
                 label: function(context) {
                   const val = context.parsed.y;
@@ -20684,12 +20725,10 @@
           },
           scales: {
             x: {
-              grid: { color: 'rgba(255, 255, 255, 0.06)' },
+              grid: { color: 'rgba(255, 255, 255, 0.08)' },
               ticks: {
                 color: '#ccc',
-                font: { family: 'Inter', size: 11, weight: '600' },
-                maxRotation: 45,
-                minRotation: 0
+                font: { family: 'Inter', size: 11, weight: '700' }
               }
             },
             y: {
