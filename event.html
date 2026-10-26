@@ -659,6 +659,28 @@
     .sector-section.minimized .progression-grid-2col {
       display: none;
     }
+    /* PACE DELTA 3-PART RACE STYLES */
+    .pace-grid-3col {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
+    @media (max-width: 1100px) {
+      .pace-grid-3col {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+      }
+    }
+    .pace-canvas-container {
+      position: relative;
+      height: 330px;
+      width: 100%;
+      min-width: 0;
+    }
+    .sector-section.minimized .pace-grid-3col {
+      display: none;
+    }
     .sector-section {
       margin-top: 36px;
       margin-bottom: 24px;
@@ -950,12 +972,20 @@
           }
         }
       }
+      if (typeof sprPaceChartInstances !== 'undefined' && Array.isArray(sprPaceChartInstances)) {
+        sprPaceChartInstances.forEach(inst => { if (inst) { try { inst.update('none'); } catch(e) {} } });
+      }
+      if (typeof racPaceChartInstances !== 'undefined' && Array.isArray(racPaceChartInstances)) {
+        racPaceChartInstances.forEach(inst => { if (inst) { try { inst.update('none'); } catch(e) {} } });
+      }
       const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
       if (cur) {
         if (typeof renderSprLapChart === 'function') renderSprLapChart(cur);
         if (typeof renderRacLapChart === 'function') renderRacLapChart(cur);
         if (typeof renderSprGapChart === 'function') renderSprGapChart(cur);
         if (typeof renderRacGapChart === 'function') renderRacGapChart(cur);
+        if (typeof renderSprPaceCharts === 'function') renderSprPaceCharts(cur);
+        if (typeof renderRacPaceCharts === 'function') renderRacPaceCharts(cur);
         if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(cur);
         if (typeof renderSectorCharts === 'function') renderSectorCharts(cur);
       }
@@ -19040,6 +19070,8 @@
       if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short);
       if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short);
       if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short);
+      if (typeof renderSprPaceCharts === 'function') renderSprPaceCharts(gp.short);
+      if (typeof renderRacPaceCharts === 'function') renderRacPaceCharts(gp.short);
       if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short);
       renderSectorCharts(gp.short);
     }
@@ -19053,6 +19085,8 @@
       if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short);
       if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short);
       if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short);
+      if (typeof renderSprPaceCharts === 'function') renderSprPaceCharts(gp.short);
+      if (typeof renderRacPaceCharts === 'function') renderRacPaceCharts(gp.short);
       if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short);
       renderSectorCharts(gp.short);
     }
@@ -19066,6 +19100,8 @@
       if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short);
       if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short);
       if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short);
+      if (typeof renderSprPaceCharts === 'function') renderSprPaceCharts(gp.short);
+      if (typeof renderRacPaceCharts === 'function') renderRacPaceCharts(gp.short);
       if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short);
       renderSectorCharts(gp.short);
     }
@@ -20154,6 +20190,466 @@
       });
     }
 
+    let sprPaceChartInstances = [null, null, null];
+    let racPaceChartInstances = [null, null, null];
+
+    function toggleSprPaceMinimize() {
+      const section = document.getElementById('spr-pace-section');
+      if (!section) return;
+      const isMin = section.classList.toggle('minimized');
+      const btn = document.getElementById('spr-pace-min-btn');
+      const icon = document.getElementById('spr-pace-min-icon');
+      if (isMin) {
+        if (btn) btn.setAttribute('title', 'Expand');
+        if (icon) icon.innerHTML = '<rect x="2" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/>';
+      } else {
+        if (btn) btn.setAttribute('title', 'Minimize');
+        if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+        sprPaceChartInstances.forEach(inst => { if (inst) { try { inst.resize(); } catch(e) {} } });
+      }
+      try { localStorage.setItem('overrevving_spr_pace_minimized', isMin ? '1' : '0'); } catch(e) {}
+    }
+
+    function toggleRacPaceMinimize() {
+      const section = document.getElementById('rac-pace-section');
+      if (!section) return;
+      const isMin = section.classList.toggle('minimized');
+      const btn = document.getElementById('rac-pace-min-btn');
+      const icon = document.getElementById('rac-pace-min-icon');
+      if (isMin) {
+        if (btn) btn.setAttribute('title', 'Expand');
+        if (icon) icon.innerHTML = '<rect x="2" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/>';
+      } else {
+        if (btn) btn.setAttribute('title', 'Minimize');
+        if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+        racPaceChartInstances.forEach(inst => { if (inst) { try { inst.resize(); } catch(e) {} } });
+      }
+      try { localStorage.setItem('overrevving_rac_pace_minimized', isMin ? '1' : '0'); } catch(e) {}
+    }
+
+    function formatLapTime(sec) {
+      if (typeof sec !== 'number' || isNaN(sec) || sec <= 0) return '-';
+      const mins = Math.floor(sec / 60);
+      const remSec = (sec % 60).toFixed(3);
+      const remSecStr = (sec % 60) < 10 ? '0' + remSec : remSec;
+      return mins > 0 ? (mins + "'" + remSecStr) : (remSecStr + 's');
+    }
+
+    const paceBarBorderPlugin = {
+      id: 'paceBarBorder',
+      afterDatasetDraw: (chart, args) => {
+        const meta = chart.getDatasetMeta(args.index);
+        if (!meta || !meta.data) return;
+        const ctx = chart.ctx;
+        const dataset = chart.data.datasets[args.index];
+        const riderStyles = dataset.riderStyles || [];
+
+        meta.data.forEach((bar, idx) => {
+          if (!bar || bar.skip || isNaN(bar.x) || isNaN(bar.y) || isNaN(bar.base)) return;
+          const val = dataset.data[idx];
+          if (val === null || isNaN(val)) return;
+
+          const style = riderStyles[idx] || {};
+          const color = style.color || '#3498db';
+          const borderDash = style.borderDash || [];
+
+          const left = bar.x - bar.width / 2;
+          const top = Math.min(bar.y, bar.base);
+          const height = Math.abs(bar.y - bar.base);
+          const width = bar.width;
+
+          if (width <= 0) return;
+
+          ctx.save();
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 2.2;
+
+          if (height < 1.5) {
+            ctx.setLineDash([]);
+            ctx.beginPath();
+            ctx.moveTo(left, bar.base);
+            ctx.lineTo(left + width, bar.base);
+            ctx.stroke();
+          } else {
+            if (borderDash && borderDash.length) {
+              ctx.setLineDash(borderDash);
+            } else {
+              ctx.setLineDash([]);
+            }
+            if (ctx.roundRect) {
+              ctx.beginPath();
+              ctx.roundRect(left, top, width, height, 4);
+              ctx.stroke();
+            } else {
+              ctx.strokeRect(left, top, width, height);
+            }
+          }
+
+          if (width >= 24) {
+            ctx.save();
+            ctx.setLineDash([]);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '600 11px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            const valStr = val === 0 ? '0.000s' : (val > 0 ? '+' + val.toFixed(3) + 's' : val.toFixed(3) + 's');
+            const textY = val >= 0 ? (top - 5) : (top + height + 13);
+            ctx.fillText(valStr, bar.x, textY);
+            ctx.restore();
+          }
+
+          ctx.restore();
+        });
+      }
+    };
+
+    function findResultInList(rName, list) {
+      if (!list || !list.length) return null;
+      const target = rName.toLowerCase().trim();
+      for (let item of list) {
+        const raw = item.rider ? (typeof item.rider === 'string' ? item.rider : (item.rider.full_name || item.name)) : (item.name || '');
+        if (raw && raw.toLowerCase().trim() === target) return item;
+      }
+      const normTarget = target.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      for (let item of list) {
+        const raw = item.rider ? (typeof item.rider === 'string' ? item.rider : (item.rider.full_name || item.name)) : (item.name || '');
+        if (raw && raw.toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "") === normTarget) return item;
+      }
+      const parts = target.split(' ');
+      const lastName = parts[parts.length - 1];
+      if (lastName.length > 2) {
+        for (let item of list) {
+          const raw = item.rider ? (typeof item.rider === 'string' ? item.rider : (item.rider.full_name || item.name)) : (item.name || '');
+          if (raw && raw.toLowerCase().includes(lastName)) return item;
+        }
+      }
+      return null;
+    }
+
+    function getSessionWinner(sessionKey, rawLapsData, currentGpShort) {
+      const results = sessionKey === 'SPR' ? window.CURRENT_SPRINT_RESULTS : window.CURRENT_RACE_RESULTS;
+      if (results && results.length) {
+        for (let item of results) {
+          const isDNF = item.pos === 'NC' || item.status === 'OUTSTND' || item.position === null || item.status === 'NOTFINISHFIRST';
+          const pos = item.pos || item.position;
+          if (!isDNF && (pos === 1 || pos === '1' || results.indexOf(item) === 0)) {
+            const raw = item.rider ? (typeof item.rider === 'string' ? item.rider : (item.rider.full_name || item.name)) : (item.name || '');
+            for (let r in rawLapsData) {
+              if (r.toLowerCase().trim() === raw.toLowerCase().trim()) return r;
+              if (r.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() === raw.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()) return r;
+            }
+          }
+        }
+      }
+      const sessionLapData = (typeof EVENT_LAP_CHARTS_DATA !== 'undefined' && EVENT_LAP_CHARTS_DATA[sessionKey]) ? EVENT_LAP_CHARTS_DATA[sessionKey][currentGpShort] : null;
+      if (sessionLapData && sessionLapData.riders && sessionLapData.totalLaps > 0) {
+        const lastLapIdx = sessionLapData.totalLaps - 1;
+        for (let r in sessionLapData.riders) {
+          if (sessionLapData.riders[r][lastLapIdx] === 1) return r;
+        }
+      }
+      return Object.keys(rawLapsData)[0];
+    }
+
+    function getRiderRankAndPos(rName, sessionKey, rawLapsData, currentGpShort) {
+      const results = sessionKey === 'SPR' ? window.CURRENT_SPRINT_RESULTS : window.CURRENT_RACE_RESULTS;
+      const resItem = findResultInList(rName, results);
+      if (resItem) {
+        const isDNF = resItem.pos === 'NC' || resItem.status === 'OUTSTND' || resItem.position === null || resItem.status === 'NOTFINISHFIRST';
+        const posNum = parseInt(resItem.pos || resItem.position || (results.indexOf(resItem) + 1), 10);
+        if (isDNF) {
+          return { rank: 1000 + results.indexOf(resItem), posLabel: 'DNF' };
+        }
+        const finalPos = isNaN(posNum) ? (results.indexOf(resItem) + 1) : posNum;
+        return { rank: finalPos, posLabel: 'P' + finalPos };
+      }
+      const sessionLapData = (typeof EVENT_LAP_CHARTS_DATA !== 'undefined' && EVENT_LAP_CHARTS_DATA[sessionKey]) ? EVENT_LAP_CHARTS_DATA[sessionKey][currentGpShort] : null;
+      if (sessionLapData && sessionLapData.riders && sessionLapData.riders[rName]) {
+        const lastPos = sessionLapData.riders[rName][sessionLapData.totalLaps - 1];
+        if (typeof lastPos === 'number') {
+          return { rank: lastPos, posLabel: 'P' + lastPos };
+        }
+      }
+      return { rank: 999, posLabel: 'P?' };
+    }
+
+    function renderPaceSection(sessionKey, currentGpShort) {
+      if (!currentGpShort) currentGpShort = (window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA'));
+      const sectionEl = document.getElementById(sessionKey === 'SPR' ? 'spr-pace-section' : 'rac-pace-section');
+      if (!sectionEl) return;
+
+      const rawLapsData = sessionKey === 'SPR'
+        ? ((typeof EVENT_SPR_LAPS_DATA !== 'undefined') ? EVENT_SPR_LAPS_DATA[currentGpShort] : null)
+        : ((typeof EVENT_LAPS_DATA !== 'undefined') ? EVENT_LAPS_DATA[currentGpShort] : null);
+
+      if (!rawLapsData || Object.keys(rawLapsData).length === 0) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      const allRiderNames = Object.keys(rawLapsData);
+      const activeFavRiders = allRiderNames.filter(r => isRiderFavorite(r));
+
+      if (activeFavRiders.length === 0) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      sectionEl.style.display = 'block';
+      const prefKey = sessionKey === 'SPR' ? 'overrevving_spr_pace_minimized' : 'overrevving_rac_pace_minimized';
+      if (localStorage.getItem(prefKey) === '1' && !sectionEl.classList.contains('minimized')) {
+        if (sessionKey === 'SPR') toggleSprPaceMinimize();
+        else toggleRacPaceMinimize();
+      }
+
+      let totalLaps = 0;
+      allRiderNames.forEach(r => {
+        (rawLapsData[r] || []).forEach((l, idx) => {
+          const lapNum = (l && typeof l.lap === 'number') ? l.lap : (idx + 1);
+          if (lapNum > totalLaps) totalLaps = lapNum;
+        });
+      });
+      const sessionLapData = (typeof EVENT_LAP_CHARTS_DATA !== 'undefined' && EVENT_LAP_CHARTS_DATA[sessionKey]) ? EVENT_LAP_CHARTS_DATA[sessionKey][currentGpShort] : null;
+      if (sessionLapData && sessionLapData.totalLaps > totalLaps) {
+        totalLaps = sessionLapData.totalLaps;
+      }
+
+      if (totalLaps < 4) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      const availableLaps = [];
+      for (let i = 2; i <= totalLaps; i++) availableLaps.push(i);
+      const totalAvail = availableLaps.length;
+      const cut1 = Math.round(totalAvail / 3);
+      const cut2 = Math.round((2 * totalAvail) / 3);
+      const partsLaps = [
+        availableLaps.slice(0, cut1),
+        availableLaps.slice(cut1, cut2),
+        availableLaps.slice(cut2)
+      ];
+
+      for (let p = 0; p < 3; p++) {
+        const badgeEl = document.getElementById((sessionKey === 'SPR' ? 'spr-pace-badge-' : 'rac-pace-badge-') + (p + 1));
+        if (badgeEl && partsLaps[p].length) {
+          badgeEl.textContent = 'L' + partsLaps[p][0] + ' - L' + partsLaps[p][partsLaps[p].length - 1];
+        }
+      }
+
+      const lapMinTime = {};
+      for (let i = 2; i <= totalLaps; i++) {
+        let minT = Infinity;
+        allRiderNames.forEach(r => {
+          const laps = rawLapsData[r] || [];
+          let l = laps.find(x => x && x.lap === i);
+          if (!l && laps[i - 1] && laps[i - 1].lap == null) l = laps[i - 1];
+          const s = extractLapTimeSec(l);
+          if (s !== null && s > 0 && s < minT) minT = s;
+        });
+        lapMinTime[i] = minT;
+      }
+
+      function getRiderStintAvg(riderName, stintLaps) {
+        const laps = rawLapsData[riderName] || [];
+        const validSecs = [];
+        stintLaps.forEach(lapNum => {
+          let l = laps.find(x => x && x.lap === lapNum);
+          if (!l && laps[lapNum - 1] && laps[lapNum - 1].lap == null) l = laps[lapNum - 1];
+          const sec = extractLapTimeSec(l);
+          const minT = lapMinTime[lapNum];
+          const maxAllowed = (minT && minT < Infinity) ? (minT * 1.25) : 300;
+          if (sec !== null && sec > 0 && sec <= maxAllowed) {
+            validSecs.push(sec);
+          }
+        });
+        if (validSecs.length === 0) return null;
+        return validSecs.reduce((a, b) => a + b, 0) / validSecs.length;
+      }
+
+      const allStintAvgs = {};
+      allRiderNames.forEach(r => {
+        allStintAvgs[r] = [
+          getRiderStintAvg(r, partsLaps[0]),
+          getRiderStintAvg(r, partsLaps[1]),
+          getRiderStintAvg(r, partsLaps[2])
+        ];
+      });
+
+      const winnerName = getSessionWinner(sessionKey, rawLapsData, currentGpShort);
+      const winnerAvgs = allStintAvgs[winnerName] || [null, null, null];
+      for (let p = 0; p < 3; p++) {
+        if (winnerAvgs[p] === null) {
+          let bestAvg = Infinity;
+          allRiderNames.forEach(r => {
+            const a = allStintAvgs[r][p];
+            if (a !== null && a < bestAvg) bestAvg = a;
+          });
+          winnerAvgs[p] = bestAvg < Infinity ? bestAvg : 90;
+        }
+      }
+
+      const activeFavObjects = activeFavRiders.map(rName => {
+        const info = getRiderRankAndPos(rName, sessionKey, rawLapsData, currentGpShort);
+        return {
+          name: rName,
+          rank: info.rank,
+          posLabel: info.posLabel
+        };
+      });
+      activeFavObjects.sort((a, b) => a.rank - b.rank);
+
+      let globalMin = 0;
+      let globalMax = 0;
+      for (let p = 0; p < 3; p++) {
+        const wAvg = winnerAvgs[p];
+        activeFavObjects.forEach(r => {
+          const avg = allStintAvgs[r.name][p];
+          if (avg !== null && wAvg !== null) {
+            const delta = avg - wAvg;
+            if (delta < globalMin) globalMin = delta;
+            if (delta > globalMax) globalMax = delta;
+          }
+        });
+      }
+      const yMin = globalMin < 0 ? (Math.floor((globalMin - 0.15) * 10) / 10) : 0;
+      const yMax = Math.max(0.5, Math.ceil((globalMax + 0.25) * 10) / 10);
+
+      const instArray = sessionKey === 'SPR' ? sprPaceChartInstances : racPaceChartInstances;
+      const xLabels = activeFavObjects.map(r => r.posLabel + ' ' + formatName(r.name));
+
+      for (let p = 0; p < 3; p++) {
+        const canvasId = (sessionKey === 'SPR' ? 'chart-spr-pace-' : 'chart-rac-pace-') + (p + 1);
+        const canvasEl = document.getElementById(canvasId);
+        if (!canvasEl) continue;
+
+        if (instArray[p]) {
+          try { instArray[p].destroy(); } catch(e) {}
+          instArray[p] = null;
+        }
+
+        const deltas = [];
+        const rawAvgs = [];
+        const bgColors = [];
+        const borderColors = [];
+        const riderStyles = [];
+        const wAvg = winnerAvgs[p];
+
+        activeFavObjects.forEach((r, idx) => {
+          const avg = allStintAvgs[r.name][p];
+          let delta = null;
+          if (avg !== null && wAvg !== null) {
+            delta = Math.round((avg - wAvg) * 1000) / 1000;
+          }
+          deltas.push(delta);
+          rawAvgs.push(avg);
+
+          const style = RIDER_STYLES[r.name] || {};
+          const color = style.color || ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6'][idx % 5];
+          const borderDash = style.borderDash || [];
+
+          bgColors.push(color + '40');
+          borderColors.push(color);
+          riderStyles.push({ color, borderDash, rName: r.name, posLabel: r.posLabel });
+        });
+
+        const ctx = canvasEl.getContext('2d');
+        instArray[p] = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: xLabels,
+            datasets: [{
+              data: deltas,
+              backgroundColor: bgColors,
+              borderColor: borderColors,
+              borderWidth: 0,
+              borderRadius: 4,
+              riderStyles: riderStyles,
+              rawAverages: rawAvgs,
+              winnerAvg: wAvg
+            }]
+          },
+          plugins: [watermarkPlugin, paceBarBorderPlugin],
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: { duration: 300 },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: '#1e1e22',
+                titleColor: '#fff',
+                bodyColor: '#ddd',
+                borderColor: '#3a3a42',
+                borderWidth: 1,
+                padding: 10,
+                callbacks: {
+                  title: function(items) {
+                    if (!items.length) return '';
+                    const idx = items[0].dataIndex;
+                    const rObj = activeFavObjects[idx];
+                    return (rObj ? rObj.posLabel + ' ' : '') + formatName(rObj ? rObj.name : '');
+                  },
+                  label: function(context) {
+                    const val = context.parsed.y;
+                    if (val === null || isNaN(val)) return ' DNF / Nessun giro completato';
+                    const rAvg = rawAvgs[context.dataIndex];
+                    const sign = val > 0 ? '+' : '';
+                    const valStr = val === 0 ? '0.000s (Rif. Vincitore)' : (sign + val.toFixed(3) + 's');
+                    let text = ' Delta passo: ' + valStr;
+                    if (rAvg !== null) {
+                      text += ' (Passo: ' + formatLapTime(rAvg) + ')';
+                    }
+                    return text;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: { color: 'rgba(255, 255, 255, 0.06)' },
+                ticks: {
+                  color: '#ccc',
+                  font: { family: 'Inter', size: 11, weight: '600' },
+                  maxRotation: 45,
+                  minRotation: 0
+                }
+              },
+              y: {
+                min: yMin,
+                max: yMax,
+                grid: {
+                  color: function(c) {
+                    if (c.tick && c.tick.value === 0) return 'rgba(46, 204, 113, 0.4)';
+                    return 'rgba(255, 255, 255, 0.06)';
+                  }
+                },
+                ticks: {
+                  color: function(c) {
+                    if (c.tick && c.tick.value === 0) return '#2ecc71';
+                    return '#999';
+                  },
+                  font: { family: 'Inter', size: 11, weight: '600' },
+                  callback: function(val) {
+                    if (val === 0) return '0.000s';
+                    if (val > 0) return '+' + val.toFixed(2) + 's';
+                    return val.toFixed(2) + 's';
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+    }
+
+    function renderSprPaceCharts(currentGpShort) {
+      renderPaceSection('SPR', currentGpShort);
+    }
+
+    function renderRacPaceCharts(currentGpShort) {
+      renderPaceSection('RAC', currentGpShort);
+    }
+
     const FAV_KEY = 'overrevving_favorites';
 
     function getFavoritesSet() {
@@ -20207,7 +20703,7 @@
           if (b) b.classList.toggle('active', isFavNow);
         }
       });
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(); if (typeof renderRacLapChart === 'function') renderRacLapChart(); if (typeof renderSprGapChart === 'function') renderSprGapChart(); if (typeof renderRacGapChart === 'function') renderRacGapChart(); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(); renderSectorCharts();
+      if (typeof renderSprLapChart === 'function') renderSprLapChart(); if (typeof renderRacLapChart === 'function') renderRacLapChart(); if (typeof renderSprGapChart === 'function') renderSprGapChart(); if (typeof renderRacGapChart === 'function') renderRacGapChart(); if (typeof renderSprPaceCharts === 'function') renderSprPaceCharts(); if (typeof renderRacPaceCharts === 'function') renderRacPaceCharts(); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(); renderSectorCharts();
     }
 
     function formatName(fullName) {
@@ -20249,6 +20745,8 @@
     }
 
     function renderPageLayout(year, gp, prevGp, nextGp, weather, fp1Results, prResults, fp2Results, q1Results, q2Results, gridResults, sprintResults, wupResults, raceResults) {
+      window.CURRENT_SPRINT_RESULTS = sprintResults;
+      window.CURRENT_RACE_RESULTS = raceResults;
       const gpWeather = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[gp.short]) ? SESSION_WEATHER_DATA[gp.short] : {};
       const isRaceCancelled = Boolean(gpWeather.race && gpWeather.race.toLowerCase().includes('cancel'));
       const isWupCancelled = Boolean(gpWeather.wup && gpWeather.wup.toLowerCase().includes('cancel'));
@@ -20940,6 +21438,50 @@
             </div>
           </div>
         </div>
+
+        <!-- SPRINT RACE: DELTA PASSO [3 PART RACE] -->
+        <div class="sector-section" id="spr-pace-section" style="display: none;">
+          <div class="sector-header">
+            <div>
+              <div class="sector-title">&#x23F2;&#xFE0F; SPR RACE - Pace Delta [3 Part Race]</div>
+              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Delta lap time medio dal vincitore nelle 3 parti di gara &middot; Escluso Giro 1</div>
+            </div>
+            <button class="win-btn" id="spr-pace-min-btn" onclick="toggleSprPaceMinimize()" title="Minimize / Expand">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="spr-pace-min-icon">
+                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="pace-grid-3col">
+            <div class="sector-card">
+              <div class="sector-card-title">
+                <span>1/3 race</span>
+                <span class="sector-card-badge" id="spr-pace-badge-1">1/3</span>
+              </div>
+              <div class="pace-canvas-container">
+                <canvas id="chart-spr-pace-1"></canvas>
+              </div>
+            </div>
+            <div class="sector-card">
+              <div class="sector-card-title">
+                <span>2/3 race</span>
+                <span class="sector-card-badge" id="spr-pace-badge-2">2/3</span>
+              </div>
+              <div class="pace-canvas-container">
+                <canvas id="chart-spr-pace-2"></canvas>
+              </div>
+            </div>
+            <div class="sector-card">
+              <div class="sector-card-title">
+                <span>3/3 race</span>
+                <span class="sector-card-badge" id="spr-pace-badge-3">3/3</span>
+              </div>
+              <div class="pace-canvas-container">
+                <canvas id="chart-spr-pace-3"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="sector-section" id="spr-sector-section" style="display: none;">
           <div class="sector-header">
             <div>
@@ -21027,6 +21569,50 @@
             </div>
           </div>
         </div>
+
+        <!-- MAIN RACE: DELTA PASSO [3 PART RACE] -->
+        <div class="sector-section" id="rac-pace-section" style="display: none;">
+          <div class="sector-header">
+            <div>
+              <div class="sector-title">&#x23F2;&#xFE0F; MAIN RACE - Pace Delta [3 Part Race]</div>
+              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Delta lap time medio dal vincitore nelle 3 parti di gara &middot; Escluso Giro 1</div>
+            </div>
+            <button class="win-btn" id="rac-pace-min-btn" onclick="toggleRacPaceMinimize()" title="Minimize / Expand">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="rac-pace-min-icon">
+                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="pace-grid-3col">
+            <div class="sector-card">
+              <div class="sector-card-title">
+                <span>1/3 race</span>
+                <span class="sector-card-badge" id="rac-pace-badge-1">1/3</span>
+              </div>
+              <div class="pace-canvas-container">
+                <canvas id="chart-rac-pace-1"></canvas>
+              </div>
+            </div>
+            <div class="sector-card">
+              <div class="sector-card-title">
+                <span>2/3 race</span>
+                <span class="sector-card-badge" id="rac-pace-badge-2">2/3</span>
+              </div>
+              <div class="pace-canvas-container">
+                <canvas id="chart-rac-pace-2"></canvas>
+              </div>
+            </div>
+            <div class="sector-card">
+              <div class="sector-card-title">
+                <span>3/3 race</span>
+                <span class="sector-card-badge" id="rac-pace-badge-3">3/3</span>
+              </div>
+              <div class="pace-canvas-container">
+                <canvas id="chart-rac-pace-3"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="sector-section" id="sector-section" style="display: none;">
           <div class="sector-header">
             <div>
@@ -21110,7 +21696,7 @@
 
       buildSidebarList();
       applySessionVisibility();
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short); if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short); if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short); if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short); renderSectorCharts(gp.short);
+      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short); if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short); if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short); if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short); if (typeof renderSprPaceCharts === 'function') renderSprPaceCharts(gp.short); if (typeof renderRacPaceCharts === 'function') renderRacPaceCharts(gp.short); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short); renderSectorCharts(gp.short);
     }
 
     document.addEventListener('DOMContentLoaded', initEventPage);
