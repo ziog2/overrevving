@@ -20845,7 +20845,43 @@
           });
           ctx.restore();
 
-          // 3. Draw fastest and slowest labels
+          // 3. Draw GIRO MEDIO (Average Lap) line and label visible in the bar at exact height
+          const yAvg = yAxis.getPixelForValue(r.avg);
+          if (yAvg >= chart.chartArea.top && yAvg <= chart.chartArea.bottom) {
+            ctx.save();
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+            ctx.shadowBlur = 4;
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(left - 3, yAvg);
+            ctx.lineTo(right + 3, yAvg);
+            ctx.stroke();
+
+            if (width >= 24) {
+              const avgText = formatLapTime(r.avg);
+              ctx.font = '700 8.5px Inter, sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'bottom';
+              ctx.strokeStyle = '#111114';
+              ctx.lineWidth = 2.5;
+              ctx.strokeText(avgText, bar.x, yAvg - 2);
+              ctx.fillStyle = '#ffffff';
+              ctx.fillText(avgText, bar.x, yAvg - 2);
+            } else {
+              ctx.fillStyle = '#ffffff';
+              ctx.beginPath();
+              ctx.moveTo(bar.x, yAvg - 3.5);
+              ctx.lineTo(bar.x + 3.5, yAvg);
+              ctx.lineTo(bar.x, yAvg + 3.5);
+              ctx.lineTo(bar.x - 3.5, yAvg);
+              ctx.closePath();
+              ctx.fill();
+            }
+            ctx.restore();
+          }
+
+          // 4. Draw fastest and slowest labels
           if (width >= 16) {
             ctx.save();
             ctx.font = '600 9px Inter, sans-serif';
