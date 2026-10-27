@@ -531,30 +531,24 @@
       color: #fff;
     }
 
-        /* RACE PROGRESSION, GAP & PACE DELTA UNIFIED SECTION */
+        /* RACE PROGRESSION, GAP, PACE DELTA & DENSITY UNIFIED SECTION */
     .progression-grid-unified {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.15fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 0.95fr);
       gap: 14px;
       width: 100%;
     }
     .progression-grid-unified.no-pace {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }
-    @media (max-width: 1200px) {
+    @media (max-width: 1400px) {
       .progression-grid-unified {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      }
-      .progression-grid-unified > .sector-card:nth-child(3) {
-        grid-column: span 2;
       }
     }
     @media (max-width: 768px) {
       .progression-grid-unified {
         grid-template-columns: 1fr !important;
-      }
-      .progression-grid-unified > .sector-card:nth-child(3) {
-        grid-column: span 1;
       }
     }
 
@@ -90927,6 +90921,7 @@
     let racLapChartInstance = null;
     let racGapChartInstance = null;
     let racPaceChartInstance = null;
+    let racDensityChartInstance = null;
 
     const raceBoundariesPlugin = {
       id: 'raceBoundaries',
@@ -91883,6 +91878,359 @@
       racPaceChartInstance = chartInst;
     }
 
+    const densityTicksPlugin = {
+      id: 'densityTicks',
+      afterDatasetsDraw: (chart) => {
+        const ctx = chart.ctx;
+        const meta = chart.getDatasetMeta(0);
+        if (!meta || !meta.data) return;
+        const yAxis = chart.scales.y;
+        const ridersList = chart.densityRidersData || [];
+
+        meta.data.forEach((bar, idx) => {
+          if (!bar || bar.skip || isNaN(bar.x)) return;
+          const r = ridersList[idx];
+          if (!r || !r.laps || !r.laps.length) return;
+
+          const left = bar.x - bar.width / 2;
+          const right = bar.x + bar.width / 2;
+          const width = bar.width;
+          const top = Math.min(bar.y, bar.base);
+          const height = Math.abs(bar.y - bar.base);
+
+          if (width <= 0) return;
+
+          // 1. Draw custom border around the bar matching rider style
+          ctx.save();
+          ctx.strokeStyle = r.color;
+          ctx.lineWidth = 1.8;
+          if (r.borderDash && r.borderDash.length) {
+            ctx.setLineDash(r.borderDash);
+          } else {
+            ctx.setLineDash([]);
+          }
+
+          if (height < 1.5) {
+            ctx.beginPath();
+            ctx.moveTo(left, bar.base);
+            ctx.lineTo(right, bar.base);
+            ctx.stroke();
+          } else {
+            if (ctx.roundRect) {
+              ctx.beginPath();
+              ctx.roundRect(left, top, width, height, 4);
+              ctx.stroke();
+            } else {
+              ctx.strokeRect(left, top, width, height);
+            }
+          }
+          ctx.restore();
+
+          // 2. Draw density ticks in rider's assigned color, continuous (solid) line
+          ctx.save();
+          ctx.setLineDash([]);
+          ctx.strokeStyle = r.color;
+          ctx.globalAlpha = 0.85;
+          ctx.lineWidth = 1.4;
+          r.laps.forEach(lObj => {
+            const lTime = lObj.time;
+            const yTick = yAxis.getPixelForValue(lTime);
+            if (yTick >= chart.chartArea.top && yTick <= chart.chartArea.bottom) {
+              ctx.beginPath();
+              ctx.moveTo(left + 2, yTick);
+              ctx.lineTo(right - 2, yTick);
+              ctx.stroke();
+            }
+          });
+          ctx.restore();
+
+          // 3. Draw GIRO MEDIO (Average Lap) line and label visible in the bar at exact height
+          const yAvg = yAxis.getPixelForValue(r.avg);
+          if (yAvg >= chart.chartArea.top && yAvg <= chart.chartArea.bottom) {
+            ctx.save();
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+            ctx.shadowBlur = 4;
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            ctx.moveTo(left - 3, yAvg);
+            ctx.lineTo(right + 3, yAvg);
+            ctx.stroke();
+
+            if (width >= 24) {
+              const avgText = formatLapTime(r.avg);
+              ctx.font = '700 8.5px Inter, sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'bottom';
+              ctx.strokeStyle = '#111114';
+              ctx.lineWidth = 2.5;
+              ctx.strokeText(avgText, bar.x, yAvg - 2);
+              ctx.fillStyle = '#ffffff';
+              ctx.fillText(avgText, bar.x, yAvg - 2);
+            } else {
+              ctx.fillStyle = '#ffffff';
+              ctx.beginPath();
+              ctx.moveTo(bar.x, yAvg - 3.5);
+              ctx.lineTo(bar.x + 3.5, yAvg);
+              ctx.lineTo(bar.x, yAvg + 3.5);
+              ctx.lineTo(bar.x - 3.5, yAvg);
+              ctx.closePath();
+              ctx.fill();
+            }
+            ctx.restore();
+          }
+
+          // 4. Draw fastest and slowest labels
+          if (width >= 16) {
+            ctx.save();
+            ctx.font = '600 9px Inter, sans-serif';
+            ctx.textAlign = 'center';
+
+            const yFast = yAxis.getPixelForValue(r.fastest);
+            const ySlow = yAxis.getPixelForValue(r.slowest);
+
+            // Fastest at top (green)
+            ctx.fillStyle = '#2ecc71';
+            let fastY = yFast - 5;
+            if (fastY < chart.chartArea.top + 9) fastY = yFast + 11;
+            ctx.fillText(formatLapTime(r.fastest), bar.x, fastY);
+
+            // Slowest at bottom (red)
+            ctx.fillStyle = '#e74c3c';
+            let slowY = ySlow + 11;
+            if (slowY > chart.chartArea.bottom - 3) slowY = ySlow - 5;
+            ctx.fillText(formatLapTime(r.slowest), bar.x, slowY);
+
+            ctx.restore();
+          }
+        });
+      }
+    };
+
+    function renderDensitySection(sessionKey, currentGpShort, passedFavRiders) {
+      if (!currentGpShort) currentGpShort = (window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA'));
+      const cardEl = document.getElementById('rac-density-card');
+      const gridEl = document.getElementById('rac-progression-grid');
+      const canvasEl = document.getElementById('chart-rac-density');
+      if (!cardEl || !canvasEl) return;
+
+      const rawLapsData = (typeof EVENT_LAPS_DATA !== 'undefined') ? EVENT_LAPS_DATA[currentGpShort] : null;
+
+      if (!rawLapsData || Object.keys(rawLapsData).length === 0) {
+        cardEl.style.display = 'none';
+        return;
+      }
+
+      const allRiderNames = Object.keys(rawLapsData);
+      let activeFavRiders = allRiderNames.filter(r => isRiderFavorite(r));
+      if (activeFavRiders.length === 0 && passedFavRiders && passedFavRiders.length > 0) {
+        activeFavRiders = passedFavRiders.filter(r => allRiderNames.includes(r) || allRiderNames.some(k => k.toLowerCase() === r.toLowerCase()));
+      }
+
+      if (activeFavRiders.length === 0) {
+        cardEl.style.display = 'none';
+        return;
+      }
+
+      // Check min flying lap time across all riders to filter crash/outlier pit laps (> minT * 1.25)
+      let minFlyingLap = Infinity;
+      let maxFlyingLapNum = 0;
+      allRiderNames.forEach(r => {
+        (rawLapsData[r] || []).forEach((l, idx) => {
+          const lapNum = (l && typeof l.lap === 'number') ? l.lap : (idx + 1);
+          if (lapNum > maxFlyingLapNum) maxFlyingLapNum = lapNum;
+          if (lapNum >= 2) {
+            const sec = extractLapTimeSec(l);
+            if (sec !== null && sec > 0 && sec < minFlyingLap) minFlyingLap = sec;
+          }
+        });
+      });
+
+      if (minFlyingLap === Infinity || maxFlyingLapNum < 4) {
+        cardEl.style.display = 'none';
+        return;
+      }
+
+      const maxAllowedLap = minFlyingLap * 1.25;
+
+      // Filter and map favorite riders sorted by rank
+      const activeFavObjects = activeFavRiders.map(rName => {
+        const info = getRiderRankAndPos(rName, 'RAC', rawLapsData, currentGpShort);
+        return {
+          name: rName,
+          rank: info.rank,
+          posLabel: info.posLabel
+        };
+      });
+      activeFavObjects.sort((a, b) => a.rank - b.rank);
+
+      // Collect valid flying laps (L2 to End) for each favorite rider
+      const densityRiders = [];
+      let globalFastest = Infinity;
+      let globalSlowest = 0;
+
+      activeFavObjects.forEach((rObj, idx) => {
+        const laps = rawLapsData[rObj.name] || [];
+        const validLaps = [];
+
+        laps.forEach((l, lIdx) => {
+          const lapNum = (l && typeof l.lap === 'number') ? l.lap : (lIdx + 1);
+          if (lapNum >= 2) {
+            const sec = extractLapTimeSec(l);
+            if (sec !== null && sec > 0 && sec <= maxAllowedLap) {
+              validLaps.push({ lap: lapNum, time: sec });
+              if (sec < globalFastest) globalFastest = sec;
+              if (sec > globalSlowest) globalSlowest = sec;
+            }
+          }
+        });
+
+        if (validLaps.length > 0) {
+          const times = validLaps.map(x => x.time);
+          const fastest = Math.min(...times);
+          const slowest = Math.max(...times);
+          const avg = times.reduce((a, b) => a + b, 0) / times.length;
+          const bestLapObj = validLaps.find(x => x.time === fastest);
+          const worstLapObj = validLaps.find(x => x.time === slowest);
+
+          const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rObj.name]) || {};
+          const color = style.color || ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6', '#ff6600', '#1abc9c'][idx % 7];
+          const borderDash = style.borderDash || [];
+
+          densityRiders.push({
+            name: rObj.name,
+            posLabel: rObj.posLabel,
+            formattedName: formatName(rObj.name),
+            color: color,
+            borderDash: borderDash,
+            laps: validLaps,
+            fastest: fastest,
+            slowest: slowest,
+            avg: avg,
+            bestLapNum: bestLapObj ? bestLapObj.lap : null,
+            worstLapNum: worstLapObj ? worstLapObj.lap : null
+          });
+        }
+      });
+
+      if (densityRiders.length === 0) {
+        cardEl.style.display = 'none';
+        return;
+      }
+
+      cardEl.style.display = '';
+
+      // Update badge
+      const badgeEl = document.getElementById('rac-density-badge');
+      if (badgeEl) {
+        badgeEl.textContent = 'L2 - L' + maxFlyingLapNum + ' · Excludes Lap 1';
+      }
+
+      // Compute Y scale bounds
+      const yMin = Math.floor((globalFastest - 0.25) * 2) / 2;
+      const yMax = Math.ceil((globalSlowest + 0.3) * 2) / 2;
+
+      // X Labels: 2-line array ['P1', 'A. Ogura'] for clean display
+      const xLabels = densityRiders.map(r => [r.posLabel, r.formattedName]);
+
+      const chartData = {
+        labels: xLabels,
+        datasets: [{
+          label: 'Lap Time Range',
+          data: densityRiders.map(r => [r.fastest, r.slowest]),
+          backgroundColor: densityRiders.map(r => r.color + '33'),
+          borderWidth: 0,
+          borderRadius: 4,
+          barPercentage: 0.65,
+          categoryPercentage: 0.82
+        }]
+      };
+
+      if (racDensityChartInstance) {
+        try { racDensityChartInstance.destroy(); } catch(e) {}
+        racDensityChartInstance = null;
+      }
+
+      const ctx = canvasEl.getContext('2d');
+      const chartInst = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        plugins: [watermarkPlugin, densityTicksPlugin],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 300 },
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1e1e22',
+              titleColor: '#fff',
+              bodyColor: '#ddd',
+              borderColor: '#3a3a42',
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                title: function(items) {
+                  if (!items.length) return '';
+                  const r = densityRiders[items[0].dataIndex];
+                  return r ? (r.posLabel + ' ' + r.name) : '';
+                },
+                label: function(context) {
+                  const r = densityRiders[context.dataIndex];
+                  if (!r) return '';
+                  const deltaEscursione = (r.slowest - r.fastest).toFixed(3);
+                  return [
+                    ' Giro medio: ' + formatLapTime(r.avg),
+                    ' Miglior giro: ' + formatLapTime(r.fastest) + (r.bestLapNum ? (' (Giro ' + r.bestLapNum + ')') : ''),
+                    ' Peggior giro: ' + formatLapTime(r.slowest) + (r.worstLapNum ? (' (Giro ' + r.worstLapNum + ')') : ''),
+                    ' Delta escursione: +' + deltaEscursione + 's',
+                    ' Giri validi: ' + r.laps.length
+                  ];
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.08)' },
+              ticks: {
+                color: '#ccc',
+                font: { family: 'Inter', size: 10, weight: '700' }
+              }
+            },
+            y: {
+              reverse: true,
+              min: yMin,
+              max: yMax,
+              grid: { color: 'rgba(255, 255, 255, 0.06)' },
+              ticks: {
+                color: '#999',
+                font: { family: 'Inter', size: 10, weight: '600' },
+                callback: function(v) {
+                  if (typeof v !== 'number' || isNaN(v) || v <= 0) return '';
+                  const mins = Math.floor(v / 60);
+                  const remSec = (v % 60).toFixed(1);
+                  const remSecStr = (v % 60) < 10 ? '0' + remSec : remSec;
+                  return mins > 0 ? (mins + "'" + remSecStr) : (remSecStr + 's');
+                }
+              }
+            }
+          }
+        }
+      });
+
+      chartInst.densityRidersData = densityRiders;
+      racDensityChartInstance = chartInst;
+    }
+
+    function renderRacDensityChart(currentGpShort) {
+      renderDensitySection('RAC', currentGpShort);
+    }
+
     function renderSectorCharts(currentGpShort) {
       const sectionEl = document.getElementById('sector-section');
       if (!sectionEl) return;
@@ -92087,6 +92435,7 @@
       renderSingleLapChart('RAC', 'chart-rac-lapchart', currentGpShort, activeFavRiders);
       renderSingleGapChart('RAC', 'chart-rac-gapchart', currentGpShort, activeFavRiders);
       renderPaceSection('RAC', currentGpShort, activeFavRiders);
+      renderDensitySection('RAC', currentGpShort, activeFavRiders);
     }
 
     function toggleRacProgressionMinimize() {
@@ -92104,6 +92453,7 @@
         if (racLapChartInstance) { try { racLapChartInstance.resize(); } catch(e) {} }
         if (racGapChartInstance) { try { racGapChartInstance.resize(); } catch(e) {} }
         if (racPaceChartInstance) { try { racPaceChartInstance.resize(); } catch(e) {} }
+        if (racDensityChartInstance) { try { racDensityChartInstance.resize(); } catch(e) {} }
       }
       try { localStorage.setItem('overrevving_rac_progression_minimized', isMin ? '1' : '0'); } catch(e) {}
     }
@@ -92528,8 +92878,8 @@
         <div class="sector-section" id="rac-progression-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">📊 RACE - Progression, Gap to Leader &amp; Pace Delta</div>
-              <div class="sector-subtitle">Comparing favorite riders (★) &middot; Lap Chart, Gap to Leader &amp; 3-Part Pace Delta (1/3, 2/3, 3/3) &middot; Excludes Lap 1 for Pace</div>
+              <div class="sector-title">📊 RACE - Progression, Gap to Leader, Pace Delta &amp; Lap Times Density</div>
+              <div class="sector-subtitle">Comparing favorite riders (★) &middot; Lap Chart, Gap to Leader, 3-Part Pace Delta &amp; Lap Time Distribution &middot; Excludes Lap 1 for Pace</div>
             </div>
             <button class="win-btn" onclick="toggleRacProgressionMinimize()" title="Minimize / Expand">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="rac-progression-min-icon"><path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -92555,6 +92905,15 @@
               </div>
               <div class="progression-canvas-container">
                 <canvas id="chart-rac-pace"></canvas>
+              </div>
+            </div>
+            <div class="sector-card" id="rac-density-card">
+              <div class="sector-card-title">
+                <span>Lap Times Range &amp; Density</span>
+                <span class="sector-card-badge" id="rac-density-badge">L2 - End &middot; Excludes Lap 1</span>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-rac-density"></canvas>
               </div>
             </div>
           </div>
