@@ -20533,7 +20533,7 @@
 
       const badgeEl = document.getElementById(sessionKey === 'SPR' ? 'spr-pace-badge' : 'rac-pace-badge');
       if (badgeEl && availableLaps.length) {
-        badgeEl.textContent = 'L' + availableLaps[0] + ' - L' + availableLaps[availableLaps.length - 1] + ' · Escluso Giro 1';
+        badgeEl.textContent = 'L' + availableLaps[0] + ' - L' + availableLaps[availableLaps.length - 1] + ' · Excludes Lap 1';
       }
 
       const lapMinTime = {};
@@ -20827,16 +20827,16 @@
           }
           ctx.restore();
 
-          // 2. Draw density ticks for every single lap inside the bar
+          // 2. Draw density ticks in rider's assigned color, continuous (solid) line
           ctx.save();
           ctx.setLineDash([]);
+          ctx.strokeStyle = r.color;
+          ctx.globalAlpha = 0.85;
+          ctx.lineWidth = 1.4;
           r.laps.forEach(lObj => {
             const lTime = lObj.time;
             const yTick = yAxis.getPixelForValue(lTime);
             if (yTick >= chart.chartArea.top && yTick <= chart.chartArea.bottom) {
-              ctx.strokeStyle = '#ffffff';
-              ctx.globalAlpha = 0.60;
-              ctx.lineWidth = 1.2;
               ctx.beginPath();
               ctx.moveTo(left + 2, yTick);
               ctx.lineTo(right - 2, yTick);
@@ -20988,7 +20988,7 @@
       // Update badge
       const badgeEl = document.getElementById(sessionKey === 'SPR' ? 'spr-density-badge' : 'rac-density-badge');
       if (badgeEl) {
-        badgeEl.textContent = 'L2 - L' + maxFlyingLapNum + ' · Escluso Giro 1';
+        badgeEl.textContent = 'L2 - L' + maxFlyingLapNum + ' · Excludes Lap 1';
       }
 
       // Compute Y scale bounds
@@ -21052,10 +21052,10 @@
                   if (!r) return '';
                   const deltaEscursione = (r.slowest - r.fastest).toFixed(3);
                   return [
+                    ' Giro medio: ' + formatLapTime(r.avg),
                     ' Miglior giro: ' + formatLapTime(r.fastest) + (r.bestLapNum ? (' (Giro ' + r.bestLapNum + ')') : ''),
                     ' Peggior giro: ' + formatLapTime(r.slowest) + (r.worstLapNum ? (' (Giro ' + r.worstLapNum + ')') : ''),
                     ' Delta escursione: +' + deltaEscursione + 's',
-                    ' Passo medio: ' + formatLapTime(r.avg),
                     ' Giri validi: ' + r.laps.length
                   ];
                 }
@@ -21902,7 +21902,7 @@
             <div class="sector-card" id="spr-density-card">
               <div class="sector-card-title">
                 <span>Lap Times Range &amp; Density</span>
-                <span class="sector-card-badge" id="spr-density-badge">L2 - End &middot; Escluso Giro 1</span>
+                <span class="sector-card-badge" id="spr-density-badge">L2 - End &middot; Excludes Lap 1</span>
               </div>
               <div class="progression-canvas-container">
                 <canvas id="chart-spr-density"></canvas>
@@ -22007,7 +22007,7 @@
             <div class="sector-card" id="rac-density-card">
               <div class="sector-card-title">
                 <span>Lap Times Range &amp; Density</span>
-                <span class="sector-card-badge" id="rac-density-badge">L2 - End &middot; Escluso Giro 1</span>
+                <span class="sector-card-badge" id="rac-density-badge">L2 - End &middot; Excludes Lap 1</span>
               </div>
               <div class="progression-canvas-container">
                 <canvas id="chart-rac-density"></canvas>
