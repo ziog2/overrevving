@@ -6,6 +6,7 @@
   <title>Event Details · Overrevving</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="js/chart.min.js"></script>
+  <script src="js/motogp_fp1_data.js"></script>
   <style>
     :root {
       --bg: #18181c;
@@ -673,6 +674,80 @@
     .sector-section.minimized .progression-grid-2col {
       display: none;
     }
+
+    /* FP1 Analysis & Stints Styling */
+    .wip-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .wip-badge {
+      background: rgba(18, 22, 28, 0.88);
+      border: 1px solid rgba(255, 183, 3, 0.35);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      color: #ffb703;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .wip-blur-bg {
+      filter: blur(5px);
+      opacity: 0.25;
+      width: 100%;
+      height: 100%;
+    }
+
+    #fp1-tooltip {
+      position: absolute;
+      display: none;
+      pointer-events: none;
+      z-index: 100;
+      background: #181c24;
+      border: 1px solid #384252;
+      border-radius: 8px;
+      padding: 10px 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      font-size: 11px;
+      color: #e6edf3;
+      min-width: 180px;
+    }
+    #fp1-tooltip .tt-title {
+      font-weight: 800;
+      font-size: 12px;
+      color: #fff;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #2d3542;
+      padding-bottom: 4px;
+    }
+    #fp1-tooltip .tt-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 3px;
+      color: #8b949e;
+    }
+    #fp1-tooltip .tt-val {
+      font-weight: 700;
+      color: #f0f6fc;
+    }
+
     .sector-section {
       margin-top: 36px;
       margin-bottom: 24px;
@@ -972,6 +1047,7 @@
       }
       const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
       if (cur) {
+        if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(cur);
         if (typeof renderSprLapChart === 'function') renderSprLapChart(cur);
         if (typeof renderRacLapChart === 'function') renderRacLapChart(cur);
         if (typeof renderSprGapChart === 'function') renderSprGapChart(cur);
@@ -19060,7 +19136,7 @@
       }
       saveSessionPrefs();
       applySessionVisibility();
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
+      if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(gp.short); if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
       if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short);
       if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short);
       if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short);
@@ -19077,7 +19153,7 @@
       buildSidebarList();
       saveSessionPrefs();
       applySessionVisibility();
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
+      if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(gp.short); if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
       if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short);
       if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short);
       if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short);
@@ -19094,7 +19170,7 @@
       buildSidebarList();
       saveSessionPrefs();
       applySessionVisibility();
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
+      if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(gp.short); if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
       if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short);
       if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short);
       if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short);
@@ -19797,6 +19873,331 @@
 
       if (sessionKey === 'SPR') sprGapChartInstance = chartInst;
       else racGapChartInstance = chartInst;
+    }
+
+    function toggleFp1AnalysisMinimize() {
+      const section = document.getElementById('fp1-analysis-section');
+      if (!section) return;
+      const isMin = section.classList.toggle('minimized');
+      const btn = document.getElementById('fp1-analysis-min-btn');
+      const icon = document.getElementById('fp1-analysis-min-icon');
+      if (isMin) {
+        if (btn) btn.setAttribute('title', 'Expand');
+        if (icon) icon.innerHTML = '<rect x="2" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.6" fill="none"/>';
+      } else {
+        if (btn) btn.setAttribute('title', 'Minimize');
+        if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
+        const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
+        if (cur) renderFp1AnalysisSection(cur);
+      }
+      try { localStorage.setItem('overrevving_fp1_analysis_minimized', isMin ? '1' : '0'); } catch(e) {}
+    }
+
+    function drawFp1DummyChart(id, type) {
+      const cvs = document.getElementById(id);
+      if (!cvs) return;
+      const ctx = cvs.getContext('2d');
+      const w = cvs.clientWidth || 300;
+      const h = cvs.clientHeight || 260;
+      cvs.width = w;
+      cvs.height = h;
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+      ctx.lineWidth = 1;
+      for (let y = 30; y < h - 20; y += 35) {
+        ctx.beginPath(); ctx.moveTo(20, y); ctx.lineTo(w - 20, y); ctx.stroke();
+      }
+
+      if (type === 'line') {
+        const colors = ['#e74c3c', '#d8ff00', '#ff6600', '#3498db'];
+        colors.forEach((c, i) => {
+          ctx.strokeStyle = c;
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          let prevY = h / 2 + (i - 1.5) * 30;
+          ctx.moveTo(30, prevY);
+          for (let x = 70; x < w - 30; x += 40) {
+            prevY += (Math.sin(x * 0.05 + i) * 15);
+            ctx.lineTo(x, prevY);
+          }
+          ctx.stroke();
+        });
+      } else {
+        const colors = ['#e74c3c', '#ff6600', '#d8ff00', '#3498db'];
+        for (let x = 35; x < w - 35; x += 45) {
+          colors.forEach((c, i) => {
+            ctx.fillStyle = c;
+            const bh = 50 + ((x * 7 + i * 31) % 120);
+            ctx.fillRect(x + i * 8, h - 30 - bh, 6, bh);
+          });
+        }
+      }
+    }
+
+    const FP1_TYRE_COLORS = {
+      'S': '#ffd600', // Soft: Yellow
+      'M': '#ffffff', // Medium: White
+      'H': '#00b0ff'  // Hard: Light Blue
+    };
+
+    function renderFp1StintsChart(gpShort, favList) {
+      const cvs = document.getElementById('chart-fp1-stints');
+      if (!cvs) return;
+      const ctx = cvs.getContext('2d');
+      const tooltipEl = document.getElementById('fp1-tooltip');
+
+      const data = (typeof EVENT_FP1_STINTS_DATA !== 'undefined' && EVENT_FP1_STINTS_DATA[gpShort]) ? EVENT_FP1_STINTS_DATA[gpShort] : {};
+      const riders = favList.filter(r => data[r]).map(r => ({
+        name: r,
+        ...data[r]
+      }));
+
+      if (!riders.length) return;
+
+      const rect = cvs.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const width = rect.width || 340;
+      const height = rect.height || 320;
+      cvs.width = width * dpr;
+      cvs.height = height * dpr;
+      cvs.style.width = width + 'px';
+      cvs.style.height = height + 'px';
+      ctx.scale(dpr, dpr);
+
+      const leftPad = 62;
+      const rightPad = 20;
+      const topPad = 25;
+      const bottomPad = 32;
+      const chartW = width - leftPad - rightPad;
+      const chartH = height - topPad - bottomPad;
+
+      const maxLaps = Math.max(...riders.map(r => r.totalLaps), 15);
+      const xScale = (lap) => leftPad + (lap / maxLaps) * chartW;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Watermark
+      ctx.save();
+      ctx.font = '900 24px Inter, sans-serif';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.025)';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('OVERREVVING', width / 2, height / 2);
+      ctx.restore();
+
+      // Draw X-axis grid lines
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+      ctx.lineWidth = 1;
+      ctx.font = '600 10px Inter, sans-serif';
+      ctx.fillStyle = '#8b949e';
+      ctx.textAlign = 'center';
+
+      const tickStep = maxLaps > 25 ? 5 : (maxLaps > 15 ? 3 : 2);
+      for (let l = 0; l <= maxLaps; l += tickStep) {
+        const x = xScale(l);
+        ctx.beginPath();
+        ctx.moveTo(x, topPad);
+        ctx.lineTo(x, height - bottomPad);
+        ctx.stroke();
+
+        ctx.fillText(l === 0 ? 'L0' : ('L' + l), x, height - bottomPad + 16);
+      }
+      ctx.restore();
+
+      const hitAreas = [];
+      const numRiders = riders.length;
+      const rowGap = 10;
+      const rowTotalH = Math.min(44, (chartH - (numRiders - 1) * rowGap) / numRiders);
+      const narrowH = Math.round(rowTotalH * 0.38);
+      const wideH = rowTotalH - narrowH;
+      const stintGap = 4;
+
+      riders.forEach((rider, rIdx) => {
+        const rowY = topPad + rIdx * (rowTotalH + rowGap);
+        const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rider.name]) || {};
+        const riderColor = style.color || '#3498db';
+
+        // 1. Draw rider code on the left (e.g. MB72, MM93)
+        ctx.save();
+        ctx.font = '800 12px Inter, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(rider.code, leftPad - 12, rowY + rowTotalH / 2);
+
+        // Livery pill beside rider code
+        ctx.fillStyle = riderColor;
+        if (ctx.roundRect) {
+          ctx.beginPath();
+          ctx.roundRect(leftPad - 8, rowY + 3, 3.5, rowTotalH - 6, 2);
+          ctx.fill();
+        } else {
+          ctx.fillRect(leftPad - 8, rowY + 3, 3.5, rowTotalH - 6);
+        }
+        ctx.restore();
+
+        // 2. Draw Stints
+        const runs = (rider.runs || []).filter(s => s.lapsCount > 0);
+        runs.forEach((stint, sIdx) => {
+          const xStart = xScale(stint.startLap - 1) + (sIdx > 0 ? (stintGap / 2) : 0);
+          const xEnd = xScale(stint.endLap) - (stintGap / 2);
+          const blockW = Math.max(8, xEnd - xStart);
+
+          const fColor = FP1_TYRE_COLORS[stint.front] || FP1_TYRE_COLORS['M'];
+          const rColor = FP1_TYRE_COLORS[stint.rear] || FP1_TYRE_COLORS['M'];
+
+          hitAreas.push({
+            x: xStart,
+            y: rowY,
+            w: blockW,
+            h: rowTotalH,
+            rider: rider,
+            stint: stint,
+            runNum: sIdx + 1
+          });
+
+          ctx.save();
+
+          // Front Tyre (upper narrow row)
+          ctx.fillStyle = fColor;
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(xStart, rowY, blockW, narrowH, [4, 4, 0, 0]);
+            ctx.fill();
+          } else {
+            ctx.fillRect(xStart, rowY, blockW, narrowH);
+          }
+
+          ctx.fillStyle = '#111114';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.font = '700 8.5px Inter, sans-serif';
+          let fText = stint.front;
+          if (blockW >= 55) fText = stint.front + ' · ' + stint.lapsCount + ' laps';
+          else if (blockW >= 32) fText = stint.front + ' · ' + stint.lapsCount + 'L';
+          else if (blockW >= 18) fText = stint.front + stint.lapsCount;
+          ctx.fillText(fText, xStart + blockW / 2, rowY + narrowH / 2);
+
+          // Divider
+          ctx.strokeStyle = 'rgba(0, 0, 0, 0.25)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(xStart, rowY + narrowH);
+          ctx.lineTo(xStart + blockW, rowY + narrowH);
+          ctx.stroke();
+
+          // Rear Tyre (lower wide row)
+          ctx.fillStyle = rColor;
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(xStart, rowY + narrowH, blockW, wideH, [0, 0, 4, 4]);
+            ctx.fill();
+          } else {
+            ctx.fillRect(xStart, rowY + narrowH, blockW, wideH);
+          }
+
+          let rText = stint.fastest || '-';
+          if (blockW < 46 && rText.includes("'")) {
+            rText = rText.replace("1'", "'");
+          }
+          const fontSize = blockW < 38 ? 9 : (blockW < 55 ? 10 : 11);
+          ctx.font = `800 ${fontSize}px Inter, sans-serif`;
+          ctx.fillStyle = '#111114';
+          if (blockW >= 20) {
+            ctx.fillText(rText, xStart + blockW / 2, rowY + narrowH + wideH / 2);
+          }
+
+          // Border
+          ctx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
+          ctx.lineWidth = 1;
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(xStart, rowY, blockW, rowTotalH, 4);
+            ctx.stroke();
+          }
+
+          ctx.restore();
+        });
+      });
+
+      // Tooltip mousemove handler
+      cvs.onmousemove = (e) => {
+        const cRect = cvs.getBoundingClientRect();
+        const mouseX = e.clientX - cRect.left;
+        const mouseY = e.clientY - cRect.top;
+
+        const hit = hitAreas.find(ha => 
+          mouseX >= ha.x && mouseX <= ha.x + ha.w &&
+          mouseY >= ha.y && mouseY <= ha.y + ha.h
+        );
+
+        if (hit && tooltipEl) {
+          const compoundNames = { 'S': 'Soft', 'M': 'Medium', 'H': 'Hard' };
+          const fName = compoundNames[hit.stint.front] || hit.stint.front;
+          const rName = compoundNames[hit.stint.rear] || hit.stint.rear;
+
+          tooltipEl.innerHTML = `
+            <div class="tt-title">${hit.rider.code} &middot; ${hit.rider.name} &middot; Run #${hit.runNum}</div>
+            <div class="tt-row"><span>Gomma Anteriore:</span> <span class="tt-val">${fName} (${hit.stint.lapsCount} giri)</span></div>
+            <div class="tt-row"><span>Gomma Posteriore:</span> <span class="tt-val">${rName} (${hit.stint.lapsCount} giri)</span></div>
+            <div class="tt-row"><span>Giro Veloce Stint:</span> <span class="tt-val" style="color:#2ecc71">${hit.stint.fastest}</span></div>
+            <div class="tt-row"><span>Intervallo Giri:</span> <span class="tt-val">L${hit.stint.startLap} - L${hit.stint.endLap}</span></div>
+          `;
+          tooltipEl.style.display = 'block';
+
+          let ttX = mouseX + 15;
+          let ttY = mouseY + 15;
+          if (ttX + 220 > cRect.width) ttX = mouseX - 225;
+          if (ttX < 10) ttX = 10;
+          if (ttY + 110 > cRect.height) ttY = mouseY - 115;
+          if (ttY < 10) ttY = 10;
+          tooltipEl.style.left = ttX + 'px';
+          tooltipEl.style.top = ttY + 'px';
+        } else if (tooltipEl) {
+          tooltipEl.style.display = 'none';
+        }
+      };
+
+      cvs.onmouseleave = () => {
+        if (tooltipEl) tooltipEl.style.display = 'none';
+      };
+    }
+
+    function renderFp1AnalysisSection(currentGpShort) {
+      if (!currentGpShort) currentGpShort = (window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA'));
+      const sectionEl = document.getElementById('fp1-analysis-section');
+      if (!sectionEl) return;
+
+      if (typeof EVENT_FP1_STINTS_DATA === 'undefined') {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      const fp1Data = EVENT_FP1_STINTS_DATA[currentGpShort];
+      if (!fp1Data || Object.keys(fp1Data).length === 0) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      const ridersPool = Object.keys(fp1Data);
+      const activeFavRiders = ridersPool.filter(rName => isRiderFavorite(rName));
+
+      if (activeFavRiders.length === 0) {
+        sectionEl.style.display = 'none';
+        return;
+      }
+
+      sectionEl.style.display = 'block';
+      if (localStorage.getItem('overrevving_fp1_analysis_minimized') === '1' && !sectionEl.classList.contains('minimized')) {
+        toggleFp1AnalysisMinimize();
+      }
+
+      renderFp1StintsChart(currentGpShort, activeFavRiders);
+      drawFp1DummyChart('dummy-chart-1', 'bar');
+      drawFp1DummyChart('dummy-chart-2', 'line');
+      drawFp1DummyChart('dummy-chart-3', 'line');
     }
 
     function renderSprProgression(currentGpShort) {
@@ -21193,7 +21594,7 @@
           if (b) b.classList.toggle('active', isFavNow);
         }
       });
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(); if (typeof renderRacLapChart === 'function') renderRacLapChart(); if (typeof renderSprGapChart === 'function') renderSprGapChart(); if (typeof renderRacGapChart === 'function') renderRacGapChart(); if (typeof renderSprPaceCharts === 'function') renderSprPaceCharts(); if (typeof renderRacPaceCharts === 'function') renderRacPaceCharts(); if (typeof renderSprDensityChart === 'function') renderSprDensityChart(); if (typeof renderRacDensityChart === 'function') renderRacDensityChart(); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(); renderSectorCharts();
+      if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(); if (typeof renderSprLapChart === 'function') renderSprLapChart(); if (typeof renderRacLapChart === 'function') renderRacLapChart(); if (typeof renderSprGapChart === 'function') renderSprGapChart(); if (typeof renderRacGapChart === 'function') renderRacGapChart(); if (typeof renderSprPaceCharts === 'function') renderSprPaceCharts(); if (typeof renderRacPaceCharts === 'function') renderRacPaceCharts(); if (typeof renderSprDensityChart === 'function') renderSprDensityChart(); if (typeof renderRacDensityChart === 'function') renderRacDensityChart(); if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(); renderSectorCharts();
     }
 
     function formatName(fullName) {
@@ -21896,6 +22297,76 @@
 
         </div>
 
+        <!-- FP1 ANALYSIS & TYRE STRATEGY SECTION -->
+        <div class="sector-section" id="fp1-analysis-section" style="display: none;">
+          <div class="sector-header">
+            <div>
+              <div class="sector-title">&#x23F1; FP1 - Free Practice 1 Analysis &amp; Tyre Strategy</div>
+              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Stints progression, compound choices (Front &amp; Rear) &amp; fastest lap per run</div>
+            </div>
+            <button class="win-btn" id="fp1-analysis-min-btn" onclick="toggleFp1AnalysisMinimize()" title="Minimize / Expand">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="fp1-analysis-min-icon">
+                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="progression-grid-unified" id="fp1-analysis-grid">
+            <!-- CARD 1: STINTS & TYRE STRATEGY -->
+            <div class="sector-card" id="fp1-stints-card">
+              <div class="sector-card-title">
+                <span>Stints &amp; Tyre Strategy</span>
+                <span class="sector-card-badge">Run by Run &middot; Laps &amp; Compound</span>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-fp1-stints"></canvas>
+                <div id="fp1-tooltip"></div>
+              </div>
+            </div>
+
+            <!-- CARD 2: DUMMY BLURRED CARD -->
+            <div class="sector-card">
+              <div class="sector-card-title">
+                <span>Stint Pace &amp; Lap Times</span>
+                <span class="sector-card-badge">Distribution</span>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas class="wip-blur-bg" id="dummy-chart-1"></canvas>
+                <div class="wip-overlay">
+                  <div class="wip-badge">&#x1F6A7; WORK IN PROGRESS</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 3: DUMMY BLURRED CARD -->
+            <div class="sector-card">
+              <div class="sector-card-title">
+                <span>Theoretical Best &amp; Sectors</span>
+                <span class="sector-card-badge">T1 &middot; T2 &middot; T3 &middot; T4</span>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas class="wip-blur-bg" id="dummy-chart-2"></canvas>
+                <div class="wip-overlay">
+                  <div class="wip-badge">&#x1F6A7; WORK IN PROGRESS</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 4: DUMMY BLURRED CARD -->
+            <div class="sector-card">
+              <div class="sector-card-title">
+                <span>Long Run Degradation</span>
+                <span class="sector-card-badge">Tyre Life Comparison</span>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas class="wip-blur-bg" id="dummy-chart-3"></canvas>
+                <div class="wip-overlay">
+                  <div class="wip-badge">&#x1F6A7; WORK IN PROGRESS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- SPRINT RACE: POSITION PROGRESSION, GAP TO LEADER & PACE DELTA (UNIFIED PANEL) -->
         <div class="sector-section" id="spr-progression-section" style="display: none;">
           <div class="sector-header">
@@ -22134,7 +22605,7 @@
 
       buildSidebarList();
       applySessionVisibility();
-      if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
+      if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(gp.short); if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
       if (typeof renderRacLapChart === 'function') renderRacLapChart(gp.short);
       if (typeof renderSprGapChart === 'function') renderSprGapChart(gp.short);
       if (typeof renderRacGapChart === 'function') renderRacGapChart(gp.short);
@@ -22145,6 +22616,16 @@
       if (typeof renderSprSectorCharts === 'function') renderSprSectorCharts(gp.short);
       renderSectorCharts(gp.short);
     }
+
+    
+    // FP1 resize listener
+    // overrevving_fp1_resize_listener
+    window.addEventListener('resize', () => {
+      const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
+      if (cur && typeof renderFp1AnalysisSection === 'function') {
+        renderFp1AnalysisSection(cur);
+      }
+    });
 
     document.addEventListener('DOMContentLoaded', initEventPage);
   </script>

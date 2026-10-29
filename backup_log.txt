@@ -74,3 +74,32 @@ Backup Timestamp:
 2026-10-27 22:58:36
 =====================================================
 
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261029_230105.zip
+
+Note / Log Message:
+Aggiunta sezione di analisi FP1 per la MotoGP in event.html:
+- Collocazione: posizionata per prima, immediatamente sotto le tabelle orizzontali dei tempi di sessione e sopra la Sprint Race.
+- Blocco comprimibile con pulsante dedicato e persistenza dello stato (localStorage).
+- Griglia unificata a 4 colonne coordinata con lo stile del sito.
+- Card 2, 3 e 4 configurate come grafici blurred 'WORK IN PROGRESS'.
+- Card 1 (Stints & Tyre Strategy):
+  * Visualizzazione dei soli piloti preferiti selezionati (★).
+  * Sigla pilota: Iniziale Nome + Iniziale Cognome + Numero di gara ufficiale (es. Marco Bezzecchi -> MB72, Marc Marquez -> MM93, Jorge Martin -> JM89, Francesco Bagnaia -> FB63).
+  * Stint posizionati da sinistra a destra (Run #1, Run #2, ...) con larghezza proporzionale ai giri percorsi.
+  * Suddivisione di ciascun rigo in 2 sub-righe:
+    - Superiore (stretta): mescola gomma anteriore (S/M/H) e numero di giri dello stint.
+    - Inferiore (larga): mescola gomma posteriore con indicazione del miglior tempo dello stint.
+  * Codifica cromatica mescole: Soft = giallo, Medium = bianco, Hard = celeste.
+  * Asse X: conteggio progressivo dei giri fino al massimo percorso tra i piloti selezionati.
+  * Spazio visivo separatore tra i diversi stint.
+  * Tooltip dettagliato al passaggio del mouse con riepilogo stint, mescole e best lap.
+  * Dataset completo pre-calcolato ed estratto per tutti i round MotoGP 2026 in js/motogp_fp1_data.js.
+
+Backup Timestamp:
+2026-10-29 23:01:05
+=====================================================
