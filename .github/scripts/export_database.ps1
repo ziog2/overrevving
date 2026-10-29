@@ -311,10 +311,12 @@ try {
     $excel.DisplayAlerts = $false
 
     $masterWb = $excel.Workbooks.Add()
+    $fp1CsvPath = Join-Path $csvDir "motogp_fp1_stints.csv"
     $csvFiles = @(
         @{ Path = $standingsCsvPath; Name = "Season_Standings" },
         @{ Path = $granularCsvPath; Name = "Race_Results_Granular" },
-        @{ Path = $calendarCsvPath; Name = "Calendars_2026" }
+        @{ Path = $calendarCsvPath; Name = "Calendars_2026" },
+        @{ Path = $fp1CsvPath; Name = "FP1_Stints_Analysis" }
     )
 
     foreach ($item in $csvFiles) {

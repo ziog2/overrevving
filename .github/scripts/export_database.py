@@ -277,6 +277,80 @@ def main():
                         ])
     print(f"Wrote {granular_csv_path}")
 
+    # 5b. Export CSV: motogp_fp1_stints.csv (FP1 Stints & Tyres Tidy Data for Grafana)
+    fp1_json_path = os.path.join(DATA_DIR, "motogp_fp1_stints.json")
+    fp1_csv_path = os.path.join(CSV_DIR, "motogp_fp1_stints.csv")
+    if os.path.exists(fp1_json_path):
+        with open(fp1_json_path, "r", encoding="utf-8") as f:
+            fp1_data = json.load(f)
+
+        cal_map = {
+            'THA': {'round': 1, 'name': 'Thailand', 'date': '2026-03-01'},
+            'BRA': {'round': 2, 'name': 'Brazil', 'date': '2026-03-22'},
+            'USA': {'round': 3, 'name': 'USA', 'date': '2026-03-29'},
+            'SPA': {'round': 4, 'name': 'Spain', 'date': '2026-04-26'},
+            'FRA': {'round': 5, 'name': 'France', 'date': '2026-05-10'},
+            'CAT': {'round': 6, 'name': 'Catalonia', 'date': '2026-05-17'},
+            'ITA': {'round': 7, 'name': 'Italy', 'date': '2026-05-31'},
+            'HUN': {'round': 8, 'name': 'Hungary', 'date': '2026-06-07'},
+            'CZE': {'round': 9, 'name': 'Czechia', 'date': '2026-06-21'},
+            'NED': {'round': 10, 'name': 'Netherlands', 'date': '2026-06-28'},
+            'GER': {'round': 11, 'name': 'Germany', 'date': '2026-07-12'},
+            'GBR': {'round': 12, 'name': 'Great Britain', 'date': '2026-08-09'},
+            'ARA': {'round': 13, 'name': 'Aragon', 'date': '2026-08-30'},
+            'RSM': {'round': 14, 'name': 'San Marino', 'date': '2026-09-13'},
+            'AUT': {'round': 15, 'name': 'Austria', 'date': '2026-09-20'},
+            'JPN': {'round': 16, 'name': 'Japan', 'date': '2026-10-04'},
+            'INA': {'round': 17, 'name': 'Indonesia', 'date': '2026-10-11'},
+            'AUS': {'round': 18, 'name': 'Australia', 'date': '2026-10-25'}
+        }
+        compound_names = {'S': 'Soft', 'M': 'Medium', 'H': 'Hard'}
+
+        sorted_rounds = sorted(fp1_data.keys(), key=lambda r: cal_map.get(r, {}).get('round', 99))
+        with open(fp1_csv_path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([
+                "Season", "Category", "Round_Number", "Round_Short", "Event_Name", "Date",
+                "Rider_Name", "Rider_Code", "Rider_Number", "Run_Number",
+                "Front_Tyre", "Rear_Tyre", "Front_Compound", "Rear_Compound",
+                "Laps_Count", "Start_Lap", "End_Lap",
+                "Fastest_Lap_Time", "Fastest_Lap_Seconds", "Is_Session_Best_Stint", "Total_Session_Laps"
+            ])
+            for rnd_short in sorted_rounds:
+                rnd_info = cal_map.get(rnd_short, {'round': 0, 'name': rnd_short, 'date': ''})
+                riders_map = fp1_data[rnd_short]
+                all_fastest = [
+                    run.get('fastestSec', 0)
+                    for r_info in riders_map.values()
+                    for run in r_info.get('runs', [])
+                    if run.get('fastestSec', 0) > 0
+                ]
+                session_best = min(all_fastest) if all_fastest else 0
+
+                for r_name, r_info in sorted(riders_map.items()):
+                    code = r_info.get('code', '')
+                    num = r_info.get('number', '')
+                    total_laps = r_info.get('totalLaps', 0)
+                    runs = [r for r in r_info.get('runs', []) if r.get('lapsCount', 0) > 0]
+                    for run_idx, run in enumerate(runs, start=1):
+                        f_tyre = run.get('front', 'M')
+                        r_tyre = run.get('rear', 'M')
+                        laps = run.get('lapsCount', 0)
+                        s_lap = run.get('startLap', 0)
+                        e_lap = run.get('endLap', 0)
+                        fastest_str = run.get('fastest', '-')
+                        fastest_sec = run.get('fastestSec', 0)
+                        is_best = 1 if (fastest_sec > 0 and fastest_sec == session_best) else 0
+
+                        writer.writerow([
+                            2026, "MOTOGP", rnd_info['round'], rnd_short, rnd_info['name'], rnd_info['date'],
+                            r_name, code, num, run_idx,
+                            f_tyre, r_tyre, compound_names.get(f_tyre, f_tyre), compound_names.get(r_tyre, r_tyre),
+                            laps, s_lap, e_lap,
+                            fastest_str, fastest_sec, is_best, total_laps
+                        ])
+        print(f"Wrote {fp1_csv_path}")
+
     # 6. Try generating Excel (.xlsx) if openpyxl is installed
     try:
         import openpyxl
@@ -313,6 +387,8 @@ def main():
         add_csv_sheet(standings_csv_path, "Season_Standings", "C0392B")
         add_csv_sheet(granular_csv_path, "Race_Results_Granular", "2980B9")
         add_csv_sheet(cal_csv_path, "Calendars_2026", "27AE60")
+        if os.path.exists(fp1_csv_path):
+            add_csv_sheet(fp1_csv_path, "FP1_Stints_Analysis", "E67E22")
 
         xlsx_out = os.path.join(EXPORTS_DIR, "motorsport_database_2026.xlsx")
         wb.save(xlsx_out)

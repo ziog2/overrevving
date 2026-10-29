@@ -103,3 +103,25 @@ Aggiunta sezione di analisi FP1 per la MotoGP in event.html:
 Backup Timestamp:
 2026-10-29 23:01:05
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261029_231630.zip
+
+Note / Log Message:
+Aggiornamenti grafici FP1 MotoGP e integrazione esportazioni database/Grafana:
+1. Grafico Stints & Tyre Strategy in event.html:
+   - Rimossa didascalia numerica dell'asse X (L0, L3, L6...) mantenendo le linee guida verticali soffuse.
+   - Allargata la pillola identificativa del pilota accanto alla sigla per rendere visibile il tratto continuo o tratteggiato fedele a RIDER_STYLES (es. Bagnaia tratteggiato, Marquez continuo, Martin tratteggiato, Bezzecchi continuo).
+   - Aggiunta indicazione della mescola gomma posteriore anche nella riga larga inferiore (es. 'M · 1'30.132').
+   - Evidenziazione dinamica dei tempi estremi tra tutti gli stint visualizzati: miglior tempo assoluto evidenziato in verde smeraldo, peggior tempo evidenziato in rosso.
+   - Adattamento automatico del testo per stint brevissimi (1-2 giri) per evitare qualsiasi sovrapposizione visiva.
+2. Integrazione Database ed Esportazioni per Grafana:
+   - Generato il dataset CSV tidy exports/csv/motogp_fp1_stints.csv (1177 righe su 18 round).
+   - Aggiornati gli engine di esportazione .github/scripts/export_database.py e export_database.ps1 per esportare motogp_fp1_stints.csv e il foglio 'FP1_Stints_Analysis' in motorsport_database_2026.xlsx.
+
+Backup Timestamp:
+2026-10-29 23:16:30
+=====================================================

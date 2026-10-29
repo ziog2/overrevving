@@ -19965,10 +19965,10 @@
       cvs.style.height = height + 'px';
       ctx.scale(dpr, dpr);
 
-      const leftPad = 62;
+      const leftPad = 86; // wider to accommodate rider code + dashed/solid livery pill
       const rightPad = 20;
       const topPad = 25;
-      const bottomPad = 32;
+      const bottomPad = 16; // reduced since x-axis didascalia is removed
       const chartW = width - leftPad - rightPad;
       const chartH = height - topPad - bottomPad;
 
@@ -19986,14 +19986,10 @@
       ctx.fillText('OVERREVVING', width / 2, height / 2);
       ctx.restore();
 
-      // Draw X-axis grid lines
+      // Draw faint vertical grid lines without x-axis didascalia
       ctx.save();
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
       ctx.lineWidth = 1;
-      ctx.font = '600 10px Inter, sans-serif';
-      ctx.fillStyle = '#8b949e';
-      ctx.textAlign = 'center';
-
       const tickStep = maxLaps > 25 ? 5 : (maxLaps > 15 ? 3 : 2);
       for (let l = 0; l <= maxLaps; l += tickStep) {
         const x = xScale(l);
@@ -20001,15 +19997,25 @@
         ctx.moveTo(x, topPad);
         ctx.lineTo(x, height - bottomPad);
         ctx.stroke();
-
-        ctx.fillText(l === 0 ? 'L0' : ('L' + l), x, height - bottomPad + 16);
       }
       ctx.restore();
+
+      // Find global best and worst times across all displayed stints
+      let allFastest = [];
+      riders.forEach(r => {
+        (r.runs || []).forEach(s => {
+          if (s.lapsCount > 0 && s.fastestSec > 0) {
+            allFastest.push(s.fastestSec);
+          }
+        });
+      });
+      const minFastest = allFastest.length ? Math.min(...allFastest) : 0;
+      const maxFastest = allFastest.length ? Math.max(...allFastest) : 0;
 
       const hitAreas = [];
       const numRiders = riders.length;
       const rowGap = 10;
-      const rowTotalH = Math.min(44, (chartH - (numRiders - 1) * rowGap) / numRiders);
+      const rowTotalH = Math.min(46, (chartH - (numRiders - 1) * rowGap) / numRiders);
       const narrowH = Math.round(rowTotalH * 0.38);
       const wideH = rowTotalH - narrowH;
       const stintGap = 4;
@@ -20025,20 +20031,41 @@
         ctx.textAlign = 'right';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = '#ffffff';
-        ctx.fillText(rider.code, leftPad - 12, rowY + rowTotalH / 2);
+        ctx.fillText(rider.code, leftPad - 30, rowY + rowTotalH / 2);
 
-        // Livery pill beside rider code
-        ctx.fillStyle = riderColor;
+        // 2. Wide livery pill showing continuous or dashed line
+        const pillX = leftPad - 24;
+        const pillW = 18;
+        const pillH = 12;
+        const pillY = rowY + (rowTotalH - pillH) / 2;
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.lineWidth = 1;
         if (ctx.roundRect) {
           ctx.beginPath();
-          ctx.roundRect(leftPad - 8, rowY + 3, 3.5, rowTotalH - 6, 2);
+          ctx.roundRect(pillX, pillY, pillW, pillH, 3);
           ctx.fill();
+          ctx.stroke();
         } else {
-          ctx.fillRect(leftPad - 8, rowY + 3, 3.5, rowTotalH - 6);
+          ctx.fillRect(pillX, pillY, pillW, pillH);
+          ctx.strokeRect(pillX, pillY, pillW, pillH);
         }
+
+        ctx.strokeStyle = riderColor;
+        ctx.lineWidth = 2.5;
+        if (style.borderDash && Array.isArray(style.borderDash)) {
+          ctx.setLineDash(style.borderDash);
+        } else {
+          ctx.setLineDash([]);
+        }
+        ctx.beginPath();
+        ctx.moveTo(pillX + 2, pillY + pillH / 2);
+        ctx.lineTo(pillX + pillW - 2, pillY + pillH / 2);
+        ctx.stroke();
         ctx.restore();
 
-        // 2. Draw Stints
+        // 3. Draw Stints
         const runs = (rider.runs || []).filter(s => s.lapsCount > 0);
         runs.forEach((stint, sIdx) => {
           const xStart = xScale(stint.startLap - 1) + (sIdx > 0 ? (stintGap / 2) : 0);
@@ -20047,6 +20074,9 @@
 
           const fColor = FP1_TYRE_COLORS[stint.front] || FP1_TYRE_COLORS['M'];
           const rColor = FP1_TYRE_COLORS[stint.rear] || FP1_TYRE_COLORS['M'];
+
+          const isBest = (stint.fastestSec > 0 && stint.fastestSec === minFastest);
+          const isWorst = (stint.fastestSec > 0 && stint.fastestSec === maxFastest);
 
           hitAreas.push({
             x: xStart,
@@ -20098,18 +20128,55 @@
             ctx.fillRect(xStart, rowY + narrowH, blockW, wideH);
           }
 
-          let rText = stint.fastest || '-';
-          if (blockW < 46 && rText.includes("'")) {
-            rText = rText.replace("1'", "'");
+          // Rear Tyre text: Tyre compound + fastest lap (e.g. "M · 1'28.920")
+          let rTime = stint.fastest || '-';
+          if (blockW < 56 && rTime.includes("'")) {
+            rTime = rTime.replace("1'", "'");
           }
-          const fontSize = blockW < 38 ? 9 : (blockW < 55 ? 10 : 11);
+          let rText = stint.rear + ' · ' + rTime;
+          if (blockW < 52) rText = stint.rear + ' ' + rTime;
+          if (blockW < 40) rText = stint.rear;
+          if (blockW < 16) rText = '';
+
+          const fontSize = blockW < 36 ? 8 : (blockW < 50 ? 9 : (blockW < 65 ? 10 : 10.5));
           ctx.font = `800 ${fontSize}px Inter, sans-serif`;
-          ctx.fillStyle = '#111114';
-          if (blockW >= 20) {
-            ctx.fillText(rText, xStart + blockW / 2, rowY + narrowH + wideH / 2);
+
+          if (isBest || isWorst) {
+            const bgBadge = isBest ? '#063818' : '#4a0808';
+            const borderBadge = isBest ? '#00e676' : '#ff4d4d';
+            const textBadge = isBest ? '#00e676' : '#ff7979';
+
+            const textMetrics = ctx.measureText(rText);
+            const bW = Math.max(12, Math.min(blockW - 4, textMetrics.width + (rText.length > 2 ? 10 : 6)));
+            const bH = wideH - 5;
+            const bX = xStart + (blockW - bW) / 2;
+            const bY = rowY + narrowH + (wideH - bH) / 2;
+
+            ctx.fillStyle = bgBadge;
+            ctx.strokeStyle = borderBadge;
+            ctx.lineWidth = 1;
+            if (ctx.roundRect) {
+              ctx.beginPath();
+              ctx.roundRect(bX, bY, bW, bH, 3);
+              ctx.fill();
+              ctx.stroke();
+            } else {
+              ctx.fillRect(bX, bY, bW, bH);
+              ctx.strokeRect(bX, bY, bW, bH);
+            }
+
+            ctx.fillStyle = textBadge;
+            if (rText && blockW >= 16) {
+              ctx.fillText(rText, xStart + blockW / 2, rowY + narrowH + wideH / 2);
+            }
+          } else {
+            ctx.fillStyle = '#111114';
+            if (rText && blockW >= 16) {
+              ctx.fillText(rText, xStart + blockW / 2, rowY + narrowH + wideH / 2);
+            }
           }
 
-          // Border
+          // Border around stint
           ctx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
           ctx.lineWidth = 1;
           if (ctx.roundRect) {
