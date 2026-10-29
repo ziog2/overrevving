@@ -125,3 +125,19 @@ Aggiornamenti grafici FP1 MotoGP e integrazione esportazioni database/Grafana:
 Backup Timestamp:
 2026-10-29 23:16:30
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261029_232652.zip
+
+Note / Log Message:
+Ottimizzazione layout grafico Stints & Tyre Strategy FP1 in event.html:
+- Riorganizzata la colonna identificativa del pilota a sinistra del grafico disponendo la sigla del pilota (es. MB72, FB63, MM93) e la linea colorata con livrea/tratteggio in verticale (sigla sopra, linea colorata centrata sotto).
+- Ridotto il padding laterale sinistro da 86px a 54px, recuperando 32px preziosi di larghezza utile per il grafico.
+- Le barre degli stint risultano più larghe e leggibili, migliorando la visualizzazione delle etichette di mescola e tempi sul giro anche per gli stint con pochi giri.
+
+Backup Timestamp:
+2026-10-29 23:26:52
+=====================================================
