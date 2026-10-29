@@ -9,11 +9,16 @@ import os
 import re
 import json
 import urllib.request
+import urllib.error
 
 sys.path.append(os.path.dirname(__file__))
 from update_event_data import parse_dorna_analysis_pdf
 
-ROUNDS = ['AUS', 'INA', 'JPN', 'AUT', 'RSM', 'ARA', 'GBR', 'GER', 'NED', 'CZE', 'HUN', 'ITA', 'CAT', 'FRA', 'SPA', 'USA', 'BRA', 'THA']
+ALL_ROUNDS = [
+    'THA', 'BRA', 'USA', 'SPA', 'FRA', 'CAT', 'ITA', 'HUN', 'CZE', 'NED',
+    'GER', 'GBR', 'ARA', 'RSM', 'AUT', 'JPN', 'INA', 'AUS', 'MAL', 'QAT',
+    'POR', 'VAL'
+]
 
 MOTOGP_RIDER_NUMBERS = {
     'Francesco Bagnaia': '63',
@@ -123,55 +128,87 @@ def parse_runs_for_rider(block):
     return runs_data
 
 def run_extraction():
-    all_events_fp1 = {}
-    for rnd in ROUNDS:
+    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    full_path = os.path.join(base_dir, 'data', 'motogp_fp1_stints.json')
+    compact_path = os.path.join(base_dir, 'data', 'motogp_fp1_compact.json')
+    js_path = os.path.join(base_dir, 'js', 'motogp_fp1_data.js')
+
+    # Load existing data so previous rounds are safely preserved
+    if os.path.exists(full_path):
+        try:
+            with open(full_path, 'r', encoding='utf-8') as f:
+                all_events_fp1 = json.load(f)
+        except Exception:
+            all_events_fp1 = {}
+    else:
+        all_events_fp1 = {}
+
+    updated_count = 0
+    for rnd in ALL_ROUNDS:
         url = f"https://resources.motogp.com/files/results/2026/{rnd}/MotoGP/FP1/Analysis.pdf"
-        print(f"Processing {rnd}...", end=" ", flush=True)
         try:
             req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
             with urllib.request.urlopen(req, timeout=12) as resp:
-                pdf_bytes = resp.read()
+                if resp.status == 200:
+                    pdf_bytes = resp.read()
+                else:
+                    continue
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                # Normal for future rounds not yet raced
+                continue
+            print(f"  {rnd}: HTTP error {e.code}")
+            continue
+        except Exception as e:
+            print(f"  {rnd}: Network error ({e})")
+            continue
+
+        try:
             txt = parse_dorna_analysis_pdf(pdf_bytes)
-            
+            if not txt or len(txt) < 1000:
+                continue
+
             cleaned_txt = PATTERN_FOOTER.sub('\n', txt)
             cleaned_txt = re.sub(r'Fastest Lap:.*?(?=\n|$)', '', cleaned_txt)
             cleaned_txt = re.sub(r'Official MotoGP Timing.*?(?=\n|$)', '', cleaned_txt)
-            
+
             matches = list(REG_RIDER.finditer(cleaned_txt))
+            if not matches:
+                continue
+
             riders_dict = {}
             for i, m in enumerate(matches):
                 start_pos = m.start()
                 end_pos = matches[i+1].start() if i + 1 < len(matches) else len(cleaned_txt)
                 block = cleaned_txt[start_pos:end_pos]
-                
+
                 num = m.group(1).strip()
                 name_raw = m.group(4).strip()
                 parts = name_raw.split()
                 norm_name = " ".join([p.capitalize() if p.isupper() else p for p in parts])
-                
+
                 code, official_num = get_code(norm_name, num)
                 runs = parse_runs_for_rider(block)
                 total_laps = sum(r['lapsCount'] for r in runs)
-                
+
                 riders_dict[norm_name] = {
                     'number': official_num,
                     'code': code,
                     'totalLaps': total_laps,
                     'runs': runs
                 }
+
             all_events_fp1[rnd] = riders_dict
-            print(f"OK ({len(riders_dict)} riders)")
+            updated_count += 1
+            print(f"  {rnd}: parsed {len(riders_dict)} riders from Analysis.pdf")
         except Exception as e:
-            print(f"ERROR: {e}")
-            
-    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    full_path = os.path.join(base_dir, 'data', 'motogp_fp1_stints.json')
-    compact_path = os.path.join(base_dir, 'data', 'motogp_fp1_compact.json')
-    js_path = os.path.join(base_dir, 'js', 'motogp_fp1_data.js')
-    
+            print(f"  {rnd}: Error parsing PDF -> {e}")
+
+    # Write full JSON
     with open(full_path, 'w', encoding='utf-8') as f:
         json.dump(all_events_fp1, f, indent=2, ensure_ascii=False)
-        
+
+    # Build compact JSON
     compact = {}
     for rnd, riders in all_events_fp1.items():
         compact[rnd] = {}
@@ -186,7 +223,7 @@ def run_extraction():
                     'fastest': r['fastest'],
                     'fastestSec': r['fastestSec']
                 }
-                for r in r_info['runs']
+                for r in r_info.get('runs', [])
                 if r.get('lapsCount', 0) > 0
             ]
             if valid_runs:
@@ -196,15 +233,16 @@ def run_extraction():
                     'totalLaps': r_info['totalLaps'],
                     'runs': valid_runs
                 }
-                
+
     compact_json = json.dumps(compact, separators=(',', ':'), ensure_ascii=False)
     with open(compact_path, 'w', encoding='utf-8') as f:
         f.write(compact_json)
-        
+
+    # Write JS file
     with open(js_path, 'w', encoding='utf-8') as f:
         f.write(f"const EVENT_FP1_STINTS_DATA = {compact_json};\n")
-        
-    print("Done! Files saved successfully.")
+
+    print(f"FP1 Stints extraction complete! Processed {len(all_events_fp1)} rounds.")
 
 if __name__ == '__main__':
     run_extraction()

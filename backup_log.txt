@@ -159,3 +159,19 @@ Correzione estrazione tempi e stint FP1 MotoGP (pulizia footer e intestazioni Do
 Backup Timestamp:
 2026-10-29 23:42:07
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261029_234750.zip
+
+Note / Log Message:
+Automazione CI/CD FP1 MotoGP integrata in GitHub Actions:
+- Aggiornato workflow .github/workflows/update-f1-v3.yaml inserendo lo step automatico di esecuzione di .github/scripts/extract_motogp_fp1.py ad ogni ciclo schedulato (ogni ora venerdì, sabato e domenica) o manuale (workflow_dispatch).
+- Incluso js/ in git add del workflow per inviare automaticamente js/motogp_fp1_data.js ad ogni aggiornamento.
+- Configurato lo script extract_motogp_fp1.py per scorrere dinamicamente tutti i 22 round del mondiale 2026, scaricando e processando il nuovo PDF Analysis.pdf della FP1 non appena Dorna lo pubblica, preservando con sicurezza i round storici già estratti.
+
+Backup Timestamp:
+2026-10-29 23:47:50
+=====================================================
