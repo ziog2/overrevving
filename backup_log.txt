@@ -141,3 +141,21 @@ Ottimizzazione layout grafico Stints & Tyre Strategy FP1 in event.html:
 Backup Timestamp:
 2026-10-29 23:26:52
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261029_234207.zip
+
+Note / Log Message:
+Correzione estrazione tempi e stint FP1 MotoGP (pulizia footer e intestazioni Dorna Analysis PDF):
+- Risolto il problema per cui nei passaggi di pagina del PDF Dorna (Analysis.pdf) la dicitura di footer 'Fastest Lap: [Pilota] [Tempo]' veniva erroneamente catturata come tempo sul giro per i piloti il cui stint si trovava a cavallo di due pagine (es. Jorge Martin a Silverstone GBR e Marc Marquez in AUS/THA).
+- Implementata pulizia regex robusta che esclude completamente i blocchi di cambio pagina (Page X of Y, Fastest Lap, copyright, intestazioni di sessione T4).
+- Rielaborati tutti i 18 round 2026: Jorge Martin a Silverstone ora mostra correttamente i suoi 3 stint autentici (Run 1: 1'59.372, Run 2: 2'00.640, Run 3: 1'59.480) con 16 giri totali corrispondenti alla classifica ufficiale FP1.
+- Creato script consolidato .github/scripts/extract_motogp_fp1.py.
+- Aggiornati dataset: data/motogp_fp1_stints.json, data/motogp_fp1_compact.json, js/motogp_fp1_data.js, exports/csv/motogp_fp1_stints.csv e exports/motorsport_database_2026.xlsx.
+
+Backup Timestamp:
+2026-10-29 23:42:07
+=====================================================
