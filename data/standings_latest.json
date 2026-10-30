@@ -2116,33 +2116,33 @@
   "motogp_constructors": [
     {
       "name": "APRILIA",
-      "pts": 503
+      "pts": 509
     },
     {
       "name": "DUCATI",
-      "pts": 491
+      "pts": 503
     },
     {
       "name": "KTM",
-      "pts": 311
+      "pts": 316
     },
     {
       "name": "HONDA",
-      "pts": 165
+      "pts": 167
     },
     {
       "name": "YAMAHA",
-      "pts": 97
+      "pts": 100
     }
   ],
   "motogp_teams": [
     {
       "name": "Aprilia Racing",
-      "pts": 664
+      "pts": 670
     },
     {
       "name": "Ducati Lenovo Team",
-      "pts": 519
+      "pts": 531
     },
     {
       "name": "SuperFile Trackhouse MotoGP Team",
@@ -2150,15 +2150,15 @@
     },
     {
       "name": "Red Bull KTM Factory Racing",
-      "pts": 362
+      "pts": 371
     },
     {
       "name": "BK8 Gresini Racing MotoGP",
-      "pts": 306
+      "pts": 316
     },
     {
       "name": "Pertamina Enduro VR46 Racing Team",
-      "pts": 304
+      "pts": 311
     },
     {
       "name": "Honda HRC",
@@ -2170,7 +2170,7 @@
     },
     {
       "name": "LCR Honda",
-      "pts": 125
+      "pts": 127
     },
     {
       "name": "Monster Energy Yamaha MotoGP Team",
@@ -2178,7 +2178,7 @@
     },
     {
       "name": "Prima Pramac Yamaha MotoGP",
-      "pts": 46
+      "pts": 49
     }
   ],
   "moto2": [
@@ -4459,7 +4459,7 @@
       "pts": 197
     },
     {
-      "name": "QJMOTOR - JP Financial - MSI",
+      "name": "QJMOTOR - R.O.M.E.A - MSI",
       "pts": 195.5
     },
     {
@@ -7494,43 +7494,43 @@
   "f1": [
     {
       "name": "Andrea Kimi Antonelli",
-      "pts": 340
+      "pts": 365
     },
     {
       "name": "George Russell",
-      "pts": 238
+      "pts": 242
     },
     {
       "name": "Lewis Hamilton",
-      "pts": 229
+      "pts": 241
     },
     {
       "name": "Max Verstappen",
-      "pts": 221
+      "pts": 236
     },
     {
       "name": "Charles Leclerc",
-      "pts": 215
+      "pts": 233
     },
     {
       "name": "Lando Norris",
-      "pts": 201
+      "pts": 211
     },
     {
       "name": "Oscar Piastri",
-      "pts": 138
+      "pts": 144
     },
     {
       "name": "Isack Hadjar",
-      "pts": 97
+      "pts": 105
     },
     {
       "name": "Liam Lawson",
-      "pts": 75
+      "pts": 77
     },
     {
       "name": "Pierre Gasly",
-      "pts": 41
+      "pts": 42
     },
     {
       "name": "Arvid Lindblad",
@@ -7585,5 +7585,5 @@
       "pts": 0
     }
   ],
-  "_updated": "2026-10-25 23:30:16 · Auto (Domenica)"
+  "_updated": "2026-10-30 08:57:22 · Auto (Domenica)"
 }
