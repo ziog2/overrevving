@@ -2,7 +2,7 @@
   "motogp": [
     {
       "name": "Marc Marquez",
-      "pts": 365,
+      "pts": 374,
       "history": [
         9,
         25,
@@ -134,7 +134,7 @@
     },
     {
       "name": "Marco Bezzecchi",
-      "pts": 315,
+      "pts": 322,
       "history": [
         25,
         31,
@@ -200,7 +200,7 @@
     },
     {
       "name": "Pedro Acosta",
-      "pts": 263,
+      "pts": 275,
       "history": [
         32,
         10,
@@ -266,7 +266,7 @@
     },
     {
       "name": "Ai Ogura",
-      "pts": 259,
+      "pts": 265,
       "history": [
         17,
         16,
@@ -332,7 +332,7 @@
     },
     {
       "name": "Fabio Di Giannantonio",
-      "pts": 252,
+      "pts": 257,
       "history": [
         12,
         25,
@@ -530,7 +530,7 @@
     },
     {
       "name": "Francesco Bagnaia",
-      "pts": 166,
+      "pts": 170,
       "history": [
         8,
         2,
@@ -662,7 +662,7 @@
     },
     {
       "name": "Enea Bastianini",
-      "pts": 122,
+      "pts": 123,
       "history": [
         4,
         1,
@@ -723,6 +723,72 @@
         5,
         13,
         6,
+        0
+      ]
+    },
+    {
+      "name": "Brad Binder",
+      "pts": 111,
+      "history": [
+        13,
+        0,
+        4,
+        11,
+        0,
+        9,
+        5,
+        6,
+        5,
+        5,
+        6,
+        8,
+        6,
+        5,
+        11,
+        5,
+        5,
+        4
+      ],
+      "sprint_pts": 16,
+      "sprint_history": [
+        4,
+        0,
+        0,
+        6,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        4
+      ],
+      "long_pts": 92,
+      "long_history": [
+        9,
+        0,
+        4,
+        5,
+        0,
+        9,
+        5,
+        6,
+        4,
+        5,
+        6,
+        8,
+        6,
+        5,
+        10,
+        5,
+        5,
         0
       ]
     },
@@ -793,74 +859,8 @@
       ]
     },
     {
-      "name": "Brad Binder",
-      "pts": 108,
-      "history": [
-        13,
-        0,
-        4,
-        11,
-        0,
-        9,
-        5,
-        6,
-        5,
-        5,
-        6,
-        8,
-        6,
-        5,
-        11,
-        5,
-        5,
-        4
-      ],
-      "sprint_pts": 16,
-      "sprint_history": [
-        4,
-        0,
-        0,
-        6,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        4
-      ],
-      "long_pts": 92,
-      "long_history": [
-        9,
-        0,
-        4,
-        5,
-        0,
-        9,
-        5,
-        6,
-        4,
-        5,
-        6,
-        8,
-        6,
-        5,
-        10,
-        5,
-        5,
-        0
-      ]
-    },
-    {
       "name": "Diogo Moreira",
-      "pts": 76,
+      "pts": 78,
       "history": [
         3,
         3,
@@ -7585,5 +7585,5 @@
       "pts": 0
     }
   ],
-  "_updated": "2026-10-31 08:51:46 · Auto (Domenica)"
+  "_updated": "2026-10-31 17:31:09 · Auto (Domenica)"
 }
