@@ -175,3 +175,23 @@ Automazione CI/CD FP1 MotoGP integrata in GitHub Actions:
 Backup Timestamp:
 2026-10-29 23:47:50
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261031_103156.zip
+
+Note / Log Message:
+Aumento frequenza cron GitHub Actions a ogni 30 minuti e inserimento risultati Sprint Malesia (Sepang):
+1. Frequenza Workflow GitHub Actions:
+   - Aggiornato .github/workflows/update-f1-v3.yaml impostando il cron ogni 30 minuti ('15,45 * * * 5,6,0') nei giorni di gara.
+   - La scelta dei minuti :15 e :45 evita la coda e la congestione dei runner di GitHub Actions al minuto :00, garantendo puntualità e copertura h24 di tutte le sessioni mondiali.
+2. Risultati e Telemetria Sprint GP Malesia (Sepang R19):
+   - Aggiornate tabelle e risultati sessioni per MotoGP, Moto2 e Moto3 in event.html, category.html e motogp.html.
+   - Estratti da Analysis.pdf e inseriti lap chart (10 giri), tempi intermedi dei settori (20 piloti) e meteo sessione per la Sprint della Malesia.
+   - Rigenerati tutti i database: JSON per categoria, CSV per Grafana ed Excel Master motorsport_database_2026.xlsx.
+
+Backup Timestamp:
+2026-10-31 10:31:56
+=====================================================
