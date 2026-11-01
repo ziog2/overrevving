@@ -20278,8 +20278,19 @@
       const compLabels = { 'S': 'SOFT', 'M': 'MED', 'H': 'HARD' };
       const compColors = { 'S': '#ffd600', 'M': '#ffffff', 'H': '#00b0ff' };
 
+      function formatCellTime(sec, availW) {
+        if (typeof sec !== 'number' || isNaN(sec) || sec <= 0) return '-';
+        const mins = Math.floor(sec / 60);
+        const rem = sec % 60;
+        const remStr = rem < 10 ? '0' + rem.toFixed(3) : rem.toFixed(3);
+        if (availW !== undefined && availW < 54 && mins > 0) {
+          return "'" + remStr;
+        }
+        return mins > 0 ? (mins + "'" + remStr) : remStr;
+      }
+
       if (currentFp1HeatmapMode === 'matrix') {
-        // --- 1. MATRICE 3x3 VIEW ---
+        // --- 1. MATRIX 3x3 VIEW ---
         const matrix = {
           'S': { 'S': 0, 'M': 0, 'H': 0 },
           'M': { 'S': 0, 'M': 0, 'H': 0 },
@@ -20329,7 +20340,7 @@
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillStyle = '#8b949e';
-        ctx.fillText('POSTERIORE (REAR) →', leftPad + gridW / 2, 12);
+        ctx.fillText('REAR TYRE →', leftPad + gridW / 2, 12);
 
         comps.forEach((c, colIdx) => {
           const x = leftPad + colIdx * (cellW + gap) + cellW / 2;
@@ -20343,7 +20354,7 @@
         ctx.fillStyle = '#8b949e';
         ctx.font = '800 10px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('ANTERIORE (FRONT) →', 0, 0);
+        ctx.fillText('FRONT TYRE →', 0, 0);
         ctx.restore();
 
         comps.forEach((r, rowIdx) => {
@@ -20423,7 +20434,7 @@
         });
 
       } else {
-        // --- 2. PILOTI VIEW ---
+        // --- 2. RIDERS VIEW ---
         const comboSet = new Set();
         riders.forEach(r => {
           (r.runs || []).forEach(run => {
@@ -20486,12 +20497,17 @@
 
           const rCombos = {};
           const rBest = {};
+          const rFlying = {};
           (rider.runs || []).forEach(run => {
             if (run.lapsCount > 0) {
               const k = run.front + '-' + run.rear;
               rCombos[k] = (rCombos[k] || 0) + run.lapsCount;
-              if (!rBest[k] || run.fastestSec < rBest[k].sec) {
+              if (!rBest[k] || (run.fastestSec > 0 && run.fastestSec < rBest[k].sec)) {
                 rBest[k] = { time: run.fastest, sec: run.fastestSec };
+              }
+              if (run.flying && Array.isArray(run.flying)) {
+                if (!rFlying[k]) rFlying[k] = [];
+                rFlying[k].push(...run.flying);
               }
             }
           });
@@ -20499,6 +20515,12 @@
           combos.forEach((c, colIdx) => {
             const x = leftPad + colIdx * (colW + colGap);
             const laps = rCombos[c] || 0;
+            const flyingList = (rFlying[c] || []).slice().sort((a, b) => a - b);
+            const top3Laps = flyingList.slice(0, 3);
+            const top3AvgSec = top3Laps.length > 0 ? (top3Laps.reduce((a, b) => a + b, 0) / top3Laps.length) : 0;
+            const top3AvgStr = top3AvgSec > 0 ? formatCellTime(top3AvgSec, colW) : '-';
+            const top3AvgFull = top3AvgSec > 0 ? formatCellTime(top3AvgSec, 999) : '-';
+            const top3LapsFormatted = top3Laps.map(s => formatCellTime(s, 999));
 
             let bg = 'rgba(255, 255, 255, 0.03)';
             let border = 'rgba(255, 255, 255, 0.06)';
@@ -20521,11 +20543,27 @@
             }
 
             if (laps > 0) {
-              ctx.font = '800 12px Inter, sans-serif';
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
-              ctx.fillStyle = '#ffffff';
-              ctx.fillText(laps + ' L', x + colW / 2, y + rowH / 2);
+              if (top3AvgSec > 0) {
+                const yShift = rowH >= 38 ? 8 : 6;
+                const lapFont = rowH >= 38 ? '800 11px Inter, sans-serif' : '800 10px Inter, sans-serif';
+                const avgFont = rowH >= 38 ? '700 10px Inter, sans-serif' : '700 9px Inter, sans-serif';
+
+                ctx.font = lapFont;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(laps + ' L', x + colW / 2, y + rowH / 2 - yShift);
+
+                ctx.font = avgFont;
+                ctx.fillStyle = '#e2e8f0';
+                ctx.fillText(top3AvgStr, x + colW / 2, y + rowH / 2 + yShift);
+              } else {
+                ctx.font = '800 12px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(laps + ' L', x + colW / 2, y + rowH / 2);
+              }
             } else {
               ctx.font = '600 11px Inter, sans-serif';
               ctx.textAlign = 'center';
@@ -20543,6 +20581,9 @@
                 combo: c,
                 laps,
                 riderTotalLaps: rider.totalLaps,
+                top3AvgStr: top3AvgFull,
+                top3Count: top3Laps.length,
+                top3LapsFormatted,
                 bestTime: rBest[c] ? rBest[c].time : '-'
               });
             }
@@ -20567,23 +20608,28 @@
             const pct = hit.totalLapsAll > 0 ? Math.round((hit.laps / hit.totalLapsAll) * 100) : 0;
             html = `
               <div class="tt-title">Front: ${fLabel} · Rear: ${rLabel} (${hit.front}-${hit.rear})</div>
-              <div class="tt-row"><span>Giri totali:</span><span class="tt-val">${hit.laps} giri (${pct}% dei preferiti)</span></div>
+              <div class="tt-row"><span>Total Laps:</span><span class="tt-val">${hit.laps} laps (${pct}% of favorites)</span></div>
             `;
             if (hit.details && hit.details.bestTime) {
-              html += `<div class="tt-row"><span>Miglior giro:</span><span class="tt-val" style="color:#00e676;">${hit.details.bestTime} (${hit.details.bestRider})</span></div>`;
+              html += `<div class="tt-row"><span>Best Lap:</span><span class="tt-val" style="color:#00e676;">${hit.details.bestTime} (${hit.details.bestRider})</span></div>`;
             }
             if (hit.details && hit.details.riders) {
-              const riderList = Object.entries(hit.details.riders).map(([r, l]) => `${r}: ${l}g`).join(', ');
-              html += `<div class="tt-row" style="margin-top:4px; font-size:10px;"><span>Piloti:</span><span class="tt-val" style="font-weight:500;">${riderList}</span></div>`;
+              const riderList = Object.entries(hit.details.riders).map(([r, l]) => `${r}: ${l} L`).join(', ');
+              html += `<div class="tt-row" style="margin-top:4px; font-size:10px;"><span>Riders:</span><span class="tt-val" style="font-weight:500;">${riderList}</span></div>`;
             }
           } else {
             const pct = hit.riderTotalLaps > 0 ? Math.round((hit.laps / hit.riderTotalLaps) * 100) : 0;
+            const avgLabel = hit.top3Count && hit.top3Count < 3 ? `Top ${hit.top3Count} Avg:` : 'Top 3 Avg:';
             html = `
               <div class="tt-title">${hit.riderName} (${hit.riderCode})</div>
-              <div class="tt-row"><span>Setup mescole:</span><span class="tt-val">${hit.combo}</span></div>
-              <div class="tt-row"><span>Giri percorsi:</span><span class="tt-val">${hit.laps} L (${pct}% del pilota)</span></div>
-              <div class="tt-row"><span>Miglior tempo:</span><span class="tt-val" style="color:#00e676;">${hit.bestTime}</span></div>
+              <div class="tt-row"><span>Tyre Setup:</span><span class="tt-val">${hit.combo}</span></div>
+              <div class="tt-row"><span>Laps Completed:</span><span class="tt-val">${hit.laps} L (${pct}% of rider)</span></div>
+              <div class="tt-row"><span>${avgLabel}</span><span class="tt-val" style="color:#ffd600;">${hit.top3AvgStr}</span></div>
+              <div class="tt-row"><span>Best Lap:</span><span class="tt-val" style="color:#00e676;">${hit.bestTime}</span></div>
             `;
+            if (hit.top3LapsFormatted && hit.top3LapsFormatted.length > 1) {
+              html += `<div class="tt-row" style="margin-top:3px; font-size:10px;"><span>Top Laps:</span><span class="tt-val" style="font-weight:500; color:#cbd5e1;">${hit.top3LapsFormatted.join(' · ')}</span></div>`;
+            }
           }
           tooltipEl.innerHTML = html;
           tooltipEl.style.display = 'block';
@@ -22775,8 +22821,8 @@
               <div class="sector-card-title">
                 <span>Tyre Choices Heatmap</span>
                 <div class="fp1-toggle-group">
-                  <button type="button" class="fp1-toggle-btn active" id="fp1-heatmap-btn-matrix" onclick="setFp1HeatmapMode('matrix')">Matrice 3&times;3</button>
-                  <button type="button" class="fp1-toggle-btn" id="fp1-heatmap-btn-riders" onclick="setFp1HeatmapMode('riders')">Piloti</button>
+                  <button type="button" class="fp1-toggle-btn active" id="fp1-heatmap-btn-matrix" onclick="setFp1HeatmapMode('matrix')">Matrix 3&times;3</button>
+                  <button type="button" class="fp1-toggle-btn" id="fp1-heatmap-btn-riders" onclick="setFp1HeatmapMode('riders')">Riders</button>
                 </div>
               </div>
               <div class="progression-canvas-container">

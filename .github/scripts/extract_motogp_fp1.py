@@ -208,24 +208,34 @@ def run_extraction():
     with open(full_path, 'w', encoding='utf-8') as f:
         json.dump(all_events_fp1, f, indent=2, ensure_ascii=False)
 
-    # Build compact JSON
+    # Build compact JSON with flying lap times
     compact = {}
     for rnd, riders in all_events_fp1.items():
         compact[rnd] = {}
         for r_name, r_info in riders.items():
-            valid_runs = [
-                {
+            valid_runs = []
+            for r in r_info.get('runs', []):
+                if r.get('lapsCount', 0) <= 0:
+                    continue
+                # Extract clean flying laps in seconds (< fastest * 1.15 and < 180s)
+                valid_laps = [l['sec'] for l in r.get('laps', []) if not l.get('pit')]
+                if valid_laps:
+                    min_sec = min(valid_laps)
+                    flying_secs = sorted([round(s, 3) for s in valid_laps if s <= min_sec * 1.15 and s < 180.0])
+                else:
+                    flying_secs = []
+
+                valid_runs.append({
                     'front': r['front'],
                     'rear': r['rear'],
                     'lapsCount': r['lapsCount'],
                     'startLap': r['startLap'],
                     'endLap': r['endLap'],
                     'fastest': r['fastest'],
-                    'fastestSec': r['fastestSec']
-                }
-                for r in r_info.get('runs', [])
-                if r.get('lapsCount', 0) > 0
-            ]
+                    'fastestSec': r['fastestSec'],
+                    'flying': flying_secs
+                })
+
             if valid_runs:
                 compact[rnd][r_name] = {
                     'number': r_info['number'],
@@ -242,7 +252,7 @@ def run_extraction():
     with open(js_path, 'w', encoding='utf-8') as f:
         f.write(f"const EVENT_FP1_STINTS_DATA = {compact_json};\n")
 
-    print(f"FP1 Stints extraction complete! Processed {len(all_events_fp1)} rounds.")
+    print(f"FP1 Stints extraction complete! Processed {len(all_events_fp1)} rounds. JS size: {len(compact_json)} bytes.")
 
 if __name__ == '__main__':
     run_extraction()

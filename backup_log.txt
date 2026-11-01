@@ -214,3 +214,25 @@ Implementazione Card 2: Tyre Choices Heatmap in event.html:
 Backup Timestamp:
 2026-11-01 22:03:05
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261101_221551.zip
+
+Note / Log Message:
+Perfezionamento Card 2: Tyre Choices Heatmap (FP1):
+- Traduzione e uniformazione di tutte le indicazioni ed etichette del grafico interamente in lingua inglese:
+  * Pulsanti di selezione: 'Matrix 3×3' e 'Riders'
+  * Assi matrice: 'REAR TYRE →' e 'FRONT TYRE →'
+  * Tooltip Matrix: 'Total Laps', 'Best Lap', 'Riders'
+  * Tooltip Riders: 'Tyre Setup', 'Laps Completed', 'Top 3 Avg', 'Best Lap', 'Top Laps'
+- Nella visualizzazione 'Riders' per ciascun pilota e combinazione di mescola:
+  * Visualizzazione interna ad ogni casella su 2 righe: riga 1 con il conteggio giri (es. '15 L') e riga 2 con la media aritmetica dei 3 giri lanciati piu' veloci realizzati da quel pilota con quel treno di gomme (es. '1'59.149').
+  * Formattazione responsive adattiva che previene qualsiasi sovrapposizione o taglio del testo.
+- Pipeline dati aggiornata: estensione di .github/scripts/extract_motogp_fp1.py, data/motogp_fp1_compact.json e js/motogp_fp1_data.js con l'array 'flying' dei tempi validi per ciascun run di tutte le 19 gare della stagione.
+
+Backup Timestamp:
+2026-11-01 22:15:51
+=====================================================
