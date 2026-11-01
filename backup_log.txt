@@ -236,3 +236,25 @@ Perfezionamento Card 2: Tyre Choices Heatmap (FP1):
 Backup Timestamp:
 2026-11-01 22:15:51
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261101_224943.zip
+
+Note / Log Message:
+Implementazione Card 3 FP1: Tyre Degradation (Passo & Decadimento Gomma per Eta' Pneumatico):
+- Inserita come Card 3 ufficiale nel layout a 4 quadranti della sezione FP1 di event.html.
+- Solo regressioni lineari: rimosso lo scatter plot/zig-zag disordinato dei singoli giri; visualizzazione pulita con linee di regressione continua nel colore identificativo del pilota, dot iniziale e finale con bordo bianco e codice pilota al termine della linea.
+- Algoritmo di anti-collisione per le etichette di fine linea per evitare sovrapposizioni quando i piloti convergono verso tempi simili ad alto chilometraggio gomma.
+- Filtro per mescole integrato nell'header della card: selettore dinamico con pulsanti pill ('All', 'S-M', 'S-H', 'M-M', 'M-H', ecc.) generati automaticamente in base alle combinazioni utilizzate dai piloti preferiti nel GP selezionato.
+- Filtro ceiling sul passo (+3.5% dal best) per escludere giri di entrata/uscita e preservare una scala verticale compatta e ad alto contrasto.
+- Strip inferiore di pill statistiche (.deg-stats-row) con rateo di decadimento per pilota (es. +0.054s/l), chilometraggio massimo e perdita stimata su 10 giri.
+- Tooltip interattivo al passaggio del mouse lungo la linea di regressione: pilota, mescola, range giri, passo al giro puntato, passo iniziale, pendenza di decadimento e perdita stimata sui 10 giri.
+- Aggiornata la Card 4 con placeholder 'Theoretical Best & Sectors' (WIP).
+- Tutte le scritte, titoli, label degli assi ('TYRE AGE (LAPS) ->', 'PACE ^ FAST') e tooltip mantenuti rigorosamente in lingua inglese.
+
+Backup Timestamp:
+2026-11-01 22:49:43
+=====================================================

@@ -714,7 +714,7 @@
       height: 100%;
     }
 
-    #fp1-tooltip, #fp1-heatmap-tooltip {
+    #fp1-tooltip, #fp1-heatmap-tooltip, #fp1-deg-tooltip {
       position: absolute;
       display: none;
       pointer-events: none;
@@ -728,24 +728,68 @@
       color: #e6edf3;
       min-width: 180px;
     }
-    #fp1-tooltip .tt-title, #fp1-heatmap-tooltip .tt-title {
+    #fp1-tooltip .tt-title, #fp1-heatmap-tooltip .tt-title, #fp1-deg-tooltip .tt-title {
       font-weight: 800;
       font-size: 12px;
       color: #fff;
       margin-bottom: 6px;
       border-bottom: 1px solid #2d3542;
       padding-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
     }
-    #fp1-tooltip .tt-row, #fp1-heatmap-tooltip .tt-row {
+    #fp1-tooltip .tt-row, #fp1-heatmap-tooltip .tt-row, #fp1-deg-tooltip .tt-row {
       display: flex;
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 3px;
       color: #8b949e;
     }
-    #fp1-tooltip .tt-val, #fp1-heatmap-tooltip .tt-val {
+    #fp1-tooltip .tt-val, #fp1-heatmap-tooltip .tt-val, #fp1-deg-tooltip .tt-val {
       font-weight: 700;
       color: #f0f6fc;
+    }
+
+    /* Stat strip for Card 3 (Tyre Degradation) */
+    .deg-stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+      gap: 6px;
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .deg-stat-pill {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 5px;
+      padding: 4px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .deg-stat-head {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 800;
+      color: #cbd5e1;
+    }
+    .deg-stat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .deg-stat-val {
+      font-size: 10px;
+      font-weight: 800;
+      color: #ffffff;
+      font-feature-settings: "tnum";
+    }
+    .deg-stat-sub {
+      font-size: 8px;
+      color: #8b949e;
     }
 
     .fp1-toggle-group {
@@ -20653,6 +20697,408 @@
       };
     }
 
+    // --- CARD 3: TYRE DEGRADATION (LINEAR REGRESSIONS ONLY) ---
+    let currentFp1DegFilter = 'All';
+    let fp1DegLinesData = [];
+
+    function formatFp1AxisTime(sec) {
+      if (typeof sec !== 'number' || isNaN(sec) || sec <= 0) return '-';
+      const mins = Math.floor(sec / 60);
+      const rem = sec % 60;
+      const remStr = rem < 10 ? '0' + rem.toFixed(1) : rem.toFixed(1);
+      return mins > 0 ? (mins + "'" + remStr) : remStr;
+    }
+
+    function formatFp1CellTime(sec, availW) {
+      if (typeof sec !== 'number' || isNaN(sec) || sec <= 0) return '-';
+      const mins = Math.floor(sec / 60);
+      const rem = sec % 60;
+      const remStr = rem < 10 ? '0' + rem.toFixed(3) : rem.toFixed(3);
+      if (availW !== undefined && availW < 54 && mins > 0) return "'" + remStr;
+      return mins > 0 ? (mins + "'" + remStr) : remStr;
+    }
+
+    function setFp1DegFilter(combo) {
+      currentFp1DegFilter = combo;
+      const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA');
+      const fp1Data = (typeof EVENT_FP1_STINTS_DATA !== 'undefined' && EVENT_FP1_STINTS_DATA[cur]) ? EVENT_FP1_STINTS_DATA[cur] : {};
+      const activeFavRiders = Object.keys(fp1Data).filter(rName => isRiderFavorite(rName));
+      updateFp1DegFilterButtons(cur, activeFavRiders);
+      renderFp1DegradationChart(cur, activeFavRiders);
+    }
+
+    function updateFp1DegFilterButtons(gpShort, favList) {
+      const container = document.getElementById('fp1-deg-filter-group');
+      if (!container) return;
+      const rawFp1 = (typeof EVENT_FP1_STINTS_DATA !== 'undefined' && EVENT_FP1_STINTS_DATA[gpShort]) ? EVENT_FP1_STINTS_DATA[gpShort] : {};
+
+      const comboSet = new Set();
+      (favList || []).forEach(r => {
+        const rData = rawFp1[r];
+        if (rData) {
+          (rData.runs || []).forEach(run => {
+            if (run.lapsCount > 0 && run.front && run.rear) comboSet.add(`${run.front}-${run.rear}`);
+          });
+        }
+      });
+
+      if (currentFp1DegFilter !== 'All' && !comboSet.has(currentFp1DegFilter)) {
+        currentFp1DegFilter = 'All';
+      }
+
+      const combos = ['All', ...Array.from(comboSet)];
+      container.innerHTML = combos.map(c => `
+        <button type="button" class="fp1-toggle-btn ${c === currentFp1DegFilter ? 'active' : ''}" onclick="setFp1DegFilter('${c}')">${c}</button>
+      `).join('');
+    }
+
+    function renderFp1DegradationChart(gpShort, favList) {
+      const cvs = document.getElementById('chart-fp1-deg');
+      if (!cvs) return;
+      const ctx = cvs.getContext('2d');
+      const tooltipEl = document.getElementById('fp1-deg-tooltip');
+      fp1DegLinesData = [];
+
+      const rect = cvs.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const width = rect.width || 340;
+      const height = rect.height || 258;
+      cvs.width = width * dpr;
+      cvs.height = height * dpr;
+      cvs.style.width = width + 'px';
+      cvs.style.height = height + 'px';
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, width, height);
+
+      // Watermark
+      ctx.save();
+      ctx.font = '900 18px Inter, sans-serif';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.025)';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('OVERREVVING', width / 2, height / 2);
+      ctx.restore();
+
+      const rawFp1 = (typeof EVENT_FP1_STINTS_DATA !== 'undefined' && EVENT_FP1_STINTS_DATA[gpShort]) ? EVENT_FP1_STINTS_DATA[gpShort] : {};
+
+      // 1. Session baseline pace
+      let sessionMin = 999;
+      (favList || []).forEach(rName => {
+        const rData = rawFp1[rName];
+        if (!rData) return;
+        (rData.runs || []).forEach(run => {
+          if (run.fastestSec > 0 && run.fastestSec < sessionMin) sessionMin = run.fastestSec;
+        });
+      });
+      if (sessionMin === 999) sessionMin = 118.0;
+      const paceCeiling = sessionMin * 1.035;
+
+      // 2. Extract linear regression for each rider
+      const lines = [];
+      (favList || []).forEach(rName => {
+        const rData = rawFp1[rName];
+        if (!rData) return;
+        const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rName]) || {};
+        const riderColor = style.color || '#3b82f6';
+
+        let targetCombo = currentFp1DegFilter;
+        if (targetCombo === 'All') {
+          const comboCounts = {};
+          (rData.runs || []).forEach(run => {
+            const c = `${run.front}-${run.rear}`;
+            const count = (run.flying || []).filter(sec => sec > 0 && sec <= paceCeiling).length;
+            comboCounts[c] = (comboCounts[c] || 0) + count;
+          });
+          let maxC = null, maxCount = 0;
+          for (const [c, cnt] of Object.entries(comboCounts)) {
+            if (cnt > maxCount) { maxCount = cnt; maxC = c; }
+          }
+          targetCombo = maxC;
+        }
+
+        if (!targetCombo) return;
+
+        const pts = [];
+        (rData.runs || []).forEach((run) => {
+          const c = `${run.front}-${run.rear}`;
+          if (c === targetCombo && run.flying && run.flying.length) {
+            run.flying.forEach((sec, idx) => {
+              const age = (run.startLap || 1) + 1 + idx;
+              if (sec <= paceCeiling && sec > 0) {
+                pts.push({ age, sec });
+              }
+            });
+          }
+        });
+
+        if (pts.length >= 2) {
+          pts.sort((a, b) => a.age - b.age);
+          const xs = pts.map(p => p.age);
+          const ys = pts.map(p => p.sec);
+          const xM = xs.reduce((a, b) => a + b, 0) / xs.length;
+          const yM = ys.reduce((a, b) => a + b, 0) / ys.length;
+          const num = xs.reduce((sum, x, i) => sum + (x - xM) * (ys[i] - yM), 0);
+          const den = xs.reduce((sum, x) => sum + (x - xM) ** 2, 0);
+          const slope = den !== 0 ? (num / den) : 0;
+          const intercept = yM - slope * xM;
+
+          const minAge = xs[0];
+          const maxAge = xs[xs.length - 1];
+          const startPace = intercept + slope * minAge;
+          const endPace = intercept + slope * maxAge;
+
+          lines.push({
+            name: rName,
+            code: rData.code,
+            color: riderColor,
+            combo: targetCombo,
+            minAge,
+            maxAge,
+            lapsCount: pts.length,
+            slope,
+            intercept,
+            startPace,
+            endPace,
+            deg10: slope * 10
+          });
+        }
+      });
+
+      if (!lines.length) {
+        ctx.font = '600 11px Inter, sans-serif';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`No long runs recorded on ${currentFp1DegFilter}`, width / 2, height / 2);
+        const stripEl = document.getElementById('deg-stats-strip');
+        if (stripEl) stripEl.innerHTML = '';
+        return;
+      }
+
+      // 3. Coordinate bounds
+      let globalMinAge = 1, globalMaxAge = 18;
+      lines.forEach(l => {
+        if (l.maxAge > globalMaxAge) globalMaxAge = Math.ceil(l.maxAge);
+      });
+      globalMaxAge = Math.max(globalMaxAge, 16);
+
+      const allPaces = [];
+      lines.forEach(l => {
+        allPaces.push(l.startPace, l.endPace);
+      });
+      let minPace = Math.floor(Math.min(...allPaces) * 2) / 2;
+      let maxPace = Math.ceil(Math.max(...allPaces) * 2) / 2;
+      if (maxPace - minPace < 2.0) maxPace = minPace + 2.0;
+
+      const padLeft = 56, padRight = 44, padTop = 16, padBottom = 24;
+      const plotW = width - padLeft - padRight;
+      const plotH = height - padTop - padBottom;
+
+      const getX = (age) => padLeft + ((age - globalMinAge) / (globalMaxAge - globalMinAge)) * plotW;
+      const getY = (val) => padTop + ((val - minPace) / (maxPace - minPace)) * plotH;
+
+      // 4. Draw Grid
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 1;
+
+      // Y grid (pace)
+      const yStep = maxPace - minPace > 4 ? 1.0 : 0.5;
+      ctx.font = '600 9px Inter, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      for (let yVal = minPace; yVal <= maxPace + 0.001; yVal += yStep) {
+        const y = getY(yVal);
+        ctx.beginPath();
+        ctx.moveTo(padLeft, y);
+        ctx.lineTo(width - padRight, y);
+        ctx.stroke();
+
+        ctx.fillStyle = '#64748b';
+        ctx.fillText(formatFp1AxisTime(yVal), padLeft - 6, y);
+      }
+
+      // X grid (tyre age)
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      for (let age = 2; age <= globalMaxAge; age += 2) {
+        const x = getX(age);
+        ctx.beginPath();
+        ctx.moveTo(x, padTop);
+        ctx.lineTo(x, height - padBottom);
+        ctx.stroke();
+
+        ctx.fillStyle = '#64748b';
+        ctx.fillText(age, x, height - padBottom + 5);
+      }
+
+      // Axes Labels
+      ctx.font = '800 9px Inter, sans-serif';
+      ctx.fillStyle = '#8b949e';
+      ctx.textAlign = 'center';
+      ctx.fillText('TYRE AGE (LAPS) →', padLeft + plotW / 2, height - 9);
+
+      ctx.save();
+      ctx.translate(11, padTop + plotH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText('PACE ↑ FAST', 0, 0);
+      ctx.restore();
+
+      // 5. Draw ONLY LINEAR REGRESSIONS
+      lines.sort((a, b) => a.endPace - b.endPace);
+
+      lines.forEach((l, idx) => {
+        const x1 = getX(l.minAge);
+        const y1 = getY(l.startPace);
+        const x2 = getX(l.maxAge);
+        const y2 = getY(l.endPace);
+
+        // Soft glow under line
+        ctx.save();
+        ctx.strokeStyle = l.color;
+        ctx.lineWidth = 5;
+        ctx.globalAlpha = 0.18;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+        ctx.restore();
+
+        // Solid linear regression line
+        ctx.save();
+        ctx.strokeStyle = l.color;
+        ctx.lineWidth = 2.5;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+
+        // Start dot
+        ctx.fillStyle = l.color;
+        ctx.beginPath();
+        ctx.arc(x1, y1, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // End dot
+        ctx.beginPath();
+        ctx.arc(x2, y2, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Label at end of line with collision check
+        let labelY = y2;
+        if (idx > 0) {
+          const prevY = getY(lines[idx - 1].endPace);
+          if (Math.abs(labelY - prevY) < 11) {
+            labelY = prevY + 11;
+          }
+        }
+
+        ctx.font = '800 10px Inter, sans-serif';
+        ctx.fillStyle = l.color;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(l.code, x2 + 5, labelY);
+        ctx.restore();
+
+        fp1DegLinesData.push({
+          line: l,
+          x1, y1, x2, y2,
+          getX, getY
+        });
+      });
+
+      // 6. Update stat pills underneath
+      const stripEl = document.getElementById('deg-stats-strip');
+      if (stripEl) {
+        stripEl.innerHTML = lines.map(l => {
+          const slopeStr = l.slope >= 0 ? `+${l.slope.toFixed(3)}s/l` : `${l.slope.toFixed(3)}s/l`;
+          const deg10Str = l.deg10 >= 0 ? `+${l.deg10.toFixed(2)}s` : `${l.deg10.toFixed(2)}s`;
+          return `
+            <div class="deg-stat-pill">
+              <div class="deg-stat-head">
+                <span class="deg-stat-dot" style="background:${l.color};"></span>
+                <span>${l.code}</span>
+                <span style="font-size:7px; color:#64748b; margin-left:auto;">${l.combo}</span>
+              </div>
+              <div class="deg-stat-val" style="color:${l.slope > 0.05 ? '#f87171' : (l.slope <= 0.01 ? '#00e676' : '#ffd600')};">
+                ${slopeStr}
+              </div>
+              <div class="deg-stat-sub">${l.maxAge}L max (${deg10Str}/10L)</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 7. Tooltip interaction along the regression lines
+      cvs.onmousemove = function(e) {
+        if (!tooltipEl) return;
+        const cRect = cvs.getBoundingClientRect();
+        const mx = e.clientX - cRect.left;
+        const my = e.clientY - cRect.top;
+
+        let bestLine = null;
+        let minD = 24;
+
+        fp1DegLinesData.forEach(item => {
+          const l = item.line;
+          if (mx >= item.x1 - 10 && mx <= item.x2 + 20) {
+            const t = (mx - item.x1) / (item.x2 - item.x1);
+            const clampedT = Math.max(0, Math.min(1, t));
+            const projY = item.y1 + clampedT * (item.y2 - item.y1);
+            const dist = Math.abs(my - projY);
+            if (dist < minD) {
+              minD = dist;
+              bestLine = {
+                item,
+                clampedT,
+                age: Math.round(l.minAge + clampedT * (l.maxAge - l.minAge)),
+                pace: l.startPace + clampedT * (l.endPace - l.startPace)
+              };
+            }
+          }
+        });
+
+        if (bestLine) {
+          cvs.style.cursor = 'pointer';
+          const l = bestLine.item.line;
+          const slopeSign = l.slope >= 0 ? '+' : '';
+          const deg10Str = l.deg10 >= 0 ? `+${l.deg10.toFixed(2)}s` : `${l.deg10.toFixed(2)}s`;
+
+          tooltipEl.innerHTML = `
+            <div class="tt-title">
+              <span style="color:${l.color};">${l.name} (${l.code})</span>
+              <span style="font-size:10px; color:#94a3b8;">${l.combo}</span>
+            </div>
+            <div class="tt-row"><span>Tyre Age Range:</span><span class="tt-val">Lap ${l.minAge} &rarr; ${l.maxAge} (${l.lapsCount} laps)</span></div>
+            <div class="tt-row"><span>At Lap ${bestLine.age}:</span><span class="tt-val" style="color:#ffd600;">${formatFp1CellTime(bestLine.pace, 999)}</span></div>
+            <div class="tt-row"><span>Starting Pace (L${l.minAge}):</span><span class="tt-val">${formatFp1CellTime(l.startPace, 999)}</span></div>
+            <div class="tt-row"><span>Degradation Slope:</span><span class="tt-val" style="color:#38bdf8;">${slopeSign}${l.slope.toFixed(3)} s/lap</span></div>
+            <div class="tt-row"><span>Projected 10-Lap Deg:</span><span class="tt-val" style="color:${l.slope > 0.05 ? '#f87171' : '#00e676'};">${deg10Str}</span></div>
+          `;
+          tooltipEl.style.display = 'block';
+
+          let tx = mx + 14;
+          let ty = my + 14;
+          const ttRect = tooltipEl.getBoundingClientRect();
+          if (tx + ttRect.width > cRect.width) tx = mx - ttRect.width - 10;
+          if (ty + ttRect.height > cRect.height) ty = my - ttRect.height - 10;
+          tooltipEl.style.left = Math.max(0, tx) + 'px';
+          tooltipEl.style.top = Math.max(0, ty) + 'px';
+        } else {
+          cvs.style.cursor = 'default';
+          tooltipEl.style.display = 'none';
+        }
+      };
+
+      cvs.onmouseleave = function() {
+        if (tooltipEl) tooltipEl.style.display = 'none';
+        cvs.style.cursor = 'default';
+      };
+    }
+
     function renderFp1AnalysisSection(currentGpShort) {
       if (!currentGpShort) currentGpShort = (window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA'));
       const sectionEl = document.getElementById('fp1-analysis-section');
@@ -20689,8 +21135,9 @@
 
       renderFp1StintsChart(currentGpShort, activeFavRiders);
       renderFp1HeatmapChart(currentGpShort, activeFavRiders);
-      drawFp1DummyChart('dummy-chart-2', 'line');
-      drawFp1DummyChart('dummy-chart-3', 'line');
+      updateFp1DegFilterButtons(currentGpShort, activeFavRiders);
+      renderFp1DegradationChart(currentGpShort, activeFavRiders);
+      drawFp1DummyChart('dummy-chart-4', 'line');
     }
 
     function renderSprProgression(currentGpShort) {
@@ -22831,28 +23278,27 @@
               </div>
             </div>
 
-            <!-- CARD 3: DUMMY BLURRED CARD -->
+            <!-- CARD 3: TYRE DEGRADATION (LINEAR REGRESSIONS ONLY) -->
+            <div class="sector-card" id="fp1-deg-card">
+              <div class="sector-card-title">
+                <span>Tyre Degradation</span>
+                <div class="fp1-toggle-group" id="fp1-deg-filter-group"></div>
+              </div>
+              <div class="progression-canvas-container" style="height: 258px;">
+                <canvas id="chart-fp1-deg"></canvas>
+                <div id="fp1-deg-tooltip"></div>
+              </div>
+              <div class="deg-stats-row" id="deg-stats-strip"></div>
+            </div>
+
+            <!-- CARD 4: THEORETICAL BEST & SECTORS (WIP) -->
             <div class="sector-card">
               <div class="sector-card-title">
                 <span>Theoretical Best &amp; Sectors</span>
                 <span class="sector-card-badge">T1 &middot; T2 &middot; T3 &middot; T4</span>
               </div>
               <div class="progression-canvas-container">
-                <canvas class="wip-blur-bg" id="dummy-chart-2"></canvas>
-                <div class="wip-overlay">
-                  <div class="wip-badge">&#x1F6A7; WORK IN PROGRESS</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- CARD 4: DUMMY BLURRED CARD -->
-            <div class="sector-card">
-              <div class="sector-card-title">
-                <span>Long Run Degradation</span>
-                <span class="sector-card-badge">Tyre Life Comparison</span>
-              </div>
-              <div class="progression-canvas-container">
-                <canvas class="wip-blur-bg" id="dummy-chart-3"></canvas>
+                <canvas class="wip-blur-bg" id="dummy-chart-4"></canvas>
                 <div class="wip-overlay">
                   <div class="wip-badge">&#x1F6A7; WORK IN PROGRESS</div>
                 </div>
