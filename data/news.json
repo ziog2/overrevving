@@ -1,9 +1,185 @@
 {
-  "lastUpdated": "2026-11-01 01:58:34",
+  "lastUpdated": "2026-11-01 08:56:52",
   "totalItems": 145,
   "items": [
     {
-      "id": "26837743",
+      "id": "265fc8d8",
+      "title": "Alex Marquez withdraws from Qatar MotoGP race for surgery",
+      "link": "https://www.crash.net/motogp/news/1109126/1/alex-marquez-withdraws-qatar-motogp-race-surgery",
+      "pubDate": "2026-11-01 08:51:09",
+      "pubDateISO": "2026-11-01T08:51:09+00:00",
+      "aiSummary": "Alex Marquez will pull out of the Qatar GP to have surgery",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1359686_hires.jpg?width=1200"
+    },
+    {
+      "id": "36e09295",
+      "title": "Marc Marquez ‘most important rider ever’, Ducati says as title chance looms",
+      "link": "https://www.crash.net/motogp/news/1109124/1/marc-marquez-most-important-rider-ever-ducati-says-title-chance-looms",
+      "pubDate": "2026-11-01 08:13:44",
+      "pubDateISO": "2026-11-01T08:13:44+00:00",
+      "aiSummary": "Marc Marquez has won in Malaysia to put one hand on the championship",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1359647_hires.jpg?width=1200"
+    },
+    {
+      "id": "28f77527",
+      "title": "Sepang: New 2026 MotoGP World Championship standings",
+      "link": "https://www.crash.net/motogp/results/1108920/1/sepang-new-2026-motogp-world-championship-standings",
+      "pubDate": "2026-11-01 08:00:17",
+      "pubDateISO": "2026-11-01T08:00:17+00:00",
+      "aiSummary": "New 2026 MotoGP World Championship standings after Sunday's Malaysian Grand Prix at Sepang, round 19 of 22.",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358838_hires_1600x900.jpg?width=1200"
+    },
+    {
+      "id": "da7573cd",
+      "title": "Marc Marquez eases to Sepang MotoGP win to set up Qatar title chance",
+      "link": "https://www.crash.net/motogp/news/1109121/1/marc-marquez-eases-sepang-motogp-win-set-qatar-title-chance",
+      "pubDate": "2026-11-01 07:52:21",
+      "pubDateISO": "2026-11-01T07:52:21+00:00",
+      "aiSummary": "Marc Marquez can win the world championship in Qatar after dominating the Malaysian GP",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1359635_hires.jpg?width=1200"
+    },
+    {
+      "id": "7503a85f",
+      "title": "MotoGP Malaysian GP: Marc Marquez takes dominant win to inch closer to title",
+      "link": "https://www.motorsport.com/motogp/news/motogp-malaysian-gp-marc-marquez-takes-dominant-win-to-inch-closer-to-title/10870473/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-01 07:46:41",
+      "pubDateISO": "2026-11-01T07:46:41+00:00",
+      "aiSummary": "Marc Marquez scored a commanding victory in the Malaysian Grand Prix to move a step closer to sealing the 2026 MotoGP title, with Aprilia failing to finish on the podium. The factory Ducati rider gained the lead at the start and built a buffer in the first half of the race, aided by his younger brother Alex Marquez acting as a rear-gunner. While Pedro Acosta was able to pass the Gresini ......",
+      "source": "Motorsport.com MotoGP",
+      "category": "SBK",
+      "image": "https://cdn-1.motorsport.com/images/amp/YK15RkD0/s6/pedro-acosta-red-bull-ktm-fact.jpg"
+    },
+    {
+      "id": "c8fc92ea",
+      "title": "2026 Malaysian MotoGP, Sepang - Race Results",
+      "link": "https://www.crash.net/motogp/results/1108918/1/2026-malaysian-motogp-sepang-race-results",
+      "pubDate": "2026-11-01 07:45:17",
+      "pubDateISO": "2026-11-01T07:45:17+00:00",
+      "aiSummary": "Full race results from the 2026 Malaysian MotoGP at Sepang, round 19 of 22.",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1359569_hires_1600x900.jpg?width=1200"
+    },
+    {
+      "id": "092b29b6",
+      "title": "The all-time MotoGP winners' list after the 2026 Malaysian Grand Prix",
+      "link": "https://www.crash.net/motogp/news/1078437/1/all-time-motogp-winners-list-who-has-most-victories",
+      "pubDate": "2026-11-01 07:44:00",
+      "pubDateISO": "2026-11-01T07:44:00+00:00",
+      "aiSummary": "The all-time winners' list in MotoGP",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2025-07/gng_724326_hires.jpg?width=1200"
+    },
+    {
+      "id": "28f655d3",
+      "title": "How Marc Marquez can win the 2026 MotoGP title at the Qatar Grand Prix",
+      "link": "https://www.crash.net/motogp/news/1109117/1/how-marc-marquez-can-win-2026-motogp-title-qatar-grand-prix",
+      "pubDate": "2026-11-01 07:34:35",
+      "pubDateISO": "2026-11-01T07:34:35+00:00",
+      "aiSummary": "Marc Marquez can win an historic eighth world title in Qatar",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1358884_hires.jpg?width=1200"
+    },
+    {
+      "id": "7a2c83a4",
+      "title": "MotoGP riders step up pressure in final bid to avoid Qatar Grand Prix",
+      "link": "https://www.motorsport.com/motogp/news/motogp-riders-step-up-pressure-in-final-bid-to-avoid-qatar-grand-prix/10870458/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-01 07:05:54",
+      "pubDateISO": "2026-11-01T07:05:54+00:00",
+      "aiSummary": "Tensions between the majority of MotoGP riders and the championship organisers have reached new heights this weekend in the Sepang paddock, with the trip to Qatar fast approaching. Next Sunday's race was originally scheduled for mid-April but was postponed following the outbreak of war between the United States and Israel on one side, and Iran on the other. Although hostilities have eased ......",
+      "source": "Motorsport.com MotoGP",
+      "category": "SBK",
+      "image": "https://cdn-2.motorsport.com/images/amp/YvKBRnE6/s6/practice-start-2.jpg"
+    },
+    {
+      "id": "d8dc7497",
+      "title": "Sepang MotoGP LIVE: Reaction after Marc Marquez wins in Malaysia",
+      "link": "https://www.crash.net/motogp/live/1044236/sepang-motogp-live-race-updates-malaysia",
+      "pubDate": "2026-11-01 05:50:06",
+      "pubDateISO": "2026-11-01T05:50:06+00:00",
+      "aiSummary": "Live race updates for Sunday's 2026 Malaysian MotoGP at Sepang.",
+      "source": "Crash MotoGP",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358854_hires_1600x900.jpg?width=1200"
+    },
+    {
+      "id": "946a1438",
+      "title": "VR46 confirm Diggia's \"cannot say\" missing Ducati MotoGP performance",
+      "link": "https://www.crash.net/motogp/news/1109073/1/vr46-confirms-diggias-cannot-say-missing-motogp-performance",
+      "pubDate": "2026-11-01 04:00:23",
+      "pubDateISO": "2026-11-01T04:00:23+00:00",
+      "aiSummary": "VR46 and Ducati investigating an unexplained straight-line speed deficit for Fabio di Giannantonio at the Malaysian MotoGP.",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1358917_hires_1600x900.jpg?width=1200"
+    },
+    {
+      "id": "62c3f413",
+      "title": "MotoGP Malaysian GP: Full starting grid after Jorge Martin's withdrawal",
+      "link": "https://www.motorsport.com/motogp/news/motogp-malaysian-gp-full-starting-grid-after-jorge-martins-withdrawal/10870103/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-01 03:52:04",
+      "pubDateISO": "2026-11-01T03:52:04+00:00",
+      "aiSummary": "Alex Marquez will start the Malaysian Grand Prix from pole position after setting the fastest time in Saturday's qualifying session. The Gresini rider is chasing back-to-back MotoGP wins at Sepang following his triumph in the 2025 edition of the row. He will be joined on the front row of the grid by elder brother and factory Ducati rider Marc Marquez, who now holds a 19-point lead in the ......",
+      "source": "Motorsport.com MotoGP",
+      "category": "SBK",
+      "image": "https://cdn-8.motorsport.com/images/amp/25dLDmE0/s6/race-start.jpg"
+    },
+    {
+      "id": "6eefb0c5",
+      "title": "Late Marc Marquez leads Sepang MotoGP warm-up, Qatar title chance?",
+      "link": "https://www.crash.net/motogp/news/1109071/1/late-starting-marc-marquez-leads-sepang-motogp-warm",
+      "pubDate": "2026-11-01 03:06:29",
+      "pubDateISO": "2026-11-01T03:06:29+00:00",
+      "aiSummary": "Marc Marquez back on top despite a late start to Sunday's warm-up for the 2026 Malaysian MotoGP at Sepang.",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1358785_hires_1600x900.jpg?width=1200"
+    },
+    {
+      "id": "03dadd06",
+      "title": "Liam Lawson disqualified from Mexico GP qualifying after penalty for Max Verstappen incident",
+      "link": "https://www.crash.net/f1/news/1109072/1/liam-lawson-disqualified-mexico-grand-prix-after-penalty-max-verstappen-incident",
+      "pubDate": "2026-11-01 03:05:14",
+      "pubDateISO": "2026-11-01T03:05:14+00:00",
+      "aiSummary": "Racing Bulls driver Liam Lawson will start at the back of the grid at the Mexican Grand Prix",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1448056_hires.jpg?width=1200"
+    },
+    {
+      "id": "ce41d948",
+      "title": "Lawson disqualified from F1 qualifying in Mexico – here's why",
+      "link": "https://www.autosport.com/f1/news/lawson-disqualified-from-f1-qualifying-in-mexico-heres-why/10870411/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
+      "pubDate": "2026-11-01 01:54:48",
+      "pubDateISO": "2026-11-01T01:54:48+00:00",
+      "aiSummary": "Liam Lawson has lost his ninth-place starting position for the Formula 1 Mexico City Grand Prix. Racing Bulls impressed at the Autodromo Hermanos Rodriguez on Saturday and managed to get both cars into Q3. The team subsequently emerged as the 'best of the rest' in eighth and ninth places, but Lawson now faces a recovery drive on Sunday. The New Zealander has been disqualified by the FIA for...",
+      "source": "Autosport F1",
+      "category": "SBK",
+      "image": "https://cdn-7.motorsport.com/images/amp/YpbA99Z0/s6/liam-lawson-racing-bulls.jpg"
+    },
+    {
+      "id": "a7440cfb",
+      "title": "Liam Lawson disqualified from F1 qualifying in Mexico – here's why",
+      "link": "https://www.motorsport.com/f1/news/liam-lawson-disqualified-after-f1-qualifying-in-mexico-heres-why/10870409/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-01 01:54:02",
+      "pubDateISO": "2026-11-01T01:54:02+00:00",
+      "aiSummary": "Liam Lawson ha perso la sua nona posizione di partenza per il Gran Premio di Formula 1 di Città del Messico. I tori da corsa hanno impressionato all'Autodromo Hermanos Rodriguez sabato e sono riusciti a portare entrambe le vetture in Q3. La squadra successivamente è emersa come la \"migliore del resto\" in ottava e nona posizione, ma Lawson ora deve affrontare un drive di recupero domenica. Il neozelandese è stato squalificato dalla FIA per...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-7.motorsport.com/images/amp/YpbA99Z0/s6/liam-lawson-racing-bulls.jpg"
+    },
+    {
+      "id": "aff5f39e",
       "title": "How Kimi Antonelli can become F1 champion today at Mexico GP - and how Lewis Hamilton can delay coronation",
       "link": "https://www.crash.net/f1/news/1107507/1/how-Kimi-Antonelli-can-become-F1-world-champon-at-Mexico-City-Grand-Prix",
       "pubDate": "2026-11-01 01:24:00",
@@ -14,7 +190,18 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1447686_hires.jpg?width=1200"
     },
     {
-      "id": "43a3344f",
+      "id": "5b78e516",
+      "title": "Starting grid for the 2026 Sepang MotoGP race",
+      "link": "https://www.crash.net/motogp/news/1108871/1/starting-grid-2026-sepang-motogp-race",
+      "pubDate": "2026-11-01 01:20:03",
+      "pubDateISO": "2026-11-01T01:20:03+00:00",
+      "aiSummary": "The full starting grid for Sunday’s 2026 Malaysian MotoGP Sprint race at Sepang.",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358663_hires_1600x900.jpg?width=1200"
+    },
+    {
+      "id": "73fa6ba1",
       "title": "How to watch Mexico GP live today: Free stream details and start time",
       "link": "https://www.crash.net/f1/news/1108596/1/how-watch-mexico-gp-live-today-free-stream-details-and-start-time",
       "pubDate": "2026-11-01 01:17:00",
@@ -25,7 +212,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1383038_hires.jpg?width=1200"
     },
     {
-      "id": "b2438647",
+      "id": "6f49a65a",
       "title": "F1 2026 Mexico Grand Prix: Updated starting grid after Liam Lawson thrown out of qualifying",
       "link": "https://www.crash.net/f1/news/1109059/1/f1-2026-mexico-grand-prix-full-starting-grid-after-penalties-including-max",
       "pubDate": "2026-11-01 01:14:39",
@@ -36,7 +223,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449716_hires.jpg?width=1200"
     },
     {
-      "id": "3ac8470b",
+      "id": "ee2146b3",
       "title": "Verstappen clears the air with Lawson, but keeps opinion on Racing Bulls F1 seat to himself",
       "link": "https://www.autosport.com/f1/news/verstappen-clears-the-air-with-lawson-but-keeps-opinion-on-racing-bulls-f1-seat-to-himself/10870388/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-11-01 00:28:51",
@@ -44,10 +231,10 @@
       "aiSummary": "Max Verstappen qualified fourth for the Formula 1 Mexico City Grand Prix, but will have to drop one place on the starting grid, meaning he will start from the third row. The reason is remarkable, to say the least: contact with Liam Lawson - two drivers from the Red Bull teams during the second free practice session. Verstappen was rather outspoken in the media pen on Friday, saying, among...",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/2eZxbVKY/s6/max-verstappen-red-bull-racing-2.jpg"
+      "image": "https://cdn-2.motorsport.com/images/amp/2eZxbVKY/s6/max-verstappen-red-bull-racing-2.jpg"
     },
     {
-      "id": "41ccd14d",
+      "id": "25b3f78c",
       "title": "Ferrari reveals luxury $4,300 fountain pen inspired by its bespoke supercars",
       "link": "https://www.motorsport.com/f1/news/ferrari-reveals-luxury-4300-fountain-pen-inspired-by-its-bespoke-supercars/10870386/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-01 00:28:32",
@@ -55,10 +242,10 @@
       "aiSummary": "Non è necessario acquistare una Ferrari per spendere soldi per il Cavallino Rampante. L'ultima collaborazione di Montblanc con Maranello ha assunto la forma di una penna stilografica e costa più di alcune auto usate. La Meisterstuck Great Masters Ferrari Tailor Made Inedita Special Edition è in vendita per $4.300 negli Stati Uniti. Se preferisci non occuparti del ricarico disordinato di una penna del genere...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/6DGg8rGY/s6/motorsport-com-graphics-53.jpg"
+      "image": "https://cdn-4.motorsport.com/images/amp/6DGg8rGY/s6/motorsport-com-graphics-53.jpg"
     },
     {
-      "id": "971270f3",
+      "id": "84751f63",
       "title": "Max Verstappen clears the air with Liam Lawson, but stays tight-lipped on Racing Bulls F1 seat",
       "link": "https://www.motorsport.com/f1/news/max-verstappen-clears-the-air-with-liam-lawson-but-stays-tight-lipped-on-racing-bulls-f1-seat/10870381/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-01 00:26:35",
@@ -66,10 +253,10 @@
       "aiSummary": "Max Verstappen si è qualificato quarto per il Gran Premio di Formula 1 di Città del Messico, ma dovrà scendere di un posto sulla griglia di partenza, il che significa che partirà dalla terza fila. Il motivo è a dir poco notevole: il contatto con Liam Lawson - due piloti dei team Red Bull durante la seconda sessione di prove libere. Verstappen è stato piuttosto esplicito nella penna dei media venerdì, dicendo, tra...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/6VyKrdLY/s6/max-verstappen-red-bull-racing.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/6VyKrdLY/s6/max-verstappen-red-bull-racing.jpg"
     },
     {
-      "id": "27c43db6",
+      "id": "0a4af2c7",
       "title": "Charles Leclerc reveals Mexican GP overtaking fears after missing out on pole",
       "link": "https://www.motorsport.com/f1/news/charles-leclerc-reveals-mexican-gp-overtaking-fears-after-missing-out-on-pole/10870384/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-01 00:24:47",
@@ -77,10 +264,10 @@
       "aiSummary": "Charles Leclerc dubita che ci saranno sorpassi nel Gran Premio del Messico, avvertendo che l'ordine di gara sarà probabilmente fissato nelle prime curve dell'Autodromo Hermanos Rodriguez. Il pilota Ferrari ha superato entrambe le sessioni di prove libere del venerdì ma ha dovuto accontentarsi del terzo posto in griglia. Il suo compagno di squadra e sette volte campione Lewis Hamilton ha conquistato la sua prima pole position con l'outfit di Maranello...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/0Zq8ZNR6/s6/motorsport-com-graphics-41.jpg"
+      "image": "https://cdn-3.motorsport.com/images/amp/0Zq8ZNR6/s6/motorsport-com-graphics-41.jpg"
     },
     {
-      "id": "7d5ace7b",
+      "id": "f853e6f2",
       "title": "Isack Hadjar explains Mexico GP F1 paddock incident: “Not a reality show”",
       "link": "https://www.crash.net/f1/news/1109067/1/isack-hadjar-explains-mexico-gp-f1-paddock-incident-not-reality-show",
       "pubDate": "2026-11-01 00:18:11",
@@ -91,7 +278,18 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1449340_hires.jpg?width=1200"
     },
     {
-      "id": "43b87dbf",
+      "id": "783c44f1",
+      "title": "How to watch 2026 Malaysian MotoGP free today: Live stream and start times",
+      "link": "https://www.crash.net/motogp/news/1108618/1/how-watch-2026-malaysian-grand-prix-free-today-live-stream-and-start-times",
+      "pubDate": "2026-11-01 00:17:02",
+      "pubDateISO": "2026-11-01T00:17:02+00:00",
+      "aiSummary": "All the details on this weekends race in Sepangand how to watch the Malaysian Grand Prix for free. This article contains affiliate links. If you buy through them, we may earn a commission at no extra cost to you.",
+      "source": "Crash MotoGP",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1278660_hires.jpg?width=1200"
+    },
+    {
+      "id": "973760ff",
       "title": "Antonelli admits to driving \"tense\" and \"tired\" on cusp of F1 title",
       "link": "https://www.autosport.com/f1/news/ill-bombard-myself-with-melatonin-kimi-antonelli-admits-to-driving-tense-and-tired-on-cusp-of-f1-ti/10870380/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-11-01 00:09:23",
@@ -99,10 +297,10 @@
       "aiSummary": "Kimi Antonelli is hoping to overcome an off-colour Mexico City Grand Prix qualifying session with a good night's rest, but admits Formula 1 title nerves have led to him driving with unwanted tension. The Italian was just 0.001s slower than Lando Norris' FP3 headliner earlier in the day, but in qualifying had been half a step behind Mercedes team-mate George Russell and unable to find the right...",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/YvKB13G6/s6/andrea-kimi-antonelli-mercedes.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/YvKB13G6/s6/andrea-kimi-antonelli-mercedes.jpg"
     },
     {
-      "id": "8eb60956",
+      "id": "dc27dcb3",
       "title": "\"I'll bombard myself with melatonin\": Kimi Antonelli admits to driving \"tense\" and \"tired\" on cusp of F1 title",
       "link": "https://www.motorsport.com/f1/news/ill-bombard-myself-with-melatonin-kimi-antonelli-admits-to-driving-tense-and-tired-on-cusp-of-f1-ti/10870375/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-01 00:08:16",
@@ -110,10 +308,10 @@
       "aiSummary": "Kimi Antonelli spera di superare una sessione di qualifiche off-color del Gran Premio di Città del Messico con un buon riposo notturno, ma ammette che i nervi del titolo di Formula 1 lo hanno portato a guidare con una tensione indesiderata. L'italiano era solo 0,001 secondi più lento dell'headliner FP3 di Lando Norris all'inizio della giornata, ma in qualifica era stato mezzo passo dietro al compagno di squadra Mercedes George Russell e non era riuscito a trovare il giusto...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/YvKB13G6/s6/andrea-kimi-antonelli-mercedes.jpg"
+      "image": "https://cdn-9.motorsport.com/images/amp/YvKB13G6/s6/andrea-kimi-antonelli-mercedes.jpg"
     },
     {
-      "id": "716e8217",
+      "id": "3b8a5199",
       "title": "George Russell identifies costly decision behind Mexican GP qualifying near-miss",
       "link": "https://www.motorsport.com/f1/news/george-russell-identifies-costly-decision-behind-mexican-gp-qualifying-near-miss/10870370/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-01 00:03:37",
@@ -121,10 +319,10 @@
       "aiSummary": "George Russell crede che un giro extra di carburante gli sia costato la pole position per il Gran Premio del Messico dopo aver perso il suo ex compagno di squadra e sette volte campione Lewis Hamilton per soli 0,009 secondi. Il pilota Mercedes partirà al fianco di Hamilton in prima fila, con Charles Leclerc in terza posizione. Russell ha spiegato che i suoi rivali non avevano fatto giri di preparazione nei loro ultimi giri del Q3, mentre...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/68VwR1Q2/s6/motorsport-com-graphics-40.jpg"
+      "image": "https://cdn-8.motorsport.com/images/amp/68VwR1Q2/s6/motorsport-com-graphics-40.jpg"
     },
     {
-      "id": "630061e0",
+      "id": "0231eeaa",
       "title": "Lewis Hamilton: First Ferrari F1 pole “takes me back to watching Michael”",
       "link": "https://www.motorsport.com/f1/news/lewis-hamilton-first-ferrari-f1-pole-takes-me-back-to-watching-michael/10870368/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 23:58:57",
@@ -135,18 +333,7 @@
       "image": "https://cdn-5.motorsport.com/images/amp/0rVPjJP0/s6/motorsport-com-graphics-52.jpg"
     },
     {
-      "id": "4b3f415b",
-      "title": "Lawson apologised to Verstappen for clash: “Right now it’s not the best time” | Formula 1",
-      "link": "https://www.racefans.net/2026/10/31/lawson-apologised-to-verstappen-for-clash-right-now-its-not-the-best-time/",
-      "pubDate": "2026-10-31 23:58:37",
-      "pubDateISO": "2026-10-31T23:58:37+00:00",
-      "aiSummary": "Liam Lawson apologised to Max Verstappen after the stewards issued the same penalty to both drivers for their collision in second practice.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "4b12bd72",
+      "id": "a9c77f6e",
       "title": "Lewis Hamilton’s honest qualifying admission after ending F1 pole drought",
       "link": "https://www.crash.net/f1/news/1109066/1/lewis-hamiltons-honest-qualifying-admission-after-ending-f1-pole-drought",
       "pubDate": "2026-10-31 23:53:50",
@@ -157,7 +344,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449732_hires.jpg?width=1200"
     },
     {
-      "id": "6acbbf90",
+      "id": "9dc08377",
       "title": "F1 stewards issue driving standards clarification ahead of Mexico GP",
       "link": "https://www.crash.net/f1/news/1109065/1/f1-stewards-issue-driving-standards-clarification-ahead-mexico-gp",
       "pubDate": "2026-10-31 23:45:00",
@@ -168,7 +355,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1382583_hires.jpg?width=1200"
     },
     {
-      "id": "d6285227",
+      "id": "ad23a873",
       "title": "Isack Hadjar defends Mexican GP paddock incident after FIA warning: \"Not a reality show\"",
       "link": "https://www.motorsport.com/f1/news/isack-hadjar-defends-mexican-gp-paddock-incident-after-fia-warning-not-a-reality-show/10870360/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 23:34:23",
@@ -176,10 +363,10 @@
       "aiSummary": "Isack Hadjar ha risposto all'ospite del paddock che ha respinto al Gran Premio del Messico, insistendo sul fatto che \"non è un reality show\". Il pilota della Red Bull è stato convocato dagli steward sabato mattina dopo che i filmati sui social media lo hanno mostrato mentre spingeva un uomo che stava cercando di farsi un selfie con lui nel paddock. I commissari hanno scoperto che Hadjar aveva violato il Codice Sportivo Internazionale, ma ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/YMXb51l2/s6/motorsport-com-graphics-39.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/YMXb51l2/s6/motorsport-com-graphics-39.jpg"
     },
     {
-      "id": "453cf44c",
+      "id": "28aed507",
       "title": "Ryo Hirakawa could have \"easily\" made Q2 in F1 Mexico GP without late traffic",
       "link": "https://www.motorsport.com/f1/news/hirakawa-could-have-easily-made-q2-in-f1-mexico-gp-without-late-traffic/10870356/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 23:33:37",
@@ -187,10 +374,10 @@
       "aiSummary": "Il sostituto di Haas, Ryo Hirakawa, ritiene che avrebbe \"facilmente\" raggiunto la seconda parte delle qualifiche per il Gran Premio di Città del Messico, se non avesse incontrato traffico nel suo ultimo giro della sessione. Hirakawa, facendo il suo debutto in Formula 1 con Haas come Esteban Ocon è stato abbandonato dai suoi doveri di guida, aveva impostato un primo settore personale migliore e stava pescando per fare il taglio Q3 a spese di Carlos ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-8.motorsport.com/images/amp/25dLDDD0/s6/ryo-hirakawa-haas-f1-team-laur.jpg"
+      "image": "https://cdn-3.motorsport.com/images/amp/25dLDDD0/s6/ryo-hirakawa-haas-f1-team-laur.jpg"
     },
     {
-      "id": "d06a382b",
+      "id": "72e65d10",
       "title": "F1 Mexico GP: Sunday schedule, weather forecast and how to watch",
       "link": "https://www.motorsport.com/f1/news/f1-mexico-gp-sunday-schedule-weather-forecast-and-how-to-watch/10870318/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 23:23:34",
@@ -201,7 +388,7 @@
       "image": "https://cdn-8.motorsport.com/images/amp/Y9lNjE82/s6/ryo-hirakawa-haas-f1-team.jpg"
     },
     {
-      "id": "e4007688",
+      "id": "d414c114",
       "title": "\"Up there for pole\": Max Verstappen rues Turn 13 traffic in F1 Mexico GP qualifying",
       "link": "https://www.motorsport.com/f1/news/up-there-for-pole-verstappen-rues-turn-13-traffic-in-f1-mexico-gp-qualifying/10870339/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 23:21:10",
@@ -209,10 +396,10 @@
       "aiSummary": "Max Verstappen non è riuscito a registrare la sua ultima corsa nelle qualifiche del Gran Premio di Città del Messico, affermando che il suo giro era \"lassù per la pole\" prima di incontrare Lando Norris nell'ultimo settore. Il quattro volte campione era quasi un decimo sul giro dell'eventuale poleman Lewis Hamilton alla chiusura del secondo settore, avendo trovato un settore di apertura viola e poi eguagliando Hamilton nel secondo...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/0arEVlN2/s6/max-verstappen-red-bull-racing.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/0arEVlN2/s6/max-verstappen-red-bull-racing.jpg"
     },
     {
-      "id": "36cca5de",
+      "id": "9e415819",
       "title": "Ocon denies physical altercation rumours in first statement since being dropped by Haas for Mexico GP",
       "link": "https://www.autosport.com/f1/news/ocon-denies-physical-altercation-rumours-in-first-statement-since-being-dropped-by-haas-for-mexico-/10870348/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-10-31 23:13:59",
@@ -220,21 +407,10 @@
       "aiSummary": "Dropped Haas Formula 1 driver Esteban Ocon has denied French media rumours of a physical altercation with team boss Ayao Komatsu as he issued his response to missing this weekend's Mexico Grand Prix. Ocon was benched in Mexico, most likely connected to a public disagreement with his race engineer during free practice. That led to a discussion with the team on Friday night as the relationship...",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/0qgKEB8Y/s6/esteban-ocon-haas-f1-team-3.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/0qgKEB8Y/s6/esteban-ocon-haas-f1-team-3.jpg"
     },
     {
-      "id": "186cfe16",
-      "title": "Stewards warn drivers over cutting first corner sequences at start and restarts | Formula 1",
-      "link": "https://www.racefans.net/2026/10/31/stewards-warn-drivers-over-cutting-first-corner-sequences-at-start-and-restarts/",
-      "pubDate": "2026-10-31 23:13:06",
-      "pubDateISO": "2026-10-31T23:13:06+00:00",
-      "aiSummary": "The stewards have issued drivers a special warning over track limits at turns one and four during Sunday's Mexican Grand Prix.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "e23d866c",
+      "id": "02ec687c",
       "title": "Esteban Ocon denies being violent in first words since losing Haas F1 seat",
       "link": "https://www.crash.net/f1/news/1109063/1/esteban-ocon-denies-being-violent-first-words-losing-haas-f1-seat",
       "pubDate": "2026-10-31 23:11:56",
@@ -245,7 +421,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/2302593973-636.jpg?width=1200"
     },
     {
-      "id": "b3afc5ee",
+      "id": "a2dbc75e",
       "title": "Esteban Ocon issues statement after Haas benching, denies physical altercation rumours",
       "link": "https://www.motorsport.com/f1/news/esteban-ocon-issues-statement-after-haas-benching-denies-physical-altercation-rumours/10870336/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 23:10:44",
@@ -253,32 +429,10 @@
       "aiSummary": "Il pilota di Formula 1 della Haas Esteban Ocon ha smentito le voci dei media francesi su un alterco fisico con il capo del team Ayao Komatsu mentre ha rilasciato la sua risposta alla mancanza del Gran Premio del Messico di questo fine settimana. Ocon è stato messo in panchina in Messico, molto probabilmente a causa di un disaccordo pubblico con il suo ingegnere di gara durante le prove libere. Ciò ha portato a una discussione con il team venerdì sera poiché la relazione...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-8.motorsport.com/images/amp/0arENOy2/s6/esteban-ocon-haas-f1-team-2.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/0arENOy2/s6/esteban-ocon-haas-f1-team-2.jpg"
     },
     {
-      "id": "9cbcaec8",
-      "title": "Ocon confirms “difference in viewpoints” led to shock exit from Haas | Formula 1",
-      "link": "https://www.racefans.net/2026/10/31/ocon-confirms-difference-in-viewpoints-led-to-shock-exit-from-haas/",
-      "pubDate": "2026-10-31 23:06:39",
-      "pubDateISO": "2026-10-31T23:06:39+00:00",
-      "aiSummary": "Esteban Ocon says he \"categorically rejects\" suggestions his shock removal from Haas's team this weekend was linked to \"physical violence\".",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "33d67395",
-      "title": "Lawson at risk of disqualification from qualifying over MGU-K rules breach | Formula 1",
-      "link": "https://www.racefans.net/2026/10/31/lawson-at-risk-of-disqualification-from-qualifying-over-mgu-k-rules-breach/",
-      "pubDate": "2026-10-31 23:02:32",
-      "pubDateISO": "2026-10-31T23:02:32+00:00",
-      "aiSummary": "Liam Lawson faces being disqualified from the results of qualifying for a technical infringement.",
-      "source": "RaceFans F1",
-      "category": "SBK",
-      "image": ""
-    },
-    {
-      "id": "69edcc7d",
+      "id": "7b6951d5",
       "title": "Lewis Hamilton 'lost for words' after claiming historic 105th pole position",
       "link": "https://www.crash.net/f1/news/1109061/1/lewis-hamilton-lost-words-after-claiming-historic-105th-pole-position",
       "pubDate": "2026-10-31 22:45:00",
@@ -289,7 +443,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449748_hires.jpg?width=1200"
     },
     {
-      "id": "7b494346",
+      "id": "d1196819",
       "title": "Lewis Hamilton \"lost for words\" after ending three-year F1 pole drought at Mexican GP",
       "link": "https://www.motorsport.com/f1/news/lewis-hamilton-lost-for-words-after-ending-three-year-f1-pole-drought-at-mexican-gp/10870309/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 22:41:25",
@@ -297,10 +451,10 @@
       "aiSummary": "Il sette volte campione di Formula 1 Lewis Hamilton ha ammesso di essere \"senza parole\" dopo aver conquistato la sua prima pole position nel Gran Premio del Messico per la Ferrari. Il britannico ha battuto il suo ex compagno di squadra Mercedes George Russell di soli 0,009 secondi per terminare un'attesa di tre anni per una pole position nel Gran Premio. È il 105° palo della carriera di Hamilton, che estende il suo record di F1 e il suo primo ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/YpbA9a30/s6/motorsport-com-graphics-38.jpg"
+      "image": "https://cdn-4.motorsport.com/images/amp/YpbA9a30/s6/motorsport-com-graphics-38.jpg"
     },
     {
-      "id": "e2e19396",
+      "id": "11b27af7",
       "title": "Lewis Hamilton buoyed by historic first Ferrari F1 pole: \"I still love what I do\"",
       "link": "https://www.motorsport.com/f1/news/lewis-hamilton-buoyant-by-historic-first-ferrari-f1-pole-i-still-love-what-i-do/10870304/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 22:36:39",
@@ -308,21 +462,10 @@
       "aiSummary": "Sul sito di due delle sue sette celebrazioni del campionato del mondo, Lewis Hamilton ha aggiunto un altro capitolo alla sua illustre carriera in Formula 1 e alla sua affezionata banca della memoria messicana, che era attesa da tempo. Hamilton ha rotto la siccità dei pali della Ferrari guadagnando alla Scuderia il suo primo palo del 2026, e nel processo si è anche assicurato il suo primo in rosso, il suo primo palo dal Gran Premio d'Ungheria 2023. In...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/YBVjz7vY/s6/lewis-hamilton-ferrari-2.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/YBVjz7vY/s6/lewis-hamilton-ferrari-2.jpg"
     },
     {
-      "id": "0c63777a",
-      "title": "Hirakawa surprised by call-up to replace Ocon but disappointed by qualifying result | Formula 1",
-      "link": "https://www.racefans.net/2026/10/31/hirakawa-surprised-by-call-up-to-replace-ocon-but-disappointed-by-qualifying-result/",
-      "pubDate": "2026-10-31 22:35:10",
-      "pubDateISO": "2026-10-31T22:35:10+00:00",
-      "aiSummary": "Ryo Hirakawa was \"very surprised\" Haas asked him to replace Esteban Ocon and disappointed he failed to reach Q2.",
-      "source": "RaceFans F1",
-      "category": "SBK",
-      "image": ""
-    },
-    {
-      "id": "40379ad5",
+      "id": "ddce334a",
       "title": "2026 F1 Mexico Grand Prix starting grid",
       "link": "https://www.motorsport.com/f1/news/2026-f1-mexico-grand-prix-starting-grid/10870302/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 22:32:06",
@@ -330,10 +473,10 @@
       "aiSummary": "1 Lewis Hamilton(Ferrari) 2 George Russell(Mercedes) 3 Charles Leclerc(Ferrari) 4 Kimi ... Continua a leggere",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/Y9lNjZb2/s6/lewis-hamilton-ferrari.jpg"
+      "image": "https://cdn-2.motorsport.com/images/amp/Y9lNjZb2/s6/lewis-hamilton-ferrari.jpg"
     },
     {
-      "id": "36756456",
+      "id": "46a12841",
       "title": "F1 Mexico GP: Hamilton takes pole from Russell and Leclerc",
       "link": "https://www.autosport.com/f1/news/f1-mexico-gp-lewis-hamilton-beats-george-russell-and-charles-leclerc-to-pole/10870295/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-10-31 22:21:54",
@@ -341,10 +484,10 @@
       "aiSummary": "Lewis Hamilton has earned Ferrari its first pole of the 2026 Formula 1 campaign by defeating George Russell in a thrilling qualifying shootout for the Mexico Grand Prix. Russell had taken provisional pole away from Charles Leclerc with his final run at the Autodromo Hermanos Rodriguez, but Hamilton responded with a marginally faster first sector to take pole by a minuscule 0.009s. As ... Keep...",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/YBVjz7vY/s6/lewis-hamilton-ferrari-2.jpg"
+      "image": "https://cdn-1.motorsport.com/images/amp/YBVjz7vY/s6/lewis-hamilton-ferrari-2.jpg"
     },
     {
-      "id": "967a07fd",
+      "id": "8496afd1",
       "title": "F1 Mexico Grand Prix: Full qualifying results",
       "link": "https://www.crash.net/f1/results/1109056/1/f1-mexico-grand-prix-full-qualifying-results",
       "pubDate": "2026-10-31 22:20:00",
@@ -355,7 +498,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449628_hires.jpg?width=1200"
     },
     {
-      "id": "cf6fc534",
+      "id": "98688f23",
       "title": "F1 Mexico GP: Lewis Hamilton beats George Russell and Charles Leclerc to pole",
       "link": "https://www.motorsport.com/f1/news/f1-mexico-gp-quali-report/10870286/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 22:19:47",
@@ -363,32 +506,10 @@
       "aiSummary": "Lewis Hamilton ha fatto guadagnare alla Ferrari la sua prima pole della stagione di Formula 1 2026 sconfiggendo George Russell in un'emozionante sparatoria di qualificazione per il Gran Premio del Messico. Russell aveva tolto la pole provvisoria a Charles Leclerc con la sua corsa finale all'Autodromo Hermanos Rodriguez, ma Hamilton ha risposto con un primo settore leggermente più veloce per conquistare la pole di un minuscolo 0,009 secondi. Come ... continua...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/68VwRpQ2/s6/lewis-hamilton-ferrari-2.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/68VwRpQ2/s6/lewis-hamilton-ferrari-2.jpg"
     },
     {
-      "id": "1607f60a",
-      "title": "Hamilton claims first pole position for three years ahead of Russell in Mexico | 2026 Mexican Grand Prix qualifying report",
-      "link": "https://www.racefans.net/2026/10/31/hamilton-claims-first-pole-position-for-three-years-ahead-of-russell-in-mexico/",
-      "pubDate": "2026-10-31 22:16:13",
-      "pubDateISO": "2026-10-31T22:16:13+00:00",
-      "aiSummary": "Lewis Hamilton claimed his first pole position as a Ferrari driver in qualifying for the Mexican Grand Prix.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "a8fcb179",
-      "title": "2026 Mexican Grand Prix grid | Formula 1",
-      "link": "https://www.racefans.net/2026/10/31/2026-mexican-grand-prix-grid/",
-      "pubDate": "2026-10-31 22:14:50",
-      "pubDateISO": "2026-10-31T22:14:50+00:00",
-      "aiSummary": "Lewis Hamilton has taken provisional pole position for the Mexican Grand Prix for Ferrari ahead of George Russell and Charles Leclerc.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "44f0cc5e",
+      "id": "87510ca5",
       "title": "Lewis Hamilton takes first F1 pole in three years at Mexico GP",
       "link": "https://www.crash.net/f1/news/1109055/1/lewis-hamilton-takes-first-f1-pole-three-years-mexico-gp",
       "pubDate": "2026-10-31 22:13:12",
@@ -399,7 +520,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449717_hires.jpg?width=1200"
     },
     {
-      "id": "7df275f6",
+      "id": "383a378b",
       "title": "Max Verstappen will have no say in 2027 Racing Bulls driver line-up, says Red Bull boss",
       "link": "https://www.motorsport.com/f1/news/max-verstappen-will-have-no-say-in-2027-racing-bulls-driver-line-up-says-red-bull-boss/10870282/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 21:24:15",
@@ -407,10 +528,10 @@
       "aiSummary": "Laurent Mekies, CEO e team principal di Red Bull Racing, ha spiegato che solo Racing Bulls deciderà la sua formazione di piloti di Formula 1 per il 2027 e che Max Verstappen non avrà voce in capitolo nonostante il suo scontro con Liam Lawson in Messico. Sia Verstappen che Lawson hanno ricevuto una penalità di un posto in griglia per il Gran Premio del Messico dopo essersi messi in contatto durante la seconda sessione di prove libere del... Continua a leggere",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/2y7QprX6/s6/motorsport-com-graphics-37.jpg"
+      "image": "https://cdn-1.motorsport.com/images/amp/2y7QprX6/s6/motorsport-com-graphics-37.jpg"
     },
     {
-      "id": "c5bb6dd6",
+      "id": "9166a68b",
       "title": "Red Bull’s take on Max Verstappen and Liam Lawson’s Mexico GP crash",
       "link": "https://www.crash.net/f1/news/1109010/1/red-bulls-take-max-verstappen-and-liam-lawsons-mexico-gp-crash",
       "pubDate": "2026-10-31 21:09:20",
@@ -421,7 +542,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1438814_hires.jpg?width=1200"
     },
     {
-      "id": "7550cca1",
+      "id": "0dbda6b7",
       "title": "Karun Chandhok drops verdict on Haas’ shock Esteban Ocon decision",
       "link": "https://www.crash.net/f1/news/1108992/1/karun-chandhok-drops-verdict-haas-shock-esteban-ocon-decision",
       "pubDate": "2026-10-31 20:06:58",
@@ -432,7 +553,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/2302753280-470.jpg?width=1200"
     },
     {
-      "id": "330a460d",
+      "id": "b0284c26",
       "title": "F1 Mexico Grand Prix qualifying as it happened",
       "link": "https://www.crash.net/f1/live/1044269/f1-mexico-grand-prix-live-fp3-and-qualifying-updates",
       "pubDate": "2026-10-31 20:00:00",
@@ -443,18 +564,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449543_hires.jpg?width=1200"
     },
     {
-      "id": "d3f2bbde",
-      "title": "Norris beats Antonelli by a thousandth of a second in final practice | Formula 1",
-      "link": "https://www.racefans.net/2026/10/31/norris-beats-antonelli-by-a-thousandth-of-a-second-in-final-practice/",
-      "pubDate": "2026-10-31 18:49:04",
-      "pubDateISO": "2026-10-31T18:49:04+00:00",
-      "aiSummary": "The reigning world champion led the driver who will almost certainly succeed him this weekend in the final practice session for the Mexican Grand Prix.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "202280d3",
+      "id": "4e7bc9aa",
       "title": "Lando Norris pips Kimi Antonelli by 0.001s in final Mexico GP practice",
       "link": "https://www.crash.net/f1/news/1108989/1/lando-norris-pips-kimi-antonelli-0001s-final-mexico-gp-practice",
       "pubDate": "2026-10-31 18:45:10",
@@ -465,7 +575,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449418_hires.jpg?width=1200"
     },
     {
-      "id": "02f858a2",
+      "id": "0cc70837",
       "title": "F1 Mexico GP: Norris tops final practice by 0.001s from Antonelli",
       "link": "https://www.autosport.com/f1/news/f1-mexico-gp-norris-tops-final-practice-by-0001s-from-antonelli/10870228/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-10-31 18:44:34",
@@ -473,10 +583,10 @@
       "aiSummary": "Reigning world champion Lando Norris has topped third and final practice at Formula 1's Mexico Grand Prix, beating championship leader Kimi Antonelli in a tight session at the Autodromo Hermanos Rodriguez. Norris dipped just 0.001s under Antonelli's initial benchmark as all four top teams looked in the mix on the tricky high-altitude circuit, with several midfield running into power unit ......",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/2wlKOl3Y/s6/lando-norris-mclaren-2.jpg"
+      "image": "https://cdn-4.motorsport.com/images/amp/2wlKOl3Y/s6/lando-norris-mclaren-2.jpg"
     },
     {
-      "id": "3af7b08d",
+      "id": "67d6de36",
       "title": "F1 Mexico GP: Lando Norris tops final practice by 0.001s from Kimi Antonelli",
       "link": "https://www.motorsport.com/f1/news/f1-mexico-gp-fp3-report/10870217/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 18:42:30",
@@ -484,10 +594,10 @@
       "aiSummary": "Il campione del mondo in carica Lando Norris ha superato la terza e ultima sessione di prove libere al Gran Premio del Messico di Formula 1, battendo il leader del campionato Kimi Antonelli in una sessione serrata all'Autodromo Hermanos Rodriguez. Norris è sceso di soli 0,001 secondi sotto il benchmark iniziale di Antonelli mentre tutte e quattro le migliori squadre guardavano nel mix sul difficile circuito ad alta quota, con diversi centrocampi che si imbattevano in power unit ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/6VyKrydY/s6/lando-norris-mclaren.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/6VyKrydY/s6/lando-norris-mclaren.jpg"
     },
     {
-      "id": "f7e2327c",
+      "id": "04490f69",
       "title": "Formula 1 Mexico Grand Prix: Full final practice results",
       "link": "https://www.crash.net/f1/results/1108987/1/formula-1-mexico-grand-prix-full-final-practice-results",
       "pubDate": "2026-10-31 18:40:00",
@@ -498,7 +608,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449413_hires.jpg?width=1200"
     },
     {
-      "id": "26b442b8",
+      "id": "fbe47f8a",
       "title": "When Red Bull expects to start using its long-awaited new F1 wind tunnel",
       "link": "https://www.motorsport.com/f1/news/when-red-bull-expects-to-start-using-its-long-awaited-new-f1-wind-tunnel/10870210/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 18:00:06",
@@ -506,10 +616,10 @@
       "aiSummary": "Sebbene la Red Bull abbia trasformato la sua stagione di Formula 1 2026 in modo impressionante, il team tecnico guidato da Pierre Wache sta ancora affrontando diverse limitazioni dietro le quinte. Una delle principali è forse la galleria del vento, la più antica di tutta la griglia di F1. L'ex team principal Christian Horner ha ripetutamente descritto la galleria del vento della Red Bull come \"una reliquia della Guerra Fredda\" e ha detto che lavorare con...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/YK15Rvz0/s6/isack-hadjar-red-bull-racing.jpg"
+      "image": "https://cdn-4.motorsport.com/images/amp/YK15Rvz0/s6/isack-hadjar-red-bull-racing.jpg"
     },
     {
-      "id": "22deb7b7",
+      "id": "97d820ad",
       "title": "Red Bull provides timeline for long-awaited new F1 wind tunnel",
       "link": "https://www.autosport.com/f1/news/when-red-bull-expects-to-start-using-its-long-awaited-new-f1-wind-tunnel/10870214/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-10-31 17:58:02",
@@ -517,10 +627,10 @@
       "aiSummary": "Although Red Bull has turned its 2026 Formula 1 season around in impressive fashion, the technical team led by Pierre Wache is still dealing with several limitations behind the scenes. One of the main ones is perhaps the wind tunnel, the oldest on the entire F1 grid. Former team principal Christian Horner repeatedly described Red Bull's wind tunnel as \"a Cold War relic\" and said working with...",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/68VwRk42/s6/max-verstappen-red-bull-racing-2.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/68VwRk42/s6/max-verstappen-red-bull-racing-2.jpg"
     },
     {
-      "id": "1715af7b",
+      "id": "d450f752",
       "title": "Did race engineer dispute lead to Esteban Ocon’s sudden Haas benching at F1 Mexico GP?",
       "link": "https://www.crash.net/f1/news/1108965/1/did-race-engineer-dispute-lead-esteban-ocons-sudden-haas-benching-f1-mexico-gp",
       "pubDate": "2026-10-31 17:51:55",
@@ -531,7 +641,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449311_hires.jpg?width=1200"
     },
     {
-      "id": "4cdcd36e",
+      "id": "b81bb17a",
       "title": "Conrad Mewse thanks Crendon Honda",
       "link": "https://gatedrop.com/conrad-mewse-thanks-crendon-honda/",
       "pubDate": "2026-10-31 17:30:10",
@@ -542,7 +652,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Mewse-1-150x150.jpg"
     },
     {
-      "id": "eab9dee0",
+      "id": "aa322de1",
       "title": "Isack Hadjar formally warned for fan incident in F1 Mexico GP paddock",
       "link": "https://www.motorsport.com/f1/news/isack-hadjar-warned-for-fan-incident-in-f1-mexico-gp-paddock/10870033/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 17:17:48",
@@ -550,10 +660,10 @@
       "aiSummary": "Isack Hadjar ha ricevuto un avvertimento formale dai commissari del Gran Premio del Messico per aver spinto un fan nel paddock di Formula 1 prima delle prove di apertura. Il pilota della Red Bull è stato inizialmente convocato per un presunto incidente di \"cattiva condotta\" all'Autodromo Hermanos Rodriguez venerdì. Hadjar era stato avvicinato da un fan che tentava di scattare una foto, ma è stato spinto via due volte e il francese ... continua...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-8.motorsport.com/images/amp/6b8ZNN32/s6/isack-hadjar-red-bull-racing.jpg"
+      "image": "https://cdn-1.motorsport.com/images/amp/6b8ZNN32/s6/isack-hadjar-red-bull-racing.jpg"
     },
     {
-      "id": "4fc2b216",
+      "id": "166011d8",
       "title": "Isack Hadjar warned for misconduct after pushing fan in F1 Mexico GP paddock",
       "link": "https://www.crash.net/f1/news/1108946/1/isack-hadjar-warned-misconduct-after-pushing-fan-f1-mexico-gp-paddock",
       "pubDate": "2026-10-31 17:17:40",
@@ -564,7 +674,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448446_hires.jpg?width=1200"
     },
     {
-      "id": "9c8f2254",
+      "id": "685a753d",
       "title": "Official: Roan van de Moosdijk stays with Kosak KTM for 2027",
       "link": "https://gatedrop.com/official-roan-van-de-moosdijk-stays-with-kosak-ktm-for-2027/",
       "pubDate": "2026-10-31 17:12:06",
@@ -575,7 +685,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Roan-van-de-Moosdijk-1-scaled-e1793466665228-150x150.jpg"
     },
     {
-      "id": "678ee2ce",
+      "id": "eb53edd6",
       "title": "Racing Bulls react to Max Verstappen's 'fighting for your seat' comment",
       "link": "https://www.crash.net/f1/news/1108938/1/racing-bulls-react-max-verstappens-fighting-your-seat-comment",
       "pubDate": "2026-10-31 16:25:00",
@@ -586,7 +696,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448276_hires.jpg?width=1200"
     },
     {
-      "id": "2e704753",
+      "id": "17409bf0",
       "title": "Mercedes out of performance window at Mexico GP - George Russell",
       "link": "https://www.motorsport.com/f1/news/george-russell-mercedes-out-of-performance-window-at-mexico-gp/10870173/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 15:52:10",
@@ -594,10 +704,10 @@
       "aiSummary": "George Russell sta sopportando ulteriori difficoltà con la vettura di Formula 1 Mercedes aggiornata, poiché era al di fuori del set-up ottimale nelle prove del venerdì al Gran Premio del Messico. La squadra leader del campionato ha introdotto una W17 aggiornata per la Malesia questo mese, ma è stata facilmente battuta da Max Verstappen della Red Bull prima di una storia simile a Singapore. Kimi Antonelli ha messo fine alla gestione di Verstappen da parte di... Continua...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/0R7Bb9M2/s6/george-russell-mercedes.jpg"
+      "image": "https://cdn-1.motorsport.com/images/amp/0R7Bb9M2/s6/george-russell-mercedes.jpg"
     },
     {
-      "id": "29849f0a",
+      "id": "14b859dd",
       "title": "Esteban Ocon replaced by Haas for remainder of Mexico City GP",
       "link": "https://www.crash.net/f1/news/1108937/1/esteban-ocon-replaced-haas-remainder-mexico-city-gp",
       "pubDate": "2026-10-31 15:04:00",
@@ -608,7 +718,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448138_hires.jpg?width=1200"
     },
     {
-      "id": "20aa500d",
+      "id": "ace856d7",
       "title": "Alex Marquez: Rain played no part in costly Sepang MotoGP Sprint crash",
       "link": "https://www.crash.net/motogp/news/1108921/1/alex-marquez-rain-played-no-part-costly-sepang-motogp-sprint-crash",
       "pubDate": "2026-10-31 15:00:00",
@@ -619,7 +729,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358822_hires.jpg?width=1200"
     },
     {
-      "id": "c796fed0",
+      "id": "50a768c7",
       "title": "Enea Bastianini explains “disaster” Sepang MotoGP Sprint",
       "link": "https://www.crash.net/motogp/news/1108936/1/enea-bastianini-explains-disaster-sepang-motogp-sprint",
       "pubDate": "2026-10-31 14:57:05",
@@ -630,7 +740,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358688_hires.jpg?width=1200"
     },
     {
-      "id": "274666fb",
+      "id": "cff5361f",
       "title": "Haas drops Ocon for F1 Mexico GP",
       "link": "https://www.autosport.com/f1/news/haas-drops-ocon-for-f1-mexico-gp/10870160/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-10-31 14:54:48",
@@ -638,10 +748,10 @@
       "aiSummary": "The Haas Formula 1 team has made the shock decision to replace Esteban Ocon with reserve driver Ryo Hirakawa for the remainder of the Mexico Grand Prix weekend. Hirakawa will act as Oliver Bearman’s team-mate for final practice, qualifying and Sunday’s race, having also taken Ocon’s VF-26 on Friday morning as part of the rookie mandate for FP1 sessions. Ocon returned for second ... Keep reading",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/68VwR8V2/s6/esteban-ocon-haas-f1-team.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/68VwR8V2/s6/esteban-ocon-haas-f1-team.jpg"
     },
     {
-      "id": "4ee56cb4",
+      "id": "1c0dd458",
       "title": "Haas drops Esteban Ocon for F1 Mexico GP",
       "link": "https://www.motorsport.com/f1/news/haas-drops-esteban-ocon-for-f1-mexico-gp/10870158/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 14:52:55",
@@ -649,21 +759,10 @@
       "aiSummary": "Il team Haas di Formula 1 ha preso la decisione scioccante di sostituire Esteban Ocon con il pilota di riserva Ryo Hirakawa per il resto del weekend del Gran Premio del Messico. Hirakawa fungerà da compagno di squadra di Oliver Bearman per le prove finali, le qualifiche e la gara di domenica, avendo anche preso la VF-26 di Ocon venerdì mattina come parte del mandato del rookie per le sessioni di FP1. Ocon è tornato per il secondo ... Continua a leggere",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/68VwR8V2/s6/esteban-ocon-haas-f1-team.jpg"
+      "image": "https://cdn-9.motorsport.com/images/amp/68VwR8V2/s6/esteban-ocon-haas-f1-team.jpg"
     },
     {
-      "id": "c5543068",
-      "title": "Ocon out, Hirakawa in as Haas make shock Mexican Grand Prix driver change | Formula 1",
-      "link": "https://www.racefans.net/2026/10/31/ocon-out-hirakawa-in-as-haas-make-shock-mexican-grand-prix-driver-change/",
-      "pubDate": "2026-10-31 14:48:03",
-      "pubDateISO": "2026-10-31T14:48:03+00:00",
-      "aiSummary": "Haas has announced Esteban Ocon will not drive for the team in the rest of this weekend's Mexican Grand Prix. Ryo Hirakawa will take his place.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "46a29585",
+      "id": "f1403df0",
       "title": "Ex-MotoGP champion says Marc Marquez rivals can’t “withstand his pressure”",
       "link": "https://www.crash.net/motogp/news/1108935/1/ex-motogp-champion-says-marc-marquez-rivals-cant-withstand-his-pressure",
       "pubDate": "2026-10-31 14:13:42",
@@ -674,7 +773,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358838_hires.jpg?width=1200"
     },
     {
-      "id": "bfd94055",
+      "id": "2068c018",
       "title": "Ferrari downplays expectations for F1 Mexico GP despite blistering Friday",
       "link": "https://www.motorsport.com/f1/news/fred-vasseur-downplays-expectations-for-f1-mexico-gp-despite-blistering-friday/10870125/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 14:00:05",
@@ -682,10 +781,10 @@
       "aiSummary": "Fred Vasseur, capo della Ferrari di Formula 1, ha minimizzato le aspettative per il Gran Premio del Messico nonostante Charles Leclerc abbia superato entrambe le sessioni di prove libere del venerdì. Il pilota Ferrari ha stabilito il ritmo con un 1m18.128s nelle FP1, prima di abbassare quel benchmark a 1m17.827s per le FP2 all'Autodromo Hermanos Rodriguez. Anche il compagno di squadra Lewis Hamilton era competitivo, avendo conquistato il quarto posto nelle prove di apertura, 0,738 ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/6O7zXZJ6/s6/charles-leclerc-ferrari.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/6O7zXZJ6/s6/charles-leclerc-ferrari.jpg"
     },
     {
-      "id": "b7bd84ae",
+      "id": "a25b098f",
       "title": "Fabio Di Giannantonio held back by mystery problem in Sepang MotoGP Sprint",
       "link": "https://www.crash.net/motogp/news/1108933/1/fabio-di-giannantonio-held-back-mystery-problem-sepang-motogp-sprint",
       "pubDate": "2026-10-31 13:34:08",
@@ -696,7 +795,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358799_hires.jpg?width=1200"
     },
     {
-      "id": "117e8e2f",
+      "id": "8e879d53",
       "title": "Ai Ogura explains Marc Marquez battle in Malaysia sprint, denies Aprilia team orders",
       "link": "https://www.motorsport.com/motogp/news/ai-ogura-explains-marc-marquez-battle-in-malaysia-sprint-denies-aprilia-team-orders/10870057/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 13:30:03",
@@ -704,10 +803,10 @@
       "aiSummary": "Ai Ogura has outlined his tight scrap with Marc Marquez in the sprint race for the Malaysian Grand Prix, but denied he was acting under any manufacturer orders from Aprilia. The Trackhouse rider got off to a brilliant start from fourth on the grid, passing both Pedro Acosta and Marquez to jump to second. But as the leaders braked into the tight opening corner, Ogura ran wide, bringing Marquez...",
       "source": "Motorsport.com MotoGP",
       "category": "Moto2",
-      "image": "https://cdn-5.motorsport.com/images/amp/24QGZg4Y/s6/race-start.jpg"
+      "image": "https://cdn-8.motorsport.com/images/amp/24QGZg4Y/s6/race-start.jpg"
     },
     {
-      "id": "40f80f8a",
+      "id": "d38d5335",
       "title": "Max Verstappen blames traffic after ruined qualifying lap: 'I couldn't believe my eyes'",
       "link": "https://www.crash.net/f1/news/1109064/1/max-verstappen-blames-traffic-after-ruined-qualifying-lap-i-couldnt-believe-my",
       "pubDate": "2026-10-31 13:20:00",
@@ -718,7 +817,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449365_hires.jpg?width=1200"
     },
     {
-      "id": "cde32875",
+      "id": "17e0983f",
       "title": "Maverick Vinales planned to “stop” in Sepang MotoGP Sprint before bike swap gamble",
       "link": "https://www.crash.net/motogp/news/1108932/1/maverick-vinales-planned-stop-sepang-motogp-sprint-bike-swap-gamble",
       "pubDate": "2026-10-31 13:02:05",
@@ -729,29 +828,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358801_hires.jpg?width=1200"
     },
     {
-      "id": "ff39fa18",
-      "title": "George Russell tips Frederik Vesti for F1 2027 Cadillac seat",
-      "link": "https://www.motorsport.com/f1/news/george-russell-frederik-vesti-deserves-cadillac-seat-for-f1-2027/10870111/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-31 13:00:03",
-      "pubDateISO": "2026-10-31T13:00:03+00:00",
-      "aiSummary": "George Russell ha etichettato il pilota di riserva Mercedes Frederik Vesti come candidato shock per unirsi a Cadillac per la campagna di Formula 1 2027. L'outfit americano deve ancora confermare Valtteri Bottas come compagno di squadra di Sergio Perez - che mercoledì ha firmato un'estensione del contratto - per il prossimo anno, con l'emergere di vari contendenti. Il collaudatore Cadillac Colton Herta è un'opzione, nonostante il suo attuale ......",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/YpbAB5A0/s6/frederik-vesti-mercedes.jpg"
-    },
-    {
-      "id": "de3acc5a",
-      "title": "\"I can do much better than this,\" laments Francesco Bagnaia after smashing windscreen",
-      "link": "https://www.motorsport.com/motogp/news/i-can-do-much-better-than-this-laments-francesco-bagnaia-after-smashing-windscreen/10870040/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-31 12:30:03",
-      "pubDateISO": "2026-10-31T12:30:03+00:00",
-      "aiSummary": "Francesco Bagnaia remained in a frustrated mood at MotoGP's Malaysian Grand Prix on Saturday, having smashed his windscreen during morning qualifying. The Italian was pushing for an improved lap time late in the Qualifying 2 session when he almost lost control of his factory Ducati under braking for the first corner. His immediate response was to strike the screen - an uncharacteristic move...",
-      "source": "Motorsport.com MotoGP",
-      "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/2eZxb5mY/s6/francesco-bagnaia-ducati-team.jpg"
-    },
-    {
-      "id": "c2dc7f13",
+      "id": "e36af6b9",
       "title": "MotoGP riders face bans if they don’t race in Qatar, stunning report claims",
       "link": "https://www.crash.net/motogp/news/1108931/1/motogp-riders-face-bans-if-they-dont-race-qatar-stunning-report-claims",
       "pubDate": "2026-10-31 12:05:36",
@@ -762,40 +839,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1220197_hires.jpg?width=1200"
     },
     {
-      "id": "8305945d",
-      "title": "Red Bull finds ‘disconnect’ in RB22 in F1 Mexico GP practice",
-      "link": "https://www.motorsport.com/f1/news/red-bull-finds-disconnect-in-rb22-in-f1-mexico-gp-practice/10870035/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-31 12:00:04",
-      "pubDateISO": "2026-10-31T12:00:04+00:00",
-      "aiSummary": "Red Bull ammette di avere ancora del lavoro da fare dopo le sessioni di prove libere di Formula 1 di venerdì a Città del Messico. Max Verstappen ha concluso la giornata al quinto posto, a tre decimi dal ritmo, ma questo nonostante i danni subiti in un incidente con Liam Lawson. Verstappen ha descritto il momento nella penna dei media come \"non molto intelligente\" dal pilota dei Racing Bulls, dato che Lawson sta ancora lottando per il suo posto. I commissari...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/0LdejdJ0/s6/max-verstappen-red-bull-racing.jpg"
-    },
-    {
-      "id": "d4573724",
-      "title": "MotoGP Malaysian GP: Full starting grid after Jorge Martin's withdrawal",
-      "link": "https://www.motorsport.com/motogp/news/motogp-malaysian-gp-full-starting-grid-after-jorge-martins-withdrawal/10870103/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-31 11:48:31",
-      "pubDateISO": "2026-10-31T11:48:31+00:00",
-      "aiSummary": "Alex Marquez will start the Malaysian Grand Prix from pole position after setting the fastest time in Saturday's qualifying session. The Gresini rider is chasing back-to-back MotoGP wins at Sepang following his triumph in the 2025 edition of the row. He will be joined on the front row of the grid by elder brother and factory Ducati rider Marc Marquez, who now holds a 19-point lead in the ......",
-      "source": "Motorsport.com MotoGP",
-      "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/25dLDmE0/s6/race-start.jpg"
-    },
-    {
-      "id": "ff80560b",
-      "title": "Why tensions between MotoGP and riders have escalated amid Qatar row",
-      "link": "https://www.motorsport.com/motogp/news/porque-se-ha-disparado-la-tension-entre-motogp-y-sus-pilotos/10870086/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
-      "pubDate": "2026-10-31 11:32:39",
-      "pubDateISO": "2026-10-31T11:32:39+00:00",
-      "aiSummary": "The majority of MotoGP riders still prefers to avoid travelling to the Qatar Grand Prix amid the Iran war, but the balance of opinion has shifted considerably over the past few days. During meetings held at Phillip Island last weekend, three-quarters of the grid expressed their opposition to travelling to Doha. A week later, however, that number had fallen to just three riders, as became ......",
-      "source": "Motorsport.com MotoGP",
-      "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/Y9lLJbb2/s6/motogp-riders-stand-for-the-pl-2.jpg"
-    },
-    {
-      "id": "d50a51c8",
+      "id": "af5940f4",
       "title": "Red Bull provides update on F1 radio issues vexing Max Verstappen",
       "link": "https://www.crash.net/f1/news/1108828/1/red-bull-provides-update-f1-radio-issues-vexing-max-verstappen",
       "pubDate": "2026-10-31 11:00:00",
@@ -806,7 +850,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448894_hires.jpg?width=1200"
     },
     {
-      "id": "a1a33a51",
+      "id": "87f78d98",
       "title": "Marco Bezzecchi’s defiant MotoGP title message: ‘What would be the point?’",
       "link": "https://www.crash.net/motogp/news/1108929/1/marco-bezzecchis-defiant-motogp-title-message-what-would-be-point",
       "pubDate": "2026-10-31 10:56:34",
@@ -817,7 +861,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358867_hires.jpg?width=1200"
     },
     {
-      "id": "e9070ea6",
+      "id": "8f2755df",
       "title": "Pedro Acosta picks “moment to attack” for “unexpected” MotoGP Sprint win",
       "link": "https://www.crash.net/motogp/news/1108927/1/pedro-acosta-picks-moment-attack-unexpected-motogp-sprint-win",
       "pubDate": "2026-10-31 10:50:17",
@@ -828,7 +872,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358837_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "6708271b",
+      "id": "8dc9b7d1",
       "title": "“Very clever” Marc Marquez mentality pushes him closer to MotoGP title",
       "link": "https://www.crash.net/motogp/news/1108926/1/very-clever-marc-marquez-mentality-pushes-him-closer-motogp-title",
       "pubDate": "2026-10-31 10:34:31",
@@ -839,7 +883,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358863_hires.jpg?width=1200"
     },
     {
-      "id": "e1ac5479",
+      "id": "8ea79586",
       "title": "Jack Miller explains Pramac \"miscommunication\" after pit stop meltdown in Sepang sprint",
       "link": "https://www.crash.net/motogp/news/1108924/1/jack-miller-explains-pramac-miscommunication-after-pit-stop-meltdown-sepang",
       "pubDate": "2026-10-31 10:12:17",
@@ -850,7 +894,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357543_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "3fab22cb",
+      "id": "3a248a8d",
       "title": "Qualifying race results: Japan MX Championship finale – Sugo",
       "link": "https://gatedrop.com/qualifying-race-results-japan-mx-championship-finale-sugo/",
       "pubDate": "2026-10-31 10:05:08",
@@ -861,7 +905,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Herlings_MXGP_2026_R17_H9A3887-150x150.jpg"
     },
     {
-      "id": "58302eab",
+      "id": "f4ccfd6e",
       "title": "Why Pecco Bagnaia was “lucky” with the rain in Sepang MotoGP sprint",
       "link": "https://www.crash.net/motogp/news/1108922/1/why-pecco-bagnaia-was-lucky-rain-sepang-motogp-sprint",
       "pubDate": "2026-10-31 10:02:26",
@@ -872,7 +916,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358819_hires.jpg?width=1200"
     },
     {
-      "id": "6a354959",
+      "id": "dc7bc2bb",
       "title": "Lewis Hamilton ‘praying everything’s ok’ with Ferrari after suffering Mexico GP blow",
       "link": "https://www.crash.net/f1/news/1108831/1/lewis-hamilton-praying-everythings-ok-ferrari-after-suffering-mexico-gp-blow",
       "pubDate": "2026-10-31 10:00:00",
@@ -883,7 +927,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448302_hires.jpg?width=1200"
     },
     {
-      "id": "4b60cb20",
+      "id": "11ea1367",
       "title": "Alex Marquez could skip Qatar MotoGP amid surgery reports",
       "link": "https://www.crash.net/motogp/news/1108916/1/alex-marquez-could-skip-qatar-motogp-amid-surgery-reports",
       "pubDate": "2026-10-31 09:00:37",
@@ -894,7 +938,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358895_hires.jpg?width=1200"
     },
     {
-      "id": "d6c8381d",
+      "id": "cc24fc69",
       "title": "Colton Herta’s F1 bid takes dramatic twist after bizarre IndyCar error",
       "link": "https://www.crash.net/f1/news/1108830/1/colton-hertas-f1-bid-takes-dramatic-twist-after-bizarre-indycar-error",
       "pubDate": "2026-10-31 09:00:00",
@@ -905,18 +949,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448159_hires.jpg?width=1200"
     },
     {
-      "id": "29e52ff6",
-      "title": "Hadjar given formal warning for pushing paddock visitor | Formula 1",
-      "link": "https://www.racefans.net/2026/10/31/hadjar-given-formal-warning-for-pushing-paddock-visitor/",
-      "pubDate": "2026-10-31 08:44:55",
-      "pubDateISO": "2026-10-31T08:44:55+00:00",
-      "aiSummary": "Hadjar summoned by stewards over \"alleged misconduct\" in paddock",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "e1962707",
+      "id": "cda68373",
       "title": "MotoGP winner questions initial decision to let Jorge Martin ride at Sepang",
       "link": "https://www.crash.net/motogp/news/1108914/1/motogp-winner-questions-initial-decision-let-jorge-martin-ride-sepang",
       "pubDate": "2026-10-31 08:27:39",
@@ -927,7 +960,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358765_hires.jpg?width=1200"
     },
     {
-      "id": "de2a510f",
+      "id": "b7b23d41",
       "title": "Max Verstappen and Liam Lawson get F1 grid penalties for 'unacceptable' Mexico GP practice clash",
       "link": "https://www.crash.net/f1/news/1108913/1/max-verstappen-and-liam-lawson-get-f1-grid-penalties-unacceptable-mexico-gp",
       "pubDate": "2026-10-31 08:25:43",
@@ -938,7 +971,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448903_hires.jpg?width=1200"
     },
     {
-      "id": "95efab72",
+      "id": "37f085cd",
       "title": "Sepang Sprint Race: New 2026 MotoGP World Championship standings",
       "link": "https://www.crash.net/motogp/results/1108663/1/sepang-sprint-race-new-2026-motogp-world-championship-standings",
       "pubDate": "2026-10-31 07:44:45",
@@ -949,7 +982,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357832_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "d1f0310f",
+      "id": "00ae0481",
       "title": "Pedro Acosta wins rain-hit Sepang MotoGP sprint after Alex Marquez crash",
       "link": "https://www.crash.net/motogp/news/1108910/1/pedro-acosta-wins-rain-hit-sepang-motogp-sprint-after-alex-marquez-crash",
       "pubDate": "2026-10-31 07:36:17",
@@ -960,7 +993,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358664_hires.jpg?width=1200"
     },
     {
-      "id": "7beff8f2",
+      "id": "dcbfc5d6",
       "title": "The all-time MotoGP Sprint winners' list after Sepang",
       "link": "https://www.crash.net/motogp/news/1092378/1/all-time-motogp-sprint-race-winners-list",
       "pubDate": "2026-10-31 07:35:00",
@@ -971,7 +1004,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358643_hires.jpg?width=1200"
     },
     {
-      "id": "8e1a94aa",
+      "id": "3d48ce2c",
       "title": "2026 Malaysian MotoGP, Sepang - Sprint Race Results",
       "link": "https://www.crash.net/motogp/results/1108662/1/2026-malaysian-motogp-sepang-sprint-results",
       "pubDate": "2026-10-31 07:20:45",
@@ -982,18 +1015,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358823_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "230b2556",
-      "title": "Starting grid for the 2026 Sepang MotoGP race",
-      "link": "https://www.crash.net/motogp/news/1108871/1/starting-grid-2026-sepang-motogp-race",
-      "pubDate": "2026-10-31 06:20:03",
-      "pubDateISO": "2026-10-31T06:20:03+00:00",
-      "aiSummary": "The full starting grid for Sunday’s 2026 Malaysian MotoGP Sprint race at Sepang.",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358663_hires_1600x900.jpg?width=1200"
-    },
-    {
-      "id": "afcd8e49",
+      "id": "2d3de82b",
       "title": "Jorge Martin stopped due to \"big risk\" at Malaysian MotoGP, expects Marc Marquez maximum",
       "link": "https://www.crash.net/motogp/news/1108877/1/jorge-martin-stopped-due-big-risk-malaysian-motogp-expects-marc-marquez",
       "pubDate": "2026-10-31 05:47:17",
@@ -1004,7 +1026,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358672_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "d23c7072",
+      "id": "63fe9ca9",
       "title": "Aprilia explains Jorge Martin's Sepang MotoGP withdrawal, Qatar plans",
       "link": "https://www.crash.net/motogp/news/1108873/1/aprilia-explains-jorge-martins-sepang-motogp-exit-qatar-plans",
       "pubDate": "2026-10-31 04:45:17",
@@ -1015,7 +1037,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357729_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "f232d69c",
+      "id": "5f8c4a61",
       "title": "Alex Marquez snatches Sepang MotoGP pole",
       "link": "https://www.crash.net/motogp/news/1108869/1/alex-marquez-snatches-sepang-motogp-pole",
       "pubDate": "2026-10-31 04:03:17",
@@ -1026,7 +1048,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358658_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "54c5becd",
+      "id": "382499c0",
       "title": "Official: Jorge Martin out of Malaysia MotoGP",
       "link": "https://www.crash.net/motogp/news/1108531/1/official-jorge-martin-out-malaysia-motogp",
       "pubDate": "2026-10-31 02:58:32",
@@ -1037,7 +1059,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357650_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "756ae903",
+      "id": "8d3d848f",
       "title": "Sepang MotoGP Sprint as it happened",
       "link": "https://www.crash.net/motogp/live/1044236/sepang-motogp-live-sprint-updates-malaysia",
       "pubDate": "2026-10-31 01:00:10",
@@ -1048,29 +1070,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358637_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "ec1e5630",
-      "title": "Claims Bearman’s salary demands delayed contract talks are “absolute nonsense” – Komatsu | Formula 1",
-      "link": "https://www.racefans.net/2026/10/31/claims-bearmans-salary-demands-delayed-contract-talks-are-absolute-nonsense-komatsu/",
-      "pubDate": "2026-10-31 00:39:03",
-      "pubDateISO": "2026-10-31T00:39:03+00:00",
-      "aiSummary": "\"I don't know who smoked up this six million euro number\" said Ayao Komatsu when asked about reports of Oliver Bearman's salary demands.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "7bdb8e44",
-      "title": "Verstappen and Lawson handed one-place grid drops for “unacceptable” practice collision | Formula 1",
-      "link": "https://www.racefans.net/2026/10/30/verstappen-and-lawson-handed-one-place-grid-drops-for-practice-collision/",
-      "pubDate": "2026-10-30 23:41:56",
-      "pubDateISO": "2026-10-30T23:41:56+00:00",
-      "aiSummary": "Max Verstappen told Liam Lawson to \"act a little bit smarter\" after the pair collided in the second practice session in Mexico.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "62dd9a0d",
+      "id": "d7850b77",
       "title": "Max Verstappen calls out Liam Lawson for “not very smart behaviour” after Mexico GP practice tangle",
       "link": "https://www.crash.net/f1/news/1108827/1/max-verstappen-calls-out-liam-lawson-not-very-smart-behaviour-after-tangle",
       "pubDate": "2026-10-30 23:35:01",
@@ -1081,7 +1081,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448891_hires.jpg?width=1200"
     },
     {
-      "id": "805f8298",
+      "id": "2c2ab3f3",
       "title": "F1 Mexico Grand Prix: Full Friday practice results",
       "link": "https://www.crash.net/f1/results/1108776/1/f1-mexico-grand-prix-full-friday-practice-results",
       "pubDate": "2026-10-30 23:10:00",
@@ -1092,18 +1092,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1449002_hires.jpg?width=1200"
     },
     {
-      "id": "3f07f4b6",
-      "title": "Leclerc fastest again, Verstappen and Lawson face investigation over collision | Formula 1",
-      "link": "https://www.racefans.net/2026/10/30/leclerc-fastest-again-verstappen-and-lawson-face-investigation-over-collision/",
-      "pubDate": "2026-10-30 23:04:01",
-      "pubDateISO": "2026-10-30T23:04:01+00:00",
-      "aiSummary": "Charles Leclerc was quickest but Lewis Hamilton stopped with a problem in the other Ferrari in second practice.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "85d87888",
+      "id": "8e710bfc",
       "title": "Isack Hadjar shoves fan in Mexico Grand Prix F1 paddock altercation",
       "link": "https://www.crash.net/f1/news/1108809/1/isack-hadjar-shoves-fan-mexico-grand-prix-f1-paddock-altercation",
       "pubDate": "2026-10-30 22:24:16",
@@ -1114,7 +1103,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448861_hires.jpg?width=1200"
     },
     {
-      "id": "7b18ed51",
+      "id": "5e086cb3",
       "title": "Laurent Mekies claps back at Christian Horner’s Red Bull “lost its mojo” claim",
       "link": "https://www.crash.net/f1/news/1108791/1/laurent-mekies-claps-back-christian-horners-red-bull-lost-its-mojo-claim",
       "pubDate": "2026-10-30 21:57:18",
@@ -1125,7 +1114,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1445145_hires.jpg?width=1200"
     },
     {
-      "id": "6fa84231",
+      "id": "2001cdfc",
       "title": "Haas boss on Ollie Bearman wage demand stories: “I don’t know who smoked up €6m”",
       "link": "https://www.crash.net/f1/news/1108784/1/haas-boss-ollie-bearman-salary-demand-stories-i-dont-know-who-smoked-eu6m",
       "pubDate": "2026-10-30 21:34:33",
@@ -1136,7 +1125,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448479_hires.jpg?width=1200"
     },
     {
-      "id": "0c653b0f",
+      "id": "3d8f8690",
       "title": "F1 Mexico Grand Prix Friday Practice as it happened",
       "link": "https://www.crash.net/f1/live/1044269/f1-mexico-grand-prix-live-updates-friday-practice",
       "pubDate": "2026-10-30 21:00:00",
@@ -1147,29 +1136,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448576_hires.jpg?width=1200"
     },
     {
-      "id": "cc2a1015",
-      "title": "Bottas ‘needs to do’ more weekends like Austin to keep Cadillac seat – Budkowski | Formula 1",
-      "link": "https://www.racefans.net/2026/10/30/bottas-needs-to-do-more-weekends-like-austin-to-keep-cadillac-seat-says-budkowski/",
-      "pubDate": "2026-10-30 20:50:22",
-      "pubDateISO": "2026-10-30T20:50:22+00:00",
-      "aiSummary": "Cadillac team principal Marcin Budkowski explained what Valtteri Bottas needs to do to keep his seat at the team.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "4966da76",
-      "title": "Leclerc puts Ferrari on top in practice again in Mexico | Formula 1",
-      "link": "https://www.racefans.net/2026/10/30/leclerc-puts-ferrari-on-top-in-practice-again-in-mexico/",
-      "pubDate": "2026-10-30 19:43:03",
-      "pubDateISO": "2026-10-30T19:43:03+00:00",
-      "aiSummary": "Charles Leclerc started the Mexican Grand Prix on top by setting the fastest time in the opening practice session.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "dd7ac91a",
+      "id": "0dbfbf77",
       "title": "Charles Leclerc fastest in Mexico GP FP1 dominated by 10 F1 rookies",
       "link": "https://www.crash.net/f1/news/1108775/1/charles-leclerc-fastest-mexico-gp-fp1-dominated-10-f1-rookies",
       "pubDate": "2026-10-30 19:38:31",
@@ -1180,7 +1147,18 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448601_hires.jpg?width=1200"
     },
     {
-      "id": "11a5594b",
+      "id": "0e221b24",
+      "title": "Lewis Hamilton Ferrari experiments for Mexico GP FP1 revealed after ‘test races’ remark",
+      "link": "https://www.crash.net/f1/news/1108752/1/lewis-hamilton-ferrari-experiments-mexico-gp-fp1-revealed-after-test-races-remark",
+      "pubDate": "2026-10-30 18:43:15",
+      "pubDateISO": "2026-10-30T18:43:15+00:00",
+      "aiSummary": "Lewis Hamilton is conducting experiments in his Ferrari during FP1 in Mexico City.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1446736_hires.jpg?width=1200"
+    },
+    {
+      "id": "b4a8d2a9",
       "title": "Confirmed: Crendon Tru7 Honda announce 2027 rider line-up",
       "link": "https://gatedrop.com/confirmed-crendon-tru7-honda-announce-2027-rider-line-up/",
       "pubDate": "2026-10-30 17:59:04",
@@ -1191,7 +1169,62 @@
       "image": "https://gatedrop.com/wp-content/uploads/L-to-R-Brookes-Carpenter-Richmond-150x150.jpg"
     },
     {
-      "id": "a72a53c0",
+      "id": "da6e94b5",
+      "title": "What Red Bull has changed with its latest F1 upgrade at Mexico GP",
+      "link": "https://www.crash.net/f1/news/1108740/1/what-red-bull-has-changed-its-latest-f1-upgrade-mexico-gp",
+      "pubDate": "2026-10-30 17:40:49",
+      "pubDateISO": "2026-10-30T17:40:49+00:00",
+      "aiSummary": "Red Bull has revealed its latest F1 upgrade at the Mexico City Grand Prix.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/si202610290476.jpg?width=1200"
+    },
+    {
+      "id": "5c08b859",
+      "title": "Who’s replacing Max Verstappen, George Russell and Lando Norris in F1 Mexico GP practice?",
+      "link": "https://www.crash.net/f1/feature/1108606/1/whos-replacing-max-verstappen-george-russell-and-lando-norris-f1-mexico-gp",
+      "pubDate": "2026-10-30 17:30:52",
+      "pubDateISO": "2026-10-30T17:30:52+00:00",
+      "aiSummary": "A total of 10 rookies have been entered for opening Formula 1 practice at the Mexico City Grand Prix.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1408659_hires.jpg?width=1200"
+    },
+    {
+      "id": "d913031c",
+      "title": "What time is the next F1 race? Mexico GP dates and full schedule",
+      "link": "https://www.crash.net/f1/news/1108527/1/when-next-f1-race-mexico-gp-dates-and-schedule",
+      "pubDate": "2026-10-30 17:05:28",
+      "pubDateISO": "2026-10-30T17:05:28+00:00",
+      "aiSummary": "The next round of the 2026 Formula 1 season takes place at the Mexico City Grand Prix.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1382579_hires.jpg?width=1200"
+    },
+    {
+      "id": "3036504b",
+      "title": "Lewis Hamilton offers encouraging words to George Russell after 'challenging' season",
+      "link": "https://www.crash.net/f1/news/1108736/1/lewis-hamilton-offers-encouraging-words-george-russell-after-challenging-season",
+      "pubDate": "2026-10-30 17:05:00",
+      "pubDateISO": "2026-10-30T17:05:00+00:00",
+      "aiSummary": "Lewis Hamilton backs his former Mercedes teammate to bounce back following a difficult 2026 campaign.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1401780_hires.jpg?width=1200"
+    },
+    {
+      "id": "a68bc917",
+      "title": "Sergio Perez pulls out of fan event after becoming third F1 driver to fall ill at Mexico GP",
+      "link": "https://www.crash.net/f1/news/1108735/1/sergio-perez-pulls-out-fan-event-after-becoming-third-f1-driver-fall-ill-mexico",
+      "pubDate": "2026-10-30 16:30:00",
+      "pubDateISO": "2026-10-30T16:30:00+00:00",
+      "aiSummary": "Cadillac has confirmed that Sergio Perez will miss his Friday media duties ahead of Practice at his home Grand Prix.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448248_hires.jpg?width=1200"
+    },
+    {
+      "id": "5d0d6bca",
       "title": "Official: David Braceras steps back from professional Motocross racing",
       "link": "https://gatedrop.com/official-david-braceras-steps-back-from-professional-motocross-racing/",
       "pubDate": "2026-10-30 16:11:50",
@@ -1202,7 +1235,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Braceras-e1793364805763-150x150.jpg"
     },
     {
-      "id": "fe45ab89",
+      "id": "aab6cd3b",
       "title": "Marco Bezzecchi hails “fantastic Friday” at Sepang MotoGP despite sizeable deficit",
       "link": "https://www.crash.net/motogp/news/1108734/1/marco-bezzecchi-hails-fantastic-friday-sepang-motogp-despite-sizeable-deficit",
       "pubDate": "2026-10-30 15:23:02",
@@ -1213,7 +1246,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357722_hires.jpg?width=1200"
     },
     {
-      "id": "cadca8cc",
+      "id": "3cb9d029",
       "title": "MotoGP riders’ opinions split on “necessary” back-to-back races",
       "link": "https://www.crash.net/motogp/news/1108722/1/motogp-riders-opinions-split-necessary-back-back-races",
       "pubDate": "2026-10-30 15:00:00",
@@ -1224,7 +1257,18 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1350227_hires.jpg?width=1200"
     },
     {
-      "id": "70ea9c59",
+      "id": "1d55da9d",
+      "title": "George Russell reveals biggest two factors behind his F1 2026 slump",
+      "link": "https://www.crash.net/f1/news/1108619/1/george-russell-reveals-biggest-two-factors-behind-his-f1-2026-slump",
+      "pubDate": "2026-10-30 15:00:00",
+      "pubDateISO": "2026-10-30T15:00:00+00:00",
+      "aiSummary": "George Russell has explained what has hampered him amid his 2026 F1 struggles.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1446685_hires_0.jpg?width=1200"
+    },
+    {
+      "id": "5f48efbe",
       "title": "“Well rested” Joan Mir takes surprise Q2 spot in MotoGP return",
       "link": "https://www.crash.net/motogp/news/1108733/1/well-rested-joan-mir-takes-surprise-q2-spot-motogp-return",
       "pubDate": "2026-10-30 14:44:19",
@@ -1235,7 +1279,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358229_hires.jpg?width=1200"
     },
     {
-      "id": "471f132d",
+      "id": "be8d234d",
       "title": "Maverick Vinales could sacrifice Sepang MotoGP Sprint despite strong Friday speed",
       "link": "https://www.crash.net/motogp/news/1108732/1/maverick-vinales-could-sacrifice-sepang-motogp-sprint-despite-strong-friday",
       "pubDate": "2026-10-30 14:19:55",
@@ -1246,7 +1290,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357582_hires.jpg?width=1200"
     },
     {
-      "id": "fd89e9a7",
+      "id": "d46461c4",
       "title": "MotoGP Malaysian Grand Prix: What we learned in Friday practice",
       "link": "https://www.crash.net/motogp/news/1108730/1/motogp-malaysian-grand-prix-what-we-learned-friday-practice",
       "pubDate": "2026-10-30 13:22:51",
@@ -1257,7 +1301,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1358224_hires.jpg?width=1200"
     },
     {
-      "id": "0c331719",
+      "id": "2ce62e20",
       "title": "Vurbmoto Prospect and Unlimited Sports MX Announce Partnership for 2027 Florida Winter Am Series",
       "link": "https://www.vurbmoto.com/vurbmoto-prospect-and-unlimited-sports-mx-announce-partnership-for-2027-florida-winter-am-series/",
       "pubDate": "2026-10-30 13:09:07",
@@ -1268,7 +1312,18 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/vurbmoto-prospect-flordia-winter-ams-partnership-2027-1024x703.png"
     },
     {
-      "id": "ea4d8e6c",
+      "id": "c73eb666",
+      "title": "Esteban Ocon lifts lid on private Lewis Hamilton chat after Haas F1 axe",
+      "link": "https://www.crash.net/f1/news/1108617/1/esteban-ocon-lifts-lid-private-lewis-hamilton-chat-after-haas-f1-axe",
+      "pubDate": "2026-10-30 13:00:00",
+      "pubDateISO": "2026-10-30T13:00:00+00:00",
+      "aiSummary": "Esteban Ocon reveals conversation with Lewis Hamilton about his F1 future.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1426806_hires.jpg?width=1200"
+    },
+    {
+      "id": "de3e13ca",
       "title": "Ken Roczen Isn’t Done Yet, Confirms 2027 Supercross Return",
       "link": "https://www.vurbmoto.com/ken-roczen-isnt-done-yet-confirms-2027-supercross-return/",
       "pubDate": "2026-10-30 12:17:10",
@@ -1279,7 +1334,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/ken-roczen-returning-2027.jpg"
     },
     {
-      "id": "1e6ed15a",
+      "id": "a73fec91",
       "title": "Official: Meuwissen Motorsports Racing confirm switch to GasGas machinery for 2027",
       "link": "https://gatedrop.com/official-meuwissen-motorsports-racing-confirm-switch-to-gasgas-machinery-for-2027/",
       "pubDate": "2026-10-30 12:15:24",
@@ -1290,7 +1345,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/meuwissen-150x150.jpeg"
     },
     {
-      "id": "0bbf37cd",
+      "id": "a1bb11d7",
       "title": "Pecco Bagnaia calls Sepang MotoGP sector deficit “ridiculous” after missing Q2",
       "link": "https://www.crash.net/motogp/news/1108725/1/pecco-bagnaia-calls-sepang-motogp-sector-deficit-ridiculous-after-missing-q2",
       "pubDate": "2026-10-30 11:08:03",
@@ -1301,7 +1356,18 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357940_hires.jpg?width=1200"
     },
     {
-      "id": "b5c1d221",
+      "id": "1013b4a9",
+      "title": "Max Verstappen blames F1 calendar demand after two drivers fall ill",
+      "link": "https://www.crash.net/f1/news/1108616/1/max-verstappen-blames-f1-calendar-demand-after-two-drivers-fall-ill",
+      "pubDate": "2026-10-30 11:00:00",
+      "pubDateISO": "2026-10-30T11:00:00+00:00",
+      "aiSummary": "Max Verstappen points to the toll of the current F1 calendar as fellow drivers fall ill.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448310_hires.jpg?width=1200"
+    },
+    {
+      "id": "0f11bc22",
       "title": "Qatar MotoGP latest as US senator warns of \"insane\" Middle East war escalation",
       "link": "https://www.crash.net/motogp/news/1108723/1/qatar-motogp-latest-us-senator-warns-insane-middle-east-war-escalation",
       "pubDate": "2026-10-30 10:53:55",
@@ -1312,7 +1378,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1218165_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "e2aef80c",
+      "id": "fe6ff090",
       "title": "Marc Marquez gives telling answer about Jorge Martin after Sepang MotoGP practice",
       "link": "https://www.crash.net/motogp/news/1108720/1/marc-marquez-gives-telling-answer-about-jorge-martin-after-sepang-motogp",
       "pubDate": "2026-10-30 10:18:57",
@@ -1323,7 +1389,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357941_hires.jpg?width=1200"
     },
     {
-      "id": "a7947b20",
+      "id": "76c0534f",
       "title": "Video: AusX Auckland press day – Cole Davies bike didn’t arrive in time!",
       "link": "https://gatedrop.com/video-ausx-auckland-press-day-davies-bike-didnt-arrive-in-time/",
       "pubDate": "2026-10-30 10:17:25",
@@ -1334,7 +1400,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Screenshot_20261030_101156_YouTube-150x150.jpg"
     },
     {
-      "id": "00b5bd34",
+      "id": "6dfeae7f",
       "title": "PICS: Marco Bezzecchi debuts new Aprilia aero at Sepang MotoGP",
       "link": "https://www.crash.net/motogp/news/1108719/1/pics-marco-bezzecchi-debuts-new-aprilia-aero-sepang-motogp",
       "pubDate": "2026-10-30 10:12:03",
@@ -1345,18 +1411,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357831_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "0880b931",
-      "title": "Aprilia explains decision to withdraw Jorge Martin from Sepang MotoGP Practice",
-      "link": "https://www.crash.net/motogp/news/1108717/1/aprilia-explains-decision-withdraw-jorge-martin-sepang-motogp-practice",
-      "pubDate": "2026-10-30 09:48:12",
-      "pubDateISO": "2026-10-30T09:48:12+00:00",
-      "aiSummary": "Aprilia has explained why it pulled Martin from Practice at the Malaysian Grand Prix",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357718_hires.jpg?width=1200"
-    },
-    {
-      "id": "ec603759",
+      "id": "41b9cffa",
       "title": "RUMOUR: Pelle Gundersen heading to Maddii Honda for 2027?",
       "link": "https://gatedrop.com/rumour-pelle-gundersen-heading-to-maddii-honda-for-2027/",
       "pubDate": "2026-10-30 09:37:11",
@@ -1367,73 +1422,40 @@
       "image": "https://gatedrop.com/wp-content/uploads/Gundersen_Maddii-150x150.png"
     },
     {
-      "id": "5f0b28cb",
-      "title": "MotoGP Malaysian Grand Prix: Which riders are in Q2?",
-      "link": "https://www.crash.net/motogp/news/1108714/1/motogp-malaysian-grand-prix-which-riders-are-q2",
-      "pubDate": "2026-10-30 08:32:46",
-      "pubDateISO": "2026-10-30T08:32:46+00:00",
-      "aiSummary": "The Q1 and Q2 groups for qualifying at the MotoGP Malaysian Grand Prix",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357761_hires_1600x900.jpg?width=1200"
+      "id": "b071aa78",
+      "title": "George Russell claims Ferrari has a major advantage at Mexico GP",
+      "link": "https://www.crash.net/f1/news/1108613/1/george-russell-claims-ferrari-has-major-advantage-mexico-gp",
+      "pubDate": "2026-10-30 09:00:00",
+      "pubDateISO": "2026-10-30T09:00:00+00:00",
+      "aiSummary": "George Russell has outlined where he thinks Ferrari could hold an advantage in Mexico City.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1447510_hires.jpg?width=1200"
     },
     {
-      "id": "aff44f56",
-      "title": "Marc Marquez leads Sepang MotoGP Practice after crash, Jorge Martin pulls out",
-      "link": "https://www.crash.net/motogp/news/1108711/1/marc-marquez-leads-sepang-motogp-practice-after-crash-jorge-martin-pulls-out",
-      "pubDate": "2026-10-30 08:10:18",
-      "pubDateISO": "2026-10-30T08:10:18+00:00",
-      "aiSummary": "Marc Marquez topped Practice on Friday afternoon at Sepang",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357988_hires.jpg?width=1200"
+      "id": "8232bd0f",
+      "title": "Lewis Hamilton “built differently” and states F1 has ‘never had anyone like me’",
+      "link": "https://www.crash.net/f1/news/1108615/1/lewis-hamilton-built-differently-and-states-f1-has-never-had-anyone-me",
+      "pubDate": "2026-10-29 23:27:28",
+      "pubDateISO": "2026-10-29T23:27:28+00:00",
+      "aiSummary": "Lewis Hamilton makes bold assertion as he discusses extending his F1 career.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1448301_hires.jpg?width=1200"
     },
     {
-      "id": "c76a0fd4",
-      "title": "2026 Malaysian MotoGP, Sepang - Friday Practice Results",
-      "link": "https://www.crash.net/motogp/results/1108580/1/2026-malaysian-motogp-sepang-friday-practice-results",
-      "pubDate": "2026-10-30 08:00:51",
-      "pubDateISO": "2026-10-30T08:00:51+00:00",
-      "aiSummary": "Friday practice results from the 2026 Malaysian MotoGP at Sepang, round 19 of 22.",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357822_hires_1600x900.jpg?width=1200"
+      "id": "4b5600e7",
+      "title": "Are F1 drivers happy to race in Middle East? “We are not the ones taking the decisions”",
+      "link": "https://www.crash.net/f1/news/1108610/1/are-f1-drivers-happy-race-middle-east-we-are-not-ones-taking-decisions",
+      "pubDate": "2026-10-29 21:03:18",
+      "pubDateISO": "2026-10-29T21:03:18+00:00",
+      "aiSummary": "F1 drivers have their say on the prospect of the 2026 season concluding in the Middle East.",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1389413_hires.jpg?width=1200"
     },
     {
-      "id": "88dc5069",
-      "title": "Marc Marquez dominates Sepang MotoGP FP1, injured Jorge Martin returns",
-      "link": "https://www.crash.net/motogp/news/1108659/1/marc-marquez-dominates-sepang-fp1-injured-jorge-martin-makes-motogp-return",
-      "pubDate": "2026-10-30 04:30:51",
-      "pubDateISO": "2026-10-30T04:30:51+00:00",
-      "aiSummary": "Marc Marquez dominated opening Malaysian MotoGP practice as injured title rival Jorge Martin returned to action at Sepang.",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357727_hires_1600x900.jpg?width=1200"
-    },
-    {
-      "id": "5808112c",
-      "title": "Jorge Martin declared \"fit to race\" after FP1, Fernandez out of Malaysian MotoGP",
-      "link": "https://www.crash.net/motogp/news/1108590/1/jorge-martin-continue-malaysian-motogp-after-fp1-medical-review",
-      "pubDate": "2026-10-30 04:05:51",
-      "pubDateISO": "2026-10-30T04:05:51+00:00",
-      "aiSummary": "Injured MotoGP title contender Jorge Martin to continue the Sepang weekend after an FP1 medical review.",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357728_hires_1600x900.jpg?width=1200"
-    },
-    {
-      "id": "b451ac78",
-      "title": "Sepang MotoGP: Friday Practice as it happened",
-      "link": "https://www.crash.net/motogp/live/1044236/sepang-motogp-live-friday-practice-updates-malaysia",
-      "pubDate": "2026-10-30 01:45:37",
-      "pubDateISO": "2026-10-30T01:45:37+00:00",
-      "aiSummary": "Live Friday practice updates for the 2026 Malaysian MotoGP at Sepang.",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357741_hires_1600x900.jpg?width=1200"
-    },
-    {
-      "id": "6be46a6c",
+      "id": "447968e4",
       "title": "Daniel Ricciardo teases Max Verstappen reunion at Le Mans: “Give the people what they want”",
       "link": "https://www.crash.net/f1/news/1108608/1/daniel-ricciardo-teases-max-verstappen-reunion-le-mans-give-people-what-they-want",
       "pubDate": "2026-10-29 18:18:13",
@@ -1444,7 +1466,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_945331_hires.jpg?width=1200"
     },
     {
-      "id": "3a5b350a",
+      "id": "6e39633a",
       "title": "Ruben Fernandez Departing Honda HRC PETRONAS MXGP Team",
       "link": "https://www.vurbmoto.com/ruben-fernandez-departing-honda-hrc-petronas-mxgp-team/",
       "pubDate": "2026-10-29 15:07:39",
@@ -1455,7 +1477,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/ruben-fernandez-leaving-honda-mxgp-1024x683.jpg"
     },
     {
-      "id": "246beaf7",
+      "id": "f25d4488",
       "title": "Official: Joey Savatgy Signs Multi-Year Deal with Troy Lee Designs/Red Bull Ducati",
       "link": "https://www.vurbmoto.com/official-joey-savatgy-signs-multi-year-deal-with-troy-lee-designs-red-bull-ducati/",
       "pubDate": "2026-10-29 13:18:57",
@@ -1466,29 +1488,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/joey-savagty-troy-lee-designs-ducati-1024x683.jpg"
     },
     {
-      "id": "5933613a",
-      "title": "Ducati MotoGP pair against team orders as Marc Marquez nears title",
-      "link": "https://www.crash.net/motogp/news/1108593/1/ducati-motogp-pair-against-team-orders-marc-marquez-nears-title",
-      "pubDate": "2026-10-29 10:35:58",
-      "pubDateISO": "2026-10-29T10:35:58+00:00",
-      "aiSummary": "Two Ducati MotoGP riders have spoken in opposition to the Bologna brand enforcing team orders.",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1345263_hires.jpg?width=1200"
-    },
-    {
-      "id": "f38ce6bb",
-      "title": "Marco Bezzecchi responds to ‘not true’ Ducati claims over his MotoGP title hopes",
-      "link": "https://www.crash.net/motogp/news/1108592/1/marco-bezzecchi-responds-not-true-ducati-claims-over-his-motogp-title-hopes",
-      "pubDate": "2026-10-29 10:06:12",
-      "pubDateISO": "2026-10-29T10:06:12+00:00",
-      "aiSummary": "Marco Bezzecchi came in for big praise from Ducati",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357696_hires.jpg?width=1200"
-    },
-    {
-      "id": "64c5619e",
+      "id": "d47ad217",
       "title": "EnduroCross: A Whole Different Battlefield.",
       "link": "https://www.vurbmoto.com/endurocross-a-whole-different-battlefield/",
       "pubDate": "2026-10-28 22:00:43",
@@ -1499,7 +1499,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/Trystan-Hart-1024x666.png"
     },
     {
-      "id": "95361f09",
+      "id": "86fb8f5a",
       "title": "Husqvarna Announces 250 Class Support Teams for 2027 SMX Season",
       "link": "https://www.vurbmoto.com/husqvarna-announces-250-class-support-teams-for-2027-smx-season/",
       "pubDate": "2026-10-28 16:06:02",
@@ -1510,7 +1510,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/Husqvarna-FC-250-SMX-2027-1024x682.jpg"
     },
     {
-      "id": "fcd3a594",
+      "id": "1df57c57",
       "title": "Official: Malcolm Stewart Inks Deal with Monster Energy Kawasaki; Garrett Marchbanks Returns",
       "link": "https://www.vurbmoto.com/official-malcolm-stewart-inks-deal-with-monster-energy-kawasaki-garrett-marchbanks-returns/",
       "pubDate": "2026-10-28 13:55:51",
@@ -1521,7 +1521,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/malcolm-stewart-kawasaki-1024x823.png"
     },
     {
-      "id": "d7c502cd",
+      "id": "4d84161f",
       "title": "CSC Generation Acquires Dennis Kirk",
       "link": "https://www.vurbmoto.com/csc-generation-acquires-dennis-kirk/",
       "pubDate": "2026-10-28 12:27:11",
@@ -1532,7 +1532,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/dennis-kirk-sold-2026.jpg"
     },
     {
-      "id": "f1f03548",
+      "id": "8c67df22",
       "title": "Phoenix Racing Honda Signs Avery Long for 2027",
       "link": "https://www.vurbmoto.com/phoenix-racing-honda-signs-avery-long-for-2027/",
       "pubDate": "2026-10-27 20:07:43",
@@ -1543,7 +1543,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/10/Avery-Long-Phoenix-Honda-Racing-2027-1024x768.jpg"
     },
     {
-      "id": "7905e042",
+      "id": "9ea6479c",
       "title": "WorldSBK champion tests next-gen Honda CBR1000RR-R Fireblade",
       "link": "https://www.crash.net/wsbk/news/1108073/1/worldsbk-champion-tests-next-gen-honda-cbr1000rr-r-fireblade",
       "pubDate": "2026-10-23 14:07:19",
@@ -1554,7 +1554,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/site-image-resize-2026-10-23t140715.651.png?width=1200"
     },
     {
-      "id": "fc8f7d23",
+      "id": "fffec42b",
       "title": "Somkiat Chantra to move to WSBK with Honda after losing MotoGP ride",
       "link": "https://www.motorsport.com/motogp/news/somkiat-chantra-wsbk-honda-losing-motogp-ride/10757002/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2025-09-06 12:12:13",
@@ -1565,7 +1565,7 @@
       "image": "https://cdn-9.motorsport.com/images/amp/0mbBzL42/s6/somkiat-chantra-team-lcr-honda.jpg"
     },
     {
-      "id": "38ba6fd9",
+      "id": "d2f8869a",
       "title": "World Superbike performs U-turn on 2024 minimum weight rules",
       "link": "https://www.motorsport.com/wsbk/news/2024-rule-changes-minimum-weight/10531777/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-10-12 00:22:10",
@@ -1576,7 +1576,7 @@
       "image": "https://cdn-7.motorsport.com/images/amp/0qXZJNE6/s6/toprak-razgatlioglu-pata-yamah.jpg"
     },
     {
-      "id": "5b8c7c62",
+      "id": "05046d46",
       "title": "Ducati hands Bulega works World Superbike seat for 2024",
       "link": "https://www.motorsport.com/wsbk/news/ducati-bulega-2024-announcement-rinaldi/10516484/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-09-05 08:25:31",
@@ -1587,7 +1587,7 @@
       "image": "https://cdn-2.motorsport.com/images/amp/6b7zawp0/s6/nicolo-bulega-1.jpg"
     },
     {
-      "id": "94efe630",
+      "id": "520ced69",
       "title": "Sam Lowes to make 2024 WSBK switch with Marc VDS",
       "link": "https://www.motorsport.com/wsbk/news/sam-lowes-to-make-2024-wsbk-switch-with-marc-vds/10495359/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-07-13 09:54:11",
