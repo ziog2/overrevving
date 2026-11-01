@@ -195,3 +195,22 @@ Aumento frequenza cron GitHub Actions a ogni 30 minuti e inserimento risultati S
 Backup Timestamp:
 2026-10-31 10:31:56
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261101_220305.zip
+
+Note / Log Message:
+Implementazione Card 2: Tyre Choices Heatmap in event.html:
+- Sostituito il secondo riquadro con la nuova Heatmap interattiva delle mescole utilizzate in FP1.
+- Inserito il selettore rapido a pillola nell'intestazione della card con memorizzazione in localStorage:
+  1. 'Matrice 3x3': visualizzazione d'insieme Anteriore (Front: Soft, Medium, Hard) vs Posteriore (Rear: Soft, Medium, Hard) con conteggio giri, percentuale di utilizzo e intensità di colore termica (oro/ambra per le più utilizzate, azzurro per le secondarie, trasparente per le non utilizzate).
+  2. 'Piloti': suddivisione dettagliata per ciascun pilota preferito (con sigla e livrea colorata/tratteggiata) e le combinazioni testate (es. S-M, S-H, M-H, M-M).
+- Tooltip personalizzato interattivo su canvas al passaggio del mouse con dettagli dei giri, percentuali, miglior tempo e piloti.
+- Piena reattività al ridimensionamento della finestra e al cambio dei piloti preferiti (★).
+
+Backup Timestamp:
+2026-11-01 22:03:05
+=====================================================

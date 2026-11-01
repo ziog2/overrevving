@@ -714,7 +714,7 @@
       height: 100%;
     }
 
-    #fp1-tooltip {
+    #fp1-tooltip, #fp1-heatmap-tooltip {
       position: absolute;
       display: none;
       pointer-events: none;
@@ -728,7 +728,7 @@
       color: #e6edf3;
       min-width: 180px;
     }
-    #fp1-tooltip .tt-title {
+    #fp1-tooltip .tt-title, #fp1-heatmap-tooltip .tt-title {
       font-weight: 800;
       font-size: 12px;
       color: #fff;
@@ -736,16 +736,46 @@
       border-bottom: 1px solid #2d3542;
       padding-bottom: 4px;
     }
-    #fp1-tooltip .tt-row {
+    #fp1-tooltip .tt-row, #fp1-heatmap-tooltip .tt-row {
       display: flex;
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 3px;
       color: #8b949e;
     }
-    #fp1-tooltip .tt-val {
+    #fp1-tooltip .tt-val, #fp1-heatmap-tooltip .tt-val {
       font-weight: 700;
       color: #f0f6fc;
+    }
+
+    .fp1-toggle-group {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .fp1-toggle-btn {
+      background: transparent;
+      border: none;
+      color: #8b949e;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: inherit;
+      padding: 2px 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      line-height: 1.3;
+    }
+    .fp1-toggle-btn:hover {
+      color: #ffffff;
+    }
+    .fp1-toggle-btn.active {
+      background: #8e44ad;
+      color: #ffffff;
+      box-shadow: 0 1px 4px rgba(142, 68, 173, 0.4);
     }
 
     .sector-section {
@@ -20187,6 +20217,396 @@
       };
     }
 
+    let currentFp1HeatmapMode = 'matrix';
+    try {
+      const saved = localStorage.getItem('overrevving_fp1_heatmap_mode');
+      if (saved === 'matrix' || saved === 'riders') currentFp1HeatmapMode = saved;
+    } catch(e) {}
+
+    function setFp1HeatmapMode(mode) {
+      if (mode !== 'matrix' && mode !== 'riders') return;
+      currentFp1HeatmapMode = mode;
+      try { localStorage.setItem('overrevving_fp1_heatmap_mode', mode); } catch(e) {}
+      const btnMatrix = document.getElementById('fp1-heatmap-btn-matrix');
+      const btnRiders = document.getElementById('fp1-heatmap-btn-riders');
+      if (btnMatrix) btnMatrix.classList.toggle('active', mode === 'matrix');
+      if (btnRiders) btnRiders.classList.toggle('active', mode === 'riders');
+      const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA');
+      const fp1Data = (typeof EVENT_FP1_STINTS_DATA !== 'undefined' && EVENT_FP1_STINTS_DATA[cur]) ? EVENT_FP1_STINTS_DATA[cur] : {};
+      const activeFavRiders = Object.keys(fp1Data).filter(rName => isRiderFavorite(rName));
+      renderFp1HeatmapChart(cur, activeFavRiders);
+    }
+
+    let fp1HeatmapHitAreas = [];
+
+    function renderFp1HeatmapChart(gpShort, favList) {
+      const cvs = document.getElementById('chart-fp1-heatmap');
+      if (!cvs) return;
+      const ctx = cvs.getContext('2d');
+      const tooltipEl = document.getElementById('fp1-heatmap-tooltip');
+      fp1HeatmapHitAreas = [];
+
+      const data = (typeof EVENT_FP1_STINTS_DATA !== 'undefined' && EVENT_FP1_STINTS_DATA[gpShort]) ? EVENT_FP1_STINTS_DATA[gpShort] : {};
+      const riders = favList.filter(r => data[r]).map(r => ({
+        name: r,
+        ...data[r]
+      }));
+
+      if (!riders.length) return;
+
+      const rect = cvs.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const width = rect.width || 300;
+      const height = rect.height || 270;
+      cvs.width = width * dpr;
+      cvs.height = height * dpr;
+      cvs.style.width = width + 'px';
+      cvs.style.height = height + 'px';
+      ctx.scale(dpr, dpr);
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Watermark
+      ctx.save();
+      ctx.font = '900 20px Inter, sans-serif';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.025)';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('OVERREVVING', width / 2, height / 2);
+      ctx.restore();
+
+      const compLabels = { 'S': 'SOFT', 'M': 'MED', 'H': 'HARD' };
+      const compColors = { 'S': '#ffd600', 'M': '#ffffff', 'H': '#00b0ff' };
+
+      if (currentFp1HeatmapMode === 'matrix') {
+        // --- 1. MATRICE 3x3 VIEW ---
+        const matrix = {
+          'S': { 'S': 0, 'M': 0, 'H': 0 },
+          'M': { 'S': 0, 'M': 0, 'H': 0 },
+          'H': { 'S': 0, 'M': 0, 'H': 0 }
+        };
+        const cellDetails = {};
+        let totalLapsAll = 0;
+        let maxCellLaps = 0;
+
+        riders.forEach(rider => {
+          (rider.runs || []).forEach(run => {
+            const f = run.front || 'M';
+            const re = run.rear || 'M';
+            const laps = run.lapsCount || 0;
+            if (matrix[f] && matrix[f][re] !== undefined && laps > 0) {
+              matrix[f][re] += laps;
+              totalLapsAll += laps;
+              if (matrix[f][re] > maxCellLaps) maxCellLaps = matrix[f][re];
+
+              const key = f + '-' + re;
+              if (!cellDetails[key]) {
+                cellDetails[key] = { bestTime: run.fastest, bestSec: run.fastestSec, bestRider: rider.name, riders: {} };
+              }
+              if (run.fastestSec > 0 && run.fastestSec < cellDetails[key].bestSec) {
+                cellDetails[key].bestSec = run.fastestSec;
+                cellDetails[key].bestTime = run.fastest;
+                cellDetails[key].bestRider = rider.name;
+              }
+              cellDetails[key].riders[rider.name] = (cellDetails[key].riders[rider.name] || 0) + laps;
+            }
+          });
+        });
+
+        const leftPad = 48;
+        const topPad = 38;
+        const rightPad = 12;
+        const bottomPad = 16;
+        const gridW = width - leftPad - rightPad;
+        const gridH = height - topPad - bottomPad;
+        const gap = 6;
+        const cellW = (gridW - gap * 2) / 3;
+        const cellH = (gridH - gap * 2) / 3;
+        const comps = ['S', 'M', 'H'];
+
+        // Headers
+        ctx.font = '800 10px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#8b949e';
+        ctx.fillText('POSTERIORE (REAR) →', leftPad + gridW / 2, 12);
+
+        comps.forEach((c, colIdx) => {
+          const x = leftPad + colIdx * (cellW + gap) + cellW / 2;
+          ctx.fillStyle = compColors[c];
+          ctx.fillText(compLabels[c], x, 26);
+        });
+
+        ctx.save();
+        ctx.translate(12, topPad + gridH / 2);
+        ctx.rotate(-Math.PI / 2);
+        ctx.fillStyle = '#8b949e';
+        ctx.font = '800 10px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('ANTERIORE (FRONT) →', 0, 0);
+        ctx.restore();
+
+        comps.forEach((r, rowIdx) => {
+          const y = topPad + rowIdx * (cellH + gap) + cellH / 2;
+          ctx.fillStyle = compColors[r];
+          ctx.textAlign = 'right';
+          ctx.font = '800 10px Inter, sans-serif';
+          ctx.fillText(compLabels[r], leftPad - 8, y);
+        });
+
+        // Cells
+        comps.forEach((f, rowIdx) => {
+          comps.forEach((re, colIdx) => {
+            const x = leftPad + colIdx * (cellW + gap);
+            const y = topPad + rowIdx * (cellH + gap);
+            const laps = matrix[f][re];
+            const ratio = maxCellLaps > 0 ? (laps / maxCellLaps) : 0;
+
+            let bg = 'rgba(255, 255, 255, 0.03)';
+            let border = 'rgba(255, 255, 255, 0.07)';
+
+            if (laps > 0) {
+              if (ratio >= 0.70) {
+                bg = 'rgba(255, 214, 0, ' + (0.16 + ratio * 0.28) + ')';
+                border = 'rgba(255, 214, 0, 0.55)';
+              } else if (ratio >= 0.35) {
+                bg = 'rgba(0, 176, 255, ' + (0.12 + ratio * 0.22) + ')';
+                border = 'rgba(0, 176, 255, 0.45)';
+              } else {
+                bg = 'rgba(255, 255, 255, ' + (0.06 + ratio * 0.15) + ')';
+                border = 'rgba(255, 255, 255, 0.2)';
+              }
+            }
+
+            ctx.fillStyle = bg;
+            ctx.strokeStyle = border;
+            ctx.lineWidth = ratio >= 0.7 ? 1.5 : 1;
+            if (ctx.roundRect) {
+              ctx.beginPath();
+              ctx.roundRect(x, y, cellW, cellH, 6);
+              ctx.fill();
+              ctx.stroke();
+            } else {
+              ctx.fillRect(x, y, cellW, cellH);
+              ctx.strokeRect(x, y, cellW, cellH);
+            }
+
+            if (laps > 0) {
+              ctx.font = '900 17px Inter, sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillStyle = '#ffffff';
+              ctx.fillText(laps, x + cellW / 2, y + cellH / 2 - 8);
+
+              ctx.font = '700 10px Inter, sans-serif';
+              ctx.fillStyle = '#a0aec0';
+              const pct = totalLapsAll > 0 ? Math.round((laps / totalLapsAll) * 100) : 0;
+              ctx.fillText(pct + '% laps', x + cellW / 2, y + cellH / 2 + 11);
+            } else {
+              ctx.font = '600 13px Inter, sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.14)';
+              ctx.fillText('—', x + cellW / 2, y + cellH / 2);
+            }
+
+            if (laps > 0) {
+              fp1HeatmapHitAreas.push({
+                x, y, w: cellW, h: cellH,
+                type: 'matrix',
+                front: f, rear: re,
+                laps, totalLapsAll,
+                details: cellDetails[f + '-' + re]
+              });
+            }
+          });
+        });
+
+      } else {
+        // --- 2. PILOTI VIEW ---
+        const comboSet = new Set();
+        riders.forEach(r => {
+          (r.runs || []).forEach(run => {
+            if (run.lapsCount > 0) comboSet.add(run.front + '-' + run.rear);
+          });
+        });
+        const combos = Array.from(comboSet);
+
+        const leftPad = 54;
+        const topPad = 32;
+        const rightPad = 12;
+        const bottomPad = 12;
+        const chartW = width - leftPad - rightPad;
+        const chartH = height - topPad - bottomPad;
+        const rowCount = riders.length;
+        const rowGap = 6;
+        const rowH = (chartH - (rowCount - 1) * rowGap) / rowCount;
+        const colGap = 6;
+        const colW = (chartW - (combos.length - 1) * colGap) / (combos.length || 1);
+
+        // Header: Combos
+        ctx.font = '800 11px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        combos.forEach((c, colIdx) => {
+          const x = leftPad + colIdx * (colW + colGap) + colW / 2;
+          ctx.fillStyle = '#e2e8f0';
+          ctx.fillText(c, x, topPad / 2);
+        });
+
+        riders.forEach((rider, rIdx) => {
+          const y = topPad + rIdx * (rowH + rowGap);
+          const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rider.name]) || {};
+          const riderColor = style.color || '#3498db';
+
+          const colCenterX = Math.round((leftPad - 8) / 2);
+          ctx.save();
+          ctx.font = '800 11px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText(rider.code, colCenterX, y + rowH * 0.35);
+
+          const lineW = 22;
+          const lineX = colCenterX - lineW / 2;
+          const lineY = y + rowH * 0.72;
+          ctx.strokeStyle = riderColor;
+          ctx.lineWidth = 2.5;
+          ctx.lineCap = 'round';
+          if (style.borderDash && Array.isArray(style.borderDash) && style.borderDash.length) {
+            ctx.setLineDash(style.borderDash);
+          } else {
+            ctx.setLineDash([]);
+          }
+          ctx.beginPath();
+          ctx.moveTo(lineX, lineY);
+          ctx.lineTo(lineX + lineW, lineY);
+          ctx.stroke();
+          ctx.restore();
+
+          const rCombos = {};
+          const rBest = {};
+          (rider.runs || []).forEach(run => {
+            if (run.lapsCount > 0) {
+              const k = run.front + '-' + run.rear;
+              rCombos[k] = (rCombos[k] || 0) + run.lapsCount;
+              if (!rBest[k] || run.fastestSec < rBest[k].sec) {
+                rBest[k] = { time: run.fastest, sec: run.fastestSec };
+              }
+            }
+          });
+
+          combos.forEach((c, colIdx) => {
+            const x = leftPad + colIdx * (colW + colGap);
+            const laps = rCombos[c] || 0;
+
+            let bg = 'rgba(255, 255, 255, 0.03)';
+            let border = 'rgba(255, 255, 255, 0.06)';
+            if (laps > 0) {
+              bg = 'rgba(0, 230, 118, ' + (0.12 + Math.min(laps / 18, 1) * 0.35) + ')';
+              border = 'rgba(0, 230, 118, 0.45)';
+            }
+
+            ctx.fillStyle = bg;
+            ctx.strokeStyle = border;
+            ctx.lineWidth = 1;
+            if (ctx.roundRect) {
+              ctx.beginPath();
+              ctx.roundRect(x, y, colW, rowH, 4);
+              ctx.fill();
+              ctx.stroke();
+            } else {
+              ctx.fillRect(x, y, colW, rowH);
+              ctx.strokeRect(x, y, colW, rowH);
+            }
+
+            if (laps > 0) {
+              ctx.font = '800 12px Inter, sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillStyle = '#ffffff';
+              ctx.fillText(laps + ' L', x + colW / 2, y + rowH / 2);
+            } else {
+              ctx.font = '600 11px Inter, sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+              ctx.fillText('—', x + colW / 2, y + rowH / 2);
+            }
+
+            if (laps > 0) {
+              fp1HeatmapHitAreas.push({
+                x, y, w: colW, h: rowH,
+                type: 'riders',
+                riderName: rider.name,
+                riderCode: rider.code,
+                combo: c,
+                laps,
+                riderTotalLaps: rider.totalLaps,
+                bestTime: rBest[c] ? rBest[c].time : '-'
+              });
+            }
+          });
+        });
+      }
+
+      // TOOLTIP MOUSE HANDLER
+      cvs.onmousemove = function(e) {
+        if (!tooltipEl) return;
+        const cRect = cvs.getBoundingClientRect();
+        const mx = e.clientX - cRect.left;
+        const my = e.clientY - cRect.top;
+
+        const hit = fp1HeatmapHitAreas.find(a => mx >= a.x && mx <= a.x + a.w && my >= a.y && my <= a.y + a.h);
+        if (hit) {
+          cvs.style.cursor = 'pointer';
+          let html = '';
+          if (hit.type === 'matrix') {
+            const fLabel = compLabels[hit.front];
+            const rLabel = compLabels[hit.rear];
+            const pct = hit.totalLapsAll > 0 ? Math.round((hit.laps / hit.totalLapsAll) * 100) : 0;
+            html = `
+              <div class="tt-title">Front: ${fLabel} · Rear: ${rLabel} (${hit.front}-${hit.rear})</div>
+              <div class="tt-row"><span>Giri totali:</span><span class="tt-val">${hit.laps} giri (${pct}% dei preferiti)</span></div>
+            `;
+            if (hit.details && hit.details.bestTime) {
+              html += `<div class="tt-row"><span>Miglior giro:</span><span class="tt-val" style="color:#00e676;">${hit.details.bestTime} (${hit.details.bestRider})</span></div>`;
+            }
+            if (hit.details && hit.details.riders) {
+              const riderList = Object.entries(hit.details.riders).map(([r, l]) => `${r}: ${l}g`).join(', ');
+              html += `<div class="tt-row" style="margin-top:4px; font-size:10px;"><span>Piloti:</span><span class="tt-val" style="font-weight:500;">${riderList}</span></div>`;
+            }
+          } else {
+            const pct = hit.riderTotalLaps > 0 ? Math.round((hit.laps / hit.riderTotalLaps) * 100) : 0;
+            html = `
+              <div class="tt-title">${hit.riderName} (${hit.riderCode})</div>
+              <div class="tt-row"><span>Setup mescole:</span><span class="tt-val">${hit.combo}</span></div>
+              <div class="tt-row"><span>Giri percorsi:</span><span class="tt-val">${hit.laps} L (${pct}% del pilota)</span></div>
+              <div class="tt-row"><span>Miglior tempo:</span><span class="tt-val" style="color:#00e676;">${hit.bestTime}</span></div>
+            `;
+          }
+          tooltipEl.innerHTML = html;
+          tooltipEl.style.display = 'block';
+
+          let tx = mx + 14;
+          let ty = my + 14;
+          const ttRect = tooltipEl.getBoundingClientRect();
+          if (tx + ttRect.width > cRect.width) tx = mx - ttRect.width - 10;
+          if (ty + ttRect.height > cRect.height) ty = my - ttRect.height - 10;
+          tooltipEl.style.left = Math.max(0, tx) + 'px';
+          tooltipEl.style.top = Math.max(0, ty) + 'px';
+        } else {
+          cvs.style.cursor = 'default';
+          tooltipEl.style.display = 'none';
+        }
+      };
+
+      cvs.onmouseleave = function() {
+        if (tooltipEl) tooltipEl.style.display = 'none';
+        cvs.style.cursor = 'default';
+      };
+    }
+
     function renderFp1AnalysisSection(currentGpShort) {
       if (!currentGpShort) currentGpShort = (window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA'));
       const sectionEl = document.getElementById('fp1-analysis-section');
@@ -20216,8 +20636,13 @@
         toggleFp1AnalysisMinimize();
       }
 
+      const btnMatrix = document.getElementById('fp1-heatmap-btn-matrix');
+      const btnRiders = document.getElementById('fp1-heatmap-btn-riders');
+      if (btnMatrix) btnMatrix.classList.toggle('active', currentFp1HeatmapMode === 'matrix');
+      if (btnRiders) btnRiders.classList.toggle('active', currentFp1HeatmapMode === 'riders');
+
       renderFp1StintsChart(currentGpShort, activeFavRiders);
-      drawFp1DummyChart('dummy-chart-1', 'bar');
+      renderFp1HeatmapChart(currentGpShort, activeFavRiders);
       drawFp1DummyChart('dummy-chart-2', 'line');
       drawFp1DummyChart('dummy-chart-3', 'line');
     }
@@ -22345,17 +22770,18 @@
               </div>
             </div>
 
-            <!-- CARD 2: DUMMY BLURRED CARD -->
-            <div class="sector-card">
+            <!-- CARD 2: TYRE CHOICES HEATMAP -->
+            <div class="sector-card" id="fp1-heatmap-card">
               <div class="sector-card-title">
-                <span>Stint Pace &amp; Lap Times</span>
-                <span class="sector-card-badge">Distribution</span>
+                <span>Tyre Choices Heatmap</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="fp1-heatmap-btn-matrix" onclick="setFp1HeatmapMode('matrix')">Matrice 3&times;3</button>
+                  <button type="button" class="fp1-toggle-btn" id="fp1-heatmap-btn-riders" onclick="setFp1HeatmapMode('riders')">Piloti</button>
+                </div>
               </div>
               <div class="progression-canvas-container">
-                <canvas class="wip-blur-bg" id="dummy-chart-1"></canvas>
-                <div class="wip-overlay">
-                  <div class="wip-badge">&#x1F6A7; WORK IN PROGRESS</div>
-                </div>
+                <canvas id="chart-fp1-heatmap"></canvas>
+                <div id="fp1-heatmap-tooltip"></div>
               </div>
             </div>
 
