@@ -258,3 +258,20 @@ Implementazione Card 3 FP1: Tyre Degradation (Passo & Decadimento Gomma per Eta'
 Backup Timestamp:
 2026-11-01 22:49:43
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261102_012055.zip
+
+Note / Log Message:
+Risoluzione Lap Chart Gara Lunga della Malesia (MAL RAC) in event.html:
+- Causa del problema: sul server/CDN Dorna di MotoGP il file 'LapChart.pdf' per la gara della Malesia non e' stato caricato (errore 404 Not Found). A differenza della Sprint e delle classi Moto2/Moto3, la pipeline .github/scripts/update_event_data.py per la MotoGP RAC non disponeva del fallback automatico per calcolare il lap chart dai settori/tempi ufficiali di Analysis.pdf.
+- Risoluzione in event.html: calcolato con precisione il lap chart ufficiale dei 20 giri per tutti i 20 piloti a partire da EVENT_LAPS_DATA['MAL'] tramite compute_lap_chart_from_sectors ed inserito in EVENT_LAP_CHARTS_DATA['RAC']['MAL'].
+- Risoluzione nella pipeline: aggiornato lo script .github/scripts/update_event_data.py inserendo il meccanismo di fallback automatico anche per la MotoGP RAC, in modo che in caso di mancato caricamento o errore 404 del PDF LapChart da parte di Dorna, il lap chart venga sempre calcolato automaticamente dall'Analysis.pdf dei settori.
+- Verificata la corretta visualizzazione di tutti i grafici della sessione Gara Lunga (Lap Chart, Gap to Leader, Pace Delta 3 Part Race, Lap Times Density).
+
+Backup Timestamp:
+2026-11-02 01:20:55
+=====================================================

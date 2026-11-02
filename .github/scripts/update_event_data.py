@@ -901,17 +901,26 @@ def main():
                     rac_lap_bytes = download_bytes(rac_lap_pdf_url)
                     if rac_lap_bytes:
                         break
-                if rac_lap_bytes:
-                    print(f"  Estrazione LapChart Gara per {short}...")
-                    rac_lap_data = extract_lap_chart_from_pdf(rac_lap_bytes)
-                    if rac_lap_data and rac_lap_data.get("riders"):
-                        rac_lap_json = json.dumps(rac_lap_data, separators=(',', ':'))
-                        m_rac_c = re.search(r'"RAC":\s*\{', html_content[idx_rac_charts:idx_spr_sec])
-                        if m_rac_c:
-                            pos = idx_rac_charts + m_rac_c.end()
-                            html_content = html_content[:pos] + f'\n        "{short}": ' + rac_lap_json + ',' + html_content[pos:]
-                            updated = True
-                            print(f"  ✓ Inserito LapChart Gara {short} ({rac_lap_data['totalLaps']} giri)!")
+                rac_lap_data = extract_lap_chart_from_pdf(rac_lap_bytes) if rac_lap_bytes else None
+                if not rac_lap_data and rac:
+                    # Fallback: compute lap chart positions from Analysis.pdf
+                    for rf in rac_pdf_folders:
+                        rac_ana_url = f"https://resources.motogp.com/files/results/2026/{short}/MotoGP/{rf}/Analysis.pdf"
+                        ana_bytes = download_bytes(rac_ana_url)
+                        if ana_bytes:
+                            rac_win_laps = int(rac[0]['laps']) if (rac and str(rac[0].get('laps', '')).isdigit()) else 30
+                            sec_dict = extract_sectors_from_pdf(ana_bytes, max_laps=rac_win_laps)
+                            if sec_dict:
+                                rac_lap_data = compute_lap_chart_from_sectors(sec_dict, rac_win_laps)
+                                break
+                if rac_lap_data and rac_lap_data.get("riders"):
+                    rac_lap_json = json.dumps(rac_lap_data, separators=(',', ':'))
+                    m_rac_c = re.search(r'"RAC":\s*\{', html_content[idx_rac_charts:idx_spr_sec])
+                    if m_rac_c:
+                        pos = idx_rac_charts + m_rac_c.end()
+                        html_content = html_content[:pos] + f'\n        "{short}": ' + rac_lap_json + ',' + html_content[pos:]
+                        updated = True
+                        print(f"  ✓ Inserito LapChart Gara {short} ({rac_lap_data['totalLaps']} giri)!")
 
             idx_rac_sec = html_content.find('const EVENT_LAPS_DATA =')
             rac_sec_present = (f'"{short}":' in html_content[idx_rac_sec:]) if idx_rac_sec != -1 else False
