@@ -59,36 +59,47 @@ def download_bytes(url):
 
 def clean_name(name):
     if not name: return "Rider"
-    clean = name.strip()
-    if "Vinales" in clean or "Vi.ales" in clean: return "Maverick Viñales"
-    if "Munoz" in clean or "Mu.oz" in clean: return "Daniel Muñoz"
-    if "Oncu" in clean or ".ncu" in clean: return "Deniz Öncü"
+    clean = " ".join(name.strip().split())
+    words = []
+    for w in clean.split(" "):
+        if len(w) >= 2 and w.isupper():
+            words.append(w.capitalize())
+        else:
+            words.append(w)
+    clean = " ".join(words)
+    u = clean.upper()
+    if "VINALES" in u or "VIÑALES" in u or re.search(r"VI.ALES", u): return "Maverick Viñales"
+    if "MUÑOZ" in u or "MUNOZ" in u or re.search(r"MU.OZ", u):
+        return "David Muñoz" if "DAVID" in u else "Daniel Muñoz"
+    if "ÖNCÜ" in u or "ONCU" in u or "ONCÜ" in u or re.search(r".NC.", u): return "Deniz Öncü"
+    if "GIANNANTONIO" in u: return "Fabio Di Giannantonio"
     return clean
 
 def normalize_rider_name(raw_name):
     if not raw_name: return "Rider"
     n = raw_name.upper()
-    if "MARQUEZ" in n and "MARC" in n: return "Marc Marquez"
+    if "MARQUEZ" in n and "MARC" in n and "MARCOS" not in n: return "Marc Marquez"
     if "MARQUEZ" in n and ("ALEX" in n or r"A\EX" in n): return "Alex Marquez"
     if "BEZZECCHI" in n: return "Marco Bezzecchi"
-    if "MARTIN" in n: return "Jorge Martin"
+    if "JORGE" in n and "MARTIN" in n: return "Jorge Martin"
     if "GIANNANTONIO" in n: return "Fabio Di Giannantonio"
     if "ACOSTA" in n: return "Pedro Acosta"
-    if "AUGUSTO" in n: return "Augusto Fernandez"
-    if "FERNANDEZ" in n or "FERNAN" in n or "RAUL" in n: return "Raul Fernandez"
+    if "AUGUSTO" in n and "FERNAN" in n: return "Augusto Fernandez"
+    if "ADRIAN" in n and "FERNAN" in n: return "Adrian Fernandez"
+    if "RAUL" in n and "FERNAN" in n: return "Raul Fernandez"
     if "EGUER" in n or r"ALDE\UER" in n: return "Fermin Aldeguer"
     if "MARINI" in n: return "Luca Marini"
     if "ZARCO" in n: return "Johann Zarco"
     if "MOREIRA" in n: return "Diogo Moreira"
     if "MORBI" in n: return "Franco Morbidelli"
     if "BAGNAIA" in n or r"BA\NAIA" in n: return "Francesco Bagnaia"
-    if "BIN" in n: return "Brad Binder"
+    if "BINDER" in n and "DARRYN" not in n: return "Brad Binder"
     if "BASTIANINI" in n: return "Enea Bastianini"
-    if "ALEIX" in n: return "Aleix Espargaro"
-    if "ESPARGARO" in n or "POL" in n: return "Pol Espargaro"
+    if "ALEIX" in n and "ESPARGARO" in n: return "Aleix Espargaro"
+    if "POL" in n and "ESPARGARO" in n: return "Pol Espargaro"
     if "MILLER" in n: return "Jack Miller"
     if "RINS" in n: return "Alex Rins"
-    if "MIR" in n: return "Joan Mir"
+    if "JOAN" in n and "MIR" in n: return "Joan Mir"
     if "QUARTARARO" in n: return "Fabio Quartararo"
     if "VIÑALES" in n or "VINALES" in n or "VI.ALES" in n or re.search(r"VI.ALES", n): return "Maverick Viñales"
     if "OGURA" in n or r"O\URA" in n: return "Ai Ogura"
@@ -228,7 +239,7 @@ def parse_dorna_analysis_pdf(pdf_bytes):
             rname_to_cmap[r_name] = font_to_cmap[f_obj]
 
     decoded_pages = []
-    for m in stream_matches:
+    for m in sorted(stream_matches, key=lambda x: int(x.group(1))):
         s_start = m.end()
         if s_start < len(pdf_bytes) and pdf_bytes[s_start] == 13: s_start += 1
         if s_start < len(pdf_bytes) and pdf_bytes[s_start] == 10: s_start += 1
@@ -246,13 +257,17 @@ def parse_dorna_analysis_pdf(pdf_bytes):
                     if tf_m and tf_m.group(1) in rname_to_cmap:
                         cur_cmap = rname_to_cmap[tf_m.group(1)]
 
-                    tj_m = re.search(r'\[(.*)\]\s*TJ', line) or re.search(r'\((.*)\)\s*Tj', line)
-                    if tj_m:
-                        raw_arr = tj_m.group(1)
-                        str_matches = [sm.group(1) for sm in re.finditer(r'\(((?:\\.|[^\\)])*)\)', raw_arr)]
+                    tj_arr = re.search(r'\[(.*)\]\s*TJ', line)
+                    tj_single = re.search(r'\(((?:\\.|[^\\)])*)\)\s*Tj', line) if not tj_arr else None
+                    if tj_arr or tj_single:
+                        if tj_arr:
+                            raw_arr = tj_arr.group(1)
+                            str_matches = [sm.group(1) for sm in re.finditer(r'\(((?:\\.|[^\\)])*)\)', raw_arr)]
+                        else:
+                            str_matches = [tj_single.group(1)]
                         decoded_str = ""
                         for sm in str_matches:
-                            val = re.sub(r'\\([0-7]{3})', lambda m_oct: chr(int(m_oct.group(1), 8)), sm)
+                            val = re.sub(r'\\([0-7]{1,3})', lambda m_oct: chr(int(m_oct.group(1), 8)), sm)
                             val = val.replace(r'\n', '\n').replace(r'\r', '\r').replace(r'\t', '\t').replace(r'\b', '\b').replace(r'\f', '\f').replace(r'\(', '(').replace(r'\)', ')').replace(r'\\', '\\')
                             for ch in val:
                                 b_code = ord(ch)
@@ -268,7 +283,15 @@ def parse_dorna_analysis_pdf(pdf_bytes):
     return "\n=== PAGE ===\n".join(decoded_pages)
 
 def unpack_numbers(text):
-    res = re.sub(r"(\d)\s+'(\d{2}\.\d{3})", r"\1'\2", text)
+    res = text
+    for _ in range(3):
+        res = re.sub(r"(\d)\s+'(\d)", r"\1'\2", res)
+        res = re.sub(r"(\d+')\s+(\d)", r"\1\2", res)
+        res = re.sub(r"(\d+'\d)\s+(\d)", r"\1\2", res)
+        res = re.sub(r"(\d+'\d{2})\s+(\.\d{3})", r"\1\2", res)
+        res = re.sub(r"(?<!\d)(\d)\s+(\d\.\d{3}\b)", r"\1\2", res)
+        res = re.sub(r"\b(\d{2})\s+(\.\d{3}\b)", r"\1\2", res)
+    res = re.sub(r"(\d)\s+'(\d{2}\.\d{3})", r"\1'\2", res)
     for _ in range(4):
         res = re.sub(r'(\b\d{2,3}\.\d{1})(\d{2}\.\d{3}\b)', r'\1 \2', res)
         res = re.sub(r'(\d{2}\.\d{3})(?=[A-Za-z0-9])', r'\1 ', res)
@@ -288,6 +311,9 @@ def parse_sector_val(s):
 def compute_lap_chart_from_sectors(sectors_dict, total_laps):
     if not sectors_dict or total_laps <= 0:
         return None
+    actual_max = max((max((l.get('lap', 0) for l in laps), default=0) for laps in sectors_dict.values() if laps), default=0)
+    if 0 < actual_max < total_laps:
+        total_laps = actual_max
     def parse_t(s):
         m = re.match(r"^(\d+)'(\d+\.\d+)$", str(s).strip())
         return int(m.group(1))*60 + float(m.group(2)) if m else None
@@ -321,12 +347,12 @@ def compute_lap_chart_from_sectors(sectors_dict, total_laps):
 
 def extract_sectors_from_pdf(pdf_bytes, max_laps):
     raw_text = parse_dorna_analysis_pdf(pdf_bytes)
-    clean = re.sub(r'(?s)Page\s+\d+\s+of\b(?:(?!Page\s+\d+\s+of\b).){0,400}?Fastest Lap:', '', raw_text)
+    clean = re.sub(r'(?s)Page\s+\d+\s+of\b(?:(?!Page\s+\d+\s+of\b).){0,600}?(?:Fastest Lap:|© MotoGP[^\n]*)', '', raw_text)
     clean = re.sub(r'(?m)^Official MotoGP Timing.*$', '', clean)
     clean = re.sub(r'(?m)^These data/results.*$', '', clean)
     clean = clean.replace('=== PAGE ===', '')
 
-    pat = r'(?m)^(?:ITA|SPA|FRA|RSA|AUS|JPN|GER|GBR|POR|USA|THA|BRA|HUN|CZE|NED|INA|MAL|QAT|TUR|SWI|MON)\s*\r?\n([^\r\n]+)\s*\r?\n(?:\d+(?:st|nd|rd|th|t\\)|NC|unfinished)'
+    pat = r'(?m)[A-Z]{3}\s*\r?\n([^\r\n]+)\s*\r?\n(?:\d+(?:st|nd|rd|th|t\\)|NC|unfinished)'
     matches = list(re.finditer(pat, clean))
     result = {}
 
@@ -1074,6 +1100,7 @@ def update_moto2():
                         pos_in = m_insert.end()
                         new_s_slice = s_slice[:pos_in] + f'\n  "{short}": {static_json},' + s_slice[pos_in:]
                     html_content = html_content[:idx_s_start] + new_s_slice + html_content[idx_s_end:]
+                    existing = static_obj
                     updated = True
                     print(f"✓ Aggiornato blocco {short} in STATIC_EVENT_DATA Moto2!")
 
@@ -1267,6 +1294,7 @@ def update_moto3():
                     new_slice = s_slice[:pos_in] + f'\n  "{short}": {new_static_json},' + s_slice[pos_in:]
 
                 html_content = html_content[:idx_s_start] + new_slice + html_content[idx_s_end:]
+                existing = new_static
                 updated = True
                 print(f"✓ Inseriti risultati {short} in STATIC_EVENT_DATA Moto3!")
 
