@@ -846,7 +846,23 @@
       color: #eee;
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
+    }
+
+    .fp1-weather-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #cbd5e1;
+      letter-spacing: 0.02em;
+      text-transform: none;
     }
 
     .sector-subtitle {
@@ -19981,6 +19997,42 @@
       'H': '#00b0ff'  // Hard: Light Blue
     };
 
+    const FP1_STINT_COLOR_PACE = '#a855f7'; // Purple / Viola (distinct from green, red, white, yellow, blue)
+    const FP1_STINT_COLOR_TA = '#ff7a00';   // Orange / Arancione (distinct from green, red, white, yellow, blue)
+
+    function classifyFp1Runs(runs) {
+      if (!runs || !runs.length) return [];
+      const validFastest = runs.filter(r => r.fastestSec > 0).map(r => r.fastestSec);
+      const pbSec = validFastest.length ? Math.min(...validFastest) : 999;
+      return runs.map((r, idx) => {
+        const flying = (r.flying || []).slice().sort((a, b) => a - b);
+        const fastestSec = r.fastestSec || (flying[0] || 999);
+        const rhythmLaps = flying.filter(s => s <= fastestSec + 1.25);
+        const deltaToPB = +(fastestSec - pbSec).toFixed(3);
+        const lapsCount = r.lapsCount || 0;
+
+        let isTA = false;
+        // 1) Push-cool-push or one-shot: <= 2 rhythm laps and within 0.45s of PB
+        if (rhythmLaps.length <= 2 && deltaToPB <= 0.45) {
+          isTA = true;
+        }
+        // 2) Final run attack: last run, <= 5 total laps, sets or matches PB, <= 3 rhythm laps
+        else if (idx === runs.length - 1 && lapsCount <= 5 && deltaToPB <= 0.05 && rhythmLaps.length <= 3) {
+          isTA = true;
+        }
+        // 3) Short dash: <= 4 total laps and within 0.30s of PB
+        else if (lapsCount <= 4 && deltaToPB <= 0.30) {
+          isTA = true;
+        }
+
+        return {
+          ...r,
+          isTA: isTA,
+          stintType: isTA ? 'TA' : 'PACE'
+        };
+      });
+    }
+
     function renderFp1StintsChart(gpShort, favList) {
       const cvs = document.getElementById('chart-fp1-stints');
       if (!cvs) return;
@@ -20024,6 +20076,40 @@
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('OVERREVVING', width / 2, height / 2);
+      ctx.restore();
+
+      // Small legend in alto nel grafico (Pace = Purple, Time Attack = Orange)
+      const legW = 160;
+      const legX = Math.max(leftPad + 10, width - rightPad - legW);
+      const legY = 13;
+      ctx.save();
+      ctx.font = '600 10px Inter, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+
+      // Pace
+      ctx.fillStyle = FP1_STINT_COLOR_PACE;
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(legX, legY - 2.5, 14, 5, 2);
+        ctx.fill();
+      } else {
+        ctx.fillRect(legX, legY - 2.5, 14, 5);
+      }
+      ctx.fillStyle = '#cbd5e1';
+      ctx.fillText('Pace', legX + 18, legY);
+
+      // Time Attack
+      ctx.fillStyle = FP1_STINT_COLOR_TA;
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(legX + 62, legY - 2.5, 14, 5, 2);
+        ctx.fill();
+      } else {
+        ctx.fillRect(legX + 62, legY - 2.5, 14, 5);
+      }
+      ctx.fillStyle = '#cbd5e1';
+      ctx.fillText('Time Attack', legX + 80, legY);
       ctx.restore();
 
       // Draw faint vertical grid lines without x-axis didascalia
@@ -20095,8 +20181,8 @@
         ctx.stroke();
         ctx.restore();
 
-        // 3. Draw Stints
-        const runs = (rider.runs || []).filter(s => s.lapsCount > 0);
+        // 3. Draw Stints with Pace / Time Attack classification
+        const runs = classifyFp1Runs((rider.runs || []).filter(s => s.lapsCount > 0));
         runs.forEach((stint, sIdx) => {
           const xStart = xScale(stint.startLap - 1) + (sIdx > 0 ? (stintGap / 2) : 0);
           const xEnd = xScale(stint.endLap) - (stintGap / 2);
@@ -20206,6 +20292,18 @@
             }
           }
 
+          // Line at bottom of stint box indicating Pace vs Time Attack
+          const stintTypeColor = stint.isTA ? FP1_STINT_COLOR_TA : FP1_STINT_COLOR_PACE;
+          const lineH = 3.5;
+          ctx.fillStyle = stintTypeColor;
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(xStart, rowY + rowTotalH - lineH, blockW, lineH, [0, 0, 4, 4]);
+            ctx.fill();
+          } else {
+            ctx.fillRect(xStart, rowY + rowTotalH - lineH, blockW, lineH);
+          }
+
           // Border around stint
           ctx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
           ctx.lineWidth = 1;
@@ -20235,8 +20333,12 @@
           const fName = compoundNames[hit.stint.front] || hit.stint.front;
           const rName = compoundNames[hit.stint.rear] || hit.stint.rear;
 
+          const stintTypeLabel = hit.stint.isTA ? 'Time Attack' : 'Pace';
+          const stintTypeColor = hit.stint.isTA ? FP1_STINT_COLOR_TA : FP1_STINT_COLOR_PACE;
+
           tooltipEl.innerHTML = `
             <div class="tt-title">${hit.rider.code} &middot; ${hit.rider.name} &middot; Run #${hit.runNum}</div>
+            <div class="tt-row"><span>Tipo Stint:</span> <span class="tt-val" style="color:${stintTypeColor}; font-weight:700;">${stintTypeLabel}</span></div>
             <div class="tt-row"><span>Gomma Anteriore:</span> <span class="tt-val">${fName} (${hit.stint.lapsCount} giri)</span></div>
             <div class="tt-row"><span>Gomma Posteriore:</span> <span class="tt-val">${rName} (${hit.stint.lapsCount} giri)</span></div>
             <div class="tt-row"><span>Giro Veloce Stint:</span> <span class="tt-val" style="color:#2ecc71">${hit.stint.fastest}</span></div>
@@ -21127,6 +21229,20 @@
       sectionEl.style.display = 'block';
       if (localStorage.getItem('overrevving_fp1_analysis_minimized') === '1' && !sectionEl.classList.contains('minimized')) {
         toggleFp1AnalysisMinimize();
+      }
+
+      // Environmental conditions (Weather: condition, air temp, track temp)
+      const weatherData = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[currentGpShort]) ? SESSION_WEATHER_DATA[currentGpShort] : {};
+      const rawFp1W = weatherData.fp1 || '';
+      const cleanFp1W = rawFp1W.replace(/&#xB0;/g, '°').replace(/Â°/g, '°').replace(/Â/g, '').replace(/°C°C/g, '°C').trim();
+      const weatherEl = document.getElementById('fp1-section-weather');
+      if (weatherEl) {
+        if (cleanFp1W && cleanFp1W !== 'Dry | Air: -- | Track: --') {
+          weatherEl.textContent = cleanFp1W;
+          weatherEl.style.display = 'inline-flex';
+        } else {
+          weatherEl.style.display = 'none';
+        }
       }
 
       const btnMatrix = document.getElementById('fp1-heatmap-btn-matrix');
@@ -23242,7 +23358,10 @@
         <div class="sector-section" id="fp1-analysis-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">&#x23F1; FP1 - Free Practice 1 Analysis &amp; Tyre Strategy</div>
+              <div class="sector-title">
+                <span>&#x23F1; FP1 - Free Practice 1 Analysis &amp; Tyre Strategy</span>
+                <span class="fp1-weather-badge" id="fp1-section-weather" style="display: none;"></span>
+              </div>
               <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Stints progression, compound choices (Front &amp; Rear) &amp; fastest lap per run</div>
             </div>
             <button class="win-btn" id="fp1-analysis-min-btn" onclick="toggleFp1AnalysisMinimize()" title="Minimize / Expand">
