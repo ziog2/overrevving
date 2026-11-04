@@ -309,3 +309,20 @@ Risoluzione divisione in 3 parti della gara (1/3, 2/3, 3/3 race) ed estrazione d
 Backup Timestamp:
 2026-11-04 00:27:02
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261105_002405.zip
+
+Note / Log Message:
+Risoluzione divisione in 3 parti della gara (1/3, 2/3, 3/3 race) ed estrazione dati per Moto2 e Moto3 Malesia (MAL) in event_moto2.html, event_moto3.html e .github/scripts/update_event_data.py:
+- Causa 1 (totalLaps errato = 25 invece di 17 in Moto2, 19 invece di 15 in Moto3): nello script update_event_data.py, la variabile 'existing' non veniva aggiornata in memoria dopo il salvataggio dei risultati della gara (STATIC_EVENT_DATA), facendo scattare il fallback predefinito di 25 giri (Moto2) e 19 giri (Moto3). Questo generava giri finali vuoti (null) fino a L25, facendo cadere l'intera terza parte della gara (3/3 race: L18-L25) fuori dai 17 giri effettivi della gara.
+- Causa 2 (Piloti mancanti e regex codici nazionalita' incompleta): la regex in extract_sectors_from_pdf non includeva codici come COL (David Alonso, vincitore Moto2 Malesia!), BEL (Barry Baltus), AUT, ARG, FIN, IRL, ne' i codici attaccati al nome del team (Moto3), né l'istruzione PDF '(...)Tj' a singolo argomento.
+- Causa 3 (Normalizzazione nomi piloti): normalizzati i cognomi maiuscoli dei PDF Dorna in Title Case coerente con RIDER_STYLES e risolte le collisioni tra classi (es. Adrian Fernandez / Marcos Ramirez).
+- Risoluzione: rigenerati integralmente EVENT_LAPS_DATA['MAL'] ed EVENT_LAP_CHARTS_DATA['RAC']['MAL'] per Moto2 (17 giri, 28 piloti incluso il vincitore David Alonso, con divisione perfetta L2-L6 / L7-L12 / L13-L17) e Moto3 (15 giri, 25 piloti, con divisione L2-L6 / L7-L10 / L11-L15), aggiornato lo script .github/scripts/update_event_data.py e aggiunta protezione lato frontend contro eventuali giri nulli finali.
+
+Backup Timestamp:
+2026-11-05 00:24:05
+=====================================================
