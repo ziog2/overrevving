@@ -1292,6 +1292,23 @@
 
     }
 
+    #fp1-analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      width: 100%;
+    }
+    @media (max-width: 1680px) {
+      #fp1-analysis-grid {
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      }
+    }
+    @media (max-width: 768px) {
+      #fp1-analysis-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
     .progression-grid-unified.no-pace {
 
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -40465,6 +40482,294 @@
 
 
 
+    
+    let currentFp1TruePaceK = 5;
+    let fp1TruePaceChartInstance = null;
+
+    function setFp1TruePaceK(k) {
+      currentFp1TruePaceK = k;
+      const btn5 = document.getElementById('fp1-truepace-btn-top5');
+      const btn8 = document.getElementById('fp1-truepace-btn-top8');
+      if (btn5) btn5.classList.toggle('active', k === 5);
+      if (btn8) btn8.classList.toggle('active', k === 8);
+      const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : 'THA');
+      const fp1Data = (typeof EVENT_FP1_STINTS_DATA !== 'undefined' && EVENT_FP1_STINTS_DATA[cur]) ? EVENT_FP1_STINTS_DATA[cur] : {};
+      const ridersPool = Object.keys(fp1Data);
+      const activeFavRiders = ridersPool.filter(rName => isRiderFavorite(rName));
+      renderFp1TruePaceChart(cur, activeFavRiders);
+    }
+
+    const fp1TruePaceForkPlugin = {
+      id: 'fp1TruePaceFork',
+      afterDatasetsDraw: (chart) => {
+        const ctx = chart.ctx;
+        const meta = chart.getDatasetMeta(0);
+        if (!meta || !meta.data) return;
+        const yAxis = chart.scales.y;
+        const items = chart.customPaceItems || [];
+
+        meta.data.forEach((bar, idx) => {
+          const it = items[idx];
+          if (!it) return;
+
+          const left = bar.x - bar.width / 2;
+          const right = bar.x + bar.width / 2;
+          const width = bar.width;
+
+          const yPeak = yAxis.getPixelForValue(it.bestLap);
+          const yPace = yAxis.getPixelForValue(it.truePace);
+          const top = Math.min(yPeak, yPace);
+          const bottom = Math.max(yPeak, yPace);
+          const height = Math.max(4, bottom - top);
+
+          // 1. Vertical Fork Capsule
+          ctx.save();
+          ctx.strokeStyle = it.color;
+          ctx.lineWidth = 2;
+          ctx.fillStyle = it.color + '2e'; // ~18% fill opacity
+
+          ctx.beginPath();
+          ctx.roundRect(left, top, width, height, 5);
+          ctx.fill();
+          ctx.stroke();
+          ctx.restore();
+
+          // 2. Top Peak Notch (Green line & text)
+          ctx.save();
+          ctx.strokeStyle = '#00e676';
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          ctx.moveTo(left - 2, top);
+          ctx.lineTo(right + 2, top);
+          ctx.stroke();
+
+          // Peak Label (Green, above)
+          ctx.font = '700 8.5px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillStyle = '#00e676';
+          let peakY = top - 4;
+          if (peakY < chart.chartArea.top + 8) peakY = top + 11;
+          ctx.fillText(formatLapTime(it.bestLap), bar.x, peakY);
+          ctx.restore();
+
+          // 3. Bottom Pace Notch (White line & text)
+          ctx.save();
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          ctx.moveTo(left - 2, bottom);
+          ctx.lineTo(right + 2, bottom);
+          ctx.stroke();
+
+          // Pace Label (White, below)
+          ctx.font = '700 8.5px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillStyle = '#ffffff';
+          let paceY = bottom + 11;
+          if (paceY > chart.chartArea.bottom - 2) paceY = bottom - 4;
+          ctx.fillText(formatLapTime(it.truePace), bar.x, paceY);
+          ctx.restore();
+
+          // 4. Center Delta (Gap Peak -> Pace)
+          const diff = (it.truePace - it.bestLap).toFixed(3);
+          if (height >= 24 && width >= 18) {
+            ctx.save();
+            const centerY = (top + bottom) / 2;
+            ctx.font = '800 8.5px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.strokeStyle = '#121318';
+            ctx.lineWidth = 3;
+            const deltaTxt = 'Δ ' + diff + 's';
+            ctx.strokeText(deltaTxt, bar.x, centerY);
+            ctx.fillStyle = '#ffb74d';
+            ctx.fillText(deltaTxt, bar.x, centerY);
+            ctx.restore();
+          }
+        });
+      }
+    };
+
+    function renderFp1TruePaceChart(gpShort, favList) {
+      const cvs = document.getElementById('chart-fp1-truepace');
+      if (!cvs) return;
+      const cardEl = document.getElementById('fp1-truepace-card');
+      if (!cardEl) return;
+
+      const rawFp1 = (typeof EVENT_FP1_STINTS_DATA !== 'undefined' && EVENT_FP1_STINTS_DATA[gpShort]) ? EVENT_FP1_STINTS_DATA[gpShort] : null;
+      if (!rawFp1 || !favList || !favList.length) {
+        if (fp1TruePaceChartInstance) {
+          fp1TruePaceChartInstance.destroy();
+          fp1TruePaceChartInstance = null;
+        }
+        return;
+      }
+
+      const k = currentFp1TruePaceK || 5;
+      const ridersPace = [];
+
+      favList.forEach(rName => {
+        const rData = rawFp1[rName];
+        if (!rData) return;
+        const runs = (rData.runs || []).filter(r => r.lapsCount > 0);
+        const validFastest = runs.filter(r => r.fastestSec > 0).map(r => r.fastestSec);
+        if (!validFastest.length) return;
+        const pb = Math.min(...validFastest);
+
+        const sigLaps = [];
+        runs.forEach(r => {
+          const sig = getSignificantFp1Laps(r.flying, r.fastestSec, pb);
+          const comp = (r.front || 'M') + '-' + (r.rear || 'M');
+          sig.forEach(s => sigLaps.push({ time: s, comp: comp }));
+        });
+
+        if (sigLaps.length < 2) return;
+        sigLaps.sort((a, b) => a.time - b.time);
+
+        const topK = sigLaps.slice(0, Math.min(k, sigLaps.length));
+        const topKTimes = topK.map(x => x.time);
+        const truePace = topKTimes.reduce((a, b) => a + b, 0) / topKTimes.length;
+        const bestLap = topKTimes[0];
+        const spread = topKTimes[topKTimes.length - 1] - topKTimes[0];
+
+        // Dominant compound in top K
+        const compCounts = {};
+        topK.forEach(x => { compCounts[x.comp] = (compCounts[x.comp] || 0) + 1; });
+        let dominantComp = topK[0].comp;
+        let maxC = 0;
+        Object.keys(compCounts).forEach(c => {
+          if (compCounts[c] > maxC) { maxC = compCounts[c]; dominantComp = c; }
+        });
+
+        const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rName]) ? RIDER_STYLES[rName] : {};
+        const color = style.color || '#3498db';
+        const code = rData.code || style.code || rName.substring(0, 4).toUpperCase();
+
+        ridersPace.push({
+          name: rName,
+          code: code,
+          color: color,
+          bestLap: bestLap,
+          truePace: truePace,
+          spread: spread,
+          comp: dominantComp,
+          totalLaps: sigLaps.length
+        });
+      });
+
+      if (!ridersPace.length) {
+        if (fp1TruePaceChartInstance) {
+          fp1TruePaceChartInstance.destroy();
+          fp1TruePaceChartInstance = null;
+        }
+        return;
+      }
+
+      // Sort by true pace ascending (P1 = fastest race pace)
+      ridersPace.sort((a, b) => a.truePace - b.truePace);
+      const p1Pace = ridersPace[0].truePace;
+      ridersPace.forEach((r, idx) => {
+        r.rank = idx + 1;
+        r.delta = +(r.truePace - p1Pace).toFixed(3);
+      });
+
+      if (fp1TruePaceChartInstance) {
+        fp1TruePaceChartInstance.destroy();
+        fp1TruePaceChartInstance = null;
+      }
+
+      const minT = Math.min(...ridersPace.map(x => x.bestLap));
+      const maxT = Math.max(...ridersPace.map(x => x.truePace));
+      const yMin = Math.floor((minT - 0.25) * 2) / 2;
+      const yMax = Math.ceil((maxT + 0.35) * 2) / 2;
+
+      const labels = ridersPace.map(it => [
+        'P' + it.rank + ' ' + it.code,
+        it.delta === 0 ? 'LEADER' : ('+' + it.delta.toFixed(2) + 's')
+      ]);
+
+      const ctx = cvs.getContext('2d');
+      fp1TruePaceChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: ridersPace.map(it => [it.bestLap, it.truePace]),
+            backgroundColor: 'transparent',
+            borderWidth: 0,
+            borderRadius: 5,
+            barPercentage: 0.58,
+            categoryPercentage: 0.82
+          }]
+        },
+        plugins: [watermarkPlugin, fp1TruePaceForkPlugin],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: { duration: 250 },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1b1c24',
+              titleColor: '#fff',
+              bodyColor: '#ddd',
+              borderColor: '#2e2f3d',
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                title: (ctxList) => {
+                  const it = ridersPace[ctxList[0].dataIndex];
+                  return it ? ('P' + it.rank + ' ' + it.name + ' (' + it.code + ')') : '';
+                },
+                label: (c) => {
+                  const it = ridersPace[c.dataIndex];
+                  if (!it) return '';
+                  return [
+                    ' True Pace (Top ' + k + ' Avg): ' + formatLapTime(it.truePace),
+                    ' Best Single Lap: ' + formatLapTime(it.bestLap),
+                    ' Gap Picco ➔ Passo: +' + (it.truePace - it.bestLap).toFixed(3) + 's',
+                    ' Distacco da P1: ' + (it.delta === 0 ? 'LEADER' : ('+' + it.delta.toFixed(3) + 's')),
+                    ' Mescola prevalente: ' + it.comp,
+                    ' Costanza (Spread Top ' + k + '): ' + it.spread.toFixed(3) + 's'
+                  ];
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: {
+                color: '#aaa',
+                font: { family: 'Inter', size: 8, weight: '700' },
+                maxRotation: 0,
+                autoSkip: false
+              }
+            },
+            y: {
+              reverse: true, // Lower lap times on top
+              min: yMin,
+              max: yMax,
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: {
+                color: '#888',
+                font: { family: 'Inter', size: 9.5, weight: '600' },
+                callback: (v) => {
+                  if (!v || isNaN(v)) return '';
+                  const m = Math.floor(v / 60);
+                  const s = (v % 60).toFixed(1);
+                  return m + "'" + (s < 10 ? '0' : '') + s;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      fp1TruePaceChartInstance.customPaceItems = ridersPace;
+      fp1TruePaceChartInstance.update('none');
+    }
+
     function renderFp1DensityChart(gpShort, favList) {
 
       const cvs = document.getElementById('chart-fp1-density');
@@ -43278,6 +43583,7 @@
       renderFp1DegradationChart(currentGpShort, activeFavRiders);
 
       renderFp1DensityChart(currentGpShort, activeFavRiders);
+      renderFp1TruePaceChart(currentGpShort, activeFavRiders);
 
     }
 
@@ -47615,6 +47921,20 @@
 
               </div>
 
+            </div>
+
+            <!-- CARD 5: TRUE PACE RANKING (PEAK VS RACE PACE FORK) -->
+            <div class="sector-card" id="fp1-truepace-card">
+              <div class="sector-card-title">
+                <span>True Pace &amp; Peak</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="fp1-truepace-btn-top5" onclick="setFp1TruePaceK(5)">Top 5</button>
+                  <button type="button" class="fp1-toggle-btn" id="fp1-truepace-btn-top8" onclick="setFp1TruePaceK(8)">Top 8</button>
+                </div>
+              </div>
+              <div class="progression-canvas-container" style="position: relative; width: 100%; height: 260px;">
+                <canvas id="chart-fp1-truepace" style="width: 100%; height: 100%; display: block;"></canvas>
+              </div>
             </div>
 
           </div>
