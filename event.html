@@ -1273,6 +1273,8 @@
 
     .sector-section.minimized .sector-grid-2x2,
 
+    .sector-section.minimized .sector-grid-1row,
+
     .sector-section.minimized .fp1-sectors-block {
 
       display: none !important;
@@ -44414,11 +44416,11 @@
 
                   color: '#ccc',
 
-                  font: { family: 'Inter', size: 12 },
+                  font: { family: 'Inter', size: 9.5, weight: '700' },
 
-                  boxWidth: 24,
+                  boxWidth: 12,
 
-                  padding: 12
+                  padding: 8
 
                 }
 
@@ -44444,7 +44446,7 @@
 
                     if (context.parsed.y === null || isNaN(context.parsed.y)) {
 
-                      return ' ' + context.dataset.label + ': OUT / ANOMALO';
+                      return ' ' + context.dataset.label + ': OUT / ANOMALOUS';
 
                     }
 
@@ -44872,7 +44874,7 @@
 
                     if (context.parsed.y === null || isNaN(context.parsed.y)) {
 
-                      return ' ' + context.dataset.label + ': OUT / ANOMALO';
+                      return ' ' + context.dataset.label + ': OUT / ANOMALOUS';
 
                     }
 
@@ -48433,7 +48435,7 @@
 
           </div>
 
-          <div class="sector-grid-2x2">
+          <div class="sector-grid-1row" id="spr-sector-grid">
 
             <!-- TOP-LEFT: T1 -->
 
