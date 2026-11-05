@@ -343,3 +343,22 @@ Risoluzione divisione in 3 parti della gara (1/3, 2/3, 3/3 race) ed estrazione d
 Backup Timestamp:
 2026-11-05 00:46:24
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261105_011410.zip
+
+Note / Log Message:
+Aggiunta analisi dei 4 settori del tracciato (T1, T2, T3, T4) nel blocco FP1 (Free Practice 1) in event.html:
+- Estratti e parsati da PDF ufficiali Dorna (Analysis.pdf) tutti gli intertempi T1, T2, T3, T4 di tutti i piloti per tutti i 19 GP della stagione 2026 MotoGP (data/motogp_fp1_sectors.json e js/motogp_fp1_sectors.js).
+- Aggiunto sotto le 5 card strategiche del blocco #fp1-analysis-section il riquadro Track Sectors Analysis con griglia 2x2 per i 4 settori (T1, T2, T3, T4).
+- Tracciamento a segmenti affiancati per stint consecutivi (Run 1, Run 2, Run 3, Run 4...) con piccoli gap (spanGaps: false) per evidenziare chiaramente la progressione e il degrado prestazionale run per run.
+- Esclusione automatica degli out-lap, in-lap con pit e giri lenti/interrotti (oltre +4.5% dal miglior tempo del pilota).
+- Inseriti comandi toggle 'Favorites (★)', 'Top 5' e 'All Riders' per consentire la visualizzazione sia dei favoriti che di tutti i piloti della griglia.
+- Integrazione completa con la minimizzazione del blocco FP1 e watermark Overrevving di sfondo.
+
+Backup Timestamp:
+2026-11-05 01:14:10
+=====================================================

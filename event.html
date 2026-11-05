@@ -15,6 +15,7 @@
   <script src="js/chart.min.js"></script>
 
   <script src="js/motogp_fp1_data.js"></script>
+  <script src="js/motogp_fp1_sectors.js"></script>
 
   <style>
 
@@ -1270,7 +1271,9 @@
 
     .sector-section.minimized .sector-subtitle,
 
-    .sector-section.minimized .sector-grid-2x2 {
+    .sector-section.minimized .sector-grid-2x2,
+
+    .sector-section.minimized .fp1-sectors-block {
 
       display: none !important;
 
@@ -40770,6 +40773,280 @@
       fp1TruePaceChartInstance.update('none');
     }
 
+    
+    let currentFp1SectorRiderMode = 'favs';
+    const fp1SectorChartInstances = { t1: null, t2: null, t3: null, t4: null };
+
+    function setFp1SectorRiderMode(mode) {
+      currentFp1SectorRiderMode = mode;
+      const bFavs = document.getElementById('fp1-sec-btn-favs');
+      const bTop5 = document.getElementById('fp1-sec-btn-top5');
+      const bAll = document.getElementById('fp1-sec-btn-all');
+      if (bFavs) bFavs.classList.toggle('active', mode === 'favs');
+      if (bTop5) bTop5.classList.toggle('active', mode === 'top5');
+      if (bAll) bAll.classList.toggle('active', mode === 'all');
+
+      const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
+      if (cur) {
+        const rawFp1 = (typeof EVENT_FP1_STINTS_DATA !== 'undefined' && EVENT_FP1_STINTS_DATA[cur]) ? EVENT_FP1_STINTS_DATA[cur] : {};
+        const activeFavRiders = Object.keys(rawFp1).filter(rName => isRiderFavorite(rName));
+        renderFp1SectorCharts(cur, activeFavRiders);
+      }
+    }
+
+    function renderFp1SectorCharts(gpShort, favList) {
+      const container = document.getElementById('fp1-sectors-container');
+      if (!container) return;
+
+      const rawSectors = (typeof EVENT_FP1_SECTORS_DATA !== 'undefined' && EVENT_FP1_SECTORS_DATA[gpShort]) ? EVENT_FP1_SECTORS_DATA[gpShort] : null;
+      if (!rawSectors || Object.keys(rawSectors).length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+      container.style.display = 'block';
+
+      // Determine rider list based on currentFp1SectorRiderMode
+      const allRiders = Object.keys(rawSectors);
+      let targetRiders = [];
+
+      if (currentFp1SectorRiderMode === 'top5') {
+        targetRiders = allRiders.map(rName => {
+          const rd = rawSectors[rName];
+          let bestSec = Infinity;
+          (rd.runs || []).forEach(rn => {
+            (rn.laps || []).forEach((l, idx) => {
+              if (idx > 0 && !l.pit && l.sec && l.sec < bestSec && l.sec > 60) bestSec = l.sec;
+            });
+          });
+          return { name: rName, bestSec };
+        }).sort((a, b) => a.bestSec - b.bestSec).slice(0, 5).map(x => x.name);
+      } else if (currentFp1SectorRiderMode === 'all') {
+        targetRiders = allRiders;
+      } else {
+        // 'favs' mode: active favorite riders that exist in this session
+        targetRiders = (favList && favList.length) ? favList.filter(r => rawSectors[r]) : [];
+        if (targetRiders.length === 0) {
+          targetRiders = allRiders.map(rName => {
+            const rd = rawSectors[rName];
+            let bestSec = Infinity;
+            (rd.runs || []).forEach(rn => {
+              (rn.laps || []).forEach((l, idx) => {
+                if (idx > 0 && !l.pit && l.sec && l.sec < bestSec && l.sec > 60) bestSec = l.sec;
+              });
+            });
+            return { name: rName, bestSec };
+          }).sort((a, b) => a.bestSec - b.bestSec).slice(0, 5).map(x => x.name);
+        }
+      }
+
+      // Update button active state
+      const bFavs = document.getElementById('fp1-sec-btn-favs');
+      const bTop5 = document.getElementById('fp1-sec-btn-top5');
+      const bAll = document.getElementById('fp1-sec-btn-all');
+      if (bFavs) bFavs.classList.toggle('active', currentFp1SectorRiderMode === 'favs');
+      if (bTop5) bTop5.classList.toggle('active', currentFp1SectorRiderMode === 'top5');
+      if (bAll) bAll.classList.toggle('active', currentFp1SectorRiderMode === 'all');
+
+      // 1. Extract clean flying laps per run for each target rider
+      const riderRunsFlying = {};
+      let maxRunNum = 0;
+
+      targetRiders.forEach(rName => {
+        const rd = rawSectors[rName];
+        if (!rd) return;
+        riderRunsFlying[rName] = {};
+
+        let bestLapSec = Infinity;
+        (rd.runs || []).forEach(r => {
+          (r.laps || []).forEach((l, idx) => {
+            if (idx > 0 && !l.pit && l.sec && l.sec < bestLapSec && l.sec > 60) {
+              bestLapSec = l.sec;
+            }
+          });
+        });
+        const maxAllowedSec = bestLapSec < Infinity ? (bestLapSec * 1.045) : Infinity;
+
+        (rd.runs || []).forEach(r => {
+          const rNum = r.run;
+          if (rNum > maxRunNum) maxRunNum = rNum;
+          if (!riderRunsFlying[rName][rNum]) riderRunsFlying[rName][rNum] = [];
+
+          (r.laps || []).forEach((l, idx) => {
+            const isOutLap = (idx === 0);
+            const isInLap = l.pit;
+            const isSlow = l.sec > maxAllowedSec;
+            if (!isOutLap && !isInLap && !isSlow) {
+              riderRunsFlying[rName][rNum].push(l);
+            }
+          });
+        });
+      });
+
+      // 2. Determine max laps per run across target riders
+      const runMaxLaps = {};
+      for (let r = 1; r <= maxRunNum; r++) {
+        let m = 0;
+        targetRiders.forEach(rName => {
+          const laps = (riderRunsFlying[rName] && riderRunsFlying[rName][r]) || [];
+          if (laps.length > m) m = laps.length;
+        });
+        runMaxLaps[r] = m;
+      }
+
+      // 3. Build unified X-axis labels with gaps between stints
+      const labels = [];
+      const runIndices = {};
+
+      for (let r = 1; r <= maxRunNum; r++) {
+        const count = runMaxLaps[r] || 0;
+        if (count === 0) continue;
+        runIndices[r] = [];
+
+        for (let l = 1; l <= count; l++) {
+          runIndices[r].push(labels.length);
+          labels.push(`R${r}-L${l}`);
+        }
+
+        // Small gap between consecutive stints
+        if (r < maxRunNum) {
+          labels.push('');
+        }
+      }
+
+      // Predefined color palette for "All Riders" mode
+      const defaultColors = [
+        '#ff4d4d', '#ff7a00', '#a0a0a8', '#00b0ff', '#e02424',
+        '#ec4899', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4',
+        '#84cc16', '#d946ef', '#14b8a6', '#f43f5e', '#6366f1',
+        '#eab308', '#22c55e', '#a855f7', '#3b82f6', '#f97316',
+        '#64748b', '#cbd5e1', '#e2e8f0'
+      ];
+
+      ['t1', 't2', 't3', 't4'].forEach(secKey => {
+        const canvasId = 'chart-fp1-sec-' + secKey;
+        const canvasEl = document.getElementById(canvasId);
+        if (!canvasEl) return;
+
+        if (fp1SectorChartInstances[secKey]) {
+          try { fp1SectorChartInstances[secKey].destroy(); } catch(e) {}
+          fp1SectorChartInstances[secKey] = null;
+        }
+
+        const datasets = targetRiders.map((rName, rIdx) => {
+          const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rName]) ? RIDER_STYLES[rName] : {};
+          const color = style.color || defaultColors[rIdx % defaultColors.length];
+
+          const dataPoints = new Array(labels.length).fill(null);
+
+          for (let r = 1; r <= maxRunNum; r++) {
+            const laps = (riderRunsFlying[rName] && riderRunsFlying[rName][r]) || [];
+            const indices = runIndices[r] || [];
+            laps.forEach((l, idx) => {
+              if (idx < indices.length) {
+                const pos = indices[idx];
+                const val = l[secKey];
+                if (val && val > 0) {
+                  dataPoints[pos] = val;
+                }
+              }
+            });
+          }
+
+          const ds = {
+            label: (currentFp1SectorRiderMode === 'all') ? (formatName(rName)) : (style.code || formatName(rName)),
+            data: dataPoints,
+            borderColor: color,
+            backgroundColor: color,
+            borderWidth: (currentFp1SectorRiderMode === 'all') ? 1.8 : 2.2,
+            pointRadius: (currentFp1SectorRiderMode === 'all') ? 2.5 : 3.5,
+            pointHoverRadius: 6,
+            tension: 0.15,
+            spanGaps: false // CRITICAL: creates distinct line segments per stint with small gaps!
+          };
+
+          if (style.borderDash && currentFp1SectorRiderMode !== 'all') {
+            ds.borderDash = style.borderDash;
+          }
+
+          return ds;
+        });
+
+        const ctx = canvasEl.getContext('2d');
+        fp1SectorChartInstances[secKey] = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: datasets
+          },
+          plugins: (typeof watermarkPlugin !== 'undefined' ? [watermarkPlugin] : []),
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+              padding: { left: 8, right: 8, top: 4, bottom: 4 }
+            },
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                  color: '#aaa',
+                  font: { family: 'Inter', size: (targetRiders.length > 8 ? 8 : 10), weight: '700' },
+                  boxWidth: 10,
+                  padding: (targetRiders.length > 8 ? 6 : 10)
+                }
+              },
+              tooltip: {
+                backgroundColor: '#1b1c24',
+                titleColor: '#fff',
+                bodyColor: '#ddd',
+                borderColor: '#2e2f3d',
+                borderWidth: 1,
+                padding: 8,
+                callbacks: {
+                  title: (items) => {
+                    if (!items || !items.length) return '';
+                    const lbl = labels[items[0].dataIndex];
+                    return lbl ? ('Stint progression: ' + lbl) : '';
+                  },
+                  label: (c) => {
+                    const y = c.parsed.y;
+                    return ' ' + c.dataset.label + ': ' + (y ? y.toFixed(3) + 's' : '--');
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: {
+                  color: (ctx) => {
+                    if (ctx.tick && ctx.tick.label === '') return 'rgba(255, 255, 255, 0.14)';
+                    return 'rgba(255, 255, 255, 0.04)';
+                  }
+                },
+                ticks: {
+                  color: '#888',
+                  font: { family: 'Inter', size: 9, weight: '600' },
+                  maxRotation: 0,
+                  callback: function(val, index) {
+                    return labels[index] || '';
+                  }
+                }
+              },
+              y: {
+                grid: { color: 'rgba(255, 255, 255, 0.04)' },
+                ticks: {
+                  color: '#888',
+                  font: { family: 'Inter', size: 9, weight: '600' },
+                  callback: (v) => v.toFixed(2) + 's'
+                }
+              }
+            }
+          }
+        });
+      });
+    }
+
     function renderFp1DensityChart(gpShort, favList) {
 
       const cvs = document.getElementById('chart-fp1-density');
@@ -43584,6 +43861,7 @@
 
       renderFp1DensityChart(currentGpShort, activeFavRiders);
       renderFp1TruePaceChart(currentGpShort, activeFavRiders);
+      renderFp1SectorCharts(currentGpShort, activeFavRiders);
 
     }
 
@@ -47937,6 +48215,67 @@
               </div>
             </div>
 
+          </div>
+
+          <!-- FP1 TRACK SECTORS SUB-SECTION (T1, T2, T3, T4) -->
+          <div class="fp1-sectors-block" id="fp1-sectors-container" style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+            <div class="sector-card-title" style="margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: #fff;">&#x23F1;&#xFE0F; Track Sectors Analysis (T1 &middot; T2 &middot; T3 &middot; T4)</span>
+                <span class="sector-card-badge" style="background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 10px; font-weight: 700;">Stints Progression &amp; Split Times</span>
+              </div>
+              <div class="fp1-toggle-group" id="fp1-sector-filter-group">
+                <button type="button" class="fp1-toggle-btn active" id="fp1-sec-btn-favs" onclick="setFp1SectorRiderMode('favs')">Favorites (&#x2605;)</button>
+                <button type="button" class="fp1-toggle-btn" id="fp1-sec-btn-top5" onclick="setFp1SectorRiderMode('top5')">Top 5</button>
+                <button type="button" class="fp1-toggle-btn" id="fp1-sec-btn-all" onclick="setFp1SectorRiderMode('all')">All Riders</button>
+              </div>
+            </div>
+
+            <div class="sector-grid-2x2" id="fp1-sector-grid">
+              <!-- TOP-LEFT: T1 -->
+              <div class="sector-card sector-card-t1">
+                <div class="sector-card-title">
+                  <span>Sector 1 (T1)</span>
+                  <span class="sector-card-badge badge-t1">T1</span>
+                </div>
+                <div class="sector-canvas-container">
+                  <canvas id="chart-fp1-sec-t1"></canvas>
+                </div>
+              </div>
+
+              <!-- TOP-RIGHT: T2 -->
+              <div class="sector-card sector-card-t2">
+                <div class="sector-card-title">
+                  <span>Sector 2 (T2)</span>
+                  <span class="sector-card-badge badge-t2">T2</span>
+                </div>
+                <div class="sector-canvas-container">
+                  <canvas id="chart-fp1-sec-t2"></canvas>
+                </div>
+              </div>
+
+              <!-- BOTTOM-RIGHT: T3 (Clockwise order matching track) -->
+              <div class="sector-card sector-card-t3">
+                <div class="sector-card-title">
+                  <span>Sector 3 (T3)</span>
+                  <span class="sector-card-badge badge-t3">T3</span>
+                </div>
+                <div class="sector-canvas-container">
+                  <canvas id="chart-fp1-sec-t3"></canvas>
+                </div>
+              </div>
+
+              <!-- BOTTOM-LEFT: T4 (Clockwise order matching track) -->
+              <div class="sector-card sector-card-t4">
+                <div class="sector-card-title">
+                  <span>Sector 4 (T4)</span>
+                  <span class="sector-card-badge badge-t4">T4</span>
+                </div>
+                <div class="sector-canvas-container">
+                  <canvas id="chart-fp1-sec-t4"></canvas>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
