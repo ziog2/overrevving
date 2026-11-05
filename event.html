@@ -1315,6 +1315,8 @@
     #fp1-sector-grid,
     #pr-sector-grid,
     #fp2-sector-grid,
+    #spr-sector-grid,
+    #rac-sector-grid,
     .sector-grid-1row {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1325,6 +1327,8 @@
     #fp1-sector-grid .sector-card,
     #pr-sector-grid .sector-card,
     #fp2-sector-grid .sector-card,
+    #spr-sector-grid .sector-card,
+    #rac-sector-grid .sector-card,
     .sector-grid-1row .sector-card {
       grid-area: auto !important;
     }
@@ -52342,13 +52346,13 @@
 
             backgroundColor: color + '15',
 
-            borderWidth: 3,
+            borderWidth: 2.2,
 
             tension: 0,
 
-            pointRadius: 4,
+            pointRadius: 3,
 
-            pointHoverRadius: 6,
+            pointHoverRadius: 5,
 
             fill: false,
 
@@ -52844,11 +52848,11 @@
 
                   color: '#ccc',
 
-                  font: { family: 'Inter', size: 12 },
+                  font: { family: 'Inter', size: 9.5, weight: '700' },
 
-                  boxWidth: 24,
+                  boxWidth: 12,
 
-                  padding: 12
+                  padding: 8
 
                 }
 
@@ -56947,7 +56951,7 @@
 
           </div>
 
-          <div class="sector-grid-2x2">
+          <div class="sector-grid-1row" id="rac-sector-grid">
 
             <!-- TOP-LEFT: T1 -->
 
