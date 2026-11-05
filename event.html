@@ -1301,6 +1301,33 @@
       gap: 14px;
       width: 100%;
     }
+
+    #fp1-sector-grid,
+    .sector-grid-1row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      width: 100%;
+    }
+
+    #fp1-sector-grid .sector-card,
+    .sector-grid-1row .sector-card {
+      grid-area: auto !important;
+    }
+
+    @media (max-width: 1300px) {
+      #fp1-sector-grid,
+      .sector-grid-1row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      #fp1-sector-grid,
+      .sector-grid-1row {
+        grid-template-columns: 1fr;
+      }
+    }
     @media (max-width: 1680px) {
       #fp1-analysis-grid {
         grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
@@ -40730,10 +40757,10 @@
                   return [
                     ' True Pace (Top ' + k + ' Avg): ' + formatLapTime(it.truePace),
                     ' Best Single Lap: ' + formatLapTime(it.bestLap),
-                    ' Gap Picco ➔ Passo: +' + (it.truePace - it.bestLap).toFixed(3) + 's',
-                    ' Distacco da P1: ' + (it.delta === 0 ? 'LEADER' : ('+' + it.delta.toFixed(3) + 's')),
-                    ' Mescola prevalente: ' + it.comp,
-                    ' Costanza (Spread Top ' + k + '): ' + it.spread.toFixed(3) + 's'
+                    ' Peak ➔ Pace Gap: +' + (it.truePace - it.bestLap).toFixed(3) + 's',
+                    ' Gap to P1: ' + (it.delta === 0 ? 'LEADER' : ('+' + it.delta.toFixed(3) + 's')),
+                    ' Prevailing compound: ' + it.comp,
+                    ' Consistency (Top ' + k + ' Spread): ' + it.spread.toFixed(3) + 's'
                   ];
                 }
               }
@@ -40991,7 +41018,7 @@
                 position: 'top',
                 labels: {
                   color: '#aaa',
-                  font: { family: 'Inter', size: (targetRiders.length > 8 ? 8 : 10), weight: '700' },
+                  font: { family: 'Inter', size: (targetRiders.length > 8 ? 7.5 : 9), weight: '700' },
                   boxWidth: 10,
                   padding: (targetRiders.length > 8 ? 6 : 10)
                 }
@@ -41329,15 +41356,15 @@
 
                   return [
 
-                    ' Passo medio: ' + formatLapTime(it.avg),
+                    ' Average pace: ' + formatLapTime(it.avg),
 
-                    ' Miglior giro: ' + formatLapTime(it.fastest),
+                    ' Best lap: ' + formatLapTime(it.fastest),
 
-                    ' Peggior giro: ' + formatLapTime(it.slowest),
+                    ' Slowest lap: ' + formatLapTime(it.slowest),
 
-                    ' Delta dispersione: +' + (it.slowest - it.fastest).toFixed(3) + 's',
+                    ' Pace dispersion: +' + (it.slowest - it.fastest).toFixed(3) + 's',
 
-                    ' Giri significativi: ' + it.lapsCount
+                    ' Significant laps: ' + it.lapsCount
 
                   ];
 
@@ -42027,15 +42054,15 @@
 
             <div class="tt-title">${hit.rider.code} &middot; ${hit.rider.name} &middot; Run #${hit.runNum}</div>
 
-            <div class="tt-row"><span>Tipo Stint:</span> <span class="tt-val" style="color:${stintTypeColor}; font-weight:700;">${stintTypeLabel}</span></div>
+            <div class="tt-row"><span>Stint Type:</span> <span class="tt-val" style="color:${stintTypeColor}; font-weight:700;">${stintTypeLabel}</span></div>
 
-            <div class="tt-row"><span>Gomma Anteriore:</span> <span class="tt-val">${fName} (${hit.stint.lapsCount} giri)</span></div>
+            <div class="tt-row"><span>Front Tyre:</span> <span class="tt-val">${fName} (${hit.stint.lapsCount} laps)</span></div>
 
-            <div class="tt-row"><span>Gomma Posteriore:</span> <span class="tt-val">${rName} (${hit.stint.lapsCount} giri)</span></div>
+            <div class="tt-row"><span>Rear Tyre:</span> <span class="tt-val">${rName} (${hit.stint.lapsCount} laps)</span></div>
 
-            <div class="tt-row"><span>Giro Veloce Stint:</span> <span class="tt-val" style="color:#2ecc71">${hit.stint.fastest}</span></div>
+            <div class="tt-row"><span>Fastest Lap in Stint:</span> <span class="tt-val" style="color:#2ecc71">${hit.stint.fastest}</span></div>
 
-            <div class="tt-row"><span>Intervallo Giri:</span> <span class="tt-val">L${hit.stint.startLap} - L${hit.stint.endLap}</span></div>
+            <div class="tt-row"><span>Lap Range:</span> <span class="tt-val">L${hit.stint.startLap} - L${hit.stint.endLap}</span></div>
 
           `;
 
@@ -45707,7 +45734,7 @@
 
                   const val = context.parsed.y;
 
-                  if (val === null || isNaN(val)) return ' DNF / Nessun giro completato';
+                  if (val === null || isNaN(val)) return ' DNF / No laps completed';
 
                   const ds = context.dataset;
 
@@ -45717,11 +45744,11 @@
 
                   const valStr = val === 0 ? '0.000s (Rif. Vincitore)' : (sign + val.toFixed(3) + 's');
 
-                  let text = ' Delta passo: ' + valStr;
+                  let text = ' Pace delta: ' + valStr;
 
                   if (rAvg !== null) {
 
-                    text += ' (Passo: ' + formatLapTime(rAvg) + ')';
+                    text += ' (Pace: ' + formatLapTime(rAvg) + ')';
 
                   }
 
@@ -46445,15 +46472,15 @@
 
                   return [
 
-                    ' Giro medio: ' + formatLapTime(r.avg),
+                    ' Average lap: ' + formatLapTime(r.avg),
 
-                    ' Miglior giro: ' + formatLapTime(r.fastest) + (r.bestLapNum ? (' (Giro ' + r.bestLapNum + ')') : ''),
+                    ' Best lap: ' + formatLapTime(r.fastest) + (r.bestLapNum ? (' (Lap ' + r.bestLapNum + ')') : ''),
 
-                    ' Peggior giro: ' + formatLapTime(r.slowest) + (r.worstLapNum ? (' (Giro ' + r.worstLapNum + ')') : ''),
+                    ' Slowest lap: ' + formatLapTime(r.slowest) + (r.worstLapNum ? (' (Lap ' + r.worstLapNum + ')') : ''),
 
                     ' Delta escursione: +' + deltaEscursione + 's',
 
-                    ' Giri validi: ' + r.laps.length
+                    ' Valid laps: ' + r.laps.length
 
                   ];
 
@@ -48231,7 +48258,7 @@
               </div>
             </div>
 
-            <div class="sector-grid-2x2" id="fp1-sector-grid">
+            <div class="sector-grid-1row" id="fp1-sector-grid">
               <!-- TOP-LEFT: T1 -->
               <div class="sector-card sector-card-t1">
                 <div class="sector-card-title">

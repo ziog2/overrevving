@@ -362,3 +362,23 @@ Aggiunta analisi dei 4 settori del tracciato (T1, T2, T3, T4) nel blocco FP1 (Fr
 Backup Timestamp:
 2026-11-05 01:14:10
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261105_151327.zip
+
+Note / Log Message:
+Aggiornamento Track Sector Analysis FP1 e traduzione tooltip in event.html:
+- Disposizione delle 4 card degli intertempi (T1, T2, T3, T4) su una singola riga orizzontale (#fp1-sector-grid con classe .sector-grid-1row, 4 colonne repeat(4, 1fr) su desktop con wrapping responsivo a 2 colonne su schermi medi e 1 su mobile).
+- Traduzione integrale in lingua inglese di tutti i testi nei tooltip dei grafici:
+  * Stints & Tyre Strategy: 'Stint Type:', 'Front Tyre:', 'Rear Tyre:', 'Fastest Lap in Stint:', 'Lap Range:', 'laps'
+  * True Pace & Peak: 'Peak ➔ Pace Gap:', 'Gap to P1:', 'Prevailing compound:', 'Consistency (Top K Spread):'
+  * Lap Times Range & Density: 'Average pace:', 'Best lap:', 'Slowest lap:', 'Pace dispersion:', 'Significant laps:'
+  * Sprint/Race Pace Delta: 'Pace delta:', 'DNF / No laps completed', '(Pace: ...)'
+  * Sprint/Race Density: 'Average lap:', 'Best lap: ... (Lap X)', 'Slowest lap: ... (Lap Y)', 'Pace dispersion:', 'Valid laps:'
+
+Backup Timestamp:
+2026-11-05 15:13:27
+=====================================================
