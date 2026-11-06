@@ -526,3 +526,21 @@ Aggiornamento sezione intertempi Sprint Race (SPR Sector Times) su singola riga 
 Backup Timestamp:
 2026-11-06 23:29:58
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261106_234024.zip
+
+Note / Log Message:
+Aggiornamento sezione intertempi Sprint Race (SPR Sector Times) su singola riga orizzontale in event.html:
+- Modificato il contenitore dei 4 settori Sprint #spr-sector-section con classe .sector-grid-1row e id #spr-sector-grid.
+- I 4 grafici di settore della Sprint (Sector 1 T1, Sector 2 T2, Sector 3 T3, Sector 4 T4) sono ora allineati side-by-side su un'unica riga a 4 colonne (repeat(4, minmax(0, 1fr))) su desktop, con wrapping responsivo a 2 colonne su schermi intermedi e 1 colonna su mobile.
+- Ottimizzata la legenda (font 9.5px, boxWidth 12, padding 8) per garantire il perfetto bilanciamento visivo delle card su 4 colonne.
+- Tradotta in inglese la dicitura anomalia nei tooltip ('OUT / ANOMALOUS').
+- Integrata la classe .sector-grid-1row nella regola di minimizzazione della sezione.
+
+Backup Timestamp:
+2026-11-06 23:40:24
+=====================================================
