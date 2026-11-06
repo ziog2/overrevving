@@ -39,9 +39,9 @@ jobs:
         run: |
           python3 .github/scripts/update_event_data.py
 
-      - name: Estrai stint e gomme FP1 MotoGP da PDF Dorna
+      - name: Estrai stint, gomme e settori MotoGP da PDF Dorna (FP1, PR, FP2)
         run: |
-          python3 .github/scripts/extract_motogp_fp1.py
+          python3 .github/scripts/update_motogp_sessions.py
 
       - name: Esporta database multi-anno, CSV e Excel per BI
         run: |

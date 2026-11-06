@@ -1,0 +1,43 @@
+name: Update MotoGP Live Sessions & Analysis
+
+on:
+  schedule:
+    # Esecuzione ad alta frequenza (ogni 10 minuti) durante i weekend di gara:
+    # Giovedì (4), Venerdì (5), Sabato (6), Domenica (0)
+    - cron: '*/10 * * * 4,5,6,0'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-motogp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installa dipendenze Python
+        run: |
+          pip install --quiet pypdf openpyxl
+
+      - name: Esegui aggiornamento sessioni MotoGP e analisi stint/settori
+        run: |
+          python3 .github/scripts/update_motogp_sessions.py
+
+      - name: Commit e push automatico se ci sono modifiche
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add event.html event_moto2.html event_moto3.html category.html motogp.html data/ exports/ js/
+          if git diff --staged --quiet; then
+            echo "Nessun nuovo dato o PDF Dorna da pubblicare."
+          else
+            git commit -m "Auto-update MotoGP results, analysis and sectors [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi
