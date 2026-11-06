@@ -623,7 +623,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,1,Thailand,2026-03-01,Barry Baltus,0,1,1,1,-11.5,0,Dry
 2026,MOTO2,1,Thailand,2026-03-01,Adrian Huertas,0,0,0,0,-12.5,1,Dry
 2026,MOTO2,1,Thailand,2026-03-01,Jose Antonio Rueda,0,0,0,0,-12.5,1,Dry
-2026,MOTO2,1,Thailand,2026-03-01,Deniz öncü,0,3.5,3.5,3.5,-9.0,0,Dry
+2026,MOTO2,1,Thailand,2026-03-01,Deniz Öncü,0,3.5,3.5,3.5,-9.0,0,Dry
 2026,MOTO2,1,Thailand,2026-03-01,Joe Roberts,0,0,0,0,-12.5,1,Dry
 2026,MOTO2,1,Thailand,2026-03-01,Luca Lunetta,0,0,0,0,-12.5,1,Dry
 2026,MOTO2,1,Thailand,2026-03-01,Ayumu Sasaki,0,3,3,3,-9.5,0,Dry
@@ -658,7 +658,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,2,Brazil,2026-03-22,Barry Baltus,0,2,2,3,-30,0,Dry
 2026,MOTO2,2,Brazil,2026-03-22,Adrian Huertas,0,4,4,4,-29,0,Dry
 2026,MOTO2,2,Brazil,2026-03-22,Jose Antonio Rueda,0,0,0,0,-33,1,Dry
-2026,MOTO2,2,Brazil,2026-03-22,Deniz öncü,0,0,0,3.5,-29.5,1,Dry
+2026,MOTO2,2,Brazil,2026-03-22,Deniz Öncü,0,0,0,3.5,-29.5,1,Dry
 2026,MOTO2,2,Brazil,2026-03-22,Joe Roberts,0,0,0,0,-33,1,Dry
 2026,MOTO2,2,Brazil,2026-03-22,Luca Lunetta,0,0,0,0,-33,1,Dry
 2026,MOTO2,2,Brazil,2026-03-22,Ayumu Sasaki,0,0,0,3,-30,1,Dry
@@ -693,7 +693,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,3,USA,2026-03-29,Barry Baltus,0,10,10,13,-26.5,0,Dry
 2026,MOTO2,3,USA,2026-03-29,Adrian Huertas,0,4,4,8,-31.5,0,Dry
 2026,MOTO2,3,USA,2026-03-29,Jose Antonio Rueda,0,1,1,1,-38.5,0,Dry
-2026,MOTO2,3,USA,2026-03-29,Deniz öncü,0,0,0,3.5,-36.0,1,Dry
+2026,MOTO2,3,USA,2026-03-29,Deniz Öncü,0,0,0,3.5,-36.0,1,Dry
 2026,MOTO2,3,USA,2026-03-29,Joe Roberts,0,7,7,7,-32.5,0,Dry
 2026,MOTO2,3,USA,2026-03-29,Luca Lunetta,0,0,0,0,-39.5,1,Dry
 2026,MOTO2,3,USA,2026-03-29,Ayumu Sasaki,0,0,0,3,-36.5,1,Dry
@@ -728,7 +728,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,4,Spain,2026-04-26,Barry Baltus,0,0,0,13,-46.5,1,Dry
 2026,MOTO2,4,Spain,2026-04-26,Adrian Huertas,0,0,0,8,-51.5,1,Dry
 2026,MOTO2,4,Spain,2026-04-26,Jose Antonio Rueda,0,0,0,1,-58.5,1,Dry
-2026,MOTO2,4,Spain,2026-04-26,Deniz öncü,0,3,3,6.5,-53.0,0,Dry
+2026,MOTO2,4,Spain,2026-04-26,Deniz Öncü,0,3,3,6.5,-53.0,0,Dry
 2026,MOTO2,4,Spain,2026-04-26,Joe Roberts,0,1,1,8,-51.5,0,Dry
 2026,MOTO2,4,Spain,2026-04-26,Luca Lunetta,0,0,0,0,-59.5,1,Dry
 2026,MOTO2,4,Spain,2026-04-26,Ayumu Sasaki,0,4,4,7,-52.5,0,Dry
@@ -763,7 +763,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,5,France,2026-05-10,Barry Baltus,0,0,0,13,-66.5,1,Dry
 2026,MOTO2,5,France,2026-05-10,Adrian Huertas,0,0,0,8,-71.5,1,Dry
 2026,MOTO2,5,France,2026-05-10,Jose Antonio Rueda,0,0,0,1,-78.5,1,Dry
-2026,MOTO2,5,France,2026-05-10,Deniz öncü,0,3,3,9.5,-70.0,0,Dry
+2026,MOTO2,5,France,2026-05-10,Deniz Öncü,0,3,3,9.5,-70.0,0,Dry
 2026,MOTO2,5,France,2026-05-10,Joe Roberts,0,8,8,16,-63.5,0,Dry
 2026,MOTO2,5,France,2026-05-10,Luca Lunetta,0,0,0,0,-79.5,1,Dry
 2026,MOTO2,5,France,2026-05-10,Ayumu Sasaki,0,0,0,7,-72.5,1,Dry
@@ -798,7 +798,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,6,Catalonia,2026-05-17,Barry Baltus,0,3,3,16,-88.5,0,Dry
 2026,MOTO2,6,Catalonia,2026-05-17,Adrian Huertas,0,0,0,8,-96.5,1,Dry
 2026,MOTO2,6,Catalonia,2026-05-17,Jose Antonio Rueda,0,4,4,5,-99.5,0,Dry
-2026,MOTO2,6,Catalonia,2026-05-17,Deniz öncü,0,0,0,9.5,-95.0,1,Dry
+2026,MOTO2,6,Catalonia,2026-05-17,Deniz Öncü,0,0,0,9.5,-95.0,1,Dry
 2026,MOTO2,6,Catalonia,2026-05-17,Joe Roberts,0,0,0,16,-88.5,1,Dry
 2026,MOTO2,6,Catalonia,2026-05-17,Luca Lunetta,0,7,7,7,-97.5,0,Dry
 2026,MOTO2,6,Catalonia,2026-05-17,Ayumu Sasaki,0,1,1,8,-96.5,0,Dry
@@ -833,7 +833,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,7,Italy,2026-05-31,Barry Baltus,0,8,8,24,-105.5,0,Dry
 2026,MOTO2,7,Italy,2026-05-31,Adrian Huertas,0,4,4,12,-117.5,0,Dry
 2026,MOTO2,7,Italy,2026-05-31,Jose Antonio Rueda,0,3,3,8,-121.5,0,Dry
-2026,MOTO2,7,Italy,2026-05-31,Deniz öncü,0,6,6,15.5,-114.0,0,Dry
+2026,MOTO2,7,Italy,2026-05-31,Deniz Öncü,0,6,6,15.5,-114.0,0,Dry
 2026,MOTO2,7,Italy,2026-05-31,Joe Roberts,0,2,2,18,-111.5,0,Dry
 2026,MOTO2,7,Italy,2026-05-31,Luca Lunetta,0,0,0,7,-122.5,1,Dry
 2026,MOTO2,7,Italy,2026-05-31,Ayumu Sasaki,0,0,0,8,-121.5,1,Dry
@@ -868,7 +868,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,8,Hungary,2026-06-07,Barry Baltus,0,4,4,28,-126.5,0,Dry
 2026,MOTO2,8,Hungary,2026-06-07,Adrian Huertas,0,0,0,12,-142.5,1,Dry
 2026,MOTO2,8,Hungary,2026-06-07,Jose Antonio Rueda,0,5,5,13,-141.5,0,Dry
-2026,MOTO2,8,Hungary,2026-06-07,Deniz öncü,0,0,0,15.5,-139.0,1,Dry
+2026,MOTO2,8,Hungary,2026-06-07,Deniz Öncü,0,0,0,15.5,-139.0,1,Dry
 2026,MOTO2,8,Hungary,2026-06-07,Joe Roberts,0,1,1,19,-135.5,0,Dry
 2026,MOTO2,8,Hungary,2026-06-07,Luca Lunetta,0,0,0,7,-147.5,1,Dry
 2026,MOTO2,8,Hungary,2026-06-07,Ayumu Sasaki,0,0,0,8,-146.5,1,Dry
@@ -903,7 +903,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,9,Czechia,2026-06-21,Barry Baltus,0,0,0,28,-137.5,1,Dry
 2026,MOTO2,9,Czechia,2026-06-21,Adrian Huertas,0,0,0,12,-153.5,1,Dry
 2026,MOTO2,9,Czechia,2026-06-21,Jose Antonio Rueda,0,6,6,19,-146.5,0,Dry
-2026,MOTO2,9,Czechia,2026-06-21,Deniz öncü,0,0,0,15.5,-150.0,1,Dry
+2026,MOTO2,9,Czechia,2026-06-21,Deniz Öncü,0,0,0,15.5,-150.0,1,Dry
 2026,MOTO2,9,Czechia,2026-06-21,Joe Roberts,0,8,8,27,-138.5,0,Dry
 2026,MOTO2,9,Czechia,2026-06-21,Luca Lunetta,0,0,0,7,-158.5,1,Dry
 2026,MOTO2,9,Czechia,2026-06-21,Ayumu Sasaki,0,0,0,8,-157.5,1,Dry
@@ -938,7 +938,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,10,Netherlands,2026-06-28,Barry Baltus,0,0,0,28,-157.5,1,Dry
 2026,MOTO2,10,Netherlands,2026-06-28,Adrian Huertas,0,9,9,21,-164.5,0,Dry
 2026,MOTO2,10,Netherlands,2026-06-28,Jose Antonio Rueda,0,0,0,19,-166.5,1,Dry
-2026,MOTO2,10,Netherlands,2026-06-28,Deniz öncü,0,0,0,15.5,-170.0,1,Dry
+2026,MOTO2,10,Netherlands,2026-06-28,Deniz Öncü,0,0,0,15.5,-170.0,1,Dry
 2026,MOTO2,10,Netherlands,2026-06-28,Joe Roberts,0,1,1,28,-157.5,0,Dry
 2026,MOTO2,10,Netherlands,2026-06-28,Luca Lunetta,0,4,4,11,-174.5,0,Dry
 2026,MOTO2,10,Netherlands,2026-06-28,Ayumu Sasaki,0,0,0,8,-177.5,1,Dry
@@ -973,7 +973,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,11,Germany,2026-07-12,Barry Baltus,0,0,0,28,-167.5,1,Dry
 2026,MOTO2,11,Germany,2026-07-12,Adrian Huertas,0,5,5,26,-169.5,0,Dry
 2026,MOTO2,11,Germany,2026-07-12,Jose Antonio Rueda,0,8,8,27,-168.5,0,Dry
-2026,MOTO2,11,Germany,2026-07-12,Deniz öncü,0,0,0,15.5,-180.0,1,Dry
+2026,MOTO2,11,Germany,2026-07-12,Deniz Öncü,0,0,0,15.5,-180.0,1,Dry
 2026,MOTO2,11,Germany,2026-07-12,Joe Roberts,0,4,4,32,-163.5,0,Dry
 2026,MOTO2,11,Germany,2026-07-12,Luca Lunetta,0,6,6,17,-178.5,0,Dry
 2026,MOTO2,11,Germany,2026-07-12,Ayumu Sasaki,0,3,3,11,-184.5,0,Dry
@@ -1008,7 +1008,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,12,Great Britain,2026-08-09,Barry Baltus,0,7,7,35,-162.5,0,Dry
 2026,MOTO2,12,Great Britain,2026-08-09,Adrian Huertas,0,0,0,26,-171.5,1,Dry
 2026,MOTO2,12,Great Britain,2026-08-09,Jose Antonio Rueda,0,0,0,27,-170.5,1,Dry
-2026,MOTO2,12,Great Britain,2026-08-09,Deniz öncü,0,8,8,23.5,-174.0,0,Dry
+2026,MOTO2,12,Great Britain,2026-08-09,Deniz Öncü,0,8,8,23.5,-174.0,0,Dry
 2026,MOTO2,12,Great Britain,2026-08-09,Joe Roberts,0,4,4,36,-161.5,0,Dry
 2026,MOTO2,12,Great Britain,2026-08-09,Luca Lunetta,0,0,0,17,-180.5,1,Dry
 2026,MOTO2,12,Great Britain,2026-08-09,Ayumu Sasaki,0,5,5,16,-181.5,0,Dry
@@ -1043,7 +1043,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,13,Aragon,2026-08-30,Barry Baltus,0,1,1,36,-171.5,0,Dry
 2026,MOTO2,13,Aragon,2026-08-30,Adrian Huertas,0,6,6,32,-175.5,0,Dry
 2026,MOTO2,13,Aragon,2026-08-30,Jose Antonio Rueda,0,0,0,27,-180.5,1,Dry
-2026,MOTO2,13,Aragon,2026-08-30,Deniz öncü,0,8,8,31.5,-176.0,0,Dry
+2026,MOTO2,13,Aragon,2026-08-30,Deniz Öncü,0,8,8,31.5,-176.0,0,Dry
 2026,MOTO2,13,Aragon,2026-08-30,Joe Roberts,0,4,4,40,-167.5,0,Dry
 2026,MOTO2,13,Aragon,2026-08-30,Luca Lunetta,0,0,0,17,-190.5,1,Dry
 2026,MOTO2,13,Aragon,2026-08-30,Ayumu Sasaki,0,3,3,19,-188.5,0,Dry
@@ -1078,7 +1078,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,14,San Marino,2026-09-13,Barry Baltus,0,16,16,52,-180.5,0,Dry
 2026,MOTO2,14,San Marino,2026-09-13,Adrian Huertas,0,5,5,37,-195.5,0,Dry
 2026,MOTO2,14,San Marino,2026-09-13,Jose Antonio Rueda,0,0,0,27,-205.5,1,Dry
-2026,MOTO2,14,San Marino,2026-09-13,Deniz öncü,0,0,0,31.5,-201.0,1,Dry
+2026,MOTO2,14,San Marino,2026-09-13,Deniz Öncü,0,0,0,31.5,-201.0,1,Dry
 2026,MOTO2,14,San Marino,2026-09-13,Joe Roberts,0,3,3,43,-189.5,0,Dry
 2026,MOTO2,14,San Marino,2026-09-13,Luca Lunetta,0,0,0,17,-215.5,1,Dry
 2026,MOTO2,14,San Marino,2026-09-13,Ayumu Sasaki,0,0,0,19,-213.5,1,Dry
@@ -1113,7 +1113,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,15,Austria,2026-09-20,Barry Baltus,0,8,8,60,-185.5,0,Dry
 2026,MOTO2,15,Austria,2026-09-20,Adrian Huertas,0,0,0,37,-208.5,1,Dry
 2026,MOTO2,15,Austria,2026-09-20,Jose Antonio Rueda,0,4,4,31,-214.5,0,Dry
-2026,MOTO2,15,Austria,2026-09-20,Deniz öncü,0,7,7,38.5,-207.0,0,Dry
+2026,MOTO2,15,Austria,2026-09-20,Deniz Öncü,0,7,7,38.5,-207.0,0,Dry
 2026,MOTO2,15,Austria,2026-09-20,Joe Roberts,0,1,1,44,-201.5,0,Dry
 2026,MOTO2,15,Austria,2026-09-20,Luca Lunetta,0,6,6,23,-222.5,0,Dry
 2026,MOTO2,15,Austria,2026-09-20,Ayumu Sasaki,0,0,0,19,-226.5,1,Dry
@@ -1148,7 +1148,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,16,Japan,2026-10-04,Barry Baltus,0,0,0,60,-185.5,1,Dry
 2026,MOTO2,16,Japan,2026-10-04,Adrian Huertas,0,5,5,42,-203.5,0,Dry
 2026,MOTO2,16,Japan,2026-10-04,Jose Antonio Rueda,0,6,6,37,-208.5,0,Dry
-2026,MOTO2,16,Japan,2026-10-04,Deniz öncü,0,9,9,47.5,-198.0,0,Dry
+2026,MOTO2,16,Japan,2026-10-04,Deniz Öncü,0,9,9,47.5,-198.0,0,Dry
 2026,MOTO2,16,Japan,2026-10-04,Joe Roberts,0,0,0,44,-201.5,1,Dry
 2026,MOTO2,16,Japan,2026-10-04,Luca Lunetta,0,0,0,23,-222.5,1,Dry
 2026,MOTO2,16,Japan,2026-10-04,Ayumu Sasaki,0,2,2,21,-224.5,0,Dry
@@ -1183,7 +1183,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,17,Indonesia,2026-10-11,Barry Baltus,0,0,0,60,-205.5,1,Dry
 2026,MOTO2,17,Indonesia,2026-10-11,Adrian Huertas,0,0,0,42,-223.5,1,Dry
 2026,MOTO2,17,Indonesia,2026-10-11,Jose Antonio Rueda,0,6,6,43,-222.5,0,Dry
-2026,MOTO2,17,Indonesia,2026-10-11,Deniz öncü,0,0,0,47.5,-218.0,1,Dry
+2026,MOTO2,17,Indonesia,2026-10-11,Deniz Öncü,0,0,0,47.5,-218.0,1,Dry
 2026,MOTO2,17,Indonesia,2026-10-11,Joe Roberts,0,0,0,44,-221.5,1,Dry
 2026,MOTO2,17,Indonesia,2026-10-11,Luca Lunetta,0,4,4,27,-238.5,0,Dry
 2026,MOTO2,17,Indonesia,2026-10-11,Ayumu Sasaki,0,3,3,24,-241.5,0,Dry
@@ -1218,7 +1218,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,18,Australia,2026-10-25,Barry Baltus,0,0,0,60,-205.5,1,Dry
 2026,MOTO2,18,Australia,2026-10-25,Adrian Huertas,0,0,0,42,-223.5,1,Dry
 2026,MOTO2,18,Australia,2026-10-25,Jose Antonio Rueda,0,0,0,43,-222.5,1,Dry
-2026,MOTO2,18,Australia,2026-10-25,Deniz öncü,0,0,0,47.5,-218.0,1,Dry
+2026,MOTO2,18,Australia,2026-10-25,Deniz Öncü,0,0,0,47.5,-218.0,1,Dry
 2026,MOTO2,18,Australia,2026-10-25,Joe Roberts,0,0,0,44,-221.5,1,Dry
 2026,MOTO2,18,Australia,2026-10-25,Luca Lunetta,0,0,0,27,-238.5,1,Dry
 2026,MOTO2,18,Australia,2026-10-25,Ayumu Sasaki,0,0,0,24,-241.5,1,Dry
@@ -1253,7 +1253,7 @@ Season,Category,Round_Number,Event_Name,Date,Rider_Name,Sprint_Points,Main_Race_
 2026,MOTO2,19,Malaysia,2026-11-01,Barry Baltus,0,0,0,60,-216.5,1,Dry
 2026,MOTO2,19,Malaysia,2026-11-01,Adrian Huertas,0,10,10,52,-224.5,0,Dry
 2026,MOTO2,19,Malaysia,2026-11-01,Jose Antonio Rueda,0,5,5,48,-228.5,0,Dry
-2026,MOTO2,19,Malaysia,2026-11-01,Deniz öncü,0,0,0,47.5,-229.0,1,Dry
+2026,MOTO2,19,Malaysia,2026-11-01,Deniz Öncü,0,0,0,47.5,-229.0,1,Dry
 2026,MOTO2,19,Malaysia,2026-11-01,Joe Roberts,0,0,0,44,-232.5,1,Dry
 2026,MOTO2,19,Malaysia,2026-11-01,Luca Lunetta,0,0,0,27,-249.5,1,Dry
 2026,MOTO2,19,Malaysia,2026-11-01,Ayumu Sasaki,0,0,0,24,-252.5,1,Dry
