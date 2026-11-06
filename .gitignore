@@ -13,3 +13,7 @@ __pycache__/
 # Temporary PDF uploads
 data/*.pdf
 scratch/
+
+# Local-only private documentation
+wiki.html
+local_docs/
