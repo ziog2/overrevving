@@ -2211,66 +2211,66 @@
   ],
   "motogp_constructors": [
     {
-      "name": "APRILIA",
-      "pts": 509
+      "name": "DUCATI",
+      "pts": 537
     },
     {
-      "name": "DUCATI",
-      "pts": 503
+      "name": "APRILIA",
+      "pts": 529
     },
     {
       "name": "KTM",
-      "pts": 316
+      "pts": 348
     },
     {
       "name": "HONDA",
-      "pts": 167
+      "pts": 178
     },
     {
       "name": "YAMAHA",
-      "pts": 100
+      "pts": 105
     }
   ],
   "motogp_teams": [
     {
       "name": "Aprilia Racing",
-      "pts": 670
+      "pts": 687
     },
     {
       "name": "Ducati Lenovo Team",
-      "pts": 531
+      "pts": 572
     },
     {
       "name": "SuperFile Trackhouse MotoGP Team",
-      "pts": 495
+      "pts": 514
     },
     {
       "name": "Red Bull KTM Factory Racing",
-      "pts": 371
+      "pts": 413
     },
     {
       "name": "BK8 Gresini Racing MotoGP",
-      "pts": 316
+      "pts": 333
     },
     {
       "name": "Pertamina Enduro VR46 Racing Team",
-      "pts": 311
+      "pts": 330
     },
     {
       "name": "Honda HRC",
-      "pts": 147
+      "pts": 156
     },
     {
       "name": "Red Bull KTM Tech3",
-      "pts": 139
+      "pts": 153
     },
     {
       "name": "LCR Honda",
-      "pts": 127
+      "pts": 129
     },
     {
       "name": "Monster Energy Yamaha MotoGP Team",
-      "pts": 99
+      "pts": 108
     },
     {
       "name": "Prima Pramac Yamaha MotoGP",
@@ -4697,41 +4697,41 @@
   "moto2_constructors": [
     {
       "name": "KALEX",
-      "pts": 392.5
+      "pts": 417.5
     },
     {
       "name": "BOSCOSCURO",
-      "pts": 281
+      "pts": 294
     },
     {
       "name": "FORWARD",
-      "pts": 63
+      "pts": 69
     }
   ],
   "moto2_teams": [
     {
       "name": "LIQUI MOLY Dynavolt Intact GP",
-      "pts": 430.5
+      "pts": 442.5
     },
     {
-      "name": "CFMOTO Power Electronics Aspar Team",
-      "pts": 336
+      "name": "CFMOTO RCB Aspar Team",
+      "pts": 381
     },
     {
       "name": "BLU CRU Pramac Yamaha Moto2",
-      "pts": 277.5
+      "pts": 290.5
+    },
+    {
+      "name": "QJMOTOR - MSI",
+      "pts": 219.5
     },
     {
       "name": "OnlyFans American Racing Team",
-      "pts": 197
-    },
-    {
-      "name": "QJMOTOR - R.O.M.E.A - MSI",
-      "pts": 195.5
+      "pts": 199
     },
     {
       "name": "BETA Tools SpeedRS Team",
-      "pts": 160
+      "pts": 167
     },
     {
       "name": "REDS Fantic Racing",
@@ -4739,23 +4739,23 @@
     },
     {
       "name": "ITALJET Gresini Moto2",
-      "pts": 136.5
+      "pts": 140.5
     },
     {
       "name": "Italtrans Racing Team",
-      "pts": 125
+      "pts": 138
     },
     {
       "name": "Red Bull KTM Ajo",
-      "pts": 123.5
+      "pts": 137.5
+    },
+    {
+      "name": "KLINT Racing Team",
+      "pts": 69
     },
     {
       "name": "ELF Marc VDS Racing Team",
       "pts": 65
-    },
-    {
-      "name": "KLINT Racing Team",
-      "pts": 63
     },
     {
       "name": "Momoven Idrofoglia RW Racing Team",
@@ -6979,53 +6979,53 @@
   "moto3_constructors": [
     {
       "name": "KTM",
-      "pts": 420
+      "pts": 445
     },
     {
       "name": "HONDA",
-      "pts": 213
+      "pts": 233
     }
   ],
   "moto3_teams": [
     {
       "name": "CFMOTO Gaviota Aspar Team",
-      "pts": 491
+      "pts": 516
     },
     {
       "name": "Red Bull KTM Ajo",
-      "pts": 387
+      "pts": 410
     },
     {
       "name": "Liqui Moly Dynavolt Intact GP",
-      "pts": 285
+      "pts": 304
     },
     {
       "name": "Leopard Racing",
-      "pts": 225
+      "pts": 238
     },
     {
       "name": "Red Bull KTM Tech3",
-      "pts": 209
+      "pts": 210
     },
     {
       "name": "LEVEL UP - MTA",
-      "pts": 171
+      "pts": 181
     },
     {
       "name": "AEON Credit - MT Helmets - MSI",
-      "pts": 144
-    },
-    {
-      "name": "GRYD Racing",
-      "pts": 124
+      "pts": 162
     },
     {
       "name": "Honda Team Asia",
-      "pts": 112
+      "pts": 135
+    },
+    {
+      "name": "GRYD Racing",
+      "pts": 130
     },
     {
       "name": "CIP Green Power",
-      "pts": 111
+      "pts": 113
     },
     {
       "name": "SIC58 Squadra Corse",
@@ -7857,27 +7857,27 @@
   "f1": [
     {
       "name": "Andrea Kimi Antonelli",
-      "pts": 365
-    },
-    {
-      "name": "George Russell",
-      "pts": 242
-    },
-    {
-      "name": "Lewis Hamilton",
-      "pts": 241
+      "pts": 380
     },
     {
       "name": "Max Verstappen",
-      "pts": 236
+      "pts": 261
+    },
+    {
+      "name": "Lewis Hamilton",
+      "pts": 259
+    },
+    {
+      "name": "George Russell",
+      "pts": 250
     },
     {
       "name": "Charles Leclerc",
-      "pts": 233
+      "pts": 245
     },
     {
       "name": "Lando Norris",
-      "pts": 211
+      "pts": 221
     },
     {
       "name": "Oscar Piastri",
@@ -7885,11 +7885,11 @@
     },
     {
       "name": "Isack Hadjar",
-      "pts": 105
+      "pts": 107
     },
     {
       "name": "Liam Lawson",
-      "pts": 77
+      "pts": 83
     },
     {
       "name": "Pierre Gasly",
@@ -7908,12 +7908,12 @@
       "pts": 23
     },
     {
-      "name": "Nico Hülkenberg",
-      "pts": 13
+      "name": "Gabriel Bortoleto",
+      "pts": 14
     },
     {
-      "name": "Gabriel Bortoleto",
-      "pts": 10
+      "name": "Nico Hülkenberg",
+      "pts": 13
     },
     {
       "name": "Esteban Ocon",
@@ -7936,6 +7936,10 @@
       "pts": 1
     },
     {
+      "name": "Ryo Hirakawa",
+      "pts": 1
+    },
+    {
       "name": "Lance Stroll",
       "pts": 0
     },
@@ -7946,11 +7950,7 @@
     {
       "name": "Sergio Pérez",
       "pts": 0
-    },
-    {
-      "name": "Ryo Hirakawa",
-      "pts": 0
     }
   ],
-  "_updated": "2026-11-02 02:52:57 · Auto (Domenica)"
+  "_updated": "2026-11-06 08:54:19 · Auto (Domenica)"
 }

@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "f1",
-  "lastUpdated": "2026-11-02 02:52:57 · Auto (Domenica)",
+  "lastUpdated": "2026-11-06 08:54:19 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -122,27 +122,27 @@
   "riders": [
     {
       "name": "Andrea Kimi Antonelli",
-      "pts": 365
-    },
-    {
-      "name": "George Russell",
-      "pts": 242
-    },
-    {
-      "name": "Lewis Hamilton",
-      "pts": 241
+      "pts": 380
     },
     {
       "name": "Max Verstappen",
-      "pts": 236
+      "pts": 261
+    },
+    {
+      "name": "Lewis Hamilton",
+      "pts": 259
+    },
+    {
+      "name": "George Russell",
+      "pts": 250
     },
     {
       "name": "Charles Leclerc",
-      "pts": 233
+      "pts": 245
     },
     {
       "name": "Lando Norris",
-      "pts": 211
+      "pts": 221
     },
     {
       "name": "Oscar Piastri",
@@ -150,11 +150,11 @@
     },
     {
       "name": "Isack Hadjar",
-      "pts": 105
+      "pts": 107
     },
     {
       "name": "Liam Lawson",
-      "pts": 77
+      "pts": 83
     },
     {
       "name": "Pierre Gasly",
@@ -173,12 +173,12 @@
       "pts": 23
     },
     {
-      "name": "Nico Hülkenberg",
-      "pts": 13
+      "name": "Gabriel Bortoleto",
+      "pts": 14
     },
     {
-      "name": "Gabriel Bortoleto",
-      "pts": 10
+      "name": "Nico Hülkenberg",
+      "pts": 13
     },
     {
       "name": "Esteban Ocon",
@@ -201,6 +201,10 @@
       "pts": 1
     },
     {
+      "name": "Ryo Hirakawa",
+      "pts": 1
+    },
+    {
       "name": "Lance Stroll",
       "pts": 0
     },
@@ -210,10 +214,6 @@
     },
     {
       "name": "Sergio Pérez",
-      "pts": 0
-    },
-    {
-      "name": "Ryo Hirakawa",
       "pts": 0
     }
   ],

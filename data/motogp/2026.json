@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "motogp",
-  "lastUpdated": "2026-11-02 02:52:57 · Auto (Domenica)",
+  "lastUpdated": "2026-11-06 08:54:19 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -2342,66 +2342,66 @@
   ],
   "constructors": [
     {
-      "name": "APRILIA",
-      "pts": 509
+      "name": "DUCATI",
+      "pts": 537
     },
     {
-      "name": "DUCATI",
-      "pts": 503
+      "name": "APRILIA",
+      "pts": 529
     },
     {
       "name": "KTM",
-      "pts": 316
+      "pts": 348
     },
     {
       "name": "HONDA",
-      "pts": 167
+      "pts": 178
     },
     {
       "name": "YAMAHA",
-      "pts": 100
+      "pts": 105
     }
   ],
   "teams": [
     {
       "name": "Aprilia Racing",
-      "pts": 670
+      "pts": 687
     },
     {
       "name": "Ducati Lenovo Team",
-      "pts": 531
+      "pts": 572
     },
     {
       "name": "SuperFile Trackhouse MotoGP Team",
-      "pts": 495
+      "pts": 514
     },
     {
       "name": "Red Bull KTM Factory Racing",
-      "pts": 371
+      "pts": 413
     },
     {
       "name": "BK8 Gresini Racing MotoGP",
-      "pts": 316
+      "pts": 333
     },
     {
       "name": "Pertamina Enduro VR46 Racing Team",
-      "pts": 311
+      "pts": 330
     },
     {
       "name": "Honda HRC",
-      "pts": 147
+      "pts": 156
     },
     {
       "name": "Red Bull KTM Tech3",
-      "pts": 139
+      "pts": 153
     },
     {
       "name": "LCR Honda",
-      "pts": 127
+      "pts": 129
     },
     {
       "name": "Monster Energy Yamaha MotoGP Team",
-      "pts": 99
+      "pts": 108
     },
     {
       "name": "Prima Pramac Yamaha MotoGP",
