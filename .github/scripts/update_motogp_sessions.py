@@ -506,9 +506,13 @@ def update_event_html_results():
                 results, weather = parse_classification_pdf(pdf_b)
                 if results and len(results) > 0:
                     current_res = static_obj.get(sess_key, [])
-                    # Check if missing, empty, or has corrupted placeholder (like Deniz Öncü at pos 6)
-                    is_corrupt = any(r.get('pos') == 6 and 'Öncü' in r.get('rider', '') for r in current_res)
-                    if not current_res or len(current_res) == 0 or is_corrupt:
+                    # Check if missing, empty, or has corrupted placeholder (like Deniz Öncü anywhere in MotoGP)
+                    is_corrupt = any(('Öncü' in str(r.get('rider', '')) or 'Oncu' in str(r.get('rider', ''))) for r in current_res)
+                    should_update = (not current_res or len(current_res) == 0 or is_corrupt)
+                    if not should_update and len(results) >= len(current_res) and current_res != results:
+                        if any(c.get('rider') != d.get('rider') for c, d in zip(current_res, results)):
+                            should_update = True
+                    if should_update:
                         static_obj[sess_key] = results
                         round_static_changed = True
                         print(f"  ✓ {rnd} {sess_code}: Updated classification from Dorna PDF ({len(results)} riders)!")

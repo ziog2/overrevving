@@ -71,7 +71,8 @@ def clean_name(name):
     if "VINALES" in u or "VIÑALES" in u or re.search(r"VI.ALES", u): return "Maverick Viñales"
     if "MUÑOZ" in u or "MUNOZ" in u or re.search(r"MU.OZ", u):
         return "David Muñoz" if "DAVID" in u else "Daniel Muñoz"
-    if "ÖNCÜ" in u or "ONCU" in u or "ONCÜ" in u or re.search(r".NC.", u): return "Deniz Öncü"
+    if re.search(r"\b[ÖO]NC[ÜU]\b", u):
+        return "Deniz Öncü" if "DENIZ" in u else "Can Öncü"
     if "GIANNANTONIO" in u: return "Fabio Di Giannantonio"
     return clean
 
@@ -121,7 +122,7 @@ def format_class(sess_id):
         classification = data.get('classification', [])
         formatted = []
         for idx, c in enumerate(classification, start=1):
-            r_name = clean_name(c.get('rider', {}).get('full_name') if c.get('rider') else 'Rider')
+            r_name = normalize_rider_name(c.get('rider', {}).get('full_name') if c.get('rider') else 'Rider')
             pos_val = c.get('position', idx)
             laps_val = c.get('total_laps') if c.get('total_laps') is not None else (c.get('laps') if c.get('laps') is not None else "-")
             time_val = c.get('time') if c.get('time') else (c.get('best_lap', {}).get('time') if c.get('best_lap') else "-")
