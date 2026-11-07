@@ -152,7 +152,7 @@ def format_cond(sess):
     tr = str(c.get('track') or '').strip()
     air_num = re.sub(r'[^0-9\-]', '', str(c.get('air') or ''))
     ground_num = re.sub(r'[^0-9\-]', '', str(c.get('ground') or ''))
-    if not tr and not air_num and not ground_num:
+    if not air_num and not ground_num:
         return ""
     tr_label = tr if tr else "Dry"
     air_label = f"{air_num}°C" if air_num else "--"

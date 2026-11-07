@@ -561,3 +561,20 @@ Fix gating sessioni Moto2 e Moto3 in .github/scripts/update_event_data.py e popo
 Backup Timestamp:
 2026-11-07 11:34:10
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261107_134711.zip
+
+Note / Log Message:
+Aggiornamento sessioni del sabato MotoGP GP Qatar 2026 (Round 20):
+- MotoGP event.html: aggiunti risultati FP2 (18 piloti), Q1 (8 piloti), Q2 (12 piloti, Pole Bezzecchi 1:50.028) e Griglia di Partenza completa (18 piloti).
+- Analisi FP2 MotoGP: generati stint, mescole pneumatici e intertempi T1-T4 estratti dall'Analysis.pdf Dorna in data/motogp_fp2_*.json e js/motogp_fp2_*.js.
+- Moto2 event_moto2.html: aggiunti risultati FP2 (27 piloti, P1 Manuel Gonzalez 1:56.334).
+- Pulizia e normalizzazione delle stringhe meteo in SESSION_WEATHER_DATA in event.html.
+
+Backup Timestamp:
+2026-11-07 13:47:11
+=====================================================
