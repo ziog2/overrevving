@@ -1041,69 +1041,108 @@ def update_moto2():
             s_slice = html_content[idx_s_start:idx_s_end]
             s_start, s_end, s_parsed = find_matching_object(s_slice, short)
             existing = s_parsed if isinstance(s_parsed, dict) else {}
+            def fmt_class_m2(sid):
+                if not sid: return []
+                u = f"https://api.motogp.pulselive.com/motogp/v1/results/session/{sid}/classification?categoryUuid={CAT_MOTO2}"
+                try:
+                    d = http_get(u)
+                    res = []
+                    for idx, c in enumerate(d.get('classification', []), 1):
+                        res.append({
+                            "pos": c.get('position', idx),
+                            "rider": clean_name(c.get('rider', {}).get('full_name') if c.get('rider') else 'Rider'),
+                            "laps": c.get('total_laps') if c.get('total_laps') is not None else (c.get('laps') if c.get('laps') is not None else "-"),
+                            "time": c.get('time') if c.get('time') else (c.get('best_lap', {}).get('time') if c.get('best_lap') else "-"),
+                            "status": c.get('status', 'INSTND'),
+                            "pts": c.get('points', None)
+                        })
+                    return res
+                except Exception:
+                    return []
+
+            has_fp1 = bool(existing.get("fp1") and len(existing["fp1"]) > 0)
+            has_pr  = bool(existing.get("pr") and len(existing["pr"]) > 0)
+            has_fp2 = bool(existing.get("fp2") and len(existing["fp2"]) > 0)
+            has_q1  = bool(existing.get("q1") and len(existing["q1"]) > 0)
+            has_q2  = bool(existing.get("q2") and len(existing["q2"]) > 0)
             has_race = bool(existing.get("race") and len(existing["race"]) > 0)
 
-            if not has_race and (rac_sess or q2_sess):
-                def fmt_class_m2(sid):
-                    if not sid: return []
-                    u = f"https://api.motogp.pulselive.com/motogp/v1/results/session/{sid}/classification?categoryUuid={CAT_MOTO2}"
-                    try:
-                        d = http_get(u)
-                        res = []
-                        for idx, c in enumerate(d.get('classification', []), 1):
-                            res.append({
-                                "pos": c.get('position', idx),
-                                "rider": clean_name(c.get('rider', {}).get('full_name') if c.get('rider') else 'Rider'),
-                                "laps": c.get('total_laps') if c.get('total_laps') is not None else (c.get('laps') if c.get('laps') is not None else "-"),
-                                "time": c.get('time') if c.get('time') else (c.get('best_lap', {}).get('time') if c.get('best_lap') else "-"),
-                                "status": c.get('status', 'INSTND'),
-                                "pts": c.get('points', None)
-                            })
-                        return res
-                    except Exception:
-                        return []
+            needs_update = False
+            fp1 = existing.get("fp1", [])
+            pr  = existing.get("pr", [])
+            fp2 = existing.get("fp2", [])
+            q1  = existing.get("q1", [])
+            q2  = existing.get("q2", [])
+            rac = existing.get("race", [])
 
-                fp1 = fmt_class_m2(fp_sess[0]['id']) if len(fp_sess) >= 1 else []
-                pr = fmt_class_m2(pr_sess['id']) if pr_sess else []
-                fp2 = fmt_class_m2(fp_sess[1]['id']) if len(fp_sess) >= 2 else []
-                q1 = fmt_class_m2(q1_sess['id']) if q1_sess else []
-                q2 = fmt_class_m2(q2_sess['id']) if q2_sess else []
-                rac = fmt_class_m2(rac_sess['id']) if rac_sess else []
+            if len(fp_sess) >= 1 and (not has_fp1 or not existing):
+                new_fp1 = fmt_class_m2(fp_sess[0]['id'])
+                if new_fp1:
+                    fp1 = new_fp1
+                    needs_update = True
 
-                grid = []
-                if q2:
-                    promoted = set(r['rider'] for r in q1[:4])
-                    p = 1
-                    for r in q2:
-                        grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
+            if pr_sess and (not has_pr or not existing):
+                new_pr = fmt_class_m2(pr_sess['id'])
+                if new_pr:
+                    pr = new_pr
+                    needs_update = True
+
+            if len(fp_sess) >= 2 and (not has_fp2 or not existing):
+                new_fp2 = fmt_class_m2(fp_sess[1]['id'])
+                if new_fp2:
+                    fp2 = new_fp2
+                    needs_update = True
+
+            if q1_sess and (not has_q1 or not existing):
+                new_q1 = fmt_class_m2(q1_sess['id'])
+                if new_q1:
+                    q1 = new_q1
+                    needs_update = True
+
+            if q2_sess and (not has_q2 or not existing):
+                new_q2 = fmt_class_m2(q2_sess['id'])
+                if new_q2:
+                    q2 = new_q2
+                    needs_update = True
+
+            if rac_sess and (not has_race or not existing):
+                new_rac = fmt_class_m2(rac_sess['id'])
+                if new_rac:
+                    rac = new_rac
+                    needs_update = True
+
+            grid = existing.get("grid", [])
+            if q2 and (not grid or len(grid) == 0):
+                promoted = set(r['rider'] for r in q1[:4])
+                p = 1
+                new_grid = []
+                for r in q2:
+                    new_grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
+                    p += 1
+                for r in q1:
+                    if r['rider'] not in promoted:
+                        new_grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
                         p += 1
-                    for r in q1:
-                        if r['rider'] not in promoted:
-                            grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
-                            p += 1
+                grid = new_grid
+                needs_update = True
 
-                if rac or q2:
-                    static_obj = {
-                        "fp1": fp1 if fp1 else existing.get("fp1", []),
-                        "pr": pr if pr else existing.get("pr", []),
-                        "fp2": fp2 if fp2 else existing.get("fp2", []),
-                        "q1": q1 if q1 else existing.get("q1", []),
-                        "q2": q2 if q2 else existing.get("q2", []),
-                        "grid": grid if grid else existing.get("grid", []),
-                        "race": rac if rac else existing.get("race", [])
-                    }
-                    static_json = json.dumps(static_obj, separators=(',', ':'))
-                    if s_start is not None and s_end is not None:
-                        new_s_entry = f'"{short}": {static_json}'
-                        new_s_slice = s_slice[:s_start] + new_s_entry + s_slice[s_end:]
-                    else:
-                        m_insert = re.search(r'const STATIC_EVENT_DATA\s*=\s*\{', s_slice)
-                        pos_in = m_insert.end()
-                        new_s_slice = s_slice[:pos_in] + f'\n  "{short}": {static_json},' + s_slice[pos_in:]
-                    html_content = html_content[:idx_s_start] + new_s_slice + html_content[idx_s_end:]
-                    existing = static_obj
-                    updated = True
-                    print(f"✓ Aggiornato blocco {short} in STATIC_EVENT_DATA Moto2!")
+            if needs_update or (not existing and (fp1 or pr or fp2 or q1 or q2 or rac)):
+                static_obj = {
+                    "fp1": fp1, "pr": pr, "fp2": fp2, "q1": q1, "q2": q2,
+                    "grid": grid, "race": rac
+                }
+                static_json = json.dumps(static_obj, separators=(',', ':'))
+                if s_start is not None and s_end is not None:
+                    new_s_entry = f'"{short}": {static_json}'
+                    new_s_slice = s_slice[:s_start] + new_s_entry + s_slice[s_end:]
+                else:
+                    m_insert = re.search(r'const STATIC_EVENT_DATA\s*=\s*\{', s_slice)
+                    pos_in = m_insert.end()
+                    new_s_slice = s_slice[:pos_in] + f'\n  "{short}": {static_json},' + s_slice[pos_in:]
+                html_content = html_content[:idx_s_start] + new_s_slice + html_content[idx_s_end:]
+                existing = static_obj
+                updated = True
+                print(f"✓ Aggiornato blocco {short} in STATIC_EVENT_DATA Moto2!")
 
         # Weather update
         idx_w_start = html_content.find('const SESSION_WEATHER_DATA = {')
@@ -1239,63 +1278,106 @@ def update_moto3():
             s_slice = html_content[idx_s_start:idx_s_end]
             s_start, s_end, s_parsed = find_matching_object(s_slice, short)
             existing = s_parsed if isinstance(s_parsed, dict) else {}
+            def fmt_class_m3(sid):
+                if not sid: return []
+                u = f"https://api.motogp.pulselive.com/motogp/v1/results/session/{sid}/classification?categoryUuid={CAT_MOTO3}"
+                try:
+                    d = http_get(u)
+                    res = []
+                    for idx, c in enumerate(d.get('classification', []), 1):
+                        res.append({
+                            "pos": c.get('position', idx),
+                            "rider": clean_name(c.get('rider', {}).get('full_name') if c.get('rider') else 'Rider'),
+                            "laps": c.get('total_laps') if c.get('total_laps') is not None else (c.get('laps') if c.get('laps') is not None else "-"),
+                            "time": c.get('time') if c.get('time') else (c.get('best_lap', {}).get('time') if c.get('best_lap') else "-"),
+                            "status": c.get('status', 'INSTND'),
+                            "pts": c.get('points', None)
+                        })
+                    return res
+                except Exception:
+                    return []
+
+            has_fp1 = bool(existing.get("fp1") and len(existing["fp1"]) > 0)
+            has_pr  = bool(existing.get("pr") and len(existing["pr"]) > 0)
+            has_fp2 = bool(existing.get("fp2") and len(existing["fp2"]) > 0)
+            has_q1  = bool(existing.get("q1") and len(existing["q1"]) > 0)
+            has_q2  = bool(existing.get("q2") and len(existing["q2"]) > 0)
             has_race = bool(existing.get("race") and len(existing["race"]) > 0)
 
-            if not has_race and (rac_sess or q2_sess):
-                def fmt_class_m3(sid):
-                    if not sid: return []
-                    u = f"https://api.motogp.pulselive.com/motogp/v1/results/session/{sid}/classification?categoryUuid={CAT_MOTO3}"
-                    try:
-                        d = http_get(u)
-                        res = []
-                        for idx, c in enumerate(d.get('classification', []), 1):
-                            res.append({
-                                "pos": c.get('position', idx),
-                                "rider": clean_name(c.get('rider', {}).get('full_name') if c.get('rider') else 'Rider'),
-                                "laps": c.get('total_laps') if c.get('total_laps') is not None else (c.get('laps') if c.get('laps') is not None else "-"),
-                                "time": c.get('time') if c.get('time') else (c.get('best_lap', {}).get('time') if c.get('best_lap') else "-"),
-                                "status": c.get('status', 'INSTND'),
-                                "pts": c.get('points', None)
-                            })
-                        return res
-                    except Exception:
-                        return []
+            needs_update = False
+            fp1 = existing.get("fp1", [])
+            pr  = existing.get("pr", [])
+            fp2 = existing.get("fp2", [])
+            q1  = existing.get("q1", [])
+            q2  = existing.get("q2", [])
+            rac = existing.get("race", [])
 
-                fp1 = fmt_class_m3(fp_sess[0]['id']) if len(fp_sess) >= 1 else []
-                pr = fmt_class_m3(pr_sess['id']) if pr_sess else []
-                fp2 = fmt_class_m3(fp_sess[1]['id']) if len(fp_sess) >= 2 else []
-                q1 = fmt_class_m3(q1_sess['id']) if q1_sess else []
-                q2 = fmt_class_m3(q2_sess['id']) if q2_sess else []
-                rac = fmt_class_m3(rac_sess['id']) if rac_sess else []
+            if len(fp_sess) >= 1 and (not has_fp1 or not existing):
+                new_fp1 = fmt_class_m3(fp_sess[0]['id'])
+                if new_fp1:
+                    fp1 = new_fp1
+                    needs_update = True
 
-                grid = []
-                if q2:
-                    promoted = set(r['rider'] for r in q1[:4])
-                    p = 1
-                    for r in q2:
-                        grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
+            if pr_sess and (not has_pr or not existing):
+                new_pr = fmt_class_m3(pr_sess['id'])
+                if new_pr:
+                    pr = new_pr
+                    needs_update = True
+
+            if len(fp_sess) >= 2 and (not has_fp2 or not existing):
+                new_fp2 = fmt_class_m3(fp_sess[1]['id'])
+                if new_fp2:
+                    fp2 = new_fp2
+                    needs_update = True
+
+            if q1_sess and (not has_q1 or not existing):
+                new_q1 = fmt_class_m3(q1_sess['id'])
+                if new_q1:
+                    q1 = new_q1
+                    needs_update = True
+
+            if q2_sess and (not has_q2 or not existing):
+                new_q2 = fmt_class_m3(q2_sess['id'])
+                if new_q2:
+                    q2 = new_q2
+                    needs_update = True
+
+            if rac_sess and (not has_race or not existing):
+                new_rac = fmt_class_m3(rac_sess['id'])
+                if new_rac:
+                    rac = new_rac
+                    needs_update = True
+
+            grid = existing.get("grid", [])
+            if q2 and (not grid or len(grid) == 0):
+                promoted = set(r['rider'] for r in q1[:4])
+                p = 1
+                new_grid = []
+                for r in q2:
+                    new_grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
+                    p += 1
+                for r in q1:
+                    if r['rider'] not in promoted:
+                        new_grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
                         p += 1
-                    for r in q1:
-                        if r['rider'] not in promoted:
-                            grid.append({"pos": p, "rider": r['rider'], "laps": r['laps'], "time": r['time'], "status": "INSTND", "pts": None})
-                            p += 1
+                grid = new_grid
+                needs_update = True
 
-                new_static = {
+            if needs_update or (not existing and (fp1 or pr or fp2 or q1 or q2 or rac)):
+                static_obj = {
                     "fp1": fp1, "pr": pr, "fp2": fp2, "q1": q1, "q2": q2,
                     "grid": grid, "race": rac
                 }
-                new_static_json = json.dumps(new_static, separators=(',', ':'))
-
+                static_json = json.dumps(static_obj, separators=(',', ':'))
                 if s_start is not None and s_end is not None:
-                    new_entry = f'"{short}": {new_static_json}'
-                    new_slice = s_slice[:s_start] + new_entry + s_slice[s_end:]
+                    new_s_entry = f'"{short}": {static_json}'
+                    new_s_slice = s_slice[:s_start] + new_s_entry + s_slice[s_end:]
                 else:
                     m_insert = re.search(r'const STATIC_EVENT_DATA\s*=\s*\{', s_slice)
                     pos_in = m_insert.end()
-                    new_slice = s_slice[:pos_in] + f'\n  "{short}": {new_static_json},' + s_slice[pos_in:]
-
-                html_content = html_content[:idx_s_start] + new_slice + html_content[idx_s_end:]
-                existing = new_static
+                    new_s_slice = s_slice[:pos_in] + f'\n  "{short}": {static_json},' + s_slice[pos_in:]
+                html_content = html_content[:idx_s_start] + new_s_slice + html_content[idx_s_end:]
+                existing = static_obj
                 updated = True
                 print(f"✓ Inseriti risultati {short} in STATIC_EVENT_DATA Moto3!")
 

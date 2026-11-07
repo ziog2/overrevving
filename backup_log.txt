@@ -544,3 +544,20 @@ Aggiornamento sezione intertempi Sprint Race (SPR Sector Times) su singola riga 
 Backup Timestamp:
 2026-11-06 23:40:24
 =====================================================
+
+=====================================================
+OVERREVVING BACKUP LOG
+=====================================================
+Backup Folder Name:
+G:\My Drive\Progetti\OR BU\Sito_overrevving_BACKUP_20261107_113410.zip
+
+Note / Log Message:
+Fix gating sessioni Moto2 e Moto3 in .github/scripts/update_event_data.py e popolamento risultati Qatar:
+- Rimossa la condizione bloccante if not has_race and (rac_sess or q2_sess) che impediva il salvataggio dei risultati in STATIC_EVENT_DATA prima del termine di Q2 o Gara.
+- Implementato controllo granulare sessione per sessione (has_fp1, has_pr, has_fp2, has_q1, has_q2, has_race) identico a MotoGP.
+- Aggiornati event_moto2.html con FP1 e PR del Qatar e event_moto3.html con FP1, PR ed FP2 del Qatar.
+- Sincronizzati database multi-anno e file news.
+
+Backup Timestamp:
+2026-11-07 11:34:10
+=====================================================
