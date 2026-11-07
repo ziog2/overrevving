@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "motogp",
-  "lastUpdated": "2026-11-07 16:10:37 · Auto (Domenica)",
+  "lastUpdated": "2026-11-07 20:50:06 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -133,7 +133,7 @@
   "riders": [
     {
       "name": "Marc Marquez",
-      "pts": 399,
+      "pts": 411,
       "history": [
         9,
         25,
@@ -202,7 +202,7 @@
     },
     {
       "name": "Jorge Martin",
-      "pts": 355,
+      "pts": 362,
       "history": [
         18,
         27,
@@ -340,7 +340,7 @@
     },
     {
       "name": "Pedro Acosta",
-      "pts": 295,
+      "pts": 299,
       "history": [
         32,
         10,
@@ -409,7 +409,7 @@
     },
     {
       "name": "Ai Ogura",
-      "pts": 278,
+      "pts": 281,
       "history": [
         17,
         16,
@@ -478,7 +478,7 @@
     },
     {
       "name": "Fabio Di Giannantonio",
-      "pts": 265,
+      "pts": 274,
       "history": [
         12,
         25,
@@ -547,7 +547,7 @@
     },
     {
       "name": "Raul Fernandez",
-      "pts": 236,
+      "pts": 242,
       "history": [
         23,
         6,
@@ -754,7 +754,7 @@
     },
     {
       "name": "Enea Bastianini",
-      "pts": 134,
+      "pts": 136,
       "history": [
         4,
         1,
@@ -1237,7 +1237,7 @@
     },
     {
       "name": "Johann Zarco",
-      "pts": 51,
+      "pts": 56,
       "history": [
         5,
         7,
@@ -1651,7 +1651,7 @@
     },
     {
       "name": "Iker Lecuona",
-      "pts": 11,
+      "pts": 12,
       "history": [
         0,
         0,
@@ -1996,6 +1996,75 @@
     },
     {
       "name": "Cal Crutchlow",
+      "pts": 0,
+      "history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sprint_pts": 0,
+      "sprint_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "long_pts": 0,
+      "long_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Jake Dixon",
       "pts": 0,
       "history": [
         0,
