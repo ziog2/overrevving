@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "motogp",
-  "lastUpdated": "2026-11-08 18:24:17 · Auto (Domenica)",
+  "lastUpdated": "2026-11-08 22:48:04 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -133,7 +133,7 @@
   "riders": [
     {
       "name": "Marc Marquez",
-      "pts": 411,
+      "pts": 431,
       "history": [
         9,
         25,
@@ -154,7 +154,7 @@
         22,
         12,
         34,
-        12
+        32
       ],
       "sprint_pts": 164,
       "sprint_history": [
@@ -179,7 +179,7 @@
         9,
         12
       ],
-      "long_pts": 247,
+      "long_pts": 267,
       "long_history": [
         0,
         13,
@@ -200,12 +200,12 @@
         10,
         0,
         25,
-        0
+        20
       ]
     },
     {
       "name": "Jorge Martin",
-      "pts": 362,
+      "pts": 371,
       "history": [
         18,
         27,
@@ -226,7 +226,7 @@
         22,
         0,
         0,
-        7
+        16
       ],
       "sprint_pts": 119,
       "sprint_history": [
@@ -251,7 +251,7 @@
         0,
         7
       ],
-      "long_pts": 243,
+      "long_pts": 252,
       "long_history": [
         13,
         20,
@@ -272,12 +272,12 @@
         16,
         0,
         0,
-        0
+        9
       ]
     },
     {
       "name": "Marco Bezzecchi",
-      "pts": 332,
+      "pts": 357,
       "history": [
         25,
         31,
@@ -298,7 +298,7 @@
         25,
         6,
         17,
-        0
+        25
       ],
       "sprint_pts": 80,
       "sprint_history": [
@@ -323,7 +323,7 @@
         7,
         0
       ],
-      "long_pts": 252,
+      "long_pts": 277,
       "long_history": [
         25,
         25,
@@ -344,12 +344,12 @@
         25,
         0,
         10,
-        0
+        25
       ]
     },
     {
       "name": "Pedro Acosta",
-      "pts": 299,
+      "pts": 309,
       "history": [
         32,
         10,
@@ -370,7 +370,7 @@
         15,
         5,
         32,
-        4
+        14
       ],
       "sprint_pts": 82,
       "sprint_history": [
@@ -395,7 +395,7 @@
         12,
         4
       ],
-      "long_pts": 217,
+      "long_pts": 227,
       "long_history": [
         20,
         9,
@@ -416,12 +416,12 @@
         11,
         0,
         20,
-        0
+        10
       ]
     },
     {
       "name": "Ai Ogura",
-      "pts": 281,
+      "pts": 294,
       "history": [
         17,
         16,
@@ -442,7 +442,7 @@
         22,
         0,
         19,
-        3
+        16
       ],
       "sprint_pts": 84,
       "sprint_history": [
@@ -467,7 +467,7 @@
         6,
         3
       ],
-      "long_pts": 197,
+      "long_pts": 210,
       "long_history": [
         11,
         11,
@@ -488,12 +488,12 @@
         13,
         0,
         13,
-        0
+        13
       ]
     },
     {
       "name": "Fabio Di Giannantonio",
-      "pts": 274,
+      "pts": 282,
       "history": [
         12,
         25,
@@ -514,7 +514,7 @@
         15,
         7,
         13,
-        9
+        17
       ],
       "sprint_pts": 89,
       "sprint_history": [
@@ -539,7 +539,7 @@
         5,
         9
       ],
-      "long_pts": 185,
+      "long_pts": 193,
       "long_history": [
         10,
         16,
@@ -560,12 +560,12 @@
         8,
         0,
         8,
-        0
+        8
       ]
     },
     {
       "name": "Raul Fernandez",
-      "pts": 242,
+      "pts": 258,
       "history": [
         23,
         6,
@@ -586,7 +586,7 @@
         20,
         0,
         0,
-        6
+        22
       ],
       "sprint_pts": 72,
       "sprint_history": [
@@ -611,7 +611,7 @@
         0,
         6
       ],
-      "long_pts": 170,
+      "long_pts": 186,
       "long_history": [
         16,
         6,
@@ -632,7 +632,7 @@
         20,
         0,
         0,
-        0
+        16
       ]
     },
     {
@@ -781,7 +781,7 @@
     },
     {
       "name": "Enea Bastianini",
-      "pts": 136,
+      "pts": 147,
       "history": [
         4,
         1,
@@ -802,7 +802,7 @@
         6,
         0,
         12,
-        2
+        13
       ],
       "sprint_pts": 23,
       "sprint_history": [
@@ -827,7 +827,7 @@
         1,
         2
       ],
-      "long_pts": 113,
+      "long_pts": 124,
       "long_history": [
         4,
         1,
@@ -848,12 +848,12 @@
         6,
         0,
         11,
-        0
+        11
       ]
     },
     {
       "name": "Fermin Aldeguer",
-      "pts": 125,
+      "pts": 129,
       "history": [
         0,
         8,
@@ -874,7 +874,7 @@
         3,
         0,
         0,
-        0
+        4
       ],
       "sprint_pts": 22,
       "sprint_history": [
@@ -899,7 +899,7 @@
         0,
         0
       ],
-      "long_pts": 103,
+      "long_pts": 107,
       "long_history": [
         0,
         8,
@@ -920,7 +920,7 @@
         0,
         0,
         0,
-        0
+        4
       ]
     },
     {
@@ -1213,7 +1213,7 @@
     },
     {
       "name": "Franco Morbidelli",
-      "pts": 65,
+      "pts": 70,
       "history": [
         8,
         4,
@@ -1234,7 +1234,7 @@
         2,
         0,
         6,
-        0
+        5
       ],
       "sprint_pts": 12,
       "sprint_history": [
@@ -1259,7 +1259,7 @@
         0,
         0
       ],
-      "long_pts": 53,
+      "long_pts": 58,
       "long_history": [
         8,
         4,
@@ -1280,12 +1280,12 @@
         2,
         0,
         6,
-        0
+        5
       ]
     },
     {
       "name": "Johann Zarco",
-      "pts": 56,
+      "pts": 63,
       "history": [
         5,
         7,
@@ -1306,7 +1306,7 @@
         3,
         0,
         0,
-        5
+        12
       ],
       "sprint_pts": 20,
       "sprint_history": [
@@ -1331,7 +1331,7 @@
         0,
         5
       ],
-      "long_pts": 36,
+      "long_pts": 43,
       "long_history": [
         5,
         7,
@@ -1352,7 +1352,7 @@
         3,
         0,
         0,
-        0
+        7
       ]
     },
     {
@@ -1572,6 +1572,78 @@
       ]
     },
     {
+      "name": "Iker Lecuona",
+      "pts": 18,
+      "history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        9,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        7
+      ],
+      "sprint_pts": 2,
+      "sprint_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "long_pts": 16,
+      "long_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        9,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        6
+      ]
+    },
+    {
       "name": "Toprak Razgatlioglu",
       "pts": 18,
       "history": [
@@ -1645,7 +1717,7 @@
     },
     {
       "name": "Maverick Viñales",
-      "pts": 14,
+      "pts": 17,
       "history": [
         0,
         0,
@@ -1666,7 +1738,7 @@
         0,
         0,
         2,
-        0
+        3
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -1691,7 +1763,7 @@
         0,
         0
       ],
-      "long_pts": 14,
+      "long_pts": 17,
       "long_history": [
         0,
         0,
@@ -1712,79 +1784,7 @@
         0,
         0,
         2,
-        0
-      ]
-    },
-    {
-      "name": "Iker Lecuona",
-      "pts": 12,
-      "history": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        9,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1
-      ],
-      "sprint_pts": 2,
-      "sprint_history": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        1
-      ],
-      "long_pts": 10,
-      "long_history": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        9,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0
+        3
       ]
     },
     {
@@ -2076,8 +2076,8 @@
       ]
     },
     {
-      "name": "Cal Crutchlow",
-      "pts": 0,
+      "name": "Jake Dixon",
+      "pts": 2,
       "history": [
         0,
         0,
@@ -2098,7 +2098,7 @@
         0,
         0,
         0,
-        0
+        2
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -2123,7 +2123,7 @@
         0,
         0
       ],
-      "long_pts": 0,
+      "long_pts": 2,
       "long_history": [
         0,
         0,
@@ -2144,11 +2144,11 @@
         0,
         0,
         0,
-        0
+        2
       ]
     },
     {
-      "name": "Jake Dixon",
+      "name": "Cal Crutchlow",
       "pts": 0,
       "history": [
         0,
@@ -2511,19 +2511,19 @@
   "constructors": [
     {
       "name": "DUCATI",
-      "pts": 537
+      "pts": 569
     },
     {
       "name": "APRILIA",
-      "pts": 529
+      "pts": 561
     },
     {
       "name": "KTM",
-      "pts": 348
+      "pts": 363
     },
     {
       "name": "HONDA",
-      "pts": 178
+      "pts": 190
     },
     {
       "name": "YAMAHA",
@@ -2533,39 +2533,39 @@
   "teams": [
     {
       "name": "Aprilia Racing",
-      "pts": 687
+      "pts": 728
     },
     {
       "name": "Ducati Lenovo Team",
-      "pts": 572
+      "pts": 604
     },
     {
       "name": "SuperFile Trackhouse MotoGP Team",
-      "pts": 514
+      "pts": 552
     },
     {
       "name": "Red Bull KTM Factory Racing",
-      "pts": 413
-    },
-    {
-      "name": "BK8 Gresini Racing MotoGP",
-      "pts": 333
+      "pts": 427
     },
     {
       "name": "Pertamina Enduro VR46 Racing Team",
-      "pts": 330
+      "pts": 352
     },
     {
-      "name": "Honda HRC",
-      "pts": 156
+      "name": "BK8 Gresini Racing MotoGP",
+      "pts": 344
     },
     {
       "name": "Red Bull KTM Tech3",
-      "pts": 153
+      "pts": 169
+    },
+    {
+      "name": "Honda HRC",
+      "pts": 158
     },
     {
       "name": "LCR Honda",
-      "pts": 129
+      "pts": 141
     },
     {
       "name": "Monster Energy Yamaha MotoGP Team",

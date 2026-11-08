@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "moto2",
-  "lastUpdated": "2026-11-08 18:24:17 · Auto (Domenica)",
+  "lastUpdated": "2026-11-08 22:48:04 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -2639,25 +2639,25 @@
   "constructors": [
     {
       "name": "KALEX",
-      "pts": 417.5
+      "pts": 442.5
     },
     {
       "name": "BOSCOSCURO",
-      "pts": 294
+      "pts": 300
     },
     {
       "name": "FORWARD",
-      "pts": 69
+      "pts": 85
     }
   ],
   "teams": [
     {
       "name": "LIQUI MOLY Dynavolt Intact GP",
-      "pts": 442.5
+      "pts": 461.5
     },
     {
-      "name": "CFMOTO RCB Aspar Team",
-      "pts": 381
+      "name": "CFMOTO Power Electronics Aspar Team",
+      "pts": 419
     },
     {
       "name": "BLU CRU Pramac Yamaha Moto2",
@@ -2665,35 +2665,35 @@
     },
     {
       "name": "QJMOTOR - MSI",
-      "pts": 219.5
+      "pts": 239.5
     },
     {
       "name": "OnlyFans American Racing Team",
-      "pts": 199
+      "pts": 209
     },
     {
       "name": "BETA Tools SpeedRS Team",
-      "pts": 167
-    },
-    {
-      "name": "REDS Fantic Racing",
-      "pts": 142.5
-    },
-    {
-      "name": "ITALJET Gresini Moto2",
-      "pts": 140.5
+      "pts": 173
     },
     {
       "name": "Italtrans Racing Team",
-      "pts": 138
+      "pts": 153
+    },
+    {
+      "name": "ITALJET Gresini Moto2",
+      "pts": 145.5
     },
     {
       "name": "Red Bull KTM Ajo",
-      "pts": 137.5
+      "pts": 145.5
+    },
+    {
+      "name": "REDS Fantic Racing",
+      "pts": 143.5
     },
     {
       "name": "KLINT Racing Team",
-      "pts": 69
+      "pts": 85
     },
     {
       "name": "ELF Marc VDS Racing Team",
@@ -2701,7 +2701,7 @@
     },
     {
       "name": "Momoven Idrofoglia RW Racing Team",
-      "pts": 38
+      "pts": 40
     },
     {
       "name": "Idemitsu Honda Team Asia",
