@@ -7420,33 +7420,33 @@
   "moto3_constructors": [
     {
       "name": "KTM",
-      "pts": 445
+      "pts": 470
     },
     {
       "name": "HONDA",
-      "pts": 233
+      "pts": 253
     }
   ],
   "moto3_teams": [
     {
       "name": "CFMOTO Gaviota Aspar Team",
-      "pts": 516
+      "pts": 533
     },
     {
       "name": "Red Bull KTM Ajo",
-      "pts": 410
+      "pts": 423
     },
     {
       "name": "Liqui Moly Dynavolt Intact GP",
-      "pts": 304
+      "pts": 337
     },
     {
       "name": "Leopard Racing",
-      "pts": 238
+      "pts": 263
     },
     {
       "name": "Red Bull KTM Tech3",
-      "pts": 210
+      "pts": 214
     },
     {
       "name": "LEVEL UP - MTA",
@@ -7454,19 +7454,19 @@
     },
     {
       "name": "AEON Credit - MT Helmets - MSI",
-      "pts": 162
+      "pts": 178
     },
     {
       "name": "Honda Team Asia",
-      "pts": 135
+      "pts": 151
     },
     {
       "name": "GRYD Racing",
-      "pts": 130
+      "pts": 140
     },
     {
       "name": "CIP Green Power",
-      "pts": 113
+      "pts": 119
     },
     {
       "name": "SIC58 Squadra Corse",
@@ -8314,7 +8314,7 @@
     },
     {
       "name": "Charles Leclerc",
-      "pts": 251
+      "pts": 249
     },
     {
       "name": "Lando Norris",
@@ -8330,7 +8330,7 @@
     },
     {
       "name": "Liam Lawson",
-      "pts": 87
+      "pts": 89
     },
     {
       "name": "Pierre Gasly",
@@ -8397,5 +8397,5 @@
       "pts": 0
     }
   ],
-  "_updated": "2026-11-08 22:48:04 · Auto (Domenica)"
+  "_updated": "2026-11-09 02:57:25 · Auto (Domenica)"
 }
