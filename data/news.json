@@ -1,9 +1,64 @@
 {
-  "lastUpdated": "2026-11-09 20:34:05",
-  "totalItems": 149,
+  "lastUpdated": "2026-11-10 03:19:24",
+  "totalItems": 148,
   "items": [
     {
-      "id": "4dabef62",
+      "id": "9efaeb8c",
+      "title": "F1 Las Vegas Grand Prix announces pre-race music line-up",
+      "link": "https://www.motorsport.com/f1/news/f1-las-vegas-grand-prix-announces-pre-race-music-line-up/10873488/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-09 23:57:29",
+      "pubDateISO": "2026-11-09T23:57:29+00:00",
+      "aiSummary": "Il DJ americano Steve Aoki tornerà sulla griglia del Gran Premio di Las Vegas quest' anno per una performance prima della gara del 21 novembre. Sarà affiancato dal collega DJ MORTEN e dal cantante Jordin Sparks come parte della formazione pre-gara. MORTEN si esibirà prima delle presentazioni dei piloti, che sono diventate una parte preferita dei fan del weekend del Gran Premio di Las Vegas dopo il momento virale tra Sergio ......",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-4.motorsport.com/images/amp/6n7b5XR0/s6/motorsport-com-graphics-84.jpg"
+    },
+    {
+      "id": "f47b534f",
+      "title": "Lewis Hamilton to share flight with Mercedes after former team's F1 title triumph",
+      "link": "https://www.motorsport.com/f1/news/lewis-hamilton-to-share-flight-with-mercedes-after-former-teams-f1-title-triumph/10873483/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-09 23:30:48",
+      "pubDateISO": "2026-11-09T23:30:48+00:00",
+      "aiSummary": "Il viaggio di ritorno del sette volte campione di Formula 1 Lewis Hamilton da Interlagos avrebbe potuto essere imbarazzante dopo che il team principal della Mercedes Toto Wolff ha rivelato che il pilota della Ferrari avrebbe viaggiato con i campioni dei costruttori appena incoronati. Mercedes si è assicurata il suo nono titolo costruttori al Gran Premio del Brasile di domenica, con George Russell e Kimi Antonelli che hanno concluso al quarto posto e ......",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-4.motorsport.com/images/amp/2QedBGJ2/s6/motorsport-com-graphics-83.jpg"
+    },
+    {
+      "id": "c024d217",
+      "title": "Video: Deegan gets ready for 450 AMA Supercross debut at Anaheim 1!",
+      "link": "https://gatedrop.com/video-deegan-gets-ready-for-450-ama-supercross-debut-at-anaheim-1/",
+      "pubDate": "2026-11-09 23:22:55",
+      "pubDateISO": "2026-11-09T23:22:55+00:00",
+      "aiSummary": "Haiden Deegan has had his rest but is now full steam ahead with training and testing ahead of his much anticipated AMA 450 Supercross debut at Anaheim 1 as he gets ready to take on Roczen, Jett Lawrence, Hunter Lawrence, Jorge Prado and Chase Sexton and more for the Supercross title in 2027. Deegan has...",
+      "source": "GateDrop MXGP",
+      "category": "SBK",
+      "image": "https://gatedrop.com/wp-content/uploads/FastClip.net_AQM1r4942XMkhtdedZLLOPP0qfwSfTBwW0qzGGpv3iDxreLlLc1HbeCFLL0gX8GJnJZ0SIB4gg_k-Anv4UBBnGk5iDUv0dPP4SoOOXg-1.mp4"
+    },
+    {
+      "id": "9d891f1a",
+      "title": "George Russell \"keeps getting kicked\" as F1 pundit addresses 2026 struggles",
+      "link": "https://www.motorsport.com/f1/news/george-russell-keeps-getting-kicked-as-f1-pundit-addresses-2026-struggles/10873477/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-09 22:59:41",
+      "pubDateISO": "2026-11-09T22:59:41+00:00",
+      "aiSummary": "L'ex pilota della IndyCar Series e opinionista televisivo di F1 James Hinchcliffe ritiene che George Russell avesse buone ragioni per sembrare \"un po' sconfitto\" dopo un altro pomeriggio difficile al Gran Premio del Brasile. Mentre la Mercedes ha concluso il fine settimana al massimo, assicurando il campionato costruttori, Russell ha sopportato un'altra gara frustrante. Il britannico ha perso la pole position contro Lando Norris della McLaren e ... continua...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-3.motorsport.com/images/amp/6lmAR5k0/s6/motorsport-com-graphics-82.jpg"
+    },
+    {
+      "id": "f982a5e0",
+      "title": "Toyota Redlands BarX Husqvarna Signs Enzo Temmerman for 2027",
+      "link": "https://www.vurbmoto.com/toyota-redlands-barx-husqvarna-signs-enzo-temmerman-for-2027/",
+      "pubDate": "2026-11-09 20:43:36",
+      "pubDateISO": "2026-11-09T20:43:36+00:00",
+      "aiSummary": "Toyota Redlands BarX Husqvarna has announced the signing of 19-year-old ascending talent Enzo Temmerman. The California native adds to a talented lineup of athletes for the new-look 250cc program, which will make a highly anticipated move to Husqvarna Mobility ahead of the 2027 season. Temmerman has found a new home after he unexpectedly became a […] The post Toyota Redlands BarX Husqvarna...",
+      "source": "Vurbmoto MX",
+      "category": "MXGP",
+      "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/enzo-temmerman-barx-husqvarna-2027.jpg"
+    },
+    {
+      "id": "d18a1d21",
       "title": "George Russell teases imminent karting announcement as F1 fans spot major clue",
       "link": "https://www.motorsport.com/f1/news/george-russell-teases-imminent-karting-announcement-as-f1-fans-spot-major-clue/10873459/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 18:31:47",
@@ -11,10 +66,10 @@
       "aiSummary": "George Russell ha anticipato un annuncio imminente legato al karting il 12 novembre. Lunedì l'autista della Mercedes ha pubblicato un video su Instagram con la didascalia \"Stay tuned\". Parla dei suoi primi passi nel motorsport su filmati di se stesso che correva con i kart da ragazzo, tra cui un kart che portava il numero 63 che usa ancora in Formula 1. La clip termina con la data 12.11.26, suggerendo più ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/YN7vzGV6/s6/motorsport-com-graphics-81.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/YN7vzGV6/s6/motorsport-com-graphics-81.jpg"
     },
     {
-      "id": "d6f63830",
+      "id": "2b70d318",
       "title": "Official: Simon Längenfelder IN for 2027 Hawkstone International",
       "link": "https://gatedrop.com/official-simon-langenfelder-in-for-2027-hawkstone-international/",
       "pubDate": "2026-11-09 18:13:58",
@@ -25,7 +80,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Langenfelder-5-150x150.jpg"
     },
     {
-      "id": "c00fa23d",
+      "id": "e4b907d3",
       "title": "Confirmed: Kawasaki UK announce 2027 Arenacross line-up",
       "link": "https://gatedrop.com/confirmed-kawasaki-uk-announce-2027-arenacross-line-up/",
       "pubDate": "2026-11-09 18:09:05",
@@ -36,7 +91,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/26KX450M_201GN1ARS2CG_A-Large-150x150.jpg"
     },
     {
-      "id": "ffcefffd",
+      "id": "4da2d29a",
       "title": "Apple TV confirms free F1 Las Vegas Grand Prix coverage: How to watch in the US",
       "link": "https://www.motorsport.com/f1/news/apple-tv-confirms-free-f1-las-vegas-grand-prix-coverage-how-to-watch-in-the-us/10873443/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 17:56:51",
@@ -47,7 +102,7 @@
       "image": "https://cdn-4.motorsport.com/images/amp/27No31e0/s6/motorsport-com-graphics-80.jpg"
     },
     {
-      "id": "e7def01f",
+      "id": "6790bb4e",
       "title": "Ex-DTM champion Guven fails to clear Formula E license hurdle: What is Porsche doing?",
       "link": "https://www.motorsport.com/dtm/news/ex-dtm-champion-guven-falls-short-of-formula-e-licence-what-can-porsche-do/10873421/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WEC&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 17:15:30",
@@ -55,10 +110,10 @@
       "aiSummary": "What is next for ex-DTM champion Ayhancan Guven in 2027? A year ago, the Turkish Manthey driver sensationally claimed the DTM title, only to be promoted to Porsche factory driver and pulled from the traditional series. The plan: The 28-year-old was to use 2026 as a transition year to prepare for a switch to the Porsche factory team in Formula E. However, following the WEC season finale, which...",
       "source": "Motorsport.com WEC",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/10RkpvE2/s6/ex-dtm-meister-gueven-schafft-formel-e-lizenzhuerde-nicht-was-macht-porsche-26110901.jpg"
+      "image": "https://cdn-2.motorsport.com/images/amp/10RkpvE2/s6/ex-dtm-meister-gueven-schafft-formel-e-lizenzhuerde-nicht-was-macht-porsche-26110901.jpg"
     },
     {
-      "id": "9e71f84f",
+      "id": "61bd369c",
       "title": "Ferrari explains tyre pressure mistake in Monza WEC",
       "link": "https://www.motorsport.com/wec/news/ferrari-explains-tyre-pressure-mistake-in-monza-wec/10873370/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WEC&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 17:12:14",
@@ -66,10 +121,10 @@
       "aiSummary": "Ferrari concluded the 2026 World Endurance Championship season with a podium finish at the Monza 6 Hours, but the Italian manufacturer's race was compromised by multiple penalties for exceeding tyre pressure. On Sunday, Antonio Fuoco put the #50 Ferrari 499P on pole position in qualifying, making it the prime candidate for a top position. But just an hour into the race, a black-and-orange flag...",
       "source": "Motorsport.com WEC",
       "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/YBVjRNBY/s6/50-ferrari-af-corse-ferrari-49.jpg"
+      "image": "https://cdn-8.motorsport.com/images/amp/YBVjRNBY/s6/50-ferrari-af-corse-ferrari-49.jpg"
     },
     {
-      "id": "690cb73e",
+      "id": "98543cdc",
       "title": "“The car is steering by itself, don’t you see it?”: How handling trouble baffled Antonelli | Formula 1",
       "link": "https://www.racefans.net/2026/11/09/the-car-is-steering-by-itself-dont-you-see-it-how-handling-trouble-baffled-antonelli/",
       "pubDate": "2026-11-09 17:05:55",
@@ -80,7 +135,7 @@
       "image": ""
     },
     {
-      "id": "2f5be5d2",
+      "id": "e632e1f8",
       "title": "Update: Lucas Coenen undergoes surgery following injury struggles",
       "link": "https://gatedrop.com/update-lucas-coenen-undergoes-surgery-following-injury-struggles/",
       "pubDate": "2026-11-09 16:49:05",
@@ -91,7 +146,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Coenen-scaled-e1794242880402-150x150.jpg"
     },
     {
-      "id": "9e2b99ac",
+      "id": "c41770f3",
       "title": "Mercedes considers plan to help George Russell beat Max Verstappen in F1 runner-up battle",
       "link": "https://www.crash.net/f1/news/1110051/1/mercedes-considers-plan-help-george-russell-beat-max-verstappen-f1-runner-battle",
       "pubDate": "2026-11-09 16:47:55",
@@ -102,7 +157,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453966_hires.jpg?width=1200"
     },
     {
-      "id": "b6d851d9",
+      "id": "48004ede",
       "title": "VR46 Ducati goes from “amazing” to “impossible” at Qatar MotoGP",
       "link": "https://www.crash.net/motogp/news/1110050/1/vr46-ducati-goes-amazing-impossible-qatar-motogp",
       "pubDate": "2026-11-09 16:40:17",
@@ -113,7 +168,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362665_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "54a55324",
+      "id": "0c65b299",
       "title": "How Aston Martin’s fuel gamble in Monza WEC fell short by just three seconds",
       "link": "https://www.motorsport.com/wec/news/how-aston-martins-fuel-gamble-in-monza-wec-fell-short-by-just-three-seconds/10873379/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WEC&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 16:15:58",
@@ -121,10 +176,10 @@
       "aiSummary": "Aston Martin lost a podium in a dramatic climax to the 2026 World Endurance Championship in Monza due to two penalties that dropped the #007 Valkyrie down to 12th place. Having struggled with early strategy calls that failed to pay off, Aston Martin's factory team Heart of Racing elected to roll the dice in the closing stages of the six-hour race. With the Hypercar field forced into heavy ......",
       "source": "Motorsport.com WEC",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/6zoD89e0/s6/007-heart-of-racing-aston-mart.jpg"
+      "image": "https://cdn-1.motorsport.com/images/amp/6zoD89e0/s6/007-heart-of-racing-aston-mart.jpg"
     },
     {
-      "id": "b69213ed",
+      "id": "412be7ea",
       "title": "Podcast: Did MotoGP stewards get Marc Marquez/Marco Bezzecchi Qatar clash call wrong?",
       "link": "https://www.crash.net/motogp/news/1110049/1/podcast-did-motogp-stewards-get-marc-marquezmarco-bezzecchi-qatar-clash-call",
       "pubDate": "2026-11-09 15:58:12",
@@ -135,7 +190,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/screenshot-2026-11-09-at-16.00.37.png?width=1200"
     },
     {
-      "id": "f92223be",
+      "id": "46926b2d",
       "title": "What's behind Piastri's split with Webber – and what it means for his F1 career",
       "link": "https://www.autosport.com/f1/news/whats-behind-piastris-split-with-webber-and-what-it-means-for-his-f1-career/10873410/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-11-09 15:53:07",
@@ -143,10 +198,10 @@
       "aiSummary": "On the Monday after the Formula 1 Brazilian Grand Prix, Oscar Piastri and Mark Webber announced in a joint statement that the latter and Ann Neal would no longer manage the 25-year-old McLaren driver. The timing may come as a surprise – now rather than at the end of the season – but the news itself had been on the cards for some time. The clearest hint came from Piastri during pre-season ......",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/6DGg5rKY/s6/oscar-piastri-mclaren-with-mar.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/6DGg5rKY/s6/oscar-piastri-mclaren-with-mar.jpg"
     },
     {
-      "id": "5d1150ff",
+      "id": "f55a0f0b",
       "title": "What's behind Oscar Piastri's split with Mark Webber – and what it means for his F1 career",
       "link": "https://www.motorsport.com/f1/news/what-the-split-with-mark-webber-says-about-the-next-phase-of-oscar-piastris-f1-career/10873385/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 15:51:41",
@@ -154,10 +209,10 @@
       "aiSummary": "Il lunedì successivo al Gran Premio del Brasile di Formula 1, Oscar Piastri e Mark Webber hanno annunciato in una dichiarazione congiunta che quest' ultimo e Ann Neal non avrebbero più gestito il pilota 25enne della McLaren. Il tempismo potrebbe essere una sorpresa – ora piuttosto che alla fine della stagione – ma la notizia stessa era in programma da qualche tempo. Il suggerimento più chiaro è arrivato da Piastri durante la pre-stagione ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/6DGg5rKY/s6/oscar-piastri-mclaren-with-mar.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/6DGg5rKY/s6/oscar-piastri-mclaren-with-mar.jpg"
     },
     {
-      "id": "3dd69525",
+      "id": "6041039e",
       "title": "Why Mercedes says a repeat of its 2014-2021 dominance is \"impossible\"",
       "link": "https://www.motorsport.com/f1/news/why-mercedes-says-a-repeat-of-its-2014-2021-dominance-is-impossible/10873407/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 15:46:27",
@@ -168,7 +223,7 @@
       "image": "https://cdn-7.motorsport.com/images/amp/0Zq8VG86/s6/motorsport-com-graphics-79.jpg"
     },
     {
-      "id": "e045547f",
+      "id": "85d0b9cf",
       "title": "Spotlight: FIA president Ben Sulayem ‘planning to remove age limits’ for office-holders | Brief",
       "link": "https://www.racefans.net/2026/11/09/spotlight-fia-president-ben-sulayem-planning-to-remove-age-limits-for-office-holders/",
       "pubDate": "2026-11-09 15:45:11",
@@ -179,7 +234,7 @@
       "image": ""
     },
     {
-      "id": "62aadacf",
+      "id": "81f75e20",
       "title": "New Christian Horner details emerge from Red Bull F1 sacking",
       "link": "https://www.crash.net/f1/news/1110048/1/new-christian-horner-details-emerge-red-bull-f1-sacking",
       "pubDate": "2026-11-09 15:22:19",
@@ -190,7 +245,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/si202507060281.jpg?width=1200"
     },
     {
-      "id": "b5ee6d68",
+      "id": "815919d3",
       "title": "Pramac Yamaha demands answers after Izan Guevara suffers “terrible” Qatar Moto2 title blow",
       "link": "https://www.crash.net/moto2/news/1110047/1/pramac-yamaha-demands-answers-after-izan-guevara-suffers-terrible-qatar-moto2",
       "pubDate": "2026-11-09 15:21:17",
@@ -201,7 +256,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1355399_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "445fd492",
+      "id": "962e5d50",
       "title": "Malthe Jakobsen completes McLaren's WEC Hypercar driver line-up",
       "link": "https://www.motorsport.com/wec/news/malthe-jakobsen-completes-mclarens-wec-hypercar-driver-line-up/10873353/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WEC&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 15:00:17",
@@ -209,10 +264,10 @@
       "aiSummary": "Malthe Jakobsen has been announced as McLaren’s final signing for its 2027 World Endurance Championship Hypercar project. Fresh from his stint with Peugeot, the Dane will be reunited with his former team-mate Mikkel Jensen and joining the other drivers already confirmed by McLaren: Laurens Vanthoor, Alex Lynn, Leonardo Fornaroli and Gregoire Saucy. Jakobsen has just turned 23, but has ... Keep...",
       "source": "Motorsport.com WEC",
       "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/6grQEJbY/s6/malthe-jakobsen-mclaren-racing-3.jpg"
+      "image": "https://cdn-8.motorsport.com/images/amp/6grQEJbY/s6/malthe-jakobsen-mclaren-racing-3.jpg"
     },
     {
-      "id": "2af0b56c",
+      "id": "c627e0de",
       "title": "Maverick Vinales set for more scans as MotoGP injury woes “not improving”",
       "link": "https://www.crash.net/motogp/news/1110046/1/maverick-vinales-set-more-scans-motogp-injury-woes-not-improving",
       "pubDate": "2026-11-09 14:56:39",
@@ -223,7 +278,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362748_hires.jpg?width=1200"
     },
     {
-      "id": "6802e46d",
+      "id": "6d6367e5",
       "title": "Toyota Redlands BarX Husqvarna Partners with HITS Bev Co. for 2027",
       "link": "https://www.vurbmoto.com/toyota-redlands-barx-husqvarna-partners-with-hits-bev-co-for-2027/",
       "pubDate": "2026-11-09 14:54:12",
@@ -234,7 +289,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/Screenshot-2026-11-09-at-9.53.34-AM.png"
     },
     {
-      "id": "bb351ae7",
+      "id": "5b03693f",
       "title": "Aston Martin told Alonso he was “quicker than the Mercedes” at end of Brazilian GP | Formula 1",
       "link": "https://www.racefans.net/2026/11/09/aston-martin-told-alonso-he-was-quicker-than-the-mercedes-at-end-of-brazilian-gp/",
       "pubDate": "2026-11-09 14:35:19",
@@ -245,7 +300,7 @@
       "image": ""
     },
     {
-      "id": "b5ed5299",
+      "id": "2a0bda1e",
       "title": "Fermin Aldeguer defends himself after Francesco Bagnaia crash: “It wasn’t a crazy move”",
       "link": "https://www.motorsport.com/motogp/news/fermin-aldeguer-defends-himself-after-francesco-bagnaia-crash-it-wasnt-a-crazy-move/10873312/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 14:31:32",
@@ -253,10 +308,10 @@
       "aiSummary": "Fermin Aldeguer has defended himself against criticism over his collision with Francesco Bagnaia which left the factory Ducati rider injured in the Qatar Grand Prix sprint. The Gresini rider was battling with KTM’s Pedro Acosta for sixth place when he sensed an opportunity heading into the final turn. But as he braked into the tight right-hander, he wasn’t able to slow down his bike ... Keep...",
       "source": "Motorsport.com MotoGP",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/6b8ZMww2/s6/francesco-bagnaia-ducati-team.jpg"
+      "image": "https://cdn-9.motorsport.com/images/amp/6b8ZMww2/s6/francesco-bagnaia-ducati-team.jpg"
     },
     {
-      "id": "5959eed9",
+      "id": "d505a47a",
       "title": "Aprilia boss admits Marc Marquez “made the difference” in MotoGP title fight",
       "link": "https://www.crash.net/motogp/news/1110044/1/aprilia-boss-admits-marc-marquez-made-difference-motogp-title-fight",
       "pubDate": "2026-11-09 14:02:17",
@@ -267,7 +322,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362553_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "c8af5a6e",
+      "id": "4d80eb7d",
       "title": "The complete 2027 WorldSBK rider line-up",
       "link": "https://www.crash.net/wsbk/news/1104737/1/2027-worldsbk-rider-line-up",
       "pubDate": "2026-11-09 14:00:03",
@@ -278,7 +333,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-09/gng_1341361_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "e45cc71e",
+      "id": "d6876416",
       "title": "Four-Time Loretta Lynn’s Champion Sawyer Gieck Signs European Deal",
       "link": "https://www.vurbmoto.com/four-time-loretta-lynns-champion-sawyer-gieck-signs-european-deal/",
       "pubDate": "2026-11-09 13:52:56",
@@ -289,7 +344,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/sawyer-gieck-europe-2027.jpg"
     },
     {
-      "id": "939b90da",
+      "id": "17e9599d",
       "title": "“Devastated” Lewis Hamilton seeks Ferrari answers after Brazil GP unravels",
       "link": "https://www.crash.net/f1/news/1110043/1/devastated-lewis-hamilton-seeks-ferrari-answers-after-brazil-gp-unravels",
       "pubDate": "2026-11-09 13:50:47",
@@ -300,7 +355,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/261108_r20_brazil_ac_cat3846.JPG?width=1200"
     },
     {
-      "id": "02acea55",
+      "id": "9eaadb19",
       "title": "George Russell has lost 90 points to Max Verstappen in F1 2026 runner-up battle",
       "link": "https://www.motorsport.com/f1/news/mercedes-considers-push-for-george-russell-to-be-f1-2026-runner-up/10873310/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 13:46:01",
@@ -308,10 +363,10 @@
       "aiSummary": "Mercedes sta valutando di dare a George Russell \"tutta la forza\" per assicurarsi un 1-2 nel campionato piloti dopo una corsa da incubo. Rimangono tre round nella stagione 2026 - supponendo che i gran premi del Qatar e di Abu Dhabi procedano come previsto - con non meno di cinque piloti in lizza per il secondo posto: Max Verstappen (279 punti), Russell (262), Lewis Hamilton (261), Charles ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/6zoDvWa0/s6/max-verstappen-red-bull-racing.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/6zoDvWa0/s6/max-verstappen-red-bull-racing.jpg"
     },
     {
-      "id": "d433c4fa",
+      "id": "545bd11d",
       "title": "Lewis Hamilton sends message to Ferrari fans after 'devastating' Brazil GP",
       "link": "https://www.motorsport.com/f1/news/lewis-hamilton-sends-message-to-ferrari-fans-after-devastating-brazil-gp/10873360/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 13:38:32",
@@ -319,10 +374,10 @@
       "aiSummary": "Lewis Hamilton ha detto ai fan di essere \"devastato\" dal risultato del suo Gran Premio del Brasile, iniziato con una carica impressionante dal fondo della griglia e terminato con un giro negli ultimi giri. Il pilota della Ferrari ha condiviso i suoi pensieri su Instagram lunedì dopo aver chiuso al nono posto a Interlagos domenica. Hamilton ha dovuto partire dal 20° posto in griglia dopo una penalità al motore, ma è salito ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-8.motorsport.com/images/amp/0arE3jP2/s6/motorsport-com-graphics-78.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/0arE3jP2/s6/motorsport-com-graphics-78.jpg"
     },
     {
-      "id": "ce67c5e4",
+      "id": "172c797e",
       "title": "Ayrton Senna's rare Honda NSX smashes auction estimate with record six-figure sale",
       "link": "https://www.motorsport.com/f1/news/ayrton-sennas-rare-honda-nsx-smashes-auction-estimate-with-record-six-figure-sale/10873355/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 13:19:30",
@@ -333,7 +388,7 @@
       "image": "https://cdn-7.motorsport.com/images/amp/YP748WQ2/s6/motorsport-com-graphics-77.jpg"
     },
     {
-      "id": "09df26a3",
+      "id": "25d6e00e",
       "title": "Aprilia: “Marco Bezzecchi couldn’t avoid the collision; Marc Marquez moved in on him\"",
       "link": "https://www.motorsport.com/motogp/news/rivola-aprilia-bezzecchi-marquez-crash-qatar-sprint/10873297/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 12:37:26",
@@ -341,10 +396,10 @@
       "aiSummary": "Aprilia Racing CEO Massimo Rivola explained why he disagreed with the stewards’ decision not to penalise Marc Marquez for his collision with Marco Bezzecchi in Saturday’s Qatar Grand Prix sprint. Halfway through the short race at Losail, Marquez appeared to drift slightly off the ideal line, even though Fabio Di Giannantonio and Jorge Martin were following in the wake of the nine-time ... Keep...",
       "source": "Motorsport.com MotoGP",
       "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/6DGgB1wY/s6/massimo-rivola-ceo-de-aprilia--2.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/6DGgB1wY/s6/massimo-rivola-ceo-de-aprilia--2.jpg"
     },
     {
-      "id": "4e12d90e",
+      "id": "7e49a5b6",
       "title": "Official: Alessandro Sadovschi joins Pedica Honda Racing Team for 2027",
       "link": "https://gatedrop.com/official-alessandro-sadovschi-joins-pedica-honda-racing-team-for-2027/",
       "pubDate": "2026-11-09 12:36:49",
@@ -355,7 +410,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Sadovschi-e1794227744844-150x150.png"
     },
     {
-      "id": "fffa52c1",
+      "id": "2047dafa",
       "title": "Valentino Rossi slams Marc Marquez again over \"absurd\" 2015 MotoGP title feud",
       "link": "https://www.crash.net/motogp/news/1110042/1/valentino-rossi-slams-marc-marquez-again-over-absurd-2015-motogp-title-feud",
       "pubDate": "2026-11-09 12:33:09",
@@ -366,7 +421,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_589065_hires-2.jpg?width=1200"
     },
     {
-      "id": "c3d6e261",
+      "id": "827cb720",
       "title": "Marc Marquez reveals heart rate hit 10-year high during Qatar MotoGP",
       "link": "https://www.crash.net/motogp/news/1110041/1/marc-marquez-reveals-heart-rate-hit-10-year-high-during-qatar-motogp-race",
       "pubDate": "2026-11-09 12:14:17",
@@ -377,7 +432,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362543_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "8c9eefb3",
+      "id": "d47c3686",
       "title": "“S***, I missed the pit lane”: Hamilton’s unheard radio from his Brazilian GP struggle | Formula 1",
       "link": "https://www.racefans.net/2026/11/09/i-missed-the-pit-lane-hamiltons-unheard-radio-from-his-brazilian-gp-struggle/",
       "pubDate": "2026-11-09 12:00:50",
@@ -388,7 +443,7 @@
       "image": ""
     },
     {
-      "id": "9965c9bf",
+      "id": "0940c067",
       "title": "MotoGP chief gives update on Yamaha penalty for missing Qatar",
       "link": "https://www.crash.net/motogp/news/1110040/1/motogp-chief-gives-update-yamaha-penalty-missing-qatar",
       "pubDate": "2026-11-09 11:59:54",
@@ -399,7 +454,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361272_hires.jpg?width=1200"
     },
     {
-      "id": "4add9f98",
+      "id": "10a7057f",
       "title": "Ferrari reveals reason for Lewis Hamilton Brazil GP struggles after stunning start",
       "link": "https://www.crash.net/f1/news/1110039/1/ferrari-reveals-reason-lewis-hamilton-struggles-after-stunning-start",
       "pubDate": "2026-11-09 11:57:53",
@@ -410,7 +465,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/261108_r20_brazil_dp_av1_2670.jpg?width=1200"
     },
     {
-      "id": "d2a1c936",
+      "id": "2a9c886a",
       "title": "How the Racing Bulls pendulum is swinging back towards undeniable Liam Lawson",
       "link": "https://www.motorsport.com/f1/news/how-the-racing-bulls-pendulum-is-swinging-back-towards-undeniable-liam-lawson/10873304/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 11:55:10",
@@ -418,10 +473,10 @@
       "aiSummary": "Quando la sicurezza del lavoro scarseggia, c'è una soluzione per un pilota di F1. Fai il bravo, non possono ignorarti. È più facile a dirsi che a farsi, ma di certo sembra essere quello che Liam Lawson ha preso a cuore mentre lottava per il suo futuro per il recente triplo titolo americano. Essendo stato parte integrante dell'ascesa dei tori da corsa al quinto posto nel campionato costruttori, che sarà il ... Keep...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/2QedBBa2/s6/liam-lawson-racing-bulls-2.jpg"
+      "image": "https://cdn-2.motorsport.com/images/amp/2QedBBa2/s6/liam-lawson-racing-bulls-2.jpg"
     },
     {
-      "id": "daa1cdef",
+      "id": "e027b824",
       "title": "How the Racing Bulls pendulum is swinging back towards Lawson",
       "link": "https://www.autosport.com/f1/news/how-the-racing-bulls-pendulum-is-swinging-back-towards-lawson/10873320/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-11-09 11:54:39",
@@ -429,10 +484,10 @@
       "aiSummary": "When job security is in short supply, there's one solution for an Formula 1 driver. Be so good they can't ignore you. That's easier said than done, but it certainly seems to be what Liam Lawson has taken to heart as he battled for his future over the recent Americas triple-header. Having been an integral part of Racing Bulls' rise to fifth in the constructors' championship, which will be the...",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/YK15ARz0/s6/liam-lawson-racing-bulls-3.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/YK15ARz0/s6/liam-lawson-racing-bulls-3.jpg"
     },
     {
-      "id": "960044be",
+      "id": "caa4125d",
       "title": "Jake Dixon “annoyed” despite first MotoGP points on HRC debut",
       "link": "https://www.crash.net/motogp/news/1110038/1/jake-dixon-annoyed-despite-first-motogp-points-hrc-debut",
       "pubDate": "2026-11-09 11:44:17",
@@ -443,7 +498,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362676_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "7417e900",
+      "id": "cc3ff978",
       "title": "How Max Verstappen beat Red Bull's own simulation tools with P2 in Brazil",
       "link": "https://www.motorsport.com/f1/news/how-max-verstappen-beat-red-bulls-own-simulation-tools-with-p2-in-brazil/10873308/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 11:33:44",
@@ -451,10 +506,10 @@
       "aiSummary": "Per il terzo anno consecutivo, Verstappen ha prodotto un'impressionante rimonta nel Gran Premio di Formula 1 di San Paolo. Mentre l'olandese ha vinto dal 17° posto in griglia nel 2024 e lo scorso anno è salito dalla pitlane al terzo posto, questa volta è passato dal 21° al secondo. Secondo Verstappen, il suo inizio sulla griglia in salita non è andato secondo i piani, anche se si è preso la colpa dopo aver tenuto il...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/6Alv98EY/s6/max-verstappen-red-bull-racing-3.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/6Alv98EY/s6/max-verstappen-red-bull-racing-3.jpg"
     },
     {
-      "id": "c3c9cfcd",
+      "id": "5adbb443",
       "title": "Who slept best last night: Toto Wolff",
       "link": "https://www.motorsport.com/f1/news/who-slept-best-last-night-toto-wolff-10873302/10873302/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 11:13:10",
@@ -462,10 +517,10 @@
       "aiSummary": "Toto Wolff non aveva bisogno di vantarsi quando, domenica sera a San Paolo, gli è stato chiesto dei suoi record, che ora lo mettono al fianco di due grandi della F1. La domanda su come ci si sente a eguagliare il conteggio dei campionati costruttori di Frank Williams e il numero complessivo di titoli di Ron Dennis è stata di per sé sufficiente a illustrare l'entità dei risultati di Wolff. Ora ha nove titoli costruttori,...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/24QGbXdY/s6/george-russell-mercedes-andrea.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/24QGbXdY/s6/george-russell-mercedes-andrea.jpg"
     },
     {
-      "id": "ddbb5b97",
+      "id": "df8b2c7c",
       "title": "Winners and losers from MotoGP’s contentious Qatar Grand Prix",
       "link": "https://www.motorsport.com/motogp/news/winners-and-losers-from-motogps-contentious-qatar-grand-prix/10873291/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 10:50:17",
@@ -473,10 +528,10 @@
       "aiSummary": "The Qatar Grand Prix featured plenty of drama throughout the weekend, but fortunately all the action was confined to the track. The Lusail round nevertheless had an unusual atmosphere following Yamaha's decision to withdraw from the event over safety concerns. Subsequent withdrawals by Francesco Bagnaia and Luca Marini further depleted the field, leaving just 16 riders on the grid.Those who...",
       "source": "Motorsport.com MotoGP",
       "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/0mXyjRX6/s6/marc-marquez-ducati-team.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/0mXyjRX6/s6/marc-marquez-ducati-team.jpg"
     },
     {
-      "id": "5bb5d7e7",
+      "id": "cfd685d5",
       "title": "Pedro Acosta says Qatar MotoGP tyre pressure issue not KTM’s fault",
       "link": "https://www.crash.net/motogp/news/1110037/1/pedro-acosta-says-qatar-motogp-tyre-pressure-issue-not-ktms-fault",
       "pubDate": "2026-11-09 10:49:18",
@@ -487,7 +542,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362713_hires.jpg?width=1200"
     },
     {
-      "id": "27fcfdcb",
+      "id": "70032870",
       "title": "Moto3 champion gets Ducati WorldSBK seat Alex Rins was linked to",
       "link": "https://www.crash.net/wsbk/news/1110036/1/moto3-champion-gets-ducati-worldsbk-seat-alex-rins-was-linked",
       "pubDate": "2026-11-09 10:22:03",
@@ -498,7 +553,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1355011_hires.jpg?width=1200"
     },
     {
-      "id": "be6ae0c6",
+      "id": "30a5cede",
       "title": "Max Verstappen owns up to rare unseen error at Brazil GP",
       "link": "https://www.crash.net/f1/news/1110035/1/max-verstappen-owns-rare-unseen-error-brazil-gp",
       "pubDate": "2026-11-09 10:19:04",
@@ -509,7 +564,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453348_hires.jpg?width=1200"
     },
     {
-      "id": "71e23a45",
+      "id": "fcdb3133",
       "title": "Russell explains pit exit spin: ‘I took too much risk because I saw a chance to win’ | Formula 1",
       "link": "https://www.racefans.net/2026/11/09/russell-explains-pit-exit-spin-i-took-too-much-risk-because-i-saw-a-chance-to-win/",
       "pubDate": "2026-11-09 09:36:27",
@@ -520,7 +575,7 @@
       "image": ""
     },
     {
-      "id": "71a65531",
+      "id": "b01e6d23",
       "title": "Racing Bulls closing on F1 2027 driver decision after Liam Lawson statement",
       "link": "https://www.crash.net/f1/news/1110034/1/racing-bulls-closing-f1-2027-driver-decision-after-liam-lawson-statement",
       "pubDate": "2026-11-09 09:34:59",
@@ -531,7 +586,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453341_hires_0.jpg?width=1200"
     },
     {
-      "id": "ffa09c3b",
+      "id": "c22924c2",
       "title": "Who slept worst last night: Fernando Alonso",
       "link": "https://www.motorsport.com/f1/news/who-slept-worst-last-night-fernando-alonso/10873272/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 09:33:04",
@@ -539,10 +594,10 @@
       "aiSummary": "Quando Fernando Alonso è diventato campione del mondo di Formula 1 nel 2005, aveva solo 24 anni, sostituendo Emerson Fittipaldi come il più giovane campione nella storia di questo sport. Alla fine, Michael Schumacher aveva uno sfidante. E anche se il re regnante della F1 una volta ha erroneamente chiamato il giovane toro spagnolo \"Ferdinando\" perché non riusciva a ricordare il suo nome, è stato Alonso che alla fine ha portato ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-8.motorsport.com/images/amp/68VwMBV2/s6/fernando-alonso-aston-martin-r.jpg"
+      "image": "https://cdn-1.motorsport.com/images/amp/68VwMBV2/s6/fernando-alonso-aston-martin-r.jpg"
     },
     {
-      "id": "6321e942",
+      "id": "8f49d463",
       "title": "Interview: Gunther Geerts – Inside the world of KYB/Technical Touch and life behind the scenes",
       "link": "https://gatedrop.com/interview-gunther-geerts-inside-the-world-of-kyb-technical-touch-and-life-behind-the-scenes/",
       "pubDate": "2026-11-09 09:16:45",
@@ -553,7 +608,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Geerts4-150x150.jpeg"
     },
     {
-      "id": "e85a5dd9",
+      "id": "c63f3fef",
       "title": "Carlos Ezpeleta: Qatar GP “noise” left MotoGP unnecessarily exposed",
       "link": "https://www.motorsport.com/motogp/news/ezpeleta-qatar-gp-noise-left-motogp-unnecessarily-exposed/10873234/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 09:02:58",
@@ -561,10 +616,10 @@
       "aiSummary": "MotoGP has received a wave of criticism for its determination to keep the Qatar GP on the calendar, moving the entire World Championship paddock to the Middle East, an area immersed in an armed conflict since the beginning of the year, even though the event was ultimately held in complete normality. Tensions increased as the date of the event at Losail approached, initially scheduled for ......",
       "source": "Motorsport.com MotoGP",
       "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/2y7Qran6/s6/carlos-ezpeleta-motogp.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/2y7Qran6/s6/carlos-ezpeleta-motogp.jpg"
     },
     {
-      "id": "54b81661",
+      "id": "c8667eb8",
       "title": "Piastri splits from Webber’s management team | Formula 1",
       "link": "https://www.racefans.net/2026/11/09/piastri-splits-from-webbers-management-team/",
       "pubDate": "2026-11-09 09:01:06",
@@ -575,7 +630,7 @@
       "image": ""
     },
     {
-      "id": "25a87cb1",
+      "id": "996d890f",
       "title": "Piastri and Webber terminate management agreement",
       "link": "https://www.autosport.com/f1/news/oscar-piastri-splits-from-mark-webber-management/10873258/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-11-09 08:43:40",
@@ -583,10 +638,10 @@
       "aiSummary": "Oscar Piastri and Mark Webber have mutually agreed to terminate their management agreement, the pair have announced. Webber and his wife Ann – who ran Mark’s career herself back in the day – became Piastri’s managers in 2019, the year the youngster narrowly beat Victor Martins to the Formula Renault Eurocup title and a spot on Renault’s F1 academy. Piastri’s rise was meteoric ... Keep reading",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/0Zq8VN46/s6/oscar-piastri-mclaren-with-mar-2.jpg"
+      "image": "https://cdn-3.motorsport.com/images/amp/0Zq8VN46/s6/oscar-piastri-mclaren-with-mar-2.jpg"
     },
     {
-      "id": "31ec74a0",
+      "id": "368a588b",
       "title": "Oscar Piastri splits from Mark Webber management",
       "link": "https://www.motorsport.com/f1/news/oscar-piastri-wont-have-mark-webber-as-his-manager-anymore/10873253/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 08:39:26",
@@ -594,10 +649,10 @@
       "aiSummary": "Oscar Piastri e Mark Webber hanno concordato di comune accordo di risolvere il loro accordo di gestione, la coppia ha annunciato. Webber e sua moglie Ann – che all'epoca gestiva lei stessa la carriera di Mark – sono diventati i manager di Piastri nel 2019, l'anno in cui il giovane ha battuto di poco Victor Martins al titolo di Formula Renault Eurocup e un posto nell'accademia di F1 della Renault. L'ascesa di Piastri è stata meteorica ... Continua a leggere",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/0Zq8VN46/s6/oscar-piastri-mclaren-with-mar-3.jpg"
+      "image": "https://cdn-8.motorsport.com/images/amp/0Zq8VN46/s6/oscar-piastri-mclaren-with-mar-3.jpg"
     },
     {
-      "id": "72b5d183",
+      "id": "0717ce92",
       "title": "Marc Marquez’s MotoGP title bid deserved to be delayed by his best rival",
       "link": "https://www.crash.net/motogp/feature/1110033/1/marc-marquezs-motogp-title-bid-deserved-be-delayed-his-best-rival",
       "pubDate": "2026-11-09 08:37:45",
@@ -608,7 +663,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361405_hires.jpg?width=1200"
     },
     {
-      "id": "dc81126f",
+      "id": "e3786c10",
       "title": "Oscar Piastri confirms split with F1 career manager Mark Webber",
       "link": "https://www.crash.net/f1/news/1110032/1/oscar-piastri-confirms-split-f1-career-manager-mark-webber",
       "pubDate": "2026-11-09 08:35:59",
@@ -619,7 +674,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1263240_hires.jpg?width=1200"
     },
     {
-      "id": "897fb684",
+      "id": "6d53dae7",
       "title": "WEC drivers question lack of full-course yellow after heavy Monza crash",
       "link": "https://www.motorsport.com/wec/news/wec-drivers-question-lack-of-full-course-yellow-after-heavy-monza-crash/10873197/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WEC&utm_term=News&utm_content=www",
       "pubDate": "2026-11-09 06:53:05",
@@ -627,10 +682,10 @@
       "aiSummary": "Several World Endurance Championship drivers have questioned race control for not neutralising the Monza 6 Hours following a late crash involving a Cadillac hypercar. With just two minutes left on the clock, Jota driver Alex Lynn slammed into the the barriers at the exit of the second chicane after making contact with the #94 Peugeot 9X8 of Malthe Jakobsen. Having lost fifth place ... Keep reading",
       "source": "Motorsport.com WEC",
       "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/0R7BEEM2/s6/untitled.jpg"
+      "image": "https://cdn-9.motorsport.com/images/amp/0R7BEEM2/s6/untitled.jpg"
     },
     {
-      "id": "3eb65968",
+      "id": "780ca355",
       "title": "Red Bull boss hails Max Verstappen's Brazil podium: \"He's beating the sim on a regular basis\"",
       "link": "https://www.motorsport.com/f1/news/red-bull-boss-hails-max-verstappens-brazil-podium-hes-beating-the-sim-on-a-regular-basis/10873193/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-08 23:11:39",
@@ -638,10 +693,10 @@
       "aiSummary": "Il team principal della Red Bull, Laurent Mekies, ha affermato che nessuna simulazione avrebbe potuto prevedere la carica di Max Verstappen dal 21° al secondo posto nel Gran Premio del Brasile a Interlagos. L'olandese è partito in fondo alla griglia dopo una penalità al motore e ha avvertito dopo le qualifiche che sarebbe stato più difficile sorpassare sul circuito di San Paolo rispetto agli anni precedenti. Ma si è dimostrato in errore con un ... continua...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-8.motorsport.com/images/amp/2y7Qrrm6/s6/motorsport-com-graphics-76.jpg"
+      "image": "https://cdn-3.motorsport.com/images/amp/2y7Qrrm6/s6/motorsport-com-graphics-76.jpg"
     },
     {
-      "id": "cd707fc5",
+      "id": "2ddc7c02",
       "title": "Winners and losers from F1's chaotic Brazilian Grand Prix",
       "link": "https://www.motorsport.com/f1/news/winners-and-losers-from-f1s-chaotic-brazilian-grand-prix/10873189/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-08 22:59:54",
@@ -649,10 +704,10 @@
       "aiSummary": "Non sei divertito? Mentre Lando Norris ha ottenuto una meritata terza vittoria della stagione, Mercedes collettivamente è scivolata e Max Verstappen ha prodotto l'ennesima masterclass del Gran Premio del Brasile. Vincitore: Andrea Stella, capo del team McLaren di Lando Norris, ama descrivere Lando Norris come il maestro a presa bassa. Quando le condizioni sono difficili, Norris è uno dei migliori ad adattarsi e ottenere il ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-8.motorsport.com/images/amp/6VyK9rdY/s6/lando-norris-mclaren-max-verst.jpg"
+      "image": "https://cdn-2.motorsport.com/images/amp/6VyK9rdY/s6/lando-norris-mclaren-max-verst.jpg"
     },
     {
-      "id": "cea115a6",
+      "id": "097e5fc3",
       "title": "Max Verstappen gives emotional farewell gift to long-serving Red Bull mechanic",
       "link": "https://www.motorsport.com/f1/news/max-verstappen-gives-emotional-farewell-gift-to-long-serving-red-bull-mechanic/10873184/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-08 22:36:27",
@@ -660,10 +715,10 @@
       "aiSummary": "Il quattro volte campione di Formula 1 Max Verstappen ha regalato il suo casco da gara al meccanico della Red Bull Ole Schack, che ha preso parte alla sua ultima gara per la squadra di Milton Keynes a Interlagos. Schack è stato con Red Bull dalla sua prima stagione nel 2005 e lavora sulla macchina di Verstappen come meccanico front-end. Il team ha anche creato una lattina una tantum di Red Bull, che presenta un elenco della sua carriera...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-6.motorsport.com/images/amp/0Zq8VV56/s6/motorsport-com-graphics-75.jpg"
+      "image": "https://cdn-3.motorsport.com/images/amp/0Zq8VV56/s6/motorsport-com-graphics-75.jpg"
     },
     {
-      "id": "0573a555",
+      "id": "ae08af71",
       "title": "Social Media: No hand injury after breaking another champagne bottle, says Norris | Brief",
       "link": "https://www.racefans.net/2026/11/08/social-media-norris-avoids-injury-after-breaking-another-champagne-bottle/",
       "pubDate": "2026-11-08 22:20:59",
@@ -674,7 +729,7 @@
       "image": ""
     },
     {
-      "id": "9ee9c151",
+      "id": "15e4eb7b",
       "title": "Robert Kubica announces exit from AF Corse’s privateer Hypercar in WEC",
       "link": "https://www.motorsport.com/wec/news/robert-kubica-announces-exit-from-af-corses-privateer-hypercar-in-wec/10873173/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WEC&utm_term=News&utm_content=www",
       "pubDate": "2026-11-08 22:20:08",
@@ -685,7 +740,7 @@
       "image": "https://cdn-8.motorsport.com/images/amp/6grBLomY/s6/robert-kubica-af-corse-ferrari.jpg"
     },
     {
-      "id": "bfa1be92",
+      "id": "340192cd",
       "title": "Leclerc penalised for Lawson clash; Antonelli and Oliver Bearman also punished after F1 Brazilian GP",
       "link": "https://www.autosport.com/f1/news/leclerc-penalised-for-lawson-clash-antonelli-and-oliver-bearman-also-punished-after-f1-brazilian-gp/10873166/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-11-08 21:59:31",
@@ -693,10 +748,10 @@
       "aiSummary": "Charles Leclerc was handed a five-second penalty after the Formula 1 Brazilian Grand Prix for his clash with Liam Lawson, dropping the Ferrari driver down to eighth place in the final results. The Monegasque was battling the Racing Bulls driver for seventh place on lap 69 of the Sao Paulo race when the pair made contact into Juncao, Turn 12, but both were able to continue and finish the ......",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-4.motorsport.com/images/amp/0Zq8VdL6/s6/charles-leclerc-ferrari-arvid-.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/0Zq8VdL6/s6/charles-leclerc-ferrari-arvid-.jpg"
     },
     {
-      "id": "87e23faa",
+      "id": "bf9f645a",
       "title": "Charles Leclerc penalised for Liam Lawson clash; Kimi Antonelli and Oliver Bearman also punished after F1 Brazilian GP",
       "link": "https://www.motorsport.com/f1/news/charles-leclerc-penalised-for-liam-lawson-clash-kimi-antonelli-and-oliver-bearman-also-punished-aft/10873163/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-08 21:54:53",
@@ -704,21 +759,10 @@
       "aiSummary": "Charles Leclerc è stato penalizzato di cinque secondi dopo il Gran Premio del Brasile di Formula 1 per il suo scontro con Liam Lawson, facendo scendere il pilota Ferrari all'ottavo posto nei risultati finali. Il monegasco stava combattendo il pilota dei Racing Bulls per il settimo posto al giro 69 della gara di San Paolo quando la coppia entrò in contatto con Juncao, curva 12, ma entrambi furono in grado di continuare e finire il ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/0Zq8VdL6/s6/charles-leclerc-ferrari-arvid-.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/0Zq8VdL6/s6/charles-leclerc-ferrari-arvid-.jpg"
     },
     {
-      "id": "e1428b4e",
-      "title": "Max Verstappen \"needs to understand what happened\" after \"night and day\" F1 comeback in Brazilian GP",
-      "link": "https://www.motorsport.com/f1/news/max-verstappen-needs-to-understand-what-happened-after-night-and-day-f1-comeback-in-brazil/10873146/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-08 21:53:41",
-      "pubDateISO": "2026-11-08T21:53:41+00:00",
-      "aiSummary": "Per il terzo anno consecutivo, Max Verstappen ha prodotto un'impressionante rimonta in Brasile. Mentre ha vinto dal 17° posto sulla griglia nel 2024 e ha guidato dalla pitlane al podio l'anno scorso, Verstappen ha concluso il Gran Premio del Brasile di Formula 1 di quest' anno al secondo posto dopo essere partito 21°. Il suo inizio non è andato interamente secondo i piani, tuttavia, come Verstappen ha riconosciuto nella stampa post-gara......",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/0o5AVQ7Y/s6/max-verstappen-red-bull-racing.jpg"
-    },
-    {
-      "id": "dd44506e",
+      "id": "c61d5e59",
       "title": "Stewards ruled Hamilton “gained no advantage” by passing Bearman off-track | Formula 1",
       "link": "https://www.racefans.net/2026/11/08/stewards-ruled-hamilton-gained-no-advantage-by-passing-bearman-off-track/",
       "pubDate": "2026-11-08 21:50:30",
@@ -729,18 +773,7 @@
       "image": ""
     },
     {
-      "id": "8cc920ca",
-      "title": "Cole Davies confirms he’s racing A1!",
-      "link": "https://gatedrop.com/cole-davies-confirms-hes-racing-a1/",
-      "pubDate": "2026-11-08 21:44:11",
-      "pubDateISO": "2026-11-08T21:44:11+00:00",
-      "aiSummary": "Usually the 250 East/West coast decisions are a bit of a secret but Cole Davies confirmed last night that he will be lining up at Anaheim one, seemingly confirming he is racing West Coast after taking the East coast title last year. Davies said: “It was unreal. Felt good all day, you had to be...",
-      "source": "GateDrop MXGP",
-      "category": "SBK",
-      "image": "https://gatedrop.com/wp-content/uploads/Screenshot_20261108_213733_Instagram-150x150.jpg"
-    },
-    {
-      "id": "e4806f62",
+      "id": "4ad6fa57",
       "title": "Kimi Antonelli and Mercedes punished for unsafe release in messy Brazil GP",
       "link": "https://www.crash.net/f1/news/1110027/1/kimi-antonelli-and-mercedes-punished-unsafe-release-messy-brazil-gp",
       "pubDate": "2026-11-08 21:43:19",
@@ -751,7 +784,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453574_hires.jpg?width=1200"
     },
     {
-      "id": "ee993af0",
+      "id": "8280caa8",
       "title": "George Russell explains unusual pit lane blunder during Brazil GP",
       "link": "https://www.crash.net/f1/news/1110026/1/george-russell-explains-unusual-pit-lane-blunder-during-brazil-gp",
       "pubDate": "2026-11-08 21:40:00",
@@ -762,7 +795,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453952_hires.jpg?width=1200"
     },
     {
-      "id": "350617a2",
+      "id": "ffe2fa7a",
       "title": "Charles Leclerc hit with Brazil GP penalty for Liam Lawson collision",
       "link": "https://www.crash.net/f1/news/1110025/1/charles-leclerc-hit-brazil-gp-penalty-liam-lawson-collision",
       "pubDate": "2026-11-08 21:27:22",
@@ -773,7 +806,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453411_hires.jpg?width=1200"
     },
     {
-      "id": "df776989",
+      "id": "d382d236",
       "title": "Lawson moves up to seventh as stewards penalise Leclerc for collision | Formula 1",
       "link": "https://www.racefans.net/2026/11/08/lawson-moves-up-to-seventh-as-stewards-penalise-leclerc-for-collision/",
       "pubDate": "2026-11-08 21:21:37",
@@ -784,7 +817,7 @@
       "image": ""
     },
     {
-      "id": "bf6b6f48",
+      "id": "b2712176",
       "title": "Max Verstappen makes foul-mouthed Red Bull complaint despite Brazil GP P2",
       "link": "https://www.crash.net/f1/news/1110024/1/max-verstappen-makes-foul-mouthed-red-bull-complaint-despite-brazil-gp-p2",
       "pubDate": "2026-11-08 20:59:57",
@@ -795,29 +828,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453799_hires.jpg?width=1200"
     },
     {
-      "id": "5a6d1abe",
-      "title": "Antonelli explains \"weird\" spin and car instability which cost F1 Brazilian GP win",
-      "link": "https://www.autosport.com/f1/news/antonelli-explains-weird-spin-and-car-instability-which-cost-f1-brazilian-gp-win/10873132/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
-      "pubDate": "2026-11-08 20:57:57",
-      "pubDateISO": "2026-11-08T20:57:57+00:00",
-      "aiSummary": "Kimi Antonelli vowed to put aside his Brazilian Grand Prix anger to celebrate Mercedes winning the Formula 1 constructors' title, as he rued the balance issues and the spin that took him out of victory contention. The new world champion had picked up the lead from polesitter Lando Norris at the start, and was building a pretty healthy lead over the Briton in the opening laps of the race. He...",
-      "source": "Autosport F1",
-      "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/2eZx8n9Y/s6/andrea-kimi-antonelli-mercedes-2.jpg"
-    },
-    {
-      "id": "bcda015a",
-      "title": "Kimi Antonelli: \"Weird\" spin and car instability cost F1 Brazilian GP win",
-      "link": "https://www.motorsport.com/f1/news/kimi-antonelli-weird-spin-and-car-instability-cost-f1-brazilian-gp-win/10873125/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-08 20:56:10",
-      "pubDateISO": "2026-11-08T20:56:10+00:00",
-      "aiSummary": "Kimi Antonelli ha promesso di mettere da parte la sua rabbia per il Gran Premio del Brasile per celebrare la vittoria della Mercedes nel titolo costruttori di Formula 1, mentre ha rovinato i problemi di equilibrio e la rotazione che lo ha portato fuori dalla contesa della vittoria. Il nuovo campione del mondo aveva preso il comando dal polesitter Lando Norris alla partenza e stava costruendo un vantaggio abbastanza sano sul britannico nei primi giri della gara. Lui...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/6grQEoVY/s6/andrea-kimi-antonelli-mercedes.jpg"
-    },
-    {
-      "id": "6596d2f0",
+      "id": "dd750a4f",
       "title": "Lewis Hamilton reveals Ferrari radio confusion behind costly Brazil GP mistake",
       "link": "https://www.crash.net/f1/news/1110022/1/lewis-hamilton-reveals-ferrari-radio-confusion-behind-costly-brazil-gp-mistake",
       "pubDate": "2026-11-08 20:35:00",
@@ -828,7 +839,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1452330_hires.jpg?width=1200"
     },
     {
-      "id": "297d0c9a",
+      "id": "330139b9",
       "title": "Lando Norris suffers Brazil GP mishap as podium celebration goes wrong",
       "link": "https://www.crash.net/f1/news/1110020/1/lando-norris-suffers-brazil-gp-mishap-podium-celebration-goes-wrong",
       "pubDate": "2026-11-08 20:16:22",
@@ -839,7 +850,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453724_hires.jpg?width=1200"
     },
     {
-      "id": "4db692b3",
+      "id": "9d843785",
       "title": "Video: Lynn crashes out in controversial end to WEC season at Monza | Brief",
       "link": "https://www.racefans.net/2026/11/08/video-lynn-crashes-out-in-controversial-crash-in-final-minutes-of-wec-season/",
       "pubDate": "2026-11-08 20:11:57",
@@ -850,7 +861,7 @@
       "image": ""
     },
     {
-      "id": "be262663",
+      "id": "af258b77",
       "title": "Spotlight: F1 displays wrong race name in bizarre podium graphic error | Brief",
       "link": "https://www.racefans.net/2026/11/08/spotlight-f1-displays-wrong-race-name-in-bizarre-podium-graphic-error/",
       "pubDate": "2026-11-08 19:52:35",
@@ -861,7 +872,7 @@
       "image": ""
     },
     {
-      "id": "3a87c736",
+      "id": "905154eb",
       "title": "Verstappen says he “did 85% of the race with a f***ed car” after finishing second | Formula 1",
       "link": "https://www.racefans.net/2026/11/08/verstappen-says-he-did-85-of-the-race-with-a-fed-car-after-finishing-second/",
       "pubDate": "2026-11-08 19:43:50",
@@ -872,7 +883,7 @@
       "image": ""
     },
     {
-      "id": "ad0335a5",
+      "id": "b05f567c",
       "title": "Jorge Martin admits “I was in doubt about coming to Qatar” due to injury",
       "link": "https://www.crash.net/motogp/news/1110019/1/jorge-martin-admits-i-was-doubt-about-coming-qatar-due-injury",
       "pubDate": "2026-11-08 19:41:46",
@@ -883,7 +894,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362711_hires.jpg?width=1200"
     },
     {
-      "id": "f3229e54",
+      "id": "4854a1e1",
       "title": "2026 Brazilian Grand Prix interactive data: lap charts, times and tyres | 2026 Brazilian Grand Prix interactive data",
       "link": "https://www.racefans.net/2026/11/08/2026-brazilian-grand-prix-interactive-data-lap-charts-times-and-tyres/",
       "pubDate": "2026-11-08 19:27:32",
@@ -894,7 +905,7 @@
       "image": ""
     },
     {
-      "id": "9701d34a",
+      "id": "e870e679",
       "title": "New F1 championship standings after the Brazil Grand Prix",
       "link": "https://www.crash.net/f1/news/1110014/1/new-f1-championship-standings-after-brazil-grand-prix",
       "pubDate": "2026-11-08 19:13:33",
@@ -905,7 +916,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453479_hires.jpg?width=1200"
     },
     {
-      "id": "b7ebfc76",
+      "id": "56f901db",
       "title": "Norris wins after Antonelli spins out of the lead at soggy Interlagos | 2026 Brazilian Grand Prix report",
       "link": "https://www.racefans.net/2026/11/08/norris-wins-after-antonelli-spins-out-of-the-lead-at-soggy-interlagos/",
       "pubDate": "2026-11-08 18:55:30",
@@ -916,7 +927,7 @@
       "image": ""
     },
     {
-      "id": "cac2fbe1",
+      "id": "2e98fb0f",
       "title": "Vote for your 2026 Brazilian Grand Prix Driver of the Weekend | Formula 1",
       "link": "https://www.racefans.net/2026/11/08/vote-for-your-2026-brazilian-grand-prix-driver-of-the-weekend/",
       "pubDate": "2026-11-08 18:54:51",
@@ -927,7 +938,7 @@
       "image": ""
     },
     {
-      "id": "8edd856f",
+      "id": "1bbdf511",
       "title": "Marc Marquez left “exhausted” by strategic Qatar MotoGP effort",
       "link": "https://www.crash.net/motogp/news/1110012/1/marc-marquez-left-exhausted-strategic-qatar-motogp-effort",
       "pubDate": "2026-11-08 18:48:10",
@@ -938,7 +949,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362550_hires.jpg?width=1200"
     },
     {
-      "id": "2c522a8d",
+      "id": "047e4f20",
       "title": "F1 Brazil Grand Prix: Updated race results after post-race penalties",
       "link": "https://www.crash.net/f1/results/1110009/1/f1-brazil-grand-prix-full-race-results",
       "pubDate": "2026-11-08 18:45:00",
@@ -949,7 +960,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453507_hires.jpg?width=1200"
     },
     {
-      "id": "7a28485e",
+      "id": "45342bc1",
       "title": "2026 Brazilian Grand Prix race result and championship points | Formula 1",
       "link": "https://www.racefans.net/2026/11/08/2026-brazilian-grand-prix-race-result-and-championship-points/",
       "pubDate": "2026-11-08 18:44:32",
@@ -960,7 +971,7 @@
       "image": ""
     },
     {
-      "id": "452c8e99",
+      "id": "d51c8bfb",
       "title": "Fernandez reveals fuel frustration after losing out to Marc Marquez in Qatar MotoGP",
       "link": "https://www.crash.net/motogp/news/1110007/1/fernandez-reveals-fuel-frustration-after-losing-out-marc-marquez-qatar-motogp",
       "pubDate": "2026-11-08 18:42:20",
@@ -971,7 +982,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362534_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "d2eac9a0",
+      "id": "7c6b26fd",
       "title": "Lando Norris beats recovering Max Verstappen to win Brazil GP as Mercedes seals F1 title double",
       "link": "https://www.crash.net/f1/race-report/1110006/1/lando-norris-beats-recovering-max-verstappen-win-brazil-gp-mercedes-seals",
       "pubDate": "2026-11-08 18:40:52",
@@ -982,7 +993,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453480_hires.jpg?width=1200"
     },
     {
-      "id": "1bef27a9",
+      "id": "952ea209",
       "title": "Mercedes wins the constructors’ title for the ninth time, tying with Williams | Formula 1",
       "link": "https://www.racefans.net/2026/11/08/mercedes-wins-the-constructors-title-for-the-ninth-time-tying-with-williams/",
       "pubDate": "2026-11-08 18:39:55",
@@ -993,7 +1004,7 @@
       "image": ""
     },
     {
-      "id": "1697a6cd",
+      "id": "9144efdd",
       "title": "Rate the race: 2026 Brazilian Grand Prix | Formula 1",
       "link": "https://www.racefans.net/2026/11/08/rate-the-race-2026-brazilian-grand-prix/",
       "pubDate": "2026-11-08 18:38:17",
@@ -1004,7 +1015,7 @@
       "image": ""
     },
     {
-      "id": "9e885b9d",
+      "id": "b59aee36",
       "title": "2026 Brazilian Grand Prix in pictures | F1 Pictures",
       "link": "https://www.racefans.net/2026/11/08/2026-brazilian-grand-prix-in-pictures/",
       "pubDate": "2026-11-08 18:18:32",
@@ -1015,7 +1026,7 @@
       "image": ""
     },
     {
-      "id": "4f73c768",
+      "id": "6ce978f9",
       "title": "Marco Bezzecchi’s glum “no miracles” response to his MotoGP title hopes",
       "link": "https://www.crash.net/motogp/news/1109985/1/marco-bezzecchis-glum-no-miracles-response-his-motogp-title-hopes",
       "pubDate": "2026-11-08 18:11:41",
@@ -1026,7 +1037,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362328_hires.jpg?width=1200"
     },
     {
-      "id": "bb33ea16",
+      "id": "334bc648",
       "title": "Jeremy Seewer on his future: “As it stands, there’s no solution left in MXGP”",
       "link": "https://gatedrop.com/jeremy-seewer-on-his-future-as-it-stands-theres-no-solution-left-in-mxgp/",
       "pubDate": "2026-11-08 17:30:34",
@@ -1037,7 +1048,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Seewer_MXGP_2025_R20_H9A5415-150x150.jpg"
     },
     {
-      "id": "f38112e4",
+      "id": "9125aeaf",
       "title": "How Marc Marquez can win the 2026 MotoGP title in Portugal",
       "link": "https://www.crash.net/motogp/news/1109117/1/how-marc-marquez-can-win-2026-motogp-title-qatar-grand-prix",
       "pubDate": "2026-11-08 17:20:00",
@@ -1048,7 +1059,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1358884_hires.jpg?width=1200"
     },
     {
-      "id": "8012ae13",
+      "id": "1245c3ad",
       "title": "Qatar: New 2026 MotoGP World Championship standings",
       "link": "https://www.crash.net/motogp/results/1109827/1/qatar-new-2026-motogp-world-championship-standings",
       "pubDate": "2026-11-08 17:00:48",
@@ -1059,7 +1070,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361375_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "fa130265",
+      "id": "2df1d34f",
       "title": "Official: SixtySeven Racing make the switch to KTM machinery for 2027",
       "link": "https://gatedrop.com/official-sixtyseven-racing-make-the-switch-to-ktm-machinery-for-2027/",
       "pubDate": "2026-11-08 16:59:38",
@@ -1070,7 +1081,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/67-150x150.jpg"
     },
     {
-      "id": "02a0fd6c",
+      "id": "4a82b31d",
       "title": "Marc Marquez denied MotoGP title in Qatar as Marco Bezzecchi wins race",
       "link": "https://www.crash.net/motogp/news/1109897/1/marc-marquez-denied-motogp-title-qatar-marco-bezzecchi-wins-race",
       "pubDate": "2026-11-08 16:51:40",
@@ -1081,7 +1092,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1360372_hires-1.jpg?width=1200"
     },
     {
-      "id": "b0e45eee",
+      "id": "276fcc67",
       "title": "2026 Qatar MotoGP, Lusail - Race Results",
       "link": "https://www.crash.net/motogp/results/1109826/1/2026-qatar-motogp-lusail-race-results",
       "pubDate": "2026-11-08 16:45:44",
@@ -1092,7 +1103,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1360419_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "6326619d",
+      "id": "631e5279",
       "title": "The all-time MotoGP winners' list after the 2026 Qatar Grand Prix",
       "link": "https://www.crash.net/motogp/news/1078437/1/all-time-motogp-winners-list-who-has-most-victories",
       "pubDate": "2026-11-08 16:44:00",
@@ -1103,7 +1114,7 @@
       "image": "https://www.crash.net/sites/default/files/2025-07/gng_724326_hires.jpg?width=1200"
     },
     {
-      "id": "6f5bc2c9",
+      "id": "46a85c82",
       "title": "Max Verstappen’s heartwarming gesture as Red Bull F1 veteran leaves",
       "link": "https://www.crash.net/f1/news/1109874/1/max-verstappens-heartwarming-gesture-red-bull-f1-veteran-leaves",
       "pubDate": "2026-11-08 16:23:09",
@@ -1114,7 +1125,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1452323_hires.jpg?width=1200"
     },
     {
-      "id": "98e2893b",
+      "id": "f5196558",
       "title": "F1 2026 Brazil Grand Prix: Mixed up starting grid after spate of engine penalties",
       "link": "https://www.crash.net/f1/news/1109820/1/f1-2026-brazil-grand-prix-mixed-starting-grid-after-five-engine-penalties",
       "pubDate": "2026-11-08 16:03:59",
@@ -1125,7 +1136,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1452843_hires.jpg?width=1200"
     },
     {
-      "id": "b078579e",
+      "id": "b48451bc",
       "title": "F1 Brazil Grand Prix as it happened",
       "link": "https://www.crash.net/f1/live/1044270/f1-brazil-grand-prix-live-race-updates-hamilton-verstappen-come-last",
       "pubDate": "2026-11-08 16:00:00",
@@ -1136,7 +1147,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453125_hires.jpg?width=1200"
     },
     {
-      "id": "3383cc99",
+      "id": "8e59a96c",
       "title": "Aprilia boss critical of MotoGP stewards after Marquez/Bezzecchi crash in Qatar",
       "link": "https://www.crash.net/motogp/news/1109854/1/aprilia-boss-critical-motogp-stewards-after-marquezbezzecchi-crash-qatar",
       "pubDate": "2026-11-08 15:38:34",
@@ -1147,7 +1158,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361938_hires.jpg?width=1200"
     },
     {
-      "id": "0e02842f",
+      "id": "16a90cd9",
       "title": "George Russell warns F1 over risks of “horrific incident” at Brazil GP",
       "link": "https://www.crash.net/f1/news/1109851/1/george-russell-warns-f1-over-risks-horrific-incident-brazil-gp",
       "pubDate": "2026-11-08 15:35:17",
@@ -1158,7 +1169,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453119_hires.jpg?width=1200"
     },
     {
-      "id": "9dfb136f",
+      "id": "0f9257f2",
       "title": "Ted Kravitz insists Racing Bulls ‘can’t sack’ Liam Lawson amid 2027 uncertainty",
       "link": "https://www.crash.net/f1/news/1109850/1/ted-kravitz-insists-racing-bulls-cant-sack-liam-lawson-amid-2027-uncertainty",
       "pubDate": "2026-11-08 15:25:00",
@@ -1169,7 +1180,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453341_hires.jpg?width=1200"
     },
     {
-      "id": "ffced351",
+      "id": "a6ee59f3",
       "title": "Fred Vasseur’s $1 million contribution to Esteban Ocon’s F1 debut revealed",
       "link": "https://www.crash.net/f1/news/1109846/1/fred-vasseurs-1-million-contribution-esteban-ocons-f1-debut-revealed",
       "pubDate": "2026-11-08 14:50:00",
@@ -1180,7 +1191,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1446519_hires.jpg?width=1200"
     },
     {
-      "id": "6aef63d0",
+      "id": "36220163",
       "title": "Qatar MotoGP starting grid after Pecco Bagnaia, Luca Marini ruled out of today's race",
       "link": "https://www.crash.net/motogp/news/1109555/1/starting-grid-2026-qatar-motogp-race",
       "pubDate": "2026-11-08 13:58:04",
@@ -1191,7 +1202,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361180_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "9cb68e1f",
+      "id": "9e70e1ea",
       "title": "Luca Marini out of Qatar MotoGP",
       "link": "https://www.crash.net/motogp/news/1109832/1/luca-marini-out-qatar-motogp",
       "pubDate": "2026-11-08 13:37:20",
@@ -1202,7 +1213,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361896_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "7f77d8ad",
+      "id": "e748c530",
       "title": "Vlog: Kevin Horgmo signs with ZXMOTO",
       "link": "https://gatedrop.com/vlog-kevin-horgmo-signs-with-zxmoto/",
       "pubDate": "2026-11-08 12:49:55",
@@ -1213,7 +1224,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Horgmo-150x150.jpg"
     },
     {
-      "id": "8d49cd73",
+      "id": "b03ab06b",
       "title": "Ducati: “No way” Marc Marquez took outside risk in Bezzecchi MotoGP Sprint clash",
       "link": "https://www.crash.net/motogp/news/1109831/1/ducati-no-way-marc-marquez-took-outside-risk-bezzecchi-sprint-clash",
       "pubDate": "2026-11-08 12:40:32",
@@ -1224,7 +1235,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361364_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "549592fb",
+      "id": "a7938268",
       "title": "Pecco Bagnaia Qatar MotoGP crash shocks Pedro Acosta",
       "link": "https://www.crash.net/motogp/news/1109830/1/pecco-bagnaia-qatar-motogp-crash-shocks-pedro-acosta",
       "pubDate": "2026-11-08 12:00:43",
@@ -1235,7 +1246,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361317_hires.jpg?width=1200"
     },
     {
-      "id": "edaf4e27",
+      "id": "37d99b2f",
       "title": "What Mercedes needs to be crowned F1 champions again in Brazil",
       "link": "https://www.crash.net/f1/news/1109346/1/what-mercedes-needs-be-crowned-f1-champions-again-brazil",
       "pubDate": "2026-11-08 11:25:00",
@@ -1246,7 +1257,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1434754_hires.jpg?width=1200"
     },
     {
-      "id": "93e8a58d",
+      "id": "57095fd0",
       "title": "What time is the next F1 race? Brazil GP dates and full schedule",
       "link": "https://www.crash.net/f1/news/1109311/1/what-time-next-f1-race-brazil-gp-dates-and-full-schedule",
       "pubDate": "2026-11-08 11:15:41",
@@ -1257,7 +1268,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453212_hires.jpg?width=1200"
     },
     {
-      "id": "51b21bfc",
+      "id": "56e18f0c",
       "title": "Marc Marquez, Di Giannantonio in tense exchange over Bezzecchi clash",
       "link": "https://www.crash.net/motogp/news/1109829/1/marc-marquez-di-giannantonio-tense-exchange-over-bezzecchi-clash",
       "pubDate": "2026-11-08 10:03:22",
@@ -1268,7 +1279,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361414_hires.jpg?width=1200"
     },
     {
-      "id": "aef7f4b1",
+      "id": "a94f97ff",
       "title": "Pecco Bagnaia responds to Qatar crash as Ducati provides surgery update",
       "link": "https://www.crash.net/motogp/news/1109828/1/pecco-bagnaia-responds-motogp-injury-setback-after-qatar-crash",
       "pubDate": "2026-11-08 09:51:00",
@@ -1279,7 +1290,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361320_hires.jpg?width=1200"
     },
     {
-      "id": "cb2208fa",
+      "id": "66de6eae",
       "title": "How to watch the Qatar Grand Prix race today: Full MotoGP schedule",
       "link": "https://www.crash.net/motogp/news/1109281/1/how-watch-qatar-grand-prix-full-motogp-schedule",
       "pubDate": "2026-11-08 08:00:45",
@@ -1290,7 +1301,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-08/gng_1221158_hires.jpg?width=1200"
     },
     {
-      "id": "50ae8ad5",
+      "id": "b7a9a7fb",
       "title": "Why Fernando Alonso was disappointed despite Brazil GP qualifying heroics",
       "link": "https://www.crash.net/f1/news/1109825/1/why-fernando-alonso-was-disappointed-despite-brazil-gp-qualifying-heroics",
       "pubDate": "2026-11-07 23:09:58",
@@ -1301,7 +1312,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1452334_hires.jpg?width=1200"
     },
     {
-      "id": "fd932688",
+      "id": "cdf81dc2",
       "title": "Max Verstappen “lost 12 hours of my life I’ll never get back” with Brazil GP penalty",
       "link": "https://www.crash.net/f1/news/1109824/1/max-verstappen-lost-12-hours-my-life-ill-never-get-back-brazil-gp-penalty",
       "pubDate": "2026-11-07 22:29:49",
@@ -1312,18 +1323,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1452328_hires.jpg?width=1200"
     },
     {
-      "id": "f0ef3580",
-      "title": "Results: 2026 ADAC Supercross – Stuttgart (Saturday)",
-      "link": "https://gatedrop.com/results-2026-adac-supercross-stuttgart-saturday/",
-      "pubDate": "2026-11-07 21:35:52",
-      "pubDateISO": "2026-11-07T21:35:52+00:00",
-      "aiSummary": "Just like during night one, Maxime Desprey dominated the SX1 action at night two of the Stuttgart Supercross. Brice Maylin finished a strong second with Adrien Escoffier third as it was an all French podium for night two. In SX2, it was Club Yamaha rider, Jesson Turner that took the win but Jules Pietre finished...",
-      "source": "GateDrop MXGP",
-      "category": "MXGP",
-      "image": "https://gatedrop.com/wp-content/uploads/Desprey-150x150.jpg"
-    },
-    {
-      "id": "43d9c5b0",
+      "id": "07d82ae3",
       "title": "Why Marc Marquez’s Qatar MotoGP title shot could be ruined by rider absences",
       "link": "https://www.crash.net/motogp/news/1109801/1/why-marc-marquezs-qatar-motogp-title-shot-could-be-ruined-rider-absences",
       "pubDate": "2026-11-07 19:54:22",
@@ -1334,7 +1334,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361389_hires.jpg?width=1200"
     },
     {
-      "id": "9375cec4",
+      "id": "bf452872",
       "title": "Fermin Aldeguer ‘didn’t make a crazy move’ in Pecco Bagnaia smash",
       "link": "https://www.crash.net/motogp/news/1109788/1/fermin-aldeguer-didnt-make-crazy-move-pecco-bagnaia-smash",
       "pubDate": "2026-11-07 19:28:48",
@@ -1345,7 +1345,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1354038_hires.jpg?width=1200"
     },
     {
-      "id": "4e05e6d8",
+      "id": "e1793500",
       "title": "Marco Bezzecchi on Marc Marquez Qatar MotoGP Sprint clash: “I tried to keep my line”",
       "link": "https://www.crash.net/motogp/news/1109768/1/marco-bezzecchi-marc-marquez-qatar-motogp-sprint-clash-i-tried-keep-my-line",
       "pubDate": "2026-11-07 18:58:17",
@@ -1356,7 +1356,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361369_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "add265a3",
+      "id": "69e9c43c",
       "title": "“Tough guy” Jorge Martin explains Qatar MotoGP sprint “gamble”",
       "link": "https://www.crash.net/motogp/news/1109765/1/tough-guy-jorge-martin-explains-qatar-motogp-sprint-gamble",
       "pubDate": "2026-11-07 18:41:50",
@@ -1367,7 +1367,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361432_hires.jpg?width=1200"
     },
     {
-      "id": "5283f116",
+      "id": "892dcac2",
       "title": "Marc Marquez plays down MotoGP title chance after Sprint win: “Not the day to take that risk”",
       "link": "https://www.crash.net/motogp/news/1109757/1/marc-marquez-plays-down-motogp-title-chance-after-sprint-win-not-day-take",
       "pubDate": "2026-11-07 18:20:17",
@@ -1378,7 +1378,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361391_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "20ff406a",
+      "id": "50a98acf",
       "title": "Marc Marquez’s first words after controversial Marco Bezzecchi sprint crash",
       "link": "https://www.crash.net/motogp/news/1109744/1/marc-marquezs-first-words-after-controversial-marco-bezzecchi-sprint-crash",
       "pubDate": "2026-11-07 17:36:57",
@@ -1389,7 +1389,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361429_hires.jpg?width=1200"
     },
     {
-      "id": "ab3588fd",
+      "id": "efed90cc",
       "title": "The all-time MotoGP Sprint winners' list after Qatar",
       "link": "https://www.crash.net/motogp/news/1092378/1/all-time-motogp-sprint-race-winners-list",
       "pubDate": "2026-11-07 17:20:09",
@@ -1400,7 +1400,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361415_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "4af36381",
+      "id": "53742685",
       "title": "Pecco Bagnaia taken to hospital after violent Qatar MotoGP sprint crash",
       "link": "https://www.crash.net/motogp/news/1109736/1/pecco-bagnaia-taken-hospital-after-violent-qatar-motogp-sprint-crash",
       "pubDate": "2026-11-07 17:17:34",
@@ -1411,7 +1411,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361328_hires.jpg?width=1200"
     },
     {
-      "id": "73d9a677",
+      "id": "69ab3f2e",
       "title": "Qatar Sprint Race: New 2026 MotoGP World Championship standings",
       "link": "https://www.crash.net/motogp/results/1109394/1/qatar-sprint-race-new-2026-motogp-world-championship-standings",
       "pubDate": "2026-11-07 17:00:46",
@@ -1422,7 +1422,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361367_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "6e58833a",
+      "id": "280f71dd",
       "title": "Marc Marquez wins dramatic Qatar MotoGP sprint after Marco Bezzecchi clash",
       "link": "https://www.crash.net/motogp/news/1109731/1/marc-marquez-wins-dramatic-qatar-motogp-sprint-after-marco-bezzecchi-clash",
       "pubDate": "2026-11-07 16:50:26",
@@ -1433,7 +1433,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361175_hires.jpg?width=1200"
     },
     {
-      "id": "5ae851dc",
+      "id": "b13e70e9",
       "title": "2026 Qatar MotoGP, Lusail - Sprint Race Results",
       "link": "https://www.crash.net/motogp/news/1109392/1/2026-qatar-motogp-lusail-sprint-race-results",
       "pubDate": "2026-11-07 16:40:46",
@@ -1444,7 +1444,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361351_hires.jpg?width=1200"
     },
     {
-      "id": "b7d13fbd",
+      "id": "acd8e43c",
       "title": "Qatar MotoGP Sprint red-flagged after Pecco Bagnaia accident",
       "link": "https://www.crash.net/motogp/news/1109685/1/qatar-motogp-sprint-red-flagged-after-pecco-bagnaia-accident",
       "pubDate": "2026-11-07 16:10:17",
@@ -1455,7 +1455,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361210_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "3752292f",
+      "id": "5b56e8e2",
       "title": "Qatar MotoGP sprint as it happened",
       "link": "https://www.crash.net/motogp/live/1044220/qatar-motogp-live-qualifying-and-sprint-updates-lusail",
       "pubDate": "2026-11-07 15:00:00",
@@ -1466,7 +1466,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361205_hires.jpg?width=1200"
     },
     {
-      "id": "bcd1f13a",
+      "id": "f701977c",
       "title": "Marc Marquez casts doubt on Qatar MotoGP title chance: “Bezzecchi has another pace”",
       "link": "https://www.crash.net/motogp/news/1109621/1/marc-marquez-casts-doubt-qatar-title-chance-bezzecchi-has-another-pace",
       "pubDate": "2026-11-07 13:29:17",
@@ -1477,7 +1477,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361152_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "ad072622",
+      "id": "717e96d9",
       "title": "Jake Dixon finds MotoGP speed after Qatar crash, credits “pain” Cal Crutchlow",
       "link": "https://www.crash.net/motogp/news/1109538/1/jake-dixon-finds-motogp-speed-after-qatar-crash-credits-pain-cal-crutchlow",
       "pubDate": "2026-11-06 19:55:46",
@@ -1488,7 +1488,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1360396_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "02c62da2",
+      "id": "c6343826",
       "title": "Watch: SMX Insider Silly Season Show",
       "link": "https://www.vurbmoto.com/watch-smx-insider-silly-season-show/",
       "pubDate": "2026-11-06 12:22:35",
@@ -1499,7 +1499,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/maxresdefault-1024x576.jpg"
     },
     {
-      "id": "f2bc6874",
+      "id": "e281a0fc",
       "title": "Honda names Jake Dixon as Joan Mir's substitute for Qatar GP",
       "link": "https://www.motorsport.com/motogp/news/honda-names-jake-dixon-as-joan-mirs-substitute-for-qatar-gp/10871629/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-11-05 08:36:48",
@@ -1507,10 +1507,10 @@
       "aiSummary": "Honda HRC has announced that Joan Mir will be absent this weekend's Qatar Grand Prix after his comeback at Sepang was cut short due to another episode of dizziness and partial loss of vision. British rider Jake Dixon will replace the Spaniard at Losail, returning to the premier class for the first time since he competed two grands prix in 2021 as a substitute for Franco Morbidelli at Petronas...",
       "source": "Motorsport.com MotoGP",
       "category": "Moto2",
-      "image": "https://cdn-4.motorsport.com/images/amp/2Qe8g5O2/s6/jake-dixon-team-hrc.jpg"
+      "image": "https://cdn-1.motorsport.com/images/amp/2Qe8g5O2/s6/jake-dixon-team-hrc.jpg"
     },
     {
-      "id": "96fb64ea",
+      "id": "117a4f97",
       "title": "Van Venrooy Racing Sign Karlis Reisulis and Byron Dennis for 2027 MX2 World Championship",
       "link": "https://www.vurbmoto.com/van-venrooy-racing-sign-karlis-reisulis-and-byron-dennis-for-2027-mx2-world-championship/",
       "pubDate": "2026-11-04 21:38:58",
@@ -1521,7 +1521,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/339046_screenshot-2026-11-04-at-92814am.webp"
     },
     {
-      "id": "2a116362",
+      "id": "411f0379",
       "title": "2027 Women’s Motocross Championship Schedule Announced",
       "link": "https://www.vurbmoto.com/2027-womens-motocross-championship-schedule-announced/",
       "pubDate": "2026-11-04 18:56:33",
@@ -1532,7 +1532,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/unnamed-1024x683.jpg"
     },
     {
-      "id": "db4d2130",
+      "id": "84d4b6a1",
       "title": "Red Bull KTM Adds Maxime Renaux, Janis Reisulis and Valerio Lata; Announce 2027 Roster",
       "link": "https://www.vurbmoto.com/red-bull-ktm-adds-maxime-renaux-janis-reisulis-and-valerio-lata-announce-2027-roster/",
       "pubDate": "2026-11-04 12:58:57",
@@ -1543,7 +1543,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/2027-red-bull-ktm-mxgp-roster.jpg"
     },
     {
-      "id": "42455bdc",
+      "id": "051fe0d0",
       "title": "Honda “can fight for wins” in WorldSBK with new bike - Jake Dixon",
       "link": "https://www.crash.net/wsbk/news/1109299/1/honda-can-fight-wins-worldsbk-new-bike-jake-dixon",
       "pubDate": "2026-11-04 12:00:00",
@@ -1554,18 +1554,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-09/gng_1334935_hires.jpg?width=1200"
     },
     {
-      "id": "9b31cb14",
-      "title": "Expanded SMX Next World All-Star Championship Announced for 2027",
-      "link": "https://www.vurbmoto.com/expanded-smx-next-world-all-star-championship-announced-for-2027/",
-      "pubDate": "2026-11-03 18:17:22",
-      "pubDateISO": "2026-11-03T18:17:22+00:00",
-      "aiSummary": "The SMX League has announced the expansion of the SMX Next program, enhancing the highly successful initiative to foster the sport’s next generation of racers. Beginning in 2027, the SMX Next World All-Star Championship will unify the prospect races held in conjunction with the Monster Energy AMA Supercross Championship and Pro Motocross Championship, sanctioned by […] The post Expanded SMX...",
-      "source": "Vurbmoto MX",
-      "category": "MXGP",
-      "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/smx-next-expands-2027-1024x683.jpg"
-    },
-    {
-      "id": "023d968c",
+      "id": "448088cf",
       "title": "Ai Ogura on brush with Marco Bezzecchi: \"It was my bad\"",
       "link": "https://www.motorsport.com/motogp/news/ai-ogura-on-brush-with-marco-bezzecchi-it-was-my-bad/10870542/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-11-02 09:01:43",
@@ -1573,10 +1562,10 @@
       "aiSummary": "Aprilias getting in each other's way has been a recurring theme in this year's MotoGP world championship - and the Malaysian Grand Prix provided another example of the phenomenon. This time it was Ai Ogura, on the satellite Trackhouse bike, rubbing fairings with factory rider Marco Bezzecchi, who is in long-shot contention for the world championship. But the move at Turn 1, with three laps ......",
       "source": "Motorsport.com MotoGP",
       "category": "Moto2",
-      "image": "https://cdn-3.motorsport.com/images/amp/0R7Bb8g2/s6/marco-bezzecchi-aprilia-leads--2.jpg"
+      "image": "https://cdn-2.motorsport.com/images/amp/0R7Bb8g2/s6/marco-bezzecchi-aprilia-leads--2.jpg"
     },
     {
-      "id": "956b94e6",
+      "id": "d86f0e9d",
       "title": "Ai Ogura explains Marc Marquez battle in Malaysia sprint, denies Aprilia team orders",
       "link": "https://www.motorsport.com/motogp/news/ai-ogura-explains-marc-marquez-battle-in-malaysia-sprint-denies-aprilia-team-orders/10870057/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-10-31 13:30:03",
@@ -1584,10 +1573,10 @@
       "aiSummary": "Ai Ogura has outlined his tight scrap with Marc Marquez in the sprint race for the Malaysian Grand Prix, but denied he was acting under any manufacturer orders from Aprilia. The Trackhouse rider got off to a brilliant start from fourth on the grid, passing both Pedro Acosta and Marquez to jump to second. But as the leaders braked into the tight opening corner, Ogura ran wide, bringing Marquez...",
       "source": "Motorsport.com MotoGP",
       "category": "Moto2",
-      "image": "https://cdn-1.motorsport.com/images/amp/24QGZg4Y/s6/race-start.jpg"
+      "image": "https://cdn-4.motorsport.com/images/amp/24QGZg4Y/s6/race-start.jpg"
     },
     {
-      "id": "a03d5f3a",
+      "id": "c8e114d2",
       "title": "WorldSBK champion tests next-gen Honda CBR1000RR-R Fireblade",
       "link": "https://www.crash.net/wsbk/news/1108073/1/worldsbk-champion-tests-next-gen-honda-cbr1000rr-r-fireblade",
       "pubDate": "2026-10-23 14:07:19",
@@ -1598,7 +1587,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/site-image-resize-2026-10-23t140715.651.png?width=1200"
     },
     {
-      "id": "1a411102",
+      "id": "c8f8e65d",
       "title": "Somkiat Chantra to move to WSBK with Honda after losing MotoGP ride",
       "link": "https://www.motorsport.com/motogp/news/somkiat-chantra-wsbk-honda-losing-motogp-ride/10757002/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2025-09-06 12:12:13",
@@ -1609,7 +1598,7 @@
       "image": "https://cdn-2.motorsport.com/images/amp/0mbBzL42/s6/somkiat-chantra-team-lcr-honda.jpg"
     },
     {
-      "id": "0dbb4d83",
+      "id": "fb3e0f48",
       "title": "World Superbike performs U-turn on 2024 minimum weight rules",
       "link": "https://www.motorsport.com/wsbk/news/2024-rule-changes-minimum-weight/10531777/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-10-12 00:22:10",
@@ -1620,7 +1609,7 @@
       "image": "https://cdn-9.motorsport.com/images/amp/0qXZJNE6/s6/toprak-razgatlioglu-pata-yamah.jpg"
     },
     {
-      "id": "ba298c67",
+      "id": "3e8c02a5",
       "title": "Ducati hands Bulega works World Superbike seat for 2024",
       "link": "https://www.motorsport.com/wsbk/news/ducati-bulega-2024-announcement-rinaldi/10516484/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-09-05 08:25:31",
@@ -1631,7 +1620,7 @@
       "image": "https://cdn-2.motorsport.com/images/amp/6b7zawp0/s6/nicolo-bulega-1.jpg"
     },
     {
-      "id": "844c9120",
+      "id": "5f0dbab0",
       "title": "Sam Lowes to make 2024 WSBK switch with Marc VDS",
       "link": "https://www.motorsport.com/wsbk/news/sam-lowes-to-make-2024-wsbk-switch-with-marc-vds/10495359/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-07-13 09:54:11",
