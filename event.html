@@ -51951,6 +51951,22 @@
 
 
 
+      // Environmental conditions (Weather: condition, air temp, track temp)
+      const sprWeatherData = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[currentGpShort]) ? SESSION_WEATHER_DATA[currentGpShort] : {};
+      const rawSprW = sprWeatherData.sprint || '';
+      const cleanSprW = rawSprW.replace(/&#xB0;/g, '°').replace(/Â°/g, '°').replace(/Â/g, '').replace(/°C°C/g, '°C').trim();
+      const sprWeatherEl = document.getElementById('spr-section-weather');
+      if (sprWeatherEl) {
+        if (cleanSprW && cleanSprW !== 'Dry | Air: -- | Track: --') {
+          sprWeatherEl.textContent = cleanSprW;
+          sprWeatherEl.style.display = 'inline-flex';
+        } else {
+          sprWeatherEl.style.display = 'none';
+        }
+      }
+
+
+
       renderSingleLapChart('SPR', 'chart-spr-lapchart', currentGpShort, activeFavRiders);
 
       renderSingleGapChart('SPR', 'chart-spr-gapchart', currentGpShort, activeFavRiders);
@@ -52031,6 +52047,22 @@
 
         toggleRacProgressionMinimize();
 
+      }
+
+
+
+      // Environmental conditions (Weather: condition, air temp, track temp)
+      const racWeatherData = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[currentGpShort]) ? SESSION_WEATHER_DATA[currentGpShort] : {};
+      const rawRacW = racWeatherData.race || '';
+      const cleanRacW = rawRacW.replace(/&#xB0;/g, '°').replace(/Â°/g, '°').replace(/Â/g, '').replace(/°C°C/g, '°C').trim();
+      const racWeatherEl = document.getElementById('rac-section-weather');
+      if (racWeatherEl) {
+        if (cleanRacW && cleanRacW !== 'Dry | Air: -- | Track: --') {
+          racWeatherEl.textContent = cleanRacW;
+          racWeatherEl.style.display = 'inline-flex';
+        } else {
+          racWeatherEl.style.display = 'none';
+        }
       }
 
 
@@ -56608,7 +56640,10 @@
 
             <div>
 
-              <div class="sector-title">&#x1F4CA; SPR RACE - Progression, Gap to Leader, Pace Delta, Lap Times Density &amp; Track Sectors</div>
+              <div class="sector-title">
+                <span>&#x1F4CA; SPR RACE - Progression, Gap to Leader, Pace Delta, Lap Times Density &amp; Track Sectors</span>
+                <span class="fp1-weather-badge" id="spr-section-weather" style="display: none;"></span>
+              </div>
 
               <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap Chart, Gap to Leader, 3-Part Pace Delta, Lap Time Distribution &amp; Sectors T1-T4</div>
 
@@ -56803,7 +56838,10 @@
 
             <div>
 
-              <div class="sector-title">&#x1F4CA; MAIN RACE - Progression, Gap to Leader, Pace Delta, Lap Times Density &amp; Track Sectors</div>
+              <div class="sector-title">
+                <span>&#x1F4CA; MAIN RACE - Progression, Gap to Leader, Pace Delta, Lap Times Density &amp; Track Sectors</span>
+                <span class="fp1-weather-badge" id="rac-section-weather" style="display: none;"></span>
+              </div>
 
               <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap Chart, Gap to Leader, 3-Part Pace Delta, Lap Time Distribution &amp; Sectors T1-T4</div>
 
