@@ -1279,6 +1279,12 @@
 
     .sector-section.minimized .sector-grid-1row,
 
+    .sector-section.minimized #fp1-analysis-grid,
+    .sector-section.minimized #pr-analysis-grid,
+    .sector-section.minimized #fp2-analysis-grid,
+    .sector-section.minimized .progression-grid-unified,
+    .sector-section.minimized .progression-grid-2col,
+
     .sector-section.minimized .fp1-sectors-block,
     .sector-section.minimized .pr-sectors-block,
     .sector-section.minimized .fp2-sectors-block,
@@ -1417,7 +1423,7 @@
 
     .sector-section.minimized .progression-grid-2col {
 
-      display: none;
+      display: none !important;
 
     }
 
@@ -38808,6 +38814,8 @@
 
       const isMin = section.classList.toggle('minimized');
 
+      try { localStorage.setItem('overrevving_spr_progression_minimized', isMin ? '1' : '0'); } catch(e) {}
+
       const btn = document.getElementById('spr-progression-min-btn');
 
       const icon = document.getElementById('spr-progression-min-icon');
@@ -38824,23 +38832,11 @@
 
         if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
 
-        if (sprLapChartInstance) { try { sprLapChartInstance.resize(); } catch(e) {} }
+        const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
 
-        if (sprGapChartInstance) { try { sprGapChartInstance.resize(); } catch(e) {} }
-
-        if (sprPaceChartInstance) { try { sprPaceChartInstance.resize(); } catch(e) {} }
-
-        if (sprDensityChartInstance) { try { sprDensityChartInstance.resize(); } catch(e) {} }
-
-        ['t1', 't2', 't3', 't4'].forEach(k => {
-          if (typeof sprSectorChartInstances !== 'undefined' && sprSectorChartInstances && sprSectorChartInstances[k]) {
-            try { sprSectorChartInstances[k].resize(); } catch(e) {}
-          }
-        });
+        if (cur) renderSprProgression(cur);
 
       }
-
-      try { localStorage.setItem('overrevving_spr_progression_minimized', isMin ? '1' : '0'); } catch(e) {}
 
     }
 
@@ -38853,6 +38849,8 @@
       if (!section) return;
 
       const isMin = section.classList.toggle('minimized');
+
+      try { localStorage.setItem('overrevving_rac_progression_minimized', isMin ? '1' : '0'); } catch(e) {}
 
       const btn = document.getElementById('rac-progression-min-btn');
 
@@ -38870,23 +38868,11 @@
 
         if (icon) icon.innerHTML = '<path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>';
 
-        if (racLapChartInstance) { try { racLapChartInstance.resize(); } catch(e) {} }
+        const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
 
-        if (racGapChartInstance) { try { racGapChartInstance.resize(); } catch(e) {} }
-
-        if (racPaceChartInstance) { try { racPaceChartInstance.resize(); } catch(e) {} }
-
-        if (racDensityChartInstance) { try { racDensityChartInstance.resize(); } catch(e) {} }
-
-        ['t1', 't2', 't3', 't4'].forEach(k => {
-          if (typeof sectorChartInstances !== 'undefined' && sectorChartInstances && sectorChartInstances[k]) {
-            try { sectorChartInstances[k].resize(); } catch(e) {}
-          }
-        });
+        if (cur) renderRacProgression(cur);
 
       }
-
-      try { localStorage.setItem('overrevving_rac_progression_minimized', isMin ? '1' : '0'); } catch(e) {}
 
     }
 
@@ -39950,6 +39936,8 @@
 
       const isMin = section.classList.toggle('minimized');
 
+      try { localStorage.setItem('overrevving_fp1_analysis_minimized', isMin ? '1' : '0'); } catch(e) {}
+
       const btn = document.getElementById('fp1-analysis-min-btn');
 
       const icon = document.getElementById('fp1-analysis-min-icon');
@@ -39971,8 +39959,6 @@
         if (cur) renderFp1AnalysisSection(cur);
 
       }
-
-      try { localStorage.setItem('overrevving_fp1_analysis_minimized', isMin ? '1' : '0'); } catch(e) {}
 
     }
 
@@ -43933,6 +43919,8 @@
 
       const isMin = section.classList.toggle('minimized');
 
+      try { localStorage.setItem('overrevving_pr_analysis_minimized', isMin ? '1' : '0'); } catch(e) {}
+
       const btn = document.getElementById('pr-analysis-min-btn');
 
       const icon = document.getElementById('pr-analysis-min-icon');
@@ -43954,8 +43942,6 @@
         if (cur) renderPrAnalysisSection(cur);
 
       }
-
-      try { localStorage.setItem('overrevving_pr_analysis_minimized', isMin ? '1' : '0'); } catch(e) {}
 
     }
 
@@ -47918,6 +47904,8 @@
 
       const isMin = section.classList.toggle('minimized');
 
+      try { localStorage.setItem('overrevving_fp2_analysis_minimized', isMin ? '1' : '0'); } catch(e) {}
+
       const btn = document.getElementById('fp2-analysis-min-btn');
 
       const icon = document.getElementById('fp2-analysis-min-icon');
@@ -47939,8 +47927,6 @@
         if (cur) renderFp2AnalysisSection(cur);
 
       }
-
-      try { localStorage.setItem('overrevving_fp2_analysis_minimized', isMin ? '1' : '0'); } catch(e) {}
 
     }
 
@@ -57059,6 +57045,8 @@
       buildSidebarList();
 
       applySessionVisibility();
+
+      window.CURRENT_EVENT_SHORT = gp.short;
 
       if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(gp.short); if (typeof renderPrAnalysisSection === 'function') renderPrAnalysisSection(gp.short); if (typeof renderFp2AnalysisSection === 'function') renderFp2AnalysisSection(gp.short); if (typeof renderSprLapChart === 'function') renderSprLapChart(gp.short);
 
