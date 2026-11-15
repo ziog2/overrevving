@@ -1281,7 +1281,9 @@
 
     .sector-section.minimized .fp1-sectors-block,
     .sector-section.minimized .pr-sectors-block,
-    .sector-section.minimized .fp2-sectors-block {
+    .sector-section.minimized .fp2-sectors-block,
+    .sector-section.minimized .spr-sectors-block,
+    .sector-section.minimized .rac-sectors-block {
 
       display: none !important;
 
@@ -38517,55 +38519,108 @@
 
         const RIDER_STYLES = {
 
-      'Marc Marquez': { color: '#e74c3c' },
+      'Marc Marquez': { color: '#e74c3c', code: 'MM93' },
 
-      'Francesco Bagnaia': { color: '#e74c3c', borderDash: [6, 4] },
+      'Francesco Bagnaia': { color: '#e74c3c', borderDash: [6, 4], code: 'FB63' },
 
-      'Jorge Martin': { color: '#a8b0bd', borderDash: [6, 4] },
+      'Jorge Martin': { color: '#a8b0bd', borderDash: [6, 4], code: 'JM89' },
 
-      'Marco Bezzecchi': { color: '#a8b0bd' },
+      'Marco Bezzecchi': { color: '#a8b0bd', code: 'MB72' },
 
-      'Fabio Di Giannantonio': { color: '#d8ff00' },
+      'Fabio Di Giannantonio': { color: '#d8ff00', code: 'FG49' },
 
-      'Franco Morbidelli': { color: '#d8ff00', borderDash: [6, 4] },
+      'Franco Morbidelli': { color: '#d8ff00', borderDash: [6, 4], code: 'FM21' },
 
-      'Ai Ogura': { color: '#8ec0e4' },
+      'Ai Ogura': { color: '#8ec0e4', code: 'AO79' },
 
-      'Raul Fernandez': { color: '#8ec0e4', borderDash: [6, 4] },
+      'Raul Fernandez': { color: '#8ec0e4', borderDash: [6, 4], code: 'RF25' },
 
-      'Pedro Acosta': { color: '#ff6600' },
+      'Pedro Acosta': { color: '#ff6600', code: 'PA37' },
 
-      'Brad Binder': { color: '#ff6600', borderDash: [6, 4] },
+      'Brad Binder': { color: '#ff6600', borderDash: [6, 4], code: 'BB33' },
 
-      'Luca Marini': { color: '#ff0000' },
+      'Luca Marini': { color: '#ff0000', code: 'LM10' },
 
-      'Joan Mir': { color: '#ff0000', borderDash: [6, 4] },
+      'Joan Mir': { color: '#ff0000', borderDash: [6, 4], code: 'JM36' },
 
-      'Alex Marquez': { color: '#9cb2e6' },
+      'Alex Marquez': { color: '#9cb2e6', code: 'AM73' },
 
-      'Fermin Aldeguer': { color: '#9cb2e6', borderDash: [6, 4] },
+      'Fermin Aldeguer': { color: '#9cb2e6', borderDash: [6, 4], code: 'FA54' },
 
-      'Enea Bastianini': { color: '#ff9f43' },
+      'Enea Bastianini': { color: '#ff9f43', code: 'EB23' },
 
-      'Maverick Viñales': { color: '#ff9f43', borderDash: [6, 4] },
+      'Maverick Viñales': { color: '#ff9f43', borderDash: [6, 4], code: 'MV12' },
 
-      'Fabio Quartararo': { color: '#0055ff' },
+      'Maverick Vinales': { color: '#ff9f43', borderDash: [6, 4], code: 'MV12' },
 
-      'Alex Rins': { color: '#0055ff', borderDash: [6, 4] },
+      'Fabio Quartararo': { color: '#0055ff', code: 'FQ20' },
 
-      'Jack Miller': { color: '#3388ff' },
+      'Alex Rins': { color: '#0055ff', borderDash: [6, 4], code: 'AR42' },
 
-      'Toprak Razgatlioglu': { color: '#3388ff', borderDash: [6, 4] },
+      'Jack Miller': { color: '#3388ff', code: 'JM43' },
 
-      'Diogo Moreira': { color: '#ffffff' },
+      'Toprak Razgatlioglu': { color: '#3388ff', borderDash: [6, 4], code: 'TR07' },
 
-      'Johann Zarco': { color: '#ffffff', borderDash: [6, 4] },
+      'Diogo Moreira': { color: '#ffffff', code: 'DM11' },
 
-      'Somkiat Chantra': { color: '#ffffff', borderDash: [6, 4] },
+      'Johann Zarco': { color: '#ffffff', borderDash: [6, 4], code: 'JZ5' },
 
-      'Michele Pirro': { color: '#e74c3c', borderDash: [4, 4] }
+      'Somkiat Chantra': { color: '#ffffff', borderDash: [6, 4], code: 'SC35' },
+
+      'Michele Pirro': { color: '#e74c3c', borderDash: [4, 4], code: 'MP51' }
 
     };
+
+    const RIDER_CODES = {
+      'Marc Marquez': 'MM93',
+      'Francesco Bagnaia': 'FB63',
+      'Jorge Martin': 'JM89',
+      'Marco Bezzecchi': 'MB72',
+      'Fabio Di Giannantonio': 'FG49',
+      'Franco Morbidelli': 'FM21',
+      'Ai Ogura': 'AO79',
+      'Raul Fernandez': 'RF25',
+      'Pedro Acosta': 'PA37',
+      'Brad Binder': 'BB33',
+      'Luca Marini': 'LM10',
+      'Joan Mir': 'JM36',
+      'Alex Marquez': 'AM73',
+      'Fermin Aldeguer': 'FA54',
+      'Enea Bastianini': 'EB23',
+      'Maverick Viñales': 'MV12',
+      'Maverick Vinales': 'MV12',
+      'Fabio Quartararo': 'FQ20',
+      'Alex Rins': 'AR42',
+      'Jack Miller': 'JM43',
+      'Toprak Razgatlioglu': 'TR07',
+      'Diogo Moreira': 'DM11',
+      'Johann Zarco': 'JZ5',
+      'Somkiat Chantra': 'SC35',
+      'Michele Pirro': 'MP51',
+      'Lorenzo Savadori': 'LS32',
+      'Pol Espargaro': 'PE44',
+      'Aleix Espargaro': 'AE41',
+      'Takaaki Nakagami': 'TN30',
+      'Augusto Fernandez': 'AF37',
+      'Iker Lecuona': 'IL27',
+      'Cal Crutchlow': 'CC35',
+      'Jonas Folger': 'JF94',
+      'Stefan Bradl': 'SB6',
+      'Dani Pedrosa': 'DP26',
+      'Remy Gardner': 'RG87'
+    };
+
+    function getRiderCode(rName) {
+      if (!rName) return '';
+      const clean = rName.trim();
+      if (RIDER_CODES[clean]) return RIDER_CODES[clean];
+      if (RIDER_STYLES[clean] && RIDER_STYLES[clean].code) return RIDER_STYLES[clean].code;
+      const parts = clean.split(/\s+/);
+      if (parts.length >= 2) {
+        return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+      }
+      return clean.substring(0, 4).toUpperCase();
+    }
 
 
 
@@ -38777,6 +38832,12 @@
 
         if (sprDensityChartInstance) { try { sprDensityChartInstance.resize(); } catch(e) {} }
 
+        ['t1', 't2', 't3', 't4'].forEach(k => {
+          if (typeof sprSectorChartInstances !== 'undefined' && sprSectorChartInstances && sprSectorChartInstances[k]) {
+            try { sprSectorChartInstances[k].resize(); } catch(e) {}
+          }
+        });
+
       }
 
       try { localStorage.setItem('overrevving_spr_progression_minimized', isMin ? '1' : '0'); } catch(e) {}
@@ -38816,6 +38877,12 @@
         if (racPaceChartInstance) { try { racPaceChartInstance.resize(); } catch(e) {} }
 
         if (racDensityChartInstance) { try { racDensityChartInstance.resize(); } catch(e) {} }
+
+        ['t1', 't2', 't3', 't4'].forEach(k => {
+          if (typeof sectorChartInstances !== 'undefined' && sectorChartInstances && sectorChartInstances[k]) {
+            try { sectorChartInstances[k].resize(); } catch(e) {}
+          }
+        });
 
       }
 
@@ -39145,7 +39212,7 @@
 
         const ds = {
 
-          label: formatName(rName),
+          label: getRiderCode(rName),
 
           data: posData,
 
@@ -39257,11 +39324,11 @@
 
                 color: '#ccc',
 
-                font: { family: 'Inter', size: 12 },
+                font: { family: 'Inter', size: 10, weight: '700' },
 
-                boxWidth: 24,
+                boxWidth: 12,
 
-                padding: 16
+                padding: 10
 
               }
 
@@ -39597,7 +39664,7 @@
 
         const ds = {
 
-          label: formatName(rName),
+          label: getRiderCode(rName),
 
           data: gaps,
 
@@ -39705,11 +39772,11 @@
 
                 color: '#ccc',
 
-                font: { family: 'Inter', size: 12 },
+                font: { family: 'Inter', size: 10, weight: '700' },
 
-                boxWidth: 24,
+                boxWidth: 12,
 
-                padding: 16
+                padding: 10
 
               }
 
@@ -40637,7 +40704,7 @@
 
         const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rName]) ? RIDER_STYLES[rName] : {};
         const color = style.color || '#3498db';
-        const code = rData.code || style.code || rName.substring(0, 4).toUpperCase();
+        const code = getRiderCode(rName);
 
         ridersPace.push({
           name: rName,
@@ -40944,7 +41011,7 @@
           }
 
           const ds = {
-            label: (currentFp1SectorRiderMode === 'all') ? (formatName(rName)) : (style.code || formatName(rName)),
+            label: getRiderCode(rName),
             data: dataPoints,
             borderColor: color,
             backgroundColor: color,
@@ -41090,7 +41157,7 @@
 
           const color = style.color || '#3498db';
 
-          const code = rData.code || style.code || rName.substring(0, 4).toUpperCase();
+          const code = getRiderCode(rName);
 
 
 
@@ -41156,7 +41223,7 @@
           if (!rData) return;
           const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rName]) ? RIDER_STYLES[rName] : {};
           const color = style.color || '#3498db';
-          const code = rData.code || style.code || rName.substring(0, 4).toUpperCase();
+          const code = getRiderCode(rName);
 
           const runs = (rData.runs || []).filter(r => r.lapsCount > 0);
           const validFastest = runs.filter(r => r.fastestSec > 0).map(r => r.fastestSec);
@@ -44620,7 +44687,7 @@
 
         const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rName]) ? RIDER_STYLES[rName] : {};
         const color = style.color || '#3498db';
-        const code = rData.code || style.code || rName.substring(0, 4).toUpperCase();
+        const code = getRiderCode(rName);
 
         ridersPace.push({
           name: rName,
@@ -44927,7 +44994,7 @@
           }
 
           const ds = {
-            label: (currentPrSectorRiderMode === 'all') ? (formatName(rName)) : (style.code || formatName(rName)),
+            label: getRiderCode(rName),
             data: dataPoints,
             borderColor: color,
             backgroundColor: color,
@@ -45073,7 +45140,7 @@
 
           const color = style.color || '#3498db';
 
-          const code = rData.code || style.code || rName.substring(0, 4).toUpperCase();
+          const code = getRiderCode(rName);
 
 
 
@@ -45139,7 +45206,7 @@
           if (!rData) return;
           const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rName]) ? RIDER_STYLES[rName] : {};
           const color = style.color || '#3498db';
-          const code = rData.code || style.code || rName.substring(0, 4).toUpperCase();
+          const code = getRiderCode(rName);
 
           const runs = (rData.runs || []).filter(r => r.lapsCount > 0);
           const validFastest = runs.filter(r => r.fastestSec > 0).map(r => r.fastestSec);
@@ -48605,7 +48672,7 @@
 
         const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rName]) ? RIDER_STYLES[rName] : {};
         const color = style.color || '#3498db';
-        const code = rData.code || style.code || rName.substring(0, 4).toUpperCase();
+        const code = getRiderCode(rName);
 
         ridersPace.push({
           name: rName,
@@ -48912,7 +48979,7 @@
           }
 
           const ds = {
-            label: (currentFp2SectorRiderMode === 'all') ? (formatName(rName)) : (style.code || formatName(rName)),
+            label: getRiderCode(rName),
             data: dataPoints,
             borderColor: color,
             backgroundColor: color,
@@ -49058,7 +49125,7 @@
 
           const color = style.color || '#3498db';
 
-          const code = rData.code || style.code || rName.substring(0, 4).toUpperCase();
+          const code = getRiderCode(rName);
 
 
 
@@ -49124,7 +49191,7 @@
           if (!rData) return;
           const style = (typeof RIDER_STYLES !== 'undefined' && RIDER_STYLES[rName]) ? RIDER_STYLES[rName] : {};
           const color = style.color || '#3498db';
-          const code = rData.code || style.code || rName.substring(0, 4).toUpperCase();
+          const code = getRiderCode(rName);
 
           const runs = (rData.runs || []).filter(r => r.lapsCount > 0);
           const validFastest = runs.filter(r => r.fastestSec > 0).map(r => r.fastestSec);
@@ -51906,6 +51973,8 @@
 
       renderDensitySection('SPR', currentGpShort);
 
+      renderSprSectorCharts(currentGpShort);
+
     }
 
 
@@ -51987,6 +52056,8 @@
       renderPaceSection('RAC', currentGpShort);
 
       renderDensitySection('RAC', currentGpShort);
+
+      renderSectorCharts(currentGpShort);
 
     }
 
@@ -52115,12 +52186,7 @@
 
 
       sectionEl.style.display = 'block';
-
-      if (localStorage.getItem('overrevving_spr_sector_minimized') === '1' && !sectionEl.classList.contains('minimized')) {
-
-        toggleSprSectorMinimize();
-
-      }
+      sectionEl.classList.remove('minimized');
 
 
 
@@ -52266,7 +52332,7 @@
 
           const ds = {
 
-            label: formatName(rName),
+            label: getRiderCode(rName),
 
             data: data,
 
@@ -52543,12 +52609,7 @@
 
 
       sectionEl.style.display = 'block';
-
-      if (localStorage.getItem('overrevving_sector_minimized') === '1' && !sectionEl.classList.contains('minimized')) {
-
-        toggleSectorMinimize();
-
-      }
+      sectionEl.classList.remove('minimized');
 
 
 
@@ -52694,7 +52755,7 @@
 
           const ds = {
 
-            label: formatName(rName),
+            label: getRiderCode(rName),
 
             data: data,
 
@@ -52702,13 +52763,13 @@
 
             backgroundColor: color + '15',
 
-            borderWidth: 3,
+            borderWidth: 2.2,
 
             tension: 0,
 
-            pointRadius: 4,
+            pointRadius: 3,
 
-            pointHoverRadius: 6,
+            pointHoverRadius: 5,
 
             fill: false,
 
@@ -53510,7 +53571,11 @@
 
         return {
 
-          label: r.posLabel + ' ' + formatName(r.name),
+          label: getRiderCode(r.name),
+
+          posLabel: r.posLabel,
+
+          fullName: r.name,
 
           data: riderDeltas,
 
@@ -53660,7 +53725,11 @@
 
                   const lapsStr = partsLaps[stintIdx] ? (' (L' + partsLaps[stintIdx][0] + ' - L' + partsLaps[stintIdx][partsLaps[stintIdx].length - 1] + ')') : '';
 
-                  return item.dataset.label + ' · ' + stintNames[stintIdx] + lapsStr;
+                  const ds = item.dataset || {};
+
+                  const rPrefix = (ds.posLabel && ds.fullName) ? (ds.posLabel + ' ' + ds.fullName + ' (' + ds.label + ')') : item.dataset.label;
+
+                  return rPrefix + ' · ' + stintNames[stintIdx] + lapsStr;
 
                 },
 
@@ -54232,7 +54301,7 @@
 
             posLabel: rObj.posLabel,
 
-            formattedName: formatName(rObj.name),
+            formattedName: getRiderCode(rObj.name),
 
             color: color,
 
@@ -56545,7 +56614,7 @@
         </div>
 
 
-        <!-- SPRINT RACE: POSITION PROGRESSION, GAP TO LEADER & PACE DELTA (UNIFIED PANEL) -->
+        <!-- SPRINT RACE: UNIFIED PANEL (PROGRESSION, GAP, PACE DELTA, DENSITY & TRACK SECTORS) -->
 
         <div class="sector-section" id="spr-progression-section" style="display: none;">
 
@@ -56553,9 +56622,9 @@
 
             <div>
 
-              <div class="sector-title">&#x1F4CA; SPR RACE - Progression, Gap to Leader, Pace Delta &amp; Lap Times Density</div>
+              <div class="sector-title">&#x1F4CA; SPR RACE - Progression, Gap to Leader, Pace Delta, Lap Times Density &amp; Track Sectors</div>
 
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap Chart, Gap to Leader, 3-Part Pace Delta &amp; Lap Time Distribution &middot; Excludes Lap 1 for Pace</div>
+              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap Chart, Gap to Leader, 3-Part Pace Delta, Lap Time Distribution &amp; Sectors T1-T4</div>
 
             </div>
 
@@ -56643,109 +56712,94 @@
 
           </div>
 
-        </div>
-
-        <div class="sector-section" id="spr-sector-section" style="display: none;">
-
-          <div class="sector-header">
-
-            <div>
-
-              <div class="sector-title">&#x23F1;&#xFE0F; SPR RACE - Lap-by-Lap Sector Times Comparison</div>
-
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Sectors T1, T2, T3, T4 &middot; Excludes Lap 1 &amp; Final Lap</div>
-
+          <!-- SPRINT RACE TRACK SECTORS SUB-SECTION (T1, T2, T3, T4) -->
+          <div class="fp1-sectors-block spr-sectors-block" id="spr-sector-section" style="display: none; margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+            <div class="sector-card-title" style="margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: #fff;">&#x23F1;&#xFE0F; Track Sectors Analysis (T1 &middot; T2 &middot; T3 &middot; T4)</span>
+                <span class="sector-card-badge" style="background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 10px; font-weight: 700;">Lap-by-Lap Sector Times &middot; Excludes Lap 1 &amp; Final Lap</span>
+              </div>
             </div>
 
-            <button class="win-btn" id="spr-sector-min-btn" onclick="toggleSprSectorMinimize()" title="Minimize / Expand">
+            <div class="sector-grid-1row" id="spr-sector-grid">
 
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="spr-sector-min-icon">
+              <!-- TOP-LEFT: T1 -->
 
-                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <div class="sector-card sector-card-t1">
 
-              </svg>
+                <div class="sector-card-title">
 
-            </button>
+                  <span>Sector 1 (T1)</span>
 
-          </div>
+                  <span class="sector-card-badge badge-t1">T1</span>
 
-          <div class="sector-grid-1row" id="spr-sector-grid">
+                </div>
 
-            <!-- TOP-LEFT: T1 -->
+                <div class="sector-canvas-container">
 
-            <div class="sector-card sector-card-t1">
+                  <canvas id="chart-spr-sector-t1"></canvas>
 
-              <div class="sector-card-title">
-
-                <span>Sector 1 (T1)</span>
-
-                <span class="sector-card-badge badge-t1">T1</span>
+                </div>
 
               </div>
 
-              <div class="sector-canvas-container">
+              <!-- TOP-RIGHT: T2 -->
 
-                <canvas id="chart-spr-sector-t1"></canvas>
+              <div class="sector-card sector-card-t2">
 
-              </div>
+                <div class="sector-card-title">
 
-            </div>
+                  <span>Sector 2 (T2)</span>
 
-            <!-- TOP-RIGHT: T2 -->
+                  <span class="sector-card-badge badge-t2">T2</span>
 
-            <div class="sector-card sector-card-t2">
+                </div>
 
-              <div class="sector-card-title">
+                <div class="sector-canvas-container">
 
-                <span>Sector 2 (T2)</span>
+                  <canvas id="chart-spr-sector-t2"></canvas>
 
-                <span class="sector-card-badge badge-t2">T2</span>
-
-              </div>
-
-              <div class="sector-canvas-container">
-
-                <canvas id="chart-spr-sector-t2"></canvas>
+                </div>
 
               </div>
 
-            </div>
+              <!-- BOTTOM-RIGHT: T3 (Clockwise order) -->
 
-            <!-- BOTTOM-RIGHT: T3 (Clockwise order) -->
+              <div class="sector-card sector-card-t3">
 
-            <div class="sector-card sector-card-t3">
+                <div class="sector-card-title">
 
-              <div class="sector-card-title">
+                  <span>Sector 3 (T3)</span>
 
-                <span>Sector 3 (T3)</span>
+                  <span class="sector-card-badge badge-t3">T3</span>
 
-                <span class="sector-card-badge badge-t3">T3</span>
+                </div>
 
-              </div>
+                <div class="sector-canvas-container">
 
-              <div class="sector-canvas-container">
+                  <canvas id="chart-spr-sector-t3"></canvas>
 
-                <canvas id="chart-spr-sector-t3"></canvas>
-
-              </div>
-
-            </div>
-
-            <!-- BOTTOM-LEFT: T4 (Clockwise order) -->
-
-            <div class="sector-card sector-card-t4">
-
-              <div class="sector-card-title">
-
-                <span>Sector 4 (T4)</span>
-
-                <span class="sector-card-badge badge-t4">T4</span>
+                </div>
 
               </div>
 
-              <div class="sector-canvas-container">
+              <!-- BOTTOM-LEFT: T4 (Clockwise order) -->
 
-                <canvas id="chart-spr-sector-t4"></canvas>
+              <div class="sector-card sector-card-t4">
+
+                <div class="sector-card-title">
+
+                  <span>Sector 4 (T4)</span>
+
+                  <span class="sector-card-badge badge-t4">T4</span>
+
+                </div>
+
+                <div class="sector-canvas-container">
+
+                  <canvas id="chart-spr-sector-t4"></canvas>
+
+                </div>
 
               </div>
 
@@ -56755,7 +56809,7 @@
 
         </div>
 
-        <!-- MAIN RACE: POSITION PROGRESSION, GAP TO LEADER & PACE DELTA (UNIFIED PANEL) -->
+        <!-- MAIN RACE: UNIFIED PANEL (PROGRESSION, GAP, PACE DELTA, DENSITY & TRACK SECTORS) -->
 
         <div class="sector-section" id="rac-progression-section" style="display: none;">
 
@@ -56763,9 +56817,9 @@
 
             <div>
 
-              <div class="sector-title">&#x1F4CA; MAIN RACE - Progression, Gap to Leader, Pace Delta &amp; Lap Times Density</div>
+              <div class="sector-title">&#x1F4CA; MAIN RACE - Progression, Gap to Leader, Pace Delta, Lap Times Density &amp; Track Sectors</div>
 
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap Chart, Gap to Leader, 3-Part Pace Delta &amp; Lap Time Distribution &middot; Excludes Lap 1 for Pace</div>
+              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Lap Chart, Gap to Leader, 3-Part Pace Delta, Lap Time Distribution &amp; Sectors T1-T4</div>
 
             </div>
 
@@ -56853,109 +56907,94 @@
 
           </div>
 
-        </div>
-
-        <div class="sector-section" id="sector-section" style="display: none;">
-
-          <div class="sector-header">
-
-            <div>
-
-              <div class="sector-title">&#x23F1;&#xFE0F; MAIN RACE - Lap-by-Lap Sector Times Comparison</div>
-
-              <div class="sector-subtitle">Comparing favorite riders (&#x2605;) &middot; Sectors T1, T2, T3, T4 &middot; Excludes Lap 1 &amp; Final Lap</div>
-
+          <!-- MAIN RACE TRACK SECTORS SUB-SECTION (T1, T2, T3, T4) -->
+          <div class="fp1-sectors-block rac-sectors-block" id="sector-section" style="display: none; margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+            <div class="sector-card-title" style="margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: #fff;">&#x23F1;&#xFE0F; Track Sectors Analysis (T1 &middot; T2 &middot; T3 &middot; T4)</span>
+                <span class="sector-card-badge" style="background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 10px; font-weight: 700;">Lap-by-Lap Sector Times &middot; Excludes Lap 1 &amp; Final Lap</span>
+              </div>
             </div>
 
-            <button class="win-btn" id="sector-min-btn" onclick="toggleSectorMinimize()" title="Minimize / Expand">
+            <div class="sector-grid-1row" id="rac-sector-grid">
 
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="sector-min-icon">
+              <!-- TOP-LEFT: T1 -->
 
-                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <div class="sector-card sector-card-t1">
 
-              </svg>
+                <div class="sector-card-title">
 
-            </button>
+                  <span>Sector 1 (T1)</span>
 
-          </div>
+                  <span class="sector-card-badge badge-t1">T1</span>
 
-          <div class="sector-grid-1row" id="rac-sector-grid">
+                </div>
 
-            <!-- TOP-LEFT: T1 -->
+                <div class="sector-canvas-container">
 
-            <div class="sector-card sector-card-t1">
+                  <canvas id="chart-sector-t1"></canvas>
 
-              <div class="sector-card-title">
-
-                <span>Sector 1 (T1)</span>
-
-                <span class="sector-card-badge badge-t1">T1</span>
+                </div>
 
               </div>
 
-              <div class="sector-canvas-container">
+              <!-- TOP-RIGHT: T2 -->
 
-                <canvas id="chart-sector-t1"></canvas>
+              <div class="sector-card sector-card-t2">
 
-              </div>
+                <div class="sector-card-title">
 
-            </div>
+                  <span>Sector 2 (T2)</span>
 
-            <!-- TOP-RIGHT: T2 -->
+                  <span class="sector-card-badge badge-t2">T2</span>
 
-            <div class="sector-card sector-card-t2">
+                </div>
 
-              <div class="sector-card-title">
+                <div class="sector-canvas-container">
 
-                <span>Sector 2 (T2)</span>
+                  <canvas id="chart-sector-t2"></canvas>
 
-                <span class="sector-card-badge badge-t2">T2</span>
-
-              </div>
-
-              <div class="sector-canvas-container">
-
-                <canvas id="chart-sector-t2"></canvas>
+                </div>
 
               </div>
 
-            </div>
+              <!-- BOTTOM-RIGHT: T3 (Clockwise order) -->
 
-            <!-- BOTTOM-RIGHT: T3 (Clockwise order) -->
+              <div class="sector-card sector-card-t3">
 
-            <div class="sector-card sector-card-t3">
+                <div class="sector-card-title">
 
-              <div class="sector-card-title">
+                  <span>Sector 3 (T3)</span>
 
-                <span>Sector 3 (T3)</span>
+                  <span class="sector-card-badge badge-t3">T3</span>
 
-                <span class="sector-card-badge badge-t3">T3</span>
+                </div>
 
-              </div>
+                <div class="sector-canvas-container">
 
-              <div class="sector-canvas-container">
+                  <canvas id="chart-sector-t3"></canvas>
 
-                <canvas id="chart-sector-t3"></canvas>
-
-              </div>
-
-            </div>
-
-            <!-- BOTTOM-LEFT: T4 (Clockwise order) -->
-
-            <div class="sector-card sector-card-t4">
-
-              <div class="sector-card-title">
-
-                <span>Sector 4 (T4)</span>
-
-                <span class="sector-card-badge badge-t4">T4</span>
+                </div>
 
               </div>
 
-              <div class="sector-canvas-container">
+              <!-- BOTTOM-LEFT: T4 (Clockwise order) -->
 
-                <canvas id="chart-sector-t4"></canvas>
+              <div class="sector-card sector-card-t4">
+
+                <div class="sector-card-title">
+
+                  <span>Sector 4 (T4)</span>
+
+                  <span class="sector-card-badge badge-t4">T4</span>
+
+                </div>
+
+                <div class="sector-canvas-container">
+
+                  <canvas id="chart-sector-t4"></canvas>
+
+                </div>
 
               </div>
 
