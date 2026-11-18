@@ -1,9 +1,306 @@
 {
-  "lastUpdated": "2026-11-18 09:54:01",
-  "totalItems": 143,
+  "lastUpdated": "2026-11-18 18:44:40",
+  "totalItems": 144,
   "items": [
     {
-      "id": "4674c31a",
+      "id": "e63606a6",
+      "title": "Official: Ollie Colmer parts ways with Chambers Racing",
+      "link": "https://gatedrop.com/official-ollie-colmer-parts-ways-with-chambers-racing/",
+      "pubDate": "2026-11-18 18:44:28",
+      "pubDateISO": "2026-11-18T18:44:28+00:00",
+      "aiSummary": "Young British talent Ollie Colmer has officially parted ways with Chambers KTM Racing after spending the past two seasons with the team. Colmer made the step up to the MX2 World Championship for the 2026 season, becoming the only British rider to commit to the series as he contested the European rounds of the championship....",
+      "source": "GateDrop MXGP",
+      "category": "MX2",
+      "image": "https://gatedrop.com/wp-content/uploads/Colmer_TheNetherlands_2026_Fullsepctrum_JC-3291-150x150.jpg"
+    },
+    {
+      "id": "e2738fd0",
+      "title": "Official: Dirt Store Triumph announce 2027 rider line-up",
+      "link": "https://gatedrop.com/official-dirt-store-triumph-announce-2027-rider-line-up/",
+      "pubDate": "2026-11-18 18:02:42",
+      "pubDateISO": "2026-11-18T18:02:42+00:00",
+      "aiSummary": "Dirt Store Triumph Racing is pleased to announce its eight-rider roster for the 2027 season, strengthening its 450cc programme with the signing of reigning MXGB MX1 Champion Conrad Mewse and welcoming one of Britain’s brightest young talents, Jamie Keith. Ben Watson, Tommy Searle, Dylan Woodcock, Eddie Jay Wade, Rich Ely and Sam Davies all return...",
+      "source": "GateDrop MXGP",
+      "category": "MXGP",
+      "image": "https://gatedrop.com/wp-content/uploads/DirtStore-150x150.png"
+    },
+    {
+      "id": "38b3ed3e",
+      "title": "F1 to showcase driver health data in new partnership",
+      "link": "https://www.autosport.com/f1/news/f1-announces-new-partnership-with-whoop/10875346/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
+      "pubDate": "2026-11-18 17:39:21",
+      "pubDateISO": "2026-11-18T17:39:21+00:00",
+      "aiSummary": "Formula 1 has signed a deal with wearables company WHOOP which will see a number of drivers wear the company's health trackers and showcase their data on the TV broadcasts in 2027. WHOOP will become an Official Partner of F1 in a deal that will see an increasing number of drivers start wearing tech bracelets provided by the company while inside the car. Per F1's plans, that data such as heart...",
+      "source": "Autosport F1",
+      "category": "SBK",
+      "image": "https://cdn-1.motorsport.com/images/amp/2y7Q83g6/s6/ahmed-domenicali.jpg"
+    },
+    {
+      "id": "232b69d9",
+      "title": "F1 to showcase driver health data as it partners with WHOOP",
+      "link": "https://www.motorsport.com/f1/news/f1-to-showcase-driver-health-data-as-it-partners-with-whoop/10875341/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-18 17:37:23",
+      "pubDateISO": "2026-11-18T17:37:23+00:00",
+      "aiSummary": "La Formula 1 ha firmato un accordo con l'azienda di dispositivi indossabili WHOOP, in base al quale alcuni piloti indosseranno i tracker per la salute dell'azienda e mostreranno i loro dati nelle trasmissioni televisive nel 2027. WHOOP diventerà un partner ufficiale della F1 con un accordo che vedrà un numero crescente di piloti iniziare a indossare i braccialetti tecnologici forniti dall'azienda mentre sono all'interno della vettura. Secondo i piani della F1, dati come quelli relativi al battito cardiaco...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-6.motorsport.com/images/amp/2y7Q83g6/s6/ahmed-domenicali.jpg"
+    },
+    {
+      "id": "2079c466",
+      "title": "How Marc Marquez could edge closer to 28-year-old MotoGP record in Portugal",
+      "link": "https://www.crash.net/motogp/news/1110175/1/how-marc-marquez-could-edge-closer-28-year-old-motogp-record-portugal",
+      "pubDate": "2026-11-18 16:51:57",
+      "pubDateISO": "2026-11-18T16:51:57+00:00",
+      "aiSummary": "Marc Marquez could move nearer to yet another MotoGP record at the Portuguese Grand Prix.",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361389_hires.jpg?width=1200"
+    },
+    {
+      "id": "57fd6c09",
+      "title": "Five things to watch out for at the F1 Las Vegas GP",
+      "link": "https://www.motorsport.com/f1/news/five-things-to-watch-out-for-at-the-f1-las-vegas-gp/10875316/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-18 16:30:40",
+      "pubDateISO": "2026-11-18T16:30:40+00:00",
+      "aiSummary": "La Formula 1 dà il via al suo ultimo trittico della stagione 2026 con il Gran Premio di Las Vegas di questo fine settimana. La sede americana ospita la 21ª gara del calendario di 23 appuntamenti, con i Gran Premi del Qatar e di Abu Dhabi che seguiranno quello di Las Vegas e concluderanno l'anno. Entrambi i titoli sono già stati assegnati, con Kimi Antonelli che si è laureato campione piloti e la Mercedes che ha conquistato il titolo costruttori, ma ciò... Continua a leggere",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-1.motorsport.com/images/amp/6DGq1eGY/s6/lando-norris-mclaren-george-ru.jpg"
+    },
+    {
+      "id": "97c91912",
+      "title": "“Maybe I become an idiot”: Pedro Acosta’s honest assessment of his dual personalities",
+      "link": "https://www.crash.net/motogp/news/1110174/1/maybe-i-become-idiot-pedro-acostas-honest-assessment-his-dual-personalities",
+      "pubDate": "2026-11-18 16:27:57",
+      "pubDateISO": "2026-11-18T16:27:57+00:00",
+      "aiSummary": "Pedro Acosta admits that while he’s “really chill” away from racing, but feels his “strong character” can rub some people the wrong way.",
+      "source": "Crash MotoGP",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357327_hires.jpg?width=1200"
+    },
+    {
+      "id": "ec5eaa34",
+      "title": "Why results don’t do justice to Genesis’ “rocketship” pace in WEC",
+      "link": "https://www.motorsport.com/wec/news/why-results-dont-do-justice-to-genesis-rocketship-pace-in-wec/10875269/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WEC&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-18 15:56:46",
+      "pubDateISO": "2026-11-18T15:56:46+00:00",
+      "aiSummary": "On paper, Genesis’ maiden Hypercar campaign in the World Endurance Championship was rather unremarkable. The #17 GMR-001 finished inside the top 10 on just three occasions, securing a best finish of seventh in Spa and Austin, while the sister car failed to break into the points all year. Even team principal Cyril Abiteboul admitted to some frustration about a lack of results across the ......",
+      "source": "Motorsport.com WEC",
+      "category": "SBK",
+      "image": "https://cdn-1.motorsport.com/images/amp/0mXyleq6/s6/19-genesis-magma-racing-genesi.jpg"
+    },
+    {
+      "id": "148f83fa",
+      "title": "How a bike change for Scott Redding’s 2027 BSB season could have WorldSBK implications",
+      "link": "https://www.crash.net/bsb/news/1110173/1/how-bike-change-scott-reddings-2027-bsb-season-could-have-worldsbk-implications",
+      "pubDate": "2026-11-18 15:34:31",
+      "pubDateISO": "2026-11-18T15:34:31+00:00",
+      "aiSummary": "Scott Redding could be about to make a bike change for BSB 2027 with potential WorldSBK implications.",
+      "source": "Crash WSBK",
+      "category": "SBK",
+      "image": "https://www.crash.net/sites/default/files/2026-09/redding-2-assen-26.jpg?width=1200"
+    },
+    {
+      "id": "9f87ac99",
+      "title": "Toto Wolff addresses F1 champion Kimi Antonelli salary claims",
+      "link": "https://www.crash.net/f1/news/1110172/1/toto-wolff-addresses-f1-champion-kimi-antonelli-salary-claims",
+      "pubDate": "2026-11-18 15:33:30",
+      "pubDateISO": "2026-11-18T15:33:30+00:00",
+      "aiSummary": "Toto Wolff has commented on Kimi Antonelli’s salary",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1450415_hires_0.jpg?width=1200"
+    },
+    {
+      "id": "901ee10a",
+      "title": "How to Watch 2026 Paris Supercross",
+      "link": "https://www.vurbmoto.com/how-to-watch-2026-paris-supercross/",
+      "pubDate": "2026-11-18 15:12:23",
+      "pubDateISO": "2026-11-18T15:12:23+00:00",
+      "aiSummary": "Paris Supercross returns this Saturday and Sunday at Paris La Défense Arena and some big names are in action. Defending Monster Energy AMA Supercross champion Ken Roczen headlines the field as he continues preparations for his title defense in 2027. Roczen enters the weekend with plenty of momentum, coming off two wins in the Australian […] The post How to Watch 2026 Paris Supercross appeared...",
+      "source": "Vurbmoto MX",
+      "category": "SBK",
+      "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/2026-paris-sx-streaming-guide.webp"
+    },
+    {
+      "id": "9005dba3",
+      "title": "Marc Marquez previews Portugal MotoGP title shot at track of ‘not much luck so far’",
+      "link": "https://www.crash.net/motogp/news/1110170/1/marc-marquez-previews-portugal-motogp-title-shot-track-not-much-luck-so-far",
+      "pubDate": "2026-11-18 14:23:36",
+      "pubDateISO": "2026-11-18T14:23:36+00:00",
+      "aiSummary": "Marc Marquez could win the MotoGP title this weekend, although he admits Portimao hasn’t given him “much luck” in the past.",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362546_hires.jpg?width=1200"
+    },
+    {
+      "id": "6b994d7a",
+      "title": "The factors behind the abortive 2030 F1 rules announcement",
+      "link": "https://www.autosport.com/f1/news/the-factors-behind-the-abortive-f1-2030-rules-announcement/10875290/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
+      "pubDate": "2026-11-18 14:08:08",
+      "pubDateISO": "2026-11-18T14:08:08+00:00",
+      "aiSummary": "Famously, when the papal conclave gathers to elect a new pope, a successful vote is communicated to the huddled masses via smoke from the Sistine Chapel chimney as the chemically impregnated ballot papers are burned: white smoke signifies a decision, black means yet another round of voting. The practice derives from the 13th century, when the cardinals took three years to debate a successor to...",
+      "source": "Autosport F1",
+      "category": "SBK",
+      "image": "https://cdn-6.motorsport.com/images/amp/0rVx13O0/s6/stefano-domenicali-mohammed-be-2.jpg"
+    },
+    {
+      "id": "a12081f4",
+      "title": "Future imperfect: What's behind the abortive 2030 F1 rules announcement?",
+      "link": "https://www.motorsport.com/f1/news/future-imperfect-whats-behind-the-abortive-2030-f1-rules-announcement/10875283/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-18 14:04:19",
+      "pubDateISO": "2026-11-18T14:04:19+00:00",
+      "aiSummary": "È noto che, quando il conclave papale si riunisce per eleggere un nuovo papa, l'esito positivo della votazione viene comunicato alle folle ammassate tramite il fumo che esce dal comignolo della Cappella Sistina, mentre vengono bruciate le schede elettorali impregnate di sostanze chimiche: il fumo bianco indica che è stata presa una decisione, quello nero che è necessario un ulteriore turno di votazione. La pratica risale al XIII secolo, quando i cardinali impiegarono tre anni per discutere di un successore di...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-6.motorsport.com/images/amp/0o5AkOxY/s6/gettyimages-2209898755.jpg"
+    },
+    {
+      "id": "3ff2bcab",
+      "title": "\"We haven't taken any steps backwards\" – McLaren boss explains 2026",
+      "link": "https://www.motorsport.com/f1/news/we-havent-taken-any-steps-backwards-mclaren-boss-explains-2026/10875219/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-18 13:30:02",
+      "pubDateISO": "2026-11-18T13:30:02+00:00",
+      "aiSummary": "La stagione 2026 di Formula 1 della McLaren è stata caratterizzata da un tentativo di recupero che non è mai andato del tutto a buon fine. Tuttavia, il team principal Andrea Stella insiste sul fatto che le ragioni di ciò sono ben chiare, perciò può essere ottimista per il 2027: \"Siamo in una situazione completamente diversa rispetto all'inizio della stagione\", ha dichiarato a Motorsport.com. Ogni volta che sembrava aver raggiunto i suoi rivali, la McLaren si è trovata...",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-1.motorsport.com/images/amp/6grBblnY/s6/andrea-stella-mclaren-2.jpg"
+    },
+    {
+      "id": "68b8c576",
+      "title": "What McLaren has learned from a tough 2026 as it aims for a return to glory in 2027",
+      "link": "https://www.autosport.com/f1/news/what-mclaren-has-learned-from-a-tough-f1-2026/10875268/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
+      "pubDate": "2026-11-18 13:30:02",
+      "pubDateISO": "2026-11-18T13:30:02+00:00",
+      "aiSummary": "McLaren's 2026 Formula 1 season has been characterised by a recovery effort that never quite came to fruition. Yet, team principal Andrea Stella insists the reasons for this are well understood, so he can be optimistic about 2027: \"We are in a completely different place compared to the start of the season,\" he told Autosport. Whenever it seemed to have caught its rivals, McLaren found itself...",
+      "source": "Autosport F1",
+      "category": "SBK",
+      "image": "https://cdn-4.motorsport.com/images/amp/6VyKR1lY/s6/andrea-stella-mclaren-2.jpg"
+    },
+    {
+      "id": "fc5c83fd",
+      "title": "Pedro Acosta: It is \"too early\" to think about winning 2027 MotoGP title",
+      "link": "https://www.motorsport.com/motogp/news/pedro-acosta-too-early-title-2027-ducati/10874911/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-18 13:00:03",
+      "pubDateISO": "2026-11-18T13:00:03+00:00",
+      "aiSummary": "Pedro Acosta says it is \"too early\" to think about the 2027 MotoGP title, despite admitting after his maiden grand prix victory that he \"needs\" to achieve \"much more\" in the championship. Acosta will depart KTM at the end of the 2026 season, having achieved his target of bringing the Mattighofen-based manufacturer back to the top step of the podium. That result on home soil at the Austrian ......",
+      "source": "Motorsport.com MotoGP",
+      "category": "SBK",
+      "image": "https://cdn-7.motorsport.com/images/amp/6b8ZowL2/s6/pedro-acosta-red-bull-ktm-fact.jpg"
+    },
+    {
+      "id": "ed30fb85",
+      "title": "Yamaha returns for Portugal MotoGP as Qatar penalty fate still unclear",
+      "link": "https://www.crash.net/motogp/news/1110169/1/yamaha-returns-portugal-motogp-qatar-penalty-fate-still-unclear",
+      "pubDate": "2026-11-18 12:50:56",
+      "pubDateISO": "2026-11-18T12:50:56+00:00",
+      "aiSummary": "Yamaha has issued its Portugal preview amid uncertainty over a penalty for missing Qatar",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1359721_hires.jpg?width=1200"
+    },
+    {
+      "id": "4197e920",
+      "title": "Speed, trust, controlled aggression - What really led to Liam Lawson's career-saving F1 2026",
+      "link": "https://www.motorsport.com/f1/news/speed-trust-controlled-aggression-what-really-led-to-liam-lawsons-career-saving-f1-2026/10875262/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-18 12:22:31",
+      "pubDateISO": "2026-11-18T12:22:31+00:00",
+      "aiSummary": "Il miglioramento delle prestazioni di Liam Lawson lo ha reso troppo bravo perché la Racing Bulls potesse ignorarlo per la stagione di Formula 1 del 2027. Ma, come sempre, dietro questo miglioramento delle prestazioni c'è più di un solo fattore. È stato solo la scorsa settimana che è stato finalmente confermato che il 24enne rimarrà con il team satellite della Red Bull per la prossima stagione, respingendo la sfida del pilota junior Nikola Tsolov, che attualmente ......",
+      "source": "Motorsport.com F1",
+      "category": "SBK",
+      "image": "https://cdn-9.motorsport.com/images/amp/6O7zMmO6/s6/liam-lawson-racing-bulls.jpg"
+    },
+    {
+      "id": "6435916a",
+      "title": "What’s behind bizarre deleted F1 V8 announcement?",
+      "link": "https://www.crash.net/f1/news/1110167/1/whats-behind-bizarre-deleted-f1-v8-announcement",
+      "pubDate": "2026-11-18 12:05:33",
+      "pubDateISO": "2026-11-18T12:05:33+00:00",
+      "aiSummary": "F1’s V8 future was revealed and then deleted on Tuesday",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453426_hires.jpg?width=1200"
+    },
+    {
+      "id": "815a336e",
+      "title": "Honda calls up Jake Dixon again as Joan Mir withdraws from Portuguese GP",
+      "link": "https://www.motorsport.com/motogp/news/honda-calls-up-jake-dixon-again-as-joan-mir-withdraws-from-portuguese-gp/10875250/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-18 11:37:28",
+      "pubDateISO": "2026-11-18T11:37:28+00:00",
+      "aiSummary": "Jake Dixon will make his second consecutive appearance of the 2026 MotoGP season at this weekend’s Portuguese Grand Prix, with illness continuing to sideline factory Honda rider Joan Mir. Dixon has been called in as a substitute by the factory HRC team following an impressive performance at the Qatar Grand Prix, where he finished inside the points in 14th and compared well against other ......",
+      "source": "Motorsport.com MotoGP",
+      "category": "Moto2",
+      "image": "https://cdn-8.motorsport.com/images/amp/01QNpeQ0/s6/jake-dixon-honda-hrc.jpg"
+    },
+    {
+      "id": "e54e22e6",
+      "title": "Joan Mir to miss Portugal MotoGP as Honda names replacement",
+      "link": "https://www.crash.net/motogp/news/1110165/1/joan-mir-miss-portugal-motogp-honda-names-replacement",
+      "pubDate": "2026-11-18 11:08:22",
+      "pubDateISO": "2026-11-18T11:08:22+00:00",
+      "aiSummary": "Joan Mir will miss this weekend’s Portuguese Grand Prix",
+      "source": "Crash MotoGP",
+      "category": "MotoGP",
+      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1341608_hires.jpg?width=1200"
+    },
+    {
+      "id": "12ac0dd6",
+      "title": "Ian Harrison on Chase Sexton meeting and Sacha Coenen riding Supercross",
+      "link": "https://gatedrop.com/ian-harrison-on-chase-sexton-meeting-and-sacha-coenen-riding-supercross/",
+      "pubDate": "2026-11-18 11:00:27",
+      "pubDateISO": "2026-11-18T11:00:27+00:00",
+      "aiSummary": "In a brilliant interview with Vital MX’s Michael Lindsay, Ian Harrison admitted they did meet with Chase Sexton this off-season and while no deal seemingly materialised it appears the relationship has been repaired after things ended badly with Sexton and KTM. Ian said: “Yes, we did talk to Chase. He actually came over to Roger’s...",
+      "source": "GateDrop MXGP",
+      "category": "MXGP",
+      "image": "https://gatedrop.com/wp-content/uploads/SACHA-COENEN-02-RED-BULL-KTM-FACTORY-RACING-150x150.jpg"
+    },
+    {
+      "id": "41376077",
+      "title": "Iker Lecuona: ‘I have to negotiate with my wife so she won’t kick me out of the house’",
+      "link": "https://www.motorsport.com/motogp/news/iker-lecuona-i-have-to-negotiate-with-my-wife-so-she-wont-kick-me-out-of-the-house/10875237/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
+      "pubDate": "2026-11-18 10:51:38",
+      "pubDateISO": "2026-11-18T10:51:38+00:00",
+      "aiSummary": "Iker Lecuona will replace injured Francesco Bagnaia in the factory Ducati MotoGP team at Portimao, where the Portuguese GP takes place this weekend. It will be the 27-year-old’s sixth MotoGP appearance this year, while he has been competing in WorldSBK with the Bologna-based manufacturer for the past two seasons. After three years without setting foot in the MotoGP paddock, Lecuona ... Keep...",
+      "source": "Motorsport.com MotoGP",
+      "category": "SBK",
+      "image": "https://cdn-3.motorsport.com/images/amp/27NoBem0/s6/iker-lecuona-gresini-racing-2.jpg"
+    },
+    {
+      "id": "7b5a1d47",
+      "title": "Max Verstappen’s blunt response on Kimi Antonelli F1 motivation",
+      "link": "https://www.crash.net/f1/news/1110164/1/max-verstappens-blunt-response-kimi-antonelli-f1-motivation",
+      "pubDate": "2026-11-18 10:48:46",
+      "pubDateISO": "2026-11-18T10:48:46+00:00",
+      "aiSummary": "Max Verstappen says he doesn’t need Kimi Antonelli's success to be motivated",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1452327_hires.jpg?width=1200"
+    },
+    {
+      "id": "fe0464cc",
+      "title": "Featured Comment: F1 fans underestimate importance of “getting to a top car” | Brief",
+      "link": "https://www.racefans.net/2026/11/18/featured-comment-f1-fans-underestimate-importance-of-getting-to-a-top-car/",
+      "pubDate": "2026-11-18 10:21:34",
+      "pubDateISO": "2026-11-18T10:21:34+00:00",
+      "aiSummary": "\"Half of the grid\" could be champions in the right car",
+      "source": "RaceFans F1",
+      "category": "F1",
+      "image": ""
+    },
+    {
+      "id": "2307d8d9",
+      "title": "Why McLaren’s F1 title defence failed in 2026",
+      "link": "https://www.crash.net/f1/news/1110162/1/why-mclarens-f1-title-defence-failed-2026",
+      "pubDate": "2026-11-18 10:04:14",
+      "pubDateISO": "2026-11-18T10:04:14+00:00",
+      "aiSummary": "Zak Brown has explained why 2026 has been so tough for McLaren",
+      "source": "Crash F1",
+      "category": "F1",
+      "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1439737_hires-1.jpg?width=1200"
+    },
+    {
+      "id": "05bb0e8b",
       "title": "Toprak Razgatlioglu to miss vital 850cc MotoGP test as injury persists",
       "link": "https://www.crash.net/motogp/news/1110161/1/toprak-razgatlioglu-miss-vital-850cc-motogp-test-injury-persists",
       "pubDate": "2026-11-18 09:40:00",
@@ -14,7 +311,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1352484_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "19492e95",
+      "id": "0eefde52",
       "title": "Oscar Piastri set for huge Las Vegas GP grid penalty",
       "link": "https://www.crash.net/f1/news/1110160/1/oscar-piastri-set-huge-las-vegas-gp-grid-penalty",
       "pubDate": "2026-11-18 09:31:09",
@@ -25,7 +322,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1450906_hires.jpg?width=1200"
     },
     {
-      "id": "7bc3e608",
+      "id": "78595ac9",
       "title": "The Antonelli you don't know: Daily life with F1's newest champion",
       "link": "https://www.autosport.com/f1/news/the-antonelli-you-dont-know-daily-life-with-f1s-newest-champion/10875217/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-11-18 09:20:55",
@@ -33,10 +330,10 @@
       "aiSummary": "There is one thing that physiotherapist Sergi Avila took a little while to understand. When Kimi Antonelli finally found himself with a free weekend, after weeks being spent between circuits, airports and training, the most logical choice would have been to stay at home: sleep a few extra hours, meet friends and switch off. Antonelli, instead, got in the car and went to a race track - perhaps...",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/YN7vl3m6/s6/andrea-kimi-antonelli-mercedes-3.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/YN7vl3m6/s6/andrea-kimi-antonelli-mercedes-3.jpg"
     },
     {
-      "id": "cd42504c",
+      "id": "cf15c674",
       "title": "Confirmed: A new pre-season race at Preston Docks announced for February",
       "link": "https://gatedrop.com/confirmed-a-new-pre-season-race-at-preston-docks-announced-for-february/",
       "pubDate": "2026-11-18 09:16:23",
@@ -47,7 +344,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Preston-Docks-e1794993276968-150x150.jpg"
     },
     {
-      "id": "b85276a4",
+      "id": "ee6edfa4",
       "title": "The Kimi Antonelli you don't know, told by those closest to him",
       "link": "https://www.motorsport.com/f1/news/the-kimi-antonelli-you-dont-know-told-by-those-closest-to-him/10875085/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-18 09:14:20",
@@ -55,10 +352,10 @@
       "aiSummary": "C'è una cosa che il fisioterapista Sergi Avila ha impiegato un po' di tempo a capire. Quando Kimi Antonelli si è finalmente ritrovato con un weekend libero, dopo settimane trascorse tra circuiti, aeroporti e allenamenti, la scelta più logica sarebbe stata quella di restare a casa: dormire qualche ora in più, incontrare gli amici e staccare la spina. Antonelli, invece, è salito in macchina ed è andato in un circuito automobilistico - forse...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/YWKAl9kY/s6/andrea-kimi-antonelli-mercedes-3.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/YWKAl9kY/s6/andrea-kimi-antonelli-mercedes-3.jpg"
     },
     {
-      "id": "2c5720f9",
+      "id": "ce7235e6",
       "title": "Lucas Coenen unlikely to be racing Anaheim one according to Ian Harrison",
       "link": "https://gatedrop.com/lucas-coenen-unlikely-to-be-racing-anaheim-one-according-to-ian-harrison/",
       "pubDate": "2026-11-18 09:02:20",
@@ -69,7 +366,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Screenshot_20261118_090117_Instagram-150x150.jpg"
     },
     {
-      "id": "e17c2075",
+      "id": "c4baf7be",
       "title": "RUMOUR: Jekabs Kubulins set to sign with Motovation Motosport Husqvarna for 2027?",
       "link": "https://gatedrop.com/rumour-jekabs-kubulins-set-to-sign-with-motovation-motosport-husqvarna-for-2027/",
       "pubDate": "2026-11-18 08:56:45",
@@ -80,7 +377,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Kubulins_Motovation-150x150.png"
     },
     {
-      "id": "1ce807ff",
+      "id": "62ab3618",
       "title": "Piastri to receive 10-place grid drop at Las Vegas GP",
       "link": "https://www.autosport.com/f1/news/piastri-to-receive-grid-drop-at-las-vegas-gp/10875205/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-11-18 08:14:39",
@@ -91,7 +388,7 @@
       "image": "https://cdn-5.motorsport.com/images/amp/YXypRDx6/s6/oscar-piastri-mclaren-3.jpg"
     },
     {
-      "id": "7762364f",
+      "id": "68caee05",
       "title": "Lewis Hamilton calls out ex-F1 drivers for “talking smack” about young stars",
       "link": "https://www.crash.net/f1/news/1110158/1/lewis-hamilton-calls-out-ex-f1-drivers-talking-smack-about-young-stars",
       "pubDate": "2026-11-18 08:00:00",
@@ -102,7 +399,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1452330_hires.jpg?width=1200"
     },
     {
-      "id": "b5f345cc",
+      "id": "eaaf8f00",
       "title": "Mercedes’ technical director explains how Antonelli leapt ahead of Russell in 2026 | Formula 1",
       "link": "https://www.racefans.net/2026/11/18/mercedes-technical-director-explains-how-antonelli-leapt-ahead-of-russell-in-second-season/",
       "pubDate": "2026-11-18 07:15:48",
@@ -113,7 +410,7 @@
       "image": ""
     },
     {
-      "id": "7c310954",
+      "id": "c463d9e5",
       "title": "2026 MotoGP Portuguese Grand Prix – How to watch, session times & more",
       "link": "https://www.motorsport.com/motogp/news/2026-motogp-portuguese-grand-prix-how-to-watch-session-times-more/10874958/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-11-18 07:00:04",
@@ -121,43 +418,43 @@
       "aiSummary": "Marc Marquez can wrap up the 2026 MotoGP title as early as the sprint race for the Portuguese Grand Prix. The factory Ducati rider only needs to outscore Aprilia's Jorge Martin by two points to secure his 10th world championship - and his eighth title in the premier class. A victory on Saturday would be enough to guarantee him the crown. Marquez's team-mate Francesco Bagnaia will skip the ......",
       "source": "Motorsport.com MotoGP",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/YN7w3yb6/s6/marco-bezzecchi-aprilia-racing.jpg"
+      "image": "https://cdn-9.motorsport.com/images/amp/YN7w3yb6/s6/marco-bezzecchi-aprilia-racing.jpg"
     },
     {
-      "id": "f8fc1681",
+      "id": "30e13a98",
       "title": "Toto Wolff reveals heartwarming memory of a teenage Kimi Antonelli living at his house",
       "link": "https://www.motorsport.com/f1/news/toto-wolff-reveals-heartwarming-memory-of-a-teenage-kimi-antonelli-living-at-his-house/10874978/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-18 01:00:03",
       "pubDateISO": "2026-11-18T01:00:03+00:00",
-      "aiSummary": "Il paddock della Formula 1 è notoriamente spietato, ma il team principal della Mercedes, Toto Wolff, gestisce il suo vivaio di piloti con un approccio decisamente paterno. Dopo aver guidato Kimi Antonelli dalle categorie giovanili del karting fino al suo storico campionato del mondo del 2026, Wolff ha recentemente rivelato quanto il ventenne sia profondamente integrato nella sua vera famiglia. In una recente intervista esclusiva...",
+      "aiSummary": "Il paddock della Formula 1 è notoriamente spietato, ma il team principal della Mercedes, Toto Wolff, gestisce il suo vivaio di piloti con un approccio decisamente paterno. Dopo aver guidato Kimi Antonelli dalle categorie minori del karting fino al suo storico campionato del mondo del 2026, Wolff ha recentemente rivelato quanto il ventenne sia profondamente integrato nella sua vera famiglia. In una recente intervista esclusiva...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/2jEAk7g0/s6/motorsport-com-graphics-4-2.jpg"
+      "image": "https://cdn-1.motorsport.com/images/amp/2jEAk7g0/s6/motorsport-com-graphics-4-2.jpg"
     },
     {
-      "id": "25d2e681",
+      "id": "84a9b729",
       "title": "Oscar Piastri set for grid penalty at F1 Las Vegas GP",
       "link": "https://www.motorsport.com/f1/news/oscar-piastri-set-for-grid-penalty-at-f1-las-vegas-gp/10875180/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-18 00:21:42",
       "pubDateISO": "2026-11-18T00:21:42+00:00",
-      "aiSummary": "Il pilota della McLaren Oscar Piastri dovrà scontare una penalità di 10 posizioni sulla griglia di partenza del GP di Las Vegas di Formula 1 per aver superato il numero di motori consentiti per la stagione. Piastri aveva già raggiunto il limite di quattro motori a combustione interna per l'anno, ma avrà bisogno di un quinto motore Mercedes V6 per concludere la stagione 2026. Poiché è la prima volta che supera il limite di motori a combustione interna consentiti, l'australiano verrà penalizzato di 10 posizioni sulla...",
+      "aiSummary": "Il pilota della McLaren Oscar Piastri dovrà scontare una penalità di 10 posizioni sulla griglia di partenza del GP di Las Vegas di Formula 1 per aver superato il numero di motori consentiti per la stagione. Piastri aveva già raggiunto il limite di quattro motori a combustione interna per l'anno, ma avrà bisogno di un quinto motore Mercedes V6 per concludere la stagione 2026. Poiché è la prima volta che supera il limite di motori a combustione interna consentiti, l'australiano sarà penalizzato di 10 posizioni sulla...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/YpbAXoM0/s6/oscar-piastri-mclaren.jpg"
+      "image": "https://cdn-4.motorsport.com/images/amp/YpbAXoM0/s6/oscar-piastri-mclaren.jpg"
     },
     {
-      "id": "3bd36aff",
+      "id": "fb7060c2",
       "title": "Toto Wolff details subdued Mercedes F1 celebrations after securing 2026 double",
       "link": "https://www.motorsport.com/f1/news/toto-wolff-celebrated-mercedes-title-with-a-vodka-shot-on-the-plane-with-hamilton-and-russell/10874816/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-18 00:00:22",
       "pubDateISO": "2026-11-18T00:00:22+00:00",
-      "aiSummary": "La Mercedes ha ufficialmente completato il suo ritorno ai vertici della Formula 1 nel caotico Gran Premio di San Paolo del 2026, aggiudicandosi con successo il campionato del mondo costruttori una settimana dopo che Kimi Antonelli si era assicurato il titolo piloti. Ma per il team principal e CEO Toto Wolff, la storica pietra miliare non è stata festeggiata con una scatenata festa in una discoteca in Brasile. In una recente intervista con il quotidiano tedesco...",
+      "aiSummary": "La Mercedes ha ufficialmente completato il suo ritorno ai vertici della Formula 1 nel caotico Gran Premio di San Paolo 2026, aggiudicandosi con successo il campionato del mondo costruttori una settimana dopo che Kimi Antonelli si era assicurato il titolo piloti. Ma per il team principal e CEO Toto Wolff, la storica pietra miliare non è stata celebrata con una festa scatenata in un locale notturno in Brasile. In una recente intervista con il quotidiano tedesco...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/0R7By5O2/s6/motorsport-com-graphics-3-2.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/0R7By5O2/s6/motorsport-com-graphics-3-2.jpg"
     },
     {
-      "id": "4bb70bd0",
+      "id": "8aafb32c",
       "title": "Toto Wolff explains why George Russell won't get Mercedes’ new turbo in Las Vegas",
       "link": "https://www.motorsport.com/f1/news/toto-wolff-explains-why-george-russell-is-being-denied-mercedes-new-turbo-in-las-vegas/10875150/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-17 23:30:27",
@@ -165,10 +462,10 @@
       "aiSummary": "Dopo aver ufficialmente concluso in Brasile sia il campionato mondiale costruttori che quello piloti del 2026, la Mercedes arriva al Gran Premio di Las Vegas con un duplice obiettivo: testare le componenti in fase di sviluppo per il 2027 e assicurare a George Russell il secondo posto nella classifica piloti. Per raggiungere il primo obiettivo, le Frecce d'argento stanno finalmente introducendo una nuova specifica del turbo sviluppata nell'ambito della Formula...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-6.motorsport.com/images/amp/2y7Q8Zg6/s6/motorsport-com-graphics-1-2.jpg"
+      "image": "https://cdn-3.motorsport.com/images/amp/2y7Q8Zg6/s6/motorsport-com-graphics-1-2.jpg"
     },
     {
-      "id": "2a5f7266",
+      "id": "e4d0ea02",
       "title": "Video: 1992 and 1993 250 GP Payerne, Switzerland!",
       "link": "https://gatedrop.com/video-1992-and-1993-250-gp-payerne-switzerland/",
       "pubDate": "2026-11-17 22:11:18",
@@ -179,7 +476,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Screenshot_20261117_220909_YouTube-150x150.jpg"
     },
     {
-      "id": "4a70e579",
+      "id": "b6559473",
       "title": "Social Media: FIA president indicates agreement reached on next power unit formula | Brief",
       "link": "https://www.racefans.net/2026/11/17/social-media-fia-president-indicates-agreement-reached-on-next-power-unit-formula/",
       "pubDate": "2026-11-17 20:37:09",
@@ -190,7 +487,7 @@
       "image": ""
     },
     {
-      "id": "2b6debb3",
+      "id": "0d02b0e5",
       "title": "Confirmed: Dani Heitink signs with Van Venrooy KTM for 2027",
       "link": "https://gatedrop.com/confirmed-dani-heitink-signs-with-van-venrooy-ktm-for-2027/",
       "pubDate": "2026-11-17 20:15:11",
@@ -201,7 +498,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/Heitink-150x150.jpg"
     },
     {
-      "id": "2a62f411",
+      "id": "ab6e9465",
       "title": "Video: KTM USA 2027 launch – Sacha Coenen doing Supercross",
       "link": "https://gatedrop.com/video-ktm-usa-2027-launch-sacha-coenen-doing-supercross/",
       "pubDate": "2026-11-17 20:12:29",
@@ -212,7 +509,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/SACHA-COENEN-RED-BULL-KTM-FACTORY-RACING-150x150.jpg"
     },
     {
-      "id": "89e9b515",
+      "id": "338eea6c",
       "title": "Red Bull KTM Announces 2027 SMX World Championship Roster",
       "link": "https://www.vurbmoto.com/red-bull-ktm-announces-2027-smx-world-championship-roster/",
       "pubDate": "2026-11-17 18:35:31",
@@ -223,7 +520,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/unnamed-2.jpg"
     },
     {
-      "id": "3e435176",
+      "id": "0a5511c6",
       "title": "Revealed: Red Bull KTM USA launch six rider line-up for 2027",
       "link": "https://gatedrop.com/revealed-red-bull-ktm-usa-launch-six-rider-line-up-for-2027/",
       "pubDate": "2026-11-17 18:14:34",
@@ -234,7 +531,7 @@
       "image": "https://gatedrop.com/wp-content/uploads/RED-BULL-KTM-FACTORY-RACING-SMX-2027-150x150.jpg"
     },
     {
-      "id": "712ba21d",
+      "id": "7fab2976",
       "title": "Valentino Rossi, Nicky Hayden and Toni Elias: The extraordinary 2006 Portuguese MotoGP",
       "link": "https://www.crash.net/motogp/news/168721/valentino-rossi-nicky-hayden-toni-elias-2006-portuguese-motogp",
       "pubDate": "2026-11-17 17:17:06",
@@ -245,29 +542,18 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_103396_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "abd50640",
-      "title": "Official: Valentin Kees stays with Kosak KTM for the 2027 season",
-      "link": "https://gatedrop.com/official-valentin-kees-stays-with-kosak-ktm-for-the-2027-season/",
-      "pubDate": "2026-11-17 17:04:26",
-      "pubDateISO": "2026-11-17T17:04:26+00:00",
-      "aiSummary": "Kosak KTM have confirmed that Valentin Kees will remain with the team for the 2027 season, continuing a partnership that dates back to 2018. The young German talent has been part of the Kosak KTM setup for several years and will once again represent the team next season. His main focus will be on the...",
-      "source": "GateDrop MXGP",
-      "category": "MXGP",
-      "image": "https://gatedrop.com/wp-content/uploads/Kees-scaled-e1794935010466-150x150.jpg"
-    },
-    {
-      "id": "13fad61a",
+      "id": "9fb764f2",
       "title": "“He’s beaten Alpine on his own” - Racing Bulls on why it kept Liam Lawson",
       "link": "https://www.motorsport.com/f1/news/alan-permane-liam-lawson-has-been-a-revelation-as-he-earned-2027-racing-bulls-f1-deal/10875104/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-17 17:02:37",
       "pubDateISO": "2026-11-17T17:02:37+00:00",
-      "aiSummary": "Alan Permane, direttore della scuderia Racing Bulls di Formula 1, afferma che il miglioramento delle prestazioni di Liam Lawson nel 2026 è stata una \"rivelazione\" e ha risposto alle insinuazioni su una divergenza di vedute all'interno della Red Bull. In un'intervista a tutto campo con Motorsport.com, Permane ha spiegato perché la decisione di scegliere tra l'attuale pilota Lawson e il pilota della Red Bull Junior Nikola Tsolov come compagno di squadra di Arvid Lindblad abbia richiesto così tanto tempo e perché sostenere Lawson non...",
+      "aiSummary": "Alan Permane, direttore della scuderia Racing Bulls di Formula 1, afferma che il miglioramento delle prestazioni di Liam Lawson nel 2026 è stata una \"rivelazione\" e ha risposto alle insinuazioni su una divergenza di vedute all'interno della Red Bull. In un'intervista a tutto campo con Motorsport.com, Permane ha spiegato perché la decisione tra l'attuale Lawson e il pilota della Red Bull Junior Nikola Tsolov come compagno di squadra di Arvid Lindblad abbia richiesto così tanto tempo e perché sostenere Lawson non...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/YXyKl5x6/s6/liam-lawson-racing-bulls.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/YXyKl5x6/s6/liam-lawson-racing-bulls.jpg"
     },
     {
-      "id": "83e1492e",
+      "id": "93864e78",
       "title": "Ai Ogura challenges ‘ice cold’ image, MotoGP “means everything”",
       "link": "https://www.crash.net/moto2/news/1110157/1/ai-ogura-challenges-ice-cold-image-insists-motogp-means-everything",
       "pubDate": "2026-11-17 15:48:54",
@@ -278,7 +564,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1360037_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "2db7dea7",
+      "id": "da55da04",
       "title": "Toto Wolff offers blunt response to Kimi Antonelli to Ferrari question",
       "link": "https://www.crash.net/f1/news/1110156/1/toto-wolff-offers-blunt-response-kimi-antonelli-ferrari-question",
       "pubDate": "2026-11-17 15:42:25",
@@ -289,7 +575,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1415432_hires.jpg?width=1200"
     },
     {
-      "id": "eea53015",
+      "id": "9b16348d",
       "title": "2026 Mini O’s Live Timing, Results & More All on Prospect",
       "link": "https://www.vurbmoto.com/2026-mini-os-live-timing-results-more-all-on-prospect/",
       "pubDate": "2026-11-17 14:59:22",
@@ -300,7 +586,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/MINIOSCOVER.jpg"
     },
     {
-      "id": "1ba6f2cc",
+      "id": "2ac22891",
       "title": "Toyota defends approach over GR GT3 after Stephane Ratel voiced concerns",
       "link": "https://www.motorsport.com/wec/news/toyota-defends-approach-over-gr-gt3-after-stephane-ratel-voices-concerns-/10874938/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WEC&utm_term=News&utm_content=www",
       "pubDate": "2026-11-17 14:57:41",
@@ -308,10 +594,10 @@
       "aiSummary": "Toyota insists its new GR GT3 “perfectly matches” the foundations on which GT3 racing is based, amid concerns raised by SRO founder Stephane Ratel about the future of the category. Earlier this summer, SRO owner Ratel issued a stark warning about the new breed of extreme vehicles set to enter the GT3 landscape in the coming years, claiming they were not being designed according to the ... Keep...",
       "source": "Motorsport.com WEC",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/0rVPkAG0/s6/toyota-gr-gt3.jpg"
+      "image": "https://cdn-6.motorsport.com/images/amp/0rVPkAG0/s6/toyota-gr-gt3.jpg"
     },
     {
-      "id": "02077627",
+      "id": "92721312",
       "title": "Why George Russell won’t get Mercedes F1 engine upgrade at Las Vegas GP",
       "link": "https://www.crash.net/f1/news/1110155/1/why-george-russell-wont-get-mercedes-f1-engine-upgrade-las-vegas-gp",
       "pubDate": "2026-11-17 14:29:22",
@@ -322,7 +608,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453187_hires.jpg?width=1200"
     },
     {
-      "id": "fdcb4ade",
+      "id": "d3840d2e",
       "title": "New Triumph Street Triple reveals likely Moto2 engine capacity change",
       "link": "https://www.crash.net/moto2/news/1110154/1/new-triumph-street-triple-reveals-likely-moto2-engine-capacity-change",
       "pubDate": "2026-11-17 14:11:54",
@@ -333,7 +619,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1357635_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "190d7ff5",
+      "id": "bc89452c",
       "title": "Lewis Hamilton announces huge new partnership ahead of Las Vegas GP",
       "link": "https://www.crash.net/f1/news/1110149/1/lewis-hamilton-announces-huge-new-partnership-ahead-las-vegas-gp",
       "pubDate": "2026-11-17 14:00:00",
@@ -344,7 +630,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1443666_hires.jpg?width=1200"
     },
     {
-      "id": "7eddb733",
+      "id": "0c595cbc",
       "title": "Honda explains why MotoGP's 850cc bikes aren't far off 1000cc pace",
       "link": "https://www.motorsport.com/motogp/news/honda-explains-why-motogps-850cc-bikes-arent-far-off-1000cc-pace/10874946/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-11-17 13:22:21",
@@ -355,7 +641,7 @@
       "image": "https://cdn-2.motorsport.com/images/amp/0R7wM9O2/s6/aleix-espargaro-honda-hrc.jpg"
     },
     {
-      "id": "5704d6f1",
+      "id": "edbe9203",
       "title": "Coenen Brothers Make Major Gear Switch Ahead of 2027 Season",
       "link": "https://www.vurbmoto.com/coenen-brothers-make-major-gear-switch-ahead-of-2027-season/",
       "pubDate": "2026-11-17 12:39:48",
@@ -366,7 +652,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/coenenbrothers-astars-deal.jpg"
     },
     {
-      "id": "5ea0e77d",
+      "id": "c0471651",
       "title": "David Alonso makes secret MotoGP debut?",
       "link": "https://www.crash.net/motogp/news/1110152/1/david-alonso-makes-secret-motogp-debut",
       "pubDate": "2026-11-17 12:36:54",
@@ -377,7 +663,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1353419_hires.jpg?width=1200"
     },
     {
-      "id": "b75612e5",
+      "id": "5cbd015e",
       "title": "Ferrari boss Fred Vasseur “overwhelmed” by job claims Bernie Ecclestone",
       "link": "https://www.crash.net/f1/news/1110151/1/ferrari-boss-fred-vasseur-overwhelmed-job-claims-bernie-ecclestone",
       "pubDate": "2026-11-17 12:30:10",
@@ -388,7 +674,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1450961_hires.jpg?width=1200"
     },
     {
-      "id": "f258c495",
+      "id": "4aae7e32",
       "title": "MotoGP legend Mick Doohan takes NSR500 for a spin - in shorts and t-shirt!",
       "link": "https://www.crash.net/motogp/news/1110150/1/watch-mick-doohan-takes-nsr500-spin-shorts-and-t-shirt",
       "pubDate": "2026-11-17 12:05:48",
@@ -399,18 +685,18 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1099504_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "9860c55c",
+      "id": "03a0591c",
       "title": "Toto Wolff is not afraid of losing Kimi Antonelli to Ferrari",
       "link": "https://www.motorsport.com/f1/news/toto-wolff-is-not-afraid-of-losing-kimi-antonelli-to-ferrari/10875044/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-17 11:45:10",
       "pubDateISO": "2026-11-17T11:45:10+00:00",
-      "aiSummary": "Il team principal della Mercedes, Toto Wolff, non teme \"neanche lontanamente\" che Kimi Antonelli possa passare alla Ferrari in Formula 1. Molti italiani vorrebbero vedere un giorno il nuovo campione del mondo in un abitacolo rosso, ma secondo Wolff ciò non accadrà nel prossimo futuro. \"Perché Kimi e la sua famiglia sono persone leali\", ha spiegato Wolff a Bild, precisando di essere \"convinto\" che Antonelli... Continua a leggere",
+      "aiSummary": "Il team principal della Mercedes, Toto Wolff, non teme \"assolutamente\" che Kimi Antonelli possa passare alla Ferrari in Formula 1. Molti italiani vorrebbero vedere un giorno il nuovo campione del mondo in un abitacolo rosso, ma secondo Wolff ciò non accadrà nel prossimo futuro. \"Perché Kimi e la sua famiglia sono persone leali\", ha spiegato Wolff a Bild, precisando di essere \"convinto\" che Antonelli... Continua a leggere",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/Y9lNjD72/s6/lewis-hamilton-ferrari-andrea-.jpg"
+      "image": "https://cdn-2.motorsport.com/images/amp/Y9lNjD72/s6/lewis-hamilton-ferrari-andrea-.jpg"
     },
     {
-      "id": "59d93bfd",
+      "id": "fe9bff5f",
       "title": "Trackhouse rider out to “change the story” at Portimao after Qatar MotoGP breakthrough",
       "link": "https://www.crash.net/motogp/news/1110148/1/trackhouse-rider-out-change-story-portimao-after-qatar-motogp-breakthrough",
       "pubDate": "2026-11-17 11:28:59",
@@ -421,7 +707,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362534_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "fa07479b",
+      "id": "c740a4fc",
       "title": "Lewis Hamilton ‘house-hunting in LA’ to spend more time with girlfriend Kim Kardashian",
       "link": "https://www.crash.net/f1/news/1110147/1/lewis-hamilton-house-hunting-la-spend-more-time-girlfriend-kim-kardashian",
       "pubDate": "2026-11-17 11:28:21",
@@ -432,7 +718,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1451164_hires.jpg?width=1200"
     },
     {
-      "id": "f3af84b2",
+      "id": "5af67bed",
       "title": "David Alonso tested Honda's MotoGP bike in a private test at Sepang",
       "link": "https://www.motorsport.com/motogp/news/david-alonso-tested-hondas-motogp-bike-in-a-private-test-at-sepang/10875029/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-11-17 11:04:53",
@@ -440,10 +726,10 @@
       "aiSummary": "LCR recruit David Alonso has ridden Honda's 2027 MotoGP bike, which he will make his premier-class debut with next season, at Sepang, Motorsport.com has learned. This means the talented Spanish rider, who competes in the world championship with a Colombian passport, will already be familiar with the bike when he takes part in the official pre-season test, taking place on 1 December in ... Keep...",
       "source": "Motorsport.com MotoGP",
       "category": "Moto3",
-      "image": "https://cdn-1.motorsport.com/images/amp/Y9lNWLP2/s6/david-alonso-aspar-2.jpg"
+      "image": "https://cdn-5.motorsport.com/images/amp/Y9lNWLP2/s6/david-alonso-aspar-2.jpg"
     },
     {
-      "id": "ba134228",
+      "id": "913da26d",
       "title": "Jorge Martin condition update for Portimao MotoGP as he faces huge task to stop Marc Marquez",
       "link": "https://www.crash.net/motogp/news/1110146/1/jorge-martin-condition-update-portimao-motogp-he-faces-huge-task-stop-marc",
       "pubDate": "2026-11-17 10:27:59",
@@ -454,7 +740,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361367_hires_1600x900_0.jpg?width=1200"
     },
     {
-      "id": "b865ea96",
+      "id": "c6f15e96",
       "title": "Ferrari reveals special Las Vegas GP look for Lewis Hamilton and Charles Leclerc",
       "link": "https://www.crash.net/f1/news/1110145/1/ferrari-reveals-special-las-vegas-gp-look-lewis-hamilton-and-charles-leclerc",
       "pubDate": "2026-11-17 10:18:35",
@@ -465,18 +751,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/1_1.png?width=1200"
     },
     {
-      "id": "807dd481",
-      "title": "Official: MXGP heading to Payerne in 2027",
-      "link": "https://gatedrop.com/official-mxgp-heading-to-payerne-in-2027/",
-      "pubDate": "2026-11-17 10:08:30",
-      "pubDateISO": "2026-11-17T10:08:30+00:00",
-      "aiSummary": "Infront Moto Racing, together with the FIM, is pleased to confirm the final Grand Prix of the 2027 FIM Motocross World Championship calendar. On 2-3 October, the MXGP of Payerne will close the season at the historic Swiss circuit in Combremont-le-Petit, returning to the World Championship for the first time since 1998 and bringing the...",
-      "source": "GateDrop MXGP",
-      "category": "MXGP",
-      "image": "https://gatedrop.com/wp-content/uploads/Payerne-150x150.png"
-    },
-    {
-      "id": "157d777f",
+      "id": "6913a129",
       "title": "Lewis Hamilton told to “think about quitting” F1 by Bernie Ecclestone",
       "link": "https://www.crash.net/f1/news/1110144/1/lewis-hamilton-told-think-about-quitting-f1-bernie-ecclestone",
       "pubDate": "2026-11-17 09:56:59",
@@ -487,7 +762,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/xpb_1444166_hires.jpg?width=1200"
     },
     {
-      "id": "dce9fad7",
+      "id": "cd2b2dd4",
       "title": "Spotlight: Alonso to enter Dakar in car Aston Martin designed for Call of Duty | Brief",
       "link": "https://www.racefans.net/2026/11/17/spotlight-alonso-to-enter-dakar-in-car-aston-martin-designed-for-call-of-duty/",
       "pubDate": "2026-11-17 09:16:48",
@@ -498,7 +773,7 @@
       "image": ""
     },
     {
-      "id": "85be56ad",
+      "id": "f9d1a5c3",
       "title": "Fernando Alonso to race in Dakar Rally for Aston Martin",
       "link": "https://www.crash.net/dakar/news/1110143/1/fernando-alonso-race-dakar-rally-aston-martin",
       "pubDate": "2026-11-17 09:14:19",
@@ -509,7 +784,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/skysports-fernando-alonso-aston-martin_7408358.jpg?width=1200"
     },
     {
-      "id": "8b419a7a",
+      "id": "a404f92e",
       "title": "Alex Marquez targets Portimao MotoGP comeback",
       "link": "https://www.crash.net/motogp/news/1110142/1/alex-marquez-targets-portimao-motogp-comeback",
       "pubDate": "2026-11-17 09:11:25",
@@ -520,7 +795,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1359669_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "85055616",
+      "id": "c5e87cbe",
       "title": "An early season finale? Five talking points for the 2026 Las Vegas Grand Prix | Formula 1",
       "link": "https://www.racefans.net/2026/11/17/an-early-season-finale-five-talking-points-for-the-2026-las-vegas-grand-prix/",
       "pubDate": "2026-11-17 09:07:11",
@@ -531,7 +806,7 @@
       "image": ""
     },
     {
-      "id": "20ab3f8f",
+      "id": "1232047f",
       "title": "Alonso, Loeb join Aston Martin for 2027 Dakar Rally",
       "link": "https://www.autosport.com/dakar/news/alonso-loeb-join-aston-martin-for-2027-dakar-rally/10875003/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-11-17 09:01:58",
@@ -539,21 +814,21 @@
       "aiSummary": "Two-time Formula 1 champion Fernando Alonso will headline Aston Martin’s factory entry into the Dakar Rally in 2027, joining Sebastien Loeb and Lucas Moraes as part of a star-studded line-up. Alonso will drive a Prodrive-built Aston Martin Dreadnought in the 49th edition of Dakar, which will take place in Portugal and Morocco from 9-23 January 2027 after being relocated from its original ......",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/6n7bvPO0/s6/fernando-alonso-aston-martin-3.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/6n7bvPO0/s6/fernando-alonso-aston-martin-3.jpg"
     },
     {
-      "id": "1c3922c3",
+      "id": "33d3efe2",
       "title": "Fernando Alonso to return to Dakar Rally with Aston Martin in 2027",
       "link": "https://www.motorsport.com/dakar/news/fernando-alonso-to-return-to-dakar-rally-with-aston-martin-in-2027/10874907/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-17 09:01:40",
       "pubDateISO": "2026-11-17T09:01:40+00:00",
-      "aiSummary": "Il due volte campione di Formula 1 Fernando Alonso sarà il pilota di punta della squadra ufficiale Aston Martin al Rally Dakar del 2027, affiancando Sébastien Loeb e Lucas Moraes in una formazione ricca di star. Alonso guiderà una Aston Martin Dreadnought costruita da Prodrive alla 49ª edizione della Dakar, che si svolgerà in Portogallo e Marocco dal 9 al 23 gennaio 2027, dopo essere stata spostata dalla sua sede originale ......",
+      "aiSummary": "Il due volte campione di Formula 1 Fernando Alonso sarà il pilota di punta della squadra ufficiale Aston Martin al Rally Dakar del 2027, unendosi a Sébastien Loeb e Lucas Moraes in una formazione ricca di star. Alonso guiderà una Aston Martin Dreadnought costruita da Prodrive alla 49ª edizione della Dakar, che si svolgerà in Portogallo e Marocco dal 9 al 23 gennaio 2027, dopo essere stata spostata dalla sua sede originale ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/63QaLLb2/s6/fernando-alonso-aston-martin-r-2.jpg"
+      "image": "https://cdn-9.motorsport.com/images/amp/63QaLLb2/s6/fernando-alonso-aston-martin-r-2.jpg"
     },
     {
-      "id": "d33fa0fe",
+      "id": "5adb4138",
       "title": "What time is the next F1 race? Las Vegas GP dates and full schedule",
       "link": "https://www.crash.net/f1/news/1110116/1/what-time-next-f1-race-las-vegas-gp-dates-and-full-schedule",
       "pubDate": "2026-11-17 08:59:00",
@@ -564,18 +839,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/si202511230187.jpg?width=1200"
     },
     {
-      "id": "1981e858",
-      "title": "EXCL: Cas Valk confirms he currently has no ride for 2027",
-      "link": "https://gatedrop.com/excl-cas-valk-confirms-he-currently-has-no-ride-for-2027/",
-      "pubDate": "2026-11-17 08:58:42",
-      "pubDateISO": "2026-11-17T08:58:42+00:00",
-      "aiSummary": "Things were looking positive for Cas Valk heading into the 2027 season, with the Dutch talent having already put pen to paper on a deal to contest the MX2 World Championship. However, following unforeseen circumstances involving the team he had signed with, Valk has now been left without a ride at the last moment. “It’s...",
-      "source": "GateDrop MXGP",
-      "category": "SBK",
-      "image": "https://gatedrop.com/wp-content/uploads/2026/05/Valk-e1779121861781-150x150.jpg"
-    },
-    {
-      "id": "43027005",
+      "id": "6b8bf1c9",
       "title": "Jalek Swoll Talks 2027, Thanksgiving and More | Winners Take Y’all Podcast",
       "link": "https://www.vurbmoto.com/jalek-swoll-talks-2027-thanksgiving-and-more-winners-take-yall-podcast/",
       "pubDate": "2026-11-16 21:25:27",
@@ -586,18 +850,18 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/jalek-swoll-winners-take-yall-podcast.png"
     },
     {
-      "id": "3e102592",
+      "id": "73e55ef1",
       "title": "Williams, Aston Martin among new F1 liveries for Las Vegas GP as Acura \"replaces\" Honda",
       "link": "https://www.motorsport.com/f1/news/williams-aston-martin-among-new-f1-liveries-for-las-vegas-gp-as-acura-replaces-honda/10874925/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-16 18:45:08",
       "pubDateISO": "2026-11-16T18:45:08+00:00",
-      "aiSummary": "Williams e Aston Martin sono tra le scuderie di F1 che hanno rinnovato le livree delle loro vetture per il Gran Premio di Las Vegas di questo fine settimana. La F1 si dirige a Las Vegas per la terza delle tre gare statunitensi, con la capitale dell'intrattenimento che è rapidamente diventata uno dei weekend commerciali più importanti della serie per le scuderie e i loro partner. Di conseguenza, questa settimana diverse scuderie presenteranno livree personalizzate, tra cui la Williams ......",
+      "aiSummary": "Williams e Aston Martin sono tra le scuderie di F1 che hanno rinnovato le livree delle loro vetture per il Gran Premio di Las Vegas di questo fine settimana. La F1 si dirige a Las Vegas per la terza delle tre gare statunitensi, con la capitale dell'intrattenimento che è diventata rapidamente uno dei weekend commerciali più importanti della serie per le scuderie e i loro partner. Di conseguenza, questa settimana diverse scuderie presenteranno livree personalizzate, tra cui la Williams ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-1.motorsport.com/images/amp/2GdKxKQY/s6/williams-las-vegas-livery.jpg"
+      "image": "https://cdn-2.motorsport.com/images/amp/2GdKxKQY/s6/williams-las-vegas-livery.jpg"
     },
     {
-      "id": "8995956b",
+      "id": "3097dc32",
       "title": "Lando Norris's LN4 Fusion signs former Red Bull junior Oliver Goethe as its first F2 driver",
       "link": "https://www.motorsport.com/f1/news/lando-norriss-ln4-fusion-signs-former-red-bull-junior-oliver-goethe-as-its-first-f2-driver/10874918/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-16 17:51:34",
@@ -605,21 +869,21 @@
       "aiSummary": "Il nuovo team junior di Lando Norris, LN4 Fusion, ha ingaggiato l'ex pilota junior della Red Bull Oliver Goethe come primo pilota per la stagione 2027 di Formula 2. Il 22enne passerà dalla MP Motorsport per la sua terza stagione in F2, dopo aver conquistato finora due podi quest'anno. Il mese scorso, LN4 Fusion ha ottenuto l'ammissione alla F2 come unica nuova scuderia per il prossimo triennio del campionato ......",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-6.motorsport.com/images/amp/0LdereN0/s6/motorsport-com-graphics.jpg"
+      "image": "https://cdn-9.motorsport.com/images/amp/0LdereN0/s6/motorsport-com-graphics.jpg"
     },
     {
-      "id": "df080709",
+      "id": "55dd62ed",
       "title": "Lando Norris: F1 needs better rain tyres as wet Las Vegas would be \"scary\"",
       "link": "https://www.motorsport.com/f1/news/lando-norris-f1-needs-better-rain-tyres-as-wet-las-vegas-would-be-scary/10874689/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
       "pubDate": "2026-11-16 17:30:42",
       "pubDateISO": "2026-11-16T17:30:42+00:00",
-      "aiSummary": "Il campione del mondo Lando Norris spera che il fornitore di pneumatici di Formula 1 Pirelli schieri gomme da pioggia molto migliorate nel 2027, poiché prevede che la gamma attuale non funzionerà correttamente su un circuito a basso carico aerodinamico come quello di Las Vegas. Dopo i weekend parzialmente condizionati dalla pioggia in Malesia e a Singapore, le vetture di F1 del 2026 hanno affrontato le loro prime qualifiche e il loro primo Gran Premio in condizioni di bagnato al Gran Premio del Brasile...",
+      "aiSummary": "Il campione del mondo Lando Norris spera che Pirelli, fornitore di pneumatici della Formula 1, metta a disposizione gomme da pioggia molto più performanti nel 2027, poiché prevede che la gamma attuale non funzionerà correttamente su un circuito a basso carico aerodinamico come quello di Las Vegas. Dopo i weekend parzialmente condizionati dalla pioggia in Malesia e a Singapore, le vetture di F1 del 2026 hanno affrontato le loro prime qualifiche e il primo Gran Premio in condizioni di bagnato al Gran Premio del Brasile...",
       "source": "Motorsport.com F1",
       "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/27No3ae0/s6/lando-norris-mclaren.jpg"
+      "image": "https://cdn-7.motorsport.com/images/amp/27No3ae0/s6/lando-norris-mclaren.jpg"
     },
     {
-      "id": "953bfbfb",
+      "id": "3c622e56",
       "title": "Norris: Las Vegas GP would be \"scary\" with current F1 wet tyres",
       "link": "https://www.autosport.com/f1/news/lando-norris-f1-needs-better-rain-tyres-as-wet-las-vegas-would-be-scary/10874886/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=uk",
       "pubDate": "2026-11-16 17:30:03",
@@ -627,10 +891,10 @@
       "aiSummary": "Lando Norris hopes Formula 1 tyre supplier Pirelli will field much-improved rain tyres in 2027 as he expects the current range won't work properly at a low-downforce circuit like Las Vegas. Following partially rain-affected weekends in Malaysia and Singapore, F1's 2026 cars went through their first proper qualifying and grand prix held in wet conditions at the Brazilian Grand Prix, with both...",
       "source": "Autosport F1",
       "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/0o5AVObY/s6/lando-norris-mclaren-george-ru-2.jpg"
+      "image": "https://cdn-4.motorsport.com/images/amp/0o5AVObY/s6/lando-norris-mclaren-george-ru-2.jpg"
     },
     {
-      "id": "cf694130",
+      "id": "54bac53e",
       "title": "Podcast: Is Valentino Rossi’s MotoGP legacy changing?",
       "link": "https://www.crash.net/motogp/news/1110141/1/podcast-valentino-rossis-motogp-legacy-changing",
       "pubDate": "2026-11-16 17:12:22",
@@ -641,7 +905,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-09/gng_1326837_hires.jpg?width=1200"
     },
     {
-      "id": "a9988b0c",
+      "id": "5c9f047b",
       "title": "Hamilton tells F1 to spend £50 million in promoting under-represented talent | Formula 1",
       "link": "https://www.racefans.net/2026/11/16/hamilton-tells-f1-to-spend-50-million-in-promoting-under-represented-talent/",
       "pubDate": "2026-11-16 17:10:16",
@@ -652,7 +916,7 @@
       "image": ""
     },
     {
-      "id": "2d0262ba",
+      "id": "51b1175b",
       "title": "WorldSBK move was Moto3 champion’s “first goal” after Moto2 snub",
       "link": "https://www.crash.net/wsbk/news/1110140/1/worldsbk-move-was-moto3-champions-first-goal-after-moto2-snub",
       "pubDate": "2026-11-16 17:01:33",
@@ -663,7 +927,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1353751_hires.jpg?width=1200"
     },
     {
-      "id": "7be26ced",
+      "id": "4d70fd84",
       "title": "MotoGP explains “reach before fees” ESPN strategy",
       "link": "https://www.crash.net/motogp/news/1110139/1/motogp-explains-reach-fees-espn-strategy",
       "pubDate": "2026-11-16 16:50:59",
@@ -674,40 +938,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1304254_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "df8a4f50",
-      "title": "Aprilia's 2027 MotoGP bike front 'wing' aero explained",
-      "link": "https://www.motorsport.com/motogp/news/2027-aprilia-850cc-aerodynamics-front-wing/10874766/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 16:32:20",
-      "pubDateISO": "2026-11-16T16:32:20+00:00",
-      "aiSummary": "Aprilia appears to set focus heavily on aerodynamics at the start of MotoGP's 850cc era, with test rider Lorenzo Savadori posting a photo of its 2027-spec bike after the Jerez test. The image quickly attracted attention, offering a glimpse of the latest developments, particularly in aerodynamics, introduced by Aprilia's technical department under the leadership of Fabiano Sterlacchini. It ......",
-      "source": "Motorsport.com MotoGP",
-      "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/0JXRpENY/s6/dettagli-aprilia-850cc.jpg"
-    },
-    {
-      "id": "7761228a",
-      "title": "Miguel Oliveira backs Brad Binder to help take BMW back to “top step” of WorldSBK",
-      "link": "https://www.crash.net/wsbk/news/1110138/1/miguel-oliveira-backs-brad-binder-help-take-bmw-back-top-step-worldsbk",
-      "pubDate": "2026-11-16 16:30:54",
-      "pubDateISO": "2026-11-16T16:30:54+00:00",
-      "aiSummary": "Miguel Oliveira has put his faith in Brad Binder to help BMW get back to the top of WorldSBK.",
-      "source": "Crash WSBK",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-06/gng_1324290_hires.jpg?width=1200"
-    },
-    {
-      "id": "4cf7bf8a",
-      "title": "Toto Wolff predicts Kimi Antonelli will become more popular in Italy than Michael Schumacher",
-      "link": "https://www.motorsport.com/f1/news/toto-wolff-says-kimi-antonelli-is-more-loved-in-italy-than-michael-schumacher-was-at-ferrari/10874809/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 16:17:25",
-      "pubDateISO": "2026-11-16T16:17:25+00:00",
-      "aiSummary": "Il team principal della Mercedes, Toto Wolff, non è nuovo a dichiarazioni audaci, ma la sua ultima valutazione sulla popolarità di Kimi Antonelli potrebbe davvero sconvolgere gli appassionati tifosi della Ferrari. Dopo la storica vittoria di Antonelli nel campionato piloti 2026 a Città del Messico, Wolff ha rilasciato un'intervista esclusiva alla testata tedesca BILD. Quando la conversazione si è spostata sul ventenne ......",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-6.motorsport.com/images/amp/2dEoloBY/s6/motorsport-com-graphics-5-2.jpg"
-    },
-    {
-      "id": "c4a7a1b9",
+      "id": "9aa20ea9",
       "title": "Marc Marquez could match rare Valentino Rossi MotoGP record in Portugal",
       "link": "https://www.crash.net/motogp/news/1110137/1/marc-marquez-could-match-rare-valentino-rossi-motogp-record-portugal",
       "pubDate": "2026-11-16 16:16:28",
@@ -718,7 +949,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_4891_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "fbc8f79e",
+      "id": "6dde7780",
       "title": "Cadillac, Williams, Alpine and Aston Martin change liveries for Las Vegas GP | Formula 1",
       "link": "https://www.racefans.net/2026/11/16/cadillac-williams-alpine-and-aston-martin-change-liveries-for-las-vegas-gp/",
       "pubDate": "2026-11-16 16:10:54",
@@ -729,40 +960,7 @@
       "image": ""
     },
     {
-      "id": "34974c16",
-      "title": "Christian Horner’s private message to Toto Wolff revealed after Kimi Antonelli's 2026 F1 title",
-      "link": "https://www.motorsport.com/f1/news/christian-horners-private-message-to-toto-wolff-revealed-respect-for-you/10874823/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 16:02:29",
-      "pubDateISO": "2026-11-16T16:02:29+00:00",
-      "aiSummary": "Al culmine delle loro aspre battaglie per il titolo, l'idea che Christian Horner inviasse a Toto Wolff un caloroso messaggio di congratulazioni sarebbe sembrata del tutto inverosimile alla maggior parte dei tifosi di Formula 1. Tuttavia, dopo la storica vittoria del titolo 2026 di Kimi Antonelli con la Mercedes, l'ex team principal della Red Bull ha contattato il suo vecchio avversario per rivolgergli grandi elogi. In un'intervista esclusiva con il quotidiano tedesco ......",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-2.motorsport.com/images/amp/6O7zEzX6/s6/motorsport-com-graphics-4-2.jpg"
-    },
-    {
-      "id": "8d66e787",
-      "title": "Nicolo Bulega reveals cautious Kimi Antonelli talks on title-winning weekend",
-      "link": "https://www.crash.net/wsbk/news/1110136/1/nicolo-bulega-reveals-cautious-kimi-antonelli-talks-title-winning-weekend",
-      "pubDate": "2026-11-16 15:58:23",
-      "pubDateISO": "2026-11-16T15:58:23+00:00",
-      "aiSummary": "WorldSBK champion Nicolo Bulega says he and Kimi Antonelli exchanged messages on the weekend of the Mercedes driver’s F1 title win.",
-      "source": "Crash WSBK",
-      "category": "SBK",
-      "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354725_hires.jpg?width=1200"
-    },
-    {
-      "id": "11a4b4b8",
-      "title": "Zak Brown recalls McLaren's \"very toxic environment\" after joining team in 2016",
-      "link": "https://www.motorsport.com/f1/news/zak-brown-recalls-mclarens-very-toxic-environment-after-joining-team-in-2016/10874891/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 15:54:25",
-      "pubDateISO": "2026-11-16T15:54:25+00:00",
-      "aiSummary": "Zak Brown, CEO di McLaren Racing, ha descritto il team a cui si è unito nel 2016 come \"un ambiente molto tossico\", attribuendo a un continuo avvicendarsi di dirigenti la responsabilità di anni di scarsi risultati, sia in pista che fuori. L'americano è arrivato alla McLaren dieci anni fa, dopo che gli azionisti della scuderia si erano separati da Ron Dennis, e ha guidato la sua risalita dalle retrovie della griglia di partenza fino ai titoli costruttori del 2024 e del 2025... Continua a leggere",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-8.motorsport.com/images/amp/YXyKXKd6/s6/motorsport-com-graphics-3.jpg"
-    },
-    {
-      "id": "879aac02",
+      "id": "662dbfce",
       "title": "MotoPlayground’s The Clash: Weekend Winners and Results",
       "link": "https://www.vurbmoto.com/motoplayground-the-clash-weekend-winners-and-results/",
       "pubDate": "2026-11-16 15:42:01",
@@ -773,7 +971,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/2026-motoplayground-the-clash-results.jpg"
     },
     {
-      "id": "b5346594",
+      "id": "36eae2cc",
       "title": "Australian GP boss to leave role weeks after final MotoGP race at Phillip Island",
       "link": "https://www.crash.net/motogp/news/1110135/1/australian-gp-boss-leave-role-weeks-after-final-motogp-race-phillip-island",
       "pubDate": "2026-11-16 15:28:00",
@@ -784,7 +982,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1357419_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "c10d1914",
+      "id": "213cf06a",
       "title": "Jack Miller: Pirelli tyres will change “the character” of MotoGP bikes",
       "link": "https://www.crash.net/motogp/news/1110134/1/jack-miller-pirelli-tyres-will-change-character-motogp-bikes",
       "pubDate": "2026-11-16 15:15:28",
@@ -795,7 +993,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1358018_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "990b40cc",
+      "id": "380257ad",
       "title": "Christian Craig, Max Anstie Claim Wins at Perth Round of AUSX Supercross",
       "link": "https://www.vurbmoto.com/christian-craig-max-anstie-claim-wins-at-perth-round-of-ausx-supercross/",
       "pubDate": "2026-11-16 15:13:39",
@@ -806,29 +1004,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/Screenshot-2026-11-15-005540-1024x672.png"
     },
     {
-      "id": "498a39ec",
-      "title": "Lewis Hamilon reportedly house-hunting in LA amid Kim Kardashian relationship",
-      "link": "https://www.motorsport.com/f1/news/lewis-hamilon-reportedly-house-hunting-in-la-amid-kim-kardashian-relationship/10874877/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 15:08:51",
-      "pubDateISO": "2026-11-16T15:08:51+00:00",
-      "aiSummary": "Secondo un articolo del Daily Mail, il sette volte campione di Formula 1 Lewis Hamilton desidera una base a Los Angeles per poter trascorrere una parte maggiore della pausa invernale con la sua compagna Kim Kardashian e i suoi figli. Secondo l'articolo, il pilota della Ferrari si è rivolto ad agenti immobiliari per cercare case a Malibu, Pacific Palisades e Hollywood Hills, e sta valutando se affittare o acquistare. La sua residenza principale si trova a...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-5.motorsport.com/images/amp/2jEAkAp0/s6/motorsport-com-graphics-2.jpg"
-    },
-    {
-      "id": "757c3d57",
-      "title": "F1 Las Vegas GP 2026: start time, schedule and how to watch",
-      "link": "https://www.motorsport.com/f1/news/f1-las-vegas-gp-2026-start-time-schedule-and-how-to-watch/10874866/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 15:02:24",
-      "pubDateISO": "2026-11-16T15:02:24+00:00",
-      "aiSummary": "Il Gran Premio di Las Vegas inizia alle 20:00 PT di sabato 21 novembre, ovvero alle 23:00 ET. La gara si svolge di notte lungo la Strip e ogni sessione è trasmessa in diretta su Apple TV. Programma del Gran Premio di Las Vegas 2026 Sessione Giorno PT MT CT ET Prove libere 1 Giovedì 19 novembre 16:30 17:30 18:30 19:30 Prove libere 2 Giovedì 19 novembre 20:00 ... Continua a leggere",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-7.motorsport.com/images/amp/YBVorJzY/s6/the-welcome-to-las-vegas-sign.jpg"
-    },
-    {
-      "id": "1254b718",
+      "id": "d93ed0f6",
       "title": "Trystan Hart Clinches 2026 AMA EnduroCross Championship",
       "link": "https://www.vurbmoto.com/trystan-hart-clinches-2026-ama-endurocross-championship/",
       "pubDate": "2026-11-16 15:00:00",
@@ -839,29 +1015,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/unnamed-1.jpg"
     },
     {
-      "id": "39d30ea3",
-      "title": "F1 Las Vegas GP 2026: UK times, schedule and how to watch",
-      "link": "https://www.motorsport.com/f1/news/f1-las-vegas-gp-2026-uk-times-schedule-how-to-watch/10874860/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 14:50:05",
-      "pubDateISO": "2026-11-16T14:50:05+00:00",
-      "aiSummary": "Il Gran Premio di Las Vegas inizia alle 4:00, ora del Regno Unito, di domenica 22 novembre. A Las Vegas sono ancora le 20:00 di sabato, perché la gara si svolge di notte lungo la Strip. Nel Regno Unito, tutte le sessioni si svolgono durante la notte e ognuna di esse viene trasmessa in diretta su Sky Sports F1. Programma del Gran Premio di Las Vegas 2026 nell'ora del Regno Unito Sessione Giorno Ora del Regno Unito Ora di Las Vegas Prove libere 1 Venerdì 20 ... Continua a leggere",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/2y7AZ9g6/s6/a-rainbow-above-the-welcome-to.jpg"
-    },
-    {
-      "id": "c2ba7af8",
-      "title": "F1 driver manager Enrico Zanarini recounts his 50 years in motorsport",
-      "link": "https://www.motorsport.com/f1/news/f1-driver-manager-enrico-zanarini-recounts-his-50-years-in-motorsport/10874697/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 14:39:52",
-      "pubDateISO": "2026-11-16T14:39:52+00:00",
-      "aiSummary": "A volte, un singolo episodio – pochi secondi – è sufficiente per cambiare il corso di una carriera. Enrico Zanarini ricorda uno di questi momenti, avvenuto nel paddock del Gran Premio del Portogallo del 1993. Emanuele Naspetti, uno dei piloti che Zanarini gestiva nei primi anni '90, stava cercando di assicurarsi il futuro in Formula 1. L'obiettivo era quello di superare il suo compagno di squadra, Rubens Barrichello – un risultato ......",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/2y7Qrqp6/s6/enrico-zanarini.jpg"
-    },
-    {
-      "id": "f2fe05d9",
+      "id": "a1e11079",
       "title": "Nico Rosberg highlights where Michael Schumacher “was not at his best” in F1 comeback",
       "link": "https://www.crash.net/f1/news/1110133/1/nico-rosberg-highlights-where-michael-schumacher-was-not-his-best-f1-comeback",
       "pubDate": "2026-11-16 14:37:44",
@@ -872,7 +1026,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_545377_hires.jpg?width=1200"
     },
     {
-      "id": "7ce8b383",
+      "id": "8e022a62",
       "title": "MotoGP changes Portimao race order as Marc Marquez closes on 2026 title",
       "link": "https://www.crash.net/motogp/news/1110132/1/motogp-changes-portimao-race-order-marc-marquez-closes-2026-title",
       "pubDate": "2026-11-16 13:15:28",
@@ -883,7 +1037,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1281144_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "30bcee62",
+      "id": "0c991eaa",
       "title": "Takes: Timed Practice Headlines Several Changes for 2026 Mini O’s",
       "link": "https://www.vurbmoto.com/takes-timed-practice-headlines-several-changes-for-2026-mini-os/",
       "pubDate": "2026-11-16 12:54:49",
@@ -894,7 +1048,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/2026-Minios-changes-practice.png"
     },
     {
-      "id": "7a5f9379",
+      "id": "51531251",
       "title": "Max Verstappen loses F1 champion mechanic to another racing series",
       "link": "https://www.crash.net/f1/news/1110130/1/max-verstappen-loses-f1-champion-mechanic-another-racing-series",
       "pubDate": "2026-11-16 12:48:11",
@@ -905,18 +1059,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1453799_hires_0.jpg?width=1200"
     },
     {
-      "id": "e0370006",
-      "title": "Christian Horner reveals how Max Verstappen’s management reshaped 2022 Red Bull development",
-      "link": "https://www.motorsport.com/f1/news/horner-reveals-verstappens-management-intervened-when-the-2022-red-bull-favored-perez/10874617/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 12:44:55",
-      "pubDateISO": "2026-11-16T12:44:55+00:00",
-      "aiSummary": "La narrazione relativa al periodo di Sergio Pérez in Red Bull Racing si concentra spesso sulla sua incapacità di ottenere costantemente lo stesso ritmo puro del compagno di squadra Max Verstappen. Tuttavia, l'ex CEO e team principal di Red Bull Racing, Christian Horner, ha recentemente svelato una battaglia ingegneristica dietro le quinte che ha modificato la traiettoria della stagione 2022 di Pérez. Parlando nel podcast High ... Continua...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/6grQkBPY/s6/motorsport-com-graphics-1-2.jpg"
-    },
-    {
-      "id": "832b00ff",
+      "id": "8731792f",
       "title": "Stark Future Closes Financing Round in Excess of €150 Million",
       "link": "https://www.vurbmoto.com/stark-future-closes-financing-round-in-excess-of-e150-million/",
       "pubDate": "2026-11-16 12:30:13",
@@ -927,29 +1070,7 @@
       "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/2023_Stark_HQ_004-1024x683.jpg"
     },
     {
-      "id": "0c90c5fb",
-      "title": "What the WEC can learn from the controversial Monza finish",
-      "link": "https://www.motorsport.com/wec/news/what-wec-can-learn-from-monza-incident-cadillac-peugeot/10874771/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WEC&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 12:25:23",
-      "pubDateISO": "2026-11-16T12:25:23+00:00",
-      "aiSummary": "The Monza 6 Hours, which closed out the 2026 World Endurance Championship, raised more than a few questions about Race Control’s handling of the situation following the accident that occurred just 90 seconds before the finish between Alex Lynn’s #12 Cadillac and Malthe Jakobsen’s #94 Peugeot. The two cars, battling for a top-five finish, made contact coming out of the Roggia, and the ... Keep...",
-      "source": "Motorsport.com WEC",
-      "category": "SBK",
-      "image": "https://cdn-3.motorsport.com/images/amp/YpbAXZ30/s6/safety-car.jpg"
-    },
-    {
-      "id": "fe78d571",
-      "title": "James Allison reveals message to Mercedes recruits during team's four-year F1 title drought",
-      "link": "https://www.motorsport.com/f1/news/james-allison-reveals-message-to-mercedes-recruits-during-teams-four-year-f1-title-drought/10874833/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-F1&utm_term=News&utm_content=www",
-      "pubDate": "2026-11-16 12:06:25",
-      "pubDateISO": "2026-11-16T12:06:25+00:00",
-      "aiSummary": "Il direttore tecnico della Mercedes, James Allison, ha rivelato di aver detto a centinaia di membri del personale che si sono uniti alla scuderia di Brackley durante gli anni difficili del team che un giorno avrebbero vinto e che il campionato sarebbe stato loro. La Mercedes ha vinto otto titoli costruttori consecutivi tra il 2014 e il 2021, ma poi ha trascorso quattro stagioni senza un campionato prima di conquistare entrambi i titoli nel 2026, con Kimi...",
-      "source": "Motorsport.com F1",
-      "category": "SBK",
-      "image": "https://cdn-9.motorsport.com/images/amp/6O7zE9w6/s6/motorsport-com-graphics.jpg"
-    },
-    {
-      "id": "23d3c763",
+      "id": "52ddaa2d",
       "title": "Pecco Bagnaia to miss Portuguese MotoGP as Ducati announces replacement",
       "link": "https://www.crash.net/motogp/news/1110128/1/pecco-bagnaia-miss-portuguese-motogp-ducati-announces-replacement",
       "pubDate": "2026-11-16 11:15:01",
@@ -960,7 +1081,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1354416_hires.jpg?width=1200"
     },
     {
-      "id": "dd978e5a",
+      "id": "4aeea235",
       "title": "Pedro Acosta “one of the luckiest guys” to be among Marc Marquez’s last MotoGP team-mates",
       "link": "https://www.crash.net/motogp/news/1110126/1/pedro-acosta-one-luckiest-guys-be-among-marc-marquezs-last-motogp-team-mates",
       "pubDate": "2026-11-16 10:28:25",
@@ -971,7 +1092,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1340868_hires.jpg?width=1200"
     },
     {
-      "id": "f0169027",
+      "id": "0d5073dc",
       "title": "Toto Wolff reveals what Christian Horner told him after Kimi Antonelli’s F1 title win",
       "link": "https://www.crash.net/f1/news/1110125/1/toto-wolff-reveals-what-christian-horner-told-him-after-kimi-antonellis-f1-title",
       "pubDate": "2026-11-16 10:12:57",
@@ -982,7 +1103,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1333672_hires.jpg?width=1200"
     },
     {
-      "id": "d365193e",
+      "id": "af05e7ff",
       "title": "Racing Bulls boss Permane “should talk up” need for cost cap changes – Vowles | Formula 1",
       "link": "https://www.racefans.net/2026/11/16/racing-bulls-boss-permane-should-talk-up-need-for-cost-cap-changes-vowles/",
       "pubDate": "2026-11-16 10:05:49",
@@ -993,7 +1114,7 @@
       "image": ""
     },
     {
-      "id": "63e9db75",
+      "id": "dc31d6bd",
       "title": "Aprilia reveals glimpse of radical 2027 MotoGP aerodynamic solution",
       "link": "https://www.crash.net/motogp/news/1110124/1/aprilia-reveals-glimpse-radical-2027-aerodynamic-solution",
       "pubDate": "2026-11-16 09:49:28",
@@ -1004,7 +1125,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1307286_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "f0216752",
+      "id": "abd933cc",
       "title": "Lewis Hamilton makes £50m investment demand ‘the future of F1 depends on’",
       "link": "https://www.crash.net/f1/news/1110123/1/lewis-hamilton-makes-ps50m-investment-demand-future-f1-depends",
       "pubDate": "2026-11-16 09:22:23",
@@ -1015,7 +1136,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1452329_hires_0.jpg?width=1200"
     },
     {
-      "id": "1346bb0e",
+      "id": "a2647bcb",
       "title": "Haas confirms driver plans for F1 Vegas GP with two changes",
       "link": "https://www.crash.net/f1/news/1110122/1/haas-confirms-driver-plans-f1-vegas-gp-two-changes",
       "pubDate": "2026-11-16 08:46:53",
@@ -1026,7 +1147,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/2303869558-926.jpg?width=1200"
     },
     {
-      "id": "4fb69dbd",
+      "id": "8b766adb",
       "title": "Camara to race for Haas again in Las Vegas, Hirakawa to drive in practice | Formula 1",
       "link": "https://www.racefans.net/2026/11/16/camara-to-race-for-haas-again-in-las-vegas-hirakawa-to-drive-in-practice/",
       "pubDate": "2026-11-16 08:12:57",
@@ -1037,7 +1158,7 @@
       "image": ""
     },
     {
-      "id": "7bc0a6cd",
+      "id": "cf338e88",
       "title": "How to watch the 2026 Las Vegas Grand Prix live this weekend | TV Times",
       "link": "https://www.racefans.net/2026/11/16/how-to-watch-the-2026-las-vegas-grand-prix-live-this-weekend/",
       "pubDate": "2026-11-16 07:15:50",
@@ -1048,7 +1169,7 @@
       "image": ""
     },
     {
-      "id": "09d80f90",
+      "id": "953026f9",
       "title": "Has Ferrari solved its Lewis Hamilton-Charles Leclerc problem? Fred Vasseur shares peace talk details",
       "link": "https://www.crash.net/f1/news/1110117/1/has-ferrari-solved-its-lewis-hamilton-charles-leclerc-problem-fred-vasseur-shares",
       "pubDate": "2026-11-15 14:00:00",
@@ -1059,7 +1180,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1397474_hires.jpg?width=1200"
     },
     {
-      "id": "4d80797c",
+      "id": "14b43145",
       "title": "Guenther Steiner suggests Max Verstappen ‘solution’ to solve Ferrari woes",
       "link": "https://www.crash.net/f1/news/1110115/1/guenther-steiner-makes-max-verstappen-solution-recommendation-ferrari",
       "pubDate": "2026-11-15 09:00:00",
@@ -1070,7 +1191,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/si202611060543.jpg?width=1200"
     },
     {
-      "id": "c15abef2",
+      "id": "9fe9a63e",
       "title": "FIA boss looking to make controversial change to presidency rule",
       "link": "https://www.crash.net/f1/news/1110114/1/fia-boss-looking-make-controversial-change-presidency-rule",
       "pubDate": "2026-11-14 12:00:00",
@@ -1081,7 +1202,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-05/xpb_1337940_hires.jpg?width=1200"
     },
     {
-      "id": "6034cab4",
+      "id": "f7937a93",
       "title": "Yamaha won’t face sporting penalty for missing Qatar MotoGP, FIM president states",
       "link": "https://www.crash.net/motogp/news/1110121/1/yamaha-wont-face-sporting-penalty-missing-qatar-motogp-fim-president-states",
       "pubDate": "2026-11-14 10:25:43",
@@ -1092,7 +1213,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/gng_1351538_hires.jpg?width=1200"
     },
     {
-      "id": "1fbe6705",
+      "id": "035f5108",
       "title": "Ignore social media echo chamber and trust F1 over Middle East races – Wolff | Formula 1",
       "link": "https://www.racefans.net/2026/11/14/ignore-social-media-echo-chamber-trust-f1-over-middle-east-races-wolff/",
       "pubDate": "2026-11-14 10:00:10",
@@ -1103,7 +1224,7 @@
       "image": ""
     },
     {
-      "id": "62c2e91d",
+      "id": "0aa2ce9b",
       "title": "Valentino Rossi maintains Sepang MotoGP kick “never existed” in new autobiography",
       "link": "https://www.crash.net/motogp/news/1110119/1/valentino-rossi-maintains-sepang-motogp-kick-never-existed-new-autobiography",
       "pubDate": "2026-11-14 10:00:00",
@@ -1114,7 +1235,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_589064_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "22b2b72f",
+      "id": "da9ae9ce",
       "title": "Casey Stoner leads tributes after MotoGP world champion mechanic dies",
       "link": "https://www.crash.net/motogp/news/1110120/1/casey-stoner-leads-tributes-after-motogp-world-champion-mechanic-dies",
       "pubDate": "2026-11-14 09:56:26",
@@ -1125,7 +1246,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_427300_hires.jpg?width=1200"
     },
     {
-      "id": "862e4424",
+      "id": "441c0d30",
       "title": "‘Lungs of the City’ campaign launched as Adelaide MotoGP tree felling begins",
       "link": "https://www.crash.net/motogp/news/1110113/1/lungs-city-campaign-launched-adelaide-motogp-tree-felling-begins",
       "pubDate": "2026-11-14 09:00:00",
@@ -1136,7 +1257,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-09/trees.jpg?width=1200"
     },
     {
-      "id": "1604473e",
+      "id": "b5d7b782",
       "title": "Toto Wolff reveals he offered to resign from Mercedes “several times”",
       "link": "https://www.crash.net/f1/news/1110112/1/toto-wolff-reveals-he-offered-resign-mercedes-several-times",
       "pubDate": "2026-11-14 09:00:00",
@@ -1147,7 +1268,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1447156_hires.jpg?width=1200"
     },
     {
-      "id": "1d9b1c4d",
+      "id": "6c371240",
       "title": "On This Day: Racing rules in spotlight as Hamilton takes Brazil win from Verstappen | Brief",
       "link": "https://www.racefans.net/2026/11/14/on-this-day-2021-brazilian-grand-prix/",
       "pubDate": "2026-11-14 00:01:00",
@@ -1158,7 +1279,7 @@
       "image": ""
     },
     {
-      "id": "2c391854",
+      "id": "81fe4c5d",
       "title": "Featured Comment: Pay more attention to Racing Bulls helping Red Bull | Brief",
       "link": "https://www.racefans.net/2026/11/13/featured-comment-pay-more-attention-to-racing-bulls-helping-red-bull/",
       "pubDate": "2026-11-13 15:35:32",
@@ -1169,18 +1290,7 @@
       "image": ""
     },
     {
-      "id": "035ae21f",
-      "title": "Carson Brown vs Jimmy “The Rippa” Decotis at Southwick | ERAs",
-      "link": "https://www.vurbmoto.com/carson-brown-vs-jimmy-the-rippa-decotis-at-southwick-eras/",
-      "pubDate": "2026-11-13 14:11:08",
-      "pubDateISO": "2026-11-13T14:11:08+00:00",
-      "aiSummary": "Carson Brown and Jimmy Decotis go head-to-head for lap times aboard a 2001 Yamaha YZ426 at the world class Southwick Motocross track! Legendary guest, Doug Henry, stops by to give us the history on the iconic Yamaha 2001 YZ426, this episode of ERAS is packed with old-school horsepower, deep sand, and some serious revved out […] The post Carson Brown vs Jimmy “The Rippa” Decotis at Southwick |...",
-      "source": "Vurbmoto MX",
-      "category": "MXGP",
-      "image": "https://www.vurbmoto.com/wp-content/uploads/2026/11/maxresdefault-1-1024x576.jpg"
-    },
-    {
-      "id": "666162bd",
+      "id": "62b07f55",
       "title": "Kimi Antonelli moved to tears as stadium crowd chants his name at Italy and France match",
       "link": "https://www.crash.net/f1/news/1110111/1/kimi-antonelli-moved-tears-stadium-crowd-chants-his-name-italy-and-france-match",
       "pubDate": "2026-11-13 13:24:55",
@@ -1191,7 +1301,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/img_8686.PNG?width=1200"
     },
     {
-      "id": "8ff4212c",
+      "id": "5f9733fa",
       "title": "2026 Portimao MotoGP: Updated start times and how to watch",
       "link": "https://www.crash.net/motogp/news/1110109/1/2026-portimao-motogp-start-times-and-how-watch",
       "pubDate": "2026-11-13 12:45:44",
@@ -1202,7 +1312,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362718_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "a3c679fc",
+      "id": "9caaab68",
       "title": "Lewis Hamilton ‘not fast enough’ against Charles Leclerc says Ralf Schumacher in brutal jibe",
       "link": "https://www.crash.net/f1/news/1110110/1/lewis-hamilton-not-fast-enough-against-charles-leclerc-says-ralf-schumacher",
       "pubDate": "2026-11-13 11:49:08",
@@ -1213,7 +1323,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1451181_hires.jpg?width=1200"
     },
     {
-      "id": "eb133f6b",
+      "id": "21b62ebe",
       "title": "F1 journalist claims he has been banned from paddock after Charles Leclerc criticism",
       "link": "https://www.crash.net/f1/news/1110107/1/f1-journalist-claims-he-has-been-banned-paddock-after-charles-leclerc-criticism",
       "pubDate": "2026-11-13 11:02:41",
@@ -1224,7 +1334,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1452573_hires.jpg?width=1200"
     },
     {
-      "id": "e48f45f6",
+      "id": "b42fd653",
       "title": "Watch Dani Pedrosa race KTM MotoGP bike against Red Bull F1 car on ice",
       "link": "https://www.crash.net/motogp/news/1110106/1/watch-dani-pedrosa-race-ktm-motogp-bike-against-red-bull-f1-car-ice",
       "pubDate": "2026-11-13 10:15:44",
@@ -1235,7 +1345,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/2026-11-13-10_03_37-f1-vs-motogp-vs-rally-vs-truck-vs-snowmobile-ultimate-winter-race-youtube_1600x900.jpg?width=1200"
     },
     {
-      "id": "23241b64",
+      "id": "4f594ea8",
       "title": "Lewis Hamilton loses 'most marketable athlete' crown and overtaken by F1 rival",
       "link": "https://www.crash.net/f1/news/1110105/1/lewis-hamilton-loses-most-marketable-athlete-crown-and-overtaken-f1-rival",
       "pubDate": "2026-11-13 10:05:02",
@@ -1246,7 +1356,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1451080_hires.jpg?width=1200"
     },
     {
-      "id": "ea7c5a7c",
+      "id": "70dc4b8e",
       "title": "Spotlight: FIA pulls F1 reporter’s pass over column calling Leclerc a ‘sneaky b*****d’ | Brief",
       "link": "https://www.racefans.net/2026/11/13/spotlight-fia-pulls-f1-reporters-pass-over-column-calling-leclerc-a-sneaky-bd/",
       "pubDate": "2026-11-13 09:33:53",
@@ -1257,7 +1367,7 @@
       "image": ""
     },
     {
-      "id": "a9558ce7",
+      "id": "e620aa00",
       "title": "Lewis Hamilton shares heartfelt message after visiting Palestinian children",
       "link": "https://www.crash.net/f1/news/1110103/1/lewis-hamilton-shares-heartfelt-message-after-visiting-palestinian-children",
       "pubDate": "2026-11-13 09:08:15",
@@ -1268,7 +1378,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/your-paragraph-text-2.png?width=1200"
     },
     {
-      "id": "42344dd8",
+      "id": "034a5fa4",
       "title": "Grosjean admits his single-seater career is likely over after ending IndyCar season 19th | Formula 1",
       "link": "https://www.racefans.net/2026/11/13/grosjean-admits-his-single-seater-racing-career-is-likely-over-after-ending-indycar-season-19th/",
       "pubDate": "2026-11-13 08:39:39",
@@ -1279,18 +1389,7 @@
       "image": ""
     },
     {
-      "id": "abd70038",
-      "title": "On This Day: Verstappen stars as Hamilton wins soaked Brazilian Grand Prix | Brief",
-      "link": "https://www.racefans.net/2026/11/13/on-this-day-brazilian-grand-prix-2/",
-      "pubDate": "2026-11-13 00:01:00",
-      "pubDateISO": "2026-11-13T00:01:00+00:00",
-      "aiSummary": "Hamilton wins, Verstappen stars in rain-lashed Brazilian GP",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "fddff994",
+      "id": "df6f18ec",
       "title": "MotoGP announces major new US broadcast deal with ESPN",
       "link": "https://www.crash.net/motogp/news/1110102/1/motogp-announces-major-new-us-broadcast-deal-espn",
       "pubDate": "2026-11-12 17:11:43",
@@ -1301,7 +1400,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1304456_hires.jpg?width=1200"
     },
     {
-      "id": "8ec8619b",
+      "id": "865f0202",
       "title": "Enea Bastianini reveals final MotoGP target before leaving KTM",
       "link": "https://www.crash.net/motogp/news/1110101/1/enea-bastianini-reveals-final-motogp-target-leaving-ktm",
       "pubDate": "2026-11-12 16:55:23",
@@ -1312,29 +1411,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362500_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "0daf5d0d",
-      "title": "Court of Appeal to hear Audi’s case over Tsunoda decision on November 25th | Formula 1",
-      "link": "https://www.racefans.net/2026/11/12/court-of-appeal-to-hear-audis-case-over-tsunoda-decision-on-november-25th/",
-      "pubDate": "2026-11-12 16:52:19",
-      "pubDateISO": "2026-11-12T16:52:19+00:00",
-      "aiSummary": "Audi is challenging the stewards decision' not to penalise Yuki Tsunoda for an infringement in the Italian Grand Prix.",
-      "source": "RaceFans F1",
-      "category": "F1",
-      "image": ""
-    },
-    {
-      "id": "0bdcf75c",
-      "title": "Ex-F1 star Romain Grosjean makes significant racing career declaration",
-      "link": "https://www.crash.net/f1/news/1110100/1/ex-f1-star-romain-grosjean-makes-significant-racing-career-declaration",
-      "pubDate": "2026-11-12 16:31:30",
-      "pubDateISO": "2026-11-12T16:31:30+00:00",
-      "aiSummary": "Romain Grosjean says his time in single-seaters is likely over",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1339828_hires.jpg?width=1200"
-    },
-    {
-      "id": "d16136bc",
+      "id": "b130ad4c",
       "title": "Ducati responds to Aprilia's Marc Marquez claim: “It's the package that wins”",
       "link": "https://www.crash.net/motogp/news/1110099/1/ducati-responds-aprilias-marc-marquez-claim-its-package-wins",
       "pubDate": "2026-11-12 15:36:23",
@@ -1345,29 +1422,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361420_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "0979ba4a",
-      "title": "Red Bull announces F1 plans for Nikola Tsolov after missing 2027 race seat",
-      "link": "https://www.crash.net/f1/news/1110098/1/red-bull-announces-f1-plans-nikola-tsolov-after-missing-2027-race-seat",
-      "pubDate": "2026-11-12 15:26:09",
-      "pubDateISO": "2026-11-12T15:26:09+00:00",
-      "aiSummary": "Red Bull has made Nikola Tsolov its official reserve driver for 2027",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1448388_hires.jpg?width=1200"
-    },
-    {
-      "id": "92bdbb37",
-      "title": "Kimi Antonelli '10 years out' from Ferrari F1 move, reckons Guenther Steiner",
-      "link": "https://www.crash.net/f1/news/1110096/1/kimi-antonelli-10-years-out-ferrari-f1-move-reckons-guenther-steiner",
-      "pubDate": "2026-11-12 15:10:44",
-      "pubDateISO": "2026-11-12T15:10:44+00:00",
-      "aiSummary": "Guenther Steiner believes F1 champion Kimi Antonelli will be a Ferrari driver",
-      "source": "Crash F1",
-      "category": "F1",
-      "image": "https://www.crash.net/sites/default/files/2026-11/xpb_1450400_hires_0.jpg?width=1200"
-    },
-    {
-      "id": "b7ff57b2",
+      "id": "d365a24b",
       "title": "Jorge Lorenzo made Aprilia title prediction over coffee at Buriram",
       "link": "https://www.crash.net/motogp/news/1110095/1/jorge-lorenzo-made-aprilia-title-prediction-over-coffee-buriram",
       "pubDate": "2026-11-12 14:30:23",
@@ -1378,7 +1433,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1294995_hires_1600x900_1600x900.jpg?width=1200"
     },
     {
-      "id": "bab43d23",
+      "id": "e4110f45",
       "title": "Cal Crutchlow: “Marc Marquez never ceases to amaze” as MotoGP title comeback nears completion",
       "link": "https://www.crash.net/motogp/news/1110086/1/cal-crutchlow-marc-marquez-never-ceases-amaze-motogp-title-comeback-nears",
       "pubDate": "2026-11-12 09:48:23",
@@ -1389,7 +1444,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362538_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "b3df1a6b",
+      "id": "ca25a977",
       "title": "Valentino Rossi feared his daughter would share Marc Marquez’s birthday",
       "link": "https://www.crash.net/motogp/news/1110083/1/valentino-rossi-feared-his-daughter-would-share-marc-marquezs-birthday",
       "pubDate": "2026-11-11 15:58:30",
@@ -1400,7 +1455,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1219724_hires-3.jpg?width=1200"
     },
     {
-      "id": "e3dfb5ba",
+      "id": "10373f3b",
       "title": "The “weak link” that helped derail one 2026 MotoGP title charge",
       "link": "https://www.crash.net/motogp/news/1110081/1/weak-link-helped-derail-one-2026-motogp-title-charge",
       "pubDate": "2026-11-11 14:40:29",
@@ -1411,7 +1466,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362671_hires.jpg?width=1200"
     },
     {
-      "id": "ebf50ce4",
+      "id": "49bd81b3",
       "title": "Jake Dixon reveals Cal Crutchlow praise after Honda MotoGP debut",
       "link": "https://www.crash.net/motogp/news/1110079/1/jake-dixon-reveals-cal-crutchlow-praise-after-honda-motogp-debut",
       "pubDate": "2026-11-11 13:55:51",
@@ -1422,29 +1477,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1360030_hires_1600x900.jpg?width=1200"
     },
     {
-      "id": "f0869523",
-      "title": "Ducati brands Qatar “pivotal” race as Marc Marquez nears historic MotoGP title",
-      "link": "https://www.crash.net/motogp/news/1110077/1/ducati-brands-qatar-pivotal-race-marc-marquez-nears-historic-motogp-title",
-      "pubDate": "2026-11-11 11:46:11",
-      "pubDateISO": "2026-11-11T11:46:11+00:00",
-      "aiSummary": "Gigi Dall’Igna believes the Qatar Grand Prix was the pivotal moment of the 2026 season",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362702_hires.jpg?width=1200"
-    },
-    {
-      "id": "98e83995",
-      "title": "Ducati issues fresh Pecco Bagnaia surgery update after nasty Qatar MotoGP crash",
-      "link": "https://www.crash.net/motogp/news/1110069/1/ducati-issues-fresh-pecco-bagnaia-surgery-update-after-nasty-qatar-motogp",
-      "pubDate": "2026-11-10 17:51:24",
-      "pubDateISO": "2026-11-10T17:51:24+00:00",
-      "aiSummary": "Ducati says Pecco Bagnaia has had successful surgery following a crash in Qatar",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1360102_hires.jpg?width=1200"
-    },
-    {
-      "id": "ae4b959d",
+      "id": "42663e35",
       "title": "Old Moto2 injury at the heart of Honda rider’s Qatar MotoGP retirement",
       "link": "https://www.crash.net/motogp/news/1110067/1/old-moto2-injury-heart-honda-riders-qatar-motogp-retirement",
       "pubDate": "2026-11-10 16:46:37",
@@ -1455,7 +1488,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1361861_hires.jpg?width=1200"
     },
     {
-      "id": "0c840261",
+      "id": "cbc3a72e",
       "title": "Aprilia boss praises “remarkable” Jorge Martin, hopes now on MotoGP’s secondary titles",
       "link": "https://www.crash.net/motogp/news/1110065/1/aprilia-boss-praises-remarkable-jorge-martin-hopes-now-motogps-secondary",
       "pubDate": "2026-11-10 15:44:18",
@@ -1466,29 +1499,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362705_hires.jpg?width=1200"
     },
     {
-      "id": "a6fefd1b",
-      "title": "Pramac Yamaha demands answers after Izan Guevara suffers “terrible” Qatar Moto2 title blow",
-      "link": "https://www.crash.net/moto2/news/1110047/1/pramac-yamaha-demands-answers-after-izan-guevara-suffers-terrible-qatar-moto2",
-      "pubDate": "2026-11-09 15:21:17",
-      "pubDateISO": "2026-11-09T15:21:17+00:00",
-      "aiSummary": "Pramac Yamaha wants answers after Izan Guevara suffered a costly Qatar Moto2 retirement, losing valuable ground to title rival Manuel Gonzalez.",
-      "source": "Crash MotoGP",
-      "category": "Moto2",
-      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1355399_hires_1600x900.jpg?width=1200"
-    },
-    {
-      "id": "8ed71842",
-      "title": "Maverick Vinales set for more scans as MotoGP injury woes “not improving”",
-      "link": "https://www.crash.net/motogp/news/1110046/1/maverick-vinales-set-more-scans-motogp-injury-woes-not-improving",
-      "pubDate": "2026-11-09 14:56:39",
-      "pubDateISO": "2026-11-09T14:56:39+00:00",
-      "aiSummary": "Maverick Vinales is continuing to struggle with a shoulder injury",
-      "source": "Crash MotoGP",
-      "category": "MotoGP",
-      "image": "https://www.crash.net/sites/default/files/2026-11/gng_1362748_hires.jpg?width=1200"
-    },
-    {
-      "id": "14681861",
+      "id": "1c698f02",
       "title": "Moto3 champion gets Ducati WorldSBK seat Alex Rins was linked to",
       "link": "https://www.crash.net/wsbk/news/1110036/1/moto3-champion-gets-ducati-worldsbk-seat-alex-rins-was-linked",
       "pubDate": "2026-11-09 10:22:03",
@@ -1499,7 +1510,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-11/gng_1355011_hires.jpg?width=1200"
     },
     {
-      "id": "3c3cce6f",
+      "id": "329e0e9a",
       "title": "Honda names Jake Dixon as Joan Mir's substitute for Qatar GP",
       "link": "https://www.motorsport.com/motogp/news/honda-names-jake-dixon-as-joan-mirs-substitute-for-qatar-gp/10871629/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-MOTOGP&utm_term=News&utm_content=www",
       "pubDate": "2026-11-05 08:36:48",
@@ -1507,10 +1518,10 @@
       "aiSummary": "Honda HRC has announced that Joan Mir will be absent this weekend's Qatar Grand Prix after his comeback at Sepang was cut short due to another episode of dizziness and partial loss of vision. British rider Jake Dixon will replace the Spaniard at Losail, returning to the premier class for the first time since he competed two grands prix in 2021 as a substitute for Franco Morbidelli at Petronas...",
       "source": "Motorsport.com MotoGP",
       "category": "Moto2",
-      "image": "https://cdn-5.motorsport.com/images/amp/2Qe8g5O2/s6/jake-dixon-team-hrc.jpg"
+      "image": "https://cdn-8.motorsport.com/images/amp/2Qe8g5O2/s6/jake-dixon-team-hrc.jpg"
     },
     {
-      "id": "ee9fc417",
+      "id": "6f4afbc1",
       "title": "Honda “can fight for wins” in WorldSBK with new bike - Jake Dixon",
       "link": "https://www.crash.net/wsbk/news/1109299/1/honda-can-fight-wins-worldsbk-new-bike-jake-dixon",
       "pubDate": "2026-11-04 12:00:00",
@@ -1521,7 +1532,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-09/gng_1334935_hires.jpg?width=1200"
     },
     {
-      "id": "97e45d16",
+      "id": "7931efdf",
       "title": "WorldSBK champion tests next-gen Honda CBR1000RR-R Fireblade",
       "link": "https://www.crash.net/wsbk/news/1108073/1/worldsbk-champion-tests-next-gen-honda-cbr1000rr-r-fireblade",
       "pubDate": "2026-10-23 14:07:19",
@@ -1532,7 +1543,7 @@
       "image": "https://www.crash.net/sites/default/files/2026-10/site-image-resize-2026-10-23t140715.651.png?width=1200"
     },
     {
-      "id": "deedcde2",
+      "id": "c801f414",
       "title": "Somkiat Chantra to move to WSBK with Honda after losing MotoGP ride",
       "link": "https://www.motorsport.com/motogp/news/somkiat-chantra-wsbk-honda-losing-motogp-ride/10757002/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2025-09-06 12:12:13",
@@ -1543,7 +1554,7 @@
       "image": "https://cdn-5.motorsport.com/images/amp/0mbBzL42/s6/somkiat-chantra-team-lcr-honda.jpg"
     },
     {
-      "id": "74e81dba",
+      "id": "d5004c06",
       "title": "World Superbike performs U-turn on 2024 minimum weight rules",
       "link": "https://www.motorsport.com/wsbk/news/2024-rule-changes-minimum-weight/10531777/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-10-12 00:22:10",
@@ -1554,7 +1565,7 @@
       "image": "https://cdn-6.motorsport.com/images/amp/0qXZJNE6/s6/toprak-razgatlioglu-pata-yamah.jpg"
     },
     {
-      "id": "68aa9846",
+      "id": "1df6297a",
       "title": "Ducati hands Bulega works World Superbike seat for 2024",
       "link": "https://www.motorsport.com/wsbk/news/ducati-bulega-2024-announcement-rinaldi/10516484/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-09-05 08:25:31",
@@ -1565,7 +1576,7 @@
       "image": "https://cdn-2.motorsport.com/images/amp/6b7zawp0/s6/nicolo-bulega-1.jpg"
     },
     {
-      "id": "5e0fffdf",
+      "id": "56264366",
       "title": "Sam Lowes to make 2024 WSBK switch with Marc VDS",
       "link": "https://www.motorsport.com/wsbk/news/sam-lowes-to-make-2024-wsbk-switch-with-marc-vds/10495359/?utm_source=RSS&utm_medium=referral&utm_campaign=RSS-WSBK&utm_term=News&utm_content=www",
       "pubDate": "2023-07-13 09:54:11",
