@@ -28,6 +28,7 @@ sys.path.append(os.path.join(BASE_DIR, ".github", "scripts"))
 
 # Import existing helpers from update_event_data
 from update_event_data import (
+    main as update_motogp_event_data,
     find_matching_object,
     clean_name,
     normalize_rider_name,
@@ -192,7 +193,7 @@ def parse_analysis_pdf_all(pdf_bytes):
 
     # Rider headers: e.g. "93 Ducati Lenovo Team\nSPA Marc MARQUEZ\n1st\nRuns=3 Total laps=15"
     matches = list(re.finditer(
-        r'(?m)^(\d{1,2})\s+[^\n]+\n[A-Z]{3}\s+([^\n]+)\n(?:\d+(?:st|nd|rd|th)|NC|unfinished)[^\n]*\nRuns=(\d+)',
+        r'(?m)^(\d{1,2})\s+[^\n]+?\s+[A-Z]{3}\s+([^\n]+?)\s+(?:\d+(?:st|nd|rd|th)|NC|unfinished)[^\n]*?\s+Runs\s*=\s*(\d+)',
         full_text
     ))
 
@@ -217,8 +218,8 @@ def parse_analysis_pdf_all(pdf_bytes):
         total_laps_so_far = 0
 
         for line in rider_block.split('\n'):
-            # Detect new run
-            run_m = re.search(r'Run\s*#.*?(\d+)\s+Slick-([A-Za-z]+)\s+Slick-([A-Za-z]+)', line)
+            # Detect new run (supports both Slick-* and Wet-* tyres)
+            run_m = re.search(r'Run\s*#.*?(\d+)\s+(?:Slick|Wet)-([A-Za-z]+)\s+(?:Slick|Wet)-([A-Za-z]+)', line, re.IGNORECASE)
             if run_m:
                 r_num = int(run_m.group(1))
                 f_tyre = run_m.group(2)[0].upper()
@@ -378,9 +379,7 @@ def update_session_datasets(session_name):
     for rnd in ALL_ROUNDS:
         # Check if already present and has riders
         if rnd in stints_data and len(stints_data[rnd]) > 0 and rnd in sectors_data and len(sectors_data[rnd]) > 0:
-            # If round is not the current one (e.g. past rounds), skip re-download
-            if rnd != 'QAT':
-                continue
+            continue
 
         url = f"https://resources.motogp.com/files/results/2026/{rnd}/MotoGP/{session_name}/Analysis.pdf"
         pdf_bytes = download_url(url)
@@ -499,6 +498,11 @@ def update_event_html_results():
         round_weather_changed = False
 
         for sess_code, sess_key in sessions_map:
+            current_res = static_obj.get(sess_key, [])
+            is_corrupt = any(('Öncü' in str(r.get('rider', '')) or 'Oncu' in str(r.get('rider', ''))) for r in current_res)
+            current_w = str(weather_obj.get(sess_key, ''))
+            if current_res and len(current_res) >= 8 and not is_corrupt and ('°C' in current_w or 'Cancelled' in current_w):
+                continue
             # Check Dorna Classification PDF
             class_url = f"https://resources.motogp.com/files/results/2026/{rnd}/MotoGP/{sess_code}/Classification.pdf"
             pdf_b = download_url(class_url)
@@ -580,9 +584,13 @@ def main():
     print("MotoGP Automated Results & Analysis Update Engine")
     print("==================================================")
 
-    # 1. Update event.html with official Dorna classification and weather
-    print("\n[Step 1/5] Checking Dorna Classification PDFs for MotoGP...")
+    # 1. Update event.html with official Dorna classification, PulseLive API, and Sprint/Race lap charts & sectors
+    print("\n[Step 1/5] Checking Dorna Classification PDFs & PulseLive API for MotoGP...")
     class_updated = update_event_html_results()
+    try:
+        update_motogp_event_data()
+    except Exception as e:
+        print(f"  MotoGP event data update notice: {e}")
 
     # 2. Update FP1, PR, and FP2 Analysis datasets (stints, tyres, sectors)
     print("\n[Step 2/5] Checking Dorna Analysis PDFs for FP1, PR, and FP2...")

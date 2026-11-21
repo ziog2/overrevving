@@ -23,7 +23,7 @@ jobs:
 
       - name: Installa dipendenze Python
         run: |
-          pip install --quiet pypdf openpyxl
+          pip install --quiet pypdf==6.21.2 openpyxl
 
       - name: Esegui aggiornamento sessioni MotoGP e analisi stint/settori
         run: |

@@ -40,6 +40,12 @@ FULL_NUM_TO_RIDER = {
     32: "Lorenzo Savadori",
     94: "Jonas Folger",
     5:  "Johann Zarco",
+    96: "Jake Dixon",
+    87: "Remy Gardner",
+    26: "Dani Pedrosa",
+    6:  "Stefan Bradl",
+    29: "Andrea Iannone",
+    4:  "Andrea Dovizioso",
 }
 
 def http_get(url):
@@ -112,6 +118,8 @@ def normalize_rider_name(raw_name):
     if "FOLGER" in n: return "Jonas Folger"
     if "CRUTCHLOW" in n: return "Cal Crutchlow"
     if "LECUONA" in n: return "Iker Lecuona"
+    if "DIXON" in n: return "Jake Dixon"
+    if "GARDNER" in n: return "Remy Gardner"
     return clean_name(raw_name)
 
 def format_class(sess_id):

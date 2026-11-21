@@ -29,7 +29,7 @@ jobs:
       - name: Installa dipendenze
         run: |
           npm install --quiet pdfjs-dist@3.11.174
-          pip install --quiet pypdf openpyxl
+          pip install --quiet pypdf==6.21.2 openpyxl
 
       - name: Scarica ed estrai classifiche da PDF Dorna e API
         run: |
