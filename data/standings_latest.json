@@ -74,7 +74,7 @@
     },
     {
       "name": "Jorge Martin",
-      "pts": 371,
+      "pts": 376,
       "history": [
         18,
         27,
@@ -146,7 +146,7 @@
     },
     {
       "name": "Marco Bezzecchi",
-      "pts": 357,
+      "pts": 369,
       "history": [
         25,
         31,
@@ -218,7 +218,7 @@
     },
     {
       "name": "Pedro Acosta",
-      "pts": 309,
+      "pts": 315,
       "history": [
         32,
         10,
@@ -290,7 +290,7 @@
     },
     {
       "name": "Ai Ogura",
-      "pts": 294,
+      "pts": 298,
       "history": [
         17,
         16,
@@ -362,7 +362,7 @@
     },
     {
       "name": "Fabio Di Giannantonio",
-      "pts": 282,
+      "pts": 285,
       "history": [
         12,
         25,
@@ -434,7 +434,7 @@
     },
     {
       "name": "Raul Fernandez",
-      "pts": 258,
+      "pts": 267,
       "history": [
         23,
         6,
@@ -506,7 +506,7 @@
     },
     {
       "name": "Alex Marquez",
-      "pts": 197,
+      "pts": 204,
       "history": [
         0,
         13,
@@ -938,7 +938,7 @@
     },
     {
       "name": "Fabio Quartararo",
-      "pts": 79,
+      "pts": 81,
       "history": [
         2,
         4,
@@ -1442,7 +1442,7 @@
     },
     {
       "name": "Iker Lecuona",
-      "pts": 18,
+      "pts": 19,
       "history": [
         0,
         0,
@@ -8397,5 +8397,5 @@
       "pts": 0
     }
   ],
-  "_updated": "2026-11-21 14:43:57 · Auto (Domenica)"
+  "_updated": "2026-11-21 21:51:17 · Auto (Domenica)"
 }
