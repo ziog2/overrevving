@@ -1,7 +1,7 @@
 {
   "season": 2026,
   "category": "motogp",
-  "lastUpdated": "2026-11-22 09:30:37 · Auto (Domenica)",
+  "lastUpdated": "2026-11-22 17:42:51 · Auto (Domenica)",
   "calendar": [
     {
       "round": 1,
@@ -133,7 +133,7 @@
   "riders": [
     {
       "name": "Marc Marquez",
-      "pts": 431,
+      "pts": 439,
       "history": [
         9,
         25,
@@ -155,7 +155,7 @@
         12,
         34,
         32,
-        0
+        8
       ],
       "sprint_pts": 164,
       "sprint_history": [
@@ -181,7 +181,7 @@
         12,
         0
       ],
-      "long_pts": 267,
+      "long_pts": 275,
       "long_history": [
         0,
         13,
@@ -203,12 +203,12 @@
         0,
         25,
         20,
-        0
+        8
       ]
     },
     {
       "name": "Jorge Martin",
-      "pts": 376,
+      "pts": 396,
       "history": [
         18,
         27,
@@ -230,7 +230,7 @@
         0,
         0,
         16,
-        5
+        25
       ],
       "sprint_pts": 124,
       "sprint_history": [
@@ -256,7 +256,7 @@
         7,
         5
       ],
-      "long_pts": 252,
+      "long_pts": 272,
       "long_history": [
         13,
         20,
@@ -278,12 +278,12 @@
         0,
         0,
         9,
-        0
+        20
       ]
     },
     {
       "name": "Marco Bezzecchi",
-      "pts": 369,
+      "pts": 394,
       "history": [
         25,
         31,
@@ -305,7 +305,7 @@
         6,
         17,
         25,
-        12
+        37
       ],
       "sprint_pts": 92,
       "sprint_history": [
@@ -331,7 +331,7 @@
         0,
         12
       ],
-      "long_pts": 277,
+      "long_pts": 302,
       "long_history": [
         25,
         25,
@@ -353,7 +353,7 @@
         0,
         10,
         25,
-        0
+        25
       ]
     },
     {
@@ -433,7 +433,7 @@
     },
     {
       "name": "Ai Ogura",
-      "pts": 298,
+      "pts": 309,
       "history": [
         17,
         16,
@@ -455,7 +455,7 @@
         0,
         19,
         16,
-        4
+        15
       ],
       "sprint_pts": 88,
       "sprint_history": [
@@ -481,7 +481,7 @@
         3,
         4
       ],
-      "long_pts": 210,
+      "long_pts": 221,
       "long_history": [
         11,
         11,
@@ -503,12 +503,12 @@
         0,
         13,
         13,
-        0
+        11
       ]
     },
     {
       "name": "Fabio Di Giannantonio",
-      "pts": 285,
+      "pts": 298,
       "history": [
         12,
         25,
@@ -530,7 +530,7 @@
         7,
         13,
         17,
-        3
+        16
       ],
       "sprint_pts": 92,
       "sprint_history": [
@@ -556,7 +556,7 @@
         9,
         3
       ],
-      "long_pts": 193,
+      "long_pts": 206,
       "long_history": [
         10,
         16,
@@ -578,12 +578,12 @@
         0,
         8,
         8,
-        0
+        13
       ]
     },
     {
       "name": "Raul Fernandez",
-      "pts": 267,
+      "pts": 283,
       "history": [
         23,
         6,
@@ -605,7 +605,7 @@
         0,
         0,
         22,
-        9
+        25
       ],
       "sprint_pts": 81,
       "sprint_history": [
@@ -631,7 +631,7 @@
         6,
         9
       ],
-      "long_pts": 186,
+      "long_pts": 202,
       "long_history": [
         16,
         6,
@@ -653,7 +653,7 @@
         0,
         0,
         16,
-        0
+        16
       ]
     },
     {
@@ -808,7 +808,7 @@
     },
     {
       "name": "Enea Bastianini",
-      "pts": 147,
+      "pts": 152,
       "history": [
         4,
         1,
@@ -830,7 +830,7 @@
         0,
         12,
         13,
-        0
+        5
       ],
       "sprint_pts": 23,
       "sprint_history": [
@@ -856,7 +856,7 @@
         2,
         0
       ],
-      "long_pts": 124,
+      "long_pts": 129,
       "long_history": [
         4,
         1,
@@ -878,12 +878,12 @@
         0,
         11,
         11,
-        0
+        5
       ]
     },
     {
       "name": "Fermin Aldeguer",
-      "pts": 129,
+      "pts": 139,
       "history": [
         0,
         8,
@@ -905,7 +905,7 @@
         0,
         0,
         4,
-        0
+        10
       ],
       "sprint_pts": 22,
       "sprint_history": [
@@ -931,7 +931,7 @@
         0,
         0
       ],
-      "long_pts": 107,
+      "long_pts": 117,
       "long_history": [
         0,
         8,
@@ -953,12 +953,12 @@
         0,
         0,
         4,
-        0
+        10
       ]
     },
     {
       "name": "Brad Binder",
-      "pts": 118,
+      "pts": 127,
       "history": [
         13,
         0,
@@ -980,7 +980,7 @@
         4,
         10,
         0,
-        0
+        9
       ],
       "sprint_pts": 19,
       "sprint_history": [
@@ -1006,7 +1006,7 @@
         0,
         0
       ],
-      "long_pts": 99,
+      "long_pts": 108,
       "long_history": [
         9,
         0,
@@ -1028,12 +1028,12 @@
         0,
         7,
         0,
-        0
+        9
       ]
     },
     {
       "name": "Luca Marini",
-      "pts": 117,
+      "pts": 124,
       "history": [
         6,
         5,
@@ -1055,7 +1055,7 @@
         0,
         9,
         0,
-        0
+        7
       ],
       "sprint_pts": 7,
       "sprint_history": [
@@ -1081,7 +1081,7 @@
         0,
         0
       ],
-      "long_pts": 110,
+      "long_pts": 117,
       "long_history": [
         6,
         5,
@@ -1103,12 +1103,12 @@
         0,
         9,
         0,
-        0
+        7
       ]
     },
     {
       "name": "Fabio Quartararo",
-      "pts": 81,
+      "pts": 85,
       "history": [
         2,
         4,
@@ -1130,7 +1130,7 @@
         0,
         5,
         0,
-        2
+        6
       ],
       "sprint_pts": 17,
       "sprint_history": [
@@ -1156,7 +1156,7 @@
         0,
         2
       ],
-      "long_pts": 64,
+      "long_pts": 68,
       "long_history": [
         2,
         0,
@@ -1178,7 +1178,7 @@
         0,
         5,
         0,
-        0
+        4
       ]
     },
     {
@@ -1258,7 +1258,7 @@
     },
     {
       "name": "Franco Morbidelli",
-      "pts": 70,
+      "pts": 71,
       "history": [
         8,
         4,
@@ -1280,7 +1280,7 @@
         0,
         6,
         5,
-        0
+        1
       ],
       "sprint_pts": 12,
       "sprint_history": [
@@ -1306,7 +1306,7 @@
         0,
         0
       ],
-      "long_pts": 58,
+      "long_pts": 59,
       "long_history": [
         8,
         4,
@@ -1328,7 +1328,7 @@
         0,
         6,
         5,
-        0
+        1
       ]
     },
     {
@@ -1407,6 +1407,81 @@
       ]
     },
     {
+      "name": "Jack Miller",
+      "pts": 34,
+      "history": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        8,
+        0,
+        4,
+        4,
+        4,
+        5,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        3
+      ],
+      "sprint_pts": 3,
+      "sprint_history": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        0,
+        0,
+        0
+      ],
+      "long_pts": 31,
+      "long_history": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        8,
+        0,
+        4,
+        4,
+        4,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    {
       "name": "Joan Mir",
       "pts": 33,
       "history": [
@@ -1482,83 +1557,8 @@
       ]
     },
     {
-      "name": "Jack Miller",
-      "pts": 31,
-      "history": [
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        8,
-        0,
-        4,
-        4,
-        4,
-        5,
-        0,
-        0,
-        0,
-        0,
-        3,
-        0,
-        0,
-        0
-      ],
-      "sprint_pts": 3,
-      "sprint_history": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        3,
-        0,
-        0,
-        0
-      ],
-      "long_pts": 28,
-      "long_history": [
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        8,
-        0,
-        4,
-        4,
-        4,
-        5,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ]
-    },
-    {
       "name": "Alex Rins",
-      "pts": 29,
+      "pts": 31,
       "history": [
         1,
         2,
@@ -1580,7 +1580,7 @@
         0,
         4,
         0,
-        0
+        2
       ],
       "sprint_pts": 0,
       "sprint_history": [
@@ -1606,7 +1606,7 @@
         0,
         0
       ],
-      "long_pts": 29,
+      "long_pts": 31,
       "long_history": [
         1,
         2,
@@ -1628,12 +1628,12 @@
         0,
         4,
         0,
-        0
+        2
       ]
     },
     {
       "name": "Iker Lecuona",
-      "pts": 19,
+      "pts": 25,
       "history": [
         0,
         0,
@@ -1655,7 +1655,7 @@
         1,
         1,
         7,
-        1
+        7
       ],
       "sprint_pts": 3,
       "sprint_history": [
@@ -1681,7 +1681,7 @@
         1,
         1
       ],
-      "long_pts": 16,
+      "long_pts": 22,
       "long_history": [
         0,
         0,
@@ -1703,7 +1703,7 @@
         0,
         1,
         6,
-        0
+        6
       ]
     },
     {
