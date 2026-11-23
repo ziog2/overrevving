@@ -11,6 +11,7 @@ import json
 import unicodedata
 import urllib.request
 import urllib.parse
+import urllib.error
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 import html
@@ -30,8 +31,12 @@ STANDINGS_KEY_TO_CAT = {
 FEEDS = [
     {"name": "Motorsport.com F1", "category": "F1", "url": "https://www.motorsport.com/rss/f1/news/"},
     {"name": "Motorsport.com MotoGP", "category": "MotoGP", "url": "https://www.motorsport.com/rss/motogp/news/"},
+    {"name": "Motorsport.com Moto2", "category": "Moto2", "url": "https://www.motorsport.com/rss/moto2/news/"},
+    {"name": "Motorsport.com Moto3", "category": "Moto3", "url": "https://www.motorsport.com/rss/moto3/news/"},
     {"name": "Motorsport.com WSBK", "category": "SBK", "url": "https://www.motorsport.com/rss/wsbk/news/"},
     {"name": "Crash MotoGP", "category": "MotoGP", "url": "https://www.crash.net/rss/motogp"},
+    {"name": "Crash Moto2", "category": "Moto2", "url": "https://www.crash.net/rss/moto2"},
+    {"name": "Crash Moto3", "category": "Moto3", "url": "https://www.crash.net/rss/moto3"},
     {"name": "Crash WSBK", "category": "SBK", "url": "https://www.crash.net/rss/wsbk"},
     {"name": "Crash F1", "category": "F1", "url": "https://www.crash.net/rss/f1"},
     {"name": "Autosport F1", "category": "F1", "url": "https://www.autosport.com/rss/f1/news/"},
@@ -127,11 +132,33 @@ def load_rosters(standings_path="data/standings_latest.json"):
     surname_map = {s: next(iter(cats)) for s, cats in surname_cats.items() if len(cats) == 1}
     return full_map, surname_map
 
+_translation_disabled = False
+
+def load_summary_cache(news_path="data/news.json"):
+    cache = {}
+    if not os.path.exists(news_path):
+        return cache
+    try:
+        with open(news_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        for item in data.get("items", []):
+            link = item.get("link")
+            summary = item.get("aiSummary")
+            if link and summary:
+                cache[link] = summary
+    except Exception:
+        pass
+    return cache
+
 def get_ai_summary(title, raw_desc):
+    global _translation_disabled
     source_text = raw_desc if raw_desc and len(raw_desc) > 30 else title
     clean = clean_text(source_text)
     if len(clean) > 400:
         clean = clean[:397].rsplit(' ', 1)[0] + '...'
+
+    if _translation_disabled:
+        return clean
 
     # Fast Italian translation attempt via MyMemory API
     try:
@@ -144,8 +171,14 @@ def get_ai_summary(title, raw_desc):
             data = json.loads(res.read().decode('utf-8'))
             if data and data.get("responseData") and data["responseData"].get("translatedText"):
                 trans = data["responseData"]["translatedText"].strip()
-                if trans and "MYMEMORY WARNING" not in trans and len(trans) > 5:
+                if "MYMEMORY WARNING" in trans:
+                    _translation_disabled = True
+                    return clean
+                if trans and len(trans) > 5:
                     return trans
+    except urllib.error.HTTPError as e:
+        if e.code == 429:
+            _translation_disabled = True
     except Exception:
         pass
 
@@ -350,7 +383,12 @@ def parse_date(date_str):
         "%Y-%m-%d %H:%M:%S",
     ):
         try:
-            return datetime.strptime(date_str.strip(), fmt)
+            dt = datetime.strptime(date_str.strip(), fmt)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            else:
+                dt = dt.astimezone(timezone.utc)
+            return dt
         except Exception:
             continue
     return datetime.now(timezone.utc)
@@ -361,7 +399,9 @@ def main():
     print("=" * 60)
 
     rosters = load_rosters()
+    summary_cache = load_summary_cache()
     print(f"✓ Roster dinamici caricati: {len(rosters[0])} nomi completi, {len(rosters[1])} cognomi univoci.")
+    print(f"✓ Cache riassunti caricata: {len(summary_cache)} articoli esistenti.")
 
     all_items = []
     seen_links = set()
@@ -406,7 +446,6 @@ def main():
 
                 image = extract_image(it, raw_desc)
                 dt = parse_date(date_str)
-                ai_sum = get_ai_summary(title, raw_desc)
 
                 all_items.append({
                     "id": f"{hash(link) & 0xffffffff:08x}",
@@ -414,7 +453,7 @@ def main():
                     "link": link,
                     "pubDate": dt.strftime("%Y-%m-%d %H:%M:%S"),
                     "pubDateISO": dt.isoformat(),
-                    "aiSummary": ai_sum,
+                    "_raw_desc": raw_desc,
                     "source": name,
                     "category": category,
                     "image": image
@@ -437,6 +476,17 @@ def main():
 
     final_list.sort(key=lambda x: x["pubDateISO"], reverse=True)
 
+    # Traduci / genera riassunto solo per gli articoli finali non già presenti in cache
+    translated_new = 0
+    for item in final_list:
+        raw_desc = item.pop("_raw_desc", "")
+        cached = summary_cache.get(item["link"])
+        if cached:
+            item["aiSummary"] = cached
+        else:
+            item["aiSummary"] = get_ai_summary(item["title"], raw_desc)
+            translated_new += 1
+
     output = {
         "lastUpdated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "totalItems": len(final_list),
@@ -456,10 +506,10 @@ def main():
         f.write("window.NEWS_DATA = " + json.dumps(output, separators=(',', ':'), ensure_ascii=False) + ";\n")
 
     print("\n✓ File generati con successo:")
-    print(f"  - data/news.json ({len(final_list)} notizie)")
+    print(f"  - data/news.json ({len(final_list)} notizie, {translated_new} nuovi riassunti)")
     print(f"  - js/news.js")
     for cat_name in sorted(grouped.keys()):
-        print(f"    • {cat_name}: {len(grouped[cat_name])} notizie")
+        print(f"    • {cat_name}: {min(len(grouped[cat_name]), 40)} notizie (estratte: {len(grouped[cat_name])})")
 
 if __name__ == "__main__":
     main()
