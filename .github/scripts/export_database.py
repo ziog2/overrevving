@@ -21,7 +21,7 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 EXPORTS_DIR = os.path.join(BASE_DIR, "exports")
 CSV_DIR = os.path.join(EXPORTS_DIR, "csv")
 
-CATEGORIES = ['motogp', 'moto2', 'moto3', 'sbk', 'f1', 'mxgp', 'mx2']
+CATEGORIES = ['motogp', 'moto2', 'moto3', 'sbk', 'f1', 'mxgp', 'mx2', 'sx450', 'sx250e', 'sx250w']
 
 CALENDARS_2026 = {
     'motogp': [
@@ -147,6 +147,49 @@ CALENDARS_2026 = {
         {'round': 15, 'name': 'Sweden', 'date': '2026-08-16'},
         {'round': 16, 'name': 'Netherlands', 'date': '2026-08-23'},
         {'round': 17, 'name': 'Turkey', 'date': '2026-09-06'}
+    ],
+    'sx450': [
+        {'round': 1,  'name': 'Anaheim 1',       'date': '2027-01-09'},
+        {'round': 2,  'name': 'San Diego',       'date': '2027-01-16'},
+        {'round': 3,  'name': 'Anaheim 2',       'date': '2027-01-23'},
+        {'round': 4,  'name': 'San Antonio',     'date': '2027-01-30'},
+        {'round': 5,  'name': 'Tampa',           'date': '2027-02-06'},
+        {'round': 6,  'name': 'Glendale',        'date': '2027-02-13'},
+        {'round': 7,  'name': 'Detroit',         'date': '2027-02-20'},
+        {'round': 8,  'name': 'Arlington',       'date': '2027-02-27'},
+        {'round': 9,  'name': 'Daytona',         'date': '2027-03-06'},
+        {'round': 10, 'name': 'Indianapolis',    'date': '2027-03-13'},
+        {'round': 11, 'name': 'Seattle',         'date': '2027-03-20'},
+        {'round': 12, 'name': 'Foxborough',      'date': '2027-04-03'},
+        {'round': 13, 'name': 'Baltimore',       'date': '2027-04-10'},
+        {'round': 14, 'name': 'East Rutherford', 'date': '2027-04-17'},
+        {'round': 15, 'name': 'Pittsburgh',      'date': '2027-04-24'},
+        {'round': 16, 'name': 'Denver',          'date': '2027-05-08'},
+        {'round': 17, 'name': 'Salt Lake City',  'date': '2027-05-15'}
+    ],
+    'sx250e': [
+        {'round': 1,  'name': 'Tampa',           'date': '2027-02-06'},
+        {'round': 2,  'name': 'Glendale',        'date': '2027-02-13'},
+        {'round': 3,  'name': 'Detroit',         'date': '2027-02-20'},
+        {'round': 4,  'name': 'Daytona',         'date': '2027-03-06'},
+        {'round': 5,  'name': 'Indianapolis',    'date': '2027-03-13'},
+        {'round': 6,  'name': 'Foxborough',      'date': '2027-04-03'},
+        {'round': 7,  'name': 'Baltimore',       'date': '2027-04-10'},
+        {'round': 8,  'name': 'East Rutherford', 'date': '2027-04-17'},
+        {'round': 9,  'name': 'Pittsburgh',      'date': '2027-04-24'},
+        {'round': 10, 'name': 'Salt Lake City',  'date': '2027-05-15'}
+    ],
+    'sx250w': [
+        {'round': 1,  'name': 'Anaheim 1',       'date': '2027-01-09'},
+        {'round': 2,  'name': 'San Diego',       'date': '2027-01-16'},
+        {'round': 3,  'name': 'Anaheim 2',       'date': '2027-01-23'},
+        {'round': 4,  'name': 'San Antonio',     'date': '2027-01-30'},
+        {'round': 5,  'name': 'Glendale',        'date': '2027-02-13'},
+        {'round': 6,  'name': 'Arlington',       'date': '2027-02-27'},
+        {'round': 7,  'name': 'Seattle',         'date': '2027-03-20'},
+        {'round': 8,  'name': 'Pittsburgh',      'date': '2027-04-24'},
+        {'round': 9,  'name': 'Denver',          'date': '2027-05-08'},
+        {'round': 10, 'name': 'Salt Lake City',  'date': '2027-05-15'}
     ],
     'f1': [
         {'round': 1, 'name': 'Australia', 'date': '2026-03-08'},

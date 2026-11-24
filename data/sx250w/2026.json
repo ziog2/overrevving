@@ -1,0 +1,205 @@
+{
+  "season": 2026,
+  "category": "sx250w",
+  "lastUpdated": "2026-11-23 04:00:23 · Auto (Domenica)",
+  "calendar": [
+    {
+      "round": 1,
+      "name": "Anaheim 1",
+      "date": "2027-01-09"
+    },
+    {
+      "round": 2,
+      "name": "San Diego",
+      "date": "2027-01-16"
+    },
+    {
+      "round": 3,
+      "name": "Anaheim 2",
+      "date": "2027-01-23"
+    },
+    {
+      "round": 4,
+      "name": "San Antonio",
+      "date": "2027-01-30"
+    },
+    {
+      "round": 5,
+      "name": "Glendale",
+      "date": "2027-02-13"
+    },
+    {
+      "round": 6,
+      "name": "Arlington",
+      "date": "2027-02-27"
+    },
+    {
+      "round": 7,
+      "name": "Seattle",
+      "date": "2027-03-20"
+    },
+    {
+      "round": 8,
+      "name": "Pittsburgh",
+      "date": "2027-04-24"
+    },
+    {
+      "round": 9,
+      "name": "Denver",
+      "date": "2027-05-08"
+    },
+    {
+      "round": 10,
+      "name": "Salt Lake City",
+      "date": "2027-05-15"
+    }
+  ],
+  "riders": [
+    {
+      "name": "Haiden Deegan",
+      "pts": 233
+    },
+    {
+      "name": "Levi Kitchen",
+      "pts": 177
+    },
+    {
+      "name": "Max Anstie",
+      "pts": 168
+    },
+    {
+      "name": "Ryder DiFrancesco",
+      "pts": 164
+    },
+    {
+      "name": "Max Vohland",
+      "pts": 146
+    },
+    {
+      "name": "Hunter Yoder",
+      "pts": 121
+    },
+    {
+      "name": "Cameron Mcadoo",
+      "pts": 107
+    },
+    {
+      "name": "Michael Mosiman",
+      "pts": 107
+    },
+    {
+      "name": "Parker Ross",
+      "pts": 90
+    },
+    {
+      "name": "Lux Turner",
+      "pts": 86
+    },
+    {
+      "name": "Joshua Varize",
+      "pts": 80
+    },
+    {
+      "name": "Carson Mumford",
+      "pts": 70
+    },
+    {
+      "name": "Avery Long",
+      "pts": 58
+    },
+    {
+      "name": "Dilan Schwartz",
+      "pts": 44
+    },
+    {
+      "name": "Robbie Wageman",
+      "pts": 39
+    },
+    {
+      "name": "Crockett Myers",
+      "pts": 39
+    },
+    {
+      "name": "Chance Hymas",
+      "pts": 38
+    },
+    {
+      "name": "Justin Rodbell",
+      "pts": 35
+    },
+    {
+      "name": "Anthony Bourdon",
+      "pts": 28
+    },
+    {
+      "name": "Kayden Minear",
+      "pts": 27
+    },
+    {
+      "name": "Matti Jorgensen",
+      "pts": 26
+    },
+    {
+      "name": "Hunter Schlosser",
+      "pts": 22
+    },
+    {
+      "name": "Ayden Shive",
+      "pts": 18
+    },
+    {
+      "name": "Dominique Thury",
+      "pts": 14
+    },
+    {
+      "name": "Cole Thompson",
+      "pts": 13
+    },
+    {
+      "name": "Preston Masciangelo",
+      "pts": 12
+    },
+    {
+      "name": "Gage Linville",
+      "pts": 11
+    },
+    {
+      "name": "Lorenzo Camporese",
+      "pts": 9
+    },
+    {
+      "name": "Brandon Ray",
+      "pts": 8
+    },
+    {
+      "name": "Nico Koch",
+      "pts": 5
+    },
+    {
+      "name": "Keegan Rowley",
+      "pts": 5
+    },
+    {
+      "name": "Reven Gordon",
+      "pts": 4
+    },
+    {
+      "name": "Ty Freehill",
+      "pts": 2
+    },
+    {
+      "name": "Logan Leitzel",
+      "pts": 1
+    },
+    {
+      "name": "Colby Copp",
+      "pts": 0
+    },
+    {
+      "name": "Slade Varola",
+      "pts": 0
+    }
+  ],
+  "constructors": [],
+  "teams": []
+}

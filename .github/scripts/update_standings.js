@@ -8,7 +8,7 @@ const HEADERS_BASE = {
   'User-Agent': 'Mozilla/5.0 (compatible; GitHubActions-MotorsportUpdater/1.0)'
 };
 
-function httpsGet(url, extraHeaders = {}) {
+function httpsGet(url, extraHeaders = {}, redirectsLeft = 5) {
   return new Promise((resolve, reject) => {
     const parsed = new URL(url);
     const options = {
@@ -18,6 +18,11 @@ function httpsGet(url, extraHeaders = {}) {
       headers: { ...HEADERS_BASE, ...extraHeaders }
     };
     const req = https.request(options, res => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && redirectsLeft > 0) {
+        res.resume();
+        const nextUrl = new URL(res.headers.location, url).toString();
+        return httpsGet(nextUrl, extraHeaders, redirectsLeft - 1).then(resolve, reject);
+      }
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
@@ -331,42 +336,40 @@ async function main() {
     }
   }
 
-  // 3. MXGP
-  try {
-    const mxgpHtml = await httpsGet('https://mxgpresults.com/mxgp/standings');
+  const parseMxgpResultsFirstTable = (html) => {
+    const firstTableMatch = html.match(/<table[\s\S]*?<\/table>/i);
+    const scope = firstTableMatch ? firstTableMatch[0] : html;
     const rowRe = /<tr[^>]*>\s*<td[^>]*>\d+\s*<\/td>\s*<td[^>]*>#\d+\s*<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>[\s\S]*?<td[^>]*>(\d+)\s*<\/td>\s*<\/tr>/g;
-    const mxgpRiders = [];
+    const riders = [];
     let m;
-    while ((m = rowRe.exec(mxgpHtml)) !== null) {
+    while ((m = rowRe.exec(scope)) !== null) {
       const name = m[1].replace(/<[^>]+>/g, '').trim();
       const pts = parseInt(m[2], 10);
-      if (name && !isNaN(pts)) mxgpRiders.push({ name, pts });
+      if (name && !isNaN(pts)) riders.push({ name, pts });
     }
-    if (mxgpRiders.length) {
-      results['mxgp'] = mxgpRiders;
-      console.log(`✓ MXGP: ${mxgpRiders.length} piloti importati`);
-    }
-  } catch (err) {
-    console.warn('Errore MXGP:', err.message);
-  }
+    return riders;
+  };
 
-  // 4. MX2
-  try {
-    const mx2Html = await httpsGet('https://mxgpresults.com/mx2/standings');
-    const rowRe2 = /<tr[^>]*>\s*<td[^>]*>\d+\s*<\/td>\s*<td[^>]*>#\d+\s*<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>[\s\S]*?<td[^>]*>(\d+)\s*<\/td>\s*<\/tr>/g;
-    const mx2Riders = [];
-    let m2;
-    while ((m2 = rowRe2.exec(mx2Html)) !== null) {
-      const name = m2[1].replace(/<[^>]+>/g, '').trim();
-      const pts = parseInt(m2[2], 10);
-      if (name && !isNaN(pts)) mx2Riders.push({ name, pts });
+  // 3. MXGP, MX2 e AMA Supercross (450SX, 250SX East, 250SX West) via mxgpresults.com
+  const MXGP_RESULTS_SOURCES = [
+    { id: 'mxgp',   label: 'MXGP',        url: 'https://mxgpresults.com/mxgp/standings' },
+    { id: 'mx2',    label: 'MX2',         url: 'https://mxgpresults.com/mx2/standings' },
+    { id: 'sx450',  label: 'SX 450',      url: 'https://mxgpresults.com/sx/standings/' },
+    { id: 'sx250e', label: 'SX 250 East', url: 'https://mxgpresults.com/sx/standings/250sxe' },
+    { id: 'sx250w', label: 'SX 250 West', url: 'https://mxgpresults.com/sx/standings/250sxw' },
+  ];
+
+  for (const src of MXGP_RESULTS_SOURCES) {
+    try {
+      const html = await httpsGet(src.url);
+      const riders = parseMxgpResultsFirstTable(html);
+      if (riders.length) {
+        results[src.id] = riders;
+        console.log(`✓ ${src.label}: ${riders.length} piloti importati`);
+      }
+    } catch (err) {
+      console.warn(`Errore ${src.label}:`, err.message);
     }
-    if (mx2Riders.length) {
-      results['mx2'] = mx2Riders;
-      console.log(`✓ MX2: ${mx2Riders.length} piloti importati`);
-    }
-  } catch (err) {
-    console.warn('Errore MX2:', err.message);
   }
 
   // 5. F1
@@ -397,7 +400,7 @@ async function main() {
     "moto2", "moto2_constructors", "moto2_teams",
     "moto3", "moto3_constructors", "moto3_teams",
     "sbk", "sbk_constructors", "sbk_teams",
-    "mxgp", "mx2", "f1", "_updated"
+    "mxgp", "mx2", "sx450", "sx250e", "sx250w", "f1", "_updated"
   ];
   const cleanCurrent = {};
   for (const k of keysToKeep) {

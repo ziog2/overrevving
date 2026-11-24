@@ -1,0 +1,260 @@
+{
+  "season": 2026,
+  "category": "sx450",
+  "lastUpdated": "2026-11-23 04:00:23 · Auto (Domenica)",
+  "calendar": [
+    {
+      "round": 1,
+      "name": "Anaheim 1",
+      "date": "2027-01-09"
+    },
+    {
+      "round": 2,
+      "name": "San Diego",
+      "date": "2027-01-16"
+    },
+    {
+      "round": 3,
+      "name": "Anaheim 2",
+      "date": "2027-01-23"
+    },
+    {
+      "round": 4,
+      "name": "San Antonio",
+      "date": "2027-01-30"
+    },
+    {
+      "round": 5,
+      "name": "Tampa",
+      "date": "2027-02-06"
+    },
+    {
+      "round": 6,
+      "name": "Glendale",
+      "date": "2027-02-13"
+    },
+    {
+      "round": 7,
+      "name": "Detroit",
+      "date": "2027-02-20"
+    },
+    {
+      "round": 8,
+      "name": "Arlington",
+      "date": "2027-02-27"
+    },
+    {
+      "round": 9,
+      "name": "Daytona",
+      "date": "2027-03-06"
+    },
+    {
+      "round": 10,
+      "name": "Indianapolis",
+      "date": "2027-03-13"
+    },
+    {
+      "round": 11,
+      "name": "Seattle",
+      "date": "2027-03-20"
+    },
+    {
+      "round": 12,
+      "name": "Foxborough",
+      "date": "2027-04-03"
+    },
+    {
+      "round": 13,
+      "name": "Baltimore",
+      "date": "2027-04-10"
+    },
+    {
+      "round": 14,
+      "name": "East Rutherford",
+      "date": "2027-04-17"
+    },
+    {
+      "round": 15,
+      "name": "Pittsburgh",
+      "date": "2027-04-24"
+    },
+    {
+      "round": 16,
+      "name": "Denver",
+      "date": "2027-05-08"
+    },
+    {
+      "round": 17,
+      "name": "Salt Lake City",
+      "date": "2027-05-15"
+    }
+  ],
+  "riders": [
+    {
+      "name": "Ken Roczen",
+      "pts": 349
+    },
+    {
+      "name": "Hunter Lawrence",
+      "pts": 346
+    },
+    {
+      "name": "Cooper Webb",
+      "pts": 315
+    },
+    {
+      "name": "Eli Tomac",
+      "pts": 275
+    },
+    {
+      "name": "Justin Cooper",
+      "pts": 273
+    },
+    {
+      "name": "Chase Sexton",
+      "pts": 237
+    },
+    {
+      "name": "Malcolm Stewart",
+      "pts": 204
+    },
+    {
+      "name": "Joey Savatgy",
+      "pts": 194
+    },
+    {
+      "name": "Jorge Prado",
+      "pts": 189
+    },
+    {
+      "name": "Justin Hill",
+      "pts": 188
+    },
+    {
+      "name": "Dylan Ferrandis",
+      "pts": 176
+    },
+    {
+      "name": "Christian Craig",
+      "pts": 154
+    },
+    {
+      "name": "Shane McElrath",
+      "pts": 150
+    },
+    {
+      "name": "Garrett Marchbanks",
+      "pts": 142
+    },
+    {
+      "name": "Colt Nichols",
+      "pts": 116
+    },
+    {
+      "name": "Aaron Plessinger",
+      "pts": 99
+    },
+    {
+      "name": "Jason Anderson",
+      "pts": 84
+    },
+    {
+      "name": "Mitchell Harrison",
+      "pts": 73
+    },
+    {
+      "name": "Jordon Smith",
+      "pts": 68
+    },
+    {
+      "name": "Vince Friese",
+      "pts": 66
+    },
+    {
+      "name": "Dean Wilson",
+      "pts": 60
+    },
+    {
+      "name": "Grant Harlan",
+      "pts": 48
+    },
+    {
+      "name": "R.j. Hampshire",
+      "pts": 38
+    },
+    {
+      "name": "Justin Barcia",
+      "pts": 33
+    },
+    {
+      "name": "Kevin Moranz",
+      "pts": 30
+    },
+    {
+      "name": "Freddie Noren",
+      "pts": 20
+    },
+    {
+      "name": "Cole Thompson",
+      "pts": 16
+    },
+    {
+      "name": "Cade Clason",
+      "pts": 14
+    },
+    {
+      "name": "Tristan Lane",
+      "pts": 13
+    },
+    {
+      "name": "Austin Forkner",
+      "pts": 12
+    },
+    {
+      "name": "Mitchell Oldenburg",
+      "pts": 6
+    },
+    {
+      "name": "Justin Bogle",
+      "pts": 5
+    },
+    {
+      "name": "Ty Masterpool",
+      "pts": 4
+    },
+    {
+      "name": "Joshua Cartwright",
+      "pts": 4
+    },
+    {
+      "name": "Zack Williams",
+      "pts": 2
+    },
+    {
+      "name": "Jeremy Hand",
+      "pts": 2
+    },
+    {
+      "name": "Scott Meshey",
+      "pts": 2
+    },
+    {
+      "name": "Ryan Breece",
+      "pts": 1
+    },
+    {
+      "name": "Max Miller",
+      "pts": 0
+    },
+    {
+      "name": "Kyle Chisholm",
+      "pts": 0
+    },
+    {
+      "name": "Vinny Luhovey",
+      "pts": 0
+    }
+  ],
+  "constructors": [],
+  "teams": []
+}

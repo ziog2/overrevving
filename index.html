@@ -131,7 +131,7 @@
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(7, 275px);
+    grid-template-columns: repeat(10, 275px);
     gap: 16px;
     width: fit-content;
     margin: 0 auto;
@@ -150,6 +150,10 @@
   .sbk    .col-header { background: #2980b9; color: #fff; }
   .f1     .col-header { background: #e10600; color: #fff; }
   .mxgp   .col-header { background: #ff6b00; color: #fff; }
+  .mx2    .col-header { background: #f0a500; color: #fff; }
+  .sx450  .col-header { background: #7d3c98; color: #fff; }
+  .sx250e .col-header { background: #00838f; color: #fff; }
+  .sx250w .col-header { background: #ad1457; color: #fff; }
   .col-table-wrapper {
     max-height: 553px;
     overflow-y: auto;
@@ -562,13 +566,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
 <script>
 const CATEGORIES = [
-  { id: 'motogp', label: 'MotoGP', cls: 'motogp', url: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings' },
-  { id: 'moto2',  label: 'Moto2',  cls: 'moto2',  url: 'https://www.motogp.com/en/world-standing/2026/moto2/championship-standings' },
-  { id: 'moto3',  label: 'Moto3',  cls: 'moto3',  url: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings' },
-  { id: 'sbk',    label: 'SBK',    cls: 'sbk',    url: 'https://www.worldsbk.com/en/standings/riders/2026/SBK' },
-  { id: 'mxgp',   label: 'MXGP',   cls: 'mxgp',   url: 'https://mxgpresults.com/mxgp/standings' },
-  { id: 'mx2',    label: 'MX2',    cls: 'mx2',    url: 'https://mxgpresults.com/mx2/standings' },
-  { id: 'f1',     label: 'F1',     cls: 'f1',     url: 'https://www.mclaren.com/racing/formula-1/standings/' },
+  { id: 'motogp', label: 'MotoGP',      cls: 'motogp', url: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings' },
+  { id: 'moto2',  label: 'Moto2',       cls: 'moto2',  url: 'https://www.motogp.com/en/world-standing/2026/moto2/championship-standings' },
+  { id: 'moto3',  label: 'Moto3',       cls: 'moto3',  url: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings' },
+  { id: 'sbk',    label: 'SBK',         cls: 'sbk',    url: 'https://www.worldsbk.com/en/standings/riders/2026/SBK' },
+  { id: 'mxgp',   label: 'MXGP',        cls: 'mxgp',   url: 'https://mxgpresults.com/mxgp/standings' },
+  { id: 'mx2',    label: 'MX2',         cls: 'mx2',    url: 'https://mxgpresults.com/mx2/standings' },
+  { id: 'sx450',  label: 'SX 450',      cls: 'sx450',  url: 'https://mxgpresults.com/sx/standings' },
+  { id: 'sx250e', label: 'SX 250 East', cls: 'sx250e', url: 'https://mxgpresults.com/sx/standings/250sxe' },
+  { id: 'sx250w', label: 'SX 250 West', cls: 'sx250w', url: 'https://mxgpresults.com/sx/standings/250sxw' },
+  { id: 'f1',     label: 'F1',          cls: 'f1',     url: 'https://www.mclaren.com/racing/formula-1/standings/' },
 ];
 
 async function loadAndRender() {
@@ -635,13 +642,40 @@ function renderAll(all) {
 // ---- Sidebar championship selector ----
 const CHAMP_COLORS = {
   motogp: '#c0392b', moto2: '#e67e22', moto3: '#27ae60',
-  sbk: '#2980b9', mxgp: '#ff6b00', mx2: '#f0a500', f1: '#e10600'
+  sbk: '#2980b9', mxgp: '#ff6b00', mx2: '#f0a500',
+  sx450: '#7d3c98', sx250e: '#00838f', sx250w: '#ad1457',
+  f1: '#e10600'
 };
+
+const ALL_CHAMP_IDS = CATEGORIES.map(c => c.id);
+const KNOWN_CHAMPS_KEY = 'overrevving_known_champs';
 
 let visibleChamps = new Set(
   JSON.parse(localStorage.getItem('overrevving_champs') ||
-  JSON.stringify(CATEGORIES.map(c => c.id)))
+  JSON.stringify(ALL_CHAMP_IDS))
 );
+
+// Auto-attiva una sola volta eventuali nuovi campionati aggiunti al sito
+try {
+  const hasSavedChamps = localStorage.getItem('overrevving_champs') !== null;
+  const legacyChamps = ['motogp', 'moto2', 'moto3', 'sbk', 'mxgp', 'mx2', 'f1'];
+  const rawKnown = localStorage.getItem(KNOWN_CHAMPS_KEY);
+  const knownChamps = new Set(
+    rawKnown ? JSON.parse(rawKnown) : (hasSavedChamps ? legacyChamps : ALL_CHAMP_IDS)
+  );
+  let migrated = !rawKnown;
+  ALL_CHAMP_IDS.forEach(id => {
+    if (!knownChamps.has(id)) {
+      visibleChamps.add(id);
+      knownChamps.add(id);
+      migrated = true;
+    }
+  });
+  if (migrated) {
+    localStorage.setItem(KNOWN_CHAMPS_KEY, JSON.stringify([...knownChamps]));
+    localStorage.setItem('overrevving_champs', JSON.stringify([...visibleChamps]));
+  }
+} catch(e) {}
 
 function saveChampPrefs() {
   localStorage.setItem('overrevving_champs', JSON.stringify([...visibleChamps]));
@@ -712,9 +746,13 @@ const ORDER_KEY = 'overrevving_order';
 function loadOrder() {
   try {
     const saved = JSON.parse(localStorage.getItem(ORDER_KEY));
-    if (saved && Array.isArray(saved)) return saved;
+    if (saved && Array.isArray(saved)) {
+      const valid = saved.filter(id => ALL_CHAMP_IDS.includes(id));
+      const missing = ALL_CHAMP_IDS.filter(id => !valid.includes(id));
+      return [...valid, ...missing];
+    }
   } catch(e) {}
-  return CATEGORIES.map(c => c.id);
+  return ALL_CHAMP_IDS;
 }
 
 function saveOrder() {
@@ -890,6 +928,49 @@ const CALENDARS_2026 = {
     { name: 'Netherlands',   date: '2026-08-23' },
     { name: 'Turkey',        date: '2026-09-06' },
   ],
+  sx450: [
+    { name: 'Anaheim 1',       date: '2027-01-09' },
+    { name: 'San Diego',       date: '2027-01-16' },
+    { name: 'Anaheim 2',       date: '2027-01-23' },
+    { name: 'San Antonio',     date: '2027-01-30' },
+    { name: 'Tampa',           date: '2027-02-06' },
+    { name: 'Glendale',        date: '2027-02-13' },
+    { name: 'Detroit',         date: '2027-02-20' },
+    { name: 'Arlington',       date: '2027-02-27' },
+    { name: 'Daytona',         date: '2027-03-06' },
+    { name: 'Indianapolis',    date: '2027-03-13' },
+    { name: 'Seattle',         date: '2027-03-20' },
+    { name: 'Foxborough',      date: '2027-04-03' },
+    { name: 'Baltimore',       date: '2027-04-10' },
+    { name: 'East Rutherford', date: '2027-04-17' },
+    { name: 'Pittsburgh',      date: '2027-04-24' },
+    { name: 'Denver',          date: '2027-05-08' },
+    { name: 'Salt Lake City',  date: '2027-05-15' },
+  ],
+  sx250e: [
+    { name: 'Tampa',           date: '2027-02-06' },
+    { name: 'Glendale',        date: '2027-02-13' },
+    { name: 'Detroit',         date: '2027-02-20' },
+    { name: 'Daytona',         date: '2027-03-06' },
+    { name: 'Indianapolis',    date: '2027-03-13' },
+    { name: 'Foxborough',      date: '2027-04-03' },
+    { name: 'Baltimore',       date: '2027-04-10' },
+    { name: 'East Rutherford', date: '2027-04-17' },
+    { name: 'Pittsburgh',      date: '2027-04-24' },
+    { name: 'Salt Lake City',  date: '2027-05-15' },
+  ],
+  sx250w: [
+    { name: 'Anaheim 1',       date: '2027-01-09' },
+    { name: 'San Diego',       date: '2027-01-16' },
+    { name: 'Anaheim 2',       date: '2027-01-23' },
+    { name: 'San Antonio',     date: '2027-01-30' },
+    { name: 'Glendale',        date: '2027-02-13' },
+    { name: 'Arlington',       date: '2027-02-27' },
+    { name: 'Seattle',         date: '2027-03-20' },
+    { name: 'Pittsburgh',      date: '2027-04-24' },
+    { name: 'Denver',          date: '2027-05-08' },
+    { name: 'Salt Lake City',  date: '2027-05-15' },
+  ],
   f1: [
     { name: 'Australia',     date: '2026-03-08' },
     { name: 'China',         date: '2026-03-15' },
@@ -922,7 +1003,7 @@ function loadCountdown() {
   countdownStarted = true;
   const now = new Date();
   // Start countdown for each category independently
-  ['motogp', 'moto2', 'moto3', 'sbk', 'mxgp', 'mx2', 'f1'].forEach(catId => {
+  ['motogp', 'moto2', 'moto3', 'sbk', 'mxgp', 'mx2', 'sx450', 'sx250e', 'sx250w', 'f1'].forEach(catId => {
     const cal = CALENDARS_2026[catId];
     if (!cal) return;
 
@@ -994,6 +1075,9 @@ const CHAMP_TO_NEWS_CAT = {
   sbk:    ['SBK', 'WSBK'],
   mxgp:   ['MXGP'],
   mx2:    ['MX2'],
+  sx450:  ['MXGP'],
+  sx250e: ['MX2'],
+  sx250w: ['MX2'],
   f1:     ['F1']
 };
 

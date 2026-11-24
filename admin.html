@@ -51,6 +51,9 @@
   .f1     .col-header { background: #e10600; color: #fff; }
   .mxgp   .col-header { background: #ff6b00; color: #fff; }
   .mx2    .col-header { background: #f0a500; color: #fff; }
+  .sx450  .col-header { background: #7d3c98; color: #fff; }
+  .sx250e .col-header { background: #00838f; color: #fff; }
+  .sx250w .col-header { background: #ad1457; color: #fff; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   thead th {
     padding: 7px 8px; text-align: left; font-size: 11px; font-weight: 600;
@@ -427,6 +430,9 @@
       <option value="sbk">SBK</option>
       <option value="mxgp">MXGP</option>
       <option value="mx2">MX2</option>
+      <option value="sx450">SX 450</option>
+      <option value="sx250e">SX 250 East</option>
+      <option value="sx250w">SX 250 West</option>
       <option value="f1">F1</option>
     </select>
     <label>Dati (una riga per pilota: Nome, Punti)</label>
@@ -463,13 +469,16 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 const ADMIN_PWD = 'andrea99!'; // ← CAMBIA QUESTA PASSWORD
 
 const CATEGORIES = [
-  { id: 'motogp', label: 'MotoGP', cls: 'motogp', url: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings' },
-  { id: 'moto2',  label: 'Moto2',  cls: 'moto2',  url: 'https://www.motogp.com/en/world-standing/2026/moto2/championship-standings' },
-  { id: 'moto3',  label: 'Moto3',  cls: 'moto3',  url: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings' },
-  { id: 'sbk',    label: 'SBK',    cls: 'sbk',    url: 'https://www.worldsbk.com/en/standings/riders/2026/SBK' },
-  { id: 'mxgp',   label: 'MXGP',   cls: 'mxgp',   url: 'https://mxgpresults.com/mxgp/standings' },
-  { id: 'mx2',    label: 'MX2',    cls: 'mx2',    url: 'https://mxgpresults.com/mx2/standings' },
-  { id: 'f1',     label: 'F1',     cls: 'f1',     url: 'https://www.mclaren.com/racing/formula-1/standings/' },
+  { id: 'motogp', label: 'MotoGP',      cls: 'motogp', url: 'https://www.motogp.com/en/world-standing/2026/motogp/championship-standings' },
+  { id: 'moto2',  label: 'Moto2',       cls: 'moto2',  url: 'https://www.motogp.com/en/world-standing/2026/moto2/championship-standings' },
+  { id: 'moto3',  label: 'Moto3',       cls: 'moto3',  url: 'https://www.motogp.com/en/world-standing/2026/moto3/championship-standings' },
+  { id: 'sbk',    label: 'SBK',         cls: 'sbk',    url: 'https://www.worldsbk.com/en/standings/riders/2026/SBK' },
+  { id: 'mxgp',   label: 'MXGP',        cls: 'mxgp',   url: 'https://mxgpresults.com/mxgp/standings' },
+  { id: 'mx2',    label: 'MX2',         cls: 'mx2',    url: 'https://mxgpresults.com/mx2/standings' },
+  { id: 'sx450',  label: 'SX 450',      cls: 'sx450',  url: 'https://mxgpresults.com/sx/standings' },
+  { id: 'sx250e', label: 'SX 250 East', cls: 'sx250e', url: 'https://mxgpresults.com/sx/standings/250sxe' },
+  { id: 'sx250w', label: 'SX 250 West', cls: 'sx250w', url: 'https://mxgpresults.com/sx/standings/250sxw' },
+  { id: 'f1',     label: 'F1',          cls: 'f1',     url: 'https://www.mclaren.com/racing/formula-1/standings/' },
 ];
 
 const PULSELIVE_SEASON_2026 = 'e88b4e43-2209-47aa-8e83-0e0b1cedde6e';

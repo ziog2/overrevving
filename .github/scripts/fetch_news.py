@@ -25,6 +25,9 @@ STANDINGS_KEY_TO_CAT = {
     "sbk": "SBK",
     "mxgp": "MXGP",
     "mx2": "MX2",
+    "sx450": "MXGP",
+    "sx250e": "MX2",
+    "sx250w": "MX2",
     "f1": "F1",
 }
 

@@ -1,0 +1,217 @@
+{
+  "season": 2026,
+  "category": "sx250e",
+  "lastUpdated": "2026-11-23 04:00:23 · Auto (Domenica)",
+  "calendar": [
+    {
+      "round": 1,
+      "name": "Tampa",
+      "date": "2027-02-06"
+    },
+    {
+      "round": 2,
+      "name": "Glendale",
+      "date": "2027-02-13"
+    },
+    {
+      "round": 3,
+      "name": "Detroit",
+      "date": "2027-02-20"
+    },
+    {
+      "round": 4,
+      "name": "Daytona",
+      "date": "2027-03-06"
+    },
+    {
+      "round": 5,
+      "name": "Indianapolis",
+      "date": "2027-03-13"
+    },
+    {
+      "round": 6,
+      "name": "Foxborough",
+      "date": "2027-04-03"
+    },
+    {
+      "round": 7,
+      "name": "Baltimore",
+      "date": "2027-04-10"
+    },
+    {
+      "round": 8,
+      "name": "East Rutherford",
+      "date": "2027-04-17"
+    },
+    {
+      "round": 9,
+      "name": "Pittsburgh",
+      "date": "2027-04-24"
+    },
+    {
+      "round": 10,
+      "name": "Salt Lake City",
+      "date": "2027-05-15"
+    }
+  ],
+  "riders": [
+    {
+      "name": "Cole Davies",
+      "pts": 231
+    },
+    {
+      "name": "Seth Hammaker",
+      "pts": 180
+    },
+    {
+      "name": "Daxton Bennick",
+      "pts": 160
+    },
+    {
+      "name": "Coty Schock",
+      "pts": 140
+    },
+    {
+      "name": "Nate Thrasher",
+      "pts": 137
+    },
+    {
+      "name": "Devin Simonson",
+      "pts": 124
+    },
+    {
+      "name": "Henry Miller",
+      "pts": 104
+    },
+    {
+      "name": "Jo Shimoda",
+      "pts": 100
+    },
+    {
+      "name": "Derek Kelley",
+      "pts": 89
+    },
+    {
+      "name": "Nicholas Romano",
+      "pts": 72
+    },
+    {
+      "name": "Pierce Brown",
+      "pts": 63
+    },
+    {
+      "name": "Marshal Weltin",
+      "pts": 53
+    },
+    {
+      "name": "Kyle Peters",
+      "pts": 51
+    },
+    {
+      "name": "Luke Neese",
+      "pts": 47
+    },
+    {
+      "name": "Gavin Towers",
+      "pts": 46
+    },
+    {
+      "name": "Luke Clout",
+      "pts": 45
+    },
+    {
+      "name": "Caden Dudney",
+      "pts": 44
+    },
+    {
+      "name": "Cullin Park",
+      "pts": 40
+    },
+    {
+      "name": "Landen Gordon",
+      "pts": 36
+    },
+    {
+      "name": "Izaih Clark",
+      "pts": 32
+    },
+    {
+      "name": "Jeremy Hand",
+      "pts": 30
+    },
+    {
+      "name": "Jalek Swoll",
+      "pts": 27
+    },
+    {
+      "name": "Landon Hartz",
+      "pts": 26
+    },
+    {
+      "name": "Drew Adams",
+      "pts": 25
+    },
+    {
+      "name": "Bryton Carroll",
+      "pts": 13
+    },
+    {
+      "name": "John Short",
+      "pts": 13
+    },
+    {
+      "name": "Evan Ferry",
+      "pts": 9
+    },
+    {
+      "name": "Luca Marsalisi",
+      "pts": 9
+    },
+    {
+      "name": "Valentin Guillod",
+      "pts": 8
+    },
+    {
+      "name": "Marcus Phelps",
+      "pts": 7
+    },
+    {
+      "name": "Leum Oehlhof",
+      "pts": 7
+    },
+    {
+      "name": "Cj Benard",
+      "pts": 7
+    },
+    {
+      "name": "Ryder Floyd",
+      "pts": 6
+    },
+    {
+      "name": "Hamden Hudson",
+      "pts": 6
+    },
+    {
+      "name": "Jace Kessler",
+      "pts": 4
+    },
+    {
+      "name": "Russell Buccheri",
+      "pts": 4
+    },
+    {
+      "name": "Bryce Shelly",
+      "pts": 2
+    },
+    {
+      "name": "Jonathan Getz",
+      "pts": 2
+    },
+    {
+      "name": "Casey Cochran",
+      "pts": 2
+    }
+  ],
+  "constructors": [],
+  "teams": []
+}
