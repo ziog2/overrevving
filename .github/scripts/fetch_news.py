@@ -240,8 +240,8 @@ URL_RULES = [
     ("Moto2",  re.compile(r'/moto2/', re.IGNORECASE), 6.0),
     ("Moto3",  re.compile(r'/moto3/', re.IGNORECASE), 6.0),
     ("SBK",    re.compile(r'/(?:wsbk|worldsbk|sbk|superbike|bsb)/', re.IGNORECASE), 6.0),
-    ("MX2",    re.compile(r'(?:/(?:mx2|sx2)/|\b(?:mx2|sx2|250-?sx|250-?prosport)\b)', re.IGNORECASE), 6.0),
-    ("MXGP",   re.compile(r'/mxgp/', re.IGNORECASE), 5.0),
+    ("MX2",    re.compile(r'(?:/(?:mx2|sx2)/|\b(?:mx2|sx2|emx250|250-?(?:sx|prosport|pro-?sport|class|cc|futures|east|west|limited|[ab]))\b)', re.IGNORECASE), 6.0),
+    ("MXGP",   re.compile(r'(?:/(?:mxgp|sx1)/|\b(?:mxgp|sx1|450-?(?:sx|pro|class|cc|[ab]))\b)', re.IGNORECASE), 6.0),
 ]
 
 # Regole esplicite per keyword di campionato (sempre con word boundary \b)
@@ -251,9 +251,15 @@ TITLE_KEYWORDS = {
     "Moto2":  re.compile(r'\bmoto2\b', re.IGNORECASE),
     "Moto3":  re.compile(r'\bmoto3\b', re.IGNORECASE),
     "SBK":    re.compile(r'\b(?:wsbk|worldsbk|sbk|world\s+superbike|superbike|worldssp|bsb|british\s+superbike)\b', re.IGNORECASE),
-    "MX2":    re.compile(r'\b(?:mx2|sx2|250\s*sx|250sx|250\s*pro\s*sport|250\s*prosport|250\s*class|250\s*[ab]|250cc|emx250)\b', re.IGNORECASE),
-    "MXGP":   re.compile(r'\b(?:mxgp|sx1|450\s*sx|450sx|450\s*class|450\s*pro|450cc|wmx|women\'?s\s+motocross|fim\s+motocross|british\s+motocross|paris\s+supercross|ama\s+motocross|supercross|motocross)\b', re.IGNORECASE),
+    "MX2":    re.compile(r'\b(?:mx2|sx2|emx250|250\s*sx|250sx|250\s*pro\s*sport|250\s*prosport|250\s*class|250\s*(?:a|b|c|east|west|futures|limited|main|moto)\b|250cc)\b', re.IGNORECASE),
+    "MXGP":   re.compile(r'\b(?:mxgp|sx1|450\s*sx|450sx|450\s*class|450\s*pro|450\s*(?:a|b|main|moto)\b|450cc|wmx|women\'?s\s+motocross)\b', re.IGNORECASE),
 }
+
+# Termini ombrello MX/SX generici (valgono per MXGP solo se non c'è un'indicazione esplicita di classe 250/MX2)
+MX_UMBRELLA_RE = re.compile(
+    r'\b(?:supercross|motocross|smx|fim\s+motocross|british\s+motocross|paris\s+supercross|ama\s+motocross|pro\s+motocross)\b',
+    re.IGNORECASE,
+)
 
 # Menzioni secondarie/passate nel titolo (es. "Ex-MotoGP", "after losing MotoGP ride", "after Moto2 snub", "Moto3 champion")
 SECONDARY_MENTION_PATTERNS = {
@@ -293,6 +299,8 @@ def detect_category(title, desc_raw, default_cat, link="", rss_tags=None, roster
     for cat, pat in TITLE_KEYWORDS.items():
         if any(pat.search(t) for t in rss_tags_norm):
             scores[cat] += 4.0
+    if any(MX_UMBRELLA_RE.search(t) for t in rss_tags_norm):
+        scores["MXGP"] += 1.0
 
     # 4. Segnale dalle keyword esplicite nel titolo
     for cat, pat in TITLE_KEYWORDS.items():
@@ -304,9 +312,11 @@ def detect_category(title, desc_raw, default_cat, link="", rss_tags=None, roster
                 # MX2 / SX2 / 250cc è una sottoclasse specifica rispetto al generico "Supercross"/"Motocross"
                 scores[cat] += 9.0
             elif cat == "MXGP":
-                scores[cat] += 6.0
+                scores[cat] += 8.0
             else:
                 scores[cat] += 7.0
+    if MX_UMBRELLA_RE.search(title_norm):
+        scores["MXGP"] += 2.0
 
     # 5. Segnale dalle keyword esplicite nella descrizione pulita
     for cat, pat in TITLE_KEYWORDS.items():
@@ -314,9 +324,11 @@ def detect_category(title, desc_raw, default_cat, link="", rss_tags=None, roster
             if cat == "MX2":
                 scores[cat] += 4.0
             elif cat == "MXGP":
-                scores[cat] += 2.0
+                scores[cat] += 3.0
             else:
                 scores[cat] += 3.0
+    if MX_UMBRELLA_RE.search(desc_norm):
+        scores["MXGP"] += 1.0
 
     # 6. Segnale di supporto dai roster aggiornati (data/standings_latest.json)
     if rosters:
