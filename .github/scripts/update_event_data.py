@@ -654,26 +654,45 @@ def get_track_cond(sess):
             return 'Wet' if 'wet' in track.lower() else 'Dry'
     return 'Dry'
 
-def update_file_calendar_weather(file_path, cal_name, weather_str):
+def update_file_calendar_weather(file_path, cal_name, weather_str, cat_section=None):
     if not os.path.exists(file_path):
         return
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
+    if cat_section:
+        sec_match = re.search(rf"({re.escape(cat_section)}\s*:\s*\[[\s\S]*?\n\s*\])", content)
+        if not sec_match:
+            return
+        sec_start, sec_end = sec_match.start(1), sec_match.end(1)
+        target_slice = content[sec_start:sec_end]
+    else:
+        sec_start, sec_end = 0, len(content)
+        target_slice = content
+
+    # Preserve multi-part race weather (e.g. RACE1: Dry RACE2: Dry)
+    if weather_str.startswith('RACE:') and re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'RACE1:", target_slice):
+        return
+
     # Check if weather is already present with the desired string
-    if re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'{re.escape(weather_str)}'", content):
+    if re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'{re.escape(weather_str)}'", target_slice):
         return
 
     # If weather is already present with a partial string (e.g. SPR only), update it
-    if re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'[^']*'", content):
-        content = re.sub(rf"(name:\s*'{cal_name}'[^\}}]*weather:\s*)'[^']*'", rf"\1'{weather_str}'", content)
+    if re.search(rf"name:\s*'{cal_name}'[^\}}]*weather:\s*'[^']*'", target_slice):
+        new_slice = re.sub(rf"(name:\s*'{cal_name}'[^\}}]*weather:\s*)'[^']*'", rf"\1'{weather_str}'", target_slice)
     else:
         # Append weather
-        content = re.sub(rf"(name:\s*'{cal_name}',\s*date:\s*'[^']+')(?!\s*,\s*weather:)(\s*\}})", rf"\1, weather: '{weather_str}'\2", content)
+        new_slice = re.sub(rf"(name:\s*'{cal_name}',\s*date:\s*'[^']+')(?!\s*,\s*weather:)(\s*\}})", rf"\1, weather: '{weather_str}'\2", target_slice)
 
+    if new_slice == target_slice:
+        return
+
+    content = content[:sec_start] + new_slice + content[sec_end:]
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
-    print(f"✓ Aggiornato meteo calendario per {cal_name} in {file_path}: {weather_str}")
+    sec_info = f" [{cat_section}]" if cat_section else ""
+    print(f"✓ Aggiornato meteo calendario per {cal_name}{sec_info} in {file_path}: {weather_str}")
 
 # --- MAIN AUTOMATION FUNCTION ---
 
@@ -867,7 +886,7 @@ def main():
                 cal_badge = None
 
             if cal_badge:
-                update_file_calendar_weather("category.html", cal_name, cal_badge)
+                update_file_calendar_weather("category.html", cal_name, cal_badge, cat_section="motogp")
                 update_file_calendar_weather("motogp.html", cal_name, cal_badge)
 
         # 3. LAP CHARTS & SECTOR TELEMETRY
@@ -1186,6 +1205,12 @@ def update_moto2():
                     updated = True
                     print(f"✓ Aggiornato meteo {short} in SESSION_WEATHER_DATA Moto2!")
 
+        cal_name = SHORT_TO_CAL_NAME.get(short)
+        if cal_name:
+            rac_cond = get_track_cond(rac_sess) if rac_sess else (get_track_cond(raw_rac_sess) if (raw_rac_sess and raw_rac_sess.get('status') == 'CANCELLED') else None)
+            if rac_cond:
+                update_file_calendar_weather("category.html", cal_name, f"RACE: {rac_cond}", cat_section="moto2")
+
         # Lap charts & sectors from Analysis.pdf
         if rac_sess:
             idx_rac_sec = html_content.find('const EVENT_LAPS_DATA =')
@@ -1423,6 +1448,12 @@ def update_moto3():
                     html_content = html_content[:idx_w_start] + new_w_slice + html_content[idx_w_end:]
                     updated = True
                     print(f"✓ Aggiornato meteo {short} in SESSION_WEATHER_DATA Moto3!")
+
+        cal_name = SHORT_TO_CAL_NAME.get(short)
+        if cal_name:
+            rac_cond = get_track_cond(rac_sess) if rac_sess else (get_track_cond(raw_rac_sess) if (raw_rac_sess and raw_rac_sess.get('status') == 'CANCELLED') else None)
+            if rac_cond:
+                update_file_calendar_weather("category.html", cal_name, f"RACE: {rac_cond}", cat_section="moto3")
 
         # Lap charts & sectors from Analysis.pdf
         if rac_sess:

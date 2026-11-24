@@ -297,16 +297,9 @@
     }
 
     .col-header {
-      padding: 14px 16px;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      border-bottom: 1px solid #3a3a42;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      min-height: 52px;
+      padding: 10px 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       box-sizing: border-box;
     }
 
@@ -315,18 +308,14 @@
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .col-header-sub {
       font-size: 11px;
       font-weight: 500;
       opacity: 0.88;
+      margin-top: 3px;
       letter-spacing: 0.02em;
-      text-transform: uppercase;
-      text-align: right;
     }
 
     .fp1-header  { background: #8e44ad; color: #fff; }
@@ -501,10 +490,30 @@
     }
 
     .sector-title {
-      font-size: 17px;
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: -0.01em;
-      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #eee;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .fp1-weather-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #cbd5e1;
+      letter-spacing: 0.02em;
+      text-transform: none;
     }
 
     .sector-subtitle {
@@ -92455,6 +92464,21 @@
         toggleRacProgressionMinimize();
       }
 
+      // Environmental conditions (Weather: condition, air temp, track temp)
+      const racWeatherData = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[currentGpShort]) ? SESSION_WEATHER_DATA[currentGpShort] : {};
+      const rawRacW = racWeatherData.race || '';
+      const cleanRacW = rawRacW.replace(/&#xB0;/g, '°').replace(/Â°/g, '°').replace(/Â/g, '').replace(/°C°C/g, '°C').trim();
+      ['rac-section-weather', 'sector-section-weather'].forEach(elId => {
+        const wEl = document.getElementById(elId);
+        if (!wEl) return;
+        if (cleanRacW && cleanRacW !== 'Dry | Air: -- | Track: --') {
+          wEl.textContent = cleanRacW;
+          wEl.style.display = 'inline-flex';
+        } else {
+          wEl.style.display = 'none';
+        }
+      });
+
       renderSingleLapChart('RAC', 'chart-rac-lapchart', currentGpShort, activeFavRiders);
       renderSingleGapChart('RAC', 'chart-rac-gapchart', currentGpShort, activeFavRiders);
       renderPaceSection('RAC', currentGpShort, activeFavRiders);
@@ -92585,9 +92609,13 @@
       const gpWeather = (typeof SESSION_WEATHER_DATA !== 'undefined' && SESSION_WEATHER_DATA[gp.short]) ? SESSION_WEATHER_DATA[gp.short] : {};
       const isRaceCancelled = Boolean(gpWeather.race && gpWeather.race.toLowerCase().includes('cancel'));
       const cleanW = (txt, hasData) => {
-        if (!txt || txt === 'Cancelled') return '';
-        if (txt.includes('--') && !hasData) return '';
-        return txt;
+        if (txt && (txt.toLowerCase() === 'cancelled' || txt.toLowerCase() === 'canceled')) {
+          return 'Cancelled';
+        }
+        if (!txt || !txt.trim() || txt.trim().startsWith('|')) {
+          return hasData ? 'Dry | Air: -- | Track: --' : 'Not started yet';
+        }
+        return txt.replace(/&#xB0;/g, '°').replace(/Â°/g, '°').replace(/Â/g, '').replace(/°C°C/g, '°C');
       };
 
       const fp1W = cleanW(gpWeather.fp1, fp1Results.length > 0);
@@ -92596,7 +92624,7 @@
       const q1W = cleanW(gpWeather.q1, q1Results.length > 0);
       const q2W = cleanW(gpWeather.q2, q2Results.length > 0);
       const gridW = cleanW(gpWeather.grid, gridResults.length > 0);
-      const raceW = gpWeather.race === 'Cancelled' ? 'Cancelled' : cleanW(gpWeather.race, raceResults.length > 0);
+      const raceW = cleanW(gpWeather.race, raceResults.length > 0);
 
       window.CURRENT_EVENT_SHORT = gp.short;
 
@@ -92901,7 +92929,10 @@
         <div class="sector-section" id="rac-progression-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">📊 RACE - Progression, Gap to Leader, Pace Delta &amp; Lap Times Density</div>
+              <div class="sector-title">
+                <span>📊 RACE - Progression, Gap to Leader, Pace Delta &amp; Lap Times Density</span>
+                <span class="fp1-weather-badge" id="rac-section-weather" style="display: none;"></span>
+              </div>
               <div class="sector-subtitle">Comparing favorite riders (★) &middot; Lap Chart, Gap to Leader, 3-Part Pace Delta &amp; Lap Time Distribution &middot; Excludes Lap 1 for Pace</div>
             </div>
             <button class="win-btn" onclick="toggleRacProgressionMinimize()" title="Minimize / Expand">
@@ -92946,7 +92977,10 @@
         <div class="sector-section" id="sector-section" style="display: none;">
           <div class="sector-header">
             <div>
-              <div class="sector-title">⏱️ RACE - Lap-by-Lap Sector Times Comparison</div>
+              <div class="sector-title">
+                <span>⏱️ RACE - Lap-by-Lap Sector Times Comparison</span>
+                <span class="fp1-weather-badge" id="sector-section-weather" style="display: none;"></span>
+              </div>
               <div class="sector-subtitle">Comparing favorite riders (★) &middot; Sectors T1, T2, T3, T4 &middot; Excludes Lap 1 &amp; Final Lap</div>
             </div>
             <button class="win-btn" onclick="toggleSectorMinimize()" title="Minimize / Expand">
