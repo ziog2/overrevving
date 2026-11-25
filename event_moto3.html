@@ -6,6 +6,9 @@
   <title>Moto3 Event Details · Overrevving</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="js/chart.min.js"></script>
+  <script src="js/moto3_fp1_data.js"></script>
+  <script src="js/moto3_fp1_sectors.js"></script>
+  <script src="js/fp1_analysis.js"></script>
   <style>
     :root {
       --bg: #18181c;
@@ -796,6 +799,186 @@
       color: var(--text-sub);
       font-size: 16px;
     }
+
+    /* FP1 Analysis & Stints Styling */
+    .sector-section.minimized {
+      padding-bottom: 18px;
+    }
+    .sector-section.minimized .sector-header {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .sector-section.minimized .sector-subtitle,
+    .sector-section.minimized .sector-grid-2x2,
+    .sector-section.minimized .sector-grid-1row,
+    .sector-section.minimized #fp1-analysis-grid,
+    .sector-section.minimized .progression-grid-unified,
+    .sector-section.minimized .progression-grid-2col,
+    .sector-section.minimized .fp1-sectors-block {
+      display: none !important;
+    }
+
+    #fp1-analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      width: 100%;
+    }
+    #fp1-analysis-grid.no-heatmap {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #fp1-sector-grid,
+    .sector-grid-1row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      width: 100%;
+    }
+    #fp1-sector-grid .sector-card,
+    .sector-grid-1row .sector-card {
+      grid-area: auto !important;
+    }
+    #fp1-sector-grid .sector-canvas-container {
+      height: 250px;
+    }
+
+    @media (max-width: 1680px) {
+      #fp1-analysis-grid {
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      }
+      #fp1-analysis-grid.no-heatmap {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 1400px) {
+      #fp1-analysis-grid.no-heatmap {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 1300px) {
+      #fp1-sector-grid,
+      .sector-grid-1row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 768px) {
+      #fp1-analysis-grid,
+      #fp1-analysis-grid.no-heatmap,
+      #fp1-sector-grid,
+      .sector-grid-1row {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    #fp1-tooltip, #fp1-heatmap-tooltip, #fp1-deg-tooltip {
+      position: absolute;
+      display: none;
+      pointer-events: none;
+      z-index: 100;
+      background: #181c24;
+      border: 1px solid #384252;
+      border-radius: 8px;
+      padding: 10px 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      font-size: 11px;
+      color: #e6edf3;
+      min-width: 180px;
+    }
+    #fp1-tooltip .tt-title, #fp1-heatmap-tooltip .tt-title, #fp1-deg-tooltip .tt-title {
+      font-weight: 800;
+      font-size: 12px;
+      color: #fff;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #2d3542;
+      padding-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    #fp1-tooltip .tt-row, #fp1-heatmap-tooltip .tt-row, #fp1-deg-tooltip .tt-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 3px;
+      color: #8b949e;
+    }
+    #fp1-tooltip .tt-val, #fp1-heatmap-tooltip .tt-val, #fp1-deg-tooltip .tt-val {
+      font-weight: 700;
+      color: #f0f6fc;
+    }
+
+    .deg-stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+      gap: 6px;
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .deg-stat-pill {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 5px;
+      padding: 4px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .deg-stat-head {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 800;
+      color: #cbd5e1;
+    }
+    .deg-stat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .deg-stat-val {
+      font-size: 10px;
+      font-weight: 800;
+      color: #ffffff;
+      font-feature-settings: "tnum";
+    }
+    .deg-stat-sub {
+      font-size: 8px;
+      color: #8b949e;
+    }
+
+    .fp1-toggle-group {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .fp1-toggle-btn {
+      background: transparent;
+      border: none;
+      color: #8b949e;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: inherit;
+      padding: 2px 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      line-height: 1.3;
+    }
+    .fp1-toggle-btn:hover {
+      color: #ffffff;
+    }
+    .fp1-toggle-btn.active {
+      background: #8e44ad;
+      color: #ffffff;
+      box-shadow: 0 1px 4px rgba(142, 68, 173, 0.4);
+    }
   </style>
 </head>
 <body>
@@ -892,6 +1075,7 @@
       }
       const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
       if (cur) {
+        if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(cur);
         if (typeof renderRacLapChart === 'function') renderRacLapChart(cur);
         if (typeof renderRacGapChart === 'function') renderRacGapChart(cur);
         if (typeof renderSectorCharts === 'function') renderSectorCharts(cur);
@@ -92579,6 +92763,7 @@
         }
       });
 
+      if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection();
       renderRacProgression();
       renderSectorCharts();
     }
@@ -92936,6 +93121,148 @@
             </div>
           </div>
         </div>
+
+        <!-- FP1 ANALYSIS & STINTS STRATEGY SECTION -->
+        <div class="sector-section" id="fp1-analysis-section" style="display: none;">
+          <div class="sector-header">
+            <div>
+              <div class="sector-title">
+                <span id="fp1-section-title-text">&#x23F1; FP1 - Free Practice 1 Analysis &amp; Stints Strategy</span>
+                <span class="fp1-weather-badge" id="fp1-section-weather" style="display: none;"></span>
+              </div>
+              <div class="sector-subtitle" id="fp1-section-subtitle">Comparing favorite riders (&#x2605;) &middot; Stints progression, pace degradation, lap times density &amp; fastest lap per run</div>
+            </div>
+            <button class="win-btn" id="fp1-analysis-min-btn" onclick="toggleFp1AnalysisMinimize()" title="Minimize / Expand">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="fp1-analysis-min-icon">
+                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="progression-grid-unified" id="fp1-analysis-grid">
+            <!-- CARD 1: STINTS PROGRESSION -->
+            <div class="sector-card" id="fp1-stints-card">
+              <div class="sector-card-title">
+                <span id="fp1-stints-title">Stints Progression</span>
+                <span class="sector-card-badge" id="fp1-stints-badge">Run by Run &middot; Laps &amp; Pace</span>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-fp1-stints"></canvas>
+                <div id="fp1-tooltip"></div>
+              </div>
+            </div>
+
+            <!-- CARD 2: TYRE CHOICES HEATMAP (shown automatically if Dorna publishes tyre compounds) -->
+            <div class="sector-card" id="fp1-heatmap-card" style="display: none;">
+              <div class="sector-card-title">
+                <span>Tyre Choices Heatmap</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="fp1-heatmap-btn-matrix" onclick="setFp1HeatmapMode('matrix')">Matrix 3&times;3</button>
+                  <button type="button" class="fp1-toggle-btn" id="fp1-heatmap-btn-riders" onclick="setFp1HeatmapMode('riders')">Riders</button>
+                </div>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-fp1-heatmap"></canvas>
+                <div id="fp1-heatmap-tooltip"></div>
+              </div>
+            </div>
+
+            <!-- CARD 3: PACE / TYRE DEGRADATION -->
+            <div class="sector-card" id="fp1-deg-card">
+              <div class="sector-card-title">
+                <span id="fp1-deg-title">Pace Degradation</span>
+                <div class="fp1-toggle-group" id="fp1-deg-filter-group"></div>
+              </div>
+              <div class="progression-canvas-container" style="height: 258px;">
+                <canvas id="chart-fp1-deg"></canvas>
+                <div id="fp1-deg-tooltip"></div>
+              </div>
+              <div class="deg-stats-row" id="deg-stats-strip"></div>
+            </div>
+
+            <!-- CARD 4: LAP TIMES RANGE & DENSITY -->
+            <div class="sector-card" id="fp1-density-card">
+              <div class="sector-card-title">
+                <span>Lap Times Range &amp; Density</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="fp1-density-btn-runs" onclick="setFp1DensityMode('runs')">Progression</button>
+                  <button type="button" class="fp1-toggle-btn" id="fp1-density-btn-overall" onclick="setFp1DensityMode('overall')">Overall</button>
+                </div>
+              </div>
+              <div class="progression-canvas-container" style="position: relative; width: 100%; height: 260px;">
+                <canvas id="chart-fp1-density" style="width: 100%; height: 100%; display: block;"></canvas>
+              </div>
+            </div>
+
+            <!-- CARD 5: TRUE PACE & PEAK -->
+            <div class="sector-card" id="fp1-truepace-card">
+              <div class="sector-card-title">
+                <span>True Pace &amp; Peak</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="fp1-truepace-btn-top5" onclick="setFp1TruePaceK(5)">Top 5</button>
+                  <button type="button" class="fp1-toggle-btn" id="fp1-truepace-btn-top8" onclick="setFp1TruePaceK(8)">Top 8</button>
+                </div>
+              </div>
+              <div class="progression-canvas-container" style="position: relative; width: 100%; height: 260px;">
+                <canvas id="chart-fp1-truepace" style="width: 100%; height: 100%; display: block;"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- FP1 TRACK SECTORS SUB-SECTION (T1, T2, T3, T4) -->
+          <div class="fp1-sectors-block" id="fp1-sectors-container" style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+            <div class="sector-card-title" style="margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: #fff;">&#x23F1;&#xFE0F; Track Sectors Analysis (T1 &middot; T2 &middot; T3 &middot; T4)</span>
+                <span class="sector-card-badge" style="background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 10px; font-weight: 700;">Stints Progression &amp; Split Times</span>
+              </div>
+              <div class="fp1-toggle-group" id="fp1-sector-filter-group">
+                <button type="button" class="fp1-toggle-btn active" id="fp1-sec-btn-favs" onclick="setFp1SectorRiderMode('favs')">Favorites (&#x2605;)</button>
+                <button type="button" class="fp1-toggle-btn" id="fp1-sec-btn-top5" onclick="setFp1SectorRiderMode('top5')">Top 5</button>
+                <button type="button" class="fp1-toggle-btn" id="fp1-sec-btn-all" onclick="setFp1SectorRiderMode('all')">All Riders</button>
+              </div>
+            </div>
+
+            <div class="sector-grid-1row" id="fp1-sector-grid">
+              <div class="sector-card sector-card-t1">
+                <div class="sector-card-title">
+                  <span>Sector 1 (T1)</span>
+                  <span class="sector-card-badge badge-t1">T1</span>
+                </div>
+                <div class="sector-canvas-container">
+                  <canvas id="chart-fp1-sec-t1"></canvas>
+                </div>
+              </div>
+              <div class="sector-card sector-card-t2">
+                <div class="sector-card-title">
+                  <span>Sector 2 (T2)</span>
+                  <span class="sector-card-badge badge-t2">T2</span>
+                </div>
+                <div class="sector-canvas-container">
+                  <canvas id="chart-fp1-sec-t2"></canvas>
+                </div>
+              </div>
+              <div class="sector-card sector-card-t3">
+                <div class="sector-card-title">
+                  <span>Sector 3 (T3)</span>
+                  <span class="sector-card-badge badge-t3">T3</span>
+                </div>
+                <div class="sector-canvas-container">
+                  <canvas id="chart-fp1-sec-t3"></canvas>
+                </div>
+              </div>
+              <div class="sector-card sector-card-t4">
+                <div class="sector-card-title">
+                  <span>Sector 4 (T4)</span>
+                  <span class="sector-card-badge badge-t4">T4</span>
+                </div>
+                <div class="sector-canvas-container">
+                  <canvas id="chart-fp1-sec-t4"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- RACE: POSITION PROGRESSION & GAP TO LEADER -->
         <div class="sector-section" id="rac-progression-section" style="display: none;">
           <div class="sector-header">
@@ -93045,6 +93372,7 @@
 
       buildSidebarList();
       applySessionVisibility();
+      if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(gp.short);
       renderRacProgression(gp.short);
       renderSectorCharts(gp.short);
     }

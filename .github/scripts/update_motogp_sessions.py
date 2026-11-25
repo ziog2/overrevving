@@ -345,17 +345,234 @@ def parse_analysis_pdf_all(pdf_bytes):
 
     return riders_stints, riders_sectors
 
-def update_session_datasets(session_name):
+def parse_category_analysis_pdf(pdf_bytes, known_names_map=None):
     """
-    Checks all rounds for Dorna Analysis.pdf for `session_name` (FP1, PR, FP2)
-    and updates JSON and JS files.
+    Parses Dorna Analysis.pdf for Moto2 / Moto3 (and also supports MotoGP format):
+    - Handles multi-line headers where FIM country code is glued to first name
+      (e.g. '81\\nLIQUI MOLY Dynavolt AUSSenna AGIUS\\n1st Runs=2 Total laps=18')
+    - Handles glued lap time + lap number and glued speed + T4
+      (e.g. "1'41.75210 22.697 31.010 15.709 284.932.336")
+    - Splits runs by explicit 'Run #N Slick-X Slick-Y' headers when present,
+      or by Pit-lane ('P') laps when tyre headers are not published by Dorna.
     """
+    import unicodedata
+
+    def norm_key(s):
+        return ''.join(c for c in unicodedata.normalize('NFKD', s or '') if not unicodedata.combining(c)).lower().strip()
+
+    try:
+        reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
+        full_text = ""
+        for page in reader.pages:
+            full_text += (page.extract_text() or "") + "\n"
+    except Exception as e:
+        print(f"  Error reading Analysis PDF with pypdf: {e}")
+        return {}, {}
+
+    nat_codes = (
+        r'(?:SPA|ITA|AUS|GBR|FRA|GER|NED|JPN|USA|ARG|COL|BEL|RSA|INA|MAL|THA|'
+        r'CZE|AUT|SUI|POR|BRA|FIN|TUR|POL|HUN|IRL|NZE|NZL|AND|CAN|MEX|SWE|DEN|'
+        r'NOR|IND|VIE|CHN|KOR|SVK|CRO|ROU|BUL|GRE|EST|LAT|LTU|UKR|ISR|CHI|PER|'
+        r'ECU|VEN|URU|PAR|BOL|QAT|UAE|MAS|IDN|DEU|ESP|NLD|CHE|PRT|RSM|MYS|PHI|TPE|HKG|SIN)'
+    )
+
+    # Match every rider block cleanly (2-line or 1-line header)
+    header_re = re.compile(
+        r'(?m)^(\d{1,2})\s*\n([^\n]+)\n(?:(?:\d+(?:st|nd|rd|th)|NC|unfinished)[^\n]*?)?Runs\s*=\s*(\d+)[^\n]*'
+    )
+    matches = list(header_re.finditer(full_text))
+
+    # Fallback to MotoGP single-line header if needed
+    if not matches:
+        return parse_analysis_pdf_all(pdf_bytes)
+
+    lap_re = re.compile(
+        r"(\d+'\d{2}\.\d{3})\*?\s*(\d{1,2})\s+(\d{1,2}\.\d{3})\*?\s+(\d{1,2}\.\d{3})\*?\s+(\d{1,2}\.\d{3})\*?\s+(?:(\d{2,3}\.\d)\s*)?(P)?\s*(\d{1,2}\.\d{3})\*?"
+    )
+
+    riders_stints = {}
+    riders_sectors = {}
+    known_map = known_names_map or {}
+
+    for idx, m in enumerate(matches):
+        num = m.group(1).strip()
+        info_line = m.group(2).strip()
+
+        # Extract rider name after the LAST FIM 3-letter country code
+        nat_matches = list(re.finditer(
+            rf'{nat_codes}\s*([A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ\'\-\.]+(?:\s+[A-Za-zÀ-ÖØ-öø-ÿ\'\-\.]+)+)\s*$',
+            info_line
+        ))
+        if nat_matches:
+            raw_name = nat_matches[-1].group(1).strip()
+        else:
+            # Generic fallback: last "First LAST" pair on the line
+            fb = re.search(r'([A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ\'\-\.]+\s+[A-ZÀ-ÖØ-Þ][A-ZÀ-ÖØ-Þ\'\-\s]+)\s*$', info_line)
+            raw_name = fb.group(1).strip() if fb else info_line
+
+        canonical_name = clean_name(raw_name)
+        canonical_name = known_map.get(norm_key(canonical_name), canonical_name)
+
+        parts = canonical_name.strip().split()
+        first_init = parts[0][0].upper() if parts else "X"
+        last_init = parts[-1][0].upper() if parts else "X"
+        code = f"{first_init}{last_init}{num}"
+
+        start_pos = m.end()
+        end_pos = matches[idx + 1].start() if idx + 1 < len(matches) else len(full_text)
+        rider_block = full_text[start_pos:end_pos]
+
+        runs_stints = []
+        runs_sectors = []
+        current_run_stint = None
+        current_run_sector = None
+        run_counter = 0
+        has_explicit_runs = bool(re.search(r'Run\s*#', rider_block, re.IGNORECASE))
+
+        for line in rider_block.split('\n'):
+            run_m = re.search(r'Run\s*#.*?(\d+)\s+(?:Slick|Wet)-([A-Za-z]+)\s+(?:Slick|Wet)-([A-Za-z]+)', line, re.IGNORECASE)
+            if run_m:
+                r_num = int(run_m.group(1))
+                f_tyre = run_m.group(2)[0].upper()
+                r_tyre = run_m.group(3)[0].upper()
+
+                if current_run_stint and current_run_stint['laps']:
+                    runs_stints.append(current_run_stint)
+                if current_run_sector and current_run_sector['laps']:
+                    runs_sectors.append(current_run_sector)
+
+                current_run_stint = {'run': r_num, 'front': f_tyre, 'rear': r_tyre, 'laps': []}
+                current_run_sector = {'run': r_num, 'front': f_tyre, 'rear': r_tyre, 'laps': []}
+                continue
+
+            lap_m = lap_re.search(line)
+            if lap_m:
+                time_str = lap_m.group(1)
+                lap_num = int(lap_m.group(2))
+                t1 = float(lap_m.group(3))
+                t2 = float(lap_m.group(4))
+                t3 = float(lap_m.group(5))
+                is_pit = bool(lap_m.group(7))
+                t4 = float(lap_m.group(8))
+
+                m_part, s_part = time_str.split("'")
+                sec = round(int(m_part) * 60 + float(s_part), 3)
+
+                if current_run_stint is None:
+                    run_counter += 1
+                    default_tyre = 'M' if has_explicit_runs else ''
+                    current_run_stint = {'run': run_counter, 'front': default_tyre, 'rear': default_tyre, 'laps': []}
+                    current_run_sector = {'run': run_counter, 'front': default_tyre, 'rear': default_tyre, 'laps': []}
+
+                current_run_stint['laps'].append({
+                    'time': time_str,
+                    'sec': sec,
+                    'pit': is_pit
+                })
+
+                current_run_sector['laps'].append({
+                    'lap': lap_num,
+                    'time': time_str,
+                    'sec': sec,
+                    't1': t1,
+                    't2': t2,
+                    't3': t3,
+                    't4': t4,
+                    'pit': is_pit
+                })
+
+                # In Moto2/Moto3 (no explicit Run # headers), a pit-in lap closes the current run
+                if not has_explicit_runs and is_pit:
+                    runs_stints.append(current_run_stint)
+                    runs_sectors.append(current_run_sector)
+                    current_run_stint = None
+                    current_run_sector = None
+
+        if current_run_stint and current_run_stint['laps']:
+            runs_stints.append(current_run_stint)
+        if current_run_sector and current_run_sector['laps']:
+            runs_sectors.append(current_run_sector)
+
+        processed_runs = []
+        total_laps_count = 0
+        for r in runs_stints:
+            laps = r['laps']
+            laps_count = len(laps)
+            start_lap = total_laps_count + 1
+            end_lap = total_laps_count + laps_count
+            total_laps_count += laps_count
+
+            valid_secs = [l['sec'] for l in laps if not l['pit'] and l['sec'] < 240.0]
+            if valid_secs:
+                min_sec = min(valid_secs)
+                flying = [l for l in laps if not l['pit'] and l['sec'] <= min_sec * 1.15 and l['sec'] < 240.0]
+                if flying:
+                    best = min(flying, key=lambda x: x['sec'])
+                    fastest_str = best['time']
+                    fastest_sec = best['sec']
+                    flying_secs = sorted([round(l['sec'], 3) for l in flying])
+                else:
+                    fastest_str = laps[0]['time']
+                    fastest_sec = laps[0]['sec']
+                    flying_secs = []
+            else:
+                fastest_str = laps[0]['time'] if laps else "-"
+                fastest_sec = laps[0]['sec'] if laps else 0
+                flying_secs = []
+
+            processed_runs.append({
+                'front': r['front'],
+                'rear': r['rear'],
+                'lapsCount': laps_count,
+                'startLap': start_lap,
+                'endLap': end_lap,
+                'fastest': fastest_str,
+                'fastestSec': fastest_sec,
+                'flying': flying_secs,
+                'laps': laps
+            })
+
+        if processed_runs:
+            riders_stints[canonical_name] = {
+                'number': str(num),
+                'code': code,
+                'totalLaps': total_laps_count,
+                'runs': processed_runs
+            }
+            riders_sectors[canonical_name] = {
+                'number': str(num),
+                'name': canonical_name,
+                'runs': runs_sectors
+            }
+
+    return riders_stints, riders_sectors
+
+def load_known_category_names(cat_key):
+    import unicodedata
+    def norm_key(s):
+        return ''.join(c for c in unicodedata.normalize('NFKD', s or '') if not unicodedata.combining(c)).lower().strip()
+    path = os.path.join(BASE_DIR, 'data', 'standings_latest.json')
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            st = json.load(f)
+        return {norm_key(r['name']): r['name'] for r in st.get(cat_key, []) if isinstance(r, dict) and r.get('name')}
+    except Exception:
+        return {}
+
+def update_category_session_datasets(category_name, session_name):
+    """
+    Checks all rounds for Dorna Analysis.pdf for `category_name` ('MotoGP', 'Moto2', 'Moto3')
+    and `session_name` ('FP1', 'PR', 'FP2'), updating JSON and JS files.
+    """
+    cat_lower = category_name.lower()
     sess_lower = session_name.lower()
-    full_path = os.path.join(BASE_DIR, 'data', f'motogp_{sess_lower}_stints.json')
-    compact_path = os.path.join(BASE_DIR, 'data', f'motogp_{sess_lower}_compact.json')
-    js_data_path = os.path.join(BASE_DIR, 'js', f'motogp_{sess_lower}_data.js')
-    sectors_path = os.path.join(BASE_DIR, 'data', f'motogp_{sess_lower}_sectors.json')
-    js_sectors_path = os.path.join(BASE_DIR, 'js', f'motogp_{sess_lower}_sectors.js')
+    full_path = os.path.join(BASE_DIR, 'data', f'{cat_lower}_{sess_lower}_stints.json')
+    compact_path = os.path.join(BASE_DIR, 'data', f'{cat_lower}_{sess_lower}_compact.json')
+    js_data_path = os.path.join(BASE_DIR, 'js', f'{cat_lower}_{sess_lower}_data.js')
+    sectors_path = os.path.join(BASE_DIR, 'data', f'{cat_lower}_{sess_lower}_sectors.json')
+    js_sectors_path = os.path.join(BASE_DIR, 'js', f'{cat_lower}_{sess_lower}_sectors.js')
 
     # Load existing datasets
     stints_data = {}
@@ -374,31 +591,33 @@ def update_session_datasets(session_name):
         except Exception:
             sectors_data = {}
 
+    known_names = load_known_category_names(cat_lower) if cat_lower in ('moto2', 'moto3') else None
     any_updated = False
 
     for rnd in ALL_ROUNDS:
-        # Check if already present and has riders
         if rnd in stints_data and len(stints_data[rnd]) > 0 and rnd in sectors_data and len(sectors_data[rnd]) > 0:
             continue
 
-        url = f"https://resources.motogp.com/files/results/2026/{rnd}/MotoGP/{session_name}/Analysis.pdf"
+        url = f"https://resources.motogp.com/files/results/2026/{rnd}/{category_name}/{session_name}/Analysis.pdf"
         pdf_bytes = download_url(url)
         if not pdf_bytes:
             continue
 
-        r_stints, r_sectors = parse_analysis_pdf_all(pdf_bytes)
+        if cat_lower == 'motogp':
+            r_stints, r_sectors = parse_analysis_pdf_all(pdf_bytes)
+        else:
+            r_stints, r_sectors = parse_category_analysis_pdf(pdf_bytes, known_names_map=known_names)
+
         if r_stints and len(r_stints) > 0:
             stints_data[rnd] = r_stints
             sectors_data[rnd] = r_sectors
             any_updated = True
-            print(f"  ✓ {rnd} {session_name}: parsed {len(r_stints)} riders from Analysis.pdf!")
+            print(f"  ✓ {category_name} {rnd} {session_name}: parsed {len(r_stints)} riders from Analysis.pdf!")
 
     if any_updated:
-        # Save full stints JSON
         with open(full_path, 'w', encoding='utf-8') as f:
             json.dump(stints_data, f, indent=2, ensure_ascii=False)
 
-        # Build compact stints
         compact = {}
         for rnd, riders in stints_data.items():
             compact[rnd] = {}
@@ -434,7 +653,6 @@ def update_session_datasets(session_name):
             f.write(f"const {js_var_name} = {compact_json};\n")
             f.write(f"if (typeof window !== 'undefined') window.{js_var_name} = {js_var_name};\n")
 
-        # Save sectors JSON and JS
         sectors_json = json.dumps(sectors_data, separators=(',', ':'), ensure_ascii=False)
         with open(sectors_path, 'w', encoding='utf-8') as f:
             f.write(sectors_json)
@@ -444,8 +662,11 @@ def update_session_datasets(session_name):
             f.write(f"const {js_sec_var} = {sectors_json};\n")
             f.write(f"if (typeof window !== 'undefined') window.{js_sec_var} = {js_sec_var};\n")
 
-        print(f"  ✓ Saved updated {session_name} stint and sector datasets.")
+        print(f"  ✓ Saved updated {category_name} {session_name} stint and sector datasets.")
     return any_updated
+
+def update_session_datasets(session_name):
+    return update_category_session_datasets('MotoGP', session_name)
 
 def update_event_html_results():
     """
@@ -598,19 +819,27 @@ def main():
     pr_up  = update_session_datasets('PR')
     fp2_up = update_session_datasets('FP2')
 
-    # 3. Update Moto2 results and lap charts
-    print("\n[Step 3/5] Updating Moto2 sessions & lap charts...")
+    # 3. Update Moto2 results, lap charts, and FP1 analysis
+    print("\n[Step 3/5] Updating Moto2 sessions, lap charts & FP1 analysis...")
     try:
         update_moto2()
     except Exception as e:
         print(f"  Moto2 update notice: {e}")
+    try:
+        update_category_session_datasets('Moto2', 'FP1')
+    except Exception as e:
+        print(f"  Moto2 FP1 analysis notice: {e}")
 
-    # 4. Update Moto3 results and lap charts
-    print("\n[Step 4/5] Updating Moto3 sessions & lap charts...")
+    # 4. Update Moto3 results, lap charts, and FP1 analysis
+    print("\n[Step 4/5] Updating Moto3 sessions, lap charts & FP1 analysis...")
     try:
         update_moto3()
     except Exception as e:
         print(f"  Moto3 update notice: {e}")
+    try:
+        update_category_session_datasets('Moto3', 'FP1')
+    except Exception as e:
+        print(f"  Moto3 FP1 analysis notice: {e}")
 
     # 5. Export multi-year and 2026 database
     print("\n[Step 5/5] Refreshing exports and database...")
