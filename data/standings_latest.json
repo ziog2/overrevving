@@ -2478,58 +2478,58 @@
   ],
   "motogp_constructors": [
     {
-      "name": "DUCATI",
-      "pts": 569
+      "name": "APRILIA",
+      "pts": 598
     },
     {
-      "name": "APRILIA",
-      "pts": 561
+      "name": "DUCATI",
+      "pts": 589
     },
     {
       "name": "KTM",
-      "pts": 363
+      "pts": 378
     },
     {
       "name": "HONDA",
-      "pts": 190
+      "pts": 197
     },
     {
       "name": "YAMAHA",
-      "pts": 105
+      "pts": 111
     }
   ],
   "motogp_teams": [
     {
       "name": "Aprilia Racing",
-      "pts": 728
+      "pts": 790
     },
     {
       "name": "Ducati Lenovo Team",
-      "pts": 604
+      "pts": 619
     },
     {
       "name": "SuperFile Trackhouse MotoGP Team",
-      "pts": 552
+      "pts": 592
     },
     {
       "name": "Red Bull KTM Factory Racing",
-      "pts": 427
+      "pts": 442
     },
     {
       "name": "Pertamina Enduro VR46 Racing Team",
-      "pts": 352
+      "pts": 369
     },
     {
       "name": "BK8 Gresini Racing MotoGP",
-      "pts": 344
+      "pts": 361
     },
     {
       "name": "Red Bull KTM Tech3",
-      "pts": 169
+      "pts": 174
     },
     {
       "name": "Honda HRC",
-      "pts": 158
+      "pts": 165
     },
     {
       "name": "LCR Honda",
@@ -2537,11 +2537,11 @@
     },
     {
       "name": "Monster Energy Yamaha MotoGP Team",
-      "pts": 108
+      "pts": 116
     },
     {
       "name": "Prima Pramac Yamaha MotoGP",
-      "pts": 49
+      "pts": 52
     }
   ],
   "moto2": [
@@ -8673,109 +8673,6 @@
       "pts": 1
     }
   ],
-  "f1": [
-    {
-      "name": "Andrea Kimi Antonelli",
-      "pts": 402
-    },
-    {
-      "name": "Max Verstappen",
-      "pts": 304
-    },
-    {
-      "name": "Lewis Hamilton",
-      "pts": 267
-    },
-    {
-      "name": "George Russell",
-      "pts": 264
-    },
-    {
-      "name": "Lando Norris",
-      "pts": 264
-    },
-    {
-      "name": "Charles Leclerc",
-      "pts": 250
-    },
-    {
-      "name": "Oscar Piastri",
-      "pts": 167
-    },
-    {
-      "name": "Isack Hadjar",
-      "pts": 122
-    },
-    {
-      "name": "Liam Lawson",
-      "pts": 89
-    },
-    {
-      "name": "Pierre Gasly",
-      "pts": 52
-    },
-    {
-      "name": "Arvid Lindblad",
-      "pts": 38
-    },
-    {
-      "name": "Franco Colapinto",
-      "pts": 35
-    },
-    {
-      "name": "Oliver Bearman",
-      "pts": 23
-    },
-    {
-      "name": "Gabriel Bortoleto",
-      "pts": 14
-    },
-    {
-      "name": "Nico Hülkenberg",
-      "pts": 14
-    },
-    {
-      "name": "Carlos Sainz",
-      "pts": 11
-    },
-    {
-      "name": "Esteban Ocon",
-      "pts": 7
-    },
-    {
-      "name": "Fernando Alonso",
-      "pts": 7
-    },
-    {
-      "name": "Alexander Albon",
-      "pts": 5
-    },
-    {
-      "name": "Yuki Tsunoda",
-      "pts": 1
-    },
-    {
-      "name": "Ryo Hirakawa",
-      "pts": 1
-    },
-    {
-      "name": "Lance Stroll",
-      "pts": 0
-    },
-    {
-      "name": "Valtteri Bottas",
-      "pts": 0
-    },
-    {
-      "name": "Sergio Pérez",
-      "pts": 0
-    },
-    {
-      "name": "Rafael Camara",
-      "pts": 0
-    }
-  ],
-  "_updated": "2026-11-23 04:00:23 · Auto (Domenica)",
   "sx450": [
     {
       "name": "Ken Roczen",
@@ -9245,5 +9142,108 @@
       "name": "Slade Varola",
       "pts": 0
     }
-  ]
+  ],
+  "f1": [
+    {
+      "name": "Andrea Kimi Antonelli",
+      "pts": 402
+    },
+    {
+      "name": "Max Verstappen",
+      "pts": 304
+    },
+    {
+      "name": "Lewis Hamilton",
+      "pts": 267
+    },
+    {
+      "name": "George Russell",
+      "pts": 264
+    },
+    {
+      "name": "Lando Norris",
+      "pts": 264
+    },
+    {
+      "name": "Charles Leclerc",
+      "pts": 250
+    },
+    {
+      "name": "Oscar Piastri",
+      "pts": 167
+    },
+    {
+      "name": "Isack Hadjar",
+      "pts": 122
+    },
+    {
+      "name": "Liam Lawson",
+      "pts": 89
+    },
+    {
+      "name": "Pierre Gasly",
+      "pts": 52
+    },
+    {
+      "name": "Arvid Lindblad",
+      "pts": 38
+    },
+    {
+      "name": "Franco Colapinto",
+      "pts": 35
+    },
+    {
+      "name": "Oliver Bearman",
+      "pts": 23
+    },
+    {
+      "name": "Gabriel Bortoleto",
+      "pts": 14
+    },
+    {
+      "name": "Nico Hülkenberg",
+      "pts": 14
+    },
+    {
+      "name": "Carlos Sainz",
+      "pts": 11
+    },
+    {
+      "name": "Esteban Ocon",
+      "pts": 7
+    },
+    {
+      "name": "Fernando Alonso",
+      "pts": 7
+    },
+    {
+      "name": "Alexander Albon",
+      "pts": 5
+    },
+    {
+      "name": "Yuki Tsunoda",
+      "pts": 1
+    },
+    {
+      "name": "Ryo Hirakawa",
+      "pts": 1
+    },
+    {
+      "name": "Lance Stroll",
+      "pts": 0
+    },
+    {
+      "name": "Valtteri Bottas",
+      "pts": 0
+    },
+    {
+      "name": "Sergio Pérez",
+      "pts": 0
+    },
+    {
+      "name": "Rafael Camara",
+      "pts": 0
+    }
+  ],
+  "_updated": "2026-11-27 10:42:09 · Auto (Domenica)"
 }
