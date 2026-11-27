@@ -139,26 +139,27 @@ def parse_classification_pdf(pdf_bytes):
             cond = "Wet"
         weather_str = f"{cond.capitalize()} | Air: {air}°C | Track: {track}°C"
 
-    # Line parsing: e.g.
-    # DUCATI 93 Marc MARQUEZ SPA 354.0 1 1'52.278 15 16 Ducati Lenovo Team
+    # Line parsing: supports both spaced (older pypdf) and glued (pypdf 6.x) tokens, e.g.:
+    #   DUCATI 93 Marc MARQUEZ SPA 354.0 1 1'52.278 15 16 Ducati Lenovo Team
+    #   DUCATI93 Marc MARQUEZ SPA 335.42 1'30.691 10 20 0.010 0.010Ducati Lenovo Team
     lines = full_text.split('\n')
     results = []
 
     for line in lines:
-        m = re.search(r'\b(\d{1,2})\s+(\d+\'\d{2}\.\d{3})\s+(\d+)\s+(\d+)\b', line)
+        m = re.search(r'(?:(\d{2,3}\.\d)\s*)?(\d{1,2})\s+(\d+\'\d{2}\.\d{3})\s+(\d+)\s+(\d+)', line)
         if m:
-            pos = int(m.group(1))
-            time_raw = m.group(2)
+            pos = int(m.group(2))
+            time_raw = m.group(3)
             m_part, s_part = time_raw.split("'")
             formatted_time = f"{int(m_part):02d}:{s_part}"
-            total_laps = int(m.group(4))
+            total_laps = int(m.group(5))
 
             pre = line[:m.start()].strip()
-            # Clean trailing speed and nation
+            # Clean trailing speed (if any) and 3-letter country code
             pre = re.sub(r'\s+\d{2,3}\.\d\s*$', '', pre)
             pre = re.sub(r'\s+[A-Z]{3}\s*$', '', pre)
-            # Remove leading bike manufacturer
-            pre = re.sub(r'^(?:DUCATI|APRILIA|KTM|HONDA|YAMAHA)\s+', '', pre, flags=re.IGNORECASE)
+            # Remove leading bike manufacturer (spaced or glued to rider number)
+            pre = re.sub(r'^(?:DUCATI|APRILIA|KTM|HONDA|YAMAHA|KALEX|BOSCOSCURO|FORWARD|GASGAS|HUSQVARNA|CFMOTO)\s*', '', pre, flags=re.IGNORECASE)
             # Remove rider number
             pre = re.sub(r'^\d{1,2}\s+', '', pre)
 
@@ -181,19 +182,22 @@ def parse_analysis_pdf_all(pdf_bytes):
     Parses Dorna Analysis.pdf and extracts:
     1. Stints data (runs, tyre compounds, flying laps, fastest laps).
     2. Sector data (T1, T2, T3, T4 for every lap).
+    Supports both spaced (older pypdf) and glued (pypdf 6.x) tokens.
     """
     try:
         reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
         full_text = ""
         for page in reader.pages:
-            full_text += page.extract_text() + "\n"
+            full_text += (page.extract_text() or "") + "\n"
     except Exception as e:
         print(f"  Error reading Analysis PDF with pypdf: {e}")
         return {}, {}
 
-    # Rider headers: e.g. "93 Ducati Lenovo Team\nSPA Marc MARQUEZ\n1st\nRuns=3 Total laps=15"
+    # Rider headers: supports both spaced and glued NAT+Name, e.g.:
+    #   "93 Ducati Lenovo Team\nSPA Marc MARQUEZ\n1st\nRuns=3 Total laps=15"
+    #   "72 Aprilia Racing\nITAMarco BEZZECCHI\n1st\nRuns=3 Total laps=19"
     matches = list(re.finditer(
-        r'(?m)^(\d{1,2})\s+[^\n]+?\s+[A-Z]{3}\s+([^\n]+?)\s+(?:\d+(?:st|nd|rd|th)|NC|unfinished)[^\n]*?\s+Runs\s*=\s*(\d+)',
+        r'(?m)^(\d{1,2})\s+[^\n]*?\s+[A-Z]{3}\s*([A-ZÀ-ÖØ-Þ][^\n]+?)\s+(?:\d+(?:st|nd|rd|th)|NC|unfinished)[^\n]*?\s+Runs\s*=\s*(\d+)',
         full_text
     ))
 
@@ -218,7 +222,7 @@ def parse_analysis_pdf_all(pdf_bytes):
         total_laps_so_far = 0
 
         for line in rider_block.split('\n'):
-            # Detect new run (supports both Slick-* and Wet-* tyres)
+            # Detect new run (supports both Slick-* and Wet-* tyres, spaced or glued run number)
             run_m = re.search(r'Run\s*#.*?(\d+)\s+(?:Slick|Wet)-([A-Za-z]+)\s+(?:Slick|Wet)-([A-Za-z]+)', line, re.IGNORECASE)
             if run_m:
                 r_num = int(run_m.group(1))
@@ -244,11 +248,12 @@ def parse_analysis_pdf_all(pdf_bytes):
                 }
                 continue
 
-            # Detect lap time & sectors
-            # Format: 1'52.278 15 28.537 29.593 25.041 354.0 29.107
-            # or with P for pit: 1'58.234 16 28.900 30.123 25.400 P 33.811
+            # Detect lap time & sectors (supports spaced & glued lap_num / speed+T4)
+            # e.g. "1'52.278 15 28.537 29.593 25.041 354.0 29.107"
+            # e.g. "1'32.4502 21.819 23.775 23.156 330.523.700"
+            # e.g. "1'36.8456 21.410 23.905 23.122 337.0P 28.408"
             lap_m = re.search(
-                r"(\d+'\d{2}\.\d{3})\s+(\d+)\s+(\d{1,2}\.\d{3})\s+(\d{1,2}\.\d{3})\s+(\d{1,2}\.\d{3})(?:\s+[\d\.]+)?\s*(P)?\s*(\d{1,2}\.\d{3})",
+                r"(\d+'\d{2}\.\d{3})\*?\s*(\d{1,2})\s+(\d{1,2}\.\d{3})\*?\s+(\d{1,2}\.\d{3})\*?\s+(\d{1,2}\.\d{3})\*?\s+(?:(\d{2,3}\.\d)\s*)?(P)?\s*(\d{1,2}\.\d{3})\*?",
                 line
             )
             if lap_m:
@@ -257,8 +262,8 @@ def parse_analysis_pdf_all(pdf_bytes):
                 t1 = float(lap_m.group(3))
                 t2 = float(lap_m.group(4))
                 t3 = float(lap_m.group(5))
-                is_pit = bool(lap_m.group(6))
-                t4 = float(lap_m.group(7))
+                is_pit = bool(lap_m.group(7))
+                t4 = float(lap_m.group(8))
 
                 m_part, s_part = time_str.split("'")
                 sec = round(int(m_part) * 60 + float(s_part), 3)
@@ -595,7 +600,13 @@ def update_category_session_datasets(category_name, session_name):
     any_updated = False
 
     for rnd in ALL_ROUNDS:
-        if rnd in stints_data and len(stints_data[rnd]) > 0 and rnd in sectors_data and len(sectors_data[rnd]) > 0:
+        if (
+            rnd in stints_data
+            and len(stints_data[rnd]) > 0
+            and any(v.get('runs') for v in stints_data[rnd].values())
+            and rnd in sectors_data
+            and len(sectors_data[rnd]) > 0
+        ):
             continue
 
         url = f"https://resources.motogp.com/files/results/2026/{rnd}/{category_name}/{session_name}/Analysis.pdf"

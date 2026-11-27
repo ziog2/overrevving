@@ -78553,5 +78553,3820 @@
         }
       ]
     }
+  },
+  "VAL": {
+    "Senna Agius": {
+      "number": "81",
+      "code": "SA81",
+      "totalLaps": 20,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 14,
+          "startLap": 1,
+          "endLap": 14,
+          "fastest": "1'33.028",
+          "fastestSec": 93.028,
+          "flying": [
+            93.028,
+            93.192,
+            93.195,
+            93.259,
+            93.321,
+            93.343,
+            93.457,
+            93.629,
+            94.065,
+            94.115,
+            94.861,
+            95.468
+          ],
+          "laps": [
+            {
+              "time": "2'34.304",
+              "sec": 154.304,
+              "pit": false
+            },
+            {
+              "time": "1'34.861",
+              "sec": 94.861,
+              "pit": false
+            },
+            {
+              "time": "1'34.115",
+              "sec": 94.115,
+              "pit": false
+            },
+            {
+              "time": "1'33.321",
+              "sec": 93.321,
+              "pit": false
+            },
+            {
+              "time": "1'33.343",
+              "sec": 93.343,
+              "pit": false
+            },
+            {
+              "time": "1'33.629",
+              "sec": 93.629,
+              "pit": false
+            },
+            {
+              "time": "1'33.259",
+              "sec": 93.259,
+              "pit": false
+            },
+            {
+              "time": "1'33.192",
+              "sec": 93.192,
+              "pit": false
+            },
+            {
+              "time": "1'33.457",
+              "sec": 93.457,
+              "pit": false
+            },
+            {
+              "time": "1'33.028",
+              "sec": 93.028,
+              "pit": false
+            },
+            {
+              "time": "1'35.468",
+              "sec": 95.468,
+              "pit": false
+            },
+            {
+              "time": "1'34.065",
+              "sec": 94.065,
+              "pit": false
+            },
+            {
+              "time": "1'33.195",
+              "sec": 93.195,
+              "pit": false
+            },
+            {
+              "time": "1'41.298",
+              "sec": 101.298,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 6,
+          "startLap": 15,
+          "endLap": 20,
+          "fastest": "1'32.500",
+          "fastestSec": 92.5,
+          "flying": [
+            92.5,
+            92.522,
+            92.804,
+            92.947,
+            92.956
+          ],
+          "laps": [
+            {
+              "time": "9'26.379",
+              "sec": 566.379,
+              "pit": false
+            },
+            {
+              "time": "1'32.522",
+              "sec": 92.522,
+              "pit": false
+            },
+            {
+              "time": "1'32.947",
+              "sec": 92.947,
+              "pit": false
+            },
+            {
+              "time": "1'32.500",
+              "sec": 92.5,
+              "pit": false
+            },
+            {
+              "time": "1'32.956",
+              "sec": 92.956,
+              "pit": false
+            },
+            {
+              "time": "1'32.804",
+              "sec": 92.804,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Izan Guevara": {
+      "number": "28",
+      "code": "IG28",
+      "totalLaps": 18,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 11,
+          "startLap": 1,
+          "endLap": 11,
+          "fastest": "1'32.974",
+          "fastestSec": 92.974,
+          "flying": [
+            92.974,
+            93.381,
+            93.384,
+            93.51,
+            93.888,
+            93.937,
+            93.953,
+            94.413,
+            95.299
+          ],
+          "laps": [
+            {
+              "time": "2'52.106",
+              "sec": 172.106,
+              "pit": false
+            },
+            {
+              "time": "1'35.299",
+              "sec": 95.299,
+              "pit": false
+            },
+            {
+              "time": "1'33.953",
+              "sec": 93.953,
+              "pit": false
+            },
+            {
+              "time": "1'33.384",
+              "sec": 93.384,
+              "pit": false
+            },
+            {
+              "time": "1'32.974",
+              "sec": 92.974,
+              "pit": false
+            },
+            {
+              "time": "1'34.413",
+              "sec": 94.413,
+              "pit": false
+            },
+            {
+              "time": "1'33.888",
+              "sec": 93.888,
+              "pit": false
+            },
+            {
+              "time": "1'33.937",
+              "sec": 93.937,
+              "pit": false
+            },
+            {
+              "time": "1'33.510",
+              "sec": 93.51,
+              "pit": false
+            },
+            {
+              "time": "1'33.381",
+              "sec": 93.381,
+              "pit": false
+            },
+            {
+              "time": "1'37.269",
+              "sec": 97.269,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 7,
+          "startLap": 12,
+          "endLap": 18,
+          "fastest": "1'32.636",
+          "fastestSec": 92.636,
+          "flying": [
+            92.636,
+            92.665,
+            92.689,
+            92.74,
+            92.814,
+            93.647
+          ],
+          "laps": [
+            {
+              "time": "12'57.899",
+              "sec": 777.899,
+              "pit": false
+            },
+            {
+              "time": "1'32.636",
+              "sec": 92.636,
+              "pit": false
+            },
+            {
+              "time": "1'32.665",
+              "sec": 92.665,
+              "pit": false
+            },
+            {
+              "time": "1'33.647",
+              "sec": 93.647,
+              "pit": false
+            },
+            {
+              "time": "1'32.689",
+              "sec": 92.689,
+              "pit": false
+            },
+            {
+              "time": "1'32.740",
+              "sec": 92.74,
+              "pit": false
+            },
+            {
+              "time": "1'32.814",
+              "sec": 92.814,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Deniz öncü": {
+      "number": "53",
+      "code": "DÖ53",
+      "totalLaps": 21,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 14,
+          "startLap": 1,
+          "endLap": 14,
+          "fastest": "1'33.798",
+          "fastestSec": 93.798,
+          "flying": [
+            93.798,
+            93.975,
+            94.04,
+            94.102,
+            94.162,
+            94.246,
+            94.352,
+            94.661,
+            94.82,
+            95.697,
+            95.767,
+            96.079
+          ],
+          "laps": [
+            {
+              "time": "2'11.372",
+              "sec": 131.372,
+              "pit": false
+            },
+            {
+              "time": "1'36.079",
+              "sec": 96.079,
+              "pit": false
+            },
+            {
+              "time": "1'34.820",
+              "sec": 94.82,
+              "pit": false
+            },
+            {
+              "time": "1'34.661",
+              "sec": 94.661,
+              "pit": false
+            },
+            {
+              "time": "1'34.352",
+              "sec": 94.352,
+              "pit": false
+            },
+            {
+              "time": "1'34.162",
+              "sec": 94.162,
+              "pit": false
+            },
+            {
+              "time": "1'34.102",
+              "sec": 94.102,
+              "pit": false
+            },
+            {
+              "time": "1'35.767",
+              "sec": 95.767,
+              "pit": false
+            },
+            {
+              "time": "1'34.040",
+              "sec": 94.04,
+              "pit": false
+            },
+            {
+              "time": "1'35.697",
+              "sec": 95.697,
+              "pit": false
+            },
+            {
+              "time": "1'33.798",
+              "sec": 93.798,
+              "pit": false
+            },
+            {
+              "time": "1'34.246",
+              "sec": 94.246,
+              "pit": false
+            },
+            {
+              "time": "1'33.975",
+              "sec": 93.975,
+              "pit": false
+            },
+            {
+              "time": "1'37.328",
+              "sec": 97.328,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 7,
+          "startLap": 15,
+          "endLap": 21,
+          "fastest": "1'32.846",
+          "fastestSec": 92.846,
+          "flying": [
+            92.846,
+            93.053,
+            93.312,
+            93.73,
+            95.088,
+            97.452
+          ],
+          "laps": [
+            {
+              "time": "8'36.730",
+              "sec": 516.73,
+              "pit": false
+            },
+            {
+              "time": "1'33.053",
+              "sec": 93.053,
+              "pit": false
+            },
+            {
+              "time": "1'37.452",
+              "sec": 97.452,
+              "pit": false
+            },
+            {
+              "time": "1'32.846",
+              "sec": 92.846,
+              "pit": false
+            },
+            {
+              "time": "1'35.088",
+              "sec": 95.088,
+              "pit": false
+            },
+            {
+              "time": "1'33.730",
+              "sec": 93.73,
+              "pit": false
+            },
+            {
+              "time": "1'33.312",
+              "sec": 93.312,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Tony Arbolino": {
+      "number": "14",
+      "code": "TA14",
+      "totalLaps": 18,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 10,
+          "startLap": 1,
+          "endLap": 10,
+          "fastest": "1'33.545",
+          "fastestSec": 93.545,
+          "flying": [
+            93.545,
+            93.573,
+            93.772,
+            94.028,
+            94.759,
+            95.484,
+            95.975,
+            96.043
+          ],
+          "laps": [
+            {
+              "time": "2'13.048",
+              "sec": 133.048,
+              "pit": false
+            },
+            {
+              "time": "1'35.484",
+              "sec": 95.484,
+              "pit": false
+            },
+            {
+              "time": "1'34.028",
+              "sec": 94.028,
+              "pit": false
+            },
+            {
+              "time": "1'35.975",
+              "sec": 95.975,
+              "pit": false
+            },
+            {
+              "time": "1'33.772",
+              "sec": 93.772,
+              "pit": false
+            },
+            {
+              "time": "1'34.759",
+              "sec": 94.759,
+              "pit": false
+            },
+            {
+              "time": "1'33.573",
+              "sec": 93.573,
+              "pit": false
+            },
+            {
+              "time": "1'33.545",
+              "sec": 93.545,
+              "pit": false
+            },
+            {
+              "time": "1'36.043",
+              "sec": 96.043,
+              "pit": false
+            },
+            {
+              "time": "1'38.831",
+              "sec": 98.831,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 8,
+          "startLap": 11,
+          "endLap": 18,
+          "fastest": "1'32.849",
+          "fastestSec": 92.849,
+          "flying": [
+            92.849,
+            92.987,
+            92.999,
+            93.168,
+            93.178,
+            93.647,
+            96.036
+          ],
+          "laps": [
+            {
+              "time": "12'55.651",
+              "sec": 775.651,
+              "pit": false
+            },
+            {
+              "time": "1'32.987",
+              "sec": 92.987,
+              "pit": false
+            },
+            {
+              "time": "1'32.849",
+              "sec": 92.849,
+              "pit": false
+            },
+            {
+              "time": "1'36.036",
+              "sec": 96.036,
+              "pit": false
+            },
+            {
+              "time": "1'33.168",
+              "sec": 93.168,
+              "pit": false
+            },
+            {
+              "time": "1'32.999",
+              "sec": 92.999,
+              "pit": false
+            },
+            {
+              "time": "1'33.178",
+              "sec": 93.178,
+              "pit": false
+            },
+            {
+              "time": "1'33.647",
+              "sec": 93.647,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Filip Salac": {
+      "number": "12",
+      "code": "FS12",
+      "totalLaps": 21,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 12,
+          "startLap": 1,
+          "endLap": 12,
+          "fastest": "1'33.368",
+          "fastestSec": 93.368,
+          "flying": [
+            93.368,
+            93.578,
+            93.663,
+            93.847,
+            93.869,
+            93.956,
+            93.998,
+            94.088,
+            94.3,
+            94.763
+          ],
+          "laps": [
+            {
+              "time": "2'42.051",
+              "sec": 162.051,
+              "pit": false
+            },
+            {
+              "time": "1'34.300",
+              "sec": 94.3,
+              "pit": false
+            },
+            {
+              "time": "1'33.998",
+              "sec": 93.998,
+              "pit": false
+            },
+            {
+              "time": "1'33.869",
+              "sec": 93.869,
+              "pit": false
+            },
+            {
+              "time": "1'33.956",
+              "sec": 93.956,
+              "pit": false
+            },
+            {
+              "time": "1'33.578",
+              "sec": 93.578,
+              "pit": false
+            },
+            {
+              "time": "1'34.763",
+              "sec": 94.763,
+              "pit": false
+            },
+            {
+              "time": "1'33.847",
+              "sec": 93.847,
+              "pit": false
+            },
+            {
+              "time": "1'34.088",
+              "sec": 94.088,
+              "pit": false
+            },
+            {
+              "time": "1'33.368",
+              "sec": 93.368,
+              "pit": false
+            },
+            {
+              "time": "1'33.663",
+              "sec": 93.663,
+              "pit": false
+            },
+            {
+              "time": "1'43.355",
+              "sec": 103.355,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 9,
+          "startLap": 13,
+          "endLap": 21,
+          "fastest": "1'32.904",
+          "fastestSec": 92.904,
+          "flying": [
+            92.904,
+            92.933,
+            92.953,
+            93.29,
+            93.519,
+            94.243,
+            96.579,
+            99.889
+          ],
+          "laps": [
+            {
+              "time": "8'09.197",
+              "sec": 489.197,
+              "pit": false
+            },
+            {
+              "time": "1'33.290",
+              "sec": 93.29,
+              "pit": false
+            },
+            {
+              "time": "1'32.933",
+              "sec": 92.933,
+              "pit": false
+            },
+            {
+              "time": "1'34.243",
+              "sec": 94.243,
+              "pit": false
+            },
+            {
+              "time": "1'36.579",
+              "sec": 96.579,
+              "pit": false
+            },
+            {
+              "time": "1'33.519",
+              "sec": 93.519,
+              "pit": false
+            },
+            {
+              "time": "1'39.889",
+              "sec": 99.889,
+              "pit": false
+            },
+            {
+              "time": "1'32.953",
+              "sec": 92.953,
+              "pit": false
+            },
+            {
+              "time": "1'32.904",
+              "sec": 92.904,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Alex Escrig": {
+      "number": "11",
+      "code": "AE11",
+      "totalLaps": 16,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 5,
+          "startLap": 1,
+          "endLap": 5,
+          "fastest": "1'34.585",
+          "fastestSec": 94.585,
+          "flying": [
+            94.585,
+            95.574,
+            96.176
+          ],
+          "laps": [
+            {
+              "time": "2'33.870",
+              "sec": 153.87,
+              "pit": false
+            },
+            {
+              "time": "1'36.176",
+              "sec": 96.176,
+              "pit": false
+            },
+            {
+              "time": "1'34.585",
+              "sec": 94.585,
+              "pit": false
+            },
+            {
+              "time": "1'35.574",
+              "sec": 95.574,
+              "pit": false
+            },
+            {
+              "time": "1'42.277",
+              "sec": 102.277,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 5,
+          "startLap": 6,
+          "endLap": 10,
+          "fastest": "1'33.526",
+          "fastestSec": 93.526,
+          "flying": [
+            93.526,
+            94.5,
+            94.87
+          ],
+          "laps": [
+            {
+              "time": "9'59.076",
+              "sec": 599.076,
+              "pit": false
+            },
+            {
+              "time": "1'34.870",
+              "sec": 94.87,
+              "pit": false
+            },
+            {
+              "time": "1'34.500",
+              "sec": 94.5,
+              "pit": false
+            },
+            {
+              "time": "1'33.526",
+              "sec": 93.526,
+              "pit": false
+            },
+            {
+              "time": "1'39.457",
+              "sec": 99.457,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 6,
+          "startLap": 11,
+          "endLap": 16,
+          "fastest": "1'32.951",
+          "fastestSec": 92.951,
+          "flying": [
+            92.951,
+            93.136,
+            94.149,
+            94.431
+          ],
+          "laps": [
+            {
+              "time": "6'32.050",
+              "sec": 392.05,
+              "pit": false
+            },
+            {
+              "time": "1'33.136",
+              "sec": 93.136,
+              "pit": false
+            },
+            {
+              "time": "1'32.951",
+              "sec": 92.951,
+              "pit": false
+            },
+            {
+              "time": "1'34.431",
+              "sec": 94.431,
+              "pit": false
+            },
+            {
+              "time": "1'34.149",
+              "sec": 94.149,
+              "pit": false
+            },
+            {
+              "time": "1'46.102",
+              "sec": 106.102,
+              "pit": true
+            }
+          ]
+        }
+      ]
+    },
+    "Alonso Lopez": {
+      "number": "21",
+      "code": "AL21",
+      "totalLaps": 19,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 12,
+          "startLap": 1,
+          "endLap": 12,
+          "fastest": "1'33.427",
+          "fastestSec": 93.427,
+          "flying": [
+            93.427,
+            93.478,
+            93.566,
+            93.609,
+            93.61,
+            93.62,
+            94.174,
+            94.684,
+            94.827,
+            96.361
+          ],
+          "laps": [
+            {
+              "time": "1'50.698",
+              "sec": 110.698,
+              "pit": false
+            },
+            {
+              "time": "1'34.827",
+              "sec": 94.827,
+              "pit": false
+            },
+            {
+              "time": "1'33.620",
+              "sec": 93.62,
+              "pit": false
+            },
+            {
+              "time": "1'33.478",
+              "sec": 93.478,
+              "pit": false
+            },
+            {
+              "time": "1'33.427",
+              "sec": 93.427,
+              "pit": false
+            },
+            {
+              "time": "1'34.174",
+              "sec": 94.174,
+              "pit": false
+            },
+            {
+              "time": "1'34.684",
+              "sec": 94.684,
+              "pit": false
+            },
+            {
+              "time": "1'33.609",
+              "sec": 93.609,
+              "pit": false
+            },
+            {
+              "time": "1'33.566",
+              "sec": 93.566,
+              "pit": false
+            },
+            {
+              "time": "1'33.610",
+              "sec": 93.61,
+              "pit": false
+            },
+            {
+              "time": "1'36.361",
+              "sec": 96.361,
+              "pit": false
+            },
+            {
+              "time": "1'39.858",
+              "sec": 99.858,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 7,
+          "startLap": 13,
+          "endLap": 19,
+          "fastest": "1'33.003",
+          "fastestSec": 93.003,
+          "flying": [
+            93.003,
+            93.037,
+            93.065,
+            93.389,
+            93.538,
+            94.203
+          ],
+          "laps": [
+            {
+              "time": "11'33.760",
+              "sec": 693.76,
+              "pit": false
+            },
+            {
+              "time": "1'33.003",
+              "sec": 93.003,
+              "pit": false
+            },
+            {
+              "time": "1'33.389",
+              "sec": 93.389,
+              "pit": false
+            },
+            {
+              "time": "1'33.538",
+              "sec": 93.538,
+              "pit": false
+            },
+            {
+              "time": "1'33.037",
+              "sec": 93.037,
+              "pit": false
+            },
+            {
+              "time": "1'33.065",
+              "sec": 93.065,
+              "pit": false
+            },
+            {
+              "time": "1'34.203",
+              "sec": 94.203,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Celestino Vietti": {
+      "number": "13",
+      "code": "CV13",
+      "totalLaps": 18,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 14,
+          "startLap": 1,
+          "endLap": 14,
+          "fastest": "1'33.681",
+          "fastestSec": 93.681,
+          "flying": [
+            93.681,
+            93.773,
+            93.799,
+            93.975,
+            94.031,
+            94.037,
+            94.082,
+            94.277,
+            94.663,
+            94.82,
+            95.332,
+            96.756
+          ],
+          "laps": [
+            {
+              "time": "2'16.480",
+              "sec": 136.48,
+              "pit": false
+            },
+            {
+              "time": "1'36.756",
+              "sec": 96.756,
+              "pit": false
+            },
+            {
+              "time": "1'35.332",
+              "sec": 95.332,
+              "pit": false
+            },
+            {
+              "time": "1'34.663",
+              "sec": 94.663,
+              "pit": false
+            },
+            {
+              "time": "1'34.277",
+              "sec": 94.277,
+              "pit": false
+            },
+            {
+              "time": "1'34.820",
+              "sec": 94.82,
+              "pit": false
+            },
+            {
+              "time": "1'34.031",
+              "sec": 94.031,
+              "pit": false
+            },
+            {
+              "time": "1'33.975",
+              "sec": 93.975,
+              "pit": false
+            },
+            {
+              "time": "1'34.082",
+              "sec": 94.082,
+              "pit": false
+            },
+            {
+              "time": "1'33.681",
+              "sec": 93.681,
+              "pit": false
+            },
+            {
+              "time": "1'33.773",
+              "sec": 93.773,
+              "pit": false
+            },
+            {
+              "time": "1'34.037",
+              "sec": 94.037,
+              "pit": false
+            },
+            {
+              "time": "1'33.799",
+              "sec": 93.799,
+              "pit": false
+            },
+            {
+              "time": "1'44.414",
+              "sec": 104.414,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 4,
+          "startLap": 15,
+          "endLap": 18,
+          "fastest": "1'33.054",
+          "fastestSec": 93.054,
+          "flying": [
+            93.054,
+            93.069,
+            93.363
+          ],
+          "laps": [
+            {
+              "time": "12'41.980",
+              "sec": 761.98,
+              "pit": false
+            },
+            {
+              "time": "1'33.363",
+              "sec": 93.363,
+              "pit": false
+            },
+            {
+              "time": "1'33.054",
+              "sec": 93.054,
+              "pit": false
+            },
+            {
+              "time": "1'33.069",
+              "sec": 93.069,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Daniel Holgado": {
+      "number": "96",
+      "code": "DH96",
+      "totalLaps": 21,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 15,
+          "startLap": 1,
+          "endLap": 15,
+          "fastest": "1'33.599",
+          "fastestSec": 93.599,
+          "flying": [
+            93.599,
+            93.686,
+            93.749,
+            93.864,
+            94.07,
+            94.108,
+            94.329,
+            94.348,
+            94.495,
+            94.525,
+            94.631,
+            94.939,
+            96.5
+          ],
+          "laps": [
+            {
+              "time": "2'02.087",
+              "sec": 122.087,
+              "pit": false
+            },
+            {
+              "time": "1'34.939",
+              "sec": 94.939,
+              "pit": false
+            },
+            {
+              "time": "1'34.108",
+              "sec": 94.108,
+              "pit": false
+            },
+            {
+              "time": "1'34.329",
+              "sec": 94.329,
+              "pit": false
+            },
+            {
+              "time": "1'33.864",
+              "sec": 93.864,
+              "pit": false
+            },
+            {
+              "time": "1'34.348",
+              "sec": 94.348,
+              "pit": false
+            },
+            {
+              "time": "1'36.500",
+              "sec": 96.5,
+              "pit": false
+            },
+            {
+              "time": "1'34.631",
+              "sec": 94.631,
+              "pit": false
+            },
+            {
+              "time": "1'34.495",
+              "sec": 94.495,
+              "pit": false
+            },
+            {
+              "time": "1'33.749",
+              "sec": 93.749,
+              "pit": false
+            },
+            {
+              "time": "1'33.599",
+              "sec": 93.599,
+              "pit": false
+            },
+            {
+              "time": "1'33.686",
+              "sec": 93.686,
+              "pit": false
+            },
+            {
+              "time": "1'34.070",
+              "sec": 94.07,
+              "pit": false
+            },
+            {
+              "time": "1'34.525",
+              "sec": 94.525,
+              "pit": false
+            },
+            {
+              "time": "1'40.234",
+              "sec": 100.234,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 6,
+          "startLap": 16,
+          "endLap": 21,
+          "fastest": "1'33.055",
+          "fastestSec": 93.055,
+          "flying": [
+            93.055,
+            93.1,
+            93.113,
+            93.204,
+            94.376
+          ],
+          "laps": [
+            {
+              "time": "8'15.882",
+              "sec": 495.882,
+              "pit": false
+            },
+            {
+              "time": "1'33.100",
+              "sec": 93.1,
+              "pit": false
+            },
+            {
+              "time": "1'33.055",
+              "sec": 93.055,
+              "pit": false
+            },
+            {
+              "time": "1'33.204",
+              "sec": 93.204,
+              "pit": false
+            },
+            {
+              "time": "1'33.113",
+              "sec": 93.113,
+              "pit": false
+            },
+            {
+              "time": "1'34.376",
+              "sec": 94.376,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Alberto Ferrandez": {
+      "number": "54",
+      "code": "AF54",
+      "totalLaps": 21,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 14,
+          "startLap": 1,
+          "endLap": 14,
+          "fastest": "1'33.879",
+          "fastestSec": 93.879,
+          "flying": [
+            93.879,
+            93.977,
+            93.992,
+            94.076,
+            94.076,
+            94.14,
+            94.34,
+            94.542,
+            95.324,
+            96.37,
+            98.126,
+            99.187
+          ],
+          "laps": [
+            {
+              "time": "2'02.420",
+              "sec": 122.42,
+              "pit": false
+            },
+            {
+              "time": "1'35.324",
+              "sec": 95.324,
+              "pit": false
+            },
+            {
+              "time": "1'34.542",
+              "sec": 94.542,
+              "pit": false
+            },
+            {
+              "time": "1'34.140",
+              "sec": 94.14,
+              "pit": false
+            },
+            {
+              "time": "1'34.076",
+              "sec": 94.076,
+              "pit": false
+            },
+            {
+              "time": "1'34.076",
+              "sec": 94.076,
+              "pit": false
+            },
+            {
+              "time": "1'34.340",
+              "sec": 94.34,
+              "pit": false
+            },
+            {
+              "time": "1'36.370",
+              "sec": 96.37,
+              "pit": false
+            },
+            {
+              "time": "1'39.187",
+              "sec": 99.187,
+              "pit": false
+            },
+            {
+              "time": "1'33.977",
+              "sec": 93.977,
+              "pit": false
+            },
+            {
+              "time": "1'33.992",
+              "sec": 93.992,
+              "pit": false
+            },
+            {
+              "time": "1'38.126",
+              "sec": 98.126,
+              "pit": false
+            },
+            {
+              "time": "1'33.879",
+              "sec": 93.879,
+              "pit": false
+            },
+            {
+              "time": "1'44.639",
+              "sec": 104.639,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 7,
+          "startLap": 15,
+          "endLap": 21,
+          "fastest": "1'33.100",
+          "fastestSec": 93.1,
+          "flying": [
+            93.1,
+            93.241,
+            93.336,
+            93.504,
+            93.95,
+            96.149
+          ],
+          "laps": [
+            {
+              "time": "8'43.329",
+              "sec": 523.329,
+              "pit": false
+            },
+            {
+              "time": "1'33.100",
+              "sec": 93.1,
+              "pit": false
+            },
+            {
+              "time": "1'33.241",
+              "sec": 93.241,
+              "pit": false
+            },
+            {
+              "time": "1'36.149",
+              "sec": 96.149,
+              "pit": false
+            },
+            {
+              "time": "1'33.336",
+              "sec": 93.336,
+              "pit": false
+            },
+            {
+              "time": "1'33.950",
+              "sec": 93.95,
+              "pit": false
+            },
+            {
+              "time": "1'33.504",
+              "sec": 93.504,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Xabi Zurutuza": {
+      "number": "85",
+      "code": "XZ85",
+      "totalLaps": 16,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 2,
+          "startLap": 1,
+          "endLap": 2,
+          "fastest": "1'50.852",
+          "fastestSec": 110.852,
+          "flying": [
+            110.852
+          ],
+          "laps": [
+            {
+              "time": "1'50.852",
+              "sec": 110.852,
+              "pit": false
+            },
+            {
+              "time": "1'38.596",
+              "sec": 98.596,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 7,
+          "startLap": 3,
+          "endLap": 9,
+          "fastest": "1'33.875",
+          "fastestSec": 93.875,
+          "flying": [
+            93.875,
+            94.137,
+            94.701,
+            94.848,
+            96.764
+          ],
+          "laps": [
+            {
+              "time": "6'24.081",
+              "sec": 384.081,
+              "pit": false
+            },
+            {
+              "time": "1'36.764",
+              "sec": 96.764,
+              "pit": false
+            },
+            {
+              "time": "1'34.701",
+              "sec": 94.701,
+              "pit": false
+            },
+            {
+              "time": "1'34.848",
+              "sec": 94.848,
+              "pit": false
+            },
+            {
+              "time": "1'34.137",
+              "sec": 94.137,
+              "pit": false
+            },
+            {
+              "time": "1'33.875",
+              "sec": 93.875,
+              "pit": false
+            },
+            {
+              "time": "1'37.968",
+              "sec": 97.968,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 3,
+          "startLap": 10,
+          "endLap": 12,
+          "fastest": "1'34.688",
+          "fastestSec": 94.688,
+          "flying": [
+            94.688
+          ],
+          "laps": [
+            {
+              "time": "9'59.544",
+              "sec": 599.544,
+              "pit": false
+            },
+            {
+              "time": "1'34.688",
+              "sec": 94.688,
+              "pit": false
+            },
+            {
+              "time": "1'37.577",
+              "sec": 97.577,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 4,
+          "startLap": 13,
+          "endLap": 16,
+          "fastest": "1'33.189",
+          "fastestSec": 93.189,
+          "flying": [
+            93.189,
+            93.21,
+            97.563
+          ],
+          "laps": [
+            {
+              "time": "3'59.143",
+              "sec": 239.143,
+              "pit": false
+            },
+            {
+              "time": "1'33.210",
+              "sec": 93.21,
+              "pit": false
+            },
+            {
+              "time": "1'37.563",
+              "sec": 97.563,
+              "pit": false
+            },
+            {
+              "time": "1'33.189",
+              "sec": 93.189,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Manuel Gonzalez": {
+      "number": "18",
+      "code": "MG18",
+      "totalLaps": 17,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 11,
+          "startLap": 1,
+          "endLap": 11,
+          "fastest": "1'33.248",
+          "fastestSec": 93.248,
+          "flying": [
+            93.248,
+            93.328,
+            93.441,
+            93.483,
+            93.599,
+            93.638,
+            94.376,
+            94.45,
+            96.043
+          ],
+          "laps": [
+            {
+              "time": "4'20.288",
+              "sec": 260.288,
+              "pit": false
+            },
+            {
+              "time": "1'34.376",
+              "sec": 94.376,
+              "pit": false
+            },
+            {
+              "time": "1'33.638",
+              "sec": 93.638,
+              "pit": false
+            },
+            {
+              "time": "1'33.599",
+              "sec": 93.599,
+              "pit": false
+            },
+            {
+              "time": "1'33.483",
+              "sec": 93.483,
+              "pit": false
+            },
+            {
+              "time": "1'36.043",
+              "sec": 96.043,
+              "pit": false
+            },
+            {
+              "time": "1'33.328",
+              "sec": 93.328,
+              "pit": false
+            },
+            {
+              "time": "1'34.450",
+              "sec": 94.45,
+              "pit": false
+            },
+            {
+              "time": "1'33.441",
+              "sec": 93.441,
+              "pit": false
+            },
+            {
+              "time": "1'33.248",
+              "sec": 93.248,
+              "pit": false
+            },
+            {
+              "time": "1'38.564",
+              "sec": 98.564,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 6,
+          "startLap": 12,
+          "endLap": 17,
+          "fastest": "1'33.273",
+          "fastestSec": 93.273,
+          "flying": [
+            93.273,
+            93.328,
+            93.568,
+            94.127,
+            94.805
+          ],
+          "laps": [
+            {
+              "time": "12'32.809",
+              "sec": 752.809,
+              "pit": false
+            },
+            {
+              "time": "1'34.127",
+              "sec": 94.127,
+              "pit": false
+            },
+            {
+              "time": "1'34.805",
+              "sec": 94.805,
+              "pit": false
+            },
+            {
+              "time": "1'33.568",
+              "sec": 93.568,
+              "pit": false
+            },
+            {
+              "time": "1'33.273",
+              "sec": 93.273,
+              "pit": false
+            },
+            {
+              "time": "1'33.328",
+              "sec": 93.328,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Luca Lunetta": {
+      "number": "32",
+      "code": "LL32",
+      "totalLaps": 21,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 14,
+          "startLap": 1,
+          "endLap": 14,
+          "fastest": "1'33.746",
+          "fastestSec": 93.746,
+          "flying": [
+            93.746,
+            93.888,
+            94.074,
+            94.135,
+            94.259,
+            94.431,
+            94.478,
+            94.598,
+            94.996,
+            95.465,
+            96.011,
+            98.622
+          ],
+          "laps": [
+            {
+              "time": "1'56.661",
+              "sec": 116.661,
+              "pit": false
+            },
+            {
+              "time": "1'36.011",
+              "sec": 96.011,
+              "pit": false
+            },
+            {
+              "time": "1'34.996",
+              "sec": 94.996,
+              "pit": false
+            },
+            {
+              "time": "1'34.598",
+              "sec": 94.598,
+              "pit": false
+            },
+            {
+              "time": "1'35.465",
+              "sec": 95.465,
+              "pit": false
+            },
+            {
+              "time": "1'34.431",
+              "sec": 94.431,
+              "pit": false
+            },
+            {
+              "time": "1'34.259",
+              "sec": 94.259,
+              "pit": false
+            },
+            {
+              "time": "1'38.622",
+              "sec": 98.622,
+              "pit": false
+            },
+            {
+              "time": "1'34.478",
+              "sec": 94.478,
+              "pit": false
+            },
+            {
+              "time": "1'33.888",
+              "sec": 93.888,
+              "pit": false
+            },
+            {
+              "time": "1'33.746",
+              "sec": 93.746,
+              "pit": false
+            },
+            {
+              "time": "1'34.135",
+              "sec": 94.135,
+              "pit": false
+            },
+            {
+              "time": "1'34.074",
+              "sec": 94.074,
+              "pit": false
+            },
+            {
+              "time": "1'39.646",
+              "sec": 99.646,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 7,
+          "startLap": 15,
+          "endLap": 21,
+          "fastest": "1'33.272",
+          "fastestSec": 93.272,
+          "flying": [
+            93.272,
+            93.379,
+            93.43,
+            93.449,
+            93.537,
+            93.557
+          ],
+          "laps": [
+            {
+              "time": "8'47.198",
+              "sec": 527.198,
+              "pit": false
+            },
+            {
+              "time": "1'33.537",
+              "sec": 93.537,
+              "pit": false
+            },
+            {
+              "time": "1'33.449",
+              "sec": 93.449,
+              "pit": false
+            },
+            {
+              "time": "1'33.272",
+              "sec": 93.272,
+              "pit": false
+            },
+            {
+              "time": "1'33.430",
+              "sec": 93.43,
+              "pit": false
+            },
+            {
+              "time": "1'33.557",
+              "sec": 93.557,
+              "pit": false
+            },
+            {
+              "time": "1'33.379",
+              "sec": 93.379,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Angel Piqueras": {
+      "number": "36",
+      "code": "AP36",
+      "totalLaps": 20,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 14,
+          "startLap": 1,
+          "endLap": 14,
+          "fastest": "1'33.667",
+          "fastestSec": 93.667,
+          "flying": [
+            93.667,
+            93.881,
+            93.988,
+            94.028,
+            94.073,
+            94.176,
+            94.266,
+            94.364,
+            94.425,
+            94.483,
+            95.054,
+            96.351
+          ],
+          "laps": [
+            {
+              "time": "2'15.555",
+              "sec": 135.555,
+              "pit": false
+            },
+            {
+              "time": "1'36.351",
+              "sec": 96.351,
+              "pit": false
+            },
+            {
+              "time": "1'35.054",
+              "sec": 95.054,
+              "pit": false
+            },
+            {
+              "time": "1'34.364",
+              "sec": 94.364,
+              "pit": false
+            },
+            {
+              "time": "1'34.425",
+              "sec": 94.425,
+              "pit": false
+            },
+            {
+              "time": "1'34.176",
+              "sec": 94.176,
+              "pit": false
+            },
+            {
+              "time": "1'33.988",
+              "sec": 93.988,
+              "pit": false
+            },
+            {
+              "time": "1'34.028",
+              "sec": 94.028,
+              "pit": false
+            },
+            {
+              "time": "1'34.483",
+              "sec": 94.483,
+              "pit": false
+            },
+            {
+              "time": "1'34.266",
+              "sec": 94.266,
+              "pit": false
+            },
+            {
+              "time": "1'33.881",
+              "sec": 93.881,
+              "pit": false
+            },
+            {
+              "time": "1'34.073",
+              "sec": 94.073,
+              "pit": false
+            },
+            {
+              "time": "1'33.667",
+              "sec": 93.667,
+              "pit": false
+            },
+            {
+              "time": "1'39.764",
+              "sec": 99.764,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 6,
+          "startLap": 15,
+          "endLap": 20,
+          "fastest": "1'33.283",
+          "fastestSec": 93.283,
+          "flying": [
+            93.283,
+            93.364,
+            93.485,
+            93.685,
+            94.151
+          ],
+          "laps": [
+            {
+              "time": "7'48.043",
+              "sec": 468.043,
+              "pit": false
+            },
+            {
+              "time": "1'34.151",
+              "sec": 94.151,
+              "pit": false
+            },
+            {
+              "time": "1'33.685",
+              "sec": 93.685,
+              "pit": false
+            },
+            {
+              "time": "1'33.364",
+              "sec": 93.364,
+              "pit": false
+            },
+            {
+              "time": "1'33.283",
+              "sec": 93.283,
+              "pit": false
+            },
+            {
+              "time": "1'33.485",
+              "sec": 93.485,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Zonta Vd Goorbergh": {
+      "number": "84",
+      "code": "ZG84",
+      "totalLaps": 20,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 12,
+          "startLap": 1,
+          "endLap": 12,
+          "fastest": "1'33.941",
+          "fastestSec": 93.941,
+          "flying": [
+            93.941,
+            94.256,
+            94.294,
+            94.476,
+            94.48,
+            95.436,
+            95.454,
+            95.55,
+            96.221,
+            97.759
+          ],
+          "laps": [
+            {
+              "time": "2'27.531",
+              "sec": 147.531,
+              "pit": false
+            },
+            {
+              "time": "1'36.221",
+              "sec": 96.221,
+              "pit": false
+            },
+            {
+              "time": "1'35.436",
+              "sec": 95.436,
+              "pit": false
+            },
+            {
+              "time": "1'35.550",
+              "sec": 95.55,
+              "pit": false
+            },
+            {
+              "time": "1'35.454",
+              "sec": 95.454,
+              "pit": false
+            },
+            {
+              "time": "1'34.480",
+              "sec": 94.48,
+              "pit": false
+            },
+            {
+              "time": "1'34.476",
+              "sec": 94.476,
+              "pit": false
+            },
+            {
+              "time": "1'34.294",
+              "sec": 94.294,
+              "pit": false
+            },
+            {
+              "time": "1'37.759",
+              "sec": 97.759,
+              "pit": false
+            },
+            {
+              "time": "1'34.256",
+              "sec": 94.256,
+              "pit": false
+            },
+            {
+              "time": "1'33.941",
+              "sec": 93.941,
+              "pit": false
+            },
+            {
+              "time": "1'42.408",
+              "sec": 102.408,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 8,
+          "startLap": 13,
+          "endLap": 20,
+          "fastest": "1'33.322",
+          "fastestSec": 93.322,
+          "flying": [
+            93.322,
+            93.349,
+            93.461,
+            93.491,
+            93.506,
+            93.585
+          ],
+          "laps": [
+            {
+              "time": "10'18.998",
+              "sec": 618.998,
+              "pit": false
+            },
+            {
+              "time": "1'33.585",
+              "sec": 93.585,
+              "pit": false
+            },
+            {
+              "time": "1'33.461",
+              "sec": 93.461,
+              "pit": false
+            },
+            {
+              "time": "1'33.322",
+              "sec": 93.322,
+              "pit": false
+            },
+            {
+              "time": "1'33.491",
+              "sec": 93.491,
+              "pit": false
+            },
+            {
+              "time": "1'33.349",
+              "sec": 93.349,
+              "pit": false
+            },
+            {
+              "time": "1'33.506",
+              "sec": 93.506,
+              "pit": false
+            },
+            {
+              "time": "2'18.321",
+              "sec": 138.321,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Daniel Muñoz": {
+      "number": "17",
+      "code": "DM17",
+      "totalLaps": 21,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 12,
+          "startLap": 1,
+          "endLap": 12,
+          "fastest": "1'33.678",
+          "fastestSec": 93.678,
+          "flying": [
+            93.678,
+            93.726,
+            93.94,
+            93.967,
+            94.028,
+            94.174,
+            94.569,
+            94.875,
+            95.202,
+            95.852
+          ],
+          "laps": [
+            {
+              "time": "2'11.036",
+              "sec": 131.036,
+              "pit": false
+            },
+            {
+              "time": "1'35.852",
+              "sec": 95.852,
+              "pit": false
+            },
+            {
+              "time": "1'35.202",
+              "sec": 95.202,
+              "pit": false
+            },
+            {
+              "time": "1'34.569",
+              "sec": 94.569,
+              "pit": false
+            },
+            {
+              "time": "1'34.875",
+              "sec": 94.875,
+              "pit": false
+            },
+            {
+              "time": "1'34.174",
+              "sec": 94.174,
+              "pit": false
+            },
+            {
+              "time": "1'34.028",
+              "sec": 94.028,
+              "pit": false
+            },
+            {
+              "time": "1'33.678",
+              "sec": 93.678,
+              "pit": false
+            },
+            {
+              "time": "1'33.967",
+              "sec": 93.967,
+              "pit": false
+            },
+            {
+              "time": "1'33.726",
+              "sec": 93.726,
+              "pit": false
+            },
+            {
+              "time": "1'33.940",
+              "sec": 93.94,
+              "pit": false
+            },
+            {
+              "time": "1'38.564",
+              "sec": 98.564,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 9,
+          "startLap": 13,
+          "endLap": 21,
+          "fastest": "1'33.463",
+          "fastestSec": 93.463,
+          "flying": [
+            93.463,
+            93.574,
+            93.621,
+            93.92,
+            93.956,
+            93.979,
+            94.094,
+            95.914
+          ],
+          "laps": [
+            {
+              "time": "9'26.831",
+              "sec": 566.831,
+              "pit": false
+            },
+            {
+              "time": "1'34.094",
+              "sec": 94.094,
+              "pit": false
+            },
+            {
+              "time": "1'33.920",
+              "sec": 93.92,
+              "pit": false
+            },
+            {
+              "time": "1'33.956",
+              "sec": 93.956,
+              "pit": false
+            },
+            {
+              "time": "1'33.463",
+              "sec": 93.463,
+              "pit": false
+            },
+            {
+              "time": "1'33.574",
+              "sec": 93.574,
+              "pit": false
+            },
+            {
+              "time": "1'33.621",
+              "sec": 93.621,
+              "pit": false
+            },
+            {
+              "time": "1'33.979",
+              "sec": 93.979,
+              "pit": false
+            },
+            {
+              "time": "1'35.914",
+              "sec": 95.914,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Ivan Ortola": {
+      "number": "4",
+      "code": "IO4",
+      "totalLaps": 13,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 13,
+          "startLap": 1,
+          "endLap": 13,
+          "fastest": "1'33.493",
+          "fastestSec": 93.493,
+          "flying": [
+            93.493,
+            93.669,
+            93.767,
+            93.988,
+            94.373,
+            94.661,
+            94.691,
+            94.839,
+            94.989,
+            96.097,
+            96.994,
+            103.288
+          ],
+          "laps": [
+            {
+              "time": "3'22.632",
+              "sec": 202.632,
+              "pit": false
+            },
+            {
+              "time": "1'34.661",
+              "sec": 94.661,
+              "pit": false
+            },
+            {
+              "time": "1'33.767",
+              "sec": 93.767,
+              "pit": false
+            },
+            {
+              "time": "1'33.988",
+              "sec": 93.988,
+              "pit": false
+            },
+            {
+              "time": "1'33.493",
+              "sec": 93.493,
+              "pit": false
+            },
+            {
+              "time": "1'33.669",
+              "sec": 93.669,
+              "pit": false
+            },
+            {
+              "time": "1'34.839",
+              "sec": 94.839,
+              "pit": false
+            },
+            {
+              "time": "1'43.288",
+              "sec": 103.288,
+              "pit": false
+            },
+            {
+              "time": "1'36.994",
+              "sec": 96.994,
+              "pit": false
+            },
+            {
+              "time": "1'34.989",
+              "sec": 94.989,
+              "pit": false
+            },
+            {
+              "time": "1'36.097",
+              "sec": 96.097,
+              "pit": false
+            },
+            {
+              "time": "1'34.373",
+              "sec": 94.373,
+              "pit": false
+            },
+            {
+              "time": "1'34.691",
+              "sec": 94.691,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Collin Veijer": {
+      "number": "95",
+      "code": "CV95",
+      "totalLaps": 20,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 14,
+          "startLap": 1,
+          "endLap": 14,
+          "fastest": "1'33.517",
+          "fastestSec": 93.517,
+          "flying": [
+            93.517,
+            93.539,
+            93.581,
+            93.816,
+            93.95,
+            94.066,
+            94.148,
+            94.183,
+            94.42,
+            95.283,
+            95.599,
+            95.848
+          ],
+          "laps": [
+            {
+              "time": "2'42.694",
+              "sec": 162.694,
+              "pit": false
+            },
+            {
+              "time": "1'35.283",
+              "sec": 95.283,
+              "pit": false
+            },
+            {
+              "time": "1'34.420",
+              "sec": 94.42,
+              "pit": false
+            },
+            {
+              "time": "1'33.950",
+              "sec": 93.95,
+              "pit": false
+            },
+            {
+              "time": "1'34.066",
+              "sec": 94.066,
+              "pit": false
+            },
+            {
+              "time": "1'35.848",
+              "sec": 95.848,
+              "pit": false
+            },
+            {
+              "time": "1'34.148",
+              "sec": 94.148,
+              "pit": false
+            },
+            {
+              "time": "1'33.539",
+              "sec": 93.539,
+              "pit": false
+            },
+            {
+              "time": "1'34.183",
+              "sec": 94.183,
+              "pit": false
+            },
+            {
+              "time": "1'33.816",
+              "sec": 93.816,
+              "pit": false
+            },
+            {
+              "time": "1'33.517",
+              "sec": 93.517,
+              "pit": false
+            },
+            {
+              "time": "1'35.599",
+              "sec": 95.599,
+              "pit": false
+            },
+            {
+              "time": "1'33.581",
+              "sec": 93.581,
+              "pit": false
+            },
+            {
+              "time": "1'36.754",
+              "sec": 96.754,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 6,
+          "startLap": 15,
+          "endLap": 20,
+          "fastest": "1'33.899",
+          "fastestSec": 93.899,
+          "flying": [
+            93.899,
+            94.106,
+            94.134,
+            94.265,
+            94.294
+          ],
+          "laps": [
+            {
+              "time": "9'20.120",
+              "sec": 560.12,
+              "pit": false
+            },
+            {
+              "time": "1'34.265",
+              "sec": 94.265,
+              "pit": false
+            },
+            {
+              "time": "1'34.294",
+              "sec": 94.294,
+              "pit": false
+            },
+            {
+              "time": "1'34.134",
+              "sec": 94.134,
+              "pit": false
+            },
+            {
+              "time": "1'33.899",
+              "sec": 93.899,
+              "pit": false
+            },
+            {
+              "time": "1'34.106",
+              "sec": 94.106,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "David Alonso": {
+      "number": "80",
+      "code": "DA80",
+      "totalLaps": 12,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 12,
+          "startLap": 1,
+          "endLap": 12,
+          "fastest": "1'33.541",
+          "fastestSec": 93.541,
+          "flying": [
+            93.541,
+            93.593,
+            93.664,
+            93.901,
+            93.908,
+            94.258,
+            94.347,
+            94.397,
+            94.413,
+            94.718,
+            96.036
+          ],
+          "laps": [
+            {
+              "time": "3'07.790",
+              "sec": 187.79,
+              "pit": false
+            },
+            {
+              "time": "1'36.036",
+              "sec": 96.036,
+              "pit": false
+            },
+            {
+              "time": "1'34.718",
+              "sec": 94.718,
+              "pit": false
+            },
+            {
+              "time": "1'34.347",
+              "sec": 94.347,
+              "pit": false
+            },
+            {
+              "time": "1'34.258",
+              "sec": 94.258,
+              "pit": false
+            },
+            {
+              "time": "1'33.908",
+              "sec": 93.908,
+              "pit": false
+            },
+            {
+              "time": "1'34.397",
+              "sec": 94.397,
+              "pit": false
+            },
+            {
+              "time": "1'34.413",
+              "sec": 94.413,
+              "pit": false
+            },
+            {
+              "time": "1'33.541",
+              "sec": 93.541,
+              "pit": false
+            },
+            {
+              "time": "1'33.664",
+              "sec": 93.664,
+              "pit": false
+            },
+            {
+              "time": "1'33.901",
+              "sec": 93.901,
+              "pit": false
+            },
+            {
+              "time": "1'33.593",
+              "sec": 93.593,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Jose Antonio Rueda": {
+      "number": "98",
+      "code": "JR98",
+      "totalLaps": 21,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 14,
+          "startLap": 1,
+          "endLap": 14,
+          "fastest": "1'34.163",
+          "fastestSec": 94.163,
+          "flying": [
+            94.163,
+            94.189,
+            94.269,
+            94.318,
+            94.353,
+            94.578,
+            94.613,
+            94.614,
+            94.672,
+            95.057,
+            95.676,
+            97.247
+          ],
+          "laps": [
+            {
+              "time": "2'06.468",
+              "sec": 126.468,
+              "pit": false
+            },
+            {
+              "time": "1'37.247",
+              "sec": 97.247,
+              "pit": false
+            },
+            {
+              "time": "1'35.676",
+              "sec": 95.676,
+              "pit": false
+            },
+            {
+              "time": "1'35.057",
+              "sec": 95.057,
+              "pit": false
+            },
+            {
+              "time": "1'34.613",
+              "sec": 94.613,
+              "pit": false
+            },
+            {
+              "time": "1'34.614",
+              "sec": 94.614,
+              "pit": false
+            },
+            {
+              "time": "1'34.189",
+              "sec": 94.189,
+              "pit": false
+            },
+            {
+              "time": "1'34.318",
+              "sec": 94.318,
+              "pit": false
+            },
+            {
+              "time": "1'34.578",
+              "sec": 94.578,
+              "pit": false
+            },
+            {
+              "time": "1'34.163",
+              "sec": 94.163,
+              "pit": false
+            },
+            {
+              "time": "1'34.353",
+              "sec": 94.353,
+              "pit": false
+            },
+            {
+              "time": "1'34.672",
+              "sec": 94.672,
+              "pit": false
+            },
+            {
+              "time": "1'34.269",
+              "sec": 94.269,
+              "pit": false
+            },
+            {
+              "time": "1'48.025",
+              "sec": 108.025,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 7,
+          "startLap": 15,
+          "endLap": 21,
+          "fastest": "1'33.630",
+          "fastestSec": 93.63,
+          "flying": [
+            93.63,
+            93.879,
+            93.975,
+            93.991,
+            94.285,
+            94.864
+          ],
+          "laps": [
+            {
+              "time": "8'17.394",
+              "sec": 497.394,
+              "pit": false
+            },
+            {
+              "time": "1'34.864",
+              "sec": 94.864,
+              "pit": false
+            },
+            {
+              "time": "1'33.991",
+              "sec": 93.991,
+              "pit": false
+            },
+            {
+              "time": "1'34.285",
+              "sec": 94.285,
+              "pit": false
+            },
+            {
+              "time": "1'33.975",
+              "sec": 93.975,
+              "pit": false
+            },
+            {
+              "time": "1'33.879",
+              "sec": 93.879,
+              "pit": false
+            },
+            {
+              "time": "1'33.630",
+              "sec": 93.63,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Aron Canet": {
+      "number": "44",
+      "code": "AC44",
+      "totalLaps": 18,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 11,
+          "startLap": 1,
+          "endLap": 11,
+          "fastest": "1'33.959",
+          "fastestSec": 93.959,
+          "flying": [
+            93.959,
+            93.989,
+            94.042,
+            94.16,
+            94.853,
+            95.018,
+            95.102,
+            95.889,
+            96.515
+          ],
+          "laps": [
+            {
+              "time": "2'11.087",
+              "sec": 131.087,
+              "pit": false
+            },
+            {
+              "time": "1'35.889",
+              "sec": 95.889,
+              "pit": false
+            },
+            {
+              "time": "1'34.853",
+              "sec": 94.853,
+              "pit": false
+            },
+            {
+              "time": "1'35.018",
+              "sec": 95.018,
+              "pit": false
+            },
+            {
+              "time": "1'35.102",
+              "sec": 95.102,
+              "pit": false
+            },
+            {
+              "time": "1'33.989",
+              "sec": 93.989,
+              "pit": false
+            },
+            {
+              "time": "1'34.160",
+              "sec": 94.16,
+              "pit": false
+            },
+            {
+              "time": "1'33.959",
+              "sec": 93.959,
+              "pit": false
+            },
+            {
+              "time": "1'36.515",
+              "sec": 96.515,
+              "pit": false
+            },
+            {
+              "time": "1'34.042",
+              "sec": 94.042,
+              "pit": false
+            },
+            {
+              "time": "1'47.246",
+              "sec": 107.246,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 7,
+          "startLap": 12,
+          "endLap": 18,
+          "fastest": "1'33.663",
+          "fastestSec": 93.663,
+          "flying": [
+            93.663,
+            93.706,
+            93.927,
+            94.316,
+            96.451,
+            96.677
+          ],
+          "laps": [
+            {
+              "time": "13'08.763",
+              "sec": 788.763,
+              "pit": false
+            },
+            {
+              "time": "1'34.316",
+              "sec": 94.316,
+              "pit": false
+            },
+            {
+              "time": "1'33.663",
+              "sec": 93.663,
+              "pit": false
+            },
+            {
+              "time": "1'36.451",
+              "sec": 96.451,
+              "pit": false
+            },
+            {
+              "time": "1'33.706",
+              "sec": 93.706,
+              "pit": false
+            },
+            {
+              "time": "1'36.677",
+              "sec": 96.677,
+              "pit": false
+            },
+            {
+              "time": "1'33.927",
+              "sec": 93.927,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Barry Baltus": {
+      "number": "7",
+      "code": "BB7",
+      "totalLaps": 6,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 6,
+          "startLap": 1,
+          "endLap": 6,
+          "fastest": "1'33.725",
+          "fastestSec": 93.725,
+          "flying": [
+            93.725,
+            93.828,
+            94.177,
+            94.579,
+            94.625
+          ],
+          "laps": [
+            {
+              "time": "2'33.023",
+              "sec": 153.023,
+              "pit": false
+            },
+            {
+              "time": "1'34.625",
+              "sec": 94.625,
+              "pit": false
+            },
+            {
+              "time": "1'33.725",
+              "sec": 93.725,
+              "pit": false
+            },
+            {
+              "time": "1'33.828",
+              "sec": 93.828,
+              "pit": false
+            },
+            {
+              "time": "1'34.579",
+              "sec": 94.579,
+              "pit": false
+            },
+            {
+              "time": "1'34.177",
+              "sec": 94.177,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Mario Aji": {
+      "number": "64",
+      "code": "MA64",
+      "totalLaps": 17,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 11,
+          "startLap": 1,
+          "endLap": 11,
+          "fastest": "1'33.852",
+          "fastestSec": 93.852,
+          "flying": [
+            93.852,
+            94.007,
+            94.14,
+            94.272,
+            94.279,
+            94.514,
+            94.916,
+            95.473,
+            98.042
+          ],
+          "laps": [
+            {
+              "time": "7'41.874",
+              "sec": 461.874,
+              "pit": false
+            },
+            {
+              "time": "1'35.473",
+              "sec": 95.473,
+              "pit": false
+            },
+            {
+              "time": "1'34.916",
+              "sec": 94.916,
+              "pit": false
+            },
+            {
+              "time": "1'38.042",
+              "sec": 98.042,
+              "pit": false
+            },
+            {
+              "time": "1'34.514",
+              "sec": 94.514,
+              "pit": false
+            },
+            {
+              "time": "1'34.007",
+              "sec": 94.007,
+              "pit": false
+            },
+            {
+              "time": "1'33.852",
+              "sec": 93.852,
+              "pit": false
+            },
+            {
+              "time": "1'34.140",
+              "sec": 94.14,
+              "pit": false
+            },
+            {
+              "time": "1'34.272",
+              "sec": 94.272,
+              "pit": false
+            },
+            {
+              "time": "1'34.279",
+              "sec": 94.279,
+              "pit": false
+            },
+            {
+              "time": "1'43.184",
+              "sec": 103.184,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 6,
+          "startLap": 12,
+          "endLap": 17,
+          "fastest": "1'34.268",
+          "fastestSec": 94.268,
+          "flying": [
+            94.268,
+            94.471,
+            94.646,
+            97.181,
+            97.978
+          ],
+          "laps": [
+            {
+              "time": "8'32.587",
+              "sec": 512.587,
+              "pit": false
+            },
+            {
+              "time": "1'37.181",
+              "sec": 97.181,
+              "pit": false
+            },
+            {
+              "time": "1'34.646",
+              "sec": 94.646,
+              "pit": false
+            },
+            {
+              "time": "1'37.978",
+              "sec": 97.978,
+              "pit": false
+            },
+            {
+              "time": "1'34.268",
+              "sec": 94.268,
+              "pit": false
+            },
+            {
+              "time": "1'34.471",
+              "sec": 94.471,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Adrian Huertas": {
+      "number": "99",
+      "code": "AH99",
+      "totalLaps": 16,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 9,
+          "startLap": 1,
+          "endLap": 9,
+          "fastest": "1'34.131",
+          "fastestSec": 94.131,
+          "flying": [
+            94.131,
+            94.517,
+            94.778,
+            95.721,
+            97.009,
+            97.231,
+            99.805
+          ],
+          "laps": [
+            {
+              "time": "1'53.411",
+              "sec": 113.411,
+              "pit": false
+            },
+            {
+              "time": "1'37.231",
+              "sec": 97.231,
+              "pit": false
+            },
+            {
+              "time": "1'35.721",
+              "sec": 95.721,
+              "pit": false
+            },
+            {
+              "time": "1'34.778",
+              "sec": 94.778,
+              "pit": false
+            },
+            {
+              "time": "1'37.009",
+              "sec": 97.009,
+              "pit": false
+            },
+            {
+              "time": "1'34.517",
+              "sec": 94.517,
+              "pit": false
+            },
+            {
+              "time": "1'34.131",
+              "sec": 94.131,
+              "pit": false
+            },
+            {
+              "time": "1'39.805",
+              "sec": 99.805,
+              "pit": false
+            },
+            {
+              "time": "1'41.422",
+              "sec": 101.422,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 7,
+          "startLap": 10,
+          "endLap": 16,
+          "fastest": "1'33.870",
+          "fastestSec": 93.87,
+          "flying": [
+            93.87,
+            94.109,
+            94.137,
+            94.266,
+            97.489
+          ],
+          "laps": [
+            {
+              "time": "12'05.582",
+              "sec": 725.582,
+              "pit": false
+            },
+            {
+              "time": "1'34.266",
+              "sec": 94.266,
+              "pit": false
+            },
+            {
+              "time": "1'34.109",
+              "sec": 94.109,
+              "pit": false
+            },
+            {
+              "time": "1'34.137",
+              "sec": 94.137,
+              "pit": false
+            },
+            {
+              "time": "1'33.870",
+              "sec": 93.87,
+              "pit": false
+            },
+            {
+              "time": "1'37.489",
+              "sec": 97.489,
+              "pit": false
+            },
+            {
+              "time": "1'41.481",
+              "sec": 101.481,
+              "pit": true
+            }
+          ]
+        }
+      ]
+    },
+    "Ayumu Sasaki": {
+      "number": "71",
+      "code": "AS71",
+      "totalLaps": 17,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 9,
+          "startLap": 1,
+          "endLap": 9,
+          "fastest": "1'34.171",
+          "fastestSec": 94.171,
+          "flying": [
+            94.171,
+            94.591,
+            95.014,
+            95.43,
+            95.608,
+            95.8,
+            96.341
+          ],
+          "laps": [
+            {
+              "time": "2'27.521",
+              "sec": 147.521,
+              "pit": false
+            },
+            {
+              "time": "1'36.341",
+              "sec": 96.341,
+              "pit": false
+            },
+            {
+              "time": "1'35.430",
+              "sec": 95.43,
+              "pit": false
+            },
+            {
+              "time": "1'35.014",
+              "sec": 95.014,
+              "pit": false
+            },
+            {
+              "time": "1'35.608",
+              "sec": 95.608,
+              "pit": false
+            },
+            {
+              "time": "1'34.591",
+              "sec": 94.591,
+              "pit": false
+            },
+            {
+              "time": "1'35.800",
+              "sec": 95.8,
+              "pit": false
+            },
+            {
+              "time": "1'34.171",
+              "sec": 94.171,
+              "pit": false
+            },
+            {
+              "time": "1'40.551",
+              "sec": 100.551,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 3,
+          "startLap": 10,
+          "endLap": 12,
+          "fastest": "1'35.344",
+          "fastestSec": 95.344,
+          "flying": [
+            95.344
+          ],
+          "laps": [
+            {
+              "time": "8'02.748",
+              "sec": 482.748,
+              "pit": false
+            },
+            {
+              "time": "1'35.344",
+              "sec": 95.344,
+              "pit": false
+            },
+            {
+              "time": "1'39.847",
+              "sec": 99.847,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 5,
+          "startLap": 13,
+          "endLap": 17,
+          "fastest": "1'34.477",
+          "fastestSec": 94.477,
+          "flying": [
+            94.477,
+            94.599,
+            94.657,
+            94.693
+          ],
+          "laps": [
+            {
+              "time": "7'41.838",
+              "sec": 461.838,
+              "pit": false
+            },
+            {
+              "time": "1'34.477",
+              "sec": 94.477,
+              "pit": false
+            },
+            {
+              "time": "1'34.693",
+              "sec": 94.693,
+              "pit": false
+            },
+            {
+              "time": "1'34.599",
+              "sec": 94.599,
+              "pit": false
+            },
+            {
+              "time": "1'34.657",
+              "sec": 94.657,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Taiyo Furusato": {
+      "number": "72",
+      "code": "TF72",
+      "totalLaps": 17,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 9,
+          "startLap": 1,
+          "endLap": 9,
+          "fastest": "1'34.570",
+          "fastestSec": 94.57,
+          "flying": [
+            94.57,
+            94.67,
+            95.26,
+            95.423,
+            95.942,
+            96.379,
+            98.959
+          ],
+          "laps": [
+            {
+              "time": "7'40.412",
+              "sec": 460.412,
+              "pit": false
+            },
+            {
+              "time": "1'36.379",
+              "sec": 96.379,
+              "pit": false
+            },
+            {
+              "time": "1'35.260",
+              "sec": 95.26,
+              "pit": false
+            },
+            {
+              "time": "1'38.959",
+              "sec": 98.959,
+              "pit": false
+            },
+            {
+              "time": "1'35.423",
+              "sec": 95.423,
+              "pit": false
+            },
+            {
+              "time": "1'34.670",
+              "sec": 94.67,
+              "pit": false
+            },
+            {
+              "time": "1'34.570",
+              "sec": 94.57,
+              "pit": false
+            },
+            {
+              "time": "1'35.942",
+              "sec": 95.942,
+              "pit": false
+            },
+            {
+              "time": "1'43.076",
+              "sec": 103.076,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 8,
+          "startLap": 10,
+          "endLap": 17,
+          "fastest": "1'34.336",
+          "fastestSec": 94.336,
+          "flying": [
+            94.336,
+            94.598,
+            94.887,
+            94.978,
+            96.473,
+            96.925,
+            97.236
+          ],
+          "laps": [
+            {
+              "time": "9'16.217",
+              "sec": 556.217,
+              "pit": false
+            },
+            {
+              "time": "1'34.978",
+              "sec": 94.978,
+              "pit": false
+            },
+            {
+              "time": "1'34.598",
+              "sec": 94.598,
+              "pit": false
+            },
+            {
+              "time": "1'37.236",
+              "sec": 97.236,
+              "pit": false
+            },
+            {
+              "time": "1'34.887",
+              "sec": 94.887,
+              "pit": false
+            },
+            {
+              "time": "1'36.473",
+              "sec": 96.473,
+              "pit": false
+            },
+            {
+              "time": "1'34.336",
+              "sec": 94.336,
+              "pit": false
+            },
+            {
+              "time": "1'36.925",
+              "sec": 96.925,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Joe Roberts": {
+      "number": "16",
+      "code": "JR16",
+      "totalLaps": 11,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 11,
+          "startLap": 1,
+          "endLap": 11,
+          "fastest": "1'34.479",
+          "fastestSec": 94.479,
+          "flying": [
+            94.479,
+            94.592,
+            94.92,
+            94.968,
+            95.026,
+            95.033,
+            95.034,
+            95.116,
+            95.869,
+            99.162
+          ],
+          "laps": [
+            {
+              "time": "1'56.090",
+              "sec": 116.09,
+              "pit": false
+            },
+            {
+              "time": "1'35.869",
+              "sec": 95.869,
+              "pit": false
+            },
+            {
+              "time": "1'35.033",
+              "sec": 95.033,
+              "pit": false
+            },
+            {
+              "time": "1'35.026",
+              "sec": 95.026,
+              "pit": false
+            },
+            {
+              "time": "1'34.968",
+              "sec": 94.968,
+              "pit": false
+            },
+            {
+              "time": "1'39.162",
+              "sec": 99.162,
+              "pit": false
+            },
+            {
+              "time": "1'34.920",
+              "sec": 94.92,
+              "pit": false
+            },
+            {
+              "time": "1'35.034",
+              "sec": 95.034,
+              "pit": false
+            },
+            {
+              "time": "1'35.116",
+              "sec": 95.116,
+              "pit": false
+            },
+            {
+              "time": "1'34.479",
+              "sec": 94.479,
+              "pit": false
+            },
+            {
+              "time": "1'34.592",
+              "sec": 94.592,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    },
+    "Matteo Ferrari": {
+      "number": "23",
+      "code": "MF23",
+      "totalLaps": 18,
+      "runs": [
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 8,
+          "startLap": 1,
+          "endLap": 8,
+          "fastest": "1'35.524",
+          "fastestSec": 95.524,
+          "flying": [
+            95.524,
+            95.631,
+            95.877,
+            96.247,
+            97.262,
+            97.516
+          ],
+          "laps": [
+            {
+              "time": "1'56.609",
+              "sec": 116.609,
+              "pit": false
+            },
+            {
+              "time": "1'37.262",
+              "sec": 97.262,
+              "pit": false
+            },
+            {
+              "time": "1'36.247",
+              "sec": 96.247,
+              "pit": false
+            },
+            {
+              "time": "1'37.516",
+              "sec": 97.516,
+              "pit": false
+            },
+            {
+              "time": "1'35.877",
+              "sec": 95.877,
+              "pit": false
+            },
+            {
+              "time": "1'35.631",
+              "sec": 95.631,
+              "pit": false
+            },
+            {
+              "time": "1'35.524",
+              "sec": 95.524,
+              "pit": false
+            },
+            {
+              "time": "1'40.801",
+              "sec": 100.801,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 4,
+          "startLap": 9,
+          "endLap": 12,
+          "fastest": "1'36.120",
+          "fastestSec": 96.12,
+          "flying": [
+            96.12,
+            96.346
+          ],
+          "laps": [
+            {
+              "time": "6'56.792",
+              "sec": 416.792,
+              "pit": false
+            },
+            {
+              "time": "1'36.346",
+              "sec": 96.346,
+              "pit": false
+            },
+            {
+              "time": "1'36.120",
+              "sec": 96.12,
+              "pit": false
+            },
+            {
+              "time": "1'39.791",
+              "sec": 99.791,
+              "pit": true
+            }
+          ]
+        },
+        {
+          "front": "",
+          "rear": "",
+          "lapsCount": 6,
+          "startLap": 13,
+          "endLap": 18,
+          "fastest": "1'35.617",
+          "fastestSec": 95.617,
+          "flying": [
+            95.617,
+            95.624,
+            95.64,
+            95.653,
+            95.971
+          ],
+          "laps": [
+            {
+              "time": "7'54.778",
+              "sec": 474.778,
+              "pit": false
+            },
+            {
+              "time": "1'35.971",
+              "sec": 95.971,
+              "pit": false
+            },
+            {
+              "time": "1'35.653",
+              "sec": 95.653,
+              "pit": false
+            },
+            {
+              "time": "1'35.617",
+              "sec": 95.617,
+              "pit": false
+            },
+            {
+              "time": "1'35.624",
+              "sec": 95.624,
+              "pit": false
+            },
+            {
+              "time": "1'35.640",
+              "sec": 95.64,
+              "pit": false
+            }
+          ]
+        }
+      ]
+    }
   }
 }
