@@ -830,27 +830,29 @@ def main():
     pr_up  = update_session_datasets('PR')
     fp2_up = update_session_datasets('FP2')
 
-    # 3. Update Moto2 results, lap charts, and FP1 analysis
-    print("\n[Step 3/5] Updating Moto2 sessions, lap charts & FP1 analysis...")
+    # 3. Update Moto2 results, lap charts, and FP1/PR/FP2 analysis
+    print("\n[Step 3/5] Updating Moto2 sessions, lap charts & FP1/PR/FP2 analysis...")
     try:
         update_moto2()
     except Exception as e:
         print(f"  Moto2 update notice: {e}")
-    try:
-        update_category_session_datasets('Moto2', 'FP1')
-    except Exception as e:
-        print(f"  Moto2 FP1 analysis notice: {e}")
+    for sess in ('FP1', 'PR', 'FP2'):
+        try:
+            update_category_session_datasets('Moto2', sess)
+        except Exception as e:
+            print(f"  Moto2 {sess} analysis notice: {e}")
 
-    # 4. Update Moto3 results, lap charts, and FP1 analysis
-    print("\n[Step 4/5] Updating Moto3 sessions, lap charts & FP1 analysis...")
+    # 4. Update Moto3 results, lap charts, and FP1/PR/FP2 analysis
+    print("\n[Step 4/5] Updating Moto3 sessions, lap charts & FP1/PR/FP2 analysis...")
     try:
         update_moto3()
     except Exception as e:
         print(f"  Moto3 update notice: {e}")
-    try:
-        update_category_session_datasets('Moto3', 'FP1')
-    except Exception as e:
-        print(f"  Moto3 FP1 analysis notice: {e}")
+    for sess in ('FP1', 'PR', 'FP2'):
+        try:
+            update_category_session_datasets('Moto3', sess)
+        except Exception as e:
+            print(f"  Moto3 {sess} analysis notice: {e}")
 
     # 5. Export multi-year and 2026 database
     print("\n[Step 5/5] Refreshing exports and database...")

@@ -8,6 +8,10 @@
   <script src="js/chart.min.js"></script>
   <script src="js/moto3_fp1_data.js"></script>
   <script src="js/moto3_fp1_sectors.js"></script>
+  <script src="js/moto3_pr_data.js"></script>
+  <script src="js/moto3_pr_sectors.js"></script>
+  <script src="js/moto3_fp2_data.js"></script>
+  <script src="js/moto3_fp2_sectors.js"></script>
   <script src="js/fp1_analysis.js"></script>
   <style>
     :root {
@@ -800,7 +804,7 @@
       font-size: 16px;
     }
 
-    /* FP1 Analysis & Stints Styling */
+    /* FP1 / PR / FP2 Analysis & Stints Styling */
     .sector-section.minimized {
       padding-bottom: 18px;
     }
@@ -813,23 +817,33 @@
     .sector-section.minimized .sector-grid-2x2,
     .sector-section.minimized .sector-grid-1row,
     .sector-section.minimized #fp1-analysis-grid,
+    .sector-section.minimized #pr-analysis-grid,
+    .sector-section.minimized #fp2-analysis-grid,
     .sector-section.minimized .progression-grid-unified,
     .sector-section.minimized .progression-grid-2col,
-    .sector-section.minimized .fp1-sectors-block {
+    .sector-section.minimized .fp1-sectors-block,
+    .sector-section.minimized .pr-sectors-block,
+    .sector-section.minimized .fp2-sectors-block {
       display: none !important;
     }
 
-    #fp1-analysis-grid {
+    #fp1-analysis-grid,
+    #pr-analysis-grid,
+    #fp2-analysis-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 14px;
       width: 100%;
     }
-    #fp1-analysis-grid.no-heatmap {
+    #fp1-analysis-grid.no-heatmap,
+    #pr-analysis-grid.no-heatmap,
+    #fp2-analysis-grid.no-heatmap {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     #fp1-sector-grid,
+    #pr-sector-grid,
+    #fp2-sector-grid,
     .sector-grid-1row {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -837,42 +851,62 @@
       width: 100%;
     }
     #fp1-sector-grid .sector-card,
+    #pr-sector-grid .sector-card,
+    #fp2-sector-grid .sector-card,
     .sector-grid-1row .sector-card {
       grid-area: auto !important;
     }
-    #fp1-sector-grid .sector-canvas-container {
+    #fp1-sector-grid .sector-canvas-container,
+    #pr-sector-grid .sector-canvas-container,
+    #fp2-sector-grid .sector-canvas-container {
       height: 250px;
     }
 
     @media (max-width: 1680px) {
-      #fp1-analysis-grid {
+      #fp1-analysis-grid,
+      #pr-analysis-grid,
+      #fp2-analysis-grid {
         grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
       }
-      #fp1-analysis-grid.no-heatmap {
+      #fp1-analysis-grid.no-heatmap,
+      #pr-analysis-grid.no-heatmap,
+      #fp2-analysis-grid.no-heatmap {
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
     }
     @media (max-width: 1400px) {
-      #fp1-analysis-grid.no-heatmap {
+      #fp1-analysis-grid.no-heatmap,
+      #pr-analysis-grid.no-heatmap,
+      #fp2-analysis-grid.no-heatmap {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
     @media (max-width: 1300px) {
       #fp1-sector-grid,
+      #pr-sector-grid,
+      #fp2-sector-grid,
       .sector-grid-1row {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
     @media (max-width: 768px) {
       #fp1-analysis-grid,
+      #pr-analysis-grid,
+      #fp2-analysis-grid,
       #fp1-analysis-grid.no-heatmap,
+      #pr-analysis-grid.no-heatmap,
+      #fp2-analysis-grid.no-heatmap,
       #fp1-sector-grid,
+      #pr-sector-grid,
+      #fp2-sector-grid,
       .sector-grid-1row {
         grid-template-columns: 1fr !important;
       }
     }
 
-    #fp1-tooltip, #fp1-heatmap-tooltip, #fp1-deg-tooltip {
+    #fp1-tooltip, #fp1-heatmap-tooltip, #fp1-deg-tooltip,
+    #pr-tooltip, #pr-heatmap-tooltip, #pr-deg-tooltip,
+    #fp2-tooltip, #fp2-heatmap-tooltip, #fp2-deg-tooltip {
       position: absolute;
       display: none;
       pointer-events: none;
@@ -886,7 +920,9 @@
       color: #e6edf3;
       min-width: 180px;
     }
-    #fp1-tooltip .tt-title, #fp1-heatmap-tooltip .tt-title, #fp1-deg-tooltip .tt-title {
+    #fp1-tooltip .tt-title, #fp1-heatmap-tooltip .tt-title, #fp1-deg-tooltip .tt-title,
+    #pr-tooltip .tt-title, #pr-heatmap-tooltip .tt-title, #pr-deg-tooltip .tt-title,
+    #fp2-tooltip .tt-title, #fp2-heatmap-tooltip .tt-title, #fp2-deg-tooltip .tt-title {
       font-weight: 800;
       font-size: 12px;
       color: #fff;
@@ -897,14 +933,18 @@
       justify-content: space-between;
       gap: 8px;
     }
-    #fp1-tooltip .tt-row, #fp1-heatmap-tooltip .tt-row, #fp1-deg-tooltip .tt-row {
+    #fp1-tooltip .tt-row, #fp1-heatmap-tooltip .tt-row, #fp1-deg-tooltip .tt-row,
+    #pr-tooltip .tt-row, #pr-heatmap-tooltip .tt-row, #pr-deg-tooltip .tt-row,
+    #fp2-tooltip .tt-row, #fp2-heatmap-tooltip .tt-row, #fp2-deg-tooltip .tt-row {
       display: flex;
       justify-content: space-between;
       gap: 12px;
       margin-bottom: 3px;
       color: #8b949e;
     }
-    #fp1-tooltip .tt-val, #fp1-heatmap-tooltip .tt-val, #fp1-deg-tooltip .tt-val {
+    #fp1-tooltip .tt-val, #fp1-heatmap-tooltip .tt-val, #fp1-deg-tooltip .tt-val,
+    #pr-tooltip .tt-val, #pr-heatmap-tooltip .tt-val, #pr-deg-tooltip .tt-val,
+    #fp2-tooltip .tt-val, #fp2-heatmap-tooltip .tt-val, #fp2-deg-tooltip .tt-val {
       font-weight: 700;
       color: #f0f6fc;
     }
@@ -1075,7 +1115,8 @@
       }
       const cur = window.CURRENT_EVENT_SHORT || (typeof gp !== 'undefined' && gp ? gp.short : null);
       if (cur) {
-        if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(cur);
+        if (typeof renderAllPracticeAnalysisSections === 'function') renderAllPracticeAnalysisSections(cur);
+        else if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(cur);
         if (typeof renderRacLapChart === 'function') renderRacLapChart(cur);
         if (typeof renderRacGapChart === 'function') renderRacGapChart(cur);
         if (typeof renderSectorCharts === 'function') renderSectorCharts(cur);
@@ -92765,7 +92806,8 @@
         }
       });
 
-      if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection();
+      if (typeof renderAllPracticeAnalysisSections === 'function') renderAllPracticeAnalysisSections();
+      else if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection();
       renderRacProgression();
       renderSectorCharts();
     }
@@ -93265,6 +93307,236 @@
           </div>
         </div>
 
+        <!-- PR ANALYSIS & STINTS STRATEGY SECTION -->
+        <div class="sector-section" id="pr-analysis-section" style="display: none;">
+          <div class="sector-header">
+            <div>
+              <div class="sector-title">
+                <span id="pr-section-title-text">&#x23F1; PR - Practice Analysis &amp; Stints Strategy</span>
+                <span class="fp1-weather-badge" id="pr-section-weather" style="display: none;"></span>
+              </div>
+              <div class="sector-subtitle" id="pr-section-subtitle">Comparing favorite riders (&#x2605;) &middot; Stints progression, pace degradation, lap times density &amp; fastest lap per run</div>
+            </div>
+            <button class="win-btn" id="pr-analysis-min-btn" onclick="togglePrAnalysisMinimize()" title="Minimize / Expand">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="pr-analysis-min-icon">
+                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="progression-grid-unified" id="pr-analysis-grid">
+            <div class="sector-card" id="pr-stints-card">
+              <div class="sector-card-title">
+                <span id="pr-stints-title">Stints Progression</span>
+                <span class="sector-card-badge" id="pr-stints-badge">Run by Run &middot; Laps &amp; Pace</span>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-pr-stints"></canvas>
+                <div id="pr-tooltip"></div>
+              </div>
+            </div>
+
+            <div class="sector-card" id="pr-heatmap-card" style="display: none;">
+              <div class="sector-card-title">
+                <span>Tyre Choices Heatmap</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="pr-heatmap-btn-matrix" onclick="setPrHeatmapMode('matrix')">Matrix 3&times;3</button>
+                  <button type="button" class="fp1-toggle-btn" id="pr-heatmap-btn-riders" onclick="setPrHeatmapMode('riders')">Riders</button>
+                </div>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-pr-heatmap"></canvas>
+                <div id="pr-heatmap-tooltip"></div>
+              </div>
+            </div>
+
+            <div class="sector-card" id="pr-deg-card">
+              <div class="sector-card-title">
+                <span id="pr-deg-title">Pace Degradation</span>
+                <div class="fp1-toggle-group" id="pr-deg-filter-group"></div>
+              </div>
+              <div class="progression-canvas-container" style="height: 258px;">
+                <canvas id="chart-pr-deg"></canvas>
+                <div id="pr-deg-tooltip"></div>
+              </div>
+              <div class="deg-stats-row" id="pr-deg-stats-strip"></div>
+            </div>
+
+            <div class="sector-card" id="pr-density-card">
+              <div class="sector-card-title">
+                <span>Lap Times Range &amp; Density</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="pr-density-btn-runs" onclick="setPrDensityMode('runs')">Progression</button>
+                  <button type="button" class="fp1-toggle-btn" id="pr-density-btn-overall" onclick="setPrDensityMode('overall')">Overall</button>
+                </div>
+              </div>
+              <div class="progression-canvas-container" style="position: relative; width: 100%; height: 260px;">
+                <canvas id="chart-pr-density" style="width: 100%; height: 100%; display: block;"></canvas>
+              </div>
+            </div>
+
+            <div class="sector-card" id="pr-truepace-card">
+              <div class="sector-card-title">
+                <span>True Pace &amp; Peak</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="pr-truepace-btn-top5" onclick="setPrTruePaceK(5)">Top 5</button>
+                  <button type="button" class="fp1-toggle-btn" id="pr-truepace-btn-top8" onclick="setPrTruePaceK(8)">Top 8</button>
+                </div>
+              </div>
+              <div class="progression-canvas-container" style="position: relative; width: 100%; height: 260px;">
+                <canvas id="chart-pr-truepace" style="width: 100%; height: 100%; display: block;"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="fp1-sectors-block pr-sectors-block" id="pr-sectors-container" style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+            <div class="sector-card-title" style="margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: #fff;">&#x23F1;&#xFE0F; Track Sectors Analysis (T1 &middot; T2 &middot; T3 &middot; T4)</span>
+                <span class="sector-card-badge" style="background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 10px; font-weight: 700;">Stints Progression &amp; Split Times</span>
+              </div>
+              <div class="fp1-toggle-group" id="pr-sector-filter-group">
+                <button type="button" class="fp1-toggle-btn active" id="pr-sec-btn-favs" onclick="setPrSectorRiderMode('favs')">Favorites (&#x2605;)</button>
+                <button type="button" class="fp1-toggle-btn" id="pr-sec-btn-top5" onclick="setPrSectorRiderMode('top5')">Top 5</button>
+                <button type="button" class="fp1-toggle-btn" id="pr-sec-btn-all" onclick="setPrSectorRiderMode('all')">All Riders</button>
+              </div>
+            </div>
+
+            <div class="sector-grid-1row" id="pr-sector-grid">
+              <div class="sector-card sector-card-t1">
+                <div class="sector-card-title"><span>Sector 1 (T1)</span><span class="sector-card-badge badge-t1">T1</span></div>
+                <div class="sector-canvas-container"><canvas id="chart-pr-sec-t1"></canvas></div>
+              </div>
+              <div class="sector-card sector-card-t2">
+                <div class="sector-card-title"><span>Sector 2 (T2)</span><span class="sector-card-badge badge-t2">T2</span></div>
+                <div class="sector-canvas-container"><canvas id="chart-pr-sec-t2"></canvas></div>
+              </div>
+              <div class="sector-card sector-card-t3">
+                <div class="sector-card-title"><span>Sector 3 (T3)</span><span class="sector-card-badge badge-t3">T3</span></div>
+                <div class="sector-canvas-container"><canvas id="chart-pr-sec-t3"></canvas></div>
+              </div>
+              <div class="sector-card sector-card-t4">
+                <div class="sector-card-title"><span>Sector 4 (T4)</span><span class="sector-card-badge badge-t4">T4</span></div>
+                <div class="sector-canvas-container"><canvas id="chart-pr-sec-t4"></canvas></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FP2 ANALYSIS & STINTS STRATEGY SECTION -->
+        <div class="sector-section" id="fp2-analysis-section" style="display: none;">
+          <div class="sector-header">
+            <div>
+              <div class="sector-title">
+                <span id="fp2-section-title-text">&#x23F1; FP2 - Free Practice 2 Analysis &amp; Stints Strategy</span>
+                <span class="fp1-weather-badge" id="fp2-section-weather" style="display: none;"></span>
+              </div>
+              <div class="sector-subtitle" id="fp2-section-subtitle">Comparing favorite riders (&#x2605;) &middot; Stints progression, pace degradation, lap times density &amp; fastest lap per run</div>
+            </div>
+            <button class="win-btn" id="fp2-analysis-min-btn" onclick="toggleFp2AnalysisMinimize()" title="Minimize / Expand">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="fp2-analysis-min-icon">
+                <path d="M2 6H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="progression-grid-unified" id="fp2-analysis-grid">
+            <div class="sector-card" id="fp2-stints-card">
+              <div class="sector-card-title">
+                <span id="fp2-stints-title">Stints Progression</span>
+                <span class="sector-card-badge" id="fp2-stints-badge">Run by Run &middot; Laps &amp; Pace</span>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-fp2-stints"></canvas>
+                <div id="fp2-tooltip"></div>
+              </div>
+            </div>
+
+            <div class="sector-card" id="fp2-heatmap-card" style="display: none;">
+              <div class="sector-card-title">
+                <span>Tyre Choices Heatmap</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="fp2-heatmap-btn-matrix" onclick="setFp2HeatmapMode('matrix')">Matrix 3&times;3</button>
+                  <button type="button" class="fp1-toggle-btn" id="fp2-heatmap-btn-riders" onclick="setFp2HeatmapMode('riders')">Riders</button>
+                </div>
+              </div>
+              <div class="progression-canvas-container">
+                <canvas id="chart-fp2-heatmap"></canvas>
+                <div id="fp2-heatmap-tooltip"></div>
+              </div>
+            </div>
+
+            <div class="sector-card" id="fp2-deg-card">
+              <div class="sector-card-title">
+                <span id="fp2-deg-title">Pace Degradation</span>
+                <div class="fp1-toggle-group" id="fp2-deg-filter-group"></div>
+              </div>
+              <div class="progression-canvas-container" style="height: 258px;">
+                <canvas id="chart-fp2-deg"></canvas>
+                <div id="fp2-deg-tooltip"></div>
+              </div>
+              <div class="deg-stats-row" id="fp2-deg-stats-strip"></div>
+            </div>
+
+            <div class="sector-card" id="fp2-density-card">
+              <div class="sector-card-title">
+                <span>Lap Times Range &amp; Density</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="fp2-density-btn-runs" onclick="setFp2DensityMode('runs')">Progression</button>
+                  <button type="button" class="fp1-toggle-btn" id="fp2-density-btn-overall" onclick="setFp2DensityMode('overall')">Overall</button>
+                </div>
+              </div>
+              <div class="progression-canvas-container" style="position: relative; width: 100%; height: 260px;">
+                <canvas id="chart-fp2-density" style="width: 100%; height: 100%; display: block;"></canvas>
+              </div>
+            </div>
+
+            <div class="sector-card" id="fp2-truepace-card">
+              <div class="sector-card-title">
+                <span>True Pace &amp; Peak</span>
+                <div class="fp1-toggle-group">
+                  <button type="button" class="fp1-toggle-btn active" id="fp2-truepace-btn-top5" onclick="setFp2TruePaceK(5)">Top 5</button>
+                  <button type="button" class="fp1-toggle-btn" id="fp2-truepace-btn-top8" onclick="setFp2TruePaceK(8)">Top 8</button>
+                </div>
+              </div>
+              <div class="progression-canvas-container" style="position: relative; width: 100%; height: 260px;">
+                <canvas id="chart-fp2-truepace" style="width: 100%; height: 100%; display: block;"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="fp1-sectors-block fp2-sectors-block" id="fp2-sectors-container" style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+            <div class="sector-card-title" style="margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: #fff;">&#x23F1;&#xFE0F; Track Sectors Analysis (T1 &middot; T2 &middot; T3 &middot; T4)</span>
+                <span class="sector-card-badge" style="background: rgba(255,255,255,0.06); color: #94a3b8; font-size: 10px; font-weight: 700;">Stints Progression &amp; Split Times</span>
+              </div>
+              <div class="fp1-toggle-group" id="fp2-sector-filter-group">
+                <button type="button" class="fp1-toggle-btn active" id="fp2-sec-btn-favs" onclick="setFp2SectorRiderMode('favs')">Favorites (&#x2605;)</button>
+                <button type="button" class="fp1-toggle-btn" id="fp2-sec-btn-top5" onclick="setFp2SectorRiderMode('top5')">Top 5</button>
+                <button type="button" class="fp1-toggle-btn" id="fp2-sec-btn-all" onclick="setFp2SectorRiderMode('all')">All Riders</button>
+              </div>
+            </div>
+
+            <div class="sector-grid-1row" id="fp2-sector-grid">
+              <div class="sector-card sector-card-t1">
+                <div class="sector-card-title"><span>Sector 1 (T1)</span><span class="sector-card-badge badge-t1">T1</span></div>
+                <div class="sector-canvas-container"><canvas id="chart-fp2-sec-t1"></canvas></div>
+              </div>
+              <div class="sector-card sector-card-t2">
+                <div class="sector-card-title"><span>Sector 2 (T2)</span><span class="sector-card-badge badge-t2">T2</span></div>
+                <div class="sector-canvas-container"><canvas id="chart-fp2-sec-t2"></canvas></div>
+              </div>
+              <div class="sector-card sector-card-t3">
+                <div class="sector-card-title"><span>Sector 3 (T3)</span><span class="sector-card-badge badge-t3">T3</span></div>
+                <div class="sector-canvas-container"><canvas id="chart-fp2-sec-t3"></canvas></div>
+              </div>
+              <div class="sector-card sector-card-t4">
+                <div class="sector-card-title"><span>Sector 4 (T4)</span><span class="sector-card-badge badge-t4">T4</span></div>
+                <div class="sector-canvas-container"><canvas id="chart-fp2-sec-t4"></canvas></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- RACE: POSITION PROGRESSION & GAP TO LEADER -->
         <div class="sector-section" id="rac-progression-section" style="display: none;">
           <div class="sector-header">
@@ -93374,7 +93646,8 @@
 
       buildSidebarList();
       applySessionVisibility();
-      if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(gp.short);
+      if (typeof renderAllPracticeAnalysisSections === 'function') renderAllPracticeAnalysisSections(gp.short);
+      else if (typeof renderFp1AnalysisSection === 'function') renderFp1AnalysisSection(gp.short);
       renderRacProgression(gp.short);
       renderSectorCharts(gp.short);
     }
